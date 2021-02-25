@@ -13,9 +13,9 @@ spec.version      = "1.1.0"
 spec.summary      = "CooeeSDK tracks user app activites"
 spec.description  = "Swift framework to track app activities"
 
-spec.homepage     = "https://github.com/suriForIOS/Cooee"
+spec.homepage     = "https://github.com/letscooee/cooee-ios-sdk"
 spec.author       = { "Surbhi Lath" => "surbhibagadia.21@gmail.com" }
-spec.source       = { :git => "https://github.com/suriForIOS/Cooee.git", :tag => "#{spec.version}" }
+spec.source       = { :git => "https://gitlab.com/wizpanda/cooee/ios-sdk.git", :tag => "#{spec.version}" }
 
 spec.vendored_frameworks = "CooeeSDK.xcframework "
 spec.platform = :ios
