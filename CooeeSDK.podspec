@@ -9,7 +9,7 @@
 Pod::Spec.new do |spec|
 
 spec.name         = "CooeeSDK"
-spec.version      = "1.1.0"
+spec.version      = "1.2.0"
 spec.summary      = "CooeeSDK tracks user app activites"
 spec.description  = "Swift framework to track app activities"
 
