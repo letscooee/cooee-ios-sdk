@@ -19,6 +19,7 @@
 		7AB7BD1625F78C6200C0FBCF /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB7BD1525F78C6200C0FBCF /* HexColor.swift */; };
 		7AB7BD1825F78D6400C0FBCF /* CustomPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB7BD1725F78D6400C0FBCF /* CustomPopup.swift */; };
 		7AB7BD1A25F78F2000C0FBCF /* CustomPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AB7BD1925F78F2000C0FBCF /* CustomPopup.xib */; };
+		7AEDDF9426219105007CE18D /* AbstractOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEDDF9326219105007CE18D /* AbstractOperation.swift */; };
 		7AF400F225D26B16006C9A82 /* CooeeSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AF400F025D26B16006C9A82 /* CooeeSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AF4010325D26BEB006C9A82 /* WService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF400FA25D26BEA006C9A82 /* WService.swift */; };
 		7AF4010425D26BEB006C9A82 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF400FB25D26BEA006C9A82 /* Model.swift */; };
@@ -57,6 +58,7 @@
 		7AB7BD1725F78D6400C0FBCF /* CustomPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopup.swift; sourceTree = "<group>"; };
 		7AB7BD1925F78F2000C0FBCF /* CustomPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomPopup.xib; sourceTree = "<group>"; };
 		7ADA10B625D27E6D00D4F736 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
+		7AEDDF9326219105007CE18D /* AbstractOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractOperation.swift; sourceTree = "<group>"; };
 		7AF400ED25D26B16006C9A82 /* CooeeSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CooeeSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AF400F025D26B16006C9A82 /* CooeeSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CooeeSDK.h; sourceTree = "<group>"; };
 		7AF400F125D26B16006C9A82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				7A6A2C3A260F3AF600F9124C /* HttpCalls.swift */,
+				7AEDDF9326219105007CE18D /* AbstractOperation.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				7AF4010725D26BEB006C9A82 /* UserSession.swift in Sources */,
 				7AB14B3D2618E3FD00AD6E5F /* CustomPlayPause.swift in Sources */,
 				7AF4010825D26BEB006C9A82 /* Network.swift in Sources */,
+				7AEDDF9426219105007CE18D /* AbstractOperation.swift in Sources */,
 				7AB7BD1225F7861400C0FBCF /* TriggerData.swift in Sources */,
 				7A6A2C3B260F3AF600F9124C /* HttpCalls.swift in Sources */,
 				7A6A2C3E260F452F00F9124C /* NotificationClass.swift in Sources */,

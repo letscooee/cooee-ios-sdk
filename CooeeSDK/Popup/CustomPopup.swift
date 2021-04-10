@@ -299,7 +299,7 @@ class CustomPopup: UIView {
                 }
             }
         }
-        let registerUserInstance = RegisterUser.shared
+        let registerUserInstance = Cooee.shared
         registerUserInstance.updateProfile(withProperties: customProperties, andData: nil)
        // registerUserInstance.buttonClickDelegate?.getPayload(info: customPayload)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "buttonClickListener"), object: nil, userInfo: customPayload)
