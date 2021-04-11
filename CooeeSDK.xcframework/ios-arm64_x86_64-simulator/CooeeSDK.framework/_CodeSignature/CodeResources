@@ -4,9 +4,13 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>CustomPopup.nib</key>
+		<data>
+		uZEGmSlCIgDlmbFXz7iu0uHnVKc=
+		</data>
 		<key>Headers/CooeeSDK-Swift.h</key>
 		<data>
-		jbiGCNtdPlWGksPfg2FPEtB2lvg=
+		nSLbrl1L4Jm/8Btyfo/7kdJan6U=
 		</data>
 		<key>Headers/CooeeSDK.h</key>
 		<data>
@@ -14,68 +18,79 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		Sj6ZFvHaE2L45wfBOmJid/BcNJs=
+		LeJ8JCPKgJCmruI4uJQbszC16HU=
 		</data>
 		<key>Modules/CooeeSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		MM4n+ykc7HVFiL9WK46duaPWitA=
+		5ujfVH6F9I7M5U3HLuJr8E5bRT0=
 		</data>
 		<key>Modules/CooeeSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		JoiFRP0BOJ7YROGWHJVuK0giFSM=
+		pXVdSdI0e34mLWtID8hHcFZk7o8=
 		</data>
 		<key>Modules/CooeeSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		HxVd8JjQ8HRYbaMDnPfMuchAQo0=
+		AErAZ9ZCnxjt0xLS11rpdn8adjc=
 		</data>
 		<key>Modules/CooeeSDK.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		MM4n+ykc7HVFiL9WK46duaPWitA=
+		5ujfVH6F9I7M5U3HLuJr8E5bRT0=
 		</data>
 		<key>Modules/CooeeSDK.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		JoiFRP0BOJ7YROGWHJVuK0giFSM=
+		pXVdSdI0e34mLWtID8hHcFZk7o8=
 		</data>
 		<key>Modules/CooeeSDK.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		HxVd8JjQ8HRYbaMDnPfMuchAQo0=
+		AErAZ9ZCnxjt0xLS11rpdn8adjc=
 		</data>
 		<key>Modules/CooeeSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		tGICGqhj7ayu+3lzSasx6Pr+fD8=
+		8OTWqr/xos9cK+OPPIVNZWaKYeM=
 		</data>
 		<key>Modules/CooeeSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		1Td5p/cPTWFNv7SSPAEITpezaco=
+		69EpmVLPGZg8fwIfUiW2dz+sRqk=
 		</data>
 		<key>Modules/CooeeSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		53CVP9zbCwQVmsoisBnf0cmqN1M=
+		qjLCQr+iYRcOMhLmhUCkVvKCt6Q=
 		</data>
 		<key>Modules/CooeeSDK.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		tGICGqhj7ayu+3lzSasx6Pr+fD8=
+		8OTWqr/xos9cK+OPPIVNZWaKYeM=
 		</data>
 		<key>Modules/CooeeSDK.swiftmodule/x86_64.swiftinterface</key>
 		<data>
-		1Td5p/cPTWFNv7SSPAEITpezaco=
+		69EpmVLPGZg8fwIfUiW2dz+sRqk=
 		</data>
 		<key>Modules/CooeeSDK.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		53CVP9zbCwQVmsoisBnf0cmqN1M=
+		qjLCQr+iYRcOMhLmhUCkVvKCt6Q=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
 		6RX2BlZx2HTnhclxM12V+3NFv5k=
 		</data>
+		<key>cross.pdf</key>
+		<data>
+		wJofa+Bqr19iH/15Uk2bZ0s5cfs=
+		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>CustomPopup.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			u8Ag9aQ2VDuZz0zT89cesoY7TEwiqyjslBooBb6VsPY=
+			</data>
+		</dict>
 		<key>Headers/CooeeSDK-Swift.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			YyjKe8YF6CNNvyrb2xEGkXK6dR2EC1ZbCBvtKe4HMoI=
+			S6kFoJZVt+3t9Ydl8xGxJNhNn1APxN82D50Zi6fdRGk=
 			</data>
 		</dict>
 		<key>Headers/CooeeSDK.h</key>
@@ -89,84 +104,84 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			bGiTPY3lw94++RxP4QpPlQioY3nWRV3d2WE+hw2BMio=
+			miTfNZdEj9eXLjCTz3WLM1o9Zm5pFXHs3cbWXwB+CPo=
 			</data>
 		</dict>
 		<key>Modules/CooeeSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			wAyGyP2/1XnXFkTm8actfyGPlXX3/BGAu3GhMHIXkSY=
+			3Fn4VDmDraWU6biNUaknEWrEFZkWBVlKTeI+StEMyMw=
 			</data>
 		</dict>
 		<key>Modules/CooeeSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			wuIMhBiwnLdDCfJcR77VnuAGle7yZrBFQ4RZivI+CB8=
+			mpFjPj4gVJZyED0p35YnZ76DQ1oAOOb/7Gx1jcs7Dhw=
 			</data>
 		</dict>
 		<key>Modules/CooeeSDK.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			bGiTPY3lw94++RxP4QpPlQioY3nWRV3d2WE+hw2BMio=
+			miTfNZdEj9eXLjCTz3WLM1o9Zm5pFXHs3cbWXwB+CPo=
 			</data>
 		</dict>
 		<key>Modules/CooeeSDK.swiftmodule/arm64.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			wAyGyP2/1XnXFkTm8actfyGPlXX3/BGAu3GhMHIXkSY=
+			3Fn4VDmDraWU6biNUaknEWrEFZkWBVlKTeI+StEMyMw=
 			</data>
 		</dict>
 		<key>Modules/CooeeSDK.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			wuIMhBiwnLdDCfJcR77VnuAGle7yZrBFQ4RZivI+CB8=
+			mpFjPj4gVJZyED0p35YnZ76DQ1oAOOb/7Gx1jcs7Dhw=
 			</data>
 		</dict>
 		<key>Modules/CooeeSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			nUAD/z5CLrUWBP9TSASlpbrVkOQ0iPOaCH09jN+Q4AQ=
+			EUHtnu4Ywl+7V77riIvQPRLRHsVld//cDCa+MyCS+F0=
 			</data>
 		</dict>
 		<key>Modules/CooeeSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			3EAeobiAYTkhFI34zFEMsJoIugSsNs9/wZzpQYZGc20=
+			hBSvUe6g9Kv1Pg0T8G3U9cd3f/qwEbeZ9Zndn9Rru18=
 			</data>
 		</dict>
 		<key>Modules/CooeeSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			vKLm4l/ju+/y3hSXdeyIqx2k9X7xFbbhBRsUa3R2iyg=
+			ue73xpAecdkZ7u/Sy2DUoSM1w2WtQ+z1QQ9Gzdg6jf8=
 			</data>
 		</dict>
 		<key>Modules/CooeeSDK.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			nUAD/z5CLrUWBP9TSASlpbrVkOQ0iPOaCH09jN+Q4AQ=
+			EUHtnu4Ywl+7V77riIvQPRLRHsVld//cDCa+MyCS+F0=
 			</data>
 		</dict>
 		<key>Modules/CooeeSDK.swiftmodule/x86_64.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			3EAeobiAYTkhFI34zFEMsJoIugSsNs9/wZzpQYZGc20=
+			hBSvUe6g9Kv1Pg0T8G3U9cd3f/qwEbeZ9Zndn9Rru18=
 			</data>
 		</dict>
 		<key>Modules/CooeeSDK.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			vKLm4l/ju+/y3hSXdeyIqx2k9X7xFbbhBRsUa3R2iyg=
+			ue73xpAecdkZ7u/Sy2DUoSM1w2WtQ+z1QQ9Gzdg6jf8=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -174,6 +189,13 @@
 			<key>hash2</key>
 			<data>
 			RAjAE60uZI1Bm1qfxM5WF10IDEdKG4YZM3JVmGy21Oc=
+			</data>
+		</dict>
+		<key>cross.pdf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Tg0IEncxUscaZQkp1kuL6ZmhzKSvrb9a4tZ36fWtWCo=
 			</data>
 		</dict>
 	</dict>

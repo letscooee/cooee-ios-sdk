@@ -14,10 +14,9 @@ public protocol InAppButtonClickDelegate {
     func getPayload(info: [String:String]?)
 }
 
-public class RegisterUser: NSObject{
+public class Cooee: NSObject{
     
-    public override init() {}
-    public static let shared = RegisterUser()
+    public static let shared = Cooee()
     
     let app = UserDefaults.standard
     let backgroundTimer = "backgroundTimer"
@@ -34,16 +33,20 @@ public class RegisterUser: NSObject{
     var isBTTurnedOn = "N"
     var locationManager = CLLocationManager()
     var currentLocation: CLLocationCoordinate2D?
-    public var screenName: String?
-    public func setup(firebaseToken: String){
-       // Messaging.messaging().delegate = self
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateFirebaseToken(_:)), name: NSNotification.Name(rawValue: "updateToken"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.createTrigger(_:)), name: NSNotification.Name(rawValue: "cooeeNotification"), object: nil)
-        getConfigData()
-        observeAppStateChanges()
-//        UIApplication.didre
-    }
+    var queue = OperationQueue()
     
+   let operationRegisterUser = RegisterUser()
+
+    public var screenName: String?
+
+    private override init() {
+        super.init()
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.updateFirebaseToken(_:)), name: NSNotification.Name(rawValue: "updateToken"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.createTrigger(_:)), name: NSNotification.Name(rawValue: "cooeeNotification"), object: nil)
+        observeAppStateChanges()
+        
+    }
+
     @objc public func updateFirebaseToken(_ notification: Notification){
         if let token = notification.userInfo?["token"] as? String{
             HttpCalls.callFirebaseToken(fToken: token)
@@ -58,7 +61,23 @@ public class RegisterUser: NSObject{
         }
     }
     
-
+    func fetchSessionID(){
+        if UserSession.getSessionID() == nil {
+            operationRegisterUser.appVersion = appVersion
+            operationRegisterUser.osVersion = osVersion
+            operationRegisterUser.sdkVersion = sdkVersion
+            
+            if !operationRegisterUser.isExecuting && !operationRegisterUser.isFinished && !queue.operations.contains(operationRegisterUser){
+                queue.maxConcurrentOperationCount = 1
+                queue.addOperations([operationRegisterUser], waitUntilFinished: false)
+                operationRegisterUser.completionBlock = {
+                    self.appIslaunched()
+                    self.updateProfile(withProperties: nil, andData: nil)
+                }
+           }
+        }
+    }
+    
     @objc func createTrigger(_ notification: Notification){
         if let userData = notification.userInfo{
             NotificationClass.notificationReceived(userInfo: userData)
@@ -80,10 +99,12 @@ public class RegisterUser: NSObject{
     }
     
     @objc func callKeepAlive(){
-        HttpCalls.callKeepAlive()
+        let keepAliveOperation = KeepAlive()
+        fetchSessionID()
+        queue.addOperations([keepAliveOperation], waitUntilFinished: false)
     }
     
-    func getConfigData(){
+    func registerUser(){
         var nsDictionary: NSDictionary?
         if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
             nsDictionary = NSDictionary(contentsOfFile: path)
@@ -128,7 +149,7 @@ public class RegisterUser: NSObject{
     }
     
     
-    @objc public func sendEvent(withName: String, properties: [String: String]){
+    @objc public func sendEvent(withName: String, properties: [String: Any]){
         var sessionNumber = 1
         let list = UserSession.getTriggerData()
         var arrayTrigger = [Dictionary<String, String>]()
@@ -153,26 +174,27 @@ public class RegisterUser: NSObject{
         }
         let sessionID = UserSession.getSessionID() ?? ""
         let params = ["name": withName, "screen": localScreenName, "sessionNumber": sessionNumber, "sessionID": sessionID, "properties":properties, "activeTriggers": arrayTrigger] as [String : Any]
-        HttpCalls.callEventTrack(with: params){ triggerdata in
-            if triggerdata != nil{
-                if let visibleController = UIApplication.shared.topMostViewController(){
-                    CustomPopup.instance.updateViewWith(data: triggerdata!.data.triggerData, on: visibleController)
-                    
-                }
-            }
-        }
+        let sendEventOperation = SendEvent()
+        sendEventOperation.params = params
+        fetchSessionID()
+       queue.addOperations([sendEventOperation], waitUntilFinished: false)
     }
     
     
-    public func updateProfile(withProperties: [String: String]?,  andData: [String:String]?){
-        var propeties = [String: String]()
+    public func updateProfile(withProperties: [String: Any]?,  andData: [String:Any]?){
+        var propeties = [String: Any]()
         if let userProperties = withProperties{
             propeties = userProperties
         }else{
             propeties = userProperties()
         }
-       
-        HttpCalls.callForUpdateProfile(withProperties: propeties, andData: andData)
+        
+        let sendPropertiesOperation = SendUserProperties()
+        sendPropertiesOperation.propeties = propeties
+        sendPropertiesOperation.data = andData
+        fetchSessionID()
+        queue.addOperations([sendPropertiesOperation], waitUntilFinished: false)
+
     }
     
     func getLocation(){
@@ -256,7 +278,7 @@ public class RegisterUser: NSObject{
         if let date2 = app.object(forKey: backgroundTimer) as? Date{
             let difference = getTimeDifference(from: date2)
             if difference>=30{
-                HttpCalls.callConcludeSession(with: difference)
+                concludeSession(with: difference)
             }else{
                 let properties = ["CE Duration": "\(difference)"]
                 sendEvent(withName: "CE App Foreground", properties: properties)
@@ -266,6 +288,13 @@ public class RegisterUser: NSObject{
             sendEvent(withName: "CE App Foreground", properties: properties)
         }
     }
+    
+    func concludeSession(with duration: Int){
+        let operationConcludeSession = ConcludeSession()
+        operationConcludeSession.duration = duration
+        fetchSessionID()
+        queue.addOperations([operationConcludeSession], waitUntilFinished: false)
+  }
     
     func getTimeDifference(from time: Date)-> Int{
         let calendar = Calendar.current
@@ -309,12 +338,12 @@ extension UIViewController {
     }
 }
 
-extension RegisterUser: CBCentralManagerDelegate {
+extension Cooee: CBCentralManagerDelegate {
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
 
     }
 }
-extension RegisterUser: CLLocationManagerDelegate{
+extension Cooee: CLLocationManagerDelegate{
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate
         else { return }
@@ -328,3 +357,41 @@ extension RegisterUser: CLLocationManagerDelegate{
 //        HttpCalls.callFirebaseToken(fToken: fcmToken ?? "")
 //    }
 //}
+class RegisterUser: AbstractOperation{
+    var sdkVersion = 0.0
+    var osVersion = ""
+    var appVersion = ""
+   
+    override open func main() {
+            if isCancelled {
+                finish()
+                return
+            }
+            
+        var nsDictionary: NSDictionary?
+        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
+            nsDictionary = NSDictionary(contentsOfFile: path)
+            let applicationID = nsDictionary?["CooeeAppID"] as? String ?? ""
+            let applicationSecretKey = nsDictionary?["CooeeSecretKey"] as? String ?? ""
+            let deviceIOSData = DeviceData(os: "IOS", cooeeSdkVersion: "\(sdkVersion)", appVersion: appVersion, osVersion: osVersion)
+            let registerUserData = RegisterUserDataModel(id: applicationID, secretKey: applicationSecretKey, deviceData: deviceIOSData)
+            
+            WService.shared.getResponse(fromURL: URLS.registerUser, method: .POST, params: registerUserData.dictionary, header: [:]) { (result: RegisterUserResponse) in
+                if let token = result.sdkToken{
+                    UserSession.save(userToken: token)
+                }
+                if let sessionID = result.sessionID{
+                    UserSession.save(sessionID: sessionID)
+                }
+                
+                if let udid = result.id{
+                    UserSession.save(udid: udid)
+                }
+                self.finish()
+               
+            }
+        }
+        
+        }
+    
+}
