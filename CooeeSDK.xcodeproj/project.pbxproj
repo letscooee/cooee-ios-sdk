@@ -71,6 +71,7 @@
 		7AF4010125D26BEA006C9A82 /* ScreenResolution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenResolution.swift; sourceTree = "<group>"; };
 		7AF4010225D26BEA006C9A82 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		7AF4018625D27A8C006C9A82 /* CooeeSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = CooeeSDK.xcodeproj; sourceTree = "<group>"; };
+		98793E0826232699007560EC /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +140,7 @@
 		7AF400E325D26B16006C9A82 = {
 			isa = PBXGroup;
 			children = (
+				98793E0826232699007560EC /* CHANGELOG.md */,
 				7AF400EF25D26B16006C9A82 /* CooeeSDK */,
 				7AF400EE25D26B16006C9A82 /* Products */,
 				7AF4018525D27A8B006C9A82 /* Frameworks */,
