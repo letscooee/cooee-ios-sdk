@@ -6,7 +6,7 @@
 	<dict>
 		<key>CustomPopup.nib</key>
 		<data>
-		ETcpPf7+esDHwe9z1QzkJWUvxWM=
+		OHFdZtVUra5Oh4EDuejfX1FmNRY=
 		</data>
 		<key>Headers/CooeeSDK-Swift.h</key>
 		<data>
@@ -18,7 +18,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		KAHNMDhrrXfa0V7iqL429RZV5os=
+		zD3/G5J3ZWTdmHDpQF+yzzrsNcw=
 		</data>
 		<key>Modules/CooeeSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>Modules/CooeeSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		ttDN+62P6ulWvGJ/NdrF/DluVPs=
+		Xi8LLUv/q5C4Aa8IBldt64Rud1c=
 		</data>
 		<key>Modules/CooeeSDK.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -42,7 +42,7 @@
 		</data>
 		<key>Modules/CooeeSDK.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		ttDN+62P6ulWvGJ/NdrF/DluVPs=
+		Xi8LLUv/q5C4Aa8IBldt64Rud1c=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -59,7 +59,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			DOaZLYg+kn9gDwKcu1mVcaMyQVR15hlPKhXqg+X1NxA=
+			b7rBebLIeAd0FRZw3L24kUU8X9uc890JuX+3lH0OxHE=
 			</data>
 		</dict>
 		<key>Headers/CooeeSDK-Swift.h</key>
@@ -94,7 +94,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			C0QY39pRDaXUS5o8bzkfm6uRj0sGoFMGTDVzeDgQJdU=
+			uRHykSLQ1LgAJJD5PDE8mZUSgvDLtp28laqRwcBzesg=
 			</data>
 		</dict>
 		<key>Modules/CooeeSDK.swiftmodule/arm64.swiftdoc</key>
@@ -115,7 +115,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			C0QY39pRDaXUS5o8bzkfm6uRj0sGoFMGTDVzeDgQJdU=
+			uRHykSLQ1LgAJJD5PDE8mZUSgvDLtp28laqRwcBzesg=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
