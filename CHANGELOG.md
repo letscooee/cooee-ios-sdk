@@ -1,5 +1,9 @@
 #  Change Log
 
+# 1.2.4
+
+1. Not asking the location permission explicitly.
+
 # 1.2.3
 
 1. Data properties are now sent as is without converting to strings.
