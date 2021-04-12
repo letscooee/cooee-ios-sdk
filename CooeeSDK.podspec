@@ -18,9 +18,8 @@ spec.author       = { "Surbhi Lath" => "surbhibagadia.21@gmail.com" }
 spec.source       = { :git => "https://github.com/letscooee/cooee-ios-sdk.git", :tag => "#{spec.version}" }
 
 spec.vendored_frameworks = "CooeeSDK.xcframework "
-spec.platform = :ios
+spec.platform = :ios, 13.0
 spec.swift_version = "5.0"
 spec.license = "MIT"
-spec.ios.deployment_target  = '13.0'
 
 end
