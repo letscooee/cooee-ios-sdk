@@ -30,23 +30,22 @@ public class Cooee: NSObject{
     let osVersion = String(ProcessInfo().operatingSystemVersion.majorVersion) + "." + String(ProcessInfo().operatingSystemVersion.minorVersion) + "." + String(ProcessInfo().operatingSystemVersion.patchVersion)
     var keepAliveTimer = Timer()
     var buttonClickDelegate: InAppButtonClickDelegate?
-    var isBTTurnedOn = "N"
+    var isBTTurnedOn = false
     var locationManager = CLLocationManager()
     var currentLocation: CLLocationCoordinate2D?
     var queue = OperationQueue()
+    let operationRegisterUser = RegisterUser()
     
-   let operationRegisterUser = RegisterUser()
-
     public var screenName: String?
-
+    
     private override init() {
         super.init()
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.updateFirebaseToken(_:)), name: NSNotification.Name(rawValue: "updateToken"), object: nil)
+        //        NotificationCenter.default.addObserver(self, selector: #selector(self.updateFirebaseToken(_:)), name: NSNotification.Name(rawValue: "updateToken"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.createTrigger(_:)), name: NSNotification.Name(rawValue: "cooeeNotification"), object: nil)
         observeAppStateChanges()
         
     }
-
+    
     @objc public func updateFirebaseToken(_ notification: Notification){
         if let token = notification.userInfo?["token"] as? String{
             HttpCalls.callFirebaseToken(fToken: token)
@@ -74,7 +73,7 @@ public class Cooee: NSObject{
                     self.appIslaunched()
                     self.updateProfile(withProperties: nil, andData: nil)
                 }
-           }
+            }
         }
     }
     
@@ -86,8 +85,8 @@ public class Cooee: NSObject{
     
     func observeAppStateChanges(){
         let centralManager = CBCentralManager()
-        if centralManager.state == .poweredOn { isBTTurnedOn = "Y" }
-       locationManager.requestWhenInUseAuthorization()
+        if centralManager.state == .poweredOn { isBTTurnedOn = true }
+        locationManager.requestWhenInUseAuthorization()
         locationManager.requestAlwaysAuthorization()
         UIDevice.current.isBatteryMonitoringEnabled = true
         keepAliveTimer = Timer.scheduledTimer(timeInterval: 300.0, target: self, selector: #selector(self.callKeepAlive), userInfo: nil, repeats: true)
@@ -102,33 +101,6 @@ public class Cooee: NSObject{
         let keepAliveOperation = KeepAlive()
         fetchSessionID()
         queue.addOperations([keepAliveOperation], waitUntilFinished: false)
-    }
-    
-    func registerUser(){
-        var nsDictionary: NSDictionary?
-        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
-            nsDictionary = NSDictionary(contentsOfFile: path)
-            let applicationID = nsDictionary?["CooeeAppID"] as? String ?? ""
-            let applicationSecretKey = nsDictionary?["CooeeSecretKey"] as? String ?? ""
-            let deviceIOSData = DeviceData(os: "IOS", cooeeSdkVersion: "\(sdkVersion)", appVersion: appVersion, osVersion: osVersion)
-            let registerUserData = RegisterUserDataModel(id: applicationID, secretKey: applicationSecretKey, deviceData: deviceIOSData)
-            
-            WService.shared.getResponse(fromURL: URLS.registerUser, method: .POST, params: registerUserData.dictionary, header: [:]) { (result: RegisterUserResponse) in
-                if let token = result.sdkToken{
-                    UserSession.save(userToken: token)
-                }
-                if let sessionID = result.sessionID{
-                    UserSession.save(sessionID: sessionID)
-                }
-                
-                if let udid = result.id{
-                    UserSession.save(udid: udid)
-                }
-                self.appIslaunched()
-                self.updateProfile(withProperties: nil, andData: nil)
-                HttpCalls.callFirebaseToken(fToken: "")
-            }
-        }
     }
     
     @objc func handleAppStateChange(notification: NSNotification){
@@ -177,7 +149,7 @@ public class Cooee: NSObject{
         let sendEventOperation = SendEvent()
         sendEventOperation.params = params
         fetchSessionID()
-       queue.addOperations([sendEventOperation], waitUntilFinished: false)
+        queue.addOperations([sendEventOperation], waitUntilFinished: false)
     }
     
     
@@ -194,7 +166,7 @@ public class Cooee: NSObject{
         sendPropertiesOperation.data = andData
         fetchSessionID()
         queue.addOperations([sendPropertiesOperation], waitUntilFinished: false)
-
+        
     }
     
     func getLocation(){
@@ -205,52 +177,52 @@ public class Cooee: NSObject{
         }
     }
     
-    func userProperties()->[String: String]{
+    func userProperties()->[String: Any]{
         let pointsPerInch = UIScreen.pointsPerInch ?? 0.0
-        var properties = [String: String]()
+        var properties = [String: Any]()
         properties["CE Device Orientation"] = UIDevice.current.orientation.isLandscape ? "Landscape" : "Potrait"
         properties["CE Device Model"] = UIDevice.modelName
         properties["CE Device Manufacture"] = "Apple"
         if let locations = currentLocation{
-            properties["CE Latitude"] = "\(locations.latitude)"
-            properties["CE Longitude"] = "\(locations.longitude)"
+            properties["CE Latitude"] = locations.latitude
+            properties["CE Longitude"] = locations.longitude
         }else{
             properties["CE Latitude"] = "Unknown"
             properties["CE Longitude"] = "Unknown"
         }
-        properties["CE Available Internal Memory"] = "\(UIDevice.current.freeDiskSpaceInBytes())"
-        properties["CE Total Internal Memory"] = "\(UIDevice.current.totalDiskSpaceInBytes())"
-        properties["CE Device Battery"] = "\(UIDevice.current.batteryLevel*100)"
+        properties["CE Available Internal Memory"] = UIDevice.current.freeDiskSpaceInBytes()
+        properties["CE Total Internal Memory"] = UIDevice.current.totalDiskSpaceInBytes()
+        properties["CE Device Battery"] = UIDevice.current.batteryLevel*100
         properties["CE Network Provider"] = NetworkData.shared.getCarrierName()
         properties["CE Network Type"] = NetworkData.shared.getNetworkType()
         properties["CE Bluetooth On"] = isBTTurnedOn
-        properties["CE Wifi Connected"] = (NetworkData.shared.getNetworkType() == "WIFI") ? ("Y") : ("N")
+        properties["CE Wifi Connected"] = (NetworkData.shared.getNetworkType() == "WIFI") ? true : false
         properties["CE OS"] = "IOS"
         properties["CE OS Version"] = osVersion
-        properties["CE SDK Version"] = "\(sdkVersion)"
+        properties["CE SDK Version"] = sdkVersion
         properties["CE App Version"] = appVersion
         properties["CE Screen Resolution"] = "\(UIScreen.main.bounds.width)x\(UIScreen.main.bounds.height)"
         properties["CE Package Name"] = "\(Bundle.main.bundleIdentifier ?? "")"
-        properties["CE Total RAM"] = "\(ProcessInfo.processInfo.physicalMemory/1024/1024)"
-        properties["CE Available RAM"] = "\(UIDevice.current.freeRAM())"
-        properties["CE DPI"] = "\(pointsPerInch)"
-        
+        properties["CE Total RAM"] = ProcessInfo.processInfo.physicalMemory/1024/1024
+        properties["CE Available RAM"] = UIDevice.current.freeRAM()
+        properties["CE DPI"] = pointsPerInch
+        print("props \(properties)")
         return properties
     }
     
     func appIslaunched(){
-        var properties = ["CE Source":"IOS","CE App Version": appVersion]
+        var properties = ["CE Source":"IOS","CE App Version": appVersion] as [String: Any]
         
         if let _ = app.object(forKey: appLaunched) {
             sendEvent(withName: "CE App Launched", properties: properties)
         }else{
-            properties["CE SDK Version"] = "\(sdkVersion)"
+            properties["CE SDK Version"] = sdkVersion
             properties["CE OS Version"] = osVersion
             properties["CE Network Provider"] = NetworkData.shared.getCarrierName()
             properties["CE Network Type"] = NetworkData.shared.getNetworkType()
             properties["CE Bluetooth On"] = isBTTurnedOn
-            properties["CE Wifi Connected"] = (NetworkData.shared.getNetworkType() == "WIFI") ? ("Y") : ("N")
-            properties["CE Device Battery"] = "\(UIDevice.current.batteryLevel*100)"
+            properties["CE Wifi Connected"] = (NetworkData.shared.getNetworkType() == "WIFI") ? true : false
+            properties["CE Device Battery"] = UIDevice.current.batteryLevel*100
             
             sendEvent(withName: "CE App Installed", properties: properties)
             app.set("true", forKey: appLaunched)
@@ -263,15 +235,15 @@ public class Cooee: NSObject{
         
         if let date2 = app.object(forKey: foregroundTimer) as? Date{
             let difference = getTimeDifference(from: date2)
-            let properties = ["CE Duration": "\(difference)"]
+            let properties = ["CE Duration": difference]
             sendEvent(withName: "CE App Background", properties: properties)
         }else{
-            let properties = ["CE Duration": "0"]
+            let properties = ["CE Duration": 0]
             sendEvent(withName: "CE App Background", properties: properties)
         }
     }
     
-   func appMovedToForeground() {
+    func appMovedToForeground() {
         let date = Date()
         app.set(date, forKey: foregroundTimer)
         
@@ -280,11 +252,11 @@ public class Cooee: NSObject{
             if difference>=30{
                 concludeSession(with: difference)
             }else{
-                let properties = ["CE Duration": "\(difference)"]
+                let properties = ["CE Duration": difference]
                 sendEvent(withName: "CE App Foreground", properties: properties)
             }
         }else{
-            let properties = ["CE Duration": "0"]
+            let properties = ["CE Duration": 0]
             sendEvent(withName: "CE App Foreground", properties: properties)
         }
     }
@@ -294,7 +266,7 @@ public class Cooee: NSObject{
         operationConcludeSession.duration = duration
         fetchSessionID()
         queue.addOperations([operationConcludeSession], waitUntilFinished: false)
-  }
+    }
     
     func getTimeDifference(from time: Date)-> Int{
         let calendar = Calendar.current
@@ -340,7 +312,7 @@ extension UIViewController {
 
 extension Cooee: CBCentralManagerDelegate {
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
-
+        
     }
 }
 extension Cooee: CLLocationManagerDelegate{
@@ -361,13 +333,13 @@ class RegisterUser: AbstractOperation{
     var sdkVersion = 0.0
     var osVersion = ""
     var appVersion = ""
-   
+    
     override open func main() {
-            if isCancelled {
-                finish()
-                return
-            }
-            
+        if isCancelled {
+            finish()
+            return
+        }
+        
         var nsDictionary: NSDictionary?
         if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
             nsDictionary = NSDictionary(contentsOfFile: path)
@@ -388,10 +360,10 @@ class RegisterUser: AbstractOperation{
                     UserSession.save(udid: udid)
                 }
                 self.finish()
-               
+                
             }
         }
         
-        }
+    }
     
 }
