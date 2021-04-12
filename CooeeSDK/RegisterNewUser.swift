@@ -86,8 +86,8 @@ public class Cooee: NSObject{
     func observeAppStateChanges(){
         let centralManager = CBCentralManager()
         if centralManager.state == .poweredOn { isBTTurnedOn = true }
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.requestAlwaysAuthorization()
+        //locationManager.requestWhenInUseAuthorization()
+        //locationManager.requestAlwaysAuthorization()
         UIDevice.current.isBatteryMonitoringEnabled = true
         keepAliveTimer = Timer.scheduledTimer(timeInterval: 300.0, target: self, selector: #selector(self.callKeepAlive), userInfo: nil, repeats: true)
         NotificationCenter.default.addObserver(self, selector: #selector(handleAppStateChange(notification:)), name: UIApplication.didFinishLaunchingNotification, object: nil)
@@ -173,7 +173,7 @@ public class Cooee: NSObject{
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
+            //locationManager.startUpdatingLocation()
         }
     }
     
@@ -183,13 +183,12 @@ public class Cooee: NSObject{
         properties["CE Device Orientation"] = UIDevice.current.orientation.isLandscape ? "Landscape" : "Potrait"
         properties["CE Device Model"] = UIDevice.modelName
         properties["CE Device Manufacture"] = "Apple"
+        
         if let locations = currentLocation{
             properties["CE Latitude"] = locations.latitude
             properties["CE Longitude"] = locations.longitude
-        }else{
-            properties["CE Latitude"] = "Unknown"
-            properties["CE Longitude"] = "Unknown"
         }
+        
         properties["CE Available Internal Memory"] = UIDevice.current.freeDiskSpaceInBytes()
         properties["CE Total Internal Memory"] = UIDevice.current.totalDiskSpaceInBytes()
         properties["CE Device Battery"] = UIDevice.current.batteryLevel*100
