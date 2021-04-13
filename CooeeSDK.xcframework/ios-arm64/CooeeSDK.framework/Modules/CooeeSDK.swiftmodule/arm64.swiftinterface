@@ -89,8 +89,5 @@ public protocol InAppButtonClickDelegate {
 extension Cooee : CoreBluetooth.CBCentralManagerDelegate {
   @objc dynamic public func centralManagerDidUpdateState(_ central: CoreBluetooth.CBCentralManager)
 }
-extension Cooee : CoreLocation.CLLocationManagerDelegate {
-  @objc dynamic public func locationManager(_ manager: CoreLocation.CLLocationManager, didUpdateLocations locations: [CoreLocation.CLLocation])
-}
 extension CooeeSDK.DownloadError : Swift.Equatable {}
 extension CooeeSDK.DownloadError : Swift.Hashable {}

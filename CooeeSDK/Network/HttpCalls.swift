@@ -76,6 +76,7 @@ class SendEvent: AbstractOperation{
     
     override open func main() {
             if isCancelled {
+                print("cancelled send event")
                 finish()
                 return
             }
@@ -100,6 +101,7 @@ class SendUserProperties: AbstractOperation{
     let networkService = WService.shared
     override open func main() {
         if isCancelled {
+            print("cancelled updateProps")
             finish()
             return
         }
@@ -146,4 +148,42 @@ class ConcludeSession: AbstractOperation{
             self.finish()
         }
     }
+}
+class RegisterUser: AbstractOperation{
+    var sdkVersion = ""
+    var osVersion = ""
+    var appVersion = ""
+    
+    override open func main() {
+        if isCancelled {
+            finish()
+            return
+        }
+        
+        var nsDictionary: NSDictionary?
+        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
+            nsDictionary = NSDictionary(contentsOfFile: path)
+            let applicationID = nsDictionary?["CooeeAppID"] as? String ?? ""
+            let applicationSecretKey = nsDictionary?["CooeeSecretKey"] as? String ?? ""
+            let deviceIOSData = DeviceData(os: "IOS", cooeeSdkVersion: "\(sdkVersion)", appVersion: appVersion, osVersion: osVersion)
+            let registerUserData = RegisterUserDataModel(id: applicationID, secretKey: applicationSecretKey, deviceData: deviceIOSData)
+            
+            WService.shared.getResponse(fromURL: URLS.registerUser, method: .POST, params: registerUserData.dictionary, header: [:]) { (result: RegisterUserResponse) in
+                if let token = result.sdkToken{
+                    UserSession.save(userToken: token)
+                }
+                if let sessionID = result.sessionID{
+                    UserSession.save(sessionID: sessionID)
+                }
+                
+                if let udid = result.id{
+                    UserSession.save(udid: udid)
+                }
+                self.finish()
+                
+            }
+        }
+        
+    }
+    
 }
