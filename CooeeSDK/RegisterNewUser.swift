@@ -26,7 +26,7 @@ public class Cooee: NSObject{
     let appLaunched = "isAppLaunched"
     let sdkTokenString = "sdkToken"
     let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
-    let sdkVersion = CooeeSDKVersionNumber
+    let sdkVersion = Bundle(identifier: "com.SurbhiLath.CooeeSDK")?.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
     let osVersion = String(ProcessInfo().operatingSystemVersion.majorVersion) + "." + String(ProcessInfo().operatingSystemVersion.minorVersion) + "." + String(ProcessInfo().operatingSystemVersion.patchVersion)
     var keepAliveTimer = Timer()
     var buttonClickDelegate: InAppButtonClickDelegate?
@@ -60,19 +60,19 @@ public class Cooee: NSObject{
         }
     }
     
-    func fetchSessionID(){
+    func fetchSessionID(nextOperation: AbstractOperation?){
         if UserSession.getSessionID() == nil {
             operationRegisterUser.appVersion = appVersion
             operationRegisterUser.osVersion = osVersion
             operationRegisterUser.sdkVersion = sdkVersion
-            
+            if let op2 = nextOperation{
+                op2.addDependency(operationRegisterUser)
+            }
             if !operationRegisterUser.isExecuting && !operationRegisterUser.isFinished && !queue.operations.contains(operationRegisterUser){
-                queue.maxConcurrentOperationCount = 1
+                //                queue.maxConcurrentOperationCount = 1
                 queue.addOperations([operationRegisterUser], waitUntilFinished: false)
-                operationRegisterUser.completionBlock = {
-                    self.appIslaunched()
-                    self.updateProfile(withProperties: nil, andData: nil)
-                }
+                
+                self.appIslaunched()
             }
         }
     }
@@ -86,8 +86,7 @@ public class Cooee: NSObject{
     func observeAppStateChanges(){
         let centralManager = CBCentralManager()
         if centralManager.state == .poweredOn { isBTTurnedOn = true }
-        //locationManager.requestWhenInUseAuthorization()
-        //locationManager.requestAlwaysAuthorization()
+        getLocation()
         UIDevice.current.isBatteryMonitoringEnabled = true
         keepAliveTimer = Timer.scheduledTimer(timeInterval: 300.0, target: self, selector: #selector(self.callKeepAlive), userInfo: nil, repeats: true)
         NotificationCenter.default.addObserver(self, selector: #selector(handleAppStateChange(notification:)), name: UIApplication.didFinishLaunchingNotification, object: nil)
@@ -99,7 +98,7 @@ public class Cooee: NSObject{
     
     @objc func callKeepAlive(){
         let keepAliveOperation = KeepAlive()
-        fetchSessionID()
+        fetchSessionID(nextOperation: keepAliveOperation)
         queue.addOperations([keepAliveOperation], waitUntilFinished: false)
     }
     
@@ -107,6 +106,7 @@ public class Cooee: NSObject{
         switch notification.name {
         case UIApplication.didFinishLaunchingNotification:
             print("launched")
+            appIslaunched()
         case UIApplication.didEnterBackgroundNotification:
             print("background")
             appEnterdBackground()
@@ -148,32 +148,29 @@ public class Cooee: NSObject{
         let params = ["name": withName, "screen": localScreenName, "sessionNumber": sessionNumber, "sessionID": sessionID, "properties":properties, "activeTriggers": arrayTrigger] as [String : Any]
         let sendEventOperation = SendEvent()
         sendEventOperation.params = params
-        fetchSessionID()
+        fetchSessionID(nextOperation: sendEventOperation)
         queue.addOperations([sendEventOperation], waitUntilFinished: false)
     }
     
     
     public func updateProfile(withProperties: [String: Any]?,  andData: [String:Any]?){
-        var propeties = [String: Any]()
-        if let userProperties = withProperties{
-            propeties = userProperties
-        }else{
-            propeties = userProperties()
-        }
-        
         let sendPropertiesOperation = SendUserProperties()
-        sendPropertiesOperation.propeties = propeties
+        sendPropertiesOperation.propeties = withProperties
         sendPropertiesOperation.data = andData
-        fetchSessionID()
+        fetchSessionID(nextOperation: sendPropertiesOperation)
         queue.addOperations([sendPropertiesOperation], waitUntilFinished: false)
-        
     }
     
     func getLocation(){
         if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            //locationManager.startUpdatingLocation()
+          switch CLLocationManager.authorizationStatus() {
+            case .notDetermined, .restricted, .denied:
+                   print("No access")
+            case .authorizedAlways, .authorizedWhenInUse :
+                currentLocation = locationManager.location?.coordinate
+            @unknown default:
+                print("No access")
+            }
         }
     }
     
@@ -183,12 +180,13 @@ public class Cooee: NSObject{
         properties["CE Device Orientation"] = UIDevice.current.orientation.isLandscape ? "Landscape" : "Potrait"
         properties["CE Device Model"] = UIDevice.modelName
         properties["CE Device Manufacture"] = "Apple"
-        
         if let locations = currentLocation{
             properties["CE Latitude"] = locations.latitude
             properties["CE Longitude"] = locations.longitude
+        }else{
+            properties["CE Latitude"] = "Unknown"
+            properties["CE Longitude"] = "Unknown"
         }
-        
         properties["CE Available Internal Memory"] = UIDevice.current.freeDiskSpaceInBytes()
         properties["CE Total Internal Memory"] = UIDevice.current.totalDiskSpaceInBytes()
         properties["CE Device Battery"] = UIDevice.current.batteryLevel*100
@@ -205,7 +203,6 @@ public class Cooee: NSObject{
         properties["CE Total RAM"] = ProcessInfo.processInfo.physicalMemory/1024/1024
         properties["CE Available RAM"] = UIDevice.current.freeRAM()
         properties["CE DPI"] = pointsPerInch
-        print("props \(properties)")
         return properties
     }
     
@@ -214,6 +211,7 @@ public class Cooee: NSObject{
         
         if let _ = app.object(forKey: appLaunched) {
             sendEvent(withName: "CE App Launched", properties: properties)
+            self.updateProfile(withProperties: userProperties(), andData: nil)
         }else{
             properties["CE SDK Version"] = sdkVersion
             properties["CE OS Version"] = osVersion
@@ -226,6 +224,7 @@ public class Cooee: NSObject{
             sendEvent(withName: "CE App Installed", properties: properties)
             app.set("true", forKey: appLaunched)
         }
+        
     }
     
     func appEnterdBackground(){
@@ -263,7 +262,7 @@ public class Cooee: NSObject{
     func concludeSession(with duration: Int){
         let operationConcludeSession = ConcludeSession()
         operationConcludeSession.duration = duration
-        fetchSessionID()
+        fetchSessionID(nextOperation: operationConcludeSession)
         queue.addOperations([operationConcludeSession], waitUntilFinished: false)
     }
     
@@ -314,13 +313,13 @@ extension Cooee: CBCentralManagerDelegate {
         
     }
 }
-extension Cooee: CLLocationManagerDelegate{
-    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate
-        else { return }
-        currentLocation = locValue
-    }
-}
+//extension Cooee: CLLocationManagerDelegate{
+//    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate
+//        else { return }
+//        currentLocation = locValue
+//    }
+//}
 
 //extension RegisterUser: MessagingDelegate{
 //    public func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
@@ -328,41 +327,3 @@ extension Cooee: CLLocationManagerDelegate{
 //        HttpCalls.callFirebaseToken(fToken: fcmToken ?? "")
 //    }
 //}
-class RegisterUser: AbstractOperation{
-    var sdkVersion = 0.0
-    var osVersion = ""
-    var appVersion = ""
-    
-    override open func main() {
-        if isCancelled {
-            finish()
-            return
-        }
-        
-        var nsDictionary: NSDictionary?
-        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
-            nsDictionary = NSDictionary(contentsOfFile: path)
-            let applicationID = nsDictionary?["CooeeAppID"] as? String ?? ""
-            let applicationSecretKey = nsDictionary?["CooeeSecretKey"] as? String ?? ""
-            let deviceIOSData = DeviceData(os: "IOS", cooeeSdkVersion: "\(sdkVersion)", appVersion: appVersion, osVersion: osVersion)
-            let registerUserData = RegisterUserDataModel(id: applicationID, secretKey: applicationSecretKey, deviceData: deviceIOSData)
-            
-            WService.shared.getResponse(fromURL: URLS.registerUser, method: .POST, params: registerUserData.dictionary, header: [:]) { (result: RegisterUserResponse) in
-                if let token = result.sdkToken{
-                    UserSession.save(userToken: token)
-                }
-                if let sessionID = result.sessionID{
-                    UserSession.save(sessionID: sessionID)
-                }
-                
-                if let udid = result.id{
-                    UserSession.save(udid: udid)
-                }
-                self.finish()
-                
-            }
-        }
-        
-    }
-    
-}
