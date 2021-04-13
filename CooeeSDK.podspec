@@ -9,7 +9,7 @@
 Pod::Spec.new do |spec|
 
 spec.name         = "CooeeSDK"
-spec.version      = "1.2.5"
+spec.version      = "1.2.6"
 spec.summary      = "Hyper-personalised Mobile App Re-Engagement via Machine Learning"
 spec.description  = "Cooee's iOS SDK for hyper-personalised Mobile App Re-Engagement via Machine Learning"
 
