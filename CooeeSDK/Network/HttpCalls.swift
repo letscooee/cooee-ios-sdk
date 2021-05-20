@@ -6,11 +6,11 @@
 //
 
 import Foundation
-
+import Network
 public class HttpCalls: NSObject{
     
     static let networkService = WService.shared
-    
+    let monitor = NWPathMonitor()
     static func callEventTrack(with params: Dictionary<String, Any>, completionHandler: @escaping(_ result: DataTriggered?) -> ()){
         let token = UserSession.getUserToken() ?? ""
 
@@ -186,4 +186,21 @@ class RegisterUser: AbstractOperation{
         
     }
     
+}
+
+class UpdateFirebaseToken: AbstractOperation{
+    let networkService = WService.shared
+    var fcmToken = ""
+    
+    override open func main() {
+        if isCancelled {
+            finish()
+            return
+        }
+       let token = UserSession.getUserToken() ?? ""
+        let params = ["firebaseToken": fcmToken] as [String : Any]
+        networkService.getResponse(fromURL: URLS.saveFCM, method: .POST, params: params, header: ["x-sdk-token":token]) { (result: TrackEventResponse) in
+            self.finish()
+        }
+    }
 }

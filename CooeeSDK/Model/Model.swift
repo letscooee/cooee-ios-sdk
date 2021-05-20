@@ -77,12 +77,14 @@ struct TriggerData: Decodable {
     let closeBehaviour: CloseBehaviour
     let duration: Int?
     let buttons: [Button]
+    let sound: String?
     
     enum CodingKeys: String, CodingKey {
         case id, triggerBackground, background
         case imageURL = "imageUrl"
         case videoURL = "videoUrl"
         case showAsPN, entranceAnimation, exitAnimation, type, fill, title, message, closeBehaviour, buttons, duration
+        case sound = "notificationSoundUrl"
     }
 }
 
@@ -127,6 +129,7 @@ struct Message: Decodable {
 struct TriggerBackground: Decodable {
     let type: BackgroundType
     let blur: Int
+    let color: String
 }
 
 enum BackgroundType: String, Decodable {
@@ -179,9 +182,24 @@ enum TextPosition: String, Decodable {
 struct TriggerDataModel: Codable {
     var triggerId: String
     var triggerDuration: String
-    
+    var receivedOn: Date?
     enum CodingKeys: String, CodingKey {
         case triggerId = "triggerID"
         case triggerDuration = "duration"
+        case receivedOn = "receivedOn"
     }
+}
+
+enum CloseType: String, Decodable{
+    case CloseButton = "Close Button"
+    case ActionButton = "Action Button"
+    case Auto = "Auto"
+    case TriggerTouch = "Trigger Touch"
+}
+
+
+struct RequestData: Codable, Equatable{
+    var url: String
+    var header: [String: String]
+    var method: String
 }

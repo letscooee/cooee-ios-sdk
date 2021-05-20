@@ -19,7 +19,10 @@ spec.source       = { :git => "https://github.com/letscooee/cooee-ios-sdk.git", 
 
 spec.vendored_frameworks = "CooeeSDK.xcframework "
 spec.platform = :ios, 13.0
+spec.ios.deployment_target = '13.0'
 spec.swift_version = "5.0"
 spec.license = "MIT"
-
+spec.dependency 'Firebase'
+#spec.static_framework = true
+spec.dependency 'FirebaseMessaging'
 end
