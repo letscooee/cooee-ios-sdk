@@ -25,4 +25,5 @@ spec.license = "MIT"
 spec.dependency 'Firebase'
 #spec.static_framework = true
 spec.dependency 'FirebaseMessaging'
+spec.dependency 'Sentry'
 end
