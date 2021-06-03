@@ -6,11 +6,11 @@
 //
 
 import Foundation
-
+import Network
 public class HttpCalls: NSObject{
     
     static let networkService = WService.shared
-    
+    let monitor = NWPathMonitor()
     static func callEventTrack(with params: Dictionary<String, Any>, completionHandler: @escaping(_ result: DataTriggered?) -> ()){
         let token = UserSession.getUserToken() ?? ""
 
@@ -76,6 +76,7 @@ class SendEvent: AbstractOperation{
     
     override open func main() {
             if isCancelled {
+                print("cancelled send event")
                 finish()
                 return
             }
@@ -100,6 +101,7 @@ class SendUserProperties: AbstractOperation{
     let networkService = WService.shared
     override open func main() {
         if isCancelled {
+            print("cancelled updateProps")
             finish()
             return
         }
@@ -143,6 +145,61 @@ class ConcludeSession: AbstractOperation{
         let token = UserSession.getUserToken() ?? ""
         let params = ["duration": duration, "sessionID": sessionID] as [String : Any]
         networkService.getResponse(fromURL: URLS.concludeSession, method: .POST, params: params, header: ["x-sdk-token":token]) { (result: TrackEventResponse) in
+            self.finish()
+        }
+    }
+}
+class RegisterUser: AbstractOperation{
+    var sdkVersion = ""
+    var osVersion = ""
+    var appVersion = ""
+    
+    override open func main() {
+        if isCancelled {
+            finish()
+            return
+        }
+        
+        var nsDictionary: NSDictionary?
+        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
+            nsDictionary = NSDictionary(contentsOfFile: path)
+            let applicationID = nsDictionary?["CooeeAppID"] as? String ?? ""
+            let applicationSecretKey = nsDictionary?["CooeeSecretKey"] as? String ?? ""
+            let deviceIOSData = DeviceData(os: "IOS", cooeeSdkVersion: "\(sdkVersion)", appVersion: appVersion, osVersion: osVersion)
+            let registerUserData = RegisterUserDataModel(id: applicationID, secretKey: applicationSecretKey, deviceData: deviceIOSData)
+            
+            WService.shared.getResponse(fromURL: URLS.registerUser, method: .POST, params: registerUserData.dictionary, header: [:]) { (result: RegisterUserResponse) in
+                if let token = result.sdkToken{
+                    UserSession.save(userToken: token)
+                }
+                if let sessionID = result.sessionID{
+                    UserSession.save(sessionID: sessionID)
+                }
+                
+                if let udid = result.id{
+                    UserSession.save(udid: udid)
+                }
+                self.finish()
+                
+            }
+        }
+        
+    }
+    
+}
+
+class UpdateFirebaseToken: AbstractOperation{
+    let networkService = WService.shared
+    var fcmToken = ""
+    
+    override open func main() {
+        if isCancelled {
+            finish()
+            return
+        }
+       let token = UserSession.getUserToken() ?? ""
+        let params = ["firebaseToken": fcmToken] as [String : Any]
+        networkService.getResponse(fromURL: URLS.saveFCM, method: .POST, params: params, header: ["x-sdk-token":token]) { (result: TrackEventResponse) in
             self.finish()
         }
     }

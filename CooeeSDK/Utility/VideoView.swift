@@ -16,7 +16,11 @@ class VideoView: UIView {
     var player: AVPlayer?
     var isLoop: Bool = false
     var avpController = AVPlayerViewController()
-  
+    var videoCounter = 0
+    var duration = 0.0
+    var watchedTill = 0.0
+    var startingTime = Date()
+    var isMute = false
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
@@ -45,14 +49,9 @@ class VideoView: UIView {
             avpController.view.frame.size.width = self.frame.size.width
             avpController.view.backgroundColor = .clear
             avpController.videoGravity = .resizeAspectFill
-//            avpController.showsPlaybackControls = false
-//            let playPauseButton = PlayPauseButton()
-//            playPauseButton.avPlayer = player
-//            self.addSubview(playPauseButton)
-//            playPauseButton.setup()
-//            self.addSubview(avpController.view)
-//            self.layoutIfNeeded()
-//            avpController.showsPlaybackControls = false
+            avpController.player?.addObserver(self, forKeyPath: "rate", options: NSKeyValueObservingOptions(rawValue: NSKeyValueObservingOptions.new.rawValue | NSKeyValueObservingOptions.old.rawValue), context: nil)
+            let asset = AVAsset(url: videoURL)
+            duration = CMTimeGetSeconds(asset.duration)
             self.addSubview(avpController.view)
             avpController.view.bounds = self.bounds
             self.layoutIfNeeded()
@@ -64,7 +63,6 @@ class VideoView: UIView {
         if player?.timeControlStatus != AVPlayer.TimeControlStatus.playing {
             player?.play()
         }
-
         avpController.player?.play()
     
     }
@@ -74,11 +72,26 @@ class VideoView: UIView {
     }
     
     func stop() {
+        watchedTill = startingTime.timeIntervalSinceNow * -1
         player?.pause()
         player?.seek(to: CMTime.zero)
     }
     
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        isMute = player!.isMuted
+        if keyPath == "rate" {
+            if player?.rate == 1  {
+                startingTime = Date()
+                print("Playing")
+            }else{
+                watchedTill = startingTime.timeIntervalSinceNow * -1
+                print("Stop")
+            }
+        }
+    }
+    
     @objc func reachTheEndOfTheVideo(_ notification: Notification) {
+        videoCounter += 1
         if isLoop {
             player?.pause()
             player?.seek(to: CMTime.zero)

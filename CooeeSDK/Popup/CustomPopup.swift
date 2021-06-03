@@ -14,6 +14,9 @@ class CustomPopup: UIView {
     var popUPView = UIView()
     var videoPlayer: VideoView?
     var loaderView = CircularProgressView()
+    var startingTime = Date()
+    var closeBehaviour: CloseType = .CloseButton
+    
     override init (frame : CGRect) {
         super.init(frame : frame)
         //Bundle.main.loadNibNamed("CustomPopup", owner: self, options: nil)
@@ -39,7 +42,7 @@ class CustomPopup: UIView {
         case .BLURRED:
             addBlurEffect(with: Double(data.triggerBackground.blur)/100 )
         case .SOLID_COLOR:
-           break
+            setBackgroundColor(with: data.triggerBackground.color)
         case .IMAGE:
            break
         }
@@ -144,7 +147,7 @@ class CustomPopup: UIView {
         case .VIDEO:
             videoPlayer = VideoView.init(frame: viewForVideoAndImage.frame)
             if let player = videoPlayer{
-                player.configure(url:"https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4")
+                player.configure(url: data.videoURL)
                 player.isLoop = true
                 player.play()
                 viewForVideoAndImage.addSubview(player)
@@ -208,6 +211,7 @@ class CustomPopup: UIView {
         vCloseStackView.frame.size = CGSize(width: 30, height: 30)
         
         if data.closeBehaviour.auto{
+            closeBehaviour = .Auto
             vCloseStackView.addArrangedSubview(closeButton)
             Timer.scheduledTimer(timeInterval: TimeInterval(data.closeBehaviour.timeToClose) , target: self, selector: #selector(removeFromSuper), userInfo: nil, repeats: false)
         }else{
@@ -230,6 +234,8 @@ class CustomPopup: UIView {
             vCloseStackView.frame.origin = CGPoint(x: popUPView.frame.width-40, y: popUPView.frame.height-40)
         }
         popUPView.addSubview(vCloseStackView)
+        callTriggerDisplayed()
+        startingTime = Date()
     }
 
     @objc func loadCircularView(closure:@escaping ()->()){
@@ -253,11 +259,11 @@ class CustomPopup: UIView {
         labelTxt.font = UIFont.systemFont(ofSize: CGFloat(message.size))
         labelTxt.textAlignment = .center
         labelTxt.numberOfLines = 0
-        labelTxt.frame.size = CGSize(width: popUPView.frame.width-40, height: 40)
+        labelTxt.frame.size = CGSize(width: popUPView.frame.width-60, height: 40)
         return labelTxt
     }
     
-    @objc func removeFromSuper(){
+    @objc func closePopUp(){
         let animationExit = CATransition()
         animationExit.duration = 0.5
         animationExit.repeatCount = 0
@@ -286,23 +292,73 @@ class CustomPopup: UIView {
         self.popUPView.layer.add(animationExit, forKey: nil)
         self.popUPView.isHidden = true
         CATransaction.commit()
+        sendCloseEvent()
     }
-
+    
+    func sendCloseEvent(){
+        var eventProps = [String: Any]()
+        eventProps["Duration"] = calculateTriggerDuration()
+        eventProps["Close Behaviour"] = closeBehaviour.rawValue
+        eventProps["triggerID"] = layoutaData?.id
+        
+        if layoutaData!.type == .VIDEO {
+            if let player = videoPlayer{
+                eventProps["Video Duration"] = player.duration
+                eventProps["Watched Till"] = player.watchedTill
+                eventProps["Total Watched"] = calculateTimeForVideo()
+                eventProps["Video Unmuted"] = !player.isMute
+            }
+        }
+        
+        print(eventProps)
+        let registerUserInstance = Cooee.shared
+        registerUserInstance.sendEvent(withName: "CE Trigger Closed", properties: eventProps)
+    }
+    
+    func callTriggerDisplayed(){
+        let eventProps = [String: Any]()
+        let name = "CE Trigger Displayed"
+        let registerUserInstance = Cooee.shared
+        registerUserInstance.sendEvent(withName: name, properties: eventProps)
+    }
+    
+    @objc func removeFromSuper(){
+        if !(layoutaData!.closeBehaviour.auto){
+            closeBehaviour = .CloseButton
+        }
+       closePopUp()
+    }
+    
+    @objc func btnTouchClose(){
+        closeBehaviour = .TriggerTouch
+        closePopUp()
+    }
+    
     @objc func actionButtonTarget(_ sender: UIButton){
-        var customProperties = [String: String]()
+        closeBehaviour = .ActionButton
         var customPayload = [String: String]()
         if let data = layoutaData{
             for button in data.buttons{
                 if "   \(button.text)   " == sender.titleLabel!.text {
-                    customProperties = button.action.userProperty
-                    customPayload = button.action.kv
+                   customPayload = button.action.kv
                 }
             }
         }
-        let registerUserInstance = Cooee.shared
-        registerUserInstance.updateProfile(withProperties: customProperties, andData: nil)
-       // registerUserInstance.buttonClickDelegate?.getPayload(info: customPayload)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "buttonClickListener"), object: nil, userInfo: customPayload)
+        
+        closePopUp()
+    }
+    
+    func calculateTimeForVideo()->Double{
+        if let player = videoPlayer{
+            return player.duration*Double(player.videoCounter) + player.watchedTill
+        }else{
+            return 0.0
+        }
+    }
+    
+    func calculateTriggerDuration()->Double{
+        return startingTime.timeIntervalSinceNow * -1
     }
     
     func addImage(with url: URL, to: UIImageView){
@@ -315,7 +371,7 @@ class CustomPopup: UIView {
     }
     
     func addTriggerToList(triggerID: String, duration: String) {
-        let data = TriggerDataModel(triggerId: triggerID, triggerDuration: duration)
+        let data = TriggerDataModel(triggerId: triggerID, triggerDuration: duration, receivedOn: Date())
         var list = UserSession.getTriggerData()
         list.append(data)
         UserSession.save(triggerData: list)
@@ -328,5 +384,9 @@ class CustomPopup: UIView {
         blurEffectView.alpha = 0.8
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         parentView.addSubview(blurEffectView)
+    }
+    
+    func setBackgroundColor(with hexColor: String){
+        parentView.backgroundColor = UIColor(hexString: hexColor)
     }
 }

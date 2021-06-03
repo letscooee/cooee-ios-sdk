@@ -119,5 +119,4 @@ public class NotificationPayload: NSObject{
                 print (error)
             }
         }
-    
 }

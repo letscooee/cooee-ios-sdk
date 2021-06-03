@@ -48,6 +48,21 @@ struct UserSession {
         }
         return list
     }
+    
+    static func save (requestData: [[String: Any]]){
+    
+        UserDefaults.standard.set(requestData, forKey:"requestData")
+       
+    }
+    
+    static func getNetworkData()-> [[String: Any]]? {
+       let listData = UserDefaults.standard.value(forKey:"requestData") as? [[String: Any]]
+        return listData
+    }
+    
+    static func removeAllElementsFromNetworkData(){
+        UserDefaults.standard.removeObject(forKey: "requestData")
+    }
 }
 
 

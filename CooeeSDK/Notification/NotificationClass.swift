@@ -7,58 +7,73 @@
 
 import UIKit
 
-public class NotificationClass: UNNotificationServiceExtension {
+public class NotificationClass: NSObject{
     
     var contentHandler: ((UNNotificationContent) -> Void)?
     var bestAttemptContent: UNMutableNotificationContent?
     var payloadData: TriggerData?
+    private let actionIdentifier = "Read"
+    public static let shared = NotificationClass()
+    private override init() {
+        super.init()
+        UNUserNotificationCenter.current().delegate = self
+    }
     
-    @objc static func notificationReceived(userInfo: [AnyHashable: Any]){
+    @objc func notificationReceived(userInfo: [AnyHashable: Any]){
+       
         if let stringData = userInfo["triggerData"] as? String {
             guard let data = stringData.data(using: String.Encoding.utf8, allowLossyConversion: false)
             else { return }
-                   do {
-                        let decodedResponse = try JSONDecoder().decode(TriggerData.self, from: data)
-
-                        if let visibleController = UIApplication.shared.topMostViewController(){
-                            if !decodedResponse.showAsPN{
-                                CustomPopup.instance.updateViewWith(data: decodedResponse, on: visibleController)
-                            }else{
-                                createLocalNotification(with: decodedResponse)
-                            }
-                        }
-                    }catch{
-                        print(error)
+            do {
+                let decodedResponse = try JSONDecoder().decode(TriggerData.self, from: data)
+                callNotificationReceived(ofType: "CE Notification Received", triggerId: decodedResponse.id)
+                if let visibleController = UIApplication.shared.topMostViewController(){
+                    if !decodedResponse.showAsPN{
+                        CustomPopup.instance.updateViewWith(data: decodedResponse, on: visibleController)
+                    }else{
+                        CustomPopup.instance.updateViewWith(data: decodedResponse, on: visibleController)
+                        createLocalNotification(with: decodedResponse)
                     }
-           
+                }
+            }catch{
+                print(error)
+            }
         }
     }
-    
-    static func createLocalNotification(with payload: TriggerData){
-        let notificationContent = UNMutableNotificationContent()
-        notificationContent.title = payload.title.text
-        notificationContent.body = payload.message.text
-        notificationContent.badge = 1
-       
-        // Add Trigger
-        let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 1.0, repeats: false)
 
-        // Create Notification Request
-        let notificationRequest = UNNotificationRequest(identifier: payload.id, content: notificationContent, trigger: notificationTrigger)
+    func callNotificationReceived(ofType: String, triggerId: String){
+        var eventProps = [String: Any]()
+        eventProps["Trigger ID"] = triggerId
+        let registerUserInstance = Cooee.shared
+        registerUserInstance.sendEvent(withName: ofType, properties: eventProps)
+    }
+    
+    func createLocalNotification(with payload: TriggerData){
+       
+        let notificationContent = UNMutableNotificationContent()
+        notificationContent.title = payload.title.notificationText
+        notificationContent.body = payload.message.notificationText
+        
+        // Add Trigger
+        let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.5, repeats: false)
         
         var actions = [UNNotificationAction]()
         for action in payload.buttons{
-            let temp = UNNotificationAction(identifier: action.text, title: action.text, options: [])
+            let temp = UNNotificationAction(identifier: actionIdentifier, title: action.text , options: [])
             actions.append(temp)
         }
-        let category = UNNotificationCategory(identifier: "Random", actions: actions, intentIdentifiers: [], hiddenPreviewsBodyPlaceholder: "", options: [])
         
+       // Add action category
+        let category = UNNotificationCategory(identifier: "Notification.category", actions: actions, intentIdentifiers: [], options: [])
         UNUserNotificationCenter.current().setNotificationCategories([category])
-    
-        getMediaAttachment(for: payload.imageURL) { image in
-            
-            guard let image = image, let fileURL = self.saveImageAttachment( image: image, forIdentifier: "attachment.png") else {
-               return
+        
+        // Add action category identifier to content
+        notificationContent.categoryIdentifier = "Notification.category"
+        
+        if payload.type == .IMAGE{
+         getMediaAttachment(for: payload.imageURL) { image in
+         guard let image = image, let fileURL = self.saveImageAttachment( image: image, forIdentifier: "attachment.png") else {
+                return
             }
             let imageAttachment = try? UNNotificationAttachment(
                 identifier: "image",
@@ -66,75 +81,33 @@ public class NotificationClass: UNNotificationServiceExtension {
                 options: nil)
             if let imageAttachment = imageAttachment {
                 notificationContent.attachments = [imageAttachment]
-                notificationContent.categoryIdentifier = "Random"
-
+                if let soundURL = payload.sound {
+                    self.checkAudioFileExists(withLink: soundURL){ soundFileURL in
+                        let stringName = soundFileURL.absoluteString
+                        notificationContent.sound = UNNotificationSound(named: UNNotificationSoundName(stringName))
+                    }
+                }
+                // Create Notification Request
+                let notificationRequest = UNNotificationRequest(identifier: payload.id, content: notificationContent, trigger: notificationTrigger)
                 UNUserNotificationCenter.current().add(notificationRequest) { (error) in
                     if let error = error {
                         print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
                     }
                 }
             }
-            
-        }
-       
-    }
-    
-    public override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
-        self.contentHandler = contentHandler
-        bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
-        
-        if let bestAttemptContent = bestAttemptContent {
-            // Modify the notification content here...
-            bestAttemptContent.title = "\(bestAttemptContent.title) [modified1]"
-          if let triggerData = bestAttemptContent.userInfo["data"] {
-                if let dictData = triggerData as? [String: Any]{
-                    do {
-                        let jsonResult =  try JSONSerialization.data(withJSONObject: dictData)
-                        do {
-                            let decodedResponse = try JSONDecoder().decode(DataClass.self, from: jsonResult)
-                            
-                            //                            if let visibleController = UIApplication.shared.topMostViewController(){
-                            //                                if !decodedResponse.triggerData.showAsPN{
-                            //                                    CustomPopup.instance.updateViewWith(data: decodedResponse.triggerData, on: visibleController)
-                            //                                }
-                            //                            }
-                            
-                            self.payloadData = decodedResponse.triggerData
-                            if let mainData = payloadData{
-                                bestAttemptContent.title = mainData.title.text
-                                bestAttemptContent.body = mainData.message.text
-//                                getMediaAttachment(for: mainData.imageURL) { [weak self] image in
-//
-//                                    guard let self = self, let image = image, let fileURL = self.saveImageAttachment( image: image, forIdentifier: "attachment.png") else {
-//                                        contentHandler(bestAttemptContent)
-//                                        return
-//                                    }
-//                                    let imageAttachment = try? UNNotificationAttachment(
-//                                        identifier: "image",
-//                                        url: fileURL,
-//                                        options: nil)
-//                                    if let imageAttachment = imageAttachment {
-//                                        bestAttemptContent.attachments = [imageAttachment]
-//                                    }
-//                                    contentHandler(bestAttemptContent)
-//
-//                                }
-                            }
-                            
-                        }catch{
-                            print(error)
-                        }
-                    }catch{
-                        print (error)
-                    }
+         }
+        }else{
+            let notificationRequest = UNNotificationRequest(identifier: payload.id, content: notificationContent, trigger: notificationTrigger)
+            UNUserNotificationCenter.current().add(notificationRequest) { (error) in
+                if let error = error {
+                    print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
                 }
             }
-            contentHandler(bestAttemptContent)
         }
     }
     
     
-    static func getMediaAttachment( for urlString: String, completion: @escaping (UIImage?) -> Void) {
+    func getMediaAttachment( for urlString: String, completion: @escaping (UIImage?) -> Void) {
         guard let url = URL(string: urlString) else {
             completion(nil)
             return
@@ -149,7 +122,7 @@ public class NotificationClass: UNNotificationServiceExtension {
         }
     }
     
-    static private func saveImageAttachment(image: UIImage, forIdentifier identifier: String
+    private func saveImageAttachment(image: UIImage, forIdentifier identifier: String
     ) -> URL? {
         let tempDirectory = URL(fileURLWithPath: NSTemporaryDirectory())
         let directoryPath = tempDirectory.appendingPathComponent(
@@ -174,5 +147,102 @@ public class NotificationClass: UNNotificationServiceExtension {
             return nil
         }
     }
+    
+    func sendNotificationCloseEvent(){
+//        var eventProps = [String: Any]()
+//        eventProps["Duration"] = calculateTriggerDuration()
+//        eventProps["Close Behaviour"] = closeBehaviour.rawValue
+//        eventProps["triggerID"] = layoutaData?.id
+//        
+//        if layoutaData!.type == .VIDEO {
+//            if let player = videoPlayer{
+//                eventProps["Video Duration"] = player.duration
+//                eventProps["Watched Till"] = player.watchedTill
+//                eventProps["Total Watched"] = calculateTimeForVideo()
+//                eventProps["Video Unmuted"] = !player.isMute
+//            }
+//        }
+//        
+//        print(eventProps)
+//        let registerUserInstance = Cooee.shared
+//        registerUserInstance.sendEvent(withName: "CE Notification Closed", properties: eventProps)
+    }
+    
 }
 
+extension NotificationClass: UNUserNotificationCenterDelegate{
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        if let stringData = userInfo["triggerData"] as? String {
+            guard let data = stringData.data(using: String.Encoding.utf8, allowLossyConversion: false)
+            else { return }
+            do {
+                let decodedResponse = try JSONDecoder().decode(TriggerData.self, from: data)
+                callNotificationReceived(ofType: "CE Notification Viewed", triggerId: decodedResponse.id)
+                switch response.actionIdentifier {
+                case actionIdentifier:
+                    callNotificationReceived(ofType: "CE PN Action Click", triggerId: decodedResponse.id)
+                default:
+                    print("Other Action")
+                }
+            }catch{
+                print(error)
+            }
+        }
+        completionHandler()
+        
+        
+    }
+    
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        print("will present framework")
+        completionHandler([.badge,.banner,.list, .sound])
+    }
+}
+
+extension NotificationClass{
+    func checkAudioFileExists(withLink link: String, completion: @escaping ((_ filePath: URL)->Void)){
+        let urlString = link.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        if let url  = URL.init(string: urlString ?? ""){
+            let fileManager = FileManager.default
+            if let documentDirectory = try? fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create: false){
+                
+                let filePath = documentDirectory.appendingPathComponent(url.lastPathComponent, isDirectory: false)
+                
+                do {
+                    if try filePath.checkResourceIsReachable() {
+                        print("file exist")
+                        completion(filePath)
+                        
+                    } else {
+                        print("file doesnt exist")
+                        downloadFile(withUrl: url, andFilePath: filePath, completion: completion)
+                    }
+                } catch {
+                    print("file doesnt exist")
+                    downloadFile(withUrl: url, andFilePath: filePath, completion: completion)
+                }
+            }else{
+                print("file doesnt exist")
+            }
+        }else{
+            print("file doesnt exist")
+        }
+    }
+    
+    func downloadFile(withUrl url: URL, andFilePath filePath: URL, completion: @escaping ((_ filePath: URL)->Void)){
+        DispatchQueue.global(qos: .background).async {
+            do {
+                let data = try Data.init(contentsOf: url)
+                try data.write(to: filePath, options: .atomic)
+                print("saved at \(filePath.absoluteString)")
+                DispatchQueue.main.async {
+                    completion(filePath)
+                }
+            } catch {
+                print("an error happened while downloading or saving the file")
+            }
+        }
+    }
+    
+}

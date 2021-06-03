@@ -191,7 +191,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import CoreBluetooth;
-@import CoreLocation;
 @import Foundation;
 @import ObjectiveC;
 @import UserNotifications;
@@ -232,13 +231,6 @@ SWIFT_CLASS("_TtC8CooeeSDK5Cooee")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 - (void)updateFirebaseToken:(NSNotification * _Nonnull)notification;
 - (void)sendEventWithName:(NSString * _Nonnull)withName properties:(NSDictionary<NSString *, id> * _Nonnull)properties;
-@end
-
-@class CLLocationManager;
-@class CLLocation;
-
-@interface Cooee (SWIFT_EXTENSION(CooeeSDK)) <CLLocationManagerDelegate>
-- (void)locationManager:(CLLocationManager * _Nonnull)manager didUpdateLocations:(NSArray<CLLocation *> * _Nonnull)locations;
 @end
 
 @class CBCentralManager;
@@ -472,7 +464,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import CoreBluetooth;
-@import CoreLocation;
 @import Foundation;
 @import ObjectiveC;
 @import UserNotifications;
@@ -513,13 +504,6 @@ SWIFT_CLASS("_TtC8CooeeSDK5Cooee")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 - (void)updateFirebaseToken:(NSNotification * _Nonnull)notification;
 - (void)sendEventWithName:(NSString * _Nonnull)withName properties:(NSDictionary<NSString *, id> * _Nonnull)properties;
-@end
-
-@class CLLocationManager;
-@class CLLocation;
-
-@interface Cooee (SWIFT_EXTENSION(CooeeSDK)) <CLLocationManagerDelegate>
-- (void)locationManager:(CLLocationManager * _Nonnull)manager didUpdateLocations:(NSArray<CLLocation *> * _Nonnull)locations;
 @end
 
 @class CBCentralManager;

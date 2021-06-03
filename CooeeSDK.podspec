@@ -9,7 +9,7 @@
 Pod::Spec.new do |spec|
 
 spec.name         = "CooeeSDK"
-spec.version      = "1.2.5"
+spec.version      = "1.2.6"
 spec.summary      = "Hyper-personalised Mobile App Re-Engagement via Machine Learning"
 spec.description  = "Cooee's iOS SDK for hyper-personalised Mobile App Re-Engagement via Machine Learning"
 
@@ -19,7 +19,11 @@ spec.source       = { :git => "https://github.com/letscooee/cooee-ios-sdk.git", 
 
 spec.vendored_frameworks = "CooeeSDK.xcframework "
 spec.platform = :ios, 13.0
+spec.ios.deployment_target = '13.0'
 spec.swift_version = "5.0"
 spec.license = "MIT"
-
+spec.dependency 'Firebase'
+#spec.static_framework = true
+spec.dependency 'FirebaseMessaging'
+spec.dependency 'Sentry'
 end
