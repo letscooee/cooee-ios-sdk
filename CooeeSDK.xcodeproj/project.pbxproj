@@ -19,11 +19,10 @@
 		751BC7BE26F311DB002D8358 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC7BD26F311DB002D8358 /* AppController.swift */; };
 		751BC7C026F3123E002D8358 /* Cooee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC7BF26F3123E002D8358 /* Cooee.swift */; };
 		751BC7C226F314D5002D8358 /* CooeeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC7C126F314D5002D8358 /* CooeeFactory.swift */; };
-		751BC7C526F31A3A002D8358 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC7C426F31A3A002D8358 /* AppInfo.swift */; };
 		751BC7C726F31A4B002D8358 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC7C626F31A4B002D8358 /* DeviceInfo.swift */; };
-		751BC7C926F321FA002D8358 /* ContextAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC7C826F321FA002D8358 /* ContextAware.swift */; };
 		751BC7D126F35881002D8358 /* CooeeSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC7D026F35881002D8358 /* CooeeSDKTests.swift */; };
 		751BC7D326F35881002D8358 /* CooeeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 751BC77D26F3108A002D8358 /* CooeeSDK.framework */; };
+		751BC7DA26F35E32002D8358 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC7C426F31A3A002D8358 /* AppInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,7 +72,6 @@
 		751BC7C126F314D5002D8358 /* CooeeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeFactory.swift; sourceTree = "<group>"; };
 		751BC7C426F31A3A002D8358 /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		751BC7C626F31A4B002D8358 /* DeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
-		751BC7C826F321FA002D8358 /* ContextAware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextAware.swift; sourceTree = "<group>"; };
 		751BC7CE26F35881002D8358 /* CooeeSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CooeeSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		751BC7D026F35881002D8358 /* CooeeSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeSDKTests.swift; sourceTree = "<group>"; };
 		751BC7D226F35881002D8358 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -152,7 +150,6 @@
 				751BC78126F3108A002D8358 /* Info.plist */,
 				751BC7BF26F3123E002D8358 /* Cooee.swift */,
 				751BC7C126F314D5002D8358 /* CooeeFactory.swift */,
-				751BC7C826F321FA002D8358 /* ContextAware.swift */,
 			);
 			path = CooeeSDK;
 			sourceTree = "<group>";
@@ -415,9 +412,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				751BC7C926F321FA002D8358 /* ContextAware.swift in Sources */,
 				751BC7C226F314D5002D8358 /* CooeeFactory.swift in Sources */,
-				751BC7C526F31A3A002D8358 /* AppInfo.swift in Sources */,
+				751BC7DA26F35E32002D8358 /* AppInfo.swift in Sources */,
 				751BC7BE26F311DB002D8358 /* AppController.swift in Sources */,
 				751BC7C026F3123E002D8358 /* Cooee.swift in Sources */,
 				751BC7C726F31A4B002D8358 /* DeviceInfo.swift in Sources */,
