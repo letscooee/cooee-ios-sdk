@@ -91,7 +91,7 @@ spec.source       = { :git => "https://github.com/letscooee/cooee-ios-sdk.git", 
 #  Not including the public_header_files will make all headers public.
 #
 
-spec.source_files  = "Classes", "Classes/**/*.{h,m}"
+# spec.source_files  = "Classes", "Classes/**/*.{h,m}"
 spec.exclude_files = "Classes/Exclude"
 
 # spec.public_header_files = "Classes/**/*.h"
@@ -119,7 +119,7 @@ spec.exclude_files = "Classes/Exclude"
 
 # spec.framework  = "SomeFramework"
 # spec.frameworks = "SomeFramework", "AnotherFramework"
-spec.vendored_frameworks = "CooeeSDK.xcframework "
+# spec.vendored_frameworks = "CooeeSDK.xcframework "
 
 # spec.library   = "iconv"
 # spec.libraries = "iconv", "xml2"
