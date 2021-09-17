@@ -26,6 +26,7 @@
 		75729E6E26F45828006EB506 /* InfoPlistReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E6D26F45828006EB506 /* InfoPlistReader.swift */; };
 		75729E7226F493AB006EB506 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7126F493AB006EB506 /* Event.swift */; };
 		75729E7426F497FD006EB506 /* TriggerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7326F497FD006EB506 /* TriggerData.swift */; };
+		75729E7826F4C131006EB506 /* LocalStorageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7726F4C131006EB506 /* LocalStorageHelper.swift */; };
 		E4B53257B1CEA855270672CE /* Pods_CooeeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB800582A4AF75A48137B606 /* Pods_CooeeSDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +84,7 @@
 		75729E6D26F45828006EB506 /* InfoPlistReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPlistReader.swift; sourceTree = "<group>"; };
 		75729E7126F493AB006EB506 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		75729E7326F497FD006EB506 /* TriggerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerData.swift; sourceTree = "<group>"; };
+		75729E7726F4C131006EB506 /* LocalStorageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageHelper.swift; sourceTree = "<group>"; };
 		7F5B66C3F5CF5A3CF236A788 /* Pods-CooeeSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.release.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.release.xcconfig"; sourceTree = "<group>"; };
 		BB800582A4AF75A48137B606 /* Pods_CooeeSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CooeeSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -232,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				75729E6D26F45828006EB506 /* InfoPlistReader.swift */,
+				75729E7726F4C131006EB506 /* LocalStorageHelper.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -495,6 +498,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75729E7826F4C131006EB506 /* LocalStorageHelper.swift in Sources */,
 				751BC7C226F314D5002D8358 /* CooeeFactory.swift in Sources */,
 				751BC7DA26F35E32002D8358 /* AppInfo.swift in Sources */,
 				75729E7426F497FD006EB506 /* TriggerData.swift in Sources */,
