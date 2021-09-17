@@ -13,13 +13,19 @@ import Foundation
  - Since:0.1
  */
 class CooeeFactory {
-    static let shared = CooeeFactory()
-
-    let appInfo: AppInfo
-    let deviceInfo: DeviceInfo
+    // MARK: Lifecycle
 
     init() {
         appInfo = AppInfo.shared
         deviceInfo = DeviceInfo.shared
+        infoPlistReader = InfoPlistReader.shared
     }
+
+    // MARK: Internal
+
+    static let shared = CooeeFactory()
+
+    let appInfo: AppInfo
+    let deviceInfo: DeviceInfo
+    let infoPlistReader: InfoPlistReader
 }
