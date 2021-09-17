@@ -23,6 +23,7 @@
 		751BC7D126F35881002D8358 /* CooeeSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC7D026F35881002D8358 /* CooeeSDKTests.swift */; };
 		751BC7D326F35881002D8358 /* CooeeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 751BC77D26F3108A002D8358 /* CooeeSDK.framework */; };
 		751BC7DA26F35E32002D8358 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC7C426F31A3A002D8358 /* AppInfo.swift */; };
+		75729E6E26F45828006EB506 /* InfoPlistReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E6D26F45828006EB506 /* InfoPlistReader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		751BC7CE26F35881002D8358 /* CooeeSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CooeeSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		751BC7D026F35881002D8358 /* CooeeSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeSDKTests.swift; sourceTree = "<group>"; };
 		751BC7D226F35881002D8358 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		75729E6D26F45828006EB506 /* InfoPlistReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPlistReader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 		751BC77F26F3108A002D8358 /* CooeeSDK */ = {
 			isa = PBXGroup;
 			children = (
+				75729E6C26F45768006EB506 /* utils */,
 				751BC7C326F31A26002D8358 /* device */,
 				751BC7BC26F311A3002D8358 /* init */,
 				751BC78026F3108A002D8358 /* CooeeSDK.h */,
@@ -210,6 +213,14 @@
 				751BC7D226F35881002D8358 /* Info.plist */,
 			);
 			path = CooeeSDKTests;
+			sourceTree = "<group>";
+		};
+		75729E6C26F45768006EB506 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				75729E6D26F45828006EB506 /* InfoPlistReader.swift */,
+			);
+			path = utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -417,6 +428,7 @@
 				751BC7BE26F311DB002D8358 /* AppController.swift in Sources */,
 				751BC7C026F3123E002D8358 /* Cooee.swift in Sources */,
 				751BC7C726F31A4B002D8358 /* DeviceInfo.swift in Sources */,
+				75729E6E26F45828006EB506 /* InfoPlistReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
