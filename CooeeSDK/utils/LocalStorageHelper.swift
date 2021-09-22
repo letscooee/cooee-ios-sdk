@@ -14,27 +14,27 @@ import Foundation
  */
 class LocalStorageHelper {
     
-    func putString(key: String, value: String) {
-        UserDefaults.standard.set(value forkey: key)
+    static func putString(key: String, value: String) {
+        UserDefaults.standard.set(value, forKey: key)
     }
 
-    func getString(key: String) -> String? {
+    static func getString(key: String) -> String? {
         return UserDefaults.standard.value(forKey: key) as? String
     }
 
-    func putInt(key: String, value: Int) {
-        UserDefaults.standard.set(value forkey: key)
+    static func putInt(key: String, value: Int) {
+        UserDefaults.standard.set(value, forKey: key)
     }
 
-    func getInt(key: String) -> Int? {
+    static func getInt(key: String) -> Int? {
         return UserDefaults.standard.value(forKey: key) as? Int
     }
 
-    func putBoolean(key: String, value: Bool) {
-        UserDefaults.standard.set(value forkey: key)
+    static func putBoolean(key: String, value: Bool) {
+        UserDefaults.standard.set(value, forKey: key)
     }
 
-    func getBoolean(key: String) -> Bool? {
+    static func getBoolean(key: String) -> Bool? {
         return UserDefaults.standard.value(forKey: key) as? Bool ?? false
     }
 }
