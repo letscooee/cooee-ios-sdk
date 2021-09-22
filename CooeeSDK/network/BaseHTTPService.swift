@@ -8,7 +8,7 @@
 import Foundation
 
 class BaseHTTPService {
-    struct CommomHeaders {
+    class CommomHeaders {
         // MARK: Lifecycle
 
         init() {
@@ -24,13 +24,13 @@ class BaseHTTPService {
         var userID: String?
         var dictionary = [String: String]()
 
-        mutating func getDictinary() -> [String: String] {
+        func getDictinary() -> [String: String] {
             if !(sdkToken?.isEmpty ?? true) {
-                dictionary["x-sdk-token"] = sdkToken
+                dictionary["x-sdk-token"] = sdkToken ?? ""
             }
 
             if !(userID?.isEmpty ?? true) {
-                dictionary["user-id"] = userID
+                dictionary["user-id"] = userID ?? ""
             }
 
             return dictionary
@@ -40,9 +40,10 @@ class BaseHTTPService {
     static let shared = BaseHTTPService()
 
     let webService = WService.shared
+    let commonHeaders = CommomHeaders()
 
     func registerDevice(body: AuthenticationRequestBody, completion: @escaping (UserAuthResponse) -> ()) {
-        webService.getResponse(fromURL: EndPoints.registerUser, method: .POST, params: body.toDictionary(), header: CommomHeaders().dictionary) {
+        webService.getResponse(fromURL: EndPoints.registerUser, method: .POST, params: body.toDictionary(), header: commonHeaders.getDictinary()) {
             (result: UserAuthResponse) in
             if result != nil {
                 completion(result)
