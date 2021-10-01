@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+ platform :ios, '13.0'
 # For Test Only
 
 workspace 'CooeeSDK.xcworkspace'
@@ -10,7 +10,7 @@ target 'Cooee iOS' do
   platform :ios, '13.0'
   #pod 'Firebase/Messaging'
   #pod 'Firebase'
-  pod 'BSON'
+  #pod 'BSON'
   pod 'CooeeSDK', path: '../CooeeSDK'
   target 'CooeeSDK' do
     project 'CooeeSDK.xcodeproj'
