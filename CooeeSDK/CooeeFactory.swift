@@ -19,8 +19,10 @@ class CooeeFactory {
         appInfo = AppInfo.shared
         deviceInfo = DeviceInfo.shared
         infoPlistReader = InfoPlistReader.shared
+        sdkInfo = SDKInfo.shared
         userAuthService = UserAuthService()
         userAuthService.acquireSDKToken()
+        print(SDKInfo.shared.catchedInfo.isDebugging)
     }
 
     // MARK: Internal
@@ -31,4 +33,5 @@ class CooeeFactory {
     let deviceInfo: DeviceInfo
     let infoPlistReader: InfoPlistReader
     let userAuthService: UserAuthService
+    let sdkInfo: SDKInfo
 }
