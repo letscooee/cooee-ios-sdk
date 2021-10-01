@@ -13,6 +13,6 @@ public final class AppController{
     
     public static func configure(){
         print("init")
-        _=CooeeFactory.shared
+        _=AppLifeCycle.shared
     }
 }
