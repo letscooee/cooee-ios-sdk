@@ -24,16 +24,25 @@ class UserAuthService {
 
     static let shared = UserAuthService()
 
+    let lock = NSRecursiveLock()
     var baseHttp: BaseHTTPService?
 
+    /**
+     * Method will ensure that the SDK has acquired the token. If on the first time, token can't be pulled
+     * from the server, calling this method will reattempt the same maximum within 1 minute.
+     */
     func acquireSDKToken() {
+        lock.lock()
         if self.hasToken() {
+            print("Already has SDK token")
+            self.populateUserDataFromStorage()
             return
         }
 
         print("Attempt to acquire SDK token")
 
         self.getSDKTokenFromServer()
+        lock.unlock()
     }
 
     func hasToken() -> Bool {
@@ -42,7 +51,13 @@ class UserAuthService {
     }
 
     func updateAPI() {
-        
+        if SDKInfo.shared.catchedInfo.isDebugging {
+            print("SDK Token - \(self.sdkToken ?? "")")
+            print("User ID - \(self.userID ?? "")")
+        }
+
+        baseHttp?.commonHeaders.sdkToken = self.sdkToken
+        baseHttp?.commonHeaders.userID = self.userID
     }
 
     // MARK: Private
@@ -52,6 +67,29 @@ class UserAuthService {
     private var sdkToken: String?
     private var uuID: String?
 
+    /**
+     * This method will pull user data (like SDK token & user ID) from the local storage (shared preference)
+     * and populates it for further use.
+     */
+    private func populateUserDataFromStorage() {
+        self.sdkToken = LocalStorageHelper.getString(key: Constants.STORAGE_SDK_TOKEN)
+        self.userID = LocalStorageHelper.getString(key: Constants.STORAGE_USER_ID)
+
+        if self.sdkToken == nil {
+            print("No SDK token found in preference")
+        }
+
+        if self.userID == nil {
+            print("No user ID found in preference")
+        }
+
+        self.updateAPI()
+    }
+
+    /**
+     * Make user registration with server (if not already) and acquire a SDK token which will be later used to authenticate
+     * other endpoints.
+     */
     private func getSDKTokenFromServer() {
         self.uuID = ObjectId().hexString
         let appInfo = InfoPlistReader.shared
