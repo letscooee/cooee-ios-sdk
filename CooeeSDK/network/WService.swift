@@ -13,14 +13,15 @@ class WService: NSObject {
     static let shared = WService()
 
     func getResponse<T: Decodable>(fromURL: String, method: httpMethod, params: [String: Any], header: [String: String], completionHandler: @escaping (_ result: T) -> ()) {
+        let finalParams = appendSessionID(params: params)
         let url = URL(string: getCompleteURL(urlString: fromURL))!
         var request = URLRequest(url: url)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.httpMethod = method.rawValue
-        request.httpBody = params.percentEncoded()
+        request.httpBody = finalParams.percentEncoded()
         request.allHTTPHeaderFields = header
-        print("\n-------WS Params--------\n\(params)\n\n\(header)\nComplete URL \n\(url)\n")
+        print("\n-------WS Params--------\n\(finalParams)\n\n\(header)\nComplete URL \n\(url)\n")
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data,
                   let _ = response as? HTTPURLResponse,
@@ -43,6 +44,14 @@ class WService: NSObject {
     }
 
     // MARK: Private
+
+    private func appendSessionID(params: [String: Any?]) -> [String: Any?] {
+        var updatedParam = [String: Any?]()
+        updatedParam.merge(params) { _, new in new }
+        updatedParam.updateValue(SessionManager.shared.getCurrentSessionID(), forKey: "sessionID")
+        updatedParam.updateValue(SessionManager.shared.getCurrentSessionNumber(), forKey: "sessionNumber")
+        return updatedParam
+    }
 
     private func getCompleteURL(urlString: String) -> String {
         let completeURL: String

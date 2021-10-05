@@ -17,7 +17,7 @@ class UserAuthService {
     // MARK: Lifecycle
 
     init() {
-        baseHttp = BaseHTTPService()
+        baseHttp = BaseHTTPService.shared
     }
 
     // MARK: Internal

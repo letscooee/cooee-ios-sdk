@@ -19,6 +19,7 @@ class SessionManager {
 
     init() {
         runtimeData = RuntimeData.shared
+        self.getCurrentSessionID()
     }
 
     // MARK: Public
@@ -42,7 +43,7 @@ class SessionManager {
      - returns:The current or new session id.
      */
     public func getCurrentSessionID(createNew: Bool) -> String {
-        if currentSessionID?.isEmpty ?? false, createNew {
+        if currentSessionID?.isEmpty ?? true, createNew {
             startNewSession()
         }
 
