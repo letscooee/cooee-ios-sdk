@@ -23,6 +23,7 @@
 		751BC7D126F35881002D8358 /* CooeeSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC7D026F35881002D8358 /* CooeeSDKTests.swift */; };
 		751BC7D326F35881002D8358 /* CooeeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 751BC77D26F3108A002D8358 /* CooeeSDK.framework */; };
 		751BC7DA26F35E32002D8358 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC7C426F31A3A002D8358 /* AppInfo.swift */; };
+		751E1323270C26A5002CF442 /* RuntimeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E1322270C26A5002CF442 /* RuntimeData.swift */; };
 		75729E6E26F45828006EB506 /* InfoPlistReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E6D26F45828006EB506 /* InfoPlistReader.swift */; };
 		75729E7226F493AB006EB506 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7126F493AB006EB506 /* Event.swift */; };
 		75729E7426F497FD006EB506 /* TriggerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7326F497FD006EB506 /* TriggerData.swift */; };
@@ -95,6 +96,7 @@
 		751BC7CE26F35881002D8358 /* CooeeSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CooeeSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		751BC7D026F35881002D8358 /* CooeeSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeSDKTests.swift; sourceTree = "<group>"; };
 		751BC7D226F35881002D8358 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		751E1322270C26A5002CF442 /* RuntimeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeData.swift; sourceTree = "<group>"; };
 		75729E6D26F45828006EB506 /* InfoPlistReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPlistReader.swift; sourceTree = "<group>"; };
 		75729E7126F493AB006EB506 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		75729E7326F497FD006EB506 /* TriggerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerData.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				75729E7726F4C131006EB506 /* LocalStorageHelper.swift */,
 				75729E7926F4C4A1006EB506 /* Constants.swift */,
 				75729E8226F9A34A006EB506 /* NetworkUtility.swift */,
+				751E1322270C26A5002CF442 /* RuntimeData.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -599,6 +602,7 @@
 				751BC7DA26F35E32002D8358 /* AppInfo.swift in Sources */,
 				75729E7426F497FD006EB506 /* TriggerData.swift in Sources */,
 				751BC7BE26F311DB002D8358 /* AppController.swift in Sources */,
+				751E1323270C26A5002CF442 /* RuntimeData.swift in Sources */,
 				75729E7A26F4C4A1006EB506 /* Constants.swift in Sources */,
 				751BC7C026F3123E002D8358 /* Cooee.swift in Sources */,
 				757E405A26F9FF54008352F3 /* AuthenticationRequestBody.swift in Sources */,
