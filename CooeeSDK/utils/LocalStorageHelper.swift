@@ -34,8 +34,8 @@ class LocalStorageHelper {
         UserDefaults.standard.set(value, forKey: key)
     }
 
-    static func getBoolean(key: String) -> Bool? {
-        return UserDefaults.standard.value(forKey: key) as? Bool ?? false
+    static func getBoolean(key: String, defaultValue:Bool?) -> Bool? {
+        return UserDefaults.standard.value(forKey: key) as? Bool ?? defaultValue
     }
     
     static func putLong(key: String, value: Int64?) {

@@ -20,6 +20,7 @@ class CooeeFactory {
         deviceInfo = DeviceInfo.shared
         infoPlistReader = InfoPlistReader.shared
         sdkInfo = SDKInfo.shared
+        sessionManager=SessionManager.shared
         baseHttpService = BaseHTTPService.shared
         userAuthService = UserAuthService()
         userAuthService.acquireSDKToken()
@@ -36,4 +37,5 @@ class CooeeFactory {
     let userAuthService: UserAuthService
     let baseHttpService: BaseHTTPService
     let sdkInfo: SDKInfo
+    let sessionManager:SessionManager
 }
