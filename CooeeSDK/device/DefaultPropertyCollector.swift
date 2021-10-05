@@ -8,6 +8,22 @@
 import Foundation
 
 class DefaultPropertyCollector {
+    // MARK: Public
+
+    public func getCommonEventProperties() -> [String: Any?] {
+        var eventProperties = [String: Any?]()
+        eventProperties["CE App Version"] = appInfo.cachedInfo.version
+        eventProperties["CE SDK Version"] = sdkInfo.catchedInfo.sdkVersion
+        eventProperties["CE OS Version"] = deviceInfo.cachedInfo.osVersion
+        // eventProperties.put("CE Network Provider", networkData[0]);
+        // eventProperties.put("CE Network Type", networkData[1]);
+        // eventProperties.put("CE Bluetooth On", defaultUserPropertiesCollector.isBluetoothOn());
+        // eventProperties.put("CE Wifi Connected", defaultUserPropertiesCollector.isConnectedToWifi());
+        eventProperties["CE Device Battery"] = deviceInfo.cachedInfo.deviceBattery
+
+        return eventProperties
+    }
+
     // MARK: Internal
 
     func getDefaultVales() -> [String: Any] {
@@ -35,6 +51,10 @@ class DefaultPropertyCollector {
         userProperty["CE App Version"] = appInfo.cachedInfo.version
 
         return userProperty
+    }
+
+    func getAppInstallDate() -> Date? {
+        appInfo.cachedInfo.installDate
     }
 
     // MARK: Private
