@@ -11,6 +11,7 @@ class AppLifeCycle: NSObject {
     // MARK: Lifecycle
 
     override init() {
+        runtimeData = RuntimeData.shared
         super.init()
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(appMovedToLaunch), name: UIApplication.didFinishLaunchingNotification, object: nil)
@@ -22,18 +23,21 @@ class AppLifeCycle: NSObject {
 
     static let shared = AppLifeCycle()
 
-    let notificationCenter = NotificationCenter.default
-
     @objc func appMovedToBackground() {
         print("************** Background")
     }
 
     @objc func appMovedToLaunch() {
-        print("************** Launch \(currentTimeInMilliSeconds())")
+        NewSessionExecutor().execute()
     }
 
     @objc func appMovedToForground() {
-        print("************** Forground \(currentTimeInMilliSeconds())")
+        runtimeData.setInForeground()
+        //keepSessionAlive()
+
+        if runtimeData.isFirstForeground() {
+            return
+        }
     }
 
     @objc func appMovedToKill() {
@@ -45,4 +49,22 @@ class AppLifeCycle: NSObject {
         let since1970 = currentDate.timeIntervalSince1970
         return Int(since1970 * 1000)
     }
+
+    // MARK: Private
+
+    private var runtimeData: RuntimeData
+    private let notificationCenter = NotificationCenter.default
+
+    /**
+     * Send server check message every 5 min that session is still alive
+     */
+    /*private func keepSessionAlive() {
+        // send server check message every 5 min that session is still alive
+        // TODO: 09/06/2021 To be change with Timer class
+        handler.postDelayed(runnable = () -> {
+            handler.postDelayed(runnable, Constants.KEEP_ALIVE_TIME_IN_MS)
+            this.sessionManager.pingServerToKeepAlive()
+
+        }, Constants.KEEP_ALIVE_TIME_IN_MS)
+    }*/
 }
