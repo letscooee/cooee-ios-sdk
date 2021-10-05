@@ -9,7 +9,8 @@ import Foundation
 
 class CooeeBootstarp {
     init() {
-        _ = AppLifeCycle.shared
         _ = CooeeFactory.shared
+        _ = AppLifeCycle.shared
+        
     }
 }

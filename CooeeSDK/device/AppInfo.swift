@@ -16,10 +16,6 @@ import UIKit
  - Since:0.1
  */
 class AppInfo {
-    
-    static let shared = AppInfo()
-    let cachedInfo = CachedInfo()
-    
     struct CachedInfo {
         var isDebuging: Bool {
             #if DEBUG
@@ -63,8 +59,17 @@ class AppInfo {
             
             return infoDate
         }
+        
+        var installDate: Date? {
+            let urlToDocumentsFolder: URL? = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last
+            return try? FileManager.default.attributesOfItem(atPath: (urlToDocumentsFolder?.path)!)[.creationDate] as? Date
+        }
     }
-    
+
+    static let shared = AppInfo()
+
+    let cachedInfo = CachedInfo()
+
     /**
      Convers Date in String with fixed format
      - parameters:
@@ -114,8 +119,18 @@ class AppInfo {
      
      - returns:App Build Date and TIme in String
      */
-    func getBuildTime() -> String {
-        return formatDate(date: cachedInfo.lastBuildTime)
+    func getBuildTime() -> String? {
+        if cachedInfo.lastBuildTime == nil {
+            return nil
+        }
+        return DateUtils.formatDateToUTCString(date: cachedInfo.lastBuildTime!)
+    }
+    
+    func getInstalledDate() -> String? {
+        if cachedInfo.installDate == nil {
+            return nil
+        }
+        return DateUtils.formatDateToUTCString(date: cachedInfo.installDate!)
     }
     
     /**
