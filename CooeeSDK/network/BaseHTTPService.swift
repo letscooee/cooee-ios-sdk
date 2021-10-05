@@ -59,9 +59,34 @@ class BaseHTTPService {
             }
         }
     }
-    
+
     func keepAliveSession(body: [String: Any]) {
         webService.getResponse(fromURL: EndPoints.concludeSession, method: .POST, params: body, header: commonHeaders.getDictinary()) {
+            (result: [String: String]) in
+            if result != nil {
+                print(result)
+            }
+        }
+    }
+
+    func updateUserProprtyOnly(userProperty: [String: Any]) {
+        var dictionary = [String: Any]()
+        dictionary["userProperties"] = userProperty
+        dictionary["userData"] = [String: Any]()
+        updateUserProfile(body: dictionary)
+    }
+
+    func updateUserProfile(body: [String: Any]) {
+        webService.getResponse(fromURL: EndPoints.updateProfile, method: .PUT, params: body, header: commonHeaders.getDictinary()) {
+            (result: [String: String]) in
+            if result != nil {
+                print(result)
+            }
+        }
+    }
+    
+    func sendEvent(event:Event){
+        webService.getResponse(fromURL: EndPoints.trackEvent, method: .POST, params: event.toDictionary(), header: commonHeaders.getDictinary()) {
             (result: [String: String]) in
             if result != nil {
                 print(result)
