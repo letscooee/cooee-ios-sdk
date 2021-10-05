@@ -9,10 +9,10 @@ import BSON
 import Foundation
 
 /**
- * Manages the user's current session in the app.
- *
- * - Author: Ashish Gaikwad
- * - Since :0.0.1
+Manages the user's current session in the app.
+ 
+- Author: Ashish Gaikwad
+- Since: 0.0.1
  */
 class SessionManager {
     // MARK: Lifecycle
