@@ -50,4 +50,22 @@ class BaseHTTPService {
             }
         }
     }
+
+    func sendSessionConcludedEvent(body: [String: Any]) {
+        webService.getResponse(fromURL: EndPoints.concludeSession, method: .POST, params: body, header: commonHeaders.getDictinary()) {
+            (result: [String: String]) in
+            if result != nil {
+                print(result)
+            }
+        }
+    }
+    
+    func keepAliveSession(body: [String: Any]) {
+        webService.getResponse(fromURL: EndPoints.concludeSession, method: .POST, params: body, header: commonHeaders.getDictinary()) {
+            (result: [String: String]) in
+            if result != nil {
+                print(result)
+            }
+        }
+    }
 }
