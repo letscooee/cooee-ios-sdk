@@ -24,6 +24,7 @@
 		751BC7D326F35881002D8358 /* CooeeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 751BC77D26F3108A002D8358 /* CooeeSDK.framework */; };
 		751BC7DA26F35E32002D8358 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC7C426F31A3A002D8358 /* AppInfo.swift */; };
 		751E1323270C26A5002CF442 /* RuntimeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E1322270C26A5002CF442 /* RuntimeData.swift */; };
+		751E1325270C350C002CF442 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E1324270C350C002CF442 /* SessionManager.swift */; };
 		75729E6E26F45828006EB506 /* InfoPlistReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E6D26F45828006EB506 /* InfoPlistReader.swift */; };
 		75729E7226F493AB006EB506 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7126F493AB006EB506 /* Event.swift */; };
 		75729E7426F497FD006EB506 /* TriggerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7326F497FD006EB506 /* TriggerData.swift */; };
@@ -97,6 +98,7 @@
 		751BC7D026F35881002D8358 /* CooeeSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeSDKTests.swift; sourceTree = "<group>"; };
 		751BC7D226F35881002D8358 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		751E1322270C26A5002CF442 /* RuntimeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeData.swift; sourceTree = "<group>"; };
+		751E1324270C350C002CF442 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		75729E6D26F45828006EB506 /* InfoPlistReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPlistReader.swift; sourceTree = "<group>"; };
 		75729E7126F493AB006EB506 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		75729E7326F497FD006EB506 /* TriggerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerData.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				75729E8026F8AD47006EB506 /* UserAuthService.swift */,
+				751E1324270C350C002CF442 /* SessionManager.swift */,
 			);
 			path = user;
 			sourceTree = "<group>";
@@ -595,6 +598,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75A098122707132100C2057B /* CooeeBootstarp.swift in Sources */,
+				751E1325270C350C002CF442 /* SessionManager.swift in Sources */,
 				75729E8526F9BA27006EB506 /* DefaultPropertyCollector.swift in Sources */,
 				75729E7826F4C131006EB506 /* LocalStorageHelper.swift in Sources */,
 				751BC7C226F314D5002D8358 /* CooeeFactory.swift in Sources */,
