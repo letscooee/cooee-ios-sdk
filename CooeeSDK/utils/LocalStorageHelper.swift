@@ -42,7 +42,7 @@ class LocalStorageHelper {
         UserDefaults.standard.set(value, forKey: key)
     }
 
-    static func getLong(key: String, defaultValue: Int64?) -> Int64 {
-        return UserDefaults.standard.value(forKey: key) as! Int64
+    static func getLong(key: String, defaultValue: Int64) -> Int64 {
+        return UserDefaults.standard.value(forKey: key) as? Int64 ?? defaultValue
     }
 }
