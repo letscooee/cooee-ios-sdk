@@ -8,6 +8,7 @@
 import ARKit
 import Foundation
 import UIKit
+import CoreBluetooth
 
 /**
  A utility helper class to provide some information of the device.
@@ -20,10 +21,11 @@ class DeviceInfo {
         // TODO: Bluetooth
 
         var manufacture = "Apple"
-        // var networkUtility = NetworkUtility.shared
+         var networkUtility = NetworkUtility.shared
         var deviceBattery = UIDevice.current.batteryLevel * 100
-        // var networkProvider = NetworkUtility.shared.getCarrierName()
-        // var networkType = NetworkUtility.shared.getNetworkType()
+         var networkProvider = NetworkUtility.shared.getCarrierName()
+         var networkType = NetworkUtility.shared.getNetworkType()
+         var isWIFIConnected = (NetworkUtility.shared.getNetworkType() == "WIFI") ? true : false
 
         let osVersion = String(ProcessInfo().operatingSystemVersion.majorVersion) + "." + String(ProcessInfo().operatingSystemVersion.minorVersion) + "." + String(ProcessInfo().operatingSystemVersion.patchVersion)
 
@@ -76,6 +78,15 @@ class DeviceInfo {
                 return 0
             }
         }
+
+        var isBTOn: Bool {
+            let centralManager = CBCentralManager()
+            if centralManager.state == .poweredOn {
+                return true
+            }
+            return false
+        }
+
     }
 
     static let shared = DeviceInfo()

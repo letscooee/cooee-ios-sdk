@@ -15,10 +15,10 @@ class DefaultPropertyCollector {
         eventProperties["CE App Version"] = appInfo.cachedInfo.version
         eventProperties["CE SDK Version"] = sdkInfo.cachedInfo.sdkVersion
         eventProperties["CE OS Version"] = deviceInfo.cachedInfo.osVersion
-        // eventProperties.put("CE Network Provider", networkData[0]);
-        // eventProperties.put("CE Network Type", networkData[1]);
-        // eventProperties.put("CE Bluetooth On", defaultUserPropertiesCollector.isBluetoothOn());
-        // eventProperties.put("CE Wifi Connected", defaultUserPropertiesCollector.isConnectedToWifi());
+        eventProperties["CE Network Provider"] = deviceInfo.cachedInfo.networkProvider
+        eventProperties["CE Network Type"] = deviceInfo.cachedInfo.networkType
+        eventProperties["CE Bluetooth On"] = deviceInfo.cachedInfo.isBTOn
+        eventProperties["CE Wifi Connected"] = deviceInfo.cachedInfo.isWIFIConnected
         eventProperties["CE Device Battery"] = deviceInfo.cachedInfo.deviceBattery
 
         return eventProperties
@@ -35,10 +35,10 @@ class DefaultPropertyCollector {
         userProperty["CE Available Internal Memory"] = deviceInfo.cachedInfo.freeSpace
         userProperty["CE Total Internal Memory"] = deviceInfo.cachedInfo.totalSpace
         userProperty["CE Device Battery"] = deviceInfo.cachedInfo.deviceBattery
-        // userProperty["CE Network Provider"] = NetworkData.shared.getCarrierName()
-        // userProperty["CE Network Type"] = NetworkData.shared.getNetworkType()
-        // userProperty["CE Bluetooth On"] = isBTTurnedOn
-        // userProperty["CE Wifi Connected"] = (NetworkData.shared.getNetworkType() == "WIFI") ? true : false
+        userProperty["CE Network Provider"] = deviceInfo.cachedInfo.networkProvider
+        userProperty["CE Network Type"] = deviceInfo.cachedInfo.networkType
+        userProperty["CE Bluetooth On"] = deviceInfo.cachedInfo.isBTOn
+        userProperty["CE Wifi Connected"] = deviceInfo.cachedInfo.isWIFIConnected
         userProperty["CE OS"] = "IOS"
         userProperty["CE OS Version"] = deviceInfo.cachedInfo.osVersion
         userProperty["CE SDK Version"] = sdkInfo.cachedInfo.sdkVersion + "+" + sdkInfo.cachedInfo.sdkLongVersion
