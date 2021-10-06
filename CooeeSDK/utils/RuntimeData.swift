@@ -63,14 +63,14 @@ class RuntimeData {
     }
 
     public func getTimeInForegroundInSeconds() -> Int64 {
-        return self.getDateDifferenceInSeconds(startDate: self.lastEnterBackground!, endDate: self.lastEnterForeground!)
+        return self.getDateDifferenceInSeconds(startDate: self.lastEnterForeground!, endDate: self.lastEnterBackground!)
     }
 
     public func getTimeInBackgroundInSeconds() -> Int64 {
         if self.lastEnterBackground == nil {
             return 0
         }
-        return self.getDateDifferenceInSeconds(startDate: Date(), endDate: self.lastEnterBackground!)
+        return self.getDateDifferenceInSeconds(startDate: self.lastEnterBackground!, endDate: Date())
     }
 
     public func setCurrentScreenName(name: String) {
