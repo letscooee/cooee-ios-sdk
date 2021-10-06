@@ -7,6 +7,10 @@
 
 import Foundation
 
+/**
+ - Author: Ashish Gaikwad
+ - Since: 0.1.0
+ */
 struct Event {
     // MARK: Lifecycle
 

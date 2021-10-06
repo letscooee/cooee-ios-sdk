@@ -11,7 +11,7 @@ import Foundation
  PostLaunchActivity initialized when app is launched
 
  - Author: Ashish Gaikwad
- - Since: 0.0.1
+ - Since: 0.1.0
    */
 class NewSessionExecutor {
     // MARK: Lifecycle

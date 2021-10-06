@@ -13,7 +13,7 @@ import UIKit
 /**
  A utility helper class to provide some common information about the installing/host app.
  - Author: Ashish Gaikwad
- - Since:0.1
+ - Since: 0.1.0
  */
 class AppInfo {
     struct CachedInfo {

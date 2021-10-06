@@ -9,9 +9,18 @@ import Foundation
 import SystemConfiguration
 import CoreTelephony
 
+/**
+ Utility class to detect network operator and network type.
+ - Author: Ashish Gaikwad
+ - Since: 0.1.0
+ */
 class NetworkUtility {
     static let shared = NetworkUtility()
 
+    /**
+     Checks the provider by which app is connected to internet
+     - Returns: provider by which app is connected (2G/3G/4G/5G/WIFI )
+     */
     func getNetworkType() -> String {
         guard let reachability = SCNetworkReachabilityCreateWithName(kCFAllocatorDefault, "www.google.com") else {
             return "NO INTERNET"

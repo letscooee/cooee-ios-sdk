@@ -9,6 +9,12 @@ import Foundation
 import FirebaseCore
 import FirebaseMessaging
 
+/**
+ A one time initializer class which initialises the Cooee SDK. This is used internally by the SDK
+ and should be quick.
+ - Author: Ashish Gaikwad
+ - Since: 0.1.0
+ */
 class CooeeBootstrap {
     public init() {
         _ = CooeeFactory.shared

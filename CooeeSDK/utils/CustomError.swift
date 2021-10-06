@@ -7,6 +7,11 @@
 
 import Foundation
 
+/**
+ Custom Error.
+ - Author: Ashish Gaikwad
+ - Since: 0.1.0
+ */
 enum CustomError: String, LocalizedError {
     case PropertyError = "Property name cannot start with 'CE '"
 

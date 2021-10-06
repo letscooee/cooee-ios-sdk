@@ -11,31 +11,49 @@ import Foundation
  * A simple data holder class that contains runtime state of the application/SDK.
  *
  * - Author: Ashish Gaikwad
- * - Since: 0.0.1
+ * - Since: 0.1.0
  */
 class RuntimeData {
     // MARK: Public
 
+    /**
+     Check if app is in background
+     - Returns: true if app is in background otherwise false
+     */
     public func isInBackground() -> Bool {
         return self.inBackground
     }
 
+    /**
+     Update app went to background
+     */
     public func setInBackground() {
         print("App went to background")
         self.inBackground = true
         self.lastEnterBackground = Date()
     }
 
+    /**
+     Update app came to foreground
+     */
     public func setInForeground() {
         print("App went to foreground")
         self.inBackground = false
         self.lastEnterForeground = Date()
     }
 
+    /**
+     Check if app is in foreground
+     - Returns: true if app is in foreground otherwise false
+     */
     public func isInForeground() -> Bool {
         return !self.inBackground
     }
 
+    /**
+     Check the current active screen variable
+     - Returns: current active string or empty string
+     */
     public func getCurrentScreenName() -> String {
         return self.currentScreenName ?? ""
     }

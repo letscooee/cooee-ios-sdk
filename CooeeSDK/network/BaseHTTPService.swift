@@ -7,6 +7,12 @@
 
 import Foundation
 
+/**
+ Central point to make communication with server
+
+ - Author: Ashish Gaikwad
+ - Since: 0.1.0
+ */
 class BaseHTTPService {
     class CommonHeaders {
         // MARK: Lifecycle

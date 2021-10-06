@@ -11,7 +11,7 @@ import UIKit
 /**
  The CooeeSDK class contains all the functions required by application to achieve the campaign tasks(Singleton Class)
  - Author: Ashish Gaikwad
- - Since: 0.1
+ - Since: 0.1.0
  */
 public final class CooeeSDK {
     // MARK: Lifecycle

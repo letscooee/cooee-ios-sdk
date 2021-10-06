@@ -14,7 +14,7 @@ import CoreBluetooth
  A utility helper class to provide some information of the device.
  
  - Author: Ashish Gaikwad
- - Since:0.1
+ - Since: 0.1.0
  */
 class DeviceInfo {
     struct CashedInfo {

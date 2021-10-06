@@ -10,7 +10,7 @@ import Foundation
 /**
  The Constants struct contains all the constants required by SDK
  - Author: Ashish Gaikwad
- - Since:0.1
+ - Since: 0.1.0
  */
 struct Constants {
 

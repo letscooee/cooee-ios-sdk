@@ -10,7 +10,7 @@ import Foundation
 /**
  A factory pattern utility class to provide the singleton instances of various classes.
  - Author: Ashish Gaikwad
- - Since:0.1
+ - Since: 0.1.0
  */
 class CooeeFactory {
     // MARK: Lifecycle

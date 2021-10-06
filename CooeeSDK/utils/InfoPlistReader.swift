@@ -10,7 +10,7 @@ import Foundation
 /**
  Utility class which provides reading the info.plist.
  - Author: Ashish Gaikwad
- - Since:0.1
+ - Since: 0.1.0
  */
 class InfoPlistReader {
     // MARK: Lifecycle

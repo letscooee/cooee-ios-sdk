@@ -12,7 +12,7 @@ import UIKit
   Register callbacks of different lifecycle of all the activities.
 
  - Author: Ashish Gaikwad
- - Since: 0.0.1
+ - Since: 0.1.0
  */
 class AppLifeCycle: NSObject {
     // MARK: Lifecycle

@@ -7,6 +7,12 @@
 
 import Foundation
 
+/**
+ Send any request to server
+
+ - Author: Ashish Gaikwad
+ - Since: 0.1.0
+ */
 class WService: NSObject {
     // MARK: Internal
 

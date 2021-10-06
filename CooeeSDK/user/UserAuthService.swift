@@ -11,7 +11,7 @@ import Foundation
 /**
  Utility class to register user with server and to provide related data
  - Author: Ashish Gaikwad
- - Since:0.1
+ - Since: 0.1.0
  */
 class UserAuthService {
     // MARK: Lifecycle

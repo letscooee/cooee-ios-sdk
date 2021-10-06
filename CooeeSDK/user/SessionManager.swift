@@ -12,7 +12,7 @@ import Foundation
 Manages the user's current session in the app.
  
 - Author: Ashish Gaikwad
-- Since: 0.0.1
+- Since: 0.1.0
  */
 class SessionManager {
     // MARK: Lifecycle

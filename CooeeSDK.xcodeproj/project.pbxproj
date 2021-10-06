@@ -18,7 +18,6 @@
 		751BC7B126F31165002D8358 /* Cooee_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC7B026F31165002D8358 /* Cooee_iOSUITests.swift */; };
 		751BC7BE26F311DB002D8358 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC7BD26F311DB002D8358 /* AppController.swift */; };
 		751BC7C026F3123E002D8358 /* Cooee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC7BF26F3123E002D8358 /* Cooee.swift */; };
-		751BC7C226F314D5002D8358 /* CooeeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC7C126F314D5002D8358 /* CooeeFactory.swift */; };
 		751BC7C726F31A4B002D8358 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC7C626F31A4B002D8358 /* DeviceInfo.swift */; };
 		751BC7D126F35881002D8358 /* CooeeSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC7D026F35881002D8358 /* CooeeSDKTests.swift */; };
 		751BC7D326F35881002D8358 /* CooeeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 751BC77D26F3108A002D8358 /* CooeeSDK.framework */; };
@@ -44,6 +43,7 @@
 		758660D626FAFA89006B40DC /* SDKInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758660D526FAFA89006B40DC /* SDKInfo.swift */; };
 		75A0981027070FD800C2057B /* AppLifeCycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A0980F27070FD800C2057B /* AppLifeCycle.swift */; };
 		75A098122707132100C2057B /* CooeeBootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A098112707132100C2057B /* CooeeBootstrap.swift */; };
+		AC0B830AA583B38E12F76E5C /* CooeeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B851DC5B190221B669F38 /* CooeeFactory.swift */; };
 		C17CD8950D3CBB4254E3AEBD /* Pods_Cooee_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6DD165866F91815E65CF7F1 /* Pods_Cooee_iOS.framework */; };
 		E4B53257B1CEA855270672CE /* Pods_CooeeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB800582A4AF75A48137B606 /* Pods_CooeeSDK.framework */; };
 /* End PBXBuildFile section */
@@ -94,7 +94,6 @@
 		751BC7B226F31165002D8358 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		751BC7BD26F311DB002D8358 /* AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
 		751BC7BF26F3123E002D8358 /* Cooee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cooee.swift; sourceTree = "<group>"; };
-		751BC7C126F314D5002D8358 /* CooeeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeFactory.swift; sourceTree = "<group>"; };
 		751BC7C426F31A3A002D8358 /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		751BC7C626F31A4B002D8358 /* DeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
 		751BC7CE26F35881002D8358 /* CooeeSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CooeeSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,6 +122,7 @@
 		75A098112707132100C2057B /* CooeeBootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeBootstrap.swift; sourceTree = "<group>"; };
 		77F56F40EDA5A57940AA34BC /* Pods-Cooee iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS.release.xcconfig"; path = "Target Support Files/Pods-Cooee iOS/Pods-Cooee iOS.release.xcconfig"; sourceTree = "<group>"; };
 		7F5B66C3F5CF5A3CF236A788 /* Pods-CooeeSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.release.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.release.xcconfig"; sourceTree = "<group>"; };
+		AC0B851DC5B190221B669F38 /* CooeeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CooeeFactory.swift; sourceTree = "<group>"; };
 		BB800582A4AF75A48137B606 /* Pods_CooeeSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CooeeSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6DD165866F91815E65CF7F1 /* Pods_Cooee_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cooee_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -207,8 +207,8 @@
 				751BC78026F3108A002D8358 /* CooeeSDK.h */,
 				751BC78126F3108A002D8358 /* Info.plist */,
 				751BC7BF26F3123E002D8358 /* Cooee.swift */,
-				751BC7C126F314D5002D8358 /* CooeeFactory.swift */,
 				75A098112707132100C2057B /* CooeeBootstrap.swift */,
+				AC0B851DC5B190221B669F38 /* CooeeFactory.swift */,
 			);
 			path = CooeeSDK;
 			sourceTree = "<group>";
@@ -610,7 +610,6 @@
 				751E1325270C350C002CF442 /* SessionManager.swift in Sources */,
 				75729E8526F9BA27006EB506 /* DefaultPropertyCollector.swift in Sources */,
 				75729E7826F4C131006EB506 /* LocalStorageHelper.swift in Sources */,
-				751BC7C226F314D5002D8358 /* CooeeFactory.swift in Sources */,
 				757E405C26FA08D5008352F3 /* UserAuthResponse.swift in Sources */,
 				751E1329270C7074002CF442 /* DateUtil.swift in Sources */,
 				751BC7DA26F35E32002D8358 /* AppInfo.swift in Sources */,
@@ -632,6 +631,7 @@
 				75729E6E26F45828006EB506 /* InfoPlistReader.swift in Sources */,
 				75729E8326F9A34A006EB506 /* NetworkUtility.swift in Sources */,
 				758660D626FAFA89006B40DC /* SDKInfo.swift in Sources */,
+				AC0B830AA583B38E12F76E5C /* CooeeFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

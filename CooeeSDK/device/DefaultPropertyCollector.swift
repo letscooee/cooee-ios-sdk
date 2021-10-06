@@ -7,6 +7,12 @@
 
 import Foundation
 
+/**
+ Make collection of all properties at one location
+
+ - Author: Ashish Gaikwad
+ - Since: 0.1.0
+ */
 class DefaultPropertyCollector {
     // MARK: Public
 

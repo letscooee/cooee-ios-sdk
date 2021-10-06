@@ -7,6 +7,12 @@
 
 import Foundation
 
+/**
+ Structure that holds all End-Point
+
+ - Author: Ashish Gaikwad
+ - Since: 0.1.0
+ */
 struct EndPoints {
 
     static let BASE_URL = "https://api.sdk.letscooee.com"

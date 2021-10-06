@@ -8,9 +8,14 @@
 import Foundation
 import UIKit
 
+/**
+ Initialize CooeeSDK
+
+ - Author: Ashish Gaikwad
+ - Since: 0.1.0
+ */
 public final class AppController{
-    
-    
+
     public static func configure(){
         print("init")
         _=CooeeBootstrap()
