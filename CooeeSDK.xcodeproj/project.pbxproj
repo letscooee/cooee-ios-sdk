@@ -27,6 +27,7 @@
 		751E1325270C350C002CF442 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E1324270C350C002CF442 /* SessionManager.swift */; };
 		751E1327270C4C47002CF442 /* NewSessionExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E1326270C4C47002CF442 /* NewSessionExecutor.swift */; };
 		751E1329270C7074002CF442 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E1328270C7074002CF442 /* DateUtil.swift */; };
+		751E132D270D9277002CF442 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E132C270D9276002CF442 /* CustomError.swift */; };
 		75729E6E26F45828006EB506 /* InfoPlistReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E6D26F45828006EB506 /* InfoPlistReader.swift */; };
 		75729E7226F493AB006EB506 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7126F493AB006EB506 /* Event.swift */; };
 		75729E7426F497FD006EB506 /* TriggerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7326F497FD006EB506 /* TriggerData.swift */; };
@@ -103,6 +104,7 @@
 		751E1324270C350C002CF442 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		751E1326270C4C47002CF442 /* NewSessionExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSessionExecutor.swift; sourceTree = "<group>"; };
 		751E1328270C7074002CF442 /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
+		751E132C270D9276002CF442 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		75729E6D26F45828006EB506 /* InfoPlistReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPlistReader.swift; sourceTree = "<group>"; };
 		75729E7126F493AB006EB506 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		75729E7326F497FD006EB506 /* TriggerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerData.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 				75729E8226F9A34A006EB506 /* NetworkUtility.swift */,
 				751E1322270C26A5002CF442 /* RuntimeData.swift */,
 				751E1328270C7074002CF442 /* DateUtil.swift */,
+				751E132C270D9276002CF442 /* CustomError.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -618,6 +621,7 @@
 				751BC7C026F3123E002D8358 /* Cooee.swift in Sources */,
 				757E405A26F9FF54008352F3 /* AuthenticationRequestBody.swift in Sources */,
 				75A0981027070FD800C2057B /* AppLifeCycle.swift in Sources */,
+				751E132D270D9277002CF442 /* CustomError.swift in Sources */,
 				751BC7C726F31A4B002D8358 /* DeviceInfo.swift in Sources */,
 				75729E8126F8AD47006EB506 /* UserAuthService.swift in Sources */,
 				751E1327270C4C47002CF442 /* NewSessionExecutor.swift in Sources */,
