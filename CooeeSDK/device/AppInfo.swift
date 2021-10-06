@@ -24,27 +24,27 @@ class AppInfo {
             return false
             #endif
         }
-        
+
         var name: String {
             let bundleInfoDict: NSDictionary = Bundle.main.infoDictionary! as NSDictionary
             let appName = bundleInfoDict["CFBundleName"] as! String
-            
+
             return appName
         }
-        
+
         var packageName: String {
             let bundleID = Bundle.main.bundleIdentifier ?? ""
-            
+
             return bundleID
         }
-        
+
         var version: String {
             let appShortVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
             let appLongVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
-            
-            return appShortVersion+"+"+appLongVersion
+
+            return appShortVersion + "+" + appLongVersion
         }
-        
+
         var lastBuildTime: Date? {
             guard let infoPath = Bundle.main.path(forResource: "Info.plist", ofType: nil) else {
                 return nil
@@ -56,10 +56,10 @@ class AppInfo {
             guard let infoDate = infoAttr[key] as? Date else {
                 return nil
             }
-            
+
             return infoDate
         }
-        
+
         var installDate: Date? {
             let urlToDocumentsFolder: URL? = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last
             return try? FileManager.default.attributesOfItem(atPath: (urlToDocumentsFolder?.path)!)[.creationDate] as? Date
@@ -81,12 +81,12 @@ class AppInfo {
         guard let rawDate = date else {
             return "Unknown"
         }
-        
+
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
         return formatter.string(from: rawDate)
     }
-    
+
     /**
      Provides App name
      
@@ -95,7 +95,7 @@ class AppInfo {
     func getAppName() -> String {
         return cachedInfo.name
     }
-    
+
     /**
      Provide App Version
      
@@ -104,7 +104,7 @@ class AppInfo {
     func getAppVersion() -> String {
         return cachedInfo.version
     }
-    
+
     /**
      Provide App Bundle ID
      
@@ -113,7 +113,7 @@ class AppInfo {
     func getAppPackage() -> String {
         return cachedInfo.packageName
     }
-    
+
     /**
      Provide App Build Date and TIme
      
@@ -125,20 +125,20 @@ class AppInfo {
         }
         return DateUtils.formatDateToUTCString(date: cachedInfo.lastBuildTime!)
     }
-    
+
     func getInstalledDate() -> String? {
         if cachedInfo.installDate == nil {
             return nil
         }
         return DateUtils.formatDateToUTCString(date: cachedInfo.installDate!)
     }
-    
+
     /**
      Provide if app is debug mode or release mode
      
      - returns:`true` if app is in debug mode
      */
-    func isAppDebigging() -> Bool {
+    func isAppDebugging() -> Bool {
         return cachedInfo.isDebuging
     }
 }
