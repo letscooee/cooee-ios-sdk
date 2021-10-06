@@ -27,6 +27,7 @@
 		751E1327270C4C47002CF442 /* NewSessionExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E1326270C4C47002CF442 /* NewSessionExecutor.swift */; };
 		751E1329270C7074002CF442 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E1328270C7074002CF442 /* DateUtil.swift */; };
 		751E132D270D9277002CF442 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E132C270D9276002CF442 /* CustomError.swift */; };
+		751E1340270DD2EA002CF442 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 751E133F270DD2EA002CF442 /* GoogleService-Info.plist */; };
 		75729E6E26F45828006EB506 /* InfoPlistReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E6D26F45828006EB506 /* InfoPlistReader.swift */; };
 		75729E7226F493AB006EB506 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7126F493AB006EB506 /* Event.swift */; };
 		75729E7426F497FD006EB506 /* TriggerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7326F497FD006EB506 /* TriggerData.swift */; };
@@ -104,6 +105,7 @@
 		751E1326270C4C47002CF442 /* NewSessionExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSessionExecutor.swift; sourceTree = "<group>"; };
 		751E1328270C7074002CF442 /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		751E132C270D9276002CF442 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
+		751E133F270DD2EA002CF442 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75729E6D26F45828006EB506 /* InfoPlistReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPlistReader.swift; sourceTree = "<group>"; };
 		75729E7126F493AB006EB506 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		75729E7326F497FD006EB506 /* TriggerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerData.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 		751BC78D26F31162002D8358 /* Cooee iOS */ = {
 			isa = PBXGroup;
 			children = (
+				751E133F270DD2EA002CF442 /* GoogleService-Info.plist */,
 				751BC78E26F31162002D8358 /* AppDelegate.swift */,
 				751BC79026F31162002D8358 /* SceneDelegate.swift */,
 				751BC79226F31162002D8358 /* ViewController.swift */,
@@ -509,6 +512,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				751BC79B26F31165002D8358 /* LaunchScreen.storyboard in Resources */,
+				751E1340270DD2EA002CF442 /* GoogleService-Info.plist in Resources */,
 				751BC79826F31165002D8358 /* Assets.xcassets in Resources */,
 				751BC79626F31162002D8358 /* Main.storyboard in Resources */,
 			);

@@ -43,6 +43,21 @@ class BaseHTTPService {
         }
     }
 
+    func sendFirebaseToken(token: String?) {
+        if token == nil {
+            return
+        }
+        var requestData = [String: Any]();
+        requestData["firebaseToken"] = token!
+
+        webService.getResponse(fromURL: EndPoints.saveFCM, method: .POST, params: requestData, header: commonHeaders.getDictionary()) {
+            (result: [String: String]) in
+            if result != nil {
+                print(result)
+            }
+        }
+    }
+
     static let shared = BaseHTTPService()
 
     let webService = WService.shared

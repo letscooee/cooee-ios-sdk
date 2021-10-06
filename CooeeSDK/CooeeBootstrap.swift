@@ -19,7 +19,8 @@ class CooeeBootstrap {
     public init() {
         _ = CooeeFactory.shared
         _ = AppLifeCycle.shared
-       // registerFirebase()
+        registerFirebase()
+        updateFirebaseToken()
     }
 
     private func registerFirebase() {
@@ -27,5 +28,11 @@ class CooeeBootstrap {
         let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
         UIApplication.shared.registerUserNotificationSettings(settings)
         UIApplication.shared.registerForRemoteNotifications()
+    }
+
+    private func updateFirebaseToken() {
+        Messaging.messaging().token { (token, _) in
+            BaseHTTPService.shared.sendFirebaseToken(token: token)
+        }
     }
 }
