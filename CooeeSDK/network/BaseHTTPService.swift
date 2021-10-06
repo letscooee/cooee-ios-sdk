@@ -8,7 +8,7 @@
 import Foundation
 
 class BaseHTTPService {
-    class CommomHeaders {
+    class CommonHeaders {
         // MARK: Lifecycle
 
         init() {
@@ -24,7 +24,7 @@ class BaseHTTPService {
         var userID: String?
         var dictionary = [String: String]()
 
-        func getDictinary() -> [String: String] {
+        func getDictionary() -> [String: String] {
             if !(sdkToken?.isEmpty ?? true) {
                 dictionary["x-sdk-token"] = sdkToken ?? ""
             }
@@ -40,10 +40,10 @@ class BaseHTTPService {
     static let shared = BaseHTTPService()
 
     let webService = WService.shared
-    let commonHeaders = CommomHeaders()
+    let commonHeaders = CommonHeaders()
 
     func registerDevice(body: AuthenticationRequestBody, completion: @escaping (UserAuthResponse) -> ()) {
-        webService.getResponse(fromURL: EndPoints.registerUser, method: .POST, params: body.toDictionary(), header: commonHeaders.getDictinary()) {
+        webService.getResponse(fromURL: EndPoints.registerUser, method: .POST, params: body.toDictionary(), header: commonHeaders.getDictionary()) {
             (result: UserAuthResponse) in
             if result != nil {
                 completion(result)
@@ -52,7 +52,7 @@ class BaseHTTPService {
     }
 
     func sendSessionConcludedEvent(body: [String: Any]) {
-        webService.getResponse(fromURL: EndPoints.concludeSession, method: .POST, params: body, header: commonHeaders.getDictinary()) {
+        webService.getResponse(fromURL: EndPoints.concludeSession, method: .POST, params: body, header: commonHeaders.getDictionary()) {
             (result: [String: String]) in
             if result != nil {
                 print(result)
@@ -61,7 +61,7 @@ class BaseHTTPService {
     }
 
     func keepAliveSession(body: [String: Any]) {
-        webService.getResponse(fromURL: EndPoints.concludeSession, method: .POST, params: body, header: commonHeaders.getDictinary()) {
+        webService.getResponse(fromURL: EndPoints.keepAlive, method: .POST, params: body, header: commonHeaders.getDictionary()) {
             (result: [String: String]) in
             if result != nil {
                 print(result)
@@ -69,7 +69,7 @@ class BaseHTTPService {
         }
     }
 
-    func updateUserProprtyOnly(userProperty: [String: Any]) {
+    func updateUserPropertyOnly(userProperty: [String: Any]) {
         var dictionary = [String: Any]()
         dictionary["userProperties"] = userProperty
         dictionary["userData"] = [String: Any]()
@@ -77,7 +77,7 @@ class BaseHTTPService {
     }
 
     func updateUserProfile(body: [String: Any]) {
-        webService.getResponse(fromURL: EndPoints.updateProfile, method: .PUT, params: body, header: commonHeaders.getDictinary()) {
+        webService.getResponse(fromURL: EndPoints.updateProfile, method: .PUT, params: body, header: commonHeaders.getDictionary()) {
             (result: [String: String]) in
             if result != nil {
                 print(result)
@@ -86,7 +86,7 @@ class BaseHTTPService {
     }
     
     func sendEvent(event:Event){
-        webService.getResponse(fromURL: EndPoints.trackEvent, method: .POST, params: event.toDictionary(), header: commonHeaders.getDictinary()) {
+        webService.getResponse(fromURL: EndPoints.trackEvent, method: .POST, params: event.toDictionary(), header: commonHeaders.getDictionary()) {
             (result: [String: String]) in
             if result != nil {
                 print(result)
