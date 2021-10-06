@@ -13,7 +13,7 @@ import Foundation
  - Since:0.1
  */
 struct Constants {
-    
+
     // region All Shared Preference related keys
     static let STORAGE_FIRST_TIME_LAUNCH = "is_first_launch"
     static let STORAGE_SDK_TOKEN = "sdk_token"
@@ -27,4 +27,8 @@ struct Constants {
     static let STORAGE_DEVICE_ID = "cooee_device_id"
     static let STORAGE_DEVICE_UUID = "cooee_device_uuid"
     // endregion
+
+    // KEEP_ALIVE_TIME_IN_MS will be in SECONDS
+    static let KEEP_ALIVE_TIME_IN_MS = 20 //5 * 60
+    static let IDLE_TIME_IN_SECONDS = 30 * 60
 }
