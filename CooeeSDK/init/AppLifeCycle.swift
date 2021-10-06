@@ -7,15 +7,28 @@
 
 import Foundation
 import UIKit
+
+/**
+  Register callbacks of different lifecycle of all the activities.
+
+ - Author: Ashish Gaikwad
+ - Since: 0.0.1
+ */
 class AppLifeCycle: NSObject {
     // MARK: Lifecycle
 
+    private var runtimeData: RuntimeData
+    private let notificationCenter = NotificationCenter.default
+    private let sessionManager: SessionManager
+    private var timer: Timer?
+
     override init() {
         runtimeData = RuntimeData.shared
+        sessionManager = SessionManager.shared
         super.init()
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(appMovedToLaunch), name: UIApplication.didFinishLaunchingNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(appMovedToForground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(appMovedToKill), name: UIApplication.willTerminateNotification, object: nil)
     }
 
@@ -24,24 +37,51 @@ class AppLifeCycle: NSObject {
     static let shared = AppLifeCycle()
 
     @objc func appMovedToBackground() {
-        print("************** Background")
+        runtimeData.setInBackground();
+
+        //stop sending check message of session alive on app background
+        timer?.invalidate()
+
+        let duration = runtimeData.getTimeInForegroundInSeconds();
+
+        var sessionProperties = [String: Any]();
+        sessionProperties["Foreground Duration"] = duration
+
+        let session = Event(eventName: "CE App Background", properties: sessionProperties);
+        BaseHTTPService.shared.sendEvent(event: session);
     }
 
     @objc func appMovedToLaunch() {
+        runtimeData.setInForeground()
         NewSessionExecutor().execute()
     }
 
-    @objc func appMovedToForground() {
-        runtimeData.setInForeground()
-        //keepSessionAlive()
+    @objc func appMovedToForeground() {
+
+        keepSessionAlive()
 
         if runtimeData.isFirstForeground() {
             return
         }
+
+        let backgroundDuration = runtimeData.getTimeInBackgroundInSeconds();
+
+        if (backgroundDuration > Constants.IDLE_TIME_IN_SECONDS) {
+            sessionManager.conclude();
+
+            NewSessionExecutor().execute();
+            print("After 30 min of App Background " + "Session Concluded")
+        } else {
+            var eventProps = [String: Any]();
+            eventProps["Background Duration"] = backgroundDuration
+            let session = Event(eventName: "CE App Foreground", properties: eventProps)
+
+            BaseHTTPService.shared.sendEvent(event: session);
+        }
     }
 
     @objc func appMovedToKill() {
-        print("************** Kill")
+        sessionManager.conclude()
     }
 
     func currentTimeInMilliSeconds() -> Int {
@@ -50,21 +90,16 @@ class AppLifeCycle: NSObject {
         return Int(since1970 * 1000)
     }
 
-    // MARK: Private
-
-    private var runtimeData: RuntimeData
-    private let notificationCenter = NotificationCenter.default
-
     /**
      * Send server check message every 5 min that session is still alive
      */
-    /*private func keepSessionAlive() {
+    private func keepSessionAlive() {
         // send server check message every 5 min that session is still alive
-        // TODO: 09/06/2021 To be change with Timer class
-        handler.postDelayed(runnable = () -> {
-            handler.postDelayed(runnable, Constants.KEEP_ALIVE_TIME_IN_MS)
-            this.sessionManager.pingServerToKeepAlive()
+        timer = Timer.scheduledTimer(timeInterval: TimeInterval(Constants.KEEP_ALIVE_TIME_IN_MS), target: self,
+                selector: #selector(keepAlive), userInfo: nil, repeats: true)
+    }
 
-        }, Constants.KEEP_ALIVE_TIME_IN_MS)
-    }*/
+    @objc private func keepAlive() {
+        sessionManager.pingServerToKeepAlive()
+    }
 }
