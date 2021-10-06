@@ -92,6 +92,6 @@ class NewSessionExecutor {
 
         dictionary["CE Last Launch Time"] = DateUtils.formatDateToUTCString(date:Date())
 
-        CooeeFactory.shared.baseHttpService.updateUserProprtyOnly(userProperty: dictionary)
+        CooeeFactory.shared.baseHttpService.updateUserPropertyOnly(userProperty: dictionary)
     }
 }
