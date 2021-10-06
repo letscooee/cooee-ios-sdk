@@ -20,5 +20,5 @@ class SDKInfo {
 
     static let shared = SDKInfo()
 
-    let catchedInfo = CachedInfo()
+    let cachedInfo = CachedInfo()
 }

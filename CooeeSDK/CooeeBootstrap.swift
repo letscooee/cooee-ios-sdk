@@ -7,10 +7,10 @@
 
 import Foundation
 
-class CooeeBootstarp {
+class CooeeBootstrap {
     init() {
         _ = CooeeFactory.shared
         _ = AppLifeCycle.shared
-        
+
     }
 }

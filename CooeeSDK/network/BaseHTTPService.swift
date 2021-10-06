@@ -13,8 +13,8 @@ class BaseHTTPService {
 
         init() {
             dictionary["device-name"] = DeviceInfo.shared.cachedInfo.name
-            dictionary["sdk-version"] = SDKInfo.shared.catchedInfo.sdkVersion
-            dictionary["sdk-version-code"] = SDKInfo.shared.catchedInfo.sdkLongVersion
+            dictionary["sdk-version"] = SDKInfo.shared.cachedInfo.sdkVersion
+            dictionary["sdk-version-code"] = SDKInfo.shared.cachedInfo.sdkLongVersion
             dictionary["app-version"] = AppInfo.shared.getAppVersion()
         }
 
@@ -84,8 +84,8 @@ class BaseHTTPService {
             }
         }
     }
-    
-    func sendEvent(event:Event){
+
+    func sendEvent(event: Event) {
         webService.getResponse(fromURL: EndPoints.trackEvent, method: .POST, params: event.toDictionary(), header: commonHeaders.getDictionary()) {
             (result: [String: String]) in
             if result != nil {

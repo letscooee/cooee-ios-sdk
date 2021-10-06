@@ -13,7 +13,7 @@ import Foundation
  - Since:0.1
  */
 class LocalStorageHelper {
-    
+
     static func putString(key: String, value: String) {
         UserDefaults.standard.set(value, forKey: key)
     }
@@ -34,10 +34,10 @@ class LocalStorageHelper {
         UserDefaults.standard.set(value, forKey: key)
     }
 
-    static func getBoolean(key: String, defaultValue:Bool?) -> Bool? {
+    static func getBoolean(key: String, defaultValue: Bool?) -> Bool? {
         return UserDefaults.standard.value(forKey: key) as? Bool ?? defaultValue
     }
-    
+
     static func putLong(key: String, value: Int64?) {
         UserDefaults.standard.set(value, forKey: key)
     }

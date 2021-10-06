@@ -17,7 +17,7 @@ import UIKit
  */
 class AppInfo {
     struct CachedInfo {
-        var isDebuging: Bool {
+        var isDebugging: Bool {
             #if DEBUG
             return true
             #else
@@ -71,9 +71,9 @@ class AppInfo {
     let cachedInfo = CachedInfo()
 
     /**
-     Convers Date in String with fixed format
+     Converts Date in String with fixed format
      - parameters:
-        - date: Date to be convertd in format
+        - date: Date to be convert in format
      
      - returns:date in String format
      */
@@ -139,6 +139,6 @@ class AppInfo {
      - returns:`true` if app is in debug mode
      */
     func isAppDebugging() -> Bool {
-        return cachedInfo.isDebuging
+        return cachedInfo.isDebugging
     }
 }

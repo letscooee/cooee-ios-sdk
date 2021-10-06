@@ -8,29 +8,30 @@
 import Foundation
 import SystemConfiguration
 import CoreTelephony
+
 class NetworkUtility {
     static let shared = NetworkUtility()
 
-    func getNetworkType()->String {
+    func getNetworkType() -> String {
         guard let reachability = SCNetworkReachabilityCreateWithName(kCFAllocatorDefault, "www.google.com") else {
             return "NO INTERNET"
         }
-        
+
         var flags = SCNetworkReachabilityFlags()
         SCNetworkReachabilityGetFlags(reachability, &flags)
-        
+
         let isReachable = flags.contains(.reachable)
         let isWWAN = flags.contains(.isWWAN)
-        
+
         if isReachable {
             if isWWAN {
                 let networkInfo = CTTelephonyNetworkInfo()
                 let carrierType = networkInfo.serviceCurrentRadioAccessTechnology
-                
+
                 guard let carrierTypeName = carrierType?.first?.value else {
                     return "UNKNOWN"
                 }
-                
+
                 switch carrierTypeName {
                 case CTRadioAccessTechnologyGPRS, CTRadioAccessTechnologyEdge, CTRadioAccessTechnologyCDMA1x:
                     return "2G"
@@ -46,11 +47,11 @@ class NetworkUtility {
             return "NO INTERNET"
         }
     }
-    
-    func getCarrierName()->String {
+
+    func getCarrierName() -> String {
         let networkInfo = CTTelephonyNetworkInfo()
         let carrier = networkInfo.serviceSubscriberCellularProviders
-        let ctCarier = carrier?.first?.value
-        return ctCarier?.carrierName ?? "Unknown"
+        let ctCarrier = carrier?.first?.value
+        return ctCarrier?.carrierName ?? "Unknown"
     }
 }

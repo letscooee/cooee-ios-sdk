@@ -13,7 +13,7 @@ class DefaultPropertyCollector {
     public func getCommonEventProperties() -> [String: Any?] {
         var eventProperties = [String: Any?]()
         eventProperties["CE App Version"] = appInfo.cachedInfo.version
-        eventProperties["CE SDK Version"] = sdkInfo.catchedInfo.sdkVersion
+        eventProperties["CE SDK Version"] = sdkInfo.cachedInfo.sdkVersion
         eventProperties["CE OS Version"] = deviceInfo.cachedInfo.osVersion
         // eventProperties.put("CE Network Provider", networkData[0]);
         // eventProperties.put("CE Network Type", networkData[1]);
@@ -41,12 +41,12 @@ class DefaultPropertyCollector {
         // userProperty["CE Wifi Connected"] = (NetworkData.shared.getNetworkType() == "WIFI") ? true : false
         userProperty["CE OS"] = "IOS"
         userProperty["CE OS Version"] = deviceInfo.cachedInfo.osVersion
-        userProperty["CE SDK Version"] = sdkInfo.catchedInfo.sdkVersion+"+"+sdkInfo.catchedInfo.sdkLongVersion
+        userProperty["CE SDK Version"] = sdkInfo.cachedInfo.sdkVersion + "+" + sdkInfo.cachedInfo.sdkLongVersion
         userProperty["CE App Version"] = appInfo.cachedInfo.version
         userProperty["CE Screen Resolution"] = "\(deviceInfo.getDeviceWidth())x\(deviceInfo.getDeviceHeight())"
         userProperty["CE Package Name"] = "\(appInfo.getAppPackage())"
         userProperty["CE Total RAM"] = (deviceInfo.cachedInfo.totalSpace)
-        userProperty["CE Available RAM"] = deviceInfo.cachedInfo.availavleRAM
+        userProperty["CE Available RAM"] = deviceInfo.cachedInfo.availableRAM
         userProperty["CE DPI"] = deviceInfo.cachedInfo.dpi
         userProperty["CE App Version"] = appInfo.cachedInfo.version
 

@@ -15,5 +15,6 @@ import Foundation
 public final class CooeeSDK {
     static let shared = CooeeSDK()
 
-    init() {}
+    init() {
+    }
 }

@@ -10,7 +10,7 @@ import Foundation
 /**
  PostLaunchActivity initialized when app is launched
 
- - Author: Abhishek Taparia
+ - Author: Ashish Gaikwad
  - Since: 0.0.1
    */
 class NewSessionExecutor {
@@ -82,7 +82,9 @@ class NewSessionExecutor {
         // String[] networkData = defaultUserPropertiesCollector.getNetworkData()
         var dictionary = defaultUserPropertiesCollector.getDefaultVales()
         if userProperties != nil {
-            dictionary.merge(userProperties!) { _, new in new }
+            dictionary.merge(userProperties!) { _, new in
+                new
+            }
         }
 
         dictionary["CE Session Count"] = sessionManager.getCurrentSessionNumber()
@@ -90,7 +92,7 @@ class NewSessionExecutor {
         // userProperties.put("CE Bluetooth On", defaultUserPropertiesCollector.isBluetoothOn())
         // userProperties.put("CE Wifi Connected", defaultUserPropertiesCollector.isConnectedToWifi())
 
-        dictionary["CE Last Launch Time"] = DateUtils.formatDateToUTCString(date:Date())
+        dictionary["CE Last Launch Time"] = DateUtils.formatDateToUTCString(date: Date())
 
         CooeeFactory.shared.baseHttpService.updateUserPropertyOnly(userProperty: dictionary)
     }

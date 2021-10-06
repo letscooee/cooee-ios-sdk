@@ -19,9 +19,9 @@ struct Event {
     }
 
     init(eventName: String, properties: [String: Any?]) {
-        name=eventName
-        self.properties=properties
-        occurred=DateUtils.formatDateToUTCString(date: Date())
+        name = eventName
+        self.properties = properties
+        occurred = DateUtils.formatDateToUTCString(date: Date())
     }
 
     // MARK: Internal
@@ -40,16 +40,16 @@ struct Event {
     }
 
     func toDictionary() -> [String: Any?] {
-        var dictionary=[String: Any?]()
+        var dictionary = [String: Any?]()
 
-        dictionary["name"]=name
-        dictionary["properties"]=properties
-        dictionary["sessionID"]=sessionID
-        dictionary["sessionNumber"]=sessionNumber
-        dictionary["screenName"]=screenName
-        dictionary["activeTriggers"]=activeTriggers
-        dictionary["occurred"]=occurred
-        dictionary["deviceProps"]=deviceProps
+        dictionary["name"] = name
+        dictionary["properties"] = properties
+        dictionary["sessionID"] = sessionID
+        dictionary["sessionNumber"] = sessionNumber
+        dictionary["screenName"] = screenName
+        dictionary["activeTriggers"] = activeTriggers
+        dictionary["occurred"] = occurred
+        dictionary["deviceProps"] = deviceProps
 
         return dictionary
     }

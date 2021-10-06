@@ -26,7 +26,7 @@ class WService: NSObject {
             guard let data = data,
                   let _ = response as? HTTPURLResponse,
                   error == nil
-            else {
+                    else {
                 print("error", error ?? "Unknown error")
                 return
             }
@@ -47,7 +47,9 @@ class WService: NSObject {
 
     private func appendSessionID(params: [String: Any?]) -> [String: Any?] {
         var updatedParam = [String: Any?]()
-        updatedParam.merge(params) { _, new in new }
+        updatedParam.merge(params) { _, new in
+            new
+        }
         updatedParam.updateValue(SessionManager.shared.getCurrentSessionID(), forKey: "sessionID")
         updatedParam.updateValue(SessionManager.shared.getCurrentSessionNumber(), forKey: "sessionNumber")
         return updatedParam

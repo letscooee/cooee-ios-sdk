@@ -8,7 +8,7 @@
 import Foundation
 
 struct EndPoints {
-    
+
     static let BASE_URL = "https://api.sdk.letscooee.com"
     static let registerUser = "/v1/device/validate"
     static let trackEvent = "/v1/event/track/"

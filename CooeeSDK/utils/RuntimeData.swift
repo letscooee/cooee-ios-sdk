@@ -83,8 +83,8 @@ class RuntimeData {
     private func getDateDifferenceInSeconds(startDate: Date, endDate: Date) -> Int64 {
         let calendar = Calendar.current
         let unitFlags = Set<Calendar.Component>([.second])
-        let datecomponents = calendar.dateComponents(unitFlags, from: startDate, to: endDate)
-        let seconds = datecomponents.second
+        let dateComponents = calendar.dateComponents(unitFlags, from: startDate, to: endDate)
+        let seconds = dateComponents.second
         return Int64(seconds!)
     }
 }

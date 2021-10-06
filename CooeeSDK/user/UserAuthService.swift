@@ -51,7 +51,7 @@ class UserAuthService {
     }
 
     func updateAPI() {
-        if SDKInfo.shared.catchedInfo.isDebugging {
+        if SDKInfo.shared.cachedInfo.isDebugging {
             print("SDK Token - \(self.sdkToken ?? "")")
             print("User ID - \(self.userID ?? "")")
         }
