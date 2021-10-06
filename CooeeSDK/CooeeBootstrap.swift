@@ -6,11 +6,20 @@
 //
 
 import Foundation
+import FirebaseCore
+import FirebaseMessaging
 
 class CooeeBootstrap {
-    init() {
+    public init() {
         _ = CooeeFactory.shared
         _ = AppLifeCycle.shared
+       // registerFirebase()
+    }
 
+    private func registerFirebase() {
+        FirebaseApp.configure()
+        let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+        UIApplication.shared.registerUserNotificationSettings(settings)
+        UIApplication.shared.registerForRemoteNotifications()
     }
 }

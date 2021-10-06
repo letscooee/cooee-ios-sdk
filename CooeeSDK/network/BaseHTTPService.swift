@@ -70,19 +70,24 @@ class BaseHTTPService {
     }
 
     func updateUserPropertyOnly(userProperty: [String: Any]) {
-        var dictionary = [String: Any]()
-        dictionary["userProperties"] = userProperty
-        dictionary["userData"] = [String: Any]()
-        updateUserProfile(body: dictionary)
+        updateUserProfile(userData: [String: Any](), userProperties: userProperty)
     }
 
-    func updateUserProfile(body: [String: Any]) {
+    func updateUserProfile(userData: [String: Any], userProperties: [String: Any]) {
+        var body = [String: Any]()
+        body["userProperties"] = userProperties
+        body["userData"] = userData
+
         webService.getResponse(fromURL: EndPoints.updateProfile, method: .PUT, params: body, header: commonHeaders.getDictionary()) {
             (result: [String: String]) in
             if result != nil {
                 print(result)
             }
         }
+    }
+
+    func updateUserDataOnly(userData: [String: Any]) {
+        updateUserProfile(userData: userData, userProperties: [String: Any]())
     }
 
     func sendEvent(event: Event) {

@@ -60,6 +60,10 @@ class UserAuthService {
         baseHttp?.commonHeaders.userID = self.userID
     }
 
+    func getUserID() -> String? {
+        self.userID
+    }
+
     // MARK: Private
 
     private var userID: String?
