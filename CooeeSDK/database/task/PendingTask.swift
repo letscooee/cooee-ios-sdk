@@ -8,23 +8,17 @@ import Foundation
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-struct PendingTask {
-    var id: Int? = nil
-    var attempts: Int
-    var dateCreated: Int64
-    var data: String
-    var lastAttempted: Int64? = nil
-    var type: PendingTaskType
-
+struct PendingTaskModel {
+    // MARK: Lifecycle
 
     init(data: String, type: PendingTaskType) {
         self.data = data
         self.type = type
-        dateCreated = Int64(Date().timeIntervalSince1970)
+        dateCreated = Date()
         attempts = 0
     }
 
-    init(id: Int, attempts: Int, dateCreated: Int64, data: String, lastAttempted: Int64, type: PendingTaskType) {
+    init(id: Int, attempts: Int, dateCreated: Date, data: String, lastAttempted: Date, type: PendingTaskType) {
         self.data = data
         self.type = type
         self.dateCreated = dateCreated
@@ -32,4 +26,13 @@ struct PendingTask {
         self.lastAttempted = lastAttempted
         self.id = id
     }
+
+    // MARK: Internal
+
+    var id: Int?
+    var attempts: Int?
+    var dateCreated: Date?
+    var data: String
+    var lastAttempted: Date?
+    var type: PendingTaskType
 }
