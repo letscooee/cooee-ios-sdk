@@ -31,6 +31,9 @@
 		751E1343270ED09C002CF442 /* CooeeDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E1342270ED09C002CF442 /* CooeeDatabase.swift */; };
 		751E1346270EDA09002CF442 /* PendingTaskConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E1345270EDA09002CF442 /* PendingTaskConstants.swift */; };
 		751E1348270EDEBD002CF442 /* PendingTaskDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E1347270EDEBD002CF442 /* PendingTaskDAO.swift */; };
+		751E134B270F1771002CF442 /* PendingTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E134A270F1771002CF442 /* PendingTaskProcessor.swift */; };
+		751E134D270F22AB002CF442 /* AbstractPendingTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E134C270F22AB002CF442 /* AbstractPendingTaskProcessor.swift */; };
+		751E1350270F2F4D002CF442 /* letscooee.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 751E134E270F2F4B002CF442 /* letscooee.xcdatamodeld */; };
 		75729E6E26F45828006EB506 /* InfoPlistReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E6D26F45828006EB506 /* InfoPlistReader.swift */; };
 		75729E7226F493AB006EB506 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7126F493AB006EB506 /* Event.swift */; };
 		75729E7426F497FD006EB506 /* TriggerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7326F497FD006EB506 /* TriggerData.swift */; };
