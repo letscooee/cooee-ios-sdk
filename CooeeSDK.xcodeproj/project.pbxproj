@@ -27,7 +27,6 @@
 		751E1327270C4C47002CF442 /* NewSessionExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E1326270C4C47002CF442 /* NewSessionExecutor.swift */; };
 		751E1329270C7074002CF442 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E1328270C7074002CF442 /* DateUtil.swift */; };
 		751E132D270D9277002CF442 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E132C270D9276002CF442 /* CustomError.swift */; };
-		751E1340270DD2EA002CF442 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 751E133F270DD2EA002CF442 /* GoogleService-Info.plist */; };
 		751E1343270ED09C002CF442 /* CooeeDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E1342270ED09C002CF442 /* CooeeDatabase.swift */; };
 		751E1346270EDA09002CF442 /* PendingTaskConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E1345270EDA09002CF442 /* PendingTaskConstants.swift */; };
 		751E1348270EDEBD002CF442 /* PendingTaskDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E1347270EDEBD002CF442 /* PendingTaskDAO.swift */; };
