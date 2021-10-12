@@ -47,11 +47,23 @@
 		757E405A26F9FF54008352F3 /* AuthenticationRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757E405926F9FF54008352F3 /* AuthenticationRequestBody.swift */; };
 		757E405C26FA08D5008352F3 /* UserAuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757E405B26FA08D5008352F3 /* UserAuthResponse.swift */; };
 		758660D626FAFA89006B40DC /* SDKInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758660D526FAFA89006B40DC /* SDKInfo.swift */; };
+		759E15F3271061520040F09C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 759E15F2271061520040F09C /* GoogleService-Info.plist */; };
 		75A0981027070FD800C2057B /* AppLifeCycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A0980F27070FD800C2057B /* AppLifeCycle.swift */; };
 		75A098122707132100C2057B /* CooeeBootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A098112707132100C2057B /* CooeeBootstrap.swift */; };
+		75DD8793271575EA00A272BB /* CooeeJobUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD8792271575EA00A272BB /* CooeeJobUtils.swift */; };
+		75DD87962715924B00A272BB /* PendingTaskJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87952715924B00A272BB /* PendingTaskJob.swift */; };
+		75DD87982715927B00A272BB /* PendingTaskJobProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87972715927B00A272BB /* PendingTaskJobProcessor.swift */; };
+		AC0B8234FFAFC98E987999A7 /* SafeHTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8B65ED15E2A6D74A0F03 /* SafeHTTPService.swift */; };
+		AC0B8269B7CDB037E372F8B3 /* HttpTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8D0C0E553156E3B76C31 /* HttpTaskProcessor.swift */; };
 		AC0B830AA583B38E12F76E5C /* CooeeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B851DC5B190221B669F38 /* CooeeFactory.swift */; };
+		AC0B83940A8AA5D45A0E64D9 /* EventTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8D173E6FFB9D0659EA78 /* EventTaskProcessor.swift */; };
+		AC0B843D6FCF6D51FBCA7FD7 /* ProfileTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B805A34D46C1243CFFC5A /* ProfileTaskProcessor.swift */; };
+		AC0B8442A908253F00AF3061 /* PendingTaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8ED273C05CC69495D48B /* PendingTaskService.swift */; };
+		AC0B850DFCDC2005C3A115B0 /* PushTokenTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B861F4E3D4E157C46147D /* PushTokenTaskProcessor.swift */; };
 		AC0B8518BD3390F14BA56E86 /* PendingTaskType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8F1A3240B22206AC68B6 /* PendingTaskType.swift */; };
 		AC0B85211B7F2B8520801AFF /* PendingTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B861B34A834EC10D3493B /* PendingTask.swift */; };
+		AC0B874545303FDF69FF4E95 /* DictionaryPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B885A897ACFB8EBF772D0 /* DictionaryPrototype.swift */; };
+		AC0B8E841AD56FEB009D2A89 /* SessionConcludeTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */; };
 		C17CD8950D3CBB4254E3AEBD /* Pods_Cooee_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6DD165866F91815E65CF7F1 /* Pods_Cooee_iOS.framework */; };
 		E4B53257B1CEA855270672CE /* Pods_CooeeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB800582A4AF75A48137B606 /* Pods_CooeeSDK.framework */; };
 /* End PBXBuildFile section */
@@ -112,10 +124,12 @@
 		751E1326270C4C47002CF442 /* NewSessionExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSessionExecutor.swift; sourceTree = "<group>"; };
 		751E1328270C7074002CF442 /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		751E132C270D9276002CF442 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
-		751E133F270DD2EA002CF442 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		751E1342270ED09C002CF442 /* CooeeDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeDatabase.swift; sourceTree = "<group>"; };
 		751E1345270EDA09002CF442 /* PendingTaskConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTaskConstants.swift; sourceTree = "<group>"; };
 		751E1347270EDEBD002CF442 /* PendingTaskDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTaskDAO.swift; sourceTree = "<group>"; };
+		751E134A270F1771002CF442 /* PendingTaskProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTaskProcessor.swift; sourceTree = "<group>"; };
+		751E134C270F22AB002CF442 /* AbstractPendingTaskProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractPendingTaskProcessor.swift; sourceTree = "<group>"; };
+		751E134F270F2F4C002CF442 /* letscooee.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = letscooee.xcdatamodel; sourceTree = "<group>"; };
 		75729E6D26F45828006EB506 /* InfoPlistReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPlistReader.swift; sourceTree = "<group>"; };
 		75729E7126F493AB006EB506 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		75729E7326F497FD006EB506 /* TriggerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerData.swift; sourceTree = "<group>"; };
@@ -130,12 +144,24 @@
 		757E405926F9FF54008352F3 /* AuthenticationRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRequestBody.swift; sourceTree = "<group>"; };
 		757E405B26FA08D5008352F3 /* UserAuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthResponse.swift; sourceTree = "<group>"; };
 		758660D526FAFA89006B40DC /* SDKInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKInfo.swift; sourceTree = "<group>"; };
+		759E15F2271061520040F09C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75A0980F27070FD800C2057B /* AppLifeCycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLifeCycle.swift; sourceTree = "<group>"; };
 		75A098112707132100C2057B /* CooeeBootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeBootstrap.swift; sourceTree = "<group>"; };
+		75DD8792271575EA00A272BB /* CooeeJobUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeJobUtils.swift; sourceTree = "<group>"; };
+		75DD87952715924B00A272BB /* PendingTaskJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTaskJob.swift; sourceTree = "<group>"; };
+		75DD87972715927B00A272BB /* PendingTaskJobProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTaskJobProcessor.swift; sourceTree = "<group>"; };
 		77F56F40EDA5A57940AA34BC /* Pods-Cooee iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS.release.xcconfig"; path = "Target Support Files/Pods-Cooee iOS/Pods-Cooee iOS.release.xcconfig"; sourceTree = "<group>"; };
 		7F5B66C3F5CF5A3CF236A788 /* Pods-CooeeSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.release.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.release.xcconfig"; sourceTree = "<group>"; };
+		AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionConcludeTaskProcessor.swift; sourceTree = "<group>"; };
+		AC0B805A34D46C1243CFFC5A /* ProfileTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTaskProcessor.swift; sourceTree = "<group>"; };
 		AC0B851DC5B190221B669F38 /* CooeeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CooeeFactory.swift; sourceTree = "<group>"; };
 		AC0B861B34A834EC10D3493B /* PendingTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingTask.swift; sourceTree = "<group>"; };
+		AC0B861F4E3D4E157C46147D /* PushTokenTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushTokenTaskProcessor.swift; sourceTree = "<group>"; };
+		AC0B885A897ACFB8EBF772D0 /* DictionaryPrototype.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryPrototype.swift; sourceTree = "<group>"; };
+		AC0B8B65ED15E2A6D74A0F03 /* SafeHTTPService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeHTTPService.swift; sourceTree = "<group>"; };
+		AC0B8D0C0E553156E3B76C31 /* HttpTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpTaskProcessor.swift; sourceTree = "<group>"; };
+		AC0B8D173E6FFB9D0659EA78 /* EventTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTaskProcessor.swift; sourceTree = "<group>"; };
+		AC0B8ED273C05CC69495D48B /* PendingTaskService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingTaskService.swift; sourceTree = "<group>"; };
 		AC0B8F1A3240B22206AC68B6 /* PendingTaskType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingTaskType.swift; sourceTree = "<group>"; };
 		BB800582A4AF75A48137B606 /* Pods_CooeeSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CooeeSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6DD165866F91815E65CF7F1 /* Pods_Cooee_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cooee_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -212,6 +238,7 @@
 		751BC77F26F3108A002D8358 /* CooeeSDK */ = {
 			isa = PBXGroup;
 			children = (
+				75DD87912715759B00A272BB /* scheduler */,
 				751E1341270ED06E002CF442 /* database */,
 				75729E7B26F87387006EB506 /* network */,
 				75729E7526F49AF0006EB506 /* user */,
@@ -231,7 +258,7 @@
 		751BC78D26F31162002D8358 /* Cooee iOS */ = {
 			isa = PBXGroup;
 			children = (
-				751E133F270DD2EA002CF442 /* GoogleService-Info.plist */,
+				759E15F2271061520040F09C /* GoogleService-Info.plist */,
 				751BC78E26F31162002D8358 /* AppDelegate.swift */,
 				751BC79026F31162002D8358 /* SceneDelegate.swift */,
 				751BC79226F31162002D8358 /* ViewController.swift */,
@@ -302,12 +329,29 @@
 		751E1344270ED9E7002CF442 /* task */ = {
 			isa = PBXGroup;
 			children = (
+				751E1349270F174C002CF442 /* processor */,
 				751E1345270EDA09002CF442 /* PendingTaskConstants.swift */,
 				751E1347270EDEBD002CF442 /* PendingTaskDAO.swift */,
 				AC0B861B34A834EC10D3493B /* PendingTask.swift */,
 				AC0B8F1A3240B22206AC68B6 /* PendingTaskType.swift */,
+				751E134E270F2F4B002CF442 /* letscooee.xcdatamodeld */,
+				AC0B8ED273C05CC69495D48B /* PendingTaskService.swift */,
 			);
 			path = task;
+			sourceTree = "<group>";
+		};
+		751E1349270F174C002CF442 /* processor */ = {
+			isa = PBXGroup;
+			children = (
+				751E134A270F1771002CF442 /* PendingTaskProcessor.swift */,
+				751E134C270F22AB002CF442 /* AbstractPendingTaskProcessor.swift */,
+				AC0B8D0C0E553156E3B76C31 /* HttpTaskProcessor.swift */,
+				AC0B805A34D46C1243CFFC5A /* ProfileTaskProcessor.swift */,
+				AC0B8D173E6FFB9D0659EA78 /* EventTaskProcessor.swift */,
+				AC0B861F4E3D4E157C46147D /* PushTokenTaskProcessor.swift */,
+				AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */,
+			);
+			path = processor;
 			sourceTree = "<group>";
 		};
 		75729E6C26F45768006EB506 /* utils */ = {
@@ -331,6 +375,7 @@
 				75729E7326F497FD006EB506 /* TriggerData.swift */,
 				757E405926F9FF54008352F3 /* AuthenticationRequestBody.swift */,
 				757E405B26FA08D5008352F3 /* UserAuthResponse.swift */,
+				AC0B885A897ACFB8EBF772D0 /* DictionaryPrototype.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -351,8 +396,27 @@
 				75729E7C26F87593006EB506 /* WService.swift */,
 				75729E7E26F8AB26006EB506 /* EndPoints.swift */,
 				757E405726F9FA16008352F3 /* BaseHTTPService.swift */,
+				AC0B8B65ED15E2A6D74A0F03 /* SafeHTTPService.swift */,
 			);
 			path = network;
+			sourceTree = "<group>";
+		};
+		75DD87912715759B00A272BB /* scheduler */ = {
+			isa = PBXGroup;
+			children = (
+				75DD87942715922C00A272BB /* job */,
+				75DD8792271575EA00A272BB /* CooeeJobUtils.swift */,
+			);
+			path = scheduler;
+			sourceTree = "<group>";
+		};
+		75DD87942715922C00A272BB /* job */ = {
+			isa = PBXGroup;
+			children = (
+				75DD87952715924B00A272BB /* PendingTaskJob.swift */,
+				75DD87972715927B00A272BB /* PendingTaskJobProcessor.swift */,
+			);
+			path = job;
 			sourceTree = "<group>";
 		};
 		A1345D19EC596FAD6A5DCFA7 /* Frameworks */ = {
@@ -545,7 +609,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				751BC79B26F31165002D8358 /* LaunchScreen.storyboard in Resources */,
-				751E1340270DD2EA002CF442 /* GoogleService-Info.plist in Resources */,
+				759E15F3271061520040F09C /* GoogleService-Info.plist in Resources */,
 				751BC79826F31165002D8358 /* Assets.xcassets in Resources */,
 				751BC79626F31162002D8358 /* Main.storyboard in Resources */,
 			);
@@ -653,27 +717,41 @@
 				75729E7426F497FD006EB506 /* TriggerData.swift in Sources */,
 				751BC7BE26F311DB002D8358 /* AppController.swift in Sources */,
 				751E1323270C26A5002CF442 /* RuntimeData.swift in Sources */,
+				751E134D270F22AB002CF442 /* AbstractPendingTaskProcessor.swift in Sources */,
 				75729E7A26F4C4A1006EB506 /* Constants.swift in Sources */,
 				751BC7C026F3123E002D8358 /* Cooee.swift in Sources */,
 				757E405A26F9FF54008352F3 /* AuthenticationRequestBody.swift in Sources */,
+				751E134B270F1771002CF442 /* PendingTaskProcessor.swift in Sources */,
 				751E1343270ED09C002CF442 /* CooeeDatabase.swift in Sources */,
 				75A0981027070FD800C2057B /* AppLifeCycle.swift in Sources */,
 				751E132D270D9277002CF442 /* CustomError.swift in Sources */,
 				751BC7C726F31A4B002D8358 /* DeviceInfo.swift in Sources */,
+				751E1350270F2F4D002CF442 /* letscooee.xcdatamodeld in Sources */,
 				75729E8126F8AD47006EB506 /* UserAuthService.swift in Sources */,
 				751E1348270EDEBD002CF442 /* PendingTaskDAO.swift in Sources */,
+				75DD8793271575EA00A272BB /* CooeeJobUtils.swift in Sources */,
 				751E1346270EDA09002CF442 /* PendingTaskConstants.swift in Sources */,
 				751E1327270C4C47002CF442 /* NewSessionExecutor.swift in Sources */,
 				75729E7226F493AB006EB506 /* Event.swift in Sources */,
 				75729E7D26F87593006EB506 /* WService.swift in Sources */,
 				757E405826F9FA16008352F3 /* BaseHTTPService.swift in Sources */,
+				75DD87982715927B00A272BB /* PendingTaskJobProcessor.swift in Sources */,
 				75729E7F26F8AB26006EB506 /* EndPoints.swift in Sources */,
 				75729E6E26F45828006EB506 /* InfoPlistReader.swift in Sources */,
 				75729E8326F9A34A006EB506 /* NetworkUtility.swift in Sources */,
 				758660D626FAFA89006B40DC /* SDKInfo.swift in Sources */,
 				AC0B830AA583B38E12F76E5C /* CooeeFactory.swift in Sources */,
 				AC0B85211B7F2B8520801AFF /* PendingTask.swift in Sources */,
+				75DD87962715924B00A272BB /* PendingTaskJob.swift in Sources */,
 				AC0B8518BD3390F14BA56E86 /* PendingTaskType.swift in Sources */,
+				AC0B8269B7CDB037E372F8B3 /* HttpTaskProcessor.swift in Sources */,
+				AC0B843D6FCF6D51FBCA7FD7 /* ProfileTaskProcessor.swift in Sources */,
+				AC0B874545303FDF69FF4E95 /* DictionaryPrototype.swift in Sources */,
+				AC0B83940A8AA5D45A0E64D9 /* EventTaskProcessor.swift in Sources */,
+				AC0B850DFCDC2005C3A115B0 /* PushTokenTaskProcessor.swift in Sources */,
+				AC0B8E841AD56FEB009D2A89 /* SessionConcludeTaskProcessor.swift in Sources */,
+				AC0B8234FFAFC98E987999A7 /* SafeHTTPService.swift in Sources */,
+				AC0B8442A908253F00AF3061 /* PendingTaskService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1148,6 +1226,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		751E134E270F2F4B002CF442 /* letscooee.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				751E134F270F2F4C002CF442 /* letscooee.xcdatamodel */,
+			);
+			currentVersion = 751E134F270F2F4C002CF442 /* letscooee.xcdatamodel */;
+			path = letscooee.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 751BC77426F3108A002D8358 /* Project object */;
 }
