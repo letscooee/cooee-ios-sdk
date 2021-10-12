@@ -141,5 +141,6 @@ spec.exclude_files = "Classes/Exclude"
 spec.dependency 'Firebase'
 spec.dependency 'FirebaseMessaging'
 spec.dependency 'BSON'
+spec.dependency 'HandyJSON'
 
 end
