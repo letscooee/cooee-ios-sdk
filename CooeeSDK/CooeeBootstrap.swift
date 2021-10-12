@@ -21,6 +21,11 @@ class CooeeBootstrap {
         _ = AppLifeCycle.shared
         registerFirebase()
         updateFirebaseToken()
+        startPendingTaskJob()
+    }
+
+    private func startPendingTaskJob() {
+        CooeeJobUtils.schedulePendingTaskJob()
     }
 
     private func registerFirebase() {
