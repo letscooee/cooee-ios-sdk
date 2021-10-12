@@ -14,6 +14,8 @@ import Foundation
  - Since: 0.1.0
  */
 class BaseHTTPService {
+    // MARK: Internal
+
     class CommonHeaders {
         // MARK: Lifecycle
 
@@ -43,38 +45,43 @@ class BaseHTTPService {
         }
     }
 
-    func sendFirebaseToken(token: String?) {
-        if token == nil {
-            return
-        }
-        var requestData = [String: Any]();
-        requestData["firebaseToken"] = token!
-
-        webService.getResponse(fromURL: EndPoints.saveFCM, method: .POST, params: requestData, header: commonHeaders.getDictionary()) {
-            (result: [String: String]) in
-            if result != nil {
-                print(result)
-            }
-        }
-    }
-
     static let shared = BaseHTTPService()
 
     let webService = WService.shared
     let commonHeaders = CommonHeaders()
 
-    func registerDevice(body: AuthenticationRequestBody, completion: @escaping (UserAuthResponse) -> ()) {
-        webService.getResponse(fromURL: EndPoints.registerUser, method: .POST, params: body.toDictionary(), header: commonHeaders.getDictionary()) {
-            (result: UserAuthResponse) in
-            if result != nil {
-                completion(result)
+    func sendFirebaseToken(token: String?) throws {
+        if token == nil {
+            return
+        }
+        var requestData = [String: Any]()
+        requestData["firebaseToken"] = token!
+
+        try webService.getResponse(fromURL: EndPoints.saveFCM, method: .POST, params: requestData, header: commonHeaders.getDictionary()) {
+            (result: [String: String]?, error: Error?) in
+            if error == nil {
+                print(result)
+            } else {
+                // throw error
             }
         }
     }
 
-    func sendSessionConcludedEvent(body: [String: Any]) {
-        webService.getResponse(fromURL: EndPoints.concludeSession, method: .POST, params: body, header: commonHeaders.getDictionary()) {
-            (result: [String: String]) in
+    func registerDevice(body: AuthenticationRequestBody, completion: @escaping (UserAuthResponse) -> ()) {
+        do {
+            try webService.getResponse(fromURL: EndPoints.registerUser, method: .POST, params: body.toDictionary(), header: commonHeaders.getDictionary()) {
+                (result: UserAuthResponse?, _: Error?) in
+                if result != nil {
+                    completion(result!)
+                }
+            }
+        } catch {
+        }
+    }
+
+    func sendSessionConcludedEvent(body: [String: Any]) throws {
+        try webService.getResponse(fromURL: EndPoints.concludeSession, method: .POST, params: body, header: commonHeaders.getDictionary()) {
+            (result: [String: String]?, _: Error?) in
             if result != nil {
                 print(result)
             }
@@ -82,38 +89,30 @@ class BaseHTTPService {
     }
 
     func keepAliveSession(body: [String: Any]) {
-        webService.getResponse(fromURL: EndPoints.keepAlive, method: .POST, params: body, header: commonHeaders.getDictionary()) {
-            (result: [String: String]) in
+        do {
+            try webService.getResponse(fromURL: EndPoints.keepAlive, method: .POST, params: body, header: commonHeaders.getDictionary()) {
+                (result: [String: String]?, _: Error?) in
+                if result != nil {
+                    print(result)
+                }
+            }
+        } catch {
+        }
+    }
+
+    func updateUserProfile(requestData: [String: Any]) throws {
+        try webService.getResponse(fromURL: EndPoints.updateProfile, method: .PUT, params: requestData, header: commonHeaders.getDictionary()) {
+            (result: [String: String]?, _: Error?) in
             if result != nil {
                 print(result)
             }
         }
     }
 
-    func updateUserPropertyOnly(userProperty: [String: Any]) {
-        updateUserProfile(userData: [String: Any](), userProperties: userProperty)
-    }
-
-    func updateUserProfile(userData: [String: Any], userProperties: [String: Any]) {
-        var body = [String: Any]()
-        body["userProperties"] = userProperties
-        body["userData"] = userData
-
-        webService.getResponse(fromURL: EndPoints.updateProfile, method: .PUT, params: body, header: commonHeaders.getDictionary()) {
-            (result: [String: String]) in
-            if result != nil {
-                print(result)
-            }
-        }
-    }
-
-    func updateUserDataOnly(userData: [String: Any]) {
-        updateUserProfile(userData: userData, userProperties: [String: Any]())
-    }
-
-    func sendEvent(event: Event) {
-        webService.getResponse(fromURL: EndPoints.trackEvent, method: .POST, params: event.toDictionary(), header: commonHeaders.getDictionary()) {
-            (result: [String: String]) in
+    func sendEvent(event: Event) throws {
+        saveToPending(data: event.toDictionary(), token: .API_SEND_EVENT)
+        try webService.getResponse(fromURL: EndPoints.trackEvent, method: .POST, params: event.toDictionary(), header: commonHeaders.getDictionary()) {
+            (result: [String: String]?, _: Error?) in
             if result != nil {
                 print(result)
             }
