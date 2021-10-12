@@ -5,8 +5,9 @@
 //  Created by Ashish Gaikwad on 07/10/21.
 //
 
+import CoreData
 import Foundation
-import SQLite3
+import UIKit
 
 /**
  Create and opens connection to the database
@@ -15,62 +16,30 @@ import SQLite3
  - Since: 0.1.0
  */
 class CooeeDatabase {
-    // MARK: Lifecycle
+    // MARK: Public
 
-    init() {
-        database = createDatabase()
-        createPendingTaskTable()
-    }
+    public static let shared = CooeeDatabase()
 
     // MARK: Internal
 
-    var database: OpaquePointer?
+    lazy var persistentContainer: NSPersistentContainer = {
+        let messageKitBundle = Bundle(identifier: identifier)
+        let modelURL = messageKitBundle!.url(forResource: self.model, withExtension: "momd")!
+        let managedObjectModel = NSManagedObjectModel(contentsOf: modelURL)
+
+        let container = NSPersistentContainer(name: self.model, managedObjectModel: managedObjectModel!)
+        container.loadPersistentStores { _, error in
+
+            if let err = error {
+                fatalError("❌ Loading of store failed:\(err)")
+            }
+        }
+
+        return container
+    }()
 
     // MARK: Private
 
-    private let databasePath = "letscooee.sqlite"
-
-    /**
-     Create database if does not exist and returns database reference
-     - Returns: return database reference if operation is successful else <code>nil</code>
-     */
-    private func createDatabase() -> OpaquePointer? {
-        let filePath = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathExtension(databasePath)
-
-        var db: OpaquePointer?
-
-        if sqlite3_open(filePath.path, &db) != SQLITE_OK {
-            print("There is error in creating DB")
-            return nil
-        } else {
-            print("Database has been created with path \(filePath)")
-            return db
-        }
-    }
-
-    /**
-     Creates PendingTask table if does not exist
-     */
-    private func createPendingTaskTable() {
-        let query = """
-                    CREATE TABLE IF NOT EXISTS \(PendingTaskConstants.TABLE_NAME)
-                    (\(PendingTaskConstants.ID) INTEGER PRIMARY KEY AUTOINCREMENT,
-                    \(PendingTaskConstants.ATTEMPTS) INTEGER,
-                    \(PendingTaskConstants.DATE_CREATED) LONG,
-                    \(PendingTaskConstants.DATA) TEXT,
-                    \(PendingTaskConstants.LAST_ATTEMPTED) LONG,
-                    \(PendingTaskConstants.TYPE) TEXT);
-                    """
-        var statement: OpaquePointer?
-
-        if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
-            if sqlite3_step(statement) == SQLITE_DONE {
-                print("Table creation success")
-            } else {
-                print("Table creation fail")
-            }
-        } else {
-            print("Preparation fail")
-        }
-    }
+    private let identifier: String = "com.letscooee.CooeeSDK"
+    private let model: String = "letscooee"
 }
