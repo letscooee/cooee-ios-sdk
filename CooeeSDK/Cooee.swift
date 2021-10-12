@@ -17,7 +17,7 @@ public final class CooeeSDK {
     // MARK: Lifecycle
 
     init() {
-        self.baseHttpService = CooeeFactory.shared.baseHttpService
+        self.safeHttpService = CooeeFactory.shared.safeHttpService
         self.runtimeData = RuntimeData.shared
     }
 
@@ -47,7 +47,7 @@ public final class CooeeSDK {
         }
 
         let event = Event(eventName: eventName, properties: eventProperties)
-        baseHttpService.sendEvent(event: event)
+        safeHttpService.sendEvent(event: event)
     }
 
     /**
@@ -55,7 +55,7 @@ public final class CooeeSDK {
      - Parameter userData: The common user data like name, email.
      */
     public func updateUserData(userData: [String: Any]) {
-        baseHttpService.updateUserDataOnly(userData: userData)
+        safeHttpService.updateUserDataOnly(userData: userData)
     }
 
     /**
@@ -63,7 +63,7 @@ public final class CooeeSDK {
      - Parameter userProperties: The additional user properties.
      */
     public func updateUserProperties(userProperties: [String: Any]) {
-        baseHttpService.updateUserPropertyOnly(userProperty: userProperties)
+        safeHttpService.updateUserPropertyOnly(userProperty: userProperties)
     }
 
     /**
@@ -73,7 +73,7 @@ public final class CooeeSDK {
        - userProperties: The additional user properties.
      */
     public func updateUserProfile(userData: [String: Any], userProperties: [String: Any]) {
-        baseHttpService.updateUserProfile(userData: userData, userProperties: userProperties)
+        safeHttpService.updateUserProfile(userData: userData, userProperties: userProperties)
     }
 
     /**
@@ -96,6 +96,6 @@ public final class CooeeSDK {
 
     private static var shared: CooeeSDK?
 
-    private let baseHttpService: BaseHTTPService
+    private let safeHttpService: SafeHTTPService
     private let runtimeData: RuntimeData
 }

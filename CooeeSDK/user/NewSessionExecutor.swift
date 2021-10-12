@@ -62,7 +62,7 @@ class NewSessionExecutor {
         sendDefaultUserProperties(userProperties: nil)
 
         let event = Event(eventName: "CE App Launched", properties: defaultUserPropertiesCollector.getCommonEventProperties())
-        CooeeFactory.shared.baseHttpService.sendEvent(event: event)
+        CooeeFactory.shared.safeHttpService.sendEvent(event: event)
     }
 
     /**
@@ -75,7 +75,7 @@ class NewSessionExecutor {
         sendDefaultUserProperties(userProperties: userProperties)
 
         let event = Event(eventName: "CE App Installed", properties: defaultUserPropertiesCollector.getCommonEventProperties())
-        CooeeFactory.shared.baseHttpService.sendEvent(event: event)
+        CooeeFactory.shared.safeHttpService.sendEvent(event: event)
     }
 
     private func sendDefaultUserProperties(userProperties: [String: Any]?) {
@@ -94,6 +94,6 @@ class NewSessionExecutor {
 
         dictionary["CE Last Launch Time"] = DateUtils.formatDateToUTCString(date: Date())
 
-        CooeeFactory.shared.baseHttpService.updateUserPropertyOnly(userProperty: dictionary)
+        CooeeFactory.shared.safeHttpService.updateUserPropertyOnly(userProperty: dictionary)
     }
 }

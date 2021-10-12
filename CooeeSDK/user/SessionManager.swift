@@ -9,17 +9,17 @@ import BSON
 import Foundation
 
 /**
-Manages the user's current session in the app.
- 
-- Author: Ashish Gaikwad
-- Since: 0.1.0
- */
+ Manages the user's current session in the app.
+
+ - Author: Ashish Gaikwad
+ - Since: 0.1.0
+  */
 class SessionManager {
     // MARK: Lifecycle
 
     init() {
         runtimeData = RuntimeData.shared
-        self.getCurrentSessionID()
+        _ = getCurrentSessionID()
     }
 
     // MARK: Public
@@ -68,7 +68,7 @@ class SessionManager {
         requestData["sessionID"] = getCurrentSessionID()
         requestData["occurred"] = Date()
 
-        CooeeFactory.shared.baseHttpService.sendSessionConcludedEvent(body: requestData)
+        CooeeFactory.shared.safeHttpService.sendSessionConcludedEvent(requestData: requestData)
         destroySession()
     }
 

@@ -59,8 +59,8 @@ class DefaultPropertyCollector {
         return userProperty
     }
 
-    func getAppInstallDate() -> Date? {
-        appInfo.cachedInfo.installDate
+    func getAppInstallDate() -> String? {
+        DateUtils.formatDateToUTCString(date: appInfo.cachedInfo.installDate ?? Date())
     }
 
     // MARK: Private

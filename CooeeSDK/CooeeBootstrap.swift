@@ -37,7 +37,9 @@ class CooeeBootstrap {
 
     private func updateFirebaseToken() {
         Messaging.messaging().token { (token, _) in
-            BaseHTTPService.shared.sendFirebaseToken(token: token)
+            var requestBody=[String:Any]()
+            requestBody["firebaseToken"]=token
+            CooeeFactory.shared.safeHttpService.updatePushToken(requestData: requestBody)
         }
     }
 }
