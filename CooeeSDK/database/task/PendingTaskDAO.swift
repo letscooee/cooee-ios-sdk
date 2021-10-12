@@ -5,12 +5,13 @@
 //  Created by Ashish Gaikwad on 07/10/21.
 //
 
+import CoreData
 import Foundation
-import SQLite3
+import UIKit
 
 /**
  Handle insert, fetch, update, delete operations on PendingTask table
-
+ß
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
@@ -18,91 +19,69 @@ class PendingTaskDAO {
     // MARK: Lifecycle
 
     init() {
-        database = CooeeDatabase().database
+        database = CooeeDatabase.shared.persistentContainer
     }
 
     // MARK: Internal
 
-    func fetchPending() -> [PendingTask] {
-        var taskList = [PendingTask]()
-        let query = """
-                    select * from \(PendingTaskConstants.TABLE_NAME) where
-                    \(PendingTaskConstants.ATTEMPTS) < 20
-                    """
+    func insert(_ pendingTask: PendingTaskModel) -> PendingTasks {
+        let context = database.viewContext
+        let task = NSEntityDescription.insertNewObject(forEntityName: "PendingTasks", into: context) as! PendingTasks
+        task.attempts = Int32(pendingTask.attempts ?? 0)
+        task.data = pendingTask.data
+        task.dateCreated = pendingTask.dateCreated
+        task.type = pendingTask.type.rawValue
 
-        var statement: OpaquePointer?
-        if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
-            while sqlite3_step(statement) == SQLITE_ROW {
-                let model = PendingTask(id: Int(sqlite3_column_int(statement, 0)),
-                        attempts: Int(sqlite3_column_int(statement, 1)),
-                        dateCreated: Int64(sqlite3_column_int(statement, 2)),
-                        data: String(describing: String(cString: sqlite3_column_text(statement, 3))),
-                        lastAttempted: Int64(sqlite3_column_int(statement, 4)),
-                        type: PendingTaskType.withLabel(String(describing: String(cString: sqlite3_column_text(statement, 5)))))
-
-                taskList.append(model)
-            }
+        do {
+            try context.save()
+        } catch {
         }
-        return taskList
+        return task
     }
 
-    func delete(id: Int) {
-        let query = "DELETE FROM \(PendingTaskConstants.TABLE_NAME) where \(PendingTaskConstants.ID) = \(id)"
-        var statement: OpaquePointer?
-        if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
-            if sqlite3_step(statement) == SQLITE_DONE {
-                print("Data delete success")
-            } else {
-                print("Data is not deleted in table")
-            }
+    func fetchTasks() -> [PendingTasks] {
+        let context = database.viewContext
+
+        let fetchRequest = NSFetchRequest<PendingTasks>(entityName: "PendingTasks")
+
+        do {
+            let pendingTasks = try context.fetch(fetchRequest)
+            return pendingTasks
+        } catch let fetchErr {
         }
+        return [PendingTasks]()
     }
 
-    func update(pendingTask: PendingTask) {
-        let query = """
-                    UPDATE \(PendingTaskConstants.TABLE_NAME) SET  \(PendingTaskConstants.ATTEMPTS)= \(pendingTask.attempts),
-                    \(PendingTaskConstants.LAST_ATTEMPTED) = \(pendingTask.lastAttempted ?? Int64(Date().timeIntervalSince1970))
-                    WHERE \(PendingTaskConstants.ID) = \(pendingTask.id!);
-                    """
-        var statement: OpaquePointer?
-        if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
-            if sqlite3_step(statement) == SQLITE_DONE {
-                print("Data updated success")
-            } else {
-                print("Data is not updated in table")
-            }
+    func delete(_ pendingTask: PendingTasks) {
+        let context = database.viewContext
+        context.delete(pendingTask)
+
+        do {
+            try context.save()
+        } catch {
         }
     }
 
-    func insert(pendingTask: PendingTask) {
-        let query = """
-                    INSERT INTO \(PendingTaskConstants.TABLE_NAME)
-                    (\(PendingTaskConstants.ATTEMPTS),
-                    \(PendingTaskConstants.DATE_CREATED),
-                    \(PendingTaskConstants.DATA),
-                    \(PendingTaskConstants.TYPE))
-                    VALUES (?, ?, ?, ?);
-                    """
+    func update(_ pendingTask: PendingTasks) {
+        let context = database.viewContext
+        let fetchUser: NSFetchRequest<PendingTasks> = PendingTasks.fetchRequest()
 
-        var statement: OpaquePointer?
+        fetchUser.predicate = NSPredicate(format: "id = %@", "\(pendingTask.id)")
 
-        if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
-            sqlite3_bind_int(statement, 1, Int32(pendingTask.attempts))
-            sqlite3_bind_int64(statement, 2, pendingTask.dateCreated)
-            sqlite3_bind_text(statement, 3, pendingTask.data, -1, nil)
-            sqlite3_bind_text(statement, 4, pendingTask.type.rawValue, -1, nil)
+        let results = try? context.fetch(fetchUser)
 
-            if sqlite3_step(statement) == SQLITE_DONE {
-                print("Data inserted success")
-            } else {
-                print("Data is not inserted in table")
-            }
-        } else {
-            print("Query is not as per requirement")
+        if results?.count != 0 {
+            results?.first?.setValue(pendingTask.attempts, forKey: "attempts")
+            results?.first?.setValue(pendingTask.lastAttempted, forKey: "lastAttempted")
+        }
+        do {
+            try context.save()
+
+        } catch {
         }
     }
 
     // MARK: Private
 
-    private let database: OpaquePointer?
+    private let database: NSPersistentContainer
 }
