@@ -105,6 +105,7 @@ class UserAuthService {
             result in
 
             self.saveUserDataInStorage(data: result)
+            CooeeJobUtils.triggerPendingTaskJobImmediately()
         }
     }
 
