@@ -55,7 +55,7 @@ public final class CooeeSDK {
      - Parameter userData: The common user data like name, email.
      */
     public func updateUserData(userData: [String: Any]) {
-        baseHttpService.updateUserDataOnly(userData: userData)
+        baseHttpService.updateUserData(userData: userData)
     }
 
     /**
@@ -63,7 +63,7 @@ public final class CooeeSDK {
      - Parameter userProperties: The additional user properties.
      */
     public func updateUserProperties(userProperties: [String: Any]) {
-        baseHttpService.updateUserPropertyOnly(userProperty: userProperties)
+        baseHttpService.updateUserProperty(userProperty: userProperties)
     }
 
     /**

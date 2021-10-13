@@ -90,7 +90,7 @@ class BaseHTTPService {
         }
     }
 
-    func updateUserPropertyOnly(userProperty: [String: Any]) {
+    func updateUserProperty(userProperty: [String: Any]) {
         updateUserProfile(userData: [String: Any](), userProperties: userProperty)
     }
 
@@ -107,7 +107,7 @@ class BaseHTTPService {
         }
     }
 
-    func updateUserDataOnly(userData: [String: Any]) {
+    func updateUserData(userData: [String: Any]) {
         updateUserProfile(userData: userData, userProperties: [String: Any]())
     }
 
