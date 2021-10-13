@@ -15,6 +15,7 @@ import CoreTelephony
  - Since: 0.1.0
  */
 class NetworkUtility {
+
     static let shared = NetworkUtility()
 
     /**
@@ -32,28 +33,28 @@ class NetworkUtility {
         let isReachable = flags.contains(.reachable)
         let isWWAN = flags.contains(.isWWAN)
 
-        if isReachable {
-            if isWWAN {
-                let networkInfo = CTTelephonyNetworkInfo()
-                let carrierType = networkInfo.serviceCurrentRadioAccessTechnology
-
-                guard let carrierTypeName = carrierType?.first?.value else {
-                    return "UNKNOWN"
-                }
-
-                switch carrierTypeName {
-                case CTRadioAccessTechnologyGPRS, CTRadioAccessTechnologyEdge, CTRadioAccessTechnologyCDMA1x:
-                    return "2G"
-                case CTRadioAccessTechnologyLTE:
-                    return "4G"
-                default:
-                    return "3G"
-                }
-            } else {
-                return "WIFI"
-            }
-        } else {
+        if !isReachable {
             return "NO INTERNET"
+        }
+
+        if !isWWAN {
+            return "WIFI"
+        }
+
+        let networkInfo = CTTelephonyNetworkInfo()
+        let carrierType = networkInfo.serviceCurrentRadioAccessTechnology
+
+        guard let carrierTypeName = carrierType?.first?.value else {
+            return "UNKNOWN"
+        }
+
+        switch carrierTypeName {
+        case CTRadioAccessTechnologyGPRS, CTRadioAccessTechnologyEdge, CTRadioAccessTechnologyCDMA1x:
+            return "2G"
+        case CTRadioAccessTechnologyLTE:
+            return "4G"
+        default:
+            return "3G"
         }
     }
 
