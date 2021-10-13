@@ -17,7 +17,7 @@ import Foundation
   - Since: 0.1.0
   */
 class BaseHTTPService {
-    
+
     class CommonHeaders {
         // MARK: Lifecycle
 
@@ -59,62 +59,32 @@ class BaseHTTPService {
         var requestData = [String: Any]()
         requestData["firebaseToken"] = token!
 
-        try webService.getResponse(fromURL: Constants.saveFCM, method: .POST, params: requestData, header: commonHeaders.getDictionary()) {
-            (result: [String: String]?, error: Error?) in
-            if error == nil {
-                print(result ?? "")
-            } else {
-                // throw error
-            }
-        }
+        _=try webService.getResponse(fromURL: Constants.saveFCM, method: .POST, params: requestData, header: commonHeaders.getDictionary(), t: [String: String].self)
     }
 
     func registerDevice(body: DeviceAuthenticationBody, completion: @escaping (UserAuthResponse) -> ()) {
         do {
-            try webService.getResponse(fromURL: Constants.registerUser, method: .POST, params: body.toDictionary(), header: commonHeaders.getDictionary()) {
-                (result: UserAuthResponse?, _: Error?) in
-                if result != nil {
-                    completion(result!)
-                }
-            }
-        } catch {}
+            _=try webService.getResponse(fromURL: Constants.registerUser, method: .POST, params: body.toDictionary(), header: commonHeaders.getDictionary(), t: UserAuthResponse.self)
+        } catch {
+        }
     }
 
     func sendSessionConcludedEvent(body: [String: Any]) throws {
-        try webService.getResponse(fromURL: Constants.concludeSession, method: .POST, params: body, header: commonHeaders.getDictionary()) {
-            (result: [String: String]?, _: Error?) in
-            if result != nil {
-                print(result ?? "")
-            }
-        }
+        _=try webService.getResponse(fromURL: Constants.concludeSession, method: .POST, params: body, header: commonHeaders.getDictionary(), t: [String: String].self)
     }
 
     func keepAliveSession(body: [String: Any]) {
         do {
-            try webService.getResponse(fromURL: Constants.keepAlive, method: .POST, params: body, header: commonHeaders.getDictionary()) {
-                (result: [String: String]?, _: Error?) in
-                if result != nil {
-                    print(result ?? "")
-                }
-            }
-        } catch {}
+            _=try webService.getResponse(fromURL: Constants.keepAlive, method: .POST, params: body, header: commonHeaders.getDictionary(), t: [String: String].self)
+        } catch {
+        }
     }
 
     func updateUserProfile(requestData: [String: Any]) throws {
-        try webService.getResponse(fromURL: Constants.updateProfile, method: .PUT, params: requestData, header: commonHeaders.getDictionary()) {
-            (result: [String: String]?, _: Error?) in
-            if result != nil {
-                print(result ?? "")
-            }
-        }
+        _=try webService.getResponse(fromURL: Constants.updateProfile, method: .PUT, params: requestData, header: commonHeaders.getDictionary(), t: [String: String].self)
     }
 
     func sendEvent(event: Event) throws {
-        try webService.getResponse(fromURL: Constants.trackEvent, method: .POST, params: event.toDictionary(), header: commonHeaders.getDictionary()) {
-            (result: [String: String]?, _: Error?) in
-            if result != nil {
-                print(result ?? "")
-            }
-        }
+        _=try webService.getResponse(fromURL: Constants.trackEvent, method: .POST, params: event.toDictionary(), header: commonHeaders.getDictionary(), t: [String: String].self)
     }
 }
