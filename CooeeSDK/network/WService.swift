@@ -18,28 +18,35 @@ class WService: NSObject {
 
     static let shared = WService()
 
-    func getResponse<T: Decodable>(fromURL: String, method: httpMethod, params: [String: Any], header: [String: String], completionHandler: @escaping (_ result: T) -> ()) {
-        let finalParams = appendSessionID(params: params)
+   func getResponse<T: Decodable>(fromURL: String, method: httpMethod, params: [String: Any?], header: [String: String], completionHandler: @escaping (_ result: T?, _ error: Error?) -> ()) throws {
         let url = URL(string: getCompleteURL(url: fromURL))!
+        let group = DispatchGroup()
         var request = URLRequest(url: url)
+
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.httpMethod = method.rawValue
-        request.httpBody = finalParams.percentEncoded()
+        request.httpBody = params.percentEncoded()
         request.allHTTPHeaderFields = header
         print("""
               \n-------WS Params--------\n 
-              Request Body:\(finalParams)\n
+              Request Body:\(params)\n
               Request Headers:\(header)\n
               Request URL:\(url)\n
               -------End WS Params--------
               """)
+
+        group.enter()
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            group.leave()
             guard let data = data,
                   let _ = response as? HTTPURLResponse,
                   error == nil
                     else {
                 print("error", error ?? "Unknown error")
+                DispatchQueue.main.async {
+                    completionHandler(nil, error)
+                }
                 return
             }
             let responseString = String(data: data, encoding: .utf8)
@@ -51,12 +58,13 @@ class WService: NSObject {
 
             if let decodedResponse = try? JSONDecoder().decode(T.self, from: data) {
                 DispatchQueue.main.async {
-                    completionHandler(decodedResponse)
+                    completionHandler(decodedResponse, nil)
                 }
                 return
             }
         }
         task.resume()
+        group.wait()
     }
 
     // MARK: Private

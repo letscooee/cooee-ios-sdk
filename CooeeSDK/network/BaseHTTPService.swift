@@ -48,74 +48,68 @@ class BaseHTTPService {
     let webService = WService.shared
     let commonHeaders = CommonHeaders()
 
-    func sendFirebaseToken(token: String?) {
+    func sendFirebaseToken(token: String?) throws {
         if token == nil {
             return
         }
-        var requestData = [String: Any]();
+        var requestData = [String: Any]()
         requestData["firebaseToken"] = token!
 
-        webService.getResponse(fromURL: Constants.saveFCM, method: .POST, params: requestData, header: commonHeaders.getDictionary()) {
-            (result: [String: String]) in
-            if result != nil {
-                print(result)
+        try webService.getResponse(fromURL: Constants.saveFCM, method: .POST, params: requestData, header: commonHeaders.getDictionary()) {
+            (result: [String: String]?, error: Error?) in
+            if error == nil {
+                print(result ?? "")
+            } else {
+                // throw error
             }
         }
     }
 
     func registerDevice(body: AuthenticationRequestBody, completion: @escaping (UserAuthResponse) -> ()) {
-        webService.getResponse(fromURL: Constants.registerUser, method: .POST, params: body.toDictionary(), header: commonHeaders.getDictionary()) {
-            (result: UserAuthResponse) in
-            if result != nil {
-                completion(result)
+        do {
+            try webService.getResponse(fromURL: Constants.registerUser, method: .POST, params: body.toDictionary(), header: commonHeaders.getDictionary()) {
+                (result: UserAuthResponse?, _: Error?) in
+                if result != nil {
+                    completion(result!)
+                }
             }
-        }
+        } catch {}
     }
 
-    func sendSessionConcludedEvent(body: [String: Any]) {
-        webService.getResponse(fromURL: Constants.concludeSession, method: .POST, params: body, header: commonHeaders.getDictionary()) {
-            (result: [String: String]) in
+    func sendSessionConcludedEvent(body: [String: Any]) throws {
+        try webService.getResponse(fromURL: Constants.concludeSession, method: .POST, params: body, header: commonHeaders.getDictionary()) {
+            (result: [String: String]?, _: Error?) in
             if result != nil {
-                print(result)
+                print(result ?? "")
             }
         }
     }
 
     func keepAliveSession(body: [String: Any]) {
-        webService.getResponse(fromURL: Constants.keepAlive, method: .POST, params: body, header: commonHeaders.getDictionary()) {
-            (result: [String: String]) in
+        do {
+            try webService.getResponse(fromURL: Constants.keepAlive, method: .POST, params: body, header: commonHeaders.getDictionary()) {
+                (result: [String: String]?, _: Error?) in
+                if result != nil {
+                    print(result ?? "")
+                }
+            }
+        } catch {}
+    }
+
+    func updateUserProfile(requestData: [String: Any]) throws {
+        try webService.getResponse(fromURL: Constants.updateProfile, method: .PUT, params: requestData, header: commonHeaders.getDictionary()) {
+            (result: [String: String]?, _: Error?) in
             if result != nil {
-                print(result)
+                print(result ?? "")
             }
         }
     }
 
-    func updateUserProperty(userProperty: [String: Any]) {
-        updateUserProfile(userData: [String: Any](), userProperties: userProperty)
-    }
-
-    func updateUserProfile(userData: [String: Any], userProperties: [String: Any]) {
-        var body = [String: Any]()
-        body["userProperties"] = userProperties
-        body["userData"] = userData
-
-        webService.getResponse(fromURL: Constants.updateProfile, method: .PUT, params: body, header: commonHeaders.getDictionary()) {
-            (result: [String: String]) in
+    func sendEvent(event: Event) throws {
+        try webService.getResponse(fromURL: Constants.trackEvent, method: .POST, params: event.toDictionary(), header: commonHeaders.getDictionary()) {
+            (result: [String: String]?, _: Error?) in
             if result != nil {
-                print(result)
-            }
-        }
-    }
-
-    func updateUserData(userData: [String: Any]) {
-        updateUserProfile(userData: userData, userProperties: [String: Any]())
-    }
-
-    func sendEvent(event: Event) {
-        webService.getResponse(fromURL: Constants.trackEvent, method: .POST, params: event.toDictionary(), header: commonHeaders.getDictionary()) {
-            (result: [String: String]) in
-            if result != nil {
-                print(result)
+                print(result ?? "")
             }
         }
     }

@@ -22,8 +22,11 @@ class CooeeFactory {
         sdkInfo = SDKInfo.shared
         sessionManager = SessionManager.shared
         baseHttpService = BaseHTTPService.shared
-        userAuthService = UserAuthService()
+        userAuthService = UserAuthService.shared
         userAuthService.acquireSDKToken()
+        pendingTaskService = PendingTaskService()
+        runtimeData = RuntimeData.shared
+        safeHttpService = SafeHTTPService(pendingTaskService: pendingTaskService, sessionManager: sessionManager, runtimeData: runtimeData)
     }
 
     // MARK: Internal
@@ -37,4 +40,7 @@ class CooeeFactory {
     let baseHttpService: BaseHTTPService
     let sdkInfo: SDKInfo
     let sessionManager: SessionManager
+    let safeHttpService: SafeHTTPService
+    let pendingTaskService: PendingTaskService
+    let runtimeData: RuntimeData
 }

@@ -13,7 +13,6 @@ import Foundation
  */
 struct UserAuthResponse: Decodable {
     var id: String?
-    // TODO: Uncomment deviceID once server is updated
-    // var deviceID: String?
+    var deviceID: String?
     var sdkToken: String?
 }

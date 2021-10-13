@@ -17,11 +17,6 @@ import UIKit
 class AppLifeCycle: NSObject {
     // MARK: Lifecycle
 
-    private var runtimeData: RuntimeData
-    private let notificationCenter = NotificationCenter.default
-    private let sessionManager: SessionManager
-    private var timer: Timer?
-
     override init() {
         runtimeData = RuntimeData.shared
         sessionManager = SessionManager.shared
@@ -37,18 +32,18 @@ class AppLifeCycle: NSObject {
     static let shared = AppLifeCycle()
 
     @objc func appMovedToBackground() {
-        runtimeData.setInBackground();
+        runtimeData.setInBackground()
 
-        //stop sending check message of session alive on app background
-        timer?.invalidate()
+        // stop sending check message of session alive on app background
+        //timer?.invalidate()
 
-        let duration = runtimeData.getTimeInForegroundInSeconds();
+        let duration = runtimeData.getTimeInForegroundInSeconds()
 
-        var sessionProperties = [String: Any]();
+        var sessionProperties = [String: Any]()
         sessionProperties["Foreground Duration"] = duration
 
-        let session = Event(eventName: "CE App Background", properties: sessionProperties);
-        BaseHTTPService.shared.sendEvent(event: session);
+        let session = Event(eventName: "CE App Background", properties: sessionProperties)
+        CooeeFactory.shared.safeHttpService.sendEvent(event: session)
     }
 
     @objc func appMovedToLaunch() {
@@ -57,26 +52,25 @@ class AppLifeCycle: NSObject {
     }
 
     @objc func appMovedToForeground() {
-
         keepSessionAlive()
 
         if runtimeData.isFirstForeground() {
             return
         }
 
-        let backgroundDuration = runtimeData.getTimeInBackgroundInSeconds();
+        let backgroundDuration = runtimeData.getTimeInBackgroundInSeconds()
 
-        if (backgroundDuration > Constants.IDLE_TIME_IN_SECONDS) {
-            sessionManager.conclude();
+        if backgroundDuration > Constants.IDLE_TIME_IN_SECONDS {
+            sessionManager.conclude()
 
-            NewSessionExecutor().execute();
+            NewSessionExecutor().execute()
             print("After 30 min of App Background " + "Session Concluded")
         } else {
-            var eventProps = [String: Any]();
+            var eventProps = [String: Any]()
             eventProps["Background Duration"] = backgroundDuration
             let session = Event(eventName: "CE App Foreground", properties: eventProps)
 
-            BaseHTTPService.shared.sendEvent(event: session);
+            CooeeFactory.shared.safeHttpService.sendEvent(event: session)
         }
     }
 
@@ -89,6 +83,13 @@ class AppLifeCycle: NSObject {
         let since1970 = currentDate.timeIntervalSince1970
         return Int(since1970 * 1000)
     }
+
+    // MARK: Private
+
+    private var runtimeData: RuntimeData
+    private let notificationCenter = NotificationCenter.default
+    private let sessionManager: SessionManager
+    private var timer: Timer?
 
     /**
      * Send server check message every 5 min that session is still alive

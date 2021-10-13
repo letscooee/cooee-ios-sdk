@@ -78,6 +78,7 @@ class UserAuthService {
     private func populateUserDataFromStorage() {
         self.sdkToken = LocalStorageHelper.getString(key: Constants.STORAGE_SDK_TOKEN)
         self.userID = LocalStorageHelper.getString(key: Constants.STORAGE_USER_ID)
+        self.deviceID = LocalStorageHelper.getString(key: Constants.STORAGE_DEVICE_ID)
 
         if self.sdkToken == nil {
             print("No SDK token found in preference")
@@ -104,14 +105,17 @@ class UserAuthService {
             result in
 
             self.saveUserDataInStorage(data: result)
+            CooeeJobUtils.triggerPendingTaskJobImmediately()
         }
     }
 
     private func saveUserDataInStorage(data: UserAuthResponse) {
         self.sdkToken = data.sdkToken ?? ""
         self.userID = data.id ?? ""
+        self.deviceID = data.deviceID ?? ""
         self.updateAPI()
-        // TODO: Add device id
+
+        LocalStorageHelper.putString(key: Constants.STORAGE_DEVICE_ID, value: self.deviceID!)
         LocalStorageHelper.putString(key: Constants.STORAGE_SDK_TOKEN, value: self.sdkToken!)
         LocalStorageHelper.putString(key: Constants.STORAGE_USER_ID, value: self.userID!)
         LocalStorageHelper.putString(key: Constants.STORAGE_DEVICE_UUID, value: self.uuID!)
