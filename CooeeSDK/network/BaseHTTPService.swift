@@ -8,27 +8,31 @@
 import Foundation
 
 /**
- Central point to make communication with server
+  A base or lower level HTTP service which simply hits the backend for given request. It does not perform
+ any retries or it does not cache the request for future reattempts. This server should not contain any business logic.
+ <p>
+ Make sure these methods are not called in the main-thread.
 
- - Author: Ashish Gaikwad
- - Since: 0.1.0
- */
+  - Author: Ashish Gaikwad
+  - Since: 0.1.0
+  */
 class BaseHTTPService {
+    
     class CommonHeaders {
         // MARK: Lifecycle
 
         init() {
-            dictionary["device-name"] = DeviceInfo.shared.cachedInfo.name
-            dictionary["sdk-version"] = SDKInfo.shared.cachedInfo.sdkVersion
-            dictionary["sdk-version-code"] = SDKInfo.shared.cachedInfo.sdkLongVersion
-            dictionary["app-version"] = AppInfo.shared.getAppVersion()
+            dictionary = ["device-name": DeviceInfo.shared.cachedInfo.name,
+                          "sdk-version": SDKInfo.shared.cachedInfo.sdkVersion,
+                          "sdk-version-code": SDKInfo.shared.cachedInfo.sdkLongVersion,
+                          "app-version": AppInfo.shared.getAppVersion()]
         }
 
         // MARK: Internal
 
         var sdkToken: String?
         var userID: String?
-        var dictionary = [String: String]()
+        var dictionary: [String: String]
 
         func getDictionary() -> [String: String] {
             if !(sdkToken?.isEmpty ?? true) {

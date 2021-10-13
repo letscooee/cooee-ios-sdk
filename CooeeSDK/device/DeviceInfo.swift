@@ -21,11 +21,11 @@ class DeviceInfo {
         // TODO: Bluetooth
 
         var manufacture = "Apple"
-         var networkUtility = NetworkUtility.shared
+        var networkUtility = NetworkUtility.shared
         var deviceBattery = UIDevice.current.batteryLevel * 100
-         var networkProvider = NetworkUtility.shared.getCarrierName()
-         var networkType = NetworkUtility.shared.getNetworkType()
-         var isWIFIConnected = (NetworkUtility.shared.getNetworkType() == "WIFI") ? true : false
+        var networkProvider = NetworkUtility.shared.getCarrierName()
+        var networkType = NetworkUtility.shared.getNetworkType()
+        var isWIFIConnected = (NetworkUtility.shared.getNetworkType() == "WIFI") ? true : false
 
         let osVersion = String(ProcessInfo().operatingSystemVersion.majorVersion) + "." + String(ProcessInfo().operatingSystemVersion.minorVersion) + "." + String(ProcessInfo().operatingSystemVersion.patchVersion)
 

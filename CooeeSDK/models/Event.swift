@@ -49,18 +49,14 @@ struct Event: HandyJSON {
     }
 
     func toDictionary() -> [String: Any?] {
-        var dictionary = [String: Any?]()
-
-        dictionary["name"] = name
-        dictionary["properties"] = properties
-        dictionary["sessionID"] = sessionID
-        dictionary["sessionNumber"] = sessionNumber
-        dictionary["screenName"] = screenName
-        dictionary["activeTriggers"] = activeTriggers
-        dictionary["occurred"] = occurred
-        dictionary["deviceProps"] = deviceProps
-
-        return dictionary
+        ["name": name,
+         "properties": properties,
+         "sessionID": sessionID,
+         "sessionNumber": sessionNumber,
+         "screenName": screenName,
+         "activeTriggers": activeTriggers,
+         "occurred": occurred,
+         "deviceProps": deviceProps] as [String: Any?]
     }
 
     func encode(to encoder: Encoder) throws {}

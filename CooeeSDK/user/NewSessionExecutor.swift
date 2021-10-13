@@ -87,10 +87,6 @@ class NewSessionExecutor {
         }
 
         dictionary["CE Session Count"] = sessionManager.getCurrentSessionNumber()
-
-        // userProperties.put("CE Bluetooth On", defaultUserPropertiesCollector.isBluetoothOn())
-        // userProperties.put("CE Wifi Connected", defaultUserPropertiesCollector.isConnectedToWifi())
-
         dictionary["CE Last Launch Time"] = DateUtils.formatDateToUTCString(date: Date())
 
         CooeeFactory.shared.safeHttpService.updateUserPropertyOnly(userProperty: dictionary)

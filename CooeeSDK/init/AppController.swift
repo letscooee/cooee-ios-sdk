@@ -14,10 +14,10 @@ import UIKit
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-public final class AppController{
+public class AppController {
 
-    public static func configure(){
+    public static func configure() {
         print("init")
-        _=CooeeBootstrap()
+        _ = CooeeBootstrap()
     }
 }
