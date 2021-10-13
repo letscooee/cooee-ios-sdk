@@ -49,8 +49,7 @@ class DevicePropertyCollector {
          "CE Package Name": "\(appInfo.getAppPackage())",
          "CE Total RAM": (deviceInfo.cachedInfo.totalSpace),
          "CE Available RAM": deviceInfo.cachedInfo.availableRAM,
-         "CE DPI": deviceInfo.cachedInfo.dpi,
-         "CE App Version": appInfo.cachedInfo.version]
+         "CE DPI": deviceInfo.cachedInfo.dpi]
     }
 
     func getAppInstallDate() -> String? {
