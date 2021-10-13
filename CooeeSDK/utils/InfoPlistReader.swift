@@ -16,18 +16,7 @@ class InfoPlistReader {
     // MARK: Lifecycle
 
     init() {
-        if let infoPlistPath = Bundle.main.url(forResource: "Info", withExtension: "plist") {
-            do {
-                let infoPlistData = try Data(contentsOf: infoPlistPath)
-
-                if let propList = try PropertyListSerialization.propertyList(from: infoPlistData, options: [], format: nil) as? [String: Any] {
-                    appID = propList["CooeeAppID"] as? String ?? ""
-                    appSecret = propList["CooeeSecretKey"] as? String ?? ""
-                }
-            } catch {
-                print(error)
-            }
-        }
+        fetchInfo()
     }
 
     // MARK: Internal
@@ -36,6 +25,21 @@ class InfoPlistReader {
 
     var appID: String = ""
     var appSecret: String = ""
+
+    private func fetchInfo() {
+        if let infoPlistPath = Bundle.main.url(forResource: "Info", withExtension: "plist") {
+            do {
+                let infoPlistData = try Data(contentsOf: infoPlistPath)
+
+                if let propList = try PropertyListSerialization.propertyList(from: infoPlistData, options: [], format: nil) as? [String: Any] {
+                    appID = propList["COOEE_APP_ID"] as? String ?? ""
+                    appSecret = propList["COOEE_APP_SECRET"] as? String ?? ""
+                }
+            } catch {
+                print(error)
+            }
+        }
+    }
 
     func getAppID() -> String {
         return self.appID
