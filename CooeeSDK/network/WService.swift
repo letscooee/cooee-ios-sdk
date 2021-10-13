@@ -20,14 +20,20 @@ class WService: NSObject {
 
     func getResponse<T: Decodable>(fromURL: String, method: httpMethod, params: [String: Any], header: [String: String], completionHandler: @escaping (_ result: T) -> ()) {
         let finalParams = appendSessionID(params: params)
-        let url = URL(string: getCompleteURL(urlString: fromURL))!
+        let url = URL(string: getCompleteURL(url: fromURL))!
         var request = URLRequest(url: url)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.httpMethod = method.rawValue
         request.httpBody = finalParams.percentEncoded()
         request.allHTTPHeaderFields = header
-        print("\n-------WS Params--------\n\(finalParams)\n\n\(header)\nComplete URL \n\(url)\n")
+        print("""
+              \n-------WS Params--------\n 
+              Request Body:\(finalParams)\n
+              Request Headers:\(header)\n
+              Request URL:\(url)\n
+              -------End WS Params--------
+              """)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data,
                   let _ = response as? HTTPURLResponse,
@@ -37,7 +43,11 @@ class WService: NSObject {
                 return
             }
             let responseString = String(data: data, encoding: .utf8)
-            print("\n-------WS Response--------\n\(responseString ?? "")\n")
+            print("""
+                  \n-------WS Response--------\n
+                  \(responseString ?? "")\n
+                  -------End WS Response--------
+                  """)
 
             if let decodedResponse = try? JSONDecoder().decode(T.self, from: data) {
                 DispatchQueue.main.async {
@@ -61,10 +71,10 @@ class WService: NSObject {
         return updatedParam
     }
 
-    private func getCompleteURL(urlString: String) -> String {
+    private func getCompleteURL(url: String) -> String {
         let completeURL: String
-        if urlString.contains(Constants.BASE_URL) {
-            completeURL = urlString
+        if url.contains(Constants.BASE_URL) {
+            completeURL = url
         } else {
             completeURL = Constants.BASE_URL + url
         }

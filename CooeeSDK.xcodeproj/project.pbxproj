@@ -34,7 +34,6 @@
 		75729E7826F4C131006EB506 /* LocalStorageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7726F4C131006EB506 /* LocalStorageHelper.swift */; };
 		75729E7A26F4C4A1006EB506 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7926F4C4A1006EB506 /* Constants.swift */; };
 		75729E7D26F87593006EB506 /* WService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7C26F87593006EB506 /* WService.swift */; };
-		75729E7F26F8AB26006EB506 /* EndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7E26F8AB26006EB506 /* EndPoints.swift */; };
 		75729E8126F8AD47006EB506 /* UserAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E8026F8AD47006EB506 /* UserAuthService.swift */; };
 		75729E8326F9A34A006EB506 /* NetworkUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E8226F9A34A006EB506 /* NetworkUtility.swift */; };
 		75729E8526F9BA27006EB506 /* DefaultPropertyCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E8426F9BA27006EB506 /* DefaultPropertyCollector.swift */; };
@@ -112,7 +111,6 @@
 		75729E7726F4C131006EB506 /* LocalStorageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageHelper.swift; sourceTree = "<group>"; };
 		75729E7926F4C4A1006EB506 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		75729E7C26F87593006EB506 /* WService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WService.swift; sourceTree = "<group>"; };
-		75729E7E26F8AB26006EB506 /* EndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoints.swift; sourceTree = "<group>"; };
 		75729E8026F8AD47006EB506 /* UserAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthService.swift; sourceTree = "<group>"; };
 		75729E8226F9A34A006EB506 /* NetworkUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkUtility.swift; sourceTree = "<group>"; };
 		75729E8426F9BA27006EB506 /* DefaultPropertyCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPropertyCollector.swift; sourceTree = "<group>"; };
@@ -316,7 +314,6 @@
 			isa = PBXGroup;
 			children = (
 				75729E7C26F87593006EB506 /* WService.swift */,
-				75729E7E26F8AB26006EB506 /* EndPoints.swift */,
 				757E405726F9FA16008352F3 /* BaseHTTPService.swift */,
 			);
 			path = network;
@@ -631,7 +628,6 @@
 				75729E7226F493AB006EB506 /* Event.swift in Sources */,
 				75729E7D26F87593006EB506 /* WService.swift in Sources */,
 				757E405826F9FA16008352F3 /* BaseHTTPService.swift in Sources */,
-				75729E7F26F8AB26006EB506 /* EndPoints.swift in Sources */,
 				75729E6E26F45828006EB506 /* InfoPlistReader.swift in Sources */,
 				75729E8326F9A34A006EB506 /* NetworkUtility.swift in Sources */,
 				758660D626FAFA89006B40DC /* SDKInfo.swift in Sources */,
