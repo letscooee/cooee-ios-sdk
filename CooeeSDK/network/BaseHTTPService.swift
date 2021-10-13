@@ -14,8 +14,6 @@ import Foundation
  - Since: 0.1.0
  */
 class BaseHTTPService {
-    // MARK: Internal
-
     class CommonHeaders {
         // MARK: Lifecycle
 
@@ -110,7 +108,6 @@ class BaseHTTPService {
     }
 
     func sendEvent(event: Event) throws {
-        saveToPending(data: event.toDictionary(), token: .API_SEND_EVENT)
         try webService.getResponse(fromURL: EndPoints.trackEvent, method: .POST, params: event.toDictionary(), header: commonHeaders.getDictionary()) {
             (result: [String: String]?, _: Error?) in
             if result != nil {
