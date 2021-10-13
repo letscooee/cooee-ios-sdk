@@ -13,10 +13,10 @@ import Foundation
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-class WService: NSObject {
+class WebService: NSObject {
     // MARK: Internal
 
-    static let shared = WService()
+    static let shared = WebService()
 
    func getResponse<T: Decodable>(fromURL: String, method: httpMethod, params: [String: Any?], header: [String: String], completionHandler: @escaping (_ result: T?, _ error: Error?) -> ()) throws {
         let url = URL(string: getCompleteURL(url: fromURL))!

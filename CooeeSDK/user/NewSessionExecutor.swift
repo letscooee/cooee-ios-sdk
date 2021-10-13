@@ -19,7 +19,7 @@ class NewSessionExecutor {
     // private let SafeHTTPService safeHTTPService
 
     init() {
-        defaultUserPropertiesCollector = DefaultPropertyCollector()
+        defaultUserPropertiesCollector = DevicePropertyCollector()
         appInfo = CooeeFactory.shared.appInfo
         sessionManager = CooeeFactory.shared.sessionManager
     }
@@ -36,7 +36,7 @@ class NewSessionExecutor {
 
     // MARK: Private
 
-    private let defaultUserPropertiesCollector: DefaultPropertyCollector
+    private let defaultUserPropertiesCollector: DevicePropertyCollector
     private let appInfo: AppInfo
     private let sessionManager: SessionManager
 

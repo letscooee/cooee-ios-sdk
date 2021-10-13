@@ -38,12 +38,12 @@
 		75729E7426F497FD006EB506 /* TriggerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7326F497FD006EB506 /* TriggerData.swift */; };
 		75729E7826F4C131006EB506 /* LocalStorageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7726F4C131006EB506 /* LocalStorageHelper.swift */; };
 		75729E7A26F4C4A1006EB506 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7926F4C4A1006EB506 /* Constants.swift */; };
-		75729E7D26F87593006EB506 /* WService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7C26F87593006EB506 /* WService.swift */; };
+		75729E7D26F87593006EB506 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7C26F87593006EB506 /* WebService.swift */; };
 		75729E8126F8AD47006EB506 /* UserAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E8026F8AD47006EB506 /* UserAuthService.swift */; };
 		75729E8326F9A34A006EB506 /* NetworkUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E8226F9A34A006EB506 /* NetworkUtility.swift */; };
-		75729E8526F9BA27006EB506 /* DefaultPropertyCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E8426F9BA27006EB506 /* DefaultPropertyCollector.swift */; };
+		75729E8526F9BA27006EB506 /* DevicePropertyCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E8426F9BA27006EB506 /* DevicePropertyCollector.swift */; };
 		757E405826F9FA16008352F3 /* BaseHTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757E405726F9FA16008352F3 /* BaseHTTPService.swift */; };
-		757E405A26F9FF54008352F3 /* AuthenticationRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757E405926F9FF54008352F3 /* AuthenticationRequestBody.swift */; };
+		757E405A26F9FF54008352F3 /* DeviceAuthenticationBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757E405926F9FF54008352F3 /* DeviceAuthenticationBody.swift */; };
 		757E405C26FA08D5008352F3 /* UserAuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757E405B26FA08D5008352F3 /* UserAuthResponse.swift */; };
 		758660D626FAFA89006B40DC /* SDKInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758660D526FAFA89006B40DC /* SDKInfo.swift */; };
 		759E15F3271061520040F09C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 759E15F2271061520040F09C /* GoogleService-Info.plist */; };
@@ -134,12 +134,12 @@
 		75729E7326F497FD006EB506 /* TriggerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerData.swift; sourceTree = "<group>"; };
 		75729E7726F4C131006EB506 /* LocalStorageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageHelper.swift; sourceTree = "<group>"; };
 		75729E7926F4C4A1006EB506 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		75729E7C26F87593006EB506 /* WService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WService.swift; sourceTree = "<group>"; };
+		75729E7C26F87593006EB506 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		75729E8026F8AD47006EB506 /* UserAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthService.swift; sourceTree = "<group>"; };
 		75729E8226F9A34A006EB506 /* NetworkUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkUtility.swift; sourceTree = "<group>"; };
-		75729E8426F9BA27006EB506 /* DefaultPropertyCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPropertyCollector.swift; sourceTree = "<group>"; };
+		75729E8426F9BA27006EB506 /* DevicePropertyCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicePropertyCollector.swift; sourceTree = "<group>"; };
 		757E405726F9FA16008352F3 /* BaseHTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseHTTPService.swift; sourceTree = "<group>"; };
-		757E405926F9FF54008352F3 /* AuthenticationRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRequestBody.swift; sourceTree = "<group>"; };
+		757E405926F9FF54008352F3 /* DeviceAuthenticationBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAuthenticationBody.swift; sourceTree = "<group>"; };
 		757E405B26FA08D5008352F3 /* UserAuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthResponse.swift; sourceTree = "<group>"; };
 		758660D526FAFA89006B40DC /* SDKInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKInfo.swift; sourceTree = "<group>"; };
 		759E15F2271061520040F09C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -300,7 +300,7 @@
 			children = (
 				751BC7C426F31A3A002D8358 /* AppInfo.swift */,
 				751BC7C626F31A4B002D8358 /* DeviceInfo.swift */,
-				75729E8426F9BA27006EB506 /* DefaultPropertyCollector.swift */,
+				75729E8426F9BA27006EB506 /* DevicePropertyCollector.swift */,
 				758660D526FAFA89006B40DC /* SDKInfo.swift */,
 			);
 			path = device;
@@ -371,7 +371,7 @@
 			children = (
 				75729E7126F493AB006EB506 /* Event.swift */,
 				75729E7326F497FD006EB506 /* TriggerData.swift */,
-				757E405926F9FF54008352F3 /* AuthenticationRequestBody.swift */,
+				757E405926F9FF54008352F3 /* DeviceAuthenticationBody.swift */,
 				757E405B26FA08D5008352F3 /* UserAuthResponse.swift */,
 				AC0B885A897ACFB8EBF772D0 /* DictionaryPrototype.swift */,
 			);
@@ -391,7 +391,7 @@
 		75729E7B26F87387006EB506 /* network */ = {
 			isa = PBXGroup;
 			children = (
-				75729E7C26F87593006EB506 /* WService.swift */,
+				75729E7C26F87593006EB506 /* WebService.swift */,
 				757E405726F9FA16008352F3 /* BaseHTTPService.swift */,
 				AC0B8B65ED15E2A6D74A0F03 /* SafeHTTPService.swift */,
 			);
@@ -706,7 +706,7 @@
 			files = (
 				75A098122707132100C2057B /* CooeeBootstrap.swift in Sources */,
 				751E1325270C350C002CF442 /* SessionManager.swift in Sources */,
-				75729E8526F9BA27006EB506 /* DefaultPropertyCollector.swift in Sources */,
+				75729E8526F9BA27006EB506 /* DevicePropertyCollector.swift in Sources */,
 				75729E7826F4C131006EB506 /* LocalStorageHelper.swift in Sources */,
 				757E405C26FA08D5008352F3 /* UserAuthResponse.swift in Sources */,
 				751E1329270C7074002CF442 /* DateUtil.swift in Sources */,
@@ -717,7 +717,7 @@
 				751E134D270F22AB002CF442 /* AbstractPendingTaskProcessor.swift in Sources */,
 				75729E7A26F4C4A1006EB506 /* Constants.swift in Sources */,
 				751BC7C026F3123E002D8358 /* Cooee.swift in Sources */,
-				757E405A26F9FF54008352F3 /* AuthenticationRequestBody.swift in Sources */,
+				757E405A26F9FF54008352F3 /* DeviceAuthenticationBody.swift in Sources */,
 				751E134B270F1771002CF442 /* PendingTaskProcessor.swift in Sources */,
 				751E1343270ED09C002CF442 /* CooeeDatabase.swift in Sources */,
 				75A0981027070FD800C2057B /* AppLifeCycle.swift in Sources */,
@@ -730,7 +730,7 @@
 				751E1346270EDA09002CF442 /* PendingTaskConstants.swift in Sources */,
 				751E1327270C4C47002CF442 /* NewSessionExecutor.swift in Sources */,
 				75729E7226F493AB006EB506 /* Event.swift in Sources */,
-				75729E7D26F87593006EB506 /* WService.swift in Sources */,
+				75729E7D26F87593006EB506 /* WebService.swift in Sources */,
 				757E405826F9FA16008352F3 /* BaseHTTPService.swift in Sources */,
 				75DD87982715927B00A272BB /* PendingTaskJobProcessor.swift in Sources */,
 				75729E6E26F45828006EB506 /* InfoPlistReader.swift in Sources */,

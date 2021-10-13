@@ -98,9 +98,9 @@ class UserAuthService {
     private func getSDKTokenFromServer() {
         self.uuID = ObjectId().hexString
         let appInfo = InfoPlistReader.shared
-        let props = DefaultPropertyCollector().getDefaultVales()
+        let props = DevicePropertyCollector().getDefaultVales()
 
-        let authBody = AuthenticationRequestBody(appID: appInfo.appID, appSecret: appInfo.appSecret, uuid: self.uuID!, props: props)
+        let authBody = DeviceAuthenticationBody(appID: appInfo.appID, appSecret: appInfo.appSecret, uuid: self.uuID!, props: props)
         baseHttp?.registerDevice(body: authBody) {
             result in
 
