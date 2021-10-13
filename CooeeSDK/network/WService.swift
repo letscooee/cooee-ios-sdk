@@ -63,10 +63,10 @@ class WService: NSObject {
 
     private func getCompleteURL(urlString: String) -> String {
         let completeURL: String
-        if urlString.contains(EndPoints.BASE_URL) {
+        if urlString.contains(Constants.BASE_URL) {
             completeURL = urlString
         } else {
-            completeURL = EndPoints.BASE_URL + urlString
+            completeURL = Constants.BASE_URL + url
         }
         return completeURL
     }

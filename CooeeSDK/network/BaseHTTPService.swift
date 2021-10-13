@@ -50,7 +50,7 @@ class BaseHTTPService {
         var requestData = [String: Any]();
         requestData["firebaseToken"] = token!
 
-        webService.getResponse(fromURL: EndPoints.saveFCM, method: .POST, params: requestData, header: commonHeaders.getDictionary()) {
+        webService.getResponse(fromURL: Constants.saveFCM, method: .POST, params: requestData, header: commonHeaders.getDictionary()) {
             (result: [String: String]) in
             if result != nil {
                 print(result)
@@ -64,7 +64,7 @@ class BaseHTTPService {
     let commonHeaders = CommonHeaders()
 
     func registerDevice(body: AuthenticationRequestBody, completion: @escaping (UserAuthResponse) -> ()) {
-        webService.getResponse(fromURL: EndPoints.registerUser, method: .POST, params: body.toDictionary(), header: commonHeaders.getDictionary()) {
+        webService.getResponse(fromURL: Constants.registerUser, method: .POST, params: body.toDictionary(), header: commonHeaders.getDictionary()) {
             (result: UserAuthResponse) in
             if result != nil {
                 completion(result)
@@ -73,7 +73,7 @@ class BaseHTTPService {
     }
 
     func sendSessionConcludedEvent(body: [String: Any]) {
-        webService.getResponse(fromURL: EndPoints.concludeSession, method: .POST, params: body, header: commonHeaders.getDictionary()) {
+        webService.getResponse(fromURL: Constants.concludeSession, method: .POST, params: body, header: commonHeaders.getDictionary()) {
             (result: [String: String]) in
             if result != nil {
                 print(result)
@@ -82,7 +82,7 @@ class BaseHTTPService {
     }
 
     func keepAliveSession(body: [String: Any]) {
-        webService.getResponse(fromURL: EndPoints.keepAlive, method: .POST, params: body, header: commonHeaders.getDictionary()) {
+        webService.getResponse(fromURL: Constants.keepAlive, method: .POST, params: body, header: commonHeaders.getDictionary()) {
             (result: [String: String]) in
             if result != nil {
                 print(result)
@@ -99,7 +99,7 @@ class BaseHTTPService {
         body["userProperties"] = userProperties
         body["userData"] = userData
 
-        webService.getResponse(fromURL: EndPoints.updateProfile, method: .PUT, params: body, header: commonHeaders.getDictionary()) {
+        webService.getResponse(fromURL: Constants.updateProfile, method: .PUT, params: body, header: commonHeaders.getDictionary()) {
             (result: [String: String]) in
             if result != nil {
                 print(result)
@@ -112,7 +112,7 @@ class BaseHTTPService {
     }
 
     func sendEvent(event: Event) {
-        webService.getResponse(fromURL: EndPoints.trackEvent, method: .POST, params: event.toDictionary(), header: commonHeaders.getDictionary()) {
+        webService.getResponse(fromURL: Constants.trackEvent, method: .POST, params: event.toDictionary(), header: commonHeaders.getDictionary()) {
             (result: [String: String]) in
             if result != nil {
                 print(result)

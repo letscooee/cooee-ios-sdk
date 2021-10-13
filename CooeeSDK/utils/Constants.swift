@@ -32,4 +32,14 @@ struct Constants {
     static let KEEP_ALIVE_TIME_IN_MS = 5 * 60
     static let IDLE_TIME_IN_SECONDS = 30 * 60
     static let SYSTEM_DATA_PREFIX = "CE"
+
+    // region All Server Endpoint
+    static let BASE_URL = "https://api.sdk.letscooee.com"
+    static let registerUser = "/v1/device/validate"
+    static let trackEvent = "/v1/event/track/"
+    static let concludeSession = "/v1/session/conclude"
+    static let keepAlive = "/v1/session/keepAlive"
+    static let saveFCM = "/v1/user/setFirebaseToken"
+    static let updateProfile = "/v1/user/update"
+    // endregion
 }
