@@ -43,6 +43,11 @@ class BaseHTTPService {
         }
     }
 
+    static let shared = BaseHTTPService()
+
+    let webService = WService.shared
+    let commonHeaders = CommonHeaders()
+
     func sendFirebaseToken(token: String?) {
         if token == nil {
             return
@@ -57,11 +62,6 @@ class BaseHTTPService {
             }
         }
     }
-
-    static let shared = BaseHTTPService()
-
-    let webService = WService.shared
-    let commonHeaders = CommonHeaders()
 
     func registerDevice(body: AuthenticationRequestBody, completion: @escaping (UserAuthResponse) -> ()) {
         webService.getResponse(fromURL: Constants.registerUser, method: .POST, params: body.toDictionary(), header: commonHeaders.getDictionary()) {

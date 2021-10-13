@@ -24,7 +24,6 @@ class CooeeFactory {
         baseHttpService = BaseHTTPService.shared
         userAuthService = UserAuthService()
         userAuthService.acquireSDKToken()
-        print(SDKInfo.shared.cachedInfo.isDebugging)
     }
 
     // MARK: Internal

@@ -79,7 +79,6 @@ class NewSessionExecutor {
     }
 
     private func sendDefaultUserProperties(userProperties: [String: Any]?) {
-        // String[] networkData = defaultUserPropertiesCollector.getNetworkData()
         var dictionary = defaultUserPropertiesCollector.getDefaultVales()
         if userProperties != nil {
             dictionary.merge(userProperties!) { _, new in
