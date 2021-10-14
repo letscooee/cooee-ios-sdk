@@ -76,8 +76,21 @@ class SentryHelper {
      - Parameter error: NSError to log
      */
     public func capture(error: NSError) {
-        print("\(Constants.TAG) \(error)")
-        SentrySDK.capture(error: error)
+        self.capture(message: "", error: error)
+    }
+
+    public func capture(message: String, error: NSError) {
+        print("""
+              \(Constants.TAG) \(message)
+              \n\(error)
+              """)
+
+        if (!enabled) {
+            return;
+        }
+
+        let sentryId = SentrySDK.capture(error: error)
+        print("\(Constants.TAG) Sentry id of the exception: \(sentryId.sentryIdString)")
     }
 
     // MARK: Internal
