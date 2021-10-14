@@ -35,7 +35,7 @@ class AppLifeCycle: NSObject {
         runtimeData.setInBackground()
 
         // stop sending check message of session alive on app background
-        //timer?.invalidate()
+        timer?.invalidate()
 
         let duration = runtimeData.getTimeInForegroundInSeconds()
 
@@ -75,6 +75,8 @@ class AppLifeCycle: NSObject {
     }
 
     @objc func appMovedToKill() {
+        // Stop Pending task job once app get killed
+        CooeeJobUtils.timer?.invalidate()
         sessionManager.conclude()
     }
 

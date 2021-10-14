@@ -31,19 +31,24 @@ class CooeeJobUtils {
      - Parameter latencyMillis: latency/delay for the job execution.
      */
     public static func scheduleJob(latencyMillis: Int) {
-        let timer = DispatchSource.makeTimerSource()
-        timer.setEventHandler {
-            PendingTaskJob().startJob()
-        }
         if latencyMillis == 0 {
-            timer.schedule(deadline: .now() + .seconds(latencyMillis), repeating: .never, leeway: .seconds(0))
+            Timer.scheduledTimer(timeInterval: TimeInterval(latencyMillis), target: self,
+                                 selector: #selector(triggerJob), userInfo: nil, repeats: false)
         } else {
-            timer.schedule(deadline: .now() + .seconds(latencyMillis), repeating: .seconds(latencyMillis), leeway: .seconds(60))
+            timer = Timer.scheduledTimer(timeInterval: TimeInterval(latencyMillis), target: self,
+                                         selector: #selector(triggerJob), userInfo: nil, repeats: true)
         }
-        timer.activate()
     }
+
+    // MARK: Internal
+
+    static var timer: Timer?
 
     // MARK: Private
 
     private static let PENDING_JOB_INTERVAL_MILLIS = 2 * 60
+
+    @objc private static func triggerJob() {
+        PendingTaskJob().startJob()
+    }
 }
