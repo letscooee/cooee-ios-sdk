@@ -32,6 +32,7 @@ struct Constants {
     static let KEEP_ALIVE_TIME_IN_MS = 5 * 60
     static let IDLE_TIME_IN_SECONDS = 30 * 60
     static let SYSTEM_DATA_PREFIX = "CE"
+    static let TAG = "\(Date()) CooeeSDK - "
 
     // region All Server Endpoint
     static let BASE_URL = "https://api.sdk.letscooee.com"
