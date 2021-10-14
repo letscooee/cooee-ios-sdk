@@ -59,32 +59,33 @@ class BaseHTTPService {
         var requestData = [String: Any]()
         requestData["firebaseToken"] = token!
 
-        _=try webService.getResponse(fromURL: Constants.saveFCM, method: .POST, params: requestData, header: commonHeaders.getDictionary(), t: [String: String].self)
+        _ = try webService.getResponse(fromURL: Constants.saveFCM, method: .POST, params: requestData, header: commonHeaders.getDictionary(), t: [String: String].self)
     }
 
-    func registerDevice(body: DeviceAuthenticationBody, completion: @escaping (UserAuthResponse) -> ()) {
+    func registerDevice(body: DeviceAuthenticationBody, completion: @escaping (UserAuthResponse?, Error?) -> ()) {
         do {
-            _=try webService.getResponse(fromURL: Constants.registerUser, method: .POST, params: body.toDictionary(), header: commonHeaders.getDictionary(), t: UserAuthResponse.self)
+            let result = try webService.getResponse(fromURL: Constants.registerUser, method: .POST, params: body.toDictionary(), header: commonHeaders.getDictionary(), t: UserAuthResponse.self)
+            completion(result, nil)
         } catch {
+            completion(nil, error)
         }
     }
 
     func sendSessionConcludedEvent(body: [String: Any]) throws {
-        _=try webService.getResponse(fromURL: Constants.concludeSession, method: .POST, params: body, header: commonHeaders.getDictionary(), t: [String: String].self)
+        _ = try webService.getResponse(fromURL: Constants.concludeSession, method: .POST, params: body, header: commonHeaders.getDictionary(), t: [String: String].self)
     }
 
     func keepAliveSession(body: [String: Any]) {
         do {
-            _=try webService.getResponse(fromURL: Constants.keepAlive, method: .POST, params: body, header: commonHeaders.getDictionary(), t: [String: String].self)
-        } catch {
-        }
+            _ = try webService.getResponse(fromURL: Constants.keepAlive, method: .POST, params: body, header: commonHeaders.getDictionary(), t: [String: String].self)
+        } catch {}
     }
 
     func updateUserProfile(requestData: [String: Any]) throws {
-        _=try webService.getResponse(fromURL: Constants.updateProfile, method: .PUT, params: requestData, header: commonHeaders.getDictionary(), t: [String: String].self)
+        _ = try webService.getResponse(fromURL: Constants.updateProfile, method: .PUT, params: requestData, header: commonHeaders.getDictionary(), t: [String: String].self)
     }
 
     func sendEvent(event: Event) throws {
-        _=try webService.getResponse(fromURL: Constants.trackEvent, method: .POST, params: event.toDictionary(), header: commonHeaders.getDictionary(), t: [String: String].self)
+        _ = try webService.getResponse(fromURL: Constants.trackEvent, method: .POST, params: event.toDictionary(), header: commonHeaders.getDictionary(), t: [String: String].self)
     }
 }
