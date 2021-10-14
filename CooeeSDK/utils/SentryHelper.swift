@@ -55,7 +55,7 @@ class SentryHelper {
         }
 
         if let mobile = userData!["mobile"], !"\(String(describing: mobile))".isEmpty {
-            let userDataExtra = ["mobile", mobile]
+            let userDataExtra = ["mobile": mobile!]
             self.user.data = userDataExtra
         }
     }

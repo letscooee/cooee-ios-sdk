@@ -31,7 +31,7 @@ class CooeeFactory {
 
         sessionManager = SessionManager.shared
         baseHttpService = BaseHTTPService.shared
-        userAuthService = UserAuthService.shared
+        userAuthService = UserAuthService(sentryHelper)
         userAuthService.acquireSDKToken()
         pendingTaskService = PendingTaskService()
         runtimeData = RuntimeData.shared
