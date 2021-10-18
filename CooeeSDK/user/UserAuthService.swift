@@ -16,23 +16,21 @@ import Foundation
 class UserAuthService {
     // MARK: Lifecycle
 
-    init() {
-        baseHttp = BaseHTTPService.shared
+    init(_ helper: SentryHelper) {
+        self.baseHttp = BaseHTTPService.shared
+        self.sentryHelper = helper
     }
 
     // MARK: Internal
 
-    static let shared = UserAuthService()
-
     let lock = NSRecursiveLock()
-    var baseHttp: BaseHTTPService?
 
     /**
      * Method will ensure that the SDK has acquired the token. If on the first time, token can't be pulled
      * from the server, calling this method will reattempt the same maximum within 1 minute.
      */
     func acquireSDKToken() {
-        lock.lock()
+        self.lock.lock()
         if self.hasToken() {
             print("Already has SDK token")
             self.populateUserDataFromStorage()
@@ -42,7 +40,7 @@ class UserAuthService {
         print("Attempt to acquire SDK token")
 
         self.getSDKTokenFromServer()
-        lock.unlock()
+        self.lock.unlock()
     }
 
     func hasToken() -> Bool {
@@ -56,8 +54,9 @@ class UserAuthService {
             print("User ID - \(self.userID ?? "")")
         }
 
-        baseHttp?.commonHeaders.sdkToken = self.sdkToken
-        baseHttp?.commonHeaders.userID = self.userID
+        self.baseHttp?.commonHeaders.sdkToken = self.sdkToken
+        self.baseHttp?.commonHeaders.userID = self.userID
+        self.sentryHelper.setUserId(id: self.userID!)
     }
 
     func getUserID() -> String? {
@@ -65,6 +64,9 @@ class UserAuthService {
     }
 
     // MARK: Private
+
+    private let baseHttp: BaseHTTPService?
+    private let sentryHelper: SentryHelper
 
     private var userID: String?
     private var deviceID: String?
@@ -101,11 +103,14 @@ class UserAuthService {
         let props = DevicePropertyCollector().getDefaultValues()
 
         let authBody = DeviceAuthenticationBody(appID: appInfo.appID, appSecret: appInfo.appSecret, uuid: self.uuID!, props: props)
-        baseHttp?.registerDevice(body: authBody) {
-            result in
-
-            self.saveUserDataInStorage(data: result)
-            CooeeJobUtils.triggerPendingTaskJobImmediately()
+        self.baseHttp?.registerDevice(body: authBody) {
+            result, error in
+            if let result = result {
+                self.saveUserDataInStorage(data: result)
+                CooeeJobUtils.triggerPendingTaskJobImmediately()
+            } else {
+                self.sentryHelper.capture(message: "Unable to acquire token- \(error.debugDescription)")
+            }
         }
     }
 

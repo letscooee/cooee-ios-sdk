@@ -19,6 +19,7 @@ public final class CooeeSDK {
     init() {
         self.safeHttpService = CooeeFactory.shared.safeHttpService
         self.runtimeData = RuntimeData.shared
+        self.sentryHelper = CooeeFactory.shared.sentryHelper
     }
 
     // MARK: Public
@@ -55,6 +56,7 @@ public final class CooeeSDK {
      - Parameter userData: The common user data like name, email.
      */
     public func updateUserData(userData: [String: Any]) {
+        sentryHelper.setUserInfo(userData: userData)
         safeHttpService.updateUserDataOnly(userData: userData)
     }
 
@@ -73,6 +75,7 @@ public final class CooeeSDK {
        - userProperties: The additional user properties.
      */
     public func updateUserProfile(userData: [String: Any], userProperties: [String: Any]) {
+        sentryHelper.setUserInfo(userData: userData)
         safeHttpService.updateUserProfile(userData: userData, userProperties: userProperties)
     }
 
@@ -98,4 +101,5 @@ public final class CooeeSDK {
 
     private let safeHttpService: SafeHTTPService
     private let runtimeData: RuntimeData
+    private let sentryHelper: SentryHelper
 }
