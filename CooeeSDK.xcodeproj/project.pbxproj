@@ -44,7 +44,7 @@
 		75729E8526F9BA27006EB506 /* DevicePropertyCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E8426F9BA27006EB506 /* DevicePropertyCollector.swift */; };
 		757E405826F9FA16008352F3 /* BaseHTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757E405726F9FA16008352F3 /* BaseHTTPService.swift */; };
 		757E405A26F9FF54008352F3 /* DeviceAuthenticationBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757E405926F9FF54008352F3 /* DeviceAuthenticationBody.swift */; };
-		757E405C26FA08D5008352F3 /* UserAuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757E405B26FA08D5008352F3 /* UserAuthResponse.swift */; };
+		757E405C26FA08D5008352F3 /* DeviceAuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757E405B26FA08D5008352F3 /* DeviceAuthResponse.swift */; };
 		758660D626FAFA89006B40DC /* SDKInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758660D526FAFA89006B40DC /* SDKInfo.swift */; };
 		759E15F3271061520040F09C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 759E15F2271061520040F09C /* GoogleService-Info.plist */; };
 		75A0981027070FD800C2057B /* AppLifeCycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A0980F27070FD800C2057B /* AppLifeCycle.swift */; };
@@ -140,7 +140,7 @@
 		75729E8426F9BA27006EB506 /* DevicePropertyCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicePropertyCollector.swift; sourceTree = "<group>"; };
 		757E405726F9FA16008352F3 /* BaseHTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseHTTPService.swift; sourceTree = "<group>"; };
 		757E405926F9FF54008352F3 /* DeviceAuthenticationBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAuthenticationBody.swift; sourceTree = "<group>"; };
-		757E405B26FA08D5008352F3 /* UserAuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthResponse.swift; sourceTree = "<group>"; };
+		757E405B26FA08D5008352F3 /* DeviceAuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAuthResponse.swift; sourceTree = "<group>"; };
 		758660D526FAFA89006B40DC /* SDKInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKInfo.swift; sourceTree = "<group>"; };
 		759E15F2271061520040F09C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75A0980F27070FD800C2057B /* AppLifeCycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLifeCycle.swift; sourceTree = "<group>"; };
@@ -372,7 +372,7 @@
 				75729E7126F493AB006EB506 /* Event.swift */,
 				75729E7326F497FD006EB506 /* TriggerData.swift */,
 				757E405926F9FF54008352F3 /* DeviceAuthenticationBody.swift */,
-				757E405B26FA08D5008352F3 /* UserAuthResponse.swift */,
+				757E405B26FA08D5008352F3 /* DeviceAuthResponse.swift */,
 				AC0B885A897ACFB8EBF772D0 /* DictionaryPrototype.swift */,
 			);
 			path = models;
@@ -708,7 +708,7 @@
 				751E1325270C350C002CF442 /* SessionManager.swift in Sources */,
 				75729E8526F9BA27006EB506 /* DevicePropertyCollector.swift in Sources */,
 				75729E7826F4C131006EB506 /* LocalStorageHelper.swift in Sources */,
-				757E405C26FA08D5008352F3 /* UserAuthResponse.swift in Sources */,
+				757E405C26FA08D5008352F3 /* DeviceAuthResponse.swift in Sources */,
 				751E1329270C7074002CF442 /* DateUtil.swift in Sources */,
 				751BC7DA26F35E32002D8358 /* AppInfo.swift in Sources */,
 				75729E7426F497FD006EB506 /* TriggerData.swift in Sources */,
