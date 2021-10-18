@@ -28,7 +28,6 @@
 		751E1329270C7074002CF442 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E1328270C7074002CF442 /* DateUtil.swift */; };
 		751E132D270D9277002CF442 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E132C270D9276002CF442 /* CustomError.swift */; };
 		751E1343270ED09C002CF442 /* CooeeDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E1342270ED09C002CF442 /* CooeeDatabase.swift */; };
-		751E1346270EDA09002CF442 /* PendingTaskConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E1345270EDA09002CF442 /* PendingTaskConstants.swift */; };
 		751E1348270EDEBD002CF442 /* PendingTaskDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E1347270EDEBD002CF442 /* PendingTaskDAO.swift */; };
 		751E134B270F1771002CF442 /* PendingTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E134A270F1771002CF442 /* PendingTaskProcessor.swift */; };
 		751E134D270F22AB002CF442 /* AbstractPendingTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E134C270F22AB002CF442 /* AbstractPendingTaskProcessor.swift */; };
@@ -124,7 +123,6 @@
 		751E1328270C7074002CF442 /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		751E132C270D9276002CF442 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		751E1342270ED09C002CF442 /* CooeeDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeDatabase.swift; sourceTree = "<group>"; };
-		751E1345270EDA09002CF442 /* PendingTaskConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTaskConstants.swift; sourceTree = "<group>"; };
 		751E1347270EDEBD002CF442 /* PendingTaskDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTaskDAO.swift; sourceTree = "<group>"; };
 		751E134A270F1771002CF442 /* PendingTaskProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTaskProcessor.swift; sourceTree = "<group>"; };
 		751E134C270F22AB002CF442 /* AbstractPendingTaskProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractPendingTaskProcessor.swift; sourceTree = "<group>"; };
@@ -328,7 +326,6 @@
 			isa = PBXGroup;
 			children = (
 				751E1349270F174C002CF442 /* processor */,
-				751E1345270EDA09002CF442 /* PendingTaskConstants.swift */,
 				751E1347270EDEBD002CF442 /* PendingTaskDAO.swift */,
 				AC0B861B34A834EC10D3493B /* PendingTask.swift */,
 				AC0B8F1A3240B22206AC68B6 /* PendingTaskType.swift */,
@@ -727,7 +724,6 @@
 				75729E8126F8AD47006EB506 /* UserAuthService.swift in Sources */,
 				751E1348270EDEBD002CF442 /* PendingTaskDAO.swift in Sources */,
 				75DD8793271575EA00A272BB /* CooeeJobUtils.swift in Sources */,
-				751E1346270EDA09002CF442 /* PendingTaskConstants.swift in Sources */,
 				751E1327270C4C47002CF442 /* NewSessionExecutor.swift in Sources */,
 				75729E7226F493AB006EB506 /* Event.swift in Sources */,
 				75729E7D26F87593006EB506 /* WebService.swift in Sources */,
