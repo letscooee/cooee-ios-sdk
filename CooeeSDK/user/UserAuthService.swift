@@ -98,7 +98,7 @@ class UserAuthService {
     private func getSDKTokenFromServer() {
         self.uuID = ObjectId().hexString
         let appInfo = InfoPlistReader.shared
-        let props = DevicePropertyCollector().getDefaultVales()
+        let props = DevicePropertyCollector().getDefaultValues()
 
         let authBody = DeviceAuthenticationBody(appID: appInfo.appID, appSecret: appInfo.appSecret, uuid: self.uuID!, props: props)
         baseHttp?.registerDevice(body: authBody) {
@@ -109,7 +109,7 @@ class UserAuthService {
         }
     }
 
-    private func saveUserDataInStorage(data: UserAuthResponse) {
+    private func saveUserDataInStorage(data: DeviceAuthResponse) {
         self.sdkToken = data.sdkToken ?? ""
         self.userID = data.id ?? ""
         self.deviceID = data.deviceID ?? ""

@@ -19,7 +19,7 @@ class NewSessionExecutor {
     // private let SafeHTTPService safeHTTPService
 
     init() {
-        defaultUserPropertiesCollector = DevicePropertyCollector()
+        devicePropertyCollector = DevicePropertyCollector()
         appInfo = CooeeFactory.shared.appInfo
         sessionManager = CooeeFactory.shared.sessionManager
     }
@@ -36,7 +36,7 @@ class NewSessionExecutor {
 
     // MARK: Private
 
-    private let defaultUserPropertiesCollector: DevicePropertyCollector
+    private let devicePropertyCollector: DevicePropertyCollector
     private let appInfo: AppInfo
     private let sessionManager: SessionManager
 
@@ -61,7 +61,7 @@ class NewSessionExecutor {
     private func sendSuccessiveLaunchEvent() {
         sendDefaultUserProperties(userProperties: nil)
 
-        let event = Event(eventName: "CE App Launched", properties: defaultUserPropertiesCollector.getCommonEventProperties())
+        let event = Event(eventName: "CE App Launched", properties: devicePropertyCollector.getCommonEventProperties())
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)
     }
 
@@ -71,15 +71,15 @@ class NewSessionExecutor {
     private func sendFirstLaunchEvent() {
         var userProperties = [String: Any]()
         userProperties["CE First Launch Time"] = DateUtils.formatDateToUTCString(date: Date())
-        userProperties["CE Installed Time"] = defaultUserPropertiesCollector.getAppInstallDate()
+        userProperties["CE Installed Time"] = devicePropertyCollector.getAppInstallDate()
         sendDefaultUserProperties(userProperties: userProperties)
 
-        let event = Event(eventName: "CE App Installed", properties: defaultUserPropertiesCollector.getCommonEventProperties())
+        let event = Event(eventName: "CE App Installed", properties: devicePropertyCollector.getCommonEventProperties())
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)
     }
 
     private func sendDefaultUserProperties(userProperties: [String: Any]?) {
-        var dictionary = defaultUserPropertiesCollector.getDefaultVales()
+        var dictionary = devicePropertyCollector.getDefaultValues()
         if userProperties != nil {
             dictionary.merge(userProperties!) { _, new in
                 new

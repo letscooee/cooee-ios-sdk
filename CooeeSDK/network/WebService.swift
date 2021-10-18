@@ -52,9 +52,8 @@ class WebService: NSObject {
     // MARK: Private
 
     private func processResponse<T: Decodable>(_ data: Data?, _ error: Error?, _ t: T.Type) throws -> T? {
-        guard let data = data,
-              error == nil
-                else {
+        guard let data = data, error == nil
+        else {
             print("error", error ?? "Unknown error")
             throw error!
         }

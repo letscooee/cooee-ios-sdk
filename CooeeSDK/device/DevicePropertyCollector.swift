@@ -25,31 +25,34 @@ class DevicePropertyCollector {
             "CE Network Type": deviceInfo.cachedInfo.networkType,
             "CE Bluetooth On": deviceInfo.cachedInfo.isBTOn,
             "CE Wifi Connected": deviceInfo.cachedInfo.isWIFIConnected,
-            "CE Device Battery": deviceInfo.cachedInfo.deviceBattery]
+            "CE Device Battery": deviceInfo.cachedInfo.deviceBattery
+        ]
     }
 
     // MARK: Internal
 
-    func getDefaultVales() -> [String: Any] {
-        ["CE Device Orientation": deviceInfo.cachedInfo.deviceOrientation,
-         "CE Device Model": deviceInfo.cachedInfo.deviceModel,
-         "CE Device Manufacture": "Apple",
-         "CE Available Internal Memory": deviceInfo.cachedInfo.freeSpace,
-         "CE Total Internal Memory": deviceInfo.cachedInfo.totalSpace,
-         "CE Device Battery": deviceInfo.cachedInfo.deviceBattery,
-         "CE Network Provider": deviceInfo.cachedInfo.networkProvider,
-         "CE Network Type": deviceInfo.cachedInfo.networkType,
-         "CE Bluetooth On": deviceInfo.cachedInfo.isBTOn,
-         "CE Wifi Connected": deviceInfo.cachedInfo.isWIFIConnected,
-         "CE OS": "IOS",
-         "CE OS Version": deviceInfo.cachedInfo.osVersion,
-         "CE SDK Version": sdkInfo.cachedInfo.sdkVersion + "+" + sdkInfo.cachedInfo.sdkLongVersion,
-         "CE App Version": appInfo.cachedInfo.version,
-         "CE Screen Resolution": "\(deviceInfo.getDeviceWidth())x\(deviceInfo.getDeviceHeight())",
-         "CE Package Name": "\(appInfo.getAppPackage())",
-         "CE Total RAM": (deviceInfo.cachedInfo.totalSpace),
-         "CE Available RAM": deviceInfo.cachedInfo.availableRAM,
-         "CE DPI": deviceInfo.cachedInfo.dpi]
+    func getDefaultValues() -> [String: Any] {
+        [
+            "CE Device Orientation": deviceInfo.cachedInfo.deviceOrientation,
+            "CE Device Model": deviceInfo.cachedInfo.deviceModel,
+            "CE Device Manufacture": "Apple",
+            "CE Available Internal Memory": deviceInfo.cachedInfo.freeSpace,
+            "CE Total Internal Memory": deviceInfo.cachedInfo.totalSpace,
+            "CE Device Battery": deviceInfo.cachedInfo.deviceBattery,
+            "CE Network Provider": deviceInfo.cachedInfo.networkProvider,
+            "CE Network Type": deviceInfo.cachedInfo.networkType,
+            "CE Bluetooth On": deviceInfo.cachedInfo.isBTOn,
+            "CE Wifi Connected": deviceInfo.cachedInfo.isWIFIConnected,
+            "CE OS": "IOS",
+            "CE OS Version": deviceInfo.cachedInfo.osVersion,
+            "CE SDK Version": "\(sdkInfo.cachedInfo.sdkVersion)+\(sdkInfo.cachedInfo.sdkLongVersion)",
+            "CE App Version": appInfo.cachedInfo.version,
+            "CE Screen Resolution": "\(deviceInfo.getDeviceWidth())x\(deviceInfo.getDeviceHeight())",
+            "CE Package Name": "\(appInfo.getAppPackage())",
+            "CE Total RAM": (deviceInfo.cachedInfo.totalSpace),
+            "CE Available RAM": deviceInfo.cachedInfo.availableRAM,
+            "CE DPI": deviceInfo.cachedInfo.dpi
+        ]
     }
 
     func getAppInstallDate() -> String? {

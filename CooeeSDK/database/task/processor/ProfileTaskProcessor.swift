@@ -11,6 +11,7 @@ import Foundation
  - Since: 0.1.0
  */
 class ProfileTaskProcessor: HttpTaskProcessor<DictionaryPrototype> {
+
     override func doHttp(data: DictionaryPrototype) throws {
         try baseHttpService.updateUserProfile(requestData: data.toProfileDictionary())
     }

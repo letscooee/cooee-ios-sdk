@@ -6,6 +6,7 @@ import Foundation
 import HandyJSON
 
 struct DictionaryPrototype: HandyJSON {
+
     var userProperties: [String: Any]?
     var userData: [String: Any]?
     var sessionID: String?
@@ -13,17 +14,17 @@ struct DictionaryPrototype: HandyJSON {
     var firebaseToken: String?
 
     func toDictionary() -> [String: Any] {
-        var dictionary = [String: Any]()
-        dictionary["sessionID"] = sessionID
-        dictionary["occurred"] = occurred
-        return dictionary
+        [
+            "sessionID": sessionID,
+            "occurred": occurred
+        ] as [String: Any]
     }
 
     func toProfileDictionary() throws -> [String: Any] {
-        var dictionary = [String: Any]()
-        dictionary["sessionID"] = sessionID
-        dictionary["userProperties"] = userProperties
-        dictionary["userData"] = userData
-        return dictionary
+        [
+            "sessionID": sessionID,
+            "userProperties": userProperties,
+            "userData": userData
+        ] as [String: Any]
     }
 }
