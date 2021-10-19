@@ -20,10 +20,14 @@ struct Size: Codable {
 
     // MARK: Internal
 
-    // TODOX:  Add flex properties
     let width: String?
     let height: String?
     let maxWidth: String?
     let maxHeight: String?
     var display: Display? = Display.BLOCK
+    let justifyContent: FlexProperty.JustifyContent?
+    let alignItems: FlexProperty.AlignItems?
+    let wrap: FlexProperty.Wrap?
+    let alignContent: FlexProperty.AlignContent?
+    let direction: FlexProperty.Direction?
 }
