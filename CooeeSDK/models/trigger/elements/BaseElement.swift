@@ -11,17 +11,30 @@ import Foundation
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-struct BaseElement: Codable {
+protocol BaseElement: Codable {
+    var bg: Background? { get }
+    var border: Border? { get }
+    var overflow: Overflow? { get }
+    var position: Position? { get set }
+    var shadow: Shadow? { get }
+    var size: Size? { get set }
+    var spacing: Spacing? { get }
+    var transform: Transform? { get }
+    var flexGrow: Int? { get }
+    var flexShrink: Int? { get }
+    var flexOrder: Int? { get }
+}
 
-    let bg: Background?
-    let border: Border?
-    let overflow: Overflow?
-    let position: Position?
-    let shadow: Shadow?
-    let size: Size?
-    let spacing: Spacing?
-    let transform: Transform?
-    let flexGrow: Int?
-    let flexShrink: Int?
-    let flexOrder: Int?
+extension BaseElement {
+    mutating func getSize() -> Size {
+        if size == nil {
+            size = Size()
+        }
+        return size!
+    }
+
+    mutating func getPosition() -> Position {
+        if position == nil { position = Position() }
+        return position!
+    }
 }
