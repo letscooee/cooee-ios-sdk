@@ -12,6 +12,12 @@ import Foundation
  - Since: 0.1.0
  */
 struct Position: Codable {
+    // MARK: Lifecycle
+
+    init() {
+        self.type = PositionType.STATIC
+    }
+
     // MARK: Public
 
     public enum PositionType: Codable {
@@ -20,9 +26,9 @@ struct Position: Codable {
 
     // MARK: Internal
 
-    var type: PositionType? = PositionType.STATIC
-    let top: String?
-    let left: String?
-    let bottom: String?
-    let right: String?
+    var type: PositionType? = nil
+    var top: String? = nil
+    var left: String? = nil
+    var bottom: String? = nil
+    var right: String? = nil
 }
