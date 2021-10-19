@@ -69,6 +69,7 @@
 		75DD87C0271D822600A272BB /* BrowserContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87BF271D822600A272BB /* BrowserContent.swift */; };
 		75DD87C2271D9B1C00A272BB /* AnyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87C1271D9B1C00A272BB /* AnyValue.swift */; };
 		75DD87C4271D9DF300A272BB /* AppAR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87C3271D9DF300A272BB /* AppAR.swift */; };
+		75DD87C8271ECD1900A272BB /* FlexProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87C7271ECD1900A272BB /* FlexProperty.swift */; };
 		AC0B8234FFAFC98E987999A7 /* SafeHTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8B65ED15E2A6D74A0F03 /* SafeHTTPService.swift */; };
 		AC0B8269B7CDB037E372F8B3 /* HttpTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8D0C0E553156E3B76C31 /* HttpTaskProcessor.swift */; };
 		AC0B830AA583B38E12F76E5C /* CooeeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B851DC5B190221B669F38 /* CooeeFactory.swift */; };
@@ -182,6 +183,7 @@
 		75DD87BF271D822600A272BB /* BrowserContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserContent.swift; sourceTree = "<group>"; };
 		75DD87C1271D9B1C00A272BB /* AnyValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyValue.swift; sourceTree = "<group>"; };
 		75DD87C3271D9DF300A272BB /* AppAR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAR.swift; sourceTree = "<group>"; };
+		75DD87C7271ECD1900A272BB /* FlexProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexProperty.swift; sourceTree = "<group>"; };
 		77F56F40EDA5A57940AA34BC /* Pods-Cooee iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS.release.xcconfig"; path = "Target Support Files/Pods-Cooee iOS/Pods-Cooee iOS.release.xcconfig"; sourceTree = "<group>"; };
 		7F5B66C3F5CF5A3CF236A788 /* Pods-CooeeSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.release.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.release.xcconfig"; sourceTree = "<group>"; };
 		AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionConcludeTaskProcessor.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 		751BC77F26F3108A002D8358 /* CooeeSDK */ = {
 			isa = PBXGroup;
 			children = (
+				75DD87C5271ECCE500A272BB /* enums */,
 				75DD87912715759B00A272BB /* scheduler */,
 				751E1341270ED06E002CF442 /* database */,
 				75729E7B26F87387006EB506 /* network */,
@@ -489,6 +492,22 @@
 				75DD87C3271D9DF300A272BB /* AppAR.swift */,
 			);
 			path = blocks;
+			sourceTree = "<group>";
+		};
+		75DD87C5271ECCE500A272BB /* enums */ = {
+			isa = PBXGroup;
+			children = (
+				75DD87C6271ECCF000A272BB /* trigger */,
+			);
+			path = enums;
+			sourceTree = "<group>";
+		};
+		75DD87C6271ECCF000A272BB /* trigger */ = {
+			isa = PBXGroup;
+			children = (
+				75DD87C7271ECD1900A272BB /* FlexProperty.swift */,
+			);
+			path = trigger;
 			sourceTree = "<group>";
 		};
 		A1345D19EC596FAD6A5DCFA7 /* Frameworks */ = {
@@ -800,6 +819,7 @@
 				751BC7C026F3123E002D8358 /* Cooee.swift in Sources */,
 				757E405A26F9FF54008352F3 /* DeviceAuthenticationBody.swift in Sources */,
 				75DD87A8271D6F5B00A272BB /* Colour.swift in Sources */,
+				75DD87C8271ECD1900A272BB /* FlexProperty.swift in Sources */,
 				751E134B270F1771002CF442 /* PendingTaskProcessor.swift in Sources */,
 				751E1343270ED09C002CF442 /* CooeeDatabase.swift in Sources */,
 				75A0981027070FD800C2057B /* AppLifeCycle.swift in Sources */,
