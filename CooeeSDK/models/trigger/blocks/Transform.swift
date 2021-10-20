@@ -6,11 +6,13 @@
 //
 
 import Foundation
+import HandyJSON
 
 /**
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-struct Transform:Codable{
-    let rotate:Int
+struct Transform: HandyJSON {
+    
+    var rotate: Int?
 }

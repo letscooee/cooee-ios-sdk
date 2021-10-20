@@ -6,13 +6,14 @@
 //
 
 import Foundation
+import HandyJSON
 
 /**
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-struct BrowserContent: Codable {
+struct BrowserContent: HandyJSON {
 
-    let url: String?
+    var url: String?
     var showAB: Bool? = false
 }

@@ -6,13 +6,14 @@
 //
 
 import Foundation
+import HandyJSON
 
 /**
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-struct Shadow: Codable {
-
-    let elevation: Int?
-    let colour: Colour?
+struct Shadow: HandyJSON {
+    
+    var elevation: Int?
+    var colour: Colour?
 }

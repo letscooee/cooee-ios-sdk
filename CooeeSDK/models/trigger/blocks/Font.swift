@@ -6,15 +6,16 @@
 //
 
 import Foundation
+import HandyJSON
 
 /**
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-struct Font: Codable {
+struct Font: HandyJSON {
     
-    let size: String?
-    let style: String?
-    let name: String?
-    let lineHeight: String?
+    var size: String?
+    var style: String?
+    var name: String?
+    var lineHeight: String?
 }

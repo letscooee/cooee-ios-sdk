@@ -6,20 +6,21 @@
 //
 
 import Foundation
+import HandyJSON
 
 /**
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-struct Overflow: Codable {
+struct Overflow: HandyJSON {
     // MARK: Public
 
-    public enum `Type`: Codable {
+    public enum `Type` {
         case VISIBLE, HIDDEN
     }
 
     // MARK: Internal
 
-    let x: Type?
-    let y: Type?
+    var x: Type?
+    var y: Type?
 }

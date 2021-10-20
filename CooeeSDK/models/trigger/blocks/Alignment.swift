@@ -6,16 +6,18 @@
 //
 
 import Foundation
+import HandyJSON
 
 /**
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-struct Alignment: Codable {
+struct Alignment: HandyJSON {
     // MARK: Public
 
-    public enum Direction: Codable {
-        case LTR, RTL
+    public enum Direction {
+        case LTR
+        case RTL
     }
 
     // MARK: Internal

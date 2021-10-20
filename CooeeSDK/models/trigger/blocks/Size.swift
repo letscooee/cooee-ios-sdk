@@ -6,34 +6,35 @@
 //
 
 import Foundation
+import HandyJSON
 
 /**
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-struct Size: Codable {
+struct Size: HandyJSON {
     // MARK: Lifecycle
 
-    init() {
-        self.display=Display.BLOCK
-    }
+//    init() {
+//        self.display = Display.BLOCK
+//    }
 
     // MARK: Public
 
-    public enum Display: Codable {
+    public enum Display {
         case BLOCK, INLINE_BLOCK, FLEX, INLINE_FLEX
     }
 
     // MARK: Internal
 
-    var width: String?=nil
-    var height: String?=nil
-    var maxWidth: String?=nil
-    var maxHeight: String?=nil
-    var display: Display?=nil
-    var justifyContent: FlexProperty.JustifyContent?=nil
-    var alignItems: FlexProperty.AlignItems?=nil
-    var wrap: FlexProperty.Wrap?=nil
-    var alignContent: FlexProperty.AlignContent?=nil
-    var direction: FlexProperty.Direction?=nil
+    var width: String?
+    var height: String?
+    var maxWidth: String?
+    var maxHeight: String?
+    var display: Display?
+    var justifyContent: FlexProperty.JustifyContent?
+    var alignItems: FlexProperty.AlignItems?
+    var wrap: FlexProperty.Wrap?
+    var alignContent: FlexProperty.AlignContent?
+    var direction: FlexProperty.Direction?
 }

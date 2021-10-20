@@ -6,14 +6,15 @@
 //
 
 import Foundation
+import HandyJSON
 
 /**
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-struct Background: Codable {
-
-    let solid: Colour?
-    let glossy: Glossy?
-    let image: Image?
+struct Background: HandyJSON {
+    
+    var solid: Colour?
+    var glossy: Glossy?
+    var image: Image?
 }

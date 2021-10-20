@@ -6,24 +6,25 @@
 //
 
 import Foundation
+import HandyJSON
 
 /**
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-struct Border: Codable {
+struct Border: HandyJSON {
     // MARK: Public
 
-    public enum Style: Codable {
+    public enum Style {
         case SOLID, DASH
     }
 
     // MARK: Internal
 
-    let radius: String?
-    let width: String?
-    let dashWidth: String?
-    let dashGap: String?
-    let colour: Colour
-    let style: Style
+    var radius: String?
+    var width: String?
+    var dashWidth: String?
+    var dashGap: String?
+    var colour: Colour?
+    var style: Style?
 }

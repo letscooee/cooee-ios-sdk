@@ -6,14 +6,15 @@
 //
 
 import Foundation
+import HandyJSON
 
 /**
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-struct AppAR: Codable {
-
-    let name: String
-    let splash: [String: AnyValue]?
-    let data: [String: AnyValue]?
+struct AppAR: HandyJSON {
+    
+    var name: String?
+    var splash: [String: Any]?
+    var data: [String: Any]?
 }

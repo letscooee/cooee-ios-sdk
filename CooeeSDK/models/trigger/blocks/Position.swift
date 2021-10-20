@@ -6,27 +6,29 @@
 //
 
 import Foundation
+import HandyJSON
 
 /**
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-struct Position: Codable {
+struct Position: HandyJSON {
     // MARK: Lifecycle
 
-    init() {
-        self.type = PositionType.STATIC
-    }
+//    init() {
+//        self.type = PositionType.STATIC
+//        su
+//    }
 
     // MARK: Public
 
-    public enum PositionType: Codable {
+    public enum PositionType {
         case STATIC, ABSOLUTE, FIXED
     }
 
     // MARK: Internal
 
-    var type: PositionType? = nil
+    var type: PositionType?
     var top: String? = nil
     var left: String? = nil
     var bottom: String? = nil

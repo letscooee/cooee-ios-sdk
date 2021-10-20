@@ -6,14 +6,15 @@
 //
 
 import Foundation
+import HandyJSON
 
 /**
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-struct Glossy: Codable {
-
-    let radius: Int?
-    let sampling: Int?
-    let colour: Colour?
+struct Glossy: HandyJSON {
+    
+    var radius: Int?
+    var sampling: Int?
+    var colour: Colour?
 }

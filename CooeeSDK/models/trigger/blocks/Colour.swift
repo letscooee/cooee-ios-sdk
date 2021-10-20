@@ -6,13 +6,14 @@
 //
 
 import Foundation
+import HandyJSON
 
 /**
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-struct Colour: Codable {
+struct Colour: HandyJSON {
     
-    let hex: String?
-    let grad: Gradient?
+    var hex: String?
+    var grad: Gradient?
 }

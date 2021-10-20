@@ -6,13 +6,14 @@
 //
 
 import Foundation
+import HandyJSON
 
 /**
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-struct Image: Codable {
-
-    let url: String?
-    let alpha: Int?
+struct Image: HandyJSON {
+    
+    var url: String?
+    var alpha: Int?
 }
