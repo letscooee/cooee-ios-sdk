@@ -14,7 +14,7 @@ import Foundation
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-public enum FlexProperty: Codable {
+public class FlexProperty: Codable {
     public enum Direction: Codable {
         case ROW, COLUMN, ROW_REVERSE, COLUMN_REVERSE
 
