@@ -6,11 +6,21 @@
 //
 
 import Foundation
+import HandyJSON
 
-protocol BaseTextElement: BaseElement {
+/**
+ - Author: Ashish Gaikwad
+ - Since: 0.1.0
+ */
+class BaseTextElement: BaseElement {
+    // MARK: Lifecycle
 
-    var text: String? { get }
-    var alignment: Alignment? { get }
-    var font: Font? { get }
-    var colour: Colour? { get }
+    required init() {}
+
+    // MARK: Internal
+
+    var text: String?
+    var alignment: Alignment?
+    var font: Font?
+    var colour: Colour?
 }
