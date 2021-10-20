@@ -6,35 +6,28 @@
 //
 
 import Foundation
+import HandyJSON
 
 /**
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-protocol BaseElement: Codable {
-    var bg: Background? { get }
-    var border: Border? { get }
-    var overflow: Overflow? { get }
-    var position: Position? { get set }
-    var shadow: Shadow? { get }
-    var size: Size? { get set }
-    var spacing: Spacing? { get }
-    var transform: Transform? { get }
-    var flexGrow: Int? { get }
-    var flexShrink: Int? { get }
-    var flexOrder: Int? { get }
-}
+class BaseElement: HandyJSON {
+    // MARK: Lifecycle
 
-extension BaseElement {
-    mutating func getSize() -> Size {
-        if size == nil {
-            size = Size()
-        }
-        return size!
-    }
+    required init() {}
 
-    mutating func getPosition() -> Position {
-        if position == nil { position = Position() }
-        return position!
-    }
+    // MARK: Internal
+
+    var bg: Background?
+    var border: Border?
+    var overflow: Overflow?
+    var position: Position?
+    var shadow: Shadow?
+    var size: Size?
+    var spacing: Spacing?
+    var transform: Transform?
+    var flexGrow: Int?
+    var flexShrink: Int?
+    var flexOrder: Int?
 }
