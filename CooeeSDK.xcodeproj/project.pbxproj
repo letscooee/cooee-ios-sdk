@@ -73,6 +73,7 @@
 		75DD87CA271EE39700A272BB /* BaseTextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87C9271EE39700A272BB /* BaseTextElement.swift */; };
 		75DD87CC271EF4BA00A272BB /* Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87CB271EF4BA00A272BB /* Alignment.swift */; };
 		75DD87CE271EF4D500A272BB /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87CD271EF4D500A272BB /* Font.swift */; };
+		75FA7DB627217B1F0060A425 /* InAppTriggerScene.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FA7DB527217B1F0060A425 /* InAppTriggerScene.xib */; };
 		AC0B8234FFAFC98E987999A7 /* SafeHTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8B65ED15E2A6D74A0F03 /* SafeHTTPService.swift */; };
 		AC0B8269B7CDB037E372F8B3 /* HttpTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8D0C0E553156E3B76C31 /* HttpTaskProcessor.swift */; };
 		AC0B830AA583B38E12F76E5C /* CooeeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B851DC5B190221B669F38 /* CooeeFactory.swift */; };
@@ -86,9 +87,11 @@
 		AC0B85211B7F2B8520801AFF /* PendingTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B861B34A834EC10D3493B /* PendingTask.swift */; };
 		AC0B85D43CEF7B19BA99BD79 /* ButtonElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B859A69ACE5A180F9E36B /* ButtonElement.swift */; };
 		AC0B861B3D2AEA999CEC1A10 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8D73DB6AA189BD02953E /* Animation.swift */; };
+		AC0B870504126AEF80E61B6A /* InAppAnimationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8B7A9B8DFBE2F5B76514 /* InAppAnimationProvider.swift */; };
 		AC0B874545303FDF69FF4E95 /* DictionaryPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B885A897ACFB8EBF772D0 /* DictionaryPrototype.swift */; };
 		AC0B880EBE65FCACBE4C063B /* InAppTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B899D43B11EA47FD52E45 /* InAppTrigger.swift */; };
 		AC0B8B29AC11EB84B287A922 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B88F3881FA99265E09B56 /* Container.swift */; };
+		AC0B8B3175C8E3905037A0FE /* InAppTriggerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8AA3294AAAB6B9AF197A /* InAppTriggerScene.swift */; };
 		AC0B8D16CF18A09786614250 /* TextAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8ADD9332621266B45210 /* TextAlignment.swift */; };
 		AC0B8E13066BD7C37F8B65E8 /* VideoElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B83A6575EA932ACCB0D2F /* VideoElement.swift */; };
 		AC0B8E5C2D7FCA755C9F8910 /* TextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B86FED7478E8BCDAAC99D /* TextElement.swift */; };
@@ -200,6 +203,7 @@
 		75DD87C9271EE39700A272BB /* BaseTextElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextElement.swift; sourceTree = "<group>"; };
 		75DD87CB271EF4BA00A272BB /* Alignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alignment.swift; sourceTree = "<group>"; };
 		75DD87CD271EF4D500A272BB /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		75FA7DB527217B1F0060A425 /* InAppTriggerScene.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InAppTriggerScene.xib; sourceTree = "<group>"; };
 		77F56F40EDA5A57940AA34BC /* Pods-Cooee iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS.release.xcconfig"; path = "Target Support Files/Pods-Cooee iOS/Pods-Cooee iOS.release.xcconfig"; sourceTree = "<group>"; };
 		7F5B66C3F5CF5A3CF236A788 /* Pods-CooeeSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.release.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.release.xcconfig"; sourceTree = "<group>"; };
 		AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionConcludeTaskProcessor.swift; sourceTree = "<group>"; };
@@ -214,8 +218,10 @@
 		AC0B885A897ACFB8EBF772D0 /* DictionaryPrototype.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryPrototype.swift; sourceTree = "<group>"; };
 		AC0B88F3881FA99265E09B56 /* Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		AC0B899D43B11EA47FD52E45 /* InAppTrigger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppTrigger.swift; sourceTree = "<group>"; };
+		AC0B8AA3294AAAB6B9AF197A /* InAppTriggerScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppTriggerScene.swift; sourceTree = "<group>"; };
 		AC0B8ADD9332621266B45210 /* TextAlignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAlignment.swift; sourceTree = "<group>"; };
 		AC0B8B65ED15E2A6D74A0F03 /* SafeHTTPService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeHTTPService.swift; sourceTree = "<group>"; };
+		AC0B8B7A9B8DFBE2F5B76514 /* InAppAnimationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppAnimationProvider.swift; sourceTree = "<group>"; };
 		AC0B8D0C0E553156E3B76C31 /* HttpTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpTaskProcessor.swift; sourceTree = "<group>"; };
 		AC0B8D173E6FFB9D0659EA78 /* EventTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTaskProcessor.swift; sourceTree = "<group>"; };
 		AC0B8D61FEAA5B2A4130CBD3 /* ImageElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageElement.swift; sourceTree = "<group>"; };
@@ -570,6 +576,9 @@
 		AC0B8C6F71D493FD0E2871F2 /* inapp */ = {
 			isa = PBXGroup;
 			children = (
+				AC0B8AA3294AAAB6B9AF197A /* InAppTriggerScene.swift */,
+				75FA7DB527217B1F0060A425 /* InAppTriggerScene.xib */,
+				AC0B8B7A9B8DFBE2F5B76514 /* InAppAnimationProvider.swift */,
 			);
 			path = inapp;
 			sourceTree = "<group>";
@@ -755,6 +764,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75FA7DB627217B1F0060A425 /* InAppTriggerScene.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -936,6 +946,8 @@
 				AC0B861B3D2AEA999CEC1A10 /* Animation.swift in Sources */,
 				AC0B8F5B3A9D608D4D9E66E5 /* Layer.swift in Sources */,
 				AC0B880EBE65FCACBE4C063B /* InAppTrigger.swift in Sources */,
+				AC0B8B3175C8E3905037A0FE /* InAppTriggerScene.swift in Sources */,
+				AC0B870504126AEF80E61B6A /* InAppAnimationProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
