@@ -45,13 +45,21 @@ class AbstractInAppRenderer: InAppRenderer {
 
         let border = elementData.border!
 
-        if let borderColor = border.colour {
-            self.newElement?.layer.borderColor = borderColor.getColour().cgColor
+        let borderColor = border.getColour() ?? UIColor.clear
+        let cornerRadius = border.getRadius(parentElement)
+
+        if border.getStyle() == Border.Style.SOLID {
+            self.newElement?.layer.borderColor = borderColor.cgColor
+            self.newElement?.layer.borderWidth = CGFloat(border.getWidth(parentElement))
+
+        } else if border.getStyle() == Border.Style.DASH {
+            self.newElement?.addDashedBorder(colour: borderColor, width: border.getWidth(parentElement),
+                    dashWidth: border.getDashWidth(parentElement), dashGap: border.getDashGap(parentElement),
+                    cornerRadius: cornerRadius)
         }
 
-        if let borderWidth = border.width {
-           // self.newElement?.layer.borderWidth
-        }
+        self.newElement?.layer.cornerRadius = CGFloat(border.getRadius(parentElement))
+
     }
 
     private func processBackground() {

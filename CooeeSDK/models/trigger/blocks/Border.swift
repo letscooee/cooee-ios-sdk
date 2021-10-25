@@ -7,6 +7,7 @@
 
 import Foundation
 import HandyJSON
+import UIKit
 
 /**
  - Author: Ashish Gaikwad
@@ -21,10 +22,34 @@ struct Border: HandyJSON {
 
     // MARK: Internal
 
-    var radius: String?
-    var width: String?
-    var dashWidth: String?
-    var dashGap: String?
-    var colour: Colour?
-    var style: Style?
+    private var radius: String?
+    private var width: String?
+    private var dashWidth: String?
+    private var dashGap: String?
+    private var colour: Colour?
+    private var style: Style?
+
+    public func getWidth(_ parent: UIView) -> Int {
+        return width != nil ? UnitUtil.getCalculatedValue(parent, width!) : 0
+    }
+
+    public func getRadius(_ parent: UIView) -> Int {
+        return radius != nil ? UnitUtil.getCalculatedPixel(radius!) : 0
+    }
+
+    public func getDashWidth(_ parent: UIView) -> Int {
+        return dashWidth != nil ? UnitUtil.getCalculatedPixel(dashWidth!) : 0
+    }
+
+    public func getDashGap(_ parent: UIView) -> Int {
+        return dashGap != nil ? UnitUtil.getCalculatedPixel(dashGap!) : 0
+    }
+
+    public func getColour() -> UIColor? {
+        return colour?.getColour()
+    }
+
+    public func getStyle() -> Style {
+        return style ?? Style.SOLID
+    }
 }
