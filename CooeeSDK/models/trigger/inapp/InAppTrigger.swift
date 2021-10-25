@@ -13,4 +13,8 @@ class InAppTrigger: HandyJSON {
 
     var container: Container?
     var layers: [Layer]?
+
+    required init() {
+
+    }
 }
