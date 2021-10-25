@@ -86,6 +86,7 @@
 		AC0B850DFCDC2005C3A115B0 /* PushTokenTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B861F4E3D4E157C46147D /* PushTokenTaskProcessor.swift */; };
 		AC0B8518BD3390F14BA56E86 /* PendingTaskType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8F1A3240B22206AC68B6 /* PendingTaskType.swift */; };
 		AC0B85211B7F2B8520801AFF /* PendingTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B861B34A834EC10D3493B /* PendingTask.swift */; };
+		AC0B85C98A085703F48B2067 /* RendererExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8A91EC01FFA1820B6560 /* RendererExtensions.swift */; };
 		AC0B85D43CEF7B19BA99BD79 /* ButtonElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B859A69ACE5A180F9E36B /* ButtonElement.swift */; };
 		AC0B861B3D2AEA999CEC1A10 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8D73DB6AA189BD02953E /* Animation.swift */; };
 		AC0B870504126AEF80E61B6A /* InAppAnimationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8B7A9B8DFBE2F5B76514 /* InAppAnimationProvider.swift */; };
@@ -226,6 +227,7 @@
 		AC0B885A897ACFB8EBF772D0 /* DictionaryPrototype.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryPrototype.swift; sourceTree = "<group>"; };
 		AC0B88F3881FA99265E09B56 /* Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		AC0B899D43B11EA47FD52E45 /* InAppTrigger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppTrigger.swift; sourceTree = "<group>"; };
+		AC0B8A91EC01FFA1820B6560 /* RendererExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RendererExtensions.swift; sourceTree = "<group>"; };
 		AC0B8AA3294AAAB6B9AF197A /* InAppTriggerScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppTriggerScene.swift; sourceTree = "<group>"; };
 		AC0B8ADD9332621266B45210 /* TextAlignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAlignment.swift; sourceTree = "<group>"; };
 		AC0B8B65ED15E2A6D74A0F03 /* SafeHTTPService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeHTTPService.swift; sourceTree = "<group>"; };
@@ -598,6 +600,7 @@
 			children = (
 				AC0B87F35B1BE71267F02947 /* InAppRenderer.swift */,
 				AC0B8CAD418C022E74D59D3F /* AbstractInAppRenderer.swift */,
+				AC0B8A91EC01FFA1820B6560 /* RendererExtensions.swift */,
 			);
 			path = renderer;
 			sourceTree = "<group>";
@@ -984,6 +987,7 @@
 				AC0B8BC022480FDA5C51B478 /* TriggerContext.swift in Sources */,
 				AC0B8DBA39461B9A35158784 /* Extensions.swift in Sources */,
 				AC0B81656327520249E6A428 /* UnitUtil.swift in Sources */,
+				AC0B85C98A085703F48B2067 /* RendererExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

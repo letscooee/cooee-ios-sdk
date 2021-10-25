@@ -12,6 +12,7 @@ import UIKit
  - Since: 0.1.0
  */
 extension UIColor {
+
     convenience init(hexString: String) {
         let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int = UInt64()
@@ -53,35 +54,5 @@ public extension CGFloat {
      */
     static func onePixelInPoints() -> CGFloat {
         return CGFloat(1).pixelsToPoints()
-    }
-}
-
-extension UIView {
-
-    /**
-     Create a shape containing dashed border and add it as sub layer in UIView
-     - Parameters:
-       - colour: Colour to be added to stroke in UIColor
-       - width: Width of stroke in Int
-       - dashWidth: With of individual dash of stroke in Int
-       - dashGap: With of gap between two dash of stroke in Int
-       - cornerRadius: Radius of corner in Int
-     */
-    func addDashedBorder(colour: UIColor, width: Int, dashWidth: Int, dashGap: Int, cornerRadius: Int) {
-        let shapeLayer: CAShapeLayer = CAShapeLayer()
-        let frameSize = self.frame.size
-        let shapeRect = CGRect(x: 0, y: 0, width: frameSize.width, height: frameSize.height)
-
-        shapeLayer.bounds = shapeRect
-        shapeLayer.position = CGPoint(x: frameSize.width / 2, y: frameSize.height / 2)
-        shapeLayer.fillColor = UIColor.clear.cgColor
-        shapeLayer.strokeColor = colour.cgColor
-        shapeLayer.lineWidth = CGFloat(width)
-        shapeLayer.lineJoin = CAShapeLayerLineJoin.round
-        shapeLayer.cornerRadius = CGFloat(cornerRadius)
-        shapeLayer.lineDashPattern = [NSNumber(value: dashWidth), NSNumber(value: dashGap)]
-        shapeLayer.path = UIBezierPath(roundedRect: shapeRect, cornerRadius: 5).cgPath
-
-        self.layer.addSublayer(shapeLayer)
     }
 }
