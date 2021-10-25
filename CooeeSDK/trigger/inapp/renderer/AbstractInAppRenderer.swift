@@ -36,6 +36,20 @@ class AbstractInAppRenderer: InAppRenderer {
     internal func processCommonBlocks() {
         self.processBackground()
         self.processBorderBlock()
+        self.processShadowBlock()
+    }
+
+    private func processShadowBlock() {
+        let shadow = elementData.shadow
+
+        if shadow == nil {
+            return
+        }
+
+        let shadowColour = shadow!.getColour()
+        let elevation = shadow!.getElevation()
+
+        self.newElement?.dropShadow(elevation: elevation, colour: shadowColour)
     }
 
     private func processBorderBlock() {
