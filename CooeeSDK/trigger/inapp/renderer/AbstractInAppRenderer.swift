@@ -37,6 +37,17 @@ class AbstractInAppRenderer: InAppRenderer {
         self.processBackground()
         self.processBorderBlock()
         self.processShadowBlock()
+        self.processTransformBlock()
+    }
+
+    private func processTransformBlock() {
+        let transform = elementData.transform
+
+        if transform == nil {
+            return
+        }
+
+        self.newElement?.rotate(angle: transform!.getRotation())
     }
 
     private func processShadowBlock() {

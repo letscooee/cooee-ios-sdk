@@ -54,4 +54,15 @@ extension UIView {
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale
     }
+
+    /**
+     Rotate a view by specified degrees
+
+     - parameter angle: angle in degrees
+     */
+    func rotate(angle: Int) {
+        let radians = CGFloat(angle) / 180.0 * CGFloat.pi
+        let rotation = self.transform.rotated(by: radians);
+        self.transform = rotation
+    }
 }
