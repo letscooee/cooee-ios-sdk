@@ -6,13 +6,16 @@
 //
 
 import Foundation
+import HandyJSON
 
 /**
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-struct Event {
+struct Event: HandyJSON {
     // MARK: Lifecycle
+
+    init() {}
 
     init(eventName: String) {
         self.init(eventName: eventName, properties: [String: Any?]())
@@ -27,6 +30,8 @@ struct Event {
         self.properties = properties
         occurred = DateUtils.formatDateToUTCString(date: Date())
     }
+
+    init(from decoder: Decoder) throws {}
 
     // MARK: Internal
 
@@ -44,17 +49,15 @@ struct Event {
     }
 
     func toDictionary() -> [String: Any?] {
-        var dictionary = [String: Any?]()
-
-        dictionary["name"] = name
-        dictionary["properties"] = properties
-        dictionary["sessionID"] = sessionID
-        dictionary["sessionNumber"] = sessionNumber
-        dictionary["screenName"] = screenName
-        dictionary["activeTriggers"] = activeTriggers
-        dictionary["occurred"] = occurred
-        dictionary["deviceProps"] = deviceProps
-
-        return dictionary
+        ["name": name,
+         "properties": properties,
+         "sessionID": sessionID,
+         "sessionNumber": sessionNumber,
+         "screenName": screenName,
+         "activeTriggers": activeTriggers,
+         "occurred": occurred,
+         "deviceProps": deviceProps] as [String: Any?]
     }
+
+    func encode(to encoder: Encoder) throws {}
 }

@@ -1,5 +1,5 @@
 //
-//  AuthenticationRequestBody.swift
+//  DeviceAuthenticationBody.swift
 //  CooeeSDK
 //
 //  Created by Ashish Gaikwad on 21/09/21.
@@ -11,7 +11,7 @@ import Foundation
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-struct AuthenticationRequestBody {
+struct DeviceAuthenticationBody {
     // MARK: Lifecycle
 
     init(appID: String, appSecret: String, uuid: String, props: [String: Any]) {

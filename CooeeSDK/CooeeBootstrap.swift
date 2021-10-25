@@ -21,6 +21,11 @@ class CooeeBootstrap {
         _ = AppLifeCycle.shared
         registerFirebase()
         updateFirebaseToken()
+        startPendingTaskJob()
+    }
+
+    private func startPendingTaskJob() {
+        CooeeJobUtils.schedulePendingTaskJob()
     }
 
     private func registerFirebase() {
@@ -32,7 +37,9 @@ class CooeeBootstrap {
 
     private func updateFirebaseToken() {
         Messaging.messaging().token { (token, _) in
-            BaseHTTPService.shared.sendFirebaseToken(token: token)
+            var requestBody = [String: Any]()
+            requestBody["firebaseToken"] = token
+            CooeeFactory.shared.safeHttpService.updatePushToken(requestData: requestBody)
         }
     }
 }
