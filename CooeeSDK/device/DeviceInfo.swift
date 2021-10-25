@@ -48,7 +48,7 @@ class DeviceInfo {
                 }
             }
             /* Stats in bytes */
-            let mem_used = Int64(vm_stat.active_count +
+            _ = Int64(vm_stat.active_count +
                     vm_stat.inactive_count +
                     vm_stat.wire_count) * Int64(pagesize)
             let mem_free = Int64(vm_stat.free_count) * Int64(pagesize)

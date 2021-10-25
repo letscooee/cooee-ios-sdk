@@ -63,11 +63,13 @@ class BaseHTTPService {
                 header: commonHeaders.getDictionary(), t: [String: String].self)
     }
 
-    func registerDevice(body: DeviceAuthenticationBody, completion: @escaping (DeviceAuthResponse) -> ()) {
+    func registerDevice(body: DeviceAuthenticationBody, completion: @escaping (DeviceAuthResponse?, Error?) -> ()) {
         do {
-            _ = try webService.getResponse(fromURL: Constants.registerUser, method: .POST, params: body.toDictionary(),
-                    header: commonHeaders.getDictionary(), t: DeviceAuthResponse.self)
+            let result = try webService.getResponse(fromURL: Constants.registerUser, method: .POST,
+                    params: body.toDictionary(), header: commonHeaders.getDictionary(), t: DeviceAuthResponse.self)
+            completion(result, nil)
         } catch {
+            completion(nil, error)
         }
     }
 
@@ -80,8 +82,7 @@ class BaseHTTPService {
         do {
             _ = try webService.getResponse(fromURL: Constants.keepAlive, method: .POST, params: body,
                     header: commonHeaders.getDictionary(), t: [String: String].self)
-        } catch {
-        }
+        } catch {}
     }
 
     func updateUserProfile(requestData: [String: Any]) throws {

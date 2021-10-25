@@ -51,6 +51,7 @@
 		75DD8793271575EA00A272BB /* CooeeJobUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD8792271575EA00A272BB /* CooeeJobUtils.swift */; };
 		75DD87962715924B00A272BB /* PendingTaskJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87952715924B00A272BB /* PendingTaskJob.swift */; };
 		75DD87982715927B00A272BB /* PendingTaskJobProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87972715927B00A272BB /* PendingTaskJobProcessor.swift */; };
+		75DD879A2716FD3600A272BB /* SentryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87992716FD3600A272BB /* SentryHelper.swift */; };
 		AC0B8234FFAFC98E987999A7 /* SafeHTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8B65ED15E2A6D74A0F03 /* SafeHTTPService.swift */; };
 		AC0B8269B7CDB037E372F8B3 /* HttpTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8D0C0E553156E3B76C31 /* HttpTaskProcessor.swift */; };
 		AC0B830AA583B38E12F76E5C /* CooeeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B851DC5B190221B669F38 /* CooeeFactory.swift */; };
@@ -146,6 +147,7 @@
 		75DD8792271575EA00A272BB /* CooeeJobUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeJobUtils.swift; sourceTree = "<group>"; };
 		75DD87952715924B00A272BB /* PendingTaskJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTaskJob.swift; sourceTree = "<group>"; };
 		75DD87972715927B00A272BB /* PendingTaskJobProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTaskJobProcessor.swift; sourceTree = "<group>"; };
+		75DD87992716FD3600A272BB /* SentryHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentryHelper.swift; sourceTree = "<group>"; };
 		77F56F40EDA5A57940AA34BC /* Pods-Cooee iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS.release.xcconfig"; path = "Target Support Files/Pods-Cooee iOS/Pods-Cooee iOS.release.xcconfig"; sourceTree = "<group>"; };
 		7F5B66C3F5CF5A3CF236A788 /* Pods-CooeeSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.release.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.release.xcconfig"; sourceTree = "<group>"; };
 		AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionConcludeTaskProcessor.swift; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 				751E1322270C26A5002CF442 /* RuntimeData.swift */,
 				751E1328270C7074002CF442 /* DateUtil.swift */,
 				751E132C270D9276002CF442 /* CustomError.swift */,
+				75DD87992716FD3600A272BB /* SentryHelper.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -742,6 +745,7 @@
 				AC0B83940A8AA5D45A0E64D9 /* EventTaskProcessor.swift in Sources */,
 				AC0B850DFCDC2005C3A115B0 /* PushTokenTaskProcessor.swift in Sources */,
 				AC0B8E841AD56FEB009D2A89 /* SessionConcludeTaskProcessor.swift in Sources */,
+				75DD879A2716FD3600A272BB /* SentryHelper.swift in Sources */,
 				AC0B8234FFAFC98E987999A7 /* SafeHTTPService.swift in Sources */,
 				AC0B8442A908253F00AF3061 /* PendingTaskService.swift in Sources */,
 			);
