@@ -44,19 +44,19 @@ class UnitUtil {
         parseToInt(pixelString, Constants.UNIT_PIXEL);
     }
 
-    public static func getCalculatedValue(_ parentWidth: Int, _  parentHeight: Int, _  value: String) -> Int? {
+    public static func getCalculatedValue(_ parentWidth: Int, _  parentHeight: Int, _  value: String) -> Int {
         getCalculatedValue(parentWidth, parentHeight, value, false)
     }
 
-    public static func getCalculatedValue(_ parent: UIView, _ value: String) -> Int? {
+    public static func getCalculatedValue(_ parent: UIView, _ value: String) -> Int {
         getCalculatedValue(parent, value, false)
     }
 
-    public static func getCalculatedValue(_ parent: UIView, _ value: String,_ isHeight: Bool) -> Int? {
+    public static func getCalculatedValue(_ parent: UIView, _ value: String, _ isHeight: Bool) -> Int {
         getCalculatedValue(Int(parent.frame.width), Int(parent.frame.height), value, isHeight);
     }
 
-    public static func getCalculatedValue(_ parentWidth: Int, _  parentHeight: Int, _  value: String, _  isHeight: Bool) -> Int? {
+    public static func getCalculatedValue(_ parentWidth: Int, _  parentHeight: Int, _  value: String, _  isHeight: Bool) -> Int {
 
         let value = value.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines).lowercased()
         if (value.contains(Constants.UNIT_PIXEL)) {
