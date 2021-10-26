@@ -36,31 +36,39 @@ class UnitUtil {
           - replaceUnit: it can be "px,%,vh,vw"
         - Returns: Float if everything done else 0
         */
-    public static func parseToFloat(_ valueToConvert: String, _ replaceUnit: String) -> Float {
-        Float(valueToConvert.replacingOccurrences(of: replaceUnit, with: "")) ?? 0
+    public static func parseToFloat(_ valueToConvert: String, _ replaceUnit: String) -> CGFloat {
+        CGFloat(Double(valueToConvert.replacingOccurrences(of: replaceUnit, with: "")) ?? 0)
     }
 
-    public static func getCalculatedPixel(_ pixelString: String) -> Int {
-        parseToInt(pixelString, Constants.UNIT_PIXEL);
+    public static func getCalculatedPixel(_ pixelString: String) -> CGFloat {
+        CGFloat(parseToFloat(pixelString, Constants.UNIT_PIXEL));
     }
 
-    public static func getCalculatedValue(_ parentWidth: Int, _  parentHeight: Int, _  value: String) -> Int {
+    public static func getCalculatedValue(_ parentWidth: CGFloat, _  parentHeight: CGFloat, _  value: String) -> CGFloat {
         getCalculatedValue(parentWidth, parentHeight, value, false)
     }
 
-    public static func getCalculatedValue(_ parent: UIView, _ value: String) -> Int {
+    public static func getCalculatedValue(_ parent: UIView, _ value: String) -> CGFloat {
         getCalculatedValue(parent, value, false)
     }
 
-    public static func getCalculatedValue(_ parent: UIView, _ value: String, _ isHeight: Bool) -> Int {
-        getCalculatedValue(Int(parent.frame.width), Int(parent.frame.height), value, isHeight);
+    public static func getCalculatedValue(_ parent: UIView, _ value: String, _ isHeight: Bool) -> CGFloat {
+        getCalculatedValue(parent.frame.width, parent.frame.height, value, isHeight);
     }
 
-    public static func getCalculatedValue(_ parentWidth: Int, _  parentHeight: Int, _  value: String, _  isHeight: Bool) -> Int {
+    public static func getCalculatedValue(_ parentWidth: CGFloat, _  parentHeight: CGFloat, _  value: String, _  isHeight: Bool) -> CGFloat {
 
         let value = value.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines).lowercased()
+
+        if (!value.contains(Constants.UNIT_PIXEL))
+                   && (!value.contains(Constants.UNIT_PERCENT))
+                   && (!value.contains(Constants.UNIT_VIEWPORT_HEIGHT))
+                   && (!value.contains(Constants.UNIT_VIEWPORT_WIDTH)) {
+            return CGFloat(Float(value) ?? 0).pixelsToPoints()
+        }
+
         if (value.contains(Constants.UNIT_PIXEL)) {
-            return getCalculatedPixel(value);
+            return getCalculatedPixel(value).pixelsToPoints();
             // TODOX: 26/07/21 Consider landscape mode here
             //return webPixels * DISPLAY_HEIGHT / STANDARD_RESOLUTION;
 
@@ -68,18 +76,20 @@ class UnitUtil {
             if (CooeeFactory.shared.sdkInfo.cachedInfo.isDebugging) {
                 print("Parent width: \(parentWidth), height: \(parentHeight)");
             }
-
+            let convertedValue = parseToFloat(value, Constants.UNIT_PERCENT).pixelsToPoints()
             if (isHeight) {
-                return ((parseToInt(value, Constants.UNIT_PERCENT) * parentHeight) / 100);
+                return CGFloat((convertedValue * parentHeight) / 100);
             } else {
-                return ((parseToInt(value, Constants.UNIT_PERCENT) * parentWidth) / 100);
+                return CGFloat((convertedValue * parentWidth) / 100);
             }
 
         } else if (value.contains(Constants.UNIT_VIEWPORT_HEIGHT)) {
-            return ((parseToInt(value, Constants.UNIT_VIEWPORT_HEIGHT) * Int(DISPLAY_HEIGHT)) / 100);
+            let convertedValue = parseToFloat(value, Constants.UNIT_VIEWPORT_HEIGHT).pixelsToPoints()
+            return ((convertedValue * CGFloat(DISPLAY_HEIGHT)) / 100);
 
         } else if (value.contains(Constants.UNIT_VIEWPORT_WIDTH)) {
-            return ((parseToInt(value, Constants.UNIT_VIEWPORT_WIDTH) * Int(DISPLAY_WIDTH)) / 100);
+            let convertedValue = parseToFloat(value, Constants.UNIT_VIEWPORT_WIDTH).pixelsToPoints()
+            return ((convertedValue * CGFloat(DISPLAY_WIDTH)) / 100);
         }
 
         return 0;
