@@ -65,6 +65,14 @@ struct Size: HandyJSON {
     }
 
     public func getCalculatedHeight(_ parent: UIView) -> CGFloat? {
-        width != nil ? CGFloat(UnitUtil.getCalculatedValue(parent, height!, true)) : nil
+        height != nil ? CGFloat(UnitUtil.getCalculatedValue(parent, height!, true)) : nil
+    }
+
+    public func getCalculatedMaxWidth(_ parent: UIView) -> CGFloat? {
+        width != nil ? CGFloat(UnitUtil.getCalculatedValue(parent, maxWidth!)) : nil
+    }
+
+    public func getCalculatedMaxHeight(_ parent: UIView) -> CGFloat? {
+        height != nil ? CGFloat(UnitUtil.getCalculatedValue(parent, maxHeight!, true)) : nil
     }
 }

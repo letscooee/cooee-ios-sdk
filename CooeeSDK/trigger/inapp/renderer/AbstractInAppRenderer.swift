@@ -46,7 +46,21 @@ class AbstractInAppRenderer: InAppRenderer {
 
         // TODO 26/10/21: Check for position apply of UIView
         //self.applyPositionBlock()
-        //self.processMaxSize()
+        self.processMaxSize()
+    }
+
+    private func processMaxSize() {
+        let size = self.elementData.getSize()
+        let currentWidth = self.newElement?.frame.width
+        let currentHeight = self.newElement?.frame.height
+
+        if let calculatedMaxWidth = size.getCalculatedMaxWidth(self.parentElement), calculatedMaxWidth < currentWidth {
+            self.newElement?.frame.size.width = calculatedMaxWidth
+        }
+
+        if let calculatedMaxHeight = size.getCalculatedMaxHeight(self.parentElement), calculatedMaxHeight < currentHeight {
+            self.newElement?.frame.size.height = calculatedMaxHeight
+        }
     }
 
     private func processSpacing() {
