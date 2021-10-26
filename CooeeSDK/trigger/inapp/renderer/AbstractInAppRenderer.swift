@@ -51,8 +51,8 @@ class AbstractInAppRenderer: InAppRenderer {
 
     private func processMaxSize() {
         let size = self.elementData.getSize()
-        let currentWidth = self.newElement?.frame.width
-        let currentHeight = self.newElement?.frame.height
+        let currentWidth = self.newElement!.frame.width
+        let currentHeight = self.newElement!.frame.height
 
         if let calculatedMaxWidth = size.getCalculatedMaxWidth(self.parentElement), calculatedMaxWidth < currentWidth {
             self.newElement?.frame.size.width = calculatedMaxWidth
