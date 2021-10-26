@@ -8,6 +8,7 @@
 import Foundation
 import HandyJSON
 import FlexLayout
+import UIKit
 
 /**
  - Author: Ashish Gaikwad
@@ -28,7 +29,7 @@ struct Size: HandyJSON {
 
     // MARK: Internal
 
-    var width: String?
+    private var width: String?
     var height: String?
     var maxWidth: String?
     var maxHeight: String?
@@ -57,5 +58,13 @@ struct Size: HandyJSON {
 
     func getAlignContent() -> Flex.AlignContent {
         alignContent?.description ?? FlexProperty.AlignContent.STRETCH.description
+    }
+
+    public func getCalculatedWidth(_ parent: UIView) -> CGFloat? {
+        width != nil ? CGFloat(UnitUtil.getCalculatedValue(parent, width!)) : nil
+    }
+
+    public func getCalculatedHeight(_ parent: UIView) -> CGFloat? {
+        width != nil ? CGFloat(UnitUtil.getCalculatedValue(parent, height!, true)) : nil
     }
 }

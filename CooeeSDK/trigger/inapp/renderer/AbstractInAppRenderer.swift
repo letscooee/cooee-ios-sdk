@@ -35,12 +35,29 @@ class AbstractInAppRenderer: InAppRenderer {
     }
 
     internal func processCommonBlocks() {
+        self.processSizeBlock()
         self.processBackground()
         self.processBorderBlock()
         self.processShadowBlock()
         self.processTransformBlock()
         self.applyFlexParentProperties()
         self.applyFlexItemProperties()
+    }
+
+    private func processSizeBlock() {
+        let size = self.elementData.getSize()
+
+        if size.display == Size.Display.BLOCK || size.display == Size.Display.FLEX {
+            self.newElement?.frame.size.width = parentElement.frame.width
+        }
+
+        if let calculatedWidth = size.getCalculatedWidth(parentElement) {
+            self.newElement?.frame.size.width = calculatedWidth
+        }
+
+        if let calculatedHeight = size.getCalculatedHeight(parentElement) {
+            self.newElement?.frame.size.width = calculatedHeight
+        }
     }
 
     private func applyFlexItemProperties() {
@@ -56,7 +73,7 @@ class AbstractInAppRenderer: InAppRenderer {
             self.newElement?.flex.shrink(flexShrink)
         }
 
-        // TODOX 26/10/21: Check for flexOrder
+        // TODO 26/10/21: Check for flexOrder
 //        if let flexOrder=self.elementData.getFlexOrder(){
 //            self.newElement?.flex.order(flexOrder)
 //        }
