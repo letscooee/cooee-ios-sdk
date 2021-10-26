@@ -42,6 +42,30 @@ class AbstractInAppRenderer: InAppRenderer {
         self.processTransformBlock()
         self.applyFlexParentProperties()
         self.applyFlexItemProperties()
+        self.processSpacing();
+
+        // TODO 26/10/21: Check for position apply of UIView
+        //self.applyPositionBlock()
+        //self.processMaxSize()
+    }
+
+    private func processSpacing() {
+        var spacing = elementData.spacing
+
+        if spacing == nil {
+            return
+        }
+
+        spacing!.calculatedPaddingAndMargin(parentElement)
+
+        let marginLeft = spacing!.getMarginLeft(parentElement)
+        let marginRight = spacing!.getMarginRight(parentElement)
+        let marginTop = spacing!.getMarginTop(parentElement)
+        let marginBottom = spacing!.getMarginBottom(parentElement)
+
+        self.newElement?.layoutMargins = UIEdgeInsets(top: marginTop, left: marginLeft, bottom: marginBottom, right: marginRight)
+
+        // TODO 26/10/21: Check for padding
     }
 
     private func processSizeBlock() {
