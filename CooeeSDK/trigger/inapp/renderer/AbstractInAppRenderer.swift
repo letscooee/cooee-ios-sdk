@@ -4,6 +4,7 @@
 
 import Foundation
 import UIKit
+import FlexLayout
 
 /**
  Process all common propertied of the element
@@ -38,6 +39,41 @@ class AbstractInAppRenderer: InAppRenderer {
         self.processBorderBlock()
         self.processShadowBlock()
         self.processTransformBlock()
+        self.applyFlexParentProperties()
+        self.applyFlexItemProperties()
+    }
+
+    private func applyFlexItemProperties() {
+        if !(self.newElement!.isKind(of: Flex.self)) {
+            return
+        }
+
+        if let flexGrow = self.elementData.getFlexGrow() {
+            self.newElement?.flex.grow(flexGrow)
+        }
+
+        if let flexShrink = self.elementData.getFlexShrink() {
+            self.newElement?.flex.shrink(flexShrink)
+        }
+
+        // TODOX 26/10/21: Check for flexOrder
+//        if let flexOrder=self.elementData.getFlexOrder(){
+//            self.newElement?.flex.order(flexOrder)
+//        }
+    }
+
+    private func applyFlexParentProperties() {
+        if !(self.newElement!.isKind(of: Flex.self)) {
+            return
+        }
+
+        let size = elementData.getSize()
+
+        self.newElement!.flex.direction(size.getDirection())
+        self.newElement!.flex.wrap(size.getWrap())
+        self.newElement!.flex.justifyContent(size.getJustifyContent())
+        self.newElement!.flex.alignItems(size.getAlignItem())
+        self.newElement!.flex.alignContent(size.getAlignContent())
     }
 
     private func processTransformBlock() {
