@@ -15,7 +15,8 @@ import HandyJSON
 class BaseElement: HandyJSON {
     // MARK: Lifecycle
 
-    required init() {}
+    required init() {
+    }
 
     // MARK: Internal
 
@@ -24,10 +25,39 @@ class BaseElement: HandyJSON {
     var overflow: Overflow?
     var position: Position?
     var shadow: Shadow?
-    var size: Size?
+    private var size: Size?
     var spacing: Spacing?
     var transform: Transform?
-    var flexGrow: Int?
-    var flexShrink: Int?
-    var flexOrder: Int?
+    private var flexGrow: Int?
+    private var flexShrink: Int?
+    private var flexOrder: Int?
+
+    public func getSize() -> Size {
+        if size == nil {
+            size = Size()
+        }
+
+        return size!
+    }
+
+    public func getFlexGrow() -> CGFloat? {
+        if flexGrow != nil {
+            return CGFloat(flexGrow!)
+        }
+        return nil
+    }
+
+    public func getFlexShrink() -> CGFloat? {
+        if flexShrink != nil {
+            return CGFloat(flexShrink!)
+        }
+        return nil
+    }
+
+    public func getFlexOrder() -> CGFloat? {
+        if flexOrder != nil {
+            return CGFloat(flexOrder!)
+        }
+        return nil
+    }
 }

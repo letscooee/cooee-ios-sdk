@@ -7,6 +7,7 @@
 
 import Foundation
 import HandyJSON
+import FlexLayout
 
 /**
  - Author: Ashish Gaikwad
@@ -15,9 +16,9 @@ import HandyJSON
 struct Size: HandyJSON {
     // MARK: Lifecycle
 
-//    init() {
-//        self.display = Display.BLOCK
-//    }
+    init() {
+        self.display = Display.BLOCK
+    }
 
     // MARK: Public
 
@@ -32,9 +33,29 @@ struct Size: HandyJSON {
     var maxWidth: String?
     var maxHeight: String?
     var display: Display?
-    var justifyContent: FlexProperty.JustifyContent?
-    var alignItems: FlexProperty.AlignItems?
-    var wrap: FlexProperty.Wrap?
-    var alignContent: FlexProperty.AlignContent?
-    var direction: FlexProperty.Direction?
+    private var justifyContent: FlexProperty.JustifyContent?
+    private var alignItems: FlexProperty.AlignItems?
+    private var wrap: FlexProperty.Wrap?
+    private var alignContent: FlexProperty.AlignContent?
+    private var direction: FlexProperty.Direction?
+
+    func getDirection() -> Flex.Direction {
+        direction?.description ?? FlexProperty.Direction.ROW.description
+    }
+
+    func getAlignItem() -> Flex.AlignItems {
+        alignItems?.description ?? FlexProperty.AlignItems.STRETCH.description
+    }
+
+    func getWrap() -> Flex.Wrap {
+        wrap?.description ?? FlexProperty.Wrap.NOWRAP.description
+    }
+
+    func getJustifyContent() -> Flex.JustifyContent {
+        justifyContent?.description ?? FlexProperty.JustifyContent.FLEX_START.description
+    }
+
+    func getAlignContent() -> Flex.AlignContent {
+        alignContent?.description ?? FlexProperty.AlignContent.STRETCH.description
+    }
 }
