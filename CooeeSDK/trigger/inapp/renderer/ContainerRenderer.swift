@@ -11,17 +11,27 @@ import UIKit
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-class ContainerRenderer {
+class ContainerRenderer: AbstractInAppRenderer {
 
     private var layers: [Layer]
+    private var container: UIView
 
     init(_ container: UIView, _ parentView: UIView, _ element: Container, _ layers: [Layer], _ triggerContext: TriggerContext) {
         self.layers = layers
+        self.container = container
+        super.init(triggerContext: triggerContext, elementData: element, parentElement: parentView)
+    }
+
+    override func render() -> UIView {
+        newElement = container
+        processCommonBlocks()
+        processChildren()
+        return newElement!
     }
 
     public func processChildren() {
         for layer in layers {
-            // TODO 27/10/21: process layer renderer
+            _ = LayerRenderer(newElement!, layer, triggerContext).render()
         }
     }
 }

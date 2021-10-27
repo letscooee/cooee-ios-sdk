@@ -92,9 +92,11 @@
 		AC0B870504126AEF80E61B6A /* InAppAnimationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8B7A9B8DFBE2F5B76514 /* InAppAnimationProvider.swift */; };
 		AC0B874545303FDF69FF4E95 /* DictionaryPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B885A897ACFB8EBF772D0 /* DictionaryPrototype.swift */; };
 		AC0B876E6466717CD0C97BD6 /* InAppRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B87F35B1BE71267F02947 /* InAppRenderer.swift */; };
+		AC0B87A06CA1408C23390D73 /* GroupRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B823934E74E88AFB834FD /* GroupRenderer.swift */; };
 		AC0B880EBE65FCACBE4C063B /* InAppTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B899D43B11EA47FD52E45 /* InAppTrigger.swift */; };
 		AC0B887F64D2646212E0E763 /* ElementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8D9905508EE356785965 /* ElementType.swift */; };
 		AC0B89F78916B1BFA5BA4196 /* ContainerRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B83B047A3106F25C50B41 /* ContainerRenderer.swift */; };
+		AC0B8A5F9B6EE4DDE91AFAEA /* LayerRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8F468A1C1465D945C4C5 /* LayerRenderer.swift */; };
 		AC0B8B29AC11EB84B287A922 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B88F3881FA99265E09B56 /* Container.swift */; };
 		AC0B8B3175C8E3905037A0FE /* InAppTriggerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8AA3294AAAB6B9AF197A /* InAppTriggerScene.swift */; };
 		AC0B8BC022480FDA5C51B478 /* TriggerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8653FB4CB92835FDFF80 /* TriggerContext.swift */; };
@@ -218,6 +220,7 @@
 		AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionConcludeTaskProcessor.swift; sourceTree = "<group>"; };
 		AC0B804DEA9B9A9EB7E1FD5F /* EngagementTriggerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngagementTriggerHelper.swift; sourceTree = "<group>"; };
 		AC0B805A34D46C1243CFFC5A /* ProfileTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTaskProcessor.swift; sourceTree = "<group>"; };
+		AC0B823934E74E88AFB834FD /* GroupRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupRenderer.swift; sourceTree = "<group>"; };
 		AC0B83A6575EA932ACCB0D2F /* VideoElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoElement.swift; sourceTree = "<group>"; };
 		AC0B83B047A3106F25C50B41 /* ContainerRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerRenderer.swift; sourceTree = "<group>"; };
 		AC0B851DC5B190221B669F38 /* CooeeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CooeeFactory.swift; sourceTree = "<group>"; };
@@ -247,6 +250,7 @@
 		AC0B8EA2BBEED727BA8558D9 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AC0B8ED273C05CC69495D48B /* PendingTaskService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingTaskService.swift; sourceTree = "<group>"; };
 		AC0B8F1A3240B22206AC68B6 /* PendingTaskType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingTaskType.swift; sourceTree = "<group>"; };
+		AC0B8F468A1C1465D945C4C5 /* LayerRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerRenderer.swift; sourceTree = "<group>"; };
 		BB800582A4AF75A48137B606 /* Pods_CooeeSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CooeeSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6DD165866F91815E65CF7F1 /* Pods_Cooee_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cooee_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -609,6 +613,8 @@
 				AC0B8CAD418C022E74D59D3F /* AbstractInAppRenderer.swift */,
 				AC0B8A91EC01FFA1820B6560 /* RendererExtensions.swift */,
 				AC0B83B047A3106F25C50B41 /* ContainerRenderer.swift */,
+				AC0B8F468A1C1465D945C4C5 /* LayerRenderer.swift */,
+				AC0B823934E74E88AFB834FD /* GroupRenderer.swift */,
 			);
 			path = renderer;
 			sourceTree = "<group>";
@@ -1000,6 +1006,8 @@
 				AC0B887F64D2646212E0E763 /* ElementType.swift in Sources */,
 				AC0B8F9ACEAD15992DF79CC2 /* EngagementTriggerHelper.swift in Sources */,
 				AC0B89F78916B1BFA5BA4196 /* ContainerRenderer.swift in Sources */,
+				AC0B8A5F9B6EE4DDE91AFAEA /* LayerRenderer.swift in Sources */,
+				AC0B87A06CA1408C23390D73 /* GroupRenderer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
