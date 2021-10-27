@@ -34,8 +34,12 @@ class GroupRenderer: AbstractInAppRenderer {
         let groupElementData = elementData as! GroupElement
 
         for child in groupElementData.children! {
-            if child.getElementType() == ElementType.IMAGE{
-                ImageRenderer(newElement!,child,triggerContext).render()
+            if child.getElementType() == ElementType.IMAGE {
+                _ = ImageRenderer(newElement!, child, triggerContext).render()
+            } else if child.getElementType() == ElementType.GROUP {
+                _ = GroupRenderer(newElement!, child, triggerContext)
+            } else if child.getElementType() == ElementType.GROUP {
+                _ = TextRenderer(newElement!, child, triggerContext)
             }
         }
     }

@@ -8,7 +8,7 @@ import Foundation
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-class TextElement: BaseElement {
+class TextElement: BaseTextElement {
     // MARK: Lifecycle
 
     required init() {}
