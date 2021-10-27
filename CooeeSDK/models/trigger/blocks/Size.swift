@@ -29,6 +29,10 @@ struct Size: HandyJSON {
 
     // MARK: Internal
 
+    public func isDisplayFlex() -> Bool {
+        (self.display == Display.FLEX || self.display == Display.INLINE_FLEX)
+    }
+
     private var width: String?
     var height: String?
     var maxWidth: String?
