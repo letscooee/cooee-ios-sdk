@@ -34,7 +34,9 @@ class GroupRenderer: AbstractInAppRenderer {
         let groupElementData = elementData as! GroupElement
 
         for child in groupElementData.children! {
-
+            if child.getElementType() == ElementType.IMAGE{
+                ImageRenderer(newElement!,child,triggerContext).render()
+            }
         }
     }
 }
