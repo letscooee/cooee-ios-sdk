@@ -102,6 +102,7 @@
 		AC0B8B29AC11EB84B287A922 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B88F3881FA99265E09B56 /* Container.swift */; };
 		AC0B8B3175C8E3905037A0FE /* InAppTriggerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8AA3294AAAB6B9AF197A /* InAppTriggerScene.swift */; };
 		AC0B8BC022480FDA5C51B478 /* TriggerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8653FB4CB92835FDFF80 /* TriggerContext.swift */; };
+		AC0B8BC8CD85A03FB49FFA10 /* ButtonRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B814783FAE5CBC0031163 /* ButtonRenderer.swift */; };
 		AC0B8D16CF18A09786614250 /* TextAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8ADD9332621266B45210 /* TextAlignment.swift */; };
 		AC0B8DBA39461B9A35158784 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8EA2BBEED727BA8558D9 /* Extensions.swift */; };
 		AC0B8E13066BD7C37F8B65E8 /* VideoElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B83A6575EA932ACCB0D2F /* VideoElement.swift */; };
@@ -222,6 +223,7 @@
 		AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionConcludeTaskProcessor.swift; sourceTree = "<group>"; };
 		AC0B804DEA9B9A9EB7E1FD5F /* EngagementTriggerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngagementTriggerHelper.swift; sourceTree = "<group>"; };
 		AC0B805A34D46C1243CFFC5A /* ProfileTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTaskProcessor.swift; sourceTree = "<group>"; };
+		AC0B814783FAE5CBC0031163 /* ButtonRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonRenderer.swift; sourceTree = "<group>"; };
 		AC0B823934E74E88AFB834FD /* GroupRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupRenderer.swift; sourceTree = "<group>"; };
 		AC0B832FF3BC900263507255 /* ImageRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRenderer.swift; sourceTree = "<group>"; };
 		AC0B83A6575EA932ACCB0D2F /* VideoElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoElement.swift; sourceTree = "<group>"; };
@@ -621,6 +623,7 @@
 				AC0B823934E74E88AFB834FD /* GroupRenderer.swift */,
 				AC0B832FF3BC900263507255 /* ImageRenderer.swift */,
 				AC0B898DBA7B1DE088837B41 /* TextRenderer.swift */,
+				AC0B814783FAE5CBC0031163 /* ButtonRenderer.swift */,
 			);
 			path = renderer;
 			sourceTree = "<group>";
@@ -1016,6 +1019,7 @@
 				AC0B87A06CA1408C23390D73 /* GroupRenderer.swift in Sources */,
 				AC0B81F74E2154808AECB63A /* ImageRenderer.swift in Sources */,
 				AC0B8A6AEF61B3EE1611B5EC /* TextRenderer.swift in Sources */,
+				AC0B8BC8CD85A03FB49FFA10 /* ButtonRenderer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
