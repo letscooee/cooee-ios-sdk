@@ -93,6 +93,7 @@
 		AC0B874545303FDF69FF4E95 /* DictionaryPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B885A897ACFB8EBF772D0 /* DictionaryPrototype.swift */; };
 		AC0B876E6466717CD0C97BD6 /* InAppRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B87F35B1BE71267F02947 /* InAppRenderer.swift */; };
 		AC0B880EBE65FCACBE4C063B /* InAppTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B899D43B11EA47FD52E45 /* InAppTrigger.swift */; };
+		AC0B887F64D2646212E0E763 /* ElementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8D9905508EE356785965 /* ElementType.swift */; };
 		AC0B8B29AC11EB84B287A922 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B88F3881FA99265E09B56 /* Container.swift */; };
 		AC0B8B3175C8E3905037A0FE /* InAppTriggerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8AA3294AAAB6B9AF197A /* InAppTriggerScene.swift */; };
 		AC0B8BC022480FDA5C51B478 /* TriggerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8653FB4CB92835FDFF80 /* TriggerContext.swift */; };
@@ -103,6 +104,7 @@
 		AC0B8E5C2D7FCA755C9F8910 /* TextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B86FED7478E8BCDAAC99D /* TextElement.swift */; };
 		AC0B8E841AD56FEB009D2A89 /* SessionConcludeTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */; };
 		AC0B8F5B3A9D608D4D9E66E5 /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8E0A4B152D56137F56CF /* Layer.swift */; };
+		AC0B8F9ACEAD15992DF79CC2 /* EngagementTriggerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B804DEA9B9A9EB7E1FD5F /* EngagementTriggerHelper.swift */; };
 		C17CD8950D3CBB4254E3AEBD /* Pods_Cooee_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6DD165866F91815E65CF7F1 /* Pods_Cooee_iOS.framework */; };
 		E4B53257B1CEA855270672CE /* Pods_CooeeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB800582A4AF75A48137B606 /* Pods_CooeeSDK.framework */; };
 /* End PBXBuildFile section */
@@ -213,6 +215,7 @@
 		77F56F40EDA5A57940AA34BC /* Pods-Cooee iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS.release.xcconfig"; path = "Target Support Files/Pods-Cooee iOS/Pods-Cooee iOS.release.xcconfig"; sourceTree = "<group>"; };
 		7F5B66C3F5CF5A3CF236A788 /* Pods-CooeeSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.release.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.release.xcconfig"; sourceTree = "<group>"; };
 		AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionConcludeTaskProcessor.swift; sourceTree = "<group>"; };
+		AC0B804DEA9B9A9EB7E1FD5F /* EngagementTriggerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngagementTriggerHelper.swift; sourceTree = "<group>"; };
 		AC0B805A34D46C1243CFFC5A /* ProfileTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTaskProcessor.swift; sourceTree = "<group>"; };
 		AC0B83A6575EA932ACCB0D2F /* VideoElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoElement.swift; sourceTree = "<group>"; };
 		AC0B851DC5B190221B669F38 /* CooeeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CooeeFactory.swift; sourceTree = "<group>"; };
@@ -237,6 +240,7 @@
 		AC0B8D173E6FFB9D0659EA78 /* EventTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTaskProcessor.swift; sourceTree = "<group>"; };
 		AC0B8D61FEAA5B2A4130CBD3 /* ImageElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageElement.swift; sourceTree = "<group>"; };
 		AC0B8D73DB6AA189BD02953E /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
+		AC0B8D9905508EE356785965 /* ElementType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementType.swift; sourceTree = "<group>"; };
 		AC0B8E0A4B152D56137F56CF /* Layer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
 		AC0B8EA2BBEED727BA8558D9 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AC0B8ED273C05CC69495D48B /* PendingTaskService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingTaskService.swift; sourceTree = "<group>"; };
@@ -564,6 +568,7 @@
 			children = (
 				75DD87C7271ECD1900A272BB /* FlexProperty.swift */,
 				AC0B8ADD9332621266B45210 /* TextAlignment.swift */,
+				AC0B8D9905508EE356785965 /* ElementType.swift */,
 			);
 			path = trigger;
 			sourceTree = "<group>";
@@ -621,6 +626,7 @@
 			isa = PBXGroup;
 			children = (
 				AC0B8C6F71D493FD0E2871F2 /* inapp */,
+				AC0B804DEA9B9A9EB7E1FD5F /* EngagementTriggerHelper.swift */,
 			);
 			path = trigger;
 			sourceTree = "<group>";
@@ -988,6 +994,8 @@
 				AC0B8DBA39461B9A35158784 /* Extensions.swift in Sources */,
 				AC0B81656327520249E6A428 /* UnitUtil.swift in Sources */,
 				AC0B85C98A085703F48B2067 /* RendererExtensions.swift in Sources */,
+				AC0B887F64D2646212E0E763 /* ElementType.swift in Sources */,
+				AC0B8F9ACEAD15992DF79CC2 /* EngagementTriggerHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

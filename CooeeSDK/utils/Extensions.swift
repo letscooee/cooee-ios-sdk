@@ -56,3 +56,41 @@ public extension CGFloat {
         return CGFloat(1).pixelsToPoints()
     }
 }
+
+extension UIApplication {
+
+    /**
+     Fetch root ViewController and find top most running UIViewController in it
+
+     - Returns: top most UIViewController
+     */
+    func topMostViewController() -> UIViewController? {
+        return UIApplication.shared.windows.filter {
+            $0.isKeyWindow
+        }.first?.rootViewController?.topMostViewController()
+    }
+}
+
+extension UIViewController {
+
+    /**
+     Find top most running UIViewController in root view controller
+
+     - Returns: UIViewController
+     */
+    func topMostViewController() -> UIViewController? {
+        if self.presentedViewController == nil {
+            return self
+        }
+        if let navigation = self.presentedViewController as? UINavigationController {
+            return navigation.visibleViewController?.topMostViewController() ?? nil
+        }
+        if let tab = self.presentedViewController as? UITabBarController {
+            if let selectedTab = tab.selectedViewController {
+                return selectedTab.topMostViewController()
+            }
+            return tab.topMostViewController()
+        }
+        return self.presentedViewController!.topMostViewController()
+    }
+}
