@@ -37,9 +37,11 @@ class GroupRenderer: AbstractInAppRenderer {
             if child.getElementType() == ElementType.IMAGE {
                 _ = ImageRenderer(newElement!, child, triggerContext).render()
             } else if child.getElementType() == ElementType.GROUP {
-                _ = GroupRenderer(newElement!, child, triggerContext)
-            } else if child.getElementType() == ElementType.GROUP {
-                _ = TextRenderer(newElement!, child, triggerContext)
+                _ = GroupRenderer(newElement!, child, triggerContext).render()
+            } else if child.getElementType() == ElementType.TEXT {
+                _ = TextRenderer(newElement!, child, triggerContext).render()
+            } else if child.getElementType() == ElementType.BUTTON {
+                _ = ButtonRenderer(newElement!, child, triggerContext).render()
             }
         }
     }
