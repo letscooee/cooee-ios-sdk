@@ -6,7 +6,7 @@ import Foundation
 import UIKit
 
 class LayerRenderer: GroupRenderer {
-    init(_ parentView: UIView, _ element: BaseElement, _ triggerContext: TriggerContext) {
+    override init(_ parentView: UIView, _ element: BaseElement, _ triggerContext: TriggerContext) {
         super.init(parentView, element, triggerContext)
     }
 }
