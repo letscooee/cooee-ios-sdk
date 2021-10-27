@@ -5,6 +5,12 @@
 import Foundation
 import UIKit
 
+/**
+ Renders a Layer
+
+ - Author: Ashish Gaikwad
+ - Since: 0.1.0
+ */
 class LayerRenderer: GroupRenderer {
     override init(_ parentView: UIView, _ element: BaseElement, _ triggerContext: TriggerContext) {
         super.init(parentView, element, triggerContext)

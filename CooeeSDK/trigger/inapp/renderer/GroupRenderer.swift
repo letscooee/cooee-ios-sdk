@@ -5,6 +5,12 @@
 import Foundation
 import UIKit
 
+/**
+ Renders a GroupElement
+
+ - Author: Ashish Gaikwad
+ - Since: 0.1.0
+ */
 class GroupRenderer: AbstractInAppRenderer {
     init(_ parentView: UIView, _ element: BaseElement, _ triggerContext: TriggerContext) {
         super.init(triggerContext: triggerContext, elementData: element, parentElement: parentView)
