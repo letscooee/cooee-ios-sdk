@@ -6,7 +6,6 @@
 //
 
 import CooeeSDK
-import Sentry
 import UIKit
 
 class ViewController: UIViewController {
@@ -19,7 +18,5 @@ class ViewController: UIViewController {
         } catch {}
 
         cooeeSDK.updateUserData(userData: ["name": "Ashish Gaikwad", "email": "ashish@iostest.com", "mobile": 9874563210])
-
-        SentrySDK.capture(message: "Dummy crash")
     }
 }
