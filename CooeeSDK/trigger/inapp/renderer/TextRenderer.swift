@@ -25,14 +25,14 @@ class TextRenderer: AbstractInAppRenderer {
             self.processParts()
         } else {
             let textView = UILabel()
+            textView.text = textData.text
             self.processTextData(textView)
         }
 
         return newElement!
     }
 
-    private func processTextData(_ view: UILabel) {
-        view.text = textData.text
+    internal func processTextData(_ view: UIView) {
         newElement = view
 
         self.processFontBlock()
