@@ -20,6 +20,7 @@ class BaseElement: HandyJSON {
 
     // MARK: Internal
 
+    private var type: ElementType?
     var bg: Background?
     var border: Border?
     var overflow: Overflow?
@@ -59,5 +60,9 @@ class BaseElement: HandyJSON {
             return CGFloat(flexOrder!)
         }
         return nil
+    }
+
+    public func getElementType() -> ElementType {
+        type ?? ElementType.TEXT
     }
 }
