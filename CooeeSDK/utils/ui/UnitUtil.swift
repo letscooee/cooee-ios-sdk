@@ -76,7 +76,7 @@ class UnitUtil {
             if (CooeeFactory.shared.sdkInfo.cachedInfo.isDebugging) {
                 print("Parent width: \(parentWidth), height: \(parentHeight)");
             }
-            let convertedValue = parseToFloat(value, Constants.UNIT_PERCENT).pixelsToPoints()
+            let convertedValue = parseToFloat(value, Constants.UNIT_PERCENT)
             if (isHeight) {
                 return CGFloat((convertedValue * parentHeight) / 100);
             } else {
