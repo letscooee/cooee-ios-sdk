@@ -15,7 +15,7 @@ import HandyJSON
 struct Gradient: HandyJSON {
     // MARK: Public
 
-    public enum `Type` {
+    public enum `Type`: String, HandyJSONEnum {
         case LINEAR
         case RADIAL
         case SWEEP

@@ -16,7 +16,7 @@ import UIKit
 struct Border: HandyJSON {
     // MARK: Public
 
-    public enum Style {
+    public enum Style: String, HandyJSONEnum {
         case SOLID, DASH
     }
 

@@ -7,6 +7,7 @@
 
 import FlexLayout
 import Foundation
+import HandyJSON
 
 /**
  Define all flex property at one place
@@ -14,8 +15,14 @@ import Foundation
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-public class FlexProperty: Codable {
-    public enum Direction: Codable {
+public class FlexProperty: HandyJSON {
+    // MARK: Lifecycle
+
+    required public init() {}
+
+    // MARK: Public
+
+    public enum Direction: String, HandyJSONEnum {
         case ROW, COLUMN, ROW_REVERSE, COLUMN_REVERSE
 
         // MARK: Internal
@@ -34,7 +41,7 @@ public class FlexProperty: Codable {
         }
     }
 
-    public enum Wrap: Codable {
+    public enum Wrap: String, HandyJSONEnum {
         case WRAP, NOWRAP, WRAP_REVERSE
 
         // MARK: Internal
@@ -51,7 +58,7 @@ public class FlexProperty: Codable {
         }
     }
 
-    public enum JustifyContent: Codable {
+    public enum JustifyContent: String, HandyJSONEnum {
         case FLEX_START, FLEX_END, CENTER, SPACE_BETWEEN, SPACE_AROUND, SPACE_EVENLY
 
         // MARK: Internal
@@ -74,7 +81,7 @@ public class FlexProperty: Codable {
         }
     }
 
-    public enum AlignItems: Codable {
+    public enum AlignItems: String, HandyJSONEnum {
         case FLEX_START, FLEX_END, CENTER, BASELINE, STRETCH
 
         // MARK: Internal
@@ -95,7 +102,7 @@ public class FlexProperty: Codable {
         }
     }
 
-    public enum AlignContent: Codable {
+    public enum AlignContent: String, HandyJSONEnum {
         case FLEX_START, FLEX_END, CENTER, SPACE_BETWEEN, SPACE_AROUND, STRETCH
 
         // MARK: Internal

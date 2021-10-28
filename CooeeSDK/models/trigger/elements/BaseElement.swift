@@ -63,6 +63,6 @@ class BaseElement: HandyJSON {
     }
 
     public func getElementType() -> ElementType {
-        type ?? ElementType.TEXT
+        type ?? ElementType.GROUP
     }
 }

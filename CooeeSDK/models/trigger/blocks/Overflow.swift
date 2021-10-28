@@ -15,7 +15,7 @@ import HandyJSON
 struct Overflow: HandyJSON {
     // MARK: Public
 
-    public enum `Type` {
+    public enum `Type`: String, HandyJSONEnum {
         case VISIBLE, HIDDEN
     }
 

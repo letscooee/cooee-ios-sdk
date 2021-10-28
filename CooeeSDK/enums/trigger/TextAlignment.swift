@@ -3,12 +3,13 @@
 //
 
 import Foundation
+import HandyJSON
 
 /**
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-enum TextAlignment: Codable {
+enum TextAlignment: String, HandyJSONEnum {
     
     case LEFT, CENTER, RIGHT
 }

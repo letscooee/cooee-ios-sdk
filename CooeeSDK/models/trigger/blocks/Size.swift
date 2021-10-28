@@ -23,7 +23,7 @@ struct Size: HandyJSON {
 
     // MARK: Public
 
-    public enum Display {
+    public enum Display: String, HandyJSONEnum {
         case BLOCK, INLINE_BLOCK, FLEX, INLINE_FLEX
     }
 
@@ -73,10 +73,10 @@ struct Size: HandyJSON {
     }
 
     public func getCalculatedMaxWidth(_ parent: UIView) -> CGFloat? {
-        width != nil ? CGFloat(UnitUtil.getCalculatedValue(parent, maxWidth!)) : nil
+        maxWidth != nil ? CGFloat(UnitUtil.getCalculatedValue(parent, maxWidth!)) : nil
     }
 
     public func getCalculatedMaxHeight(_ parent: UIView) -> CGFloat? {
-        height != nil ? CGFloat(UnitUtil.getCalculatedValue(parent, maxHeight!, true)) : nil
+        maxHeight != nil ? CGFloat(UnitUtil.getCalculatedValue(parent, maxHeight!, true)) : nil
     }
 }

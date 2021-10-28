@@ -22,7 +22,7 @@ struct Position: HandyJSON {
 
     // MARK: Public
 
-    public enum PositionType {
+    public enum PositionType: String, HandyJSONEnum {
         case STATIC, ABSOLUTE, FIXED
     }
 

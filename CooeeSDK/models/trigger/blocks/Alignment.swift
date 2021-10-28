@@ -15,7 +15,7 @@ import HandyJSON
 struct Alignment: HandyJSON {
     // MARK: Public
 
-    public enum Direction {
+    public enum Direction: String, HandyJSONEnum {
         case LTR
         case RTL
     }
