@@ -19,4 +19,21 @@ class ViewController: UIViewController {
 
         cooeeSDK.updateUserData(userData: ["name": "Ashish Gaikwad", "email": "ashish@iostest.com", "mobile": 9874563210])
     }
+
+    @IBAction func loadPayload(_ sender: Any) {
+        do {
+                if let bundlePath = Bundle.main.url(forResource: "samplepayloadone",
+                                                    withExtension: "json"){
+                    print("path obtained")
+                    let jsonData = try Data(contentsOf: bundlePath)
+                    let rawString = String(data: jsonData, encoding: .utf8)
+                    let formatedString = rawString?.trimmingCharacters(in: .whitespacesAndNewlines)
+                    EngagementTriggerHelper.renderInAppTriggerFromJSONString(rawString!)
+                }else{
+                    print("file not found")
+                }
+            } catch {
+                print(error)
+            }
+    }
 }

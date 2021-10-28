@@ -29,6 +29,9 @@
                                 <rect key="frame" x="40" y="135" width="334" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Load In-App 1"/>
+                                <connections>
+                                    <action selector="loadPayload:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nqc-Qy-4oR"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
