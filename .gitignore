@@ -36,3 +36,6 @@ Carthage/Build
 #
 Pods/
 *.lock
+
+#payloads
+*.json
