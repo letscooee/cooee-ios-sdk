@@ -7,38 +7,43 @@ import UIKit
 
 /**
  Renders a TextElement
- 
+
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
 class TextRenderer: AbstractInAppRenderer {
+    // MARK: Lifecycle
 
-    private var textData: TextElement
-
-    init(_ parentElement: UIView, _ elementData: BaseElement, _ triggerContext: TriggerContext) {
+    init(_ parentElement: UIView, _ elementData: BaseElement, _ triggerContext: TriggerContext, _ isFlex: Bool) {
         self.textData = elementData as! TextElement
-        super.init(triggerContext: triggerContext, elementData: elementData, parentElement: parentElement)
+        super.init(triggerContext: triggerContext, elementData: elementData, parentElement: parentElement, isFlex: isFlex)
     }
 
+    // MARK: Internal
+
     override func render() -> UIView {
-        if textData.parts != nil && !(textData.parts!.isEmpty) {
-            self.processParts()
+        if textData.parts != nil, !(textData.parts!.isEmpty) {
+            processParts()
         } else {
             let textView = UILabel()
             textView.text = textData.text
-            self.processTextData(textView)
+            processTextData(textView)
         }
-
+        processCommonBlocks()
         return newElement!
     }
 
     internal func processTextData(_ view: UIView) {
         newElement = view
 
-        self.processFontBlock()
-        self.processAlignmentBlock()
-        self.processColourBlock()
+        processFontBlock()
+        processAlignmentBlock()
+        processColourBlock()
     }
+
+    // MARK: Private
+
+    private var textData: TextElement
 
     private func processColourBlock() {
         if textData.colour == nil {
@@ -71,8 +76,8 @@ class TextRenderer: AbstractInAppRenderer {
         processCommonBlocks()
 
         for child in textData.parts! {
-            // TODO 27/10/21: watch for size of element
-            _ = TextRenderer(newElement!, child, triggerContext).render()
+            // TODO: 27/10/21: watch for size of element
+            _ = TextRenderer(newElement!, child, triggerContext, isFlex).render()
         }
     }
 }

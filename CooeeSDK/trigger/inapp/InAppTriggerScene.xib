@@ -23,9 +23,6 @@
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-            <connections>
-                <outlet property="parentView" destination="OlJ-2i-a1Q" id="Uu7-Me-aKX"/>
-            </connections>
             <point key="canvasLocation" x="131.8840579710145" y="86.383928571428569"/>
         </view>
     </objects>

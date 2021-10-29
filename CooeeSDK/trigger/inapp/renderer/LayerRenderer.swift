@@ -12,7 +12,7 @@ import UIKit
  - Since: 0.1.0
  */
 class LayerRenderer: GroupRenderer {
-    override init(_ parentView: UIView, _ element: BaseElement, _ triggerContext: TriggerContext) {
-        super.init(parentView, element, triggerContext)
+    override init(_ parentView: UIView, _ element: BaseElement, _ triggerContext: TriggerContext, _ isFlex: Bool) {
+        super.init(parentView, element, triggerContext, isFlex)
     }
 }

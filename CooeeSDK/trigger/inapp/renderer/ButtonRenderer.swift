@@ -12,13 +12,14 @@ import UIKit
  - Since: 0.1.0
  */
 class ButtonRenderer: TextRenderer {
+    // MARK: Lifecycle
 
-    private var buttonData: ButtonElement
-
-    override init(_ parentElement: UIView, _ elementData: BaseElement, _ triggerContext: TriggerContext) {
+    override init(_ parentElement: UIView, _ elementData: BaseElement, _ triggerContext: TriggerContext, _ isFlex: Bool) {
         self.buttonData = elementData as! ButtonElement
-        super.init(_: parentElement, _: elementData, _: triggerContext)
+        super.init(_: parentElement, _: elementData, _: triggerContext, _: isFlex)
     }
+
+    // MARK: Internal
 
     override func render() -> UIKit.UIView {
         let button = UIButton()
@@ -26,4 +27,8 @@ class ButtonRenderer: TextRenderer {
         processTextData(button)
         return newElement!
     }
+
+    // MARK: Private
+
+    private var buttonData: ButtonElement
 }

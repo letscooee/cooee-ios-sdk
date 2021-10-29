@@ -11,7 +11,7 @@ import AVFoundation
  - Since:
  */
 class InAppTriggerScene: UIView {
-    @IBOutlet weak var parentView: UIView!
+    var parentView: UIView!
     private var container: UIView?
 
     private var triggerData: TriggerData?
@@ -22,7 +22,28 @@ class InAppTriggerScene: UIView {
     private let exit = CATransition()
     public static let instance = InAppTriggerScene()
 
-    public func updateViewWith(data: TriggerData, on: UIViewController) throws {
+//    override init (frame : CGRect) {
+//        super.init(frame : frame)
+//        //Bundle.main.loadNibNamed("CustomPopup", owner: self, options: nil)
+//        commonInit()
+//    }
+//
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+
+    private func commonInit() {
+        let bundle = Bundle(for: type(of: self))
+        let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
+        _ = nib.instantiate(withOwner: self, options: nil).first as! UIView
+        parentView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        parentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+    }
+
+    public func updateViewWith(data: TriggerData, on viewController: UIViewController) throws {
+        parentView = UIView()
+        commonInit()
         self.triggerData = data
         self.inAppData = data.getInAppTrigger()
 
@@ -31,10 +52,12 @@ class InAppTriggerScene: UIView {
         }
 
         container = UIView()
+        container?.frame = parentView.frame
         triggerContext.setTriggerData(triggerData: triggerData!)
         // TODO 27/10/21: add closing provision
         setAnimations()
         renderContainerAndLayers()
+        viewController.view.addSubview(parentView)
         parentView.addSubview(container!)
         sendTriggerDisplayedEvent()
     }
@@ -46,7 +69,7 @@ class InAppTriggerScene: UIView {
 
     private func renderContainerAndLayers() {
         let containerData = inAppData?.container!
-        ContainerRenderer(container!, parentView!, containerData!, inAppData!.layers!,triggerContext).render()
+        _ = ContainerRenderer(container!, parentView!, containerData!, inAppData!.layers!, triggerContext).render()
     }
 
     private func setAnimations() {

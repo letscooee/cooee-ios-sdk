@@ -19,7 +19,7 @@ class ContainerRenderer: AbstractInAppRenderer {
     init(_ container: UIView, _ parentView: UIView, _ element: Container, _ layers: [Layer], _ triggerContext: TriggerContext) {
         self.layers = layers
         self.container = container
-        super.init(triggerContext: triggerContext, elementData: element, parentElement: parentView)
+        super.init(triggerContext: triggerContext, elementData: element, parentElement: parentView, isFlex: true)
     }
 
     override func render() -> UIView {
@@ -31,7 +31,7 @@ class ContainerRenderer: AbstractInAppRenderer {
 
     public func processChildren() {
         for layer in layers {
-            _ = LayerRenderer(newElement!, layer, triggerContext).render()
+            _ = LayerRenderer(newElement!, layer, triggerContext, true).render()
         }
     }
 }
