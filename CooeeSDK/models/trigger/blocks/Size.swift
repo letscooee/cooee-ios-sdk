@@ -18,7 +18,7 @@ struct Size: HandyJSON {
     // MARK: Lifecycle
 
     init() {
-        self.display = Display.BLOCK
+        self.display = Display.FLEX
     }
 
     // MARK: Public
