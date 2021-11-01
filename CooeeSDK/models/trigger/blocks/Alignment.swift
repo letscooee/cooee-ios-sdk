@@ -7,6 +7,7 @@
 
 import Foundation
 import HandyJSON
+import UIKit
 
 /**
  - Author: Ashish Gaikwad
@@ -26,6 +27,20 @@ struct Alignment: HandyJSON {
     var direction: Direction? = Direction.LTR
 
     public func getAlignment() -> NSTextAlignment {
+        switch align {
+
+        case .CENTER:
+            return .center
+        case .LEFT:
+            return .left
+        case .RIGHT:
+            return .right
+        case .none:
+            return .center
+        }
+    }
+    
+    public func getButtonAlignment() -> UIControl.ContentHorizontalAlignment {
         switch align {
 
         case .CENTER:
