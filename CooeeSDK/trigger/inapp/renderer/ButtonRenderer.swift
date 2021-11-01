@@ -11,12 +11,12 @@ import UIKit
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-class ButtonRenderer: TextRenderer {
+class ButtonRenderer: AbstractInAppRenderer {
     // MARK: Lifecycle
 
-    override init(_ parentElement: UIView, _ elementData: BaseElement, _ triggerContext: TriggerContext, _ isFlex: Bool) {
+    init(_ parentElement: UIView, _ elementData: BaseElement, _ triggerContext: TriggerContext, _ isFlex: Bool) {
         self.buttonData = elementData as! ButtonElement
-        super.init(_: parentElement, _: elementData, _: triggerContext, _: isFlex)
+        super.init(triggerContext: triggerContext, elementData: elementData, parentElement: parentElement, isFlex: isFlex)
     }
 
     // MARK: Internal
@@ -28,7 +28,39 @@ class ButtonRenderer: TextRenderer {
         return newElement!
     }
 
+    internal func processTextData(_ view: UIView) {
+        newElement = view
+
+        processFontBlock()
+        processAlignmentBlock()
+        processColourBlock()
+    }
+
     // MARK: Private
 
     private var buttonData: ButtonElement
+
+    private func processColourBlock() {
+        if buttonData.colour == nil {
+            return
+        }
+
+        (newElement as! UIButton).setTitleColor(buttonData.colour!.getColour(), for: .normal)
+    }
+
+    private func processAlignmentBlock() {
+        if buttonData.alignment == nil {
+            return
+        }
+
+        (newElement as! UIButton).contentHorizontalAlignment = buttonData.alignment!.getButtonAlignment()
+    }
+
+    private func processFontBlock() {
+        if buttonData.font == nil {
+            return
+        }
+
+        (newElement as! UIButton).titleLabel?.font = UIFont.systemFont(ofSize: buttonData.font!.getSize())
+    }
 }
