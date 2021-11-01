@@ -32,6 +32,7 @@ class BaseElement: HandyJSON {
     private var flexGrow: Int?
     private var flexShrink: Int?
     private var flexOrder: Int?
+    private var click: ClickAction?
 
     public func getSize() -> Size {
         if size == nil {
@@ -64,5 +65,9 @@ class BaseElement: HandyJSON {
 
     public func getElementType() -> ElementType {
         type ?? ElementType.GROUP
+    }
+
+    public func getClickAction() -> ClickAction? {
+        click
     }
 }

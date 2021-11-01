@@ -46,12 +46,29 @@ class AbstractInAppRenderer: InAppRenderer {
         self.processTransformBlock()
         self.applyFlexItemProperties()
         self.processSpacing()
+        self.processClickBlock()
 
         // TODO: 26/10/21: Check for position apply of UIView
         // self.applyPositionBlock()
         self.processMaxSize()
         self.applyFlexParentProperties()
         self.addElementToHierarchy()
+    }
+
+    private func processClickBlock() {
+        let clickAction = self.elementData.getClickAction()
+
+        if clickAction == nil {
+            return
+        }
+
+        let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.checkAction))
+        self.newElement!.addGestureRecognizer(gesture)
+
+    }
+
+    @objc func checkAction(sender : UITapGestureRecognizer) {
+        print("******************* Taped")
     }
 
     func updateSize(_ contentWidth: CGFloat, _ contentHeight: CGFloat) {
