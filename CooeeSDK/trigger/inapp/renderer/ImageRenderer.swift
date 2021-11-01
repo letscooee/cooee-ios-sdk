@@ -47,6 +47,7 @@ class ImageRenderer: AbstractInAppRenderer {
             if let imageData = data {
                 if let uiImage = UIImage(data: imageData) {
                     imageView.image = uiImage
+                    self.updateSize(uiImage.size.width, uiImage.size.height)
                 }
             }
         }

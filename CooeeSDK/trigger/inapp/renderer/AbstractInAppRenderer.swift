@@ -44,24 +44,47 @@ class AbstractInAppRenderer: InAppRenderer {
         self.processBorderBlock()
         self.processShadowBlock()
         self.processTransformBlock()
-        self.applyFlexParentProperties()
         self.applyFlexItemProperties()
         self.processSpacing()
 
         // TODO: 26/10/21: Check for position apply of UIView
         // self.applyPositionBlock()
         self.processMaxSize()
-        self.addElementToHeirarchy()
+        self.applyFlexParentProperties()
+        self.addElementToHierarchy()
+    }
+
+    func updateSize(_ contentWidth: CGFloat, _ contentHeight: CGFloat) {
+        let size = self.elementData.getSize()
+
+        if size.display == Size.Display.BLOCK || size.display == Size.Display.FLEX {
+            self.newElement?.frame.size.width = self.parentElement.frame.width
+        }
+
+        if let contentSize = self.newElement?.intrinsicContentSize.height {
+            self.newElement?.frame.size.height = contentSize
+        }
+
+        if let calculatedWidth = size.getCalculatedWidth(parentElement) {
+            print("calculated Width \(calculatedWidth)")
+            self.newElement?.frame.size.width = calculatedWidth
+        } else {
+            self.newElement?.frame.size.width = contentWidth.pixelsToPoints()
+        }
+
+        if let calculatedHeight = size.getCalculatedHeight(parentElement) {
+            print("calculated Height \(calculatedHeight)")
+            self.newElement?.frame.size.height = calculatedHeight
+        } else {
+            self.newElement?.frame.size.height = contentHeight.pixelsToPoints()
+        }
     }
 
     // MARK: Private
 
-    private func addElementToHeirarchy() {
+    private func addElementToHierarchy() {
         if self.isFlex {
-            self.parentElement.flex.define { flex in
-                print("Is Flex")
-                flex.addItem(newElement!)
-            }
+            self.parentElement.flex.addItem(self.newElement!)
         } else {
             print("Is Not Flex")
             self.parentElement.addSubview(self.newElement!)
@@ -149,17 +172,17 @@ class AbstractInAppRenderer: InAppRenderer {
     }
 
     private func applyFlexParentProperties() {
-        if !(self.newElement!.isKind(of: Flex.self)) {
+        if !(self.elementData.getElementType() == ElementType.GROUP) {
             return
         }
 
         let size = self.elementData.getSize()
 
         self.newElement!.flex.direction(size.getDirection())
-                .wrap(size.getWrap())
-                .justifyContent(size.getJustifyContent())
-                .alignItems(size.getAlignItem())
-                .alignContent(size.getAlignContent())
+            .wrap(size.getWrap())
+            .justifyContent(size.getJustifyContent())
+            .alignItems(size.getAlignItem())
+            .alignContent(size.getAlignContent())
     }
 
     private func processTransformBlock() {
@@ -201,8 +224,8 @@ class AbstractInAppRenderer: InAppRenderer {
 
         } else if border.getStyle() == Border.Style.DASH {
             self.newElement?.addDashedBorder(colour: borderColor, width: border.getWidth(self.parentElement),
-                    dashWidth: border.getDashWidth(self.parentElement), dashGap: border.getDashGap(self.parentElement),
-                    cornerRadius: cornerRadius)
+                                             dashWidth: border.getDashWidth(self.parentElement), dashGap: border.getDashGap(self.parentElement),
+                                             cornerRadius: cornerRadius)
         }
 
         self.newElement?.layer.cornerRadius = CGFloat(border.getRadius(self.parentElement))
