@@ -62,7 +62,9 @@ class ClickActionExecutor {
             return
         }
 
-        let onCTAListener = CooeeSDK.getInstance().getOnCTAListener()
+        guard let onCTAListener = CooeeSDK.getInstance().getOnCTAListener() else {
+            return
+        }
         onCTAListener(keyValues!)
     }
 }

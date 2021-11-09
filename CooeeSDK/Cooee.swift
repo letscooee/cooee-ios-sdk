@@ -20,6 +20,7 @@ public final class CooeeSDK {
         self.safeHttpService = CooeeFactory.shared.safeHttpService
         self.runtimeData = RuntimeData.shared
         self.sentryHelper = CooeeFactory.shared.sentryHelper
+        self.onCTAHandler = nil
     }
 
     // MARK: Public
@@ -99,7 +100,7 @@ public final class CooeeSDK {
         self.onCTAHandler = onCTAHandler
     }
 
-    public func getOnCTAListener() -> (_ result: [String: Any]) -> () {
+    public func getOnCTAListener() -> ((_ result: [String: Any]) -> ())? {
         onCTAHandler
     }
 
@@ -110,5 +111,5 @@ public final class CooeeSDK {
     private let safeHttpService: SafeHTTPService
     private let runtimeData: RuntimeData
     private let sentryHelper: SentryHelper
-    private var onCTAHandler: (_ result: [String: Any]) -> ()
+    private var onCTAHandler: ((_ result: [String: Any]) -> ())? = nil
 }
