@@ -105,7 +105,6 @@
 		AC0B8D16CF18A09786614250 /* TextAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8ADD9332621266B45210 /* TextAlignment.swift */; };
 		AC0B8DBA39461B9A35158784 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8EA2BBEED727BA8558D9 /* Extensions.swift */; };
 		AC0B8E13066BD7C37F8B65E8 /* VideoElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B83A6575EA932ACCB0D2F /* VideoElement.swift */; };
-		AC0B8E2248C889174A5420B0 /* FlexProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8AB7987CB8923CD36259 /* FlexProperties.swift */; };
 		AC0B8E543C14FC65E6EE0093 /* AbstractInAppRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8CAD418C022E74D59D3F /* AbstractInAppRenderer.swift */; };
 		AC0B8E5C2D7FCA755C9F8910 /* TextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B86FED7478E8BCDAAC99D /* TextElement.swift */; };
 		AC0B8E841AD56FEB009D2A89 /* SessionConcludeTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */; };
@@ -242,7 +241,6 @@
 		AC0B8A5E35C8A00964D04170 /* PermissionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionType.swift; sourceTree = "<group>"; };
 		AC0B8A91EC01FFA1820B6560 /* RendererExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RendererExtensions.swift; sourceTree = "<group>"; };
 		AC0B8AA3294AAAB6B9AF197A /* InAppTriggerScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppTriggerScene.swift; sourceTree = "<group>"; };
-		AC0B8AB7987CB8923CD36259 /* FlexProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexProperties.swift; sourceTree = "<group>"; };
 		AC0B8ADD9332621266B45210 /* TextAlignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAlignment.swift; sourceTree = "<group>"; };
 		AC0B8B65ED15E2A6D74A0F03 /* SafeHTTPService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeHTTPService.swift; sourceTree = "<group>"; };
 		AC0B8B7A9B8DFBE2F5B76514 /* InAppAnimationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppAnimationProvider.swift; sourceTree = "<group>"; };
@@ -560,7 +558,6 @@
 				75DD87CB271EF4BA00A272BB /* Alignment.swift */,
 				75DD87CD271EF4D500A272BB /* Font.swift */,
 				AC0B8D73DB6AA189BD02953E /* Animation.swift */,
-				AC0B8AB7987CB8923CD36259 /* FlexProperties.swift */,
 			);
 			path = blocks;
 			sourceTree = "<group>";
@@ -1022,7 +1019,6 @@
 				AC0B8BC8CD85A03FB49FFA10 /* ButtonRenderer.swift in Sources */,
 				AC0B82977F7EFDA50155FEC3 /* ClickActionExecutor.swift in Sources */,
 				AC0B8B26F975F50E0AC0F12F /* PermissionType.swift in Sources */,
-				AC0B8E2248C889174A5420B0 /* FlexProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
