@@ -48,7 +48,6 @@
 		759E15F3271061520040F09C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 759E15F2271061520040F09C /* GoogleService-Info.plist */; };
 		75A0981027070FD800C2057B /* AppLifeCycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A0980F27070FD800C2057B /* AppLifeCycle.swift */; };
 		75A098122707132100C2057B /* CooeeBootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A098112707132100C2057B /* CooeeBootstrap.swift */; };
-		75CC6BD1273B88AF008E3871 /* PositionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CC6BD0273B88AF008E3871 /* PositionType.swift */; };
 		75DD8793271575EA00A272BB /* CooeeJobUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD8792271575EA00A272BB /* CooeeJobUtils.swift */; };
 		75DD87962715924B00A272BB /* PendingTaskJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87952715924B00A272BB /* PendingTaskJob.swift */; };
 		75DD87982715927B00A272BB /* PendingTaskJobProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87972715927B00A272BB /* PendingTaskJobProcessor.swift */; };
@@ -60,7 +59,6 @@
 		75DD87AC271D76E400A272BB /* Glossy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87AB271D76E400A272BB /* Glossy.swift */; };
 		75DD87AE271D77CA00A272BB /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87AD271D77CA00A272BB /* Image.swift */; };
 		75DD87B0271D787900A272BB /* Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87AF271D787900A272BB /* Border.swift */; };
-		75DD87B2271D795B00A272BB /* Overflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87B1271D795B00A272BB /* Overflow.swift */; };
 		75DD87B4271D7BFE00A272BB /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87B3271D7BFE00A272BB /* Position.swift */; };
 		75DD87B6271D7D2000A272BB /* Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87B5271D7D2000A272BB /* Shadow.swift */; };
 		75DD87B8271D7ECB00A272BB /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87B7271D7ECB00A272BB /* Size.swift */; };
@@ -197,7 +195,6 @@
 		759E15F2271061520040F09C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75A0980F27070FD800C2057B /* AppLifeCycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLifeCycle.swift; sourceTree = "<group>"; };
 		75A098112707132100C2057B /* CooeeBootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeBootstrap.swift; sourceTree = "<group>"; };
-		75CC6BD0273B88AF008E3871 /* PositionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionType.swift; sourceTree = "<group>"; };
 		75DD8792271575EA00A272BB /* CooeeJobUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeJobUtils.swift; sourceTree = "<group>"; };
 		75DD87952715924B00A272BB /* PendingTaskJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTaskJob.swift; sourceTree = "<group>"; };
 		75DD87972715927B00A272BB /* PendingTaskJobProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTaskJobProcessor.swift; sourceTree = "<group>"; };
@@ -209,7 +206,6 @@
 		75DD87AB271D76E400A272BB /* Glossy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Glossy.swift; sourceTree = "<group>"; };
 		75DD87AD271D77CA00A272BB /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		75DD87AF271D787900A272BB /* Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Border.swift; sourceTree = "<group>"; };
-		75DD87B1271D795B00A272BB /* Overflow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overflow.swift; sourceTree = "<group>"; };
 		75DD87B3271D7BFE00A272BB /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		75DD87B5271D7D2000A272BB /* Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadow.swift; sourceTree = "<group>"; };
 		75DD87B7271D7ECB00A272BB /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
@@ -562,7 +558,6 @@
 				75DD87AB271D76E400A272BB /* Glossy.swift */,
 				75DD87AD271D77CA00A272BB /* Image.swift */,
 				75DD87AF271D787900A272BB /* Border.swift */,
-				75DD87B1271D795B00A272BB /* Overflow.swift */,
 				75DD87B3271D7BFE00A272BB /* Position.swift */,
 				75DD87B5271D7D2000A272BB /* Shadow.swift */,
 				75DD87B7271D7ECB00A272BB /* Size.swift */,
@@ -593,7 +588,6 @@
 				75DD87C7271ECD1900A272BB /* FlexProperty.swift */,
 				AC0B8ADD9332621266B45210 /* TextAlignment.swift */,
 				AC0B8D9905508EE356785965 /* ElementType.swift */,
-				75CC6BD0273B88AF008E3871 /* PositionType.swift */,
 				AC0B8A5E35C8A00964D04170 /* PermissionType.swift */,
 			);
 			path = trigger;
@@ -954,7 +948,6 @@
 			files = (
 				75A098122707132100C2057B /* CooeeBootstrap.swift in Sources */,
 				75DD87CA271EE39700A272BB /* BaseTextElement.swift in Sources */,
-				75DD87B2271D795B00A272BB /* Overflow.swift in Sources */,
 				751E1325270C350C002CF442 /* SessionManager.swift in Sources */,
 				75DD87C0271D822600A272BB /* BrowserContent.swift in Sources */,
 				75729E8526F9BA27006EB506 /* DevicePropertyCollector.swift in Sources */,
@@ -1029,7 +1022,6 @@
 				AC0B880EBE65FCACBE4C063B /* InAppTrigger.swift in Sources */,
 				AC0B8B3175C8E3905037A0FE /* InAppTriggerScene.swift in Sources */,
 				AC0B870504126AEF80E61B6A /* InAppAnimationProvider.swift in Sources */,
-				75CC6BD1273B88AF008E3871 /* PositionType.swift in Sources */,
 				AC0B876E6466717CD0C97BD6 /* InAppRenderer.swift in Sources */,
 				AC0B8E543C14FC65E6EE0093 /* AbstractInAppRenderer.swift in Sources */,
 				AC0B8BC022480FDA5C51B478 /* TriggerContext.swift in Sources */,

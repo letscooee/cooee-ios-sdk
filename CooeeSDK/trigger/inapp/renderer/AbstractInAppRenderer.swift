@@ -133,12 +133,12 @@ class AbstractInAppRenderer: InAppRenderer {
 
         spacing!.calculatedPaddingAndMargin(self.parentElement)
 
-        let marginLeft = spacing!.getMarginLeft(self.parentElement)
+        /*let marginLeft = spacing!.getMarginLeft(self.parentElement)
         let marginRight = spacing!.getMarginRight(self.parentElement)
         let marginTop = spacing!.getMarginTop(self.parentElement)
         let marginBottom = spacing!.getMarginBottom(self.parentElement)
 
-        self.newElement?.layoutMargins = UIEdgeInsets(top: marginTop, left: marginLeft, bottom: marginBottom, right: marginRight)
+        self.newElement?.layoutMargins = UIEdgeInsets(top: marginTop, left: marginLeft, bottom: marginBottom, right: marginRight)*/
 
         // TODO: 26/10/21: Check for padding
     }

@@ -95,5 +95,4 @@ class BaseElement: HandyJSON {
     private var z: Float?
     private var w: Float?
     private var h: Float?
-    private var mode: PositionType?
 }

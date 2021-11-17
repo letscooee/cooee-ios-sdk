@@ -20,34 +20,10 @@ struct Spacing: HandyJSON {
     private var pr: Float?
     private var pt: Float?
     private var pb: Float?
-    private var m: Float?
-    private var mr: Float?
-    private var ml: Float?
-    private var mt: Float?
-    private var mb: Float?
 
-    private var calculatedMargin: CGFloat = 0
     private var calculatedPadding: CGFloat = 0
 
-    public func getMarginLeft(_ parent: UIView) -> CGFloat {
-        ml != nil ? UnitUtil.getScaledPixel(ml!) : calculatedMargin;
-    }
-
-    public func getMarginRight(_ parent: UIView) -> CGFloat {
-        mr != nil ? UnitUtil.getScaledPixel(mr!) : calculatedMargin;
-    }
-
-    public func getMarginTop(_ parent: UIView) -> CGFloat {
-        mt != nil ? UnitUtil.getScaledPixel(mt!) : calculatedMargin;
-    }
-
-    public func getMarginBottom(_ parent: UIView) -> CGFloat {
-        mb != nil ? UnitUtil.getScaledPixel(mb!) : calculatedMargin;
-    }
-
     public mutating func calculatedPaddingAndMargin(_ parent: UIView) {
-        calculatedMargin = UnitUtil.getScaledPixel(m!)
-
         calculatedPadding = CGFloat(p == nil ? 0 : UnitUtil.getScaledPixel(p!))
     }
 

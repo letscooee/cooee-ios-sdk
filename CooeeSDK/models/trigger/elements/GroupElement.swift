@@ -18,6 +18,5 @@ class GroupElement: BaseElement {
     // MARK: Internal
 
     var children: [[String: Any]]?
-    var clip: Overflow.Type?
     var fx: FlexProperties?
 }
