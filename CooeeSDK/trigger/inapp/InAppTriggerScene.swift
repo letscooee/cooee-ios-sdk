@@ -68,12 +68,12 @@ class InAppTriggerScene: UIView {
     }
 
     private func renderContainerAndLayers() {
-        let containerData = inAppData?.container!
-        _ = ContainerRenderer(container!, parentView!, containerData!, inAppData!.layers!, triggerContext).render()
+        let containerData = inAppData?.cont!
+        //_ = ContainerRenderer(container!, parentView!, containerData!, inAppData!.layers!, triggerContext).render()
     }
 
     private func setAnimations() {
-        if let animation = inAppData?.container?.animation {
+        if let animation = inAppData?.cont?.animation {
             let enterAnimation = InAppAnimationProvider.getEnterAnimation(animation: animation)
             let exitAnimation = InAppAnimationProvider.getExitAnimation(animation: animation)
 

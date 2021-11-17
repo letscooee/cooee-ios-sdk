@@ -11,8 +11,7 @@ import HandyJSON
  */
 class InAppTrigger: HandyJSON {
 
-    var container: Container?
-    var layers: [Layer]?
+    var cont: Container?
 
     required init() {
 

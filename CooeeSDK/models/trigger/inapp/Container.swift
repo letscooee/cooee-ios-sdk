@@ -4,7 +4,8 @@
 
 import Foundation
 
-class Container: GroupElement {
+class Container: BaseElement {
 
     var animation: Animation?
+    var elems: [[String: Any]]?
 }
