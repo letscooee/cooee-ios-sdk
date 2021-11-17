@@ -37,35 +37,6 @@ class BaseElement: HandyJSON {
         return h == nil ? nil : UnitUtil.getScaledPixel(h!)
     }
 
-    public func getSize() -> Size {
-        if size == nil {
-            size = Size()
-        }
-
-        return size!
-    }
-
-    public func getFlexGrow() -> CGFloat? {
-        if flexGrow != nil {
-            return CGFloat(flexGrow!)
-        }
-        return nil
-    }
-
-    public func getFlexShrink() -> CGFloat? {
-        if flexShrink != nil {
-            return CGFloat(flexShrink!)
-        }
-        return nil
-    }
-
-    public func getFlexOrder() -> CGFloat? {
-        if flexOrder != nil {
-            return CGFloat(flexOrder!)
-        }
-        return nil
-    }
-
     public func getElementType() -> ElementType {
         type ?? ElementType.GROUP
     }
@@ -86,10 +57,6 @@ class BaseElement: HandyJSON {
     // MARK: Private
 
     private var type: ElementType?
-    private var size: Size?
-    private var flexGrow: Int?
-    private var flexShrink: Int?
-    private var flexOrder: Int?
     private var x: Float?
     private var y: Float?
     private var z: Float?

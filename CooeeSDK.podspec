@@ -143,6 +143,5 @@ spec.dependency 'FirebaseMessaging'
 spec.dependency 'BSON'
 spec.dependency 'HandyJSON'
 spec.dependency 'Sentry'
-spec.dependency 'FlexLayout'
 
 end

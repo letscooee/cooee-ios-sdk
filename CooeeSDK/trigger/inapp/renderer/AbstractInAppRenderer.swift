@@ -2,7 +2,6 @@
 // Created by Ashish Gaikwad on 22/10/21.
 //
 
-import FlexLayout
 import Foundation
 import UIKit
 
@@ -44,14 +43,11 @@ class AbstractInAppRenderer: InAppRenderer {
         self.processBorderBlock()
         self.processShadowBlock()
         self.processTransformBlock()
-        self.applyFlexItemProperties()
         self.processSpacing()
         self.processClickBlock()
 
         // TODO: 26/10/21: Check for position apply of UIView
         // self.applyPositionBlock()
-        self.processMaxSize()
-        self.applyFlexParentProperties()
         self.addElementToHierarchy()
     }
 
@@ -71,57 +67,10 @@ class AbstractInAppRenderer: InAppRenderer {
         print("******************* Taped")
     }
 
-    func updateSize(_ contentWidth: CGFloat, _ contentHeight: CGFloat) {
-        let size = self.elementData.getSize()
-
-        if size.display == Size.Display.FLEX {
-            self.newElement?.frame.size.width = self.parentElement.frame.width
-        }
-
-        if let contentSize = self.newElement?.intrinsicContentSize.height {
-            self.newElement?.frame.size.height = contentSize
-        }
-
-        if let calculatedWidth = size.getCalculatedWidth(parentElement) {
-            print("calculated Width \(calculatedWidth)")
-            self.newElement?.frame.size.width = calculatedWidth
-        } else {
-            self.newElement?.frame.size.width = contentWidth.pixelsToPoints()
-        }
-
-        if let calculatedHeight = size.getCalculatedHeight(parentElement) {
-            print("calculated Height \(calculatedHeight)")
-            self.newElement?.frame.size.height = calculatedHeight
-        } else {
-            self.newElement?.frame.size.height = contentHeight.pixelsToPoints()
-        }
-    }
-
     // MARK: Private
 
     private func addElementToHierarchy() {
-        if self.isFlex {
-            self.parentElement.flex.addItem(self.newElement!)
-        } else {
-            print("Is Not Flex")
-            self.parentElement.addSubview(self.newElement!)
-        }
-    }
-
-    private func processMaxSize() {
-        let size = self.elementData.getSize()
-        let currentWidth = self.newElement!.frame.width
-        let currentHeight = self.newElement!.frame.height
-        print("Current Height: \(currentHeight) Width: \(currentWidth)")
-        if let calculatedMaxWidth = size.getCalculatedMaxWidth(self.parentElement), calculatedMaxWidth < currentWidth {
-            print("calculated Max-Width \(calculatedMaxWidth)")
-            self.newElement?.frame.size.width = calculatedMaxWidth
-        }
-
-        if let calculatedMaxHeight = size.getCalculatedMaxHeight(self.parentElement), calculatedMaxHeight < currentHeight {
-            print("calculated Max-Height \(calculatedMaxHeight)")
-            self.newElement?.frame.size.height = calculatedMaxHeight
-        }
+        self.parentElement.addSubview(self.newElement!)
     }
 
     private func processSpacing() {
@@ -159,39 +108,6 @@ class AbstractInAppRenderer: InAppRenderer {
         self.parentElement.setNeedsLayout()
         self.newElement?.layoutIfNeeded()
         self.newElement?.autoresizingMask = [.flexibleHeight, .flexibleWidth]*/
-    }
-
-    private func applyFlexItemProperties() {
-        if !(self.newElement!.isKind(of: Flex.self)) {
-            return
-        }
-
-        if let flexGrow = self.elementData.getFlexGrow() {
-            self.newElement?.flex.grow(flexGrow)
-        }
-
-        if let flexShrink = self.elementData.getFlexShrink() {
-            self.newElement?.flex.shrink(flexShrink)
-        }
-
-        // TODO: 26/10/21: Check for flexOrder
-//        if let flexOrder=self.elementData.getFlexOrder(){
-//            self.newElement?.flex.order(flexOrder)
-//        }
-    }
-
-    private func applyFlexParentProperties() {
-        if !(self.elementData.getElementType() == ElementType.GROUP) {
-            return
-        }
-
-        let size = self.elementData.getSize()
-
-        self.newElement!.flex.direction(size.getDirection())
-                .wrap(size.getWrap())
-                .justifyContent(size.getJustifyContent())
-                .alignItems(size.getAlignItem())
-                .alignContent(size.getAlignContent())
     }
 
     private func processTransformBlock() {

@@ -59,16 +59,13 @@
 		75DD87AC271D76E400A272BB /* Glossy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87AB271D76E400A272BB /* Glossy.swift */; };
 		75DD87AE271D77CA00A272BB /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87AD271D77CA00A272BB /* Image.swift */; };
 		75DD87B0271D787900A272BB /* Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87AF271D787900A272BB /* Border.swift */; };
-		75DD87B4271D7BFE00A272BB /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87B3271D7BFE00A272BB /* Position.swift */; };
 		75DD87B6271D7D2000A272BB /* Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87B5271D7D2000A272BB /* Shadow.swift */; };
-		75DD87B8271D7ECB00A272BB /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87B7271D7ECB00A272BB /* Size.swift */; };
 		75DD87BA271D80B700A272BB /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87B9271D80B700A272BB /* Spacing.swift */; };
 		75DD87BC271D815A00A272BB /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87BB271D815A00A272BB /* Transform.swift */; };
 		75DD87BE271D81E300A272BB /* ClickAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87BD271D81E300A272BB /* ClickAction.swift */; };
 		75DD87C0271D822600A272BB /* BrowserContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87BF271D822600A272BB /* BrowserContent.swift */; };
 		75DD87C2271D9B1C00A272BB /* AnyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87C1271D9B1C00A272BB /* AnyValue.swift */; };
 		75DD87C4271D9DF300A272BB /* AppAR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87C3271D9DF300A272BB /* AppAR.swift */; };
-		75DD87C8271ECD1900A272BB /* FlexProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87C7271ECD1900A272BB /* FlexProperty.swift */; };
 		75DD87CA271EE39700A272BB /* BaseTextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87C9271EE39700A272BB /* BaseTextElement.swift */; };
 		75DD87CC271EF4BA00A272BB /* Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87CB271EF4BA00A272BB /* Alignment.swift */; };
 		75DD87CE271EF4D500A272BB /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87CD271EF4D500A272BB /* Font.swift */; };
@@ -201,16 +198,13 @@
 		75DD87AB271D76E400A272BB /* Glossy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Glossy.swift; sourceTree = "<group>"; };
 		75DD87AD271D77CA00A272BB /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		75DD87AF271D787900A272BB /* Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Border.swift; sourceTree = "<group>"; };
-		75DD87B3271D7BFE00A272BB /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		75DD87B5271D7D2000A272BB /* Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadow.swift; sourceTree = "<group>"; };
-		75DD87B7271D7ECB00A272BB /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		75DD87B9271D80B700A272BB /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		75DD87BB271D815A00A272BB /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
 		75DD87BD271D81E300A272BB /* ClickAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickAction.swift; sourceTree = "<group>"; };
 		75DD87BF271D822600A272BB /* BrowserContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserContent.swift; sourceTree = "<group>"; };
 		75DD87C1271D9B1C00A272BB /* AnyValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyValue.swift; sourceTree = "<group>"; };
 		75DD87C3271D9DF300A272BB /* AppAR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAR.swift; sourceTree = "<group>"; };
-		75DD87C7271ECD1900A272BB /* FlexProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexProperty.swift; sourceTree = "<group>"; };
 		75DD87C9271EE39700A272BB /* BaseTextElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextElement.swift; sourceTree = "<group>"; };
 		75DD87CB271EF4BA00A272BB /* Alignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alignment.swift; sourceTree = "<group>"; };
 		75DD87CD271EF4D500A272BB /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
@@ -547,9 +541,7 @@
 				75DD87AB271D76E400A272BB /* Glossy.swift */,
 				75DD87AD271D77CA00A272BB /* Image.swift */,
 				75DD87AF271D787900A272BB /* Border.swift */,
-				75DD87B3271D7BFE00A272BB /* Position.swift */,
 				75DD87B5271D7D2000A272BB /* Shadow.swift */,
-				75DD87B7271D7ECB00A272BB /* Size.swift */,
 				75DD87B9271D80B700A272BB /* Spacing.swift */,
 				75DD87BB271D815A00A272BB /* Transform.swift */,
 				75DD87BD271D81E300A272BB /* ClickAction.swift */,
@@ -573,7 +565,6 @@
 		75DD87C6271ECCF000A272BB /* trigger */ = {
 			isa = PBXGroup;
 			children = (
-				75DD87C7271ECD1900A272BB /* FlexProperty.swift */,
 				AC0B8ADD9332621266B45210 /* TextAlignment.swift */,
 				AC0B8D9905508EE356785965 /* ElementType.swift */,
 				AC0B8A5E35C8A00964D04170 /* PermissionType.swift */,
@@ -948,13 +939,11 @@
 				75DD87C4271D9DF300A272BB /* AppAR.swift in Sources */,
 				75DD87BC271D815A00A272BB /* Transform.swift in Sources */,
 				751E1323270C26A5002CF442 /* RuntimeData.swift in Sources */,
-				75DD87B8271D7ECB00A272BB /* Size.swift in Sources */,
 				751E134D270F22AB002CF442 /* AbstractPendingTaskProcessor.swift in Sources */,
 				75729E7A26F4C4A1006EB506 /* Constants.swift in Sources */,
 				751BC7C026F3123E002D8358 /* Cooee.swift in Sources */,
 				757E405A26F9FF54008352F3 /* DeviceAuthenticationBody.swift in Sources */,
 				75DD87A8271D6F5B00A272BB /* Colour.swift in Sources */,
-				75DD87C8271ECD1900A272BB /* FlexProperty.swift in Sources */,
 				751E134B270F1771002CF442 /* PendingTaskProcessor.swift in Sources */,
 				751E1343270ED09C002CF442 /* CooeeDatabase.swift in Sources */,
 				75A0981027070FD800C2057B /* AppLifeCycle.swift in Sources */,
@@ -962,7 +951,6 @@
 				75DD87BA271D80B700A272BB /* Spacing.swift in Sources */,
 				751BC7C726F31A4B002D8358 /* DeviceInfo.swift in Sources */,
 				751E1350270F2F4D002CF442 /* letscooee.xcdatamodeld in Sources */,
-				75DD87B4271D7BFE00A272BB /* Position.swift in Sources */,
 				75729E8126F8AD47006EB506 /* UserAuthService.swift in Sources */,
 				751E1348270EDEBD002CF442 /* PendingTaskDAO.swift in Sources */,
 				75DD87C2271D9B1C00A272BB /* AnyValue.swift in Sources */,

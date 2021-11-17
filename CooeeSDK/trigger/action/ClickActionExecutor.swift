@@ -33,13 +33,13 @@ class ClickActionExecutor {
     }
 
     private func executeExternal() {
-        let external = clickAction.external
+        let external = clickAction.ext
 
-        if external == nil || (external!.url?.isEmpty ?? true) {
+        if external == nil || (external!.u?.isEmpty ?? true) {
             return
         }
 
-        if let url = URL(string: external!.url!) {
+        if let url = URL(string: external!.u!) {
             UIApplication.shared.open(url)
         }
 
