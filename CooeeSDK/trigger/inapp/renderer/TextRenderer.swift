@@ -46,19 +46,19 @@ class TextRenderer: AbstractInAppRenderer {
     private var textData: TextElement
 
     private func processColourBlock() {
-        if textData.colour == nil {
+        if textData.clr == nil {
             return
         }
 
-        (newElement as! UILabel).textColor = textData.colour!.getColour()
+        (newElement as! UILabel).textColor = textData.clr!.getColour()
     }
 
     private func processAlignmentBlock() {
-        if textData.alignment == nil {
+        if textData.alg == nil {
             return
         }
 
-        (newElement as! UILabel).textAlignment = textData.alignment!.getAlignment()
+        (newElement as! UILabel).textAlignment = textData.getAlignment()
     }
 
     private func processFontBlock() {

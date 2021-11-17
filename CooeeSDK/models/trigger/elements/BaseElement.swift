@@ -7,6 +7,7 @@
 
 import Foundation
 import HandyJSON
+import UIKit
 
 /**
  - Author: Ashish Gaikwad
@@ -18,21 +19,23 @@ class BaseElement: HandyJSON {
     required init() {
     }
 
-    // MARK: Internal
+    // MARK: Public
 
-    private var type: ElementType?
-    var bg: Background?
-    var border: Border?
-    var overflow: Overflow?
-    var position: Position?
-    var shadow: Shadow?
-    private var size: Size?
-    var spacing: Spacing?
-    var transform: Transform?
-    private var flexGrow: Int?
-    private var flexShrink: Int?
-    private var flexOrder: Int?
-    private var click: ClickAction?
+    public func getX(_ parentView: UIView? = nil) -> CGFloat {
+        return x == nil ? 0 : UnitUtil.getScaledPixel(x!)
+    }
+
+    public func getY(_ parentView: UIView? = nil) -> CGFloat {
+        return y == nil ? 0 : UnitUtil.getScaledPixel(y!)
+    }
+
+    public func getCalculatedWidth() -> CGFloat? {
+        return w == nil ? nil : UnitUtil.getScaledPixel(w!)
+    }
+
+    public func getCalculatedHeight() -> CGFloat? {
+        return h == nil ? nil : UnitUtil.getScaledPixel(h!)
+    }
 
     public func getSize() -> Size {
         if size == nil {
@@ -70,4 +73,27 @@ class BaseElement: HandyJSON {
     public func getClickAction() -> ClickAction? {
         click
     }
+
+    // MARK: Internal
+
+    var bg: Background?
+    var br: Border?
+    var shadow: Shadow?
+    var spc: Spacing?
+    var trf: Transform?
+    var click: ClickAction?
+
+    // MARK: Private
+
+    private var type: ElementType?
+    private var size: Size?
+    private var flexGrow: Int?
+    private var flexShrink: Int?
+    private var flexOrder: Int?
+    private var x: Float?
+    private var y: Float?
+    private var z: Float?
+    private var w: Float?
+    private var h: Float?
+    private var mode: PositionType?
 }

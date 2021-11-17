@@ -13,20 +13,6 @@ import HandyJSON
  - Since: 0.1.0
  */
 struct Position: HandyJSON {
-    // MARK: Lifecycle
-
-//    init() {
-//        self.type = PositionType.STATIC
-//        su
-//    }
-
-    // MARK: Public
-
-    public enum PositionType: String, HandyJSONEnum {
-        case STATIC, ABSOLUTE, FIXED
-    }
-
-    // MARK: Internal
 
     var type: PositionType?
     var top: String? = nil

@@ -21,4 +21,9 @@ struct Colour: HandyJSON {
     func getColour() -> UIColor {
         UIColor(hexString: hex!)
     }
+
+    func getColour() -> String {
+        print("colour: \(hex ?? "#000000")")
+        return hex ?? "#000000"
+    }
 }

@@ -36,12 +36,12 @@ class GroupRenderer: AbstractInAppRenderer {
 
     // MARK: Private
 
-    private func processChildren() {
+    internal func processChildren() {
         let data = elementData
         if let groupElementData: GroupElement = data as? GroupElement {
             for child in groupElementData.children! {
                 let parsedChild = BaseElement.deserialize(from: child)
-                print("***************************\(parsedChild?.getElementType().rawValue)")
+                print("***************************\(String(describing: parsedChild?.getElementType().rawValue))")
                 if parsedChild!.getElementType() == ElementType.IMAGE {
                     _ = ImageRenderer(newElement!, ImageElement.deserialize(from: child)!, triggerContext, isFlex).render()
                 } else if parsedChild!.getElementType() == ElementType.GROUP {

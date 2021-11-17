@@ -15,12 +15,45 @@ import HandyJSON
 class BaseTextElement: BaseElement {
     // MARK: Lifecycle
 
-    required init() {}
+    required init() {
+    }
+
+    // MARK: Public
+
+    public func getAlignment() -> NSTextAlignment {
+        switch alg {
+        case 0:
+            return .center
+        case 1:
+            return .left
+        case 2:
+            return .right
+        case .none:
+            return .center
+        case .some:
+            return .center
+        }
+    }
+
+    public func getButtonAlignment() -> UIControl.ContentHorizontalAlignment {
+        switch alg {
+        case 0:
+            return .center
+        case 1:
+            return .left
+        case 2:
+            return .right
+        case .none:
+            return .center
+        case .some:
+            return .center
+        }
+    }
 
     // MARK: Internal
 
     var text: String?
-    var alignment: Alignment?
+    var alg: Int?
     var font: Font?
-    var colour: Colour?
+    var clr: Colour?
 }

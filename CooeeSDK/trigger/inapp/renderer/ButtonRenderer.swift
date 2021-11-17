@@ -41,19 +41,19 @@ class ButtonRenderer: AbstractInAppRenderer {
     private var buttonData: ButtonElement
 
     private func processColourBlock() {
-        if buttonData.colour == nil {
+        if buttonData.clr == nil {
             return
         }
 
-        (newElement as! UIButton).setTitleColor(buttonData.colour!.getColour(), for: .normal)
+        (newElement as! UIButton).setTitleColor(buttonData.clr!.getColour(), for: .normal)
     }
 
     private func processAlignmentBlock() {
-        if buttonData.alignment == nil {
+        if buttonData.alg == nil {
             return
         }
 
-        (newElement as! UIButton).contentHorizontalAlignment = buttonData.alignment!.getButtonAlignment()
+        (newElement as! UIButton).contentHorizontalAlignment = buttonData.getButtonAlignment()
     }
 
     private func processFontBlock() {

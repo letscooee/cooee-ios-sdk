@@ -8,6 +8,7 @@
 import Foundation
 import HandyJSON
 import UIKit
+import SwiftUI
 
 /**
  - Author: Ashish Gaikwad
@@ -22,31 +23,35 @@ struct Border: HandyJSON {
 
     // MARK: Internal
 
-    private var radius: String?
-    private var width: String?
-    private var dashWidth: String?
-    private var dashGap: String?
+    private var radius: Float?
+    private var width: Float?
+    private var dashWidth: Float?
+    private var dashGap: Float?
     private var colour: Colour?
     private var style: Style?
 
-    public func getWidth(_ parent: UIView) -> CGFloat {
-        return width != nil ? UnitUtil.getCalculatedValue(parent, width!) : 0
+    public func getWidth(_ parent: UIView? = nil) -> CGFloat {
+        return width == nil ? 0 : UnitUtil.getScaledPixel(width!)
     }
 
-    public func getRadius(_ parent: UIView) -> CGFloat {
-        return radius != nil ? UnitUtil.getCalculatedPixel(radius!) : 0
+    public func getRadius(_ parent: UIView? = nil) -> CGFloat {
+        return radius == nil ? 0 : UnitUtil.getScaledPixel(radius!)
     }
 
-    public func getDashWidth(_ parent: UIView) -> CGFloat {
-        return dashWidth != nil ? UnitUtil.getCalculatedPixel(dashWidth!) : 0
+    public func getDashWidth(_ parent: UIView? = nil) -> CGFloat {
+        return UnitUtil.getScaledPixel(dashWidth!)
     }
 
-    public func getDashGap(_ parent: UIView) -> CGFloat {
-        return dashGap != nil ? UnitUtil.getCalculatedPixel(dashGap!) : 0
+    public func getDashGap(_ parent: UIView? = nil) -> CGFloat {
+        return UnitUtil.getScaledPixel(dashGap!)
     }
 
     public func getColour() -> UIColor? {
         return colour?.getColour()
+    }
+
+    public func getColour() -> String {
+        return colour?.hex! ?? "#ffffff"
     }
 
     public func getStyle() -> Style {

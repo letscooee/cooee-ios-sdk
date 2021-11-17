@@ -9,6 +9,7 @@ import Foundation
 import HandyJSON
 import FlexLayout
 import UIKit
+import SwiftUI
 
 /**
  - Author: Ashish Gaikwad
@@ -78,5 +79,21 @@ struct Size: HandyJSON {
 
     public func getCalculatedMaxHeight(_ parent: UIView) -> CGFloat? {
         maxHeight != nil ? CGFloat(UnitUtil.getCalculatedValue(parent, maxHeight!, true)) : nil
+    }
+
+    public func getCalculatedWidth(parentWidth: CGFloat, parentHeight: CGFloat) -> CGFloat? {
+        width != nil ? CGFloat(UnitUtil.getCalculatedValue(parentWidth, parentHeight, width!)) : nil
+    }
+
+    public func getCalculatedHeight(parentWidth: CGFloat, parentHeight: CGFloat) -> CGFloat? {
+        height != nil ? CGFloat(UnitUtil.getCalculatedValue(parentWidth, parentHeight, height!, true)) : nil
+    }
+
+    public func getCalculatedMaxWidth(parentWidth: CGFloat, parentHeight: CGFloat) -> CGFloat? {
+        maxWidth != nil ? CGFloat(UnitUtil.getCalculatedValue(parentWidth, parentHeight, maxWidth!)) : nil
+    }
+
+    public func getCalculatedMaxHeight(parentWidth: CGFloat, parentHeight: CGFloat) -> CGFloat? {
+        maxHeight != nil ? CGFloat(UnitUtil.getCalculatedValue(parentWidth, parentHeight, maxHeight!, true)) : nil
     }
 }

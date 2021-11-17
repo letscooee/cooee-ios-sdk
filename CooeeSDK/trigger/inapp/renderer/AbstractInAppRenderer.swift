@@ -39,7 +39,7 @@ class AbstractInAppRenderer: InAppRenderer {
     }
 
     internal func processCommonBlocks() {
-        self.processSizeBlock()
+        self.processSizePositionBlock()
         self.processBackground()
         self.processBorderBlock()
         self.processShadowBlock()
@@ -62,19 +62,19 @@ class AbstractInAppRenderer: InAppRenderer {
             return
         }
 
-        let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.checkAction))
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(self.checkAction))
         self.newElement!.addGestureRecognizer(gesture)
 
     }
 
-    @objc func checkAction(sender : UITapGestureRecognizer) {
+    @objc func checkAction(sender: UITapGestureRecognizer) {
         print("******************* Taped")
     }
 
     func updateSize(_ contentWidth: CGFloat, _ contentHeight: CGFloat) {
         let size = self.elementData.getSize()
 
-        if size.display == Size.Display.BLOCK || size.display == Size.Display.FLEX {
+        if size.display == Size.Display.FLEX {
             self.newElement?.frame.size.width = self.parentElement.frame.width
         }
 
@@ -125,7 +125,7 @@ class AbstractInAppRenderer: InAppRenderer {
     }
 
     private func processSpacing() {
-        var spacing = self.elementData.spacing
+        var spacing = self.elementData.spc
 
         if spacing == nil {
             return
@@ -143,30 +143,22 @@ class AbstractInAppRenderer: InAppRenderer {
         // TODO: 26/10/21: Check for padding
     }
 
-    private func processSizeBlock() {
-        let size = self.elementData.getSize()
+    internal func processSizePositionBlock() {
 
-        if size.display == Size.Display.BLOCK || size.display == Size.Display.FLEX {
-            self.newElement?.frame.size.width = self.parentElement.frame.width
-        }
+        let calculatedWidth = elementData.getCalculatedWidth()
+        let calculatedHeight = elementData.getCalculatedHeight()
+        let calculatedX = elementData.getX(self.parentElement)
+        let calculatedY = elementData.getY(self.parentElement)
+        print("calculated Width \(calculatedWidth)")
+        print("calculated Height \(calculatedHeight)")
 
-        if let contentSize = self.newElement?.intrinsicContentSize.height {
-            self.newElement?.frame.size.height = contentSize
-        }
+        self.newElement?.frame = CGRect(x: calculatedX, y: calculatedY, width: calculatedWidth!, height: calculatedHeight!)
+        //self.newElement?.frame.size.height = calculatedHeight
 
-        if let calculatedWidth = size.getCalculatedWidth(parentElement) {
-            print("calculated Width \(calculatedWidth)")
-            self.newElement?.frame.size.width = calculatedWidth
-        }
-
-        if let calculatedHeight = size.getCalculatedHeight(parentElement) {
-            print("calculated Height \(calculatedHeight)")
-            self.newElement?.frame.size.height = calculatedHeight
-        }
-        self.newElement?.translatesAutoresizingMaskIntoConstraints = true
+        /*self.newElement?.translatesAutoresizingMaskIntoConstraints = true
         self.parentElement.setNeedsLayout()
         self.newElement?.layoutIfNeeded()
-        self.newElement?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        self.newElement?.autoresizingMask = [.flexibleHeight, .flexibleWidth]*/
     }
 
     private func applyFlexItemProperties() {
@@ -196,14 +188,14 @@ class AbstractInAppRenderer: InAppRenderer {
         let size = self.elementData.getSize()
 
         self.newElement!.flex.direction(size.getDirection())
-            .wrap(size.getWrap())
-            .justifyContent(size.getJustifyContent())
-            .alignItems(size.getAlignItem())
-            .alignContent(size.getAlignContent())
+                .wrap(size.getWrap())
+                .justifyContent(size.getJustifyContent())
+                .alignItems(size.getAlignItem())
+                .alignContent(size.getAlignContent())
     }
 
     private func processTransformBlock() {
-        let transform = self.elementData.transform
+        let transform = self.elementData.trf
 
         if transform == nil {
             return
@@ -226,11 +218,11 @@ class AbstractInAppRenderer: InAppRenderer {
     }
 
     private func processBorderBlock() {
-        if self.elementData.border == nil {
+        if self.elementData.br == nil {
             return
         }
 
-        let border = self.elementData.border!
+        let border = self.elementData.br!
 
         let borderColor = border.getColour() ?? UIColor.clear
         let cornerRadius = border.getRadius(self.parentElement)
@@ -241,8 +233,8 @@ class AbstractInAppRenderer: InAppRenderer {
 
         } else if border.getStyle() == Border.Style.DASH {
             self.newElement?.addDashedBorder(colour: borderColor, width: border.getWidth(self.parentElement),
-                                             dashWidth: border.getDashWidth(self.parentElement), dashGap: border.getDashGap(self.parentElement),
-                                             cornerRadius: cornerRadius)
+                    dashWidth: border.getDashWidth(self.parentElement), dashGap: border.getDashGap(self.parentElement),
+                    cornerRadius: cornerRadius)
         }
 
         self.newElement?.layer.cornerRadius = CGFloat(border.getRadius(self.parentElement))
