@@ -11,10 +11,11 @@ import HandyJSON
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-enum ElementType: String, HandyJSONEnum {
-    case TEXT
-    case BUTTON
-    case IMAGE
-    case VIDEO
-    case GROUP
+enum ElementType: Int, HandyJSONEnum,CaseIterable {
+
+    case IMAGE = 1
+    case TEXT = 2
+    case BUTTON = 3
+    case VIDEO = 4
+    case SHAPE = 100
 }
