@@ -15,6 +15,6 @@ import HandyJSON
 struct Background: HandyJSON {
     
     var solid: Colour?
-    var glossy: Glossy?
+    var glass: Glossy?
     var image: Image?
 }

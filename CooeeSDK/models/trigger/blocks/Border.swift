@@ -23,38 +23,47 @@ struct Border: HandyJSON {
 
     // MARK: Internal
 
-    private var radius: Float?
-    private var width: Float?
-    private var dashWidth: Float?
-    private var dashGap: Float?
-    private var colour: Colour?
-    private var style: Style?
+    private var r: Float?
+    private var w: Float?
+    private var dw: Float?
+    private var dg: Float?
+    private var clr: Colour?
+    private var s: Int?
 
     public func getWidth(_ parent: UIView? = nil) -> CGFloat {
-        return width == nil ? 0 : UnitUtil.getScaledPixel(width!)
+        return w == nil ? 0 : UnitUtil.getScaledPixel(w!)
     }
 
     public func getRadius(_ parent: UIView? = nil) -> CGFloat {
-        return radius == nil ? 0 : UnitUtil.getScaledPixel(radius!)
+        return r == nil ? 0 : UnitUtil.getScaledPixel(r!)
     }
 
     public func getDashWidth(_ parent: UIView? = nil) -> CGFloat {
-        return UnitUtil.getScaledPixel(dashWidth!)
+        return UnitUtil.getScaledPixel(dw!)
     }
 
     public func getDashGap(_ parent: UIView? = nil) -> CGFloat {
-        return UnitUtil.getScaledPixel(dashGap!)
+        return UnitUtil.getScaledPixel(dg!)
     }
 
     public func getColour() -> UIColor? {
-        return colour?.getColour()
+        return clr?.getColour()
     }
 
     public func getColour() -> String {
-        return colour?.hex! ?? "#ffffff"
+        return clr?.h! ?? "#ffffff"
     }
 
     public func getStyle() -> Style {
-        return style ?? Style.SOLID
+        switch (s) {
+        case 1:
+            return Style.SOLID
+        case 2:
+            return Style.DASH
+        case .none:
+            return Style.SOLID
+        case .some(_):
+            return Style.SOLID
+        }
     }
 }

@@ -26,7 +26,7 @@ class ImageRenderer: AbstractInAppRenderer {
         // ref. https://stackoverflow.com/a/4895327/9256497
         imageView.contentMode = .scaleAspectFit
         if let imageElement = elementData as? ImageElement {
-            loadImage(imageElement.url, imageView)
+            loadImage(imageElement.src, imageView)
         }
 
         newElement = imageView

@@ -29,4 +29,5 @@ struct Gradient: HandyJSON {
     var c3: String?
     var c4: String?
     var c5: String?
+    var ang: Int?
 }

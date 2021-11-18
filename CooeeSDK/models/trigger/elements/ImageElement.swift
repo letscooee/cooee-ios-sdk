@@ -15,5 +15,5 @@ class ImageElement: BaseElement {
 
     // MARK: Internal
 
-    var url: String?
+    var src: String?
 }

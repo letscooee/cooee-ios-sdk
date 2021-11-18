@@ -15,14 +15,14 @@ import UIKit
  */
 struct Shadow: HandyJSON {
 
-    private var elevation: Int?
-    private var colour: Colour?
+    private var e: Int?
+    private var clr: Colour?
 
     public func getColour() -> UIColor {
-        return colour?.getColour() ?? UIColor.black
+        return clr?.getColour() ?? UIColor.black
     }
 
     public func getElevation() -> Int {
-        return elevation ?? 0
+        return e ?? 0
     }
 }

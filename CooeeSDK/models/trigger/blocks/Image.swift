@@ -14,6 +14,5 @@ import HandyJSON
  */
 struct Image: HandyJSON {
     
-    var url: String?
-    var alpha: Int?
+    var src: String?
 }

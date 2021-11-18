@@ -14,9 +14,9 @@ import HandyJSON
  */
 struct Transform: HandyJSON {
 
-    private var rotate: Int?
+    private var rot: Int?
 
     public func getRotation() -> Int {
-        rotate ?? 0
+        rot ?? 0
     }
 }

@@ -15,7 +15,7 @@ import HandyJSON
 struct TriggerData: HandyJSON {
 
     var id: String?
-    var version: Double?
+    var v: Double?
     var engagementID: String?
     var `internal`: Bool? = false
     var expireAt: Int64?

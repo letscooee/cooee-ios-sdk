@@ -15,15 +15,16 @@ import UIKit
  */
 struct Colour: HandyJSON {
 
-    var hex: String?
-    var grad: Gradient?
+    var h: String?
+    var a: Int?
+    var g: Gradient?
 
     func getColour() -> UIColor {
-        UIColor(hexString: hex!)
+        UIColor(hexString: h!)
     }
 
     func getColour() -> String {
-        print("colour: \(hex ?? "#000000")")
-        return hex ?? "#000000"
+        print("colour: \(h ?? "#000000")")
+        return h ?? "#000000"
     }
 }

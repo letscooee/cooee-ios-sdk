@@ -38,7 +38,7 @@ class BaseElement: HandyJSON {
     }
 
     public func getElementType() -> ElementType {
-        type ?? ElementType.GROUP
+        ElementType(rawValue: t!) ?? ElementType.SHAPE
     }
 
     public func getClickAction() -> ClickAction? {
@@ -56,7 +56,7 @@ class BaseElement: HandyJSON {
 
     // MARK: Private
 
-    private var type: ElementType?
+    private var t: Int?
     private var x: Float?
     private var y: Float?
     private var z: Float?

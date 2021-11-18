@@ -14,7 +14,7 @@ import HandyJSON
  */
 struct Glossy: HandyJSON {
     
-    var radius: Int?
-    var sampling: Int?
-    var colour: Colour?
+    var r: Int?
+    var s: Int?
+    var clr: Colour?
 }

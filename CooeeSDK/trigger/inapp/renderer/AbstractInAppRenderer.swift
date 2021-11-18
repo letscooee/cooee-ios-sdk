@@ -165,8 +165,8 @@ class AbstractInAppRenderer: InAppRenderer {
 
         if background.solid != nil {
             self.newElement?.backgroundColor = background.solid!.getColour()
-        } else if background.glossy != nil {
-            self.applyGlassmorphism(background.glossy!)
+        } else if background.glass != nil {
+            self.applyGlassmorphism(background.glass!)
         } else if background.image != nil {
             self.applyBackgroundImage(background.image!)
         }
@@ -174,7 +174,7 @@ class AbstractInAppRenderer: InAppRenderer {
 
     private func applyBackgroundImage(_ image: Image) {
         DispatchQueue.main.async {
-            let data = try? Data(contentsOf: URL(string: image.url!)!)
+            let data = try? Data(contentsOf: URL(string: image.src!)!)
             if let imageData = data {
                 if let uiImage = UIImage(data: imageData) {
                     self.newElement!.backgroundColor = UIColor(patternImage: uiImage)
