@@ -23,7 +23,7 @@ class ButtonRenderer: AbstractInAppRenderer {
 
     override func render() -> UIKit.UIView {
         let button = UIButton()
-        button.setTitle(buttonData.text, for: .normal)
+        button.setTitle(buttonData.txt, for: .normal)
         processTextData(button)
         return newElement!
     }
@@ -41,11 +41,11 @@ class ButtonRenderer: AbstractInAppRenderer {
     private var buttonData: ButtonElement
 
     private func processColourBlock() {
-        if buttonData.clr == nil {
+        if buttonData.c == nil {
             return
         }
 
-        (newElement as! UIButton).setTitleColor(buttonData.clr!.getColour(), for: .normal)
+        (newElement as! UIButton).setTitleColor(buttonData.c!.getColour(), for: .normal)
     }
 
     private func processAlignmentBlock() {
@@ -57,10 +57,10 @@ class ButtonRenderer: AbstractInAppRenderer {
     }
 
     private func processFontBlock() {
-        if buttonData.font == nil {
+        if buttonData.f == nil {
             return
         }
 
-        (newElement as! UIButton).titleLabel?.font = UIFont.systemFont(ofSize: buttonData.font!.getSize())
+        (newElement as! UIButton).titleLabel?.font = UIFont.systemFont(ofSize: buttonData.f!.getSize())
     }
 }

@@ -52,8 +52,8 @@ class BaseTextElement: BaseElement {
 
     // MARK: Internal
 
-    var text: String?
+    var txt: String?
     var alg: Int?
-    var font: Font?
-    var clr: Colour?
+    var f: Font?
+    var c: Colour?
 }

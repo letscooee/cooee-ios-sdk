@@ -22,11 +22,11 @@ class TextRenderer: AbstractInAppRenderer {
     // MARK: Internal
 
     override func render() -> UIView {
-        if textData.parts != nil, !(textData.parts!.isEmpty) {
+        if textData.prs != nil, !(textData.prs!.isEmpty) {
             processParts()
         } else {
             let textView = UILabel()
-            textView.text = textData.text
+            textView.text = textData.txt
             processTextData(textView)
         }
         processCommonBlocks()
@@ -46,11 +46,11 @@ class TextRenderer: AbstractInAppRenderer {
     private var textData: TextElement
 
     private func processColourBlock() {
-        if textData.clr == nil {
+        if textData.c == nil {
             return
         }
 
-        (newElement as! UILabel).textColor = textData.clr!.getColour()
+        (newElement as! UILabel).textColor = textData.c!.getColour()
     }
 
     private func processAlignmentBlock() {
@@ -62,11 +62,11 @@ class TextRenderer: AbstractInAppRenderer {
     }
 
     private func processFontBlock() {
-        if textData.font == nil {
+        if textData.f == nil {
             return
         }
 
-        (newElement as! UILabel).font = UIFont.systemFont(ofSize: textData.font!.getSize())
+        (newElement as! UILabel).font = UIFont.systemFont(ofSize: textData.f!.getSize())
     }
 
     private func processParts() {
@@ -75,7 +75,7 @@ class TextRenderer: AbstractInAppRenderer {
         newElement = stackView
         processCommonBlocks()
 
-        for child in textData.parts! {
+        for child in textData.prs! {
             // TODO: 27/10/21: watch for size of element
             _ = TextRenderer(newElement!, child, triggerContext, isFlex).render()
         }

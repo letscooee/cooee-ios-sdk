@@ -27,7 +27,7 @@ struct Border: HandyJSON {
     private var w: Float?
     private var dw: Float?
     private var dg: Float?
-    private var clr: Colour?
+    private var c: Colour?
     private var s: Int?
 
     public func getWidth(_ parent: UIView? = nil) -> CGFloat {
@@ -47,11 +47,11 @@ struct Border: HandyJSON {
     }
 
     public func getColour() -> UIColor? {
-        return clr?.getColour()
+        return c?.getColour()
     }
 
     public func getColour() -> String {
-        return clr?.h! ?? "#ffffff"
+        return c?.h! ?? "#ffffff"
     }
 
     public func getStyle() -> Style {

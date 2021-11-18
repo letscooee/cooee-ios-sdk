@@ -16,10 +16,10 @@ import UIKit
 struct Shadow: HandyJSON {
 
     private var e: Int?
-    private var clr: Colour?
+    private var c: Colour?
 
     public func getColour() -> UIColor {
-        return clr?.getColour() ?? UIColor.black
+        return c?.getColour() ?? UIColor.black
     }
 
     public func getElevation() -> Int {

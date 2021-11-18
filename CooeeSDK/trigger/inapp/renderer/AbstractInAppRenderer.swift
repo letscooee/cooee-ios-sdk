@@ -163,12 +163,12 @@ class AbstractInAppRenderer: InAppRenderer {
 
         let background = self.elementData.bg!
 
-        if background.solid != nil {
-            self.newElement?.backgroundColor = background.solid!.getColour()
-        } else if background.glass != nil {
-            self.applyGlassmorphism(background.glass!)
-        } else if background.image != nil {
-            self.applyBackgroundImage(background.image!)
+        if background.s != nil {
+            self.newElement?.backgroundColor = background.s!.getColour()
+        } else if background.g != nil {
+            self.applyGlassmorphism(background.g!)
+        } else if background.i != nil {
+            self.applyBackgroundImage(background.i!)
         }
     }
 

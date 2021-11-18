@@ -15,5 +15,5 @@ class TextElement: BaseTextElement, Identifiable {
 
     // MARK: Internal
 
-    var parts: [TextElement]?
+    var prs: [TextElement]?
 }
