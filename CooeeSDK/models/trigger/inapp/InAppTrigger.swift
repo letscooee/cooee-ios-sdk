@@ -12,6 +12,7 @@ import HandyJSON
 class InAppTrigger: HandyJSON {
 
     var cont: Container?
+    var elems: [[String: Any]]?
 
     required init() {
 

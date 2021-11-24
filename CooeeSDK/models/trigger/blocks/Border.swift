@@ -31,11 +31,11 @@ struct Border: HandyJSON {
     private var s: Int?
 
     public func getWidth(_ parent: UIView? = nil) -> CGFloat {
-        return w == nil ? 0 : UnitUtil.getScaledPixel(w!)
+        return CGFloat(w ?? 0)
     }
 
     public func getRadius(_ parent: UIView? = nil) -> CGFloat {
-        return r == nil ? 0 : UnitUtil.getScaledPixel(r!)
+        return CGFloat(r ?? 0)
     }
 
     public func getDashWidth(_ parent: UIView? = nil) -> CGFloat {
@@ -52,6 +52,10 @@ struct Border: HandyJSON {
 
     public func getColour() -> String {
         return c?.h! ?? "#ffffff"
+    }
+    
+    public func getAlpha() -> Double {
+        return c?.getAlpha() ?? 100
     }
 
     public func getStyle() -> Style {

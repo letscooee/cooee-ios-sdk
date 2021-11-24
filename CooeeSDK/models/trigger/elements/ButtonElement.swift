@@ -8,12 +8,8 @@ import Foundation
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-class ButtonElement: BaseTextElement {
+class ButtonElement: TextElement {
     // MARK: Lifecycle
 
     required init() {}
-
-    // MARK: Internal
-
-    var txt: String?
 }

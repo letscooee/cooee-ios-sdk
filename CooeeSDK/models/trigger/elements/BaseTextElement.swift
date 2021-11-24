@@ -7,6 +7,7 @@
 
 import Foundation
 import HandyJSON
+import SwiftUI
 
 /**
  - Author: Ashish Gaikwad
@@ -15,8 +16,7 @@ import HandyJSON
 class BaseTextElement: BaseElement {
     // MARK: Lifecycle
 
-    required init() {
-    }
+    required init() {}
 
     // MARK: Public
 
@@ -47,6 +47,18 @@ class BaseTextElement: BaseElement {
             return .center
         case .some:
             return .center
+        }
+    }
+
+    public func getColour() -> Color? {
+        return c == nil ? nil : Color(hex: c!.getColour(), alpha: c!.getAlpha())
+    }
+
+    public func getFont() -> SwiftUI.Font {
+        if f == nil {
+            return SwiftUI.Font.system(size: 14)
+        } else {
+            return f!.getFont()
         }
     }
 

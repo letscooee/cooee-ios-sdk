@@ -42,7 +42,7 @@ class BaseElement: HandyJSON {
     }
 
     public func getClickAction() -> ClickAction? {
-        click
+        clc
     }
 
     // MARK: Internal
@@ -52,7 +52,7 @@ class BaseElement: HandyJSON {
     var shadow: Shadow?
     var spc: Spacing?
     var trf: Transform?
-    var click: ClickAction?
+    var clc: ClickAction?
 
     // MARK: Private
 

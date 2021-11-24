@@ -24,7 +24,10 @@ struct Colour: HandyJSON {
     }
 
     func getColour() -> String {
-        print("colour: \(h ?? "#000000")")
         return h ?? "#000000"
+    }
+    
+    func getAlpha() -> Double{
+        Double(a ?? 100)
     }
 }

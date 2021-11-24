@@ -7,5 +7,4 @@ import Foundation
 class Container: BaseElement {
 
     var animation: Animation?
-    var elems: [[String: Any]]?
 }
