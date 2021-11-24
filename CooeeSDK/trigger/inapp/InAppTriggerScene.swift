@@ -5,6 +5,7 @@
 import Foundation
 import UIKit
 import AVFoundation
+import SwiftUI
 
 /**
  - Author: Ashish Gaikwad
@@ -21,6 +22,7 @@ class InAppTriggerScene: UIView {
     private var triggerContext = TriggerContext()
     private let exit = CATransition()
     public static let instance = InAppTriggerScene()
+    private var startTime: Date? = nil
 
 //    override init (frame : CGRect) {
 //        super.init(frame : frame)
@@ -54,22 +56,28 @@ class InAppTriggerScene: UIView {
         container = UIView()
         container?.frame = parentView.frame
         triggerContext.setTriggerData(triggerData: triggerData!)
+        triggerContext.setTriggerParentLayout(triggerParentLayout: parentView)
         // TODO 27/10/21: add closing provision
         setAnimations()
-        renderContainerAndLayers()
+        triggerContext.onExit(){data in self.finish()}
+        
+        let host = UIHostingController(rootView: ContainerRenderer(inAppTrigger: inAppData!, triggerContext))
+        guard let hostView = host.view else {
+            print("fail to load swiftUI")
+            return
+        }
+        hostView.translatesAutoresizingMaskIntoConstraints = false
+        
         viewController.view.addSubview(parentView)
-        parentView.addSubview(container!)
+        parentView.addSubview(hostView)
+        
+        startTime = Date()
         sendTriggerDisplayedEvent()
     }
 
     private func sendTriggerDisplayedEvent() {
         let event = Event(eventName: "CE Trigger Displayed", triggerData: triggerData!)
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)
-    }
-
-    private func renderContainerAndLayers() {
-        let containerData = inAppData?.cont!
-        //_ = ContainerRenderer(container!, parentView!, containerData!, inAppData!.layers!, triggerContext).render()
     }
 
     private func setAnimations() {
@@ -79,8 +87,6 @@ class InAppTriggerScene: UIView {
 
             overrideAnimation(enterAnimation, exitAnimation)
         }
-
-
     }
 
     private func overrideAnimation(_ enterAnimation: CATransitionSubtype, _ exitAnimation: CATransitionSubtype) {
@@ -96,5 +102,16 @@ class InAppTriggerScene: UIView {
         exit.repeatCount = 0
         exit.type = CATransitionType.push
         exit.subtype = exitAnimation
+    }
+    
+    private func finish(){
+        var closedEventProps = triggerContext.getClosedEventProps()
+        let duration = DateUtils.getDateDifferenceInSeconds(startDate: startTime!, endDate: Date())
+        closedEventProps.updateValue(duration, forKey: "Duration")
+        
+        var event = Event(eventName: "CE Trigger Closed", properties: closedEventProps)
+        event.withTrigger(triggerData: triggerData!)
+        CooeeFactory.shared.safeHttpService.sendEvent(event: event)
+        parentView!.removeFromSuperview()
     }
 }
