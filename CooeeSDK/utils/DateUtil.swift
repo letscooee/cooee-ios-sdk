@@ -26,4 +26,12 @@ class DateUtils {
         formatter.timeZone = NSTimeZone(abbreviation: "UTC") as TimeZone?
         return formatter.string(from: date)
     }
+    
+    static func getDateDifferenceInSeconds(startDate: Date, endDate: Date) -> Int64 {
+        let calendar = Calendar.current
+        let unitFlags = Set<Calendar.Component>([.second])
+        let dateComponents = calendar.dateComponents(unitFlags, from: startDate, to: endDate)
+        let seconds = dateComponents.second
+        return Int64(seconds!)
+    }
 }
