@@ -27,7 +27,7 @@ class ClickActionExecutor {
         executeExternal()
 
         if let close = clickAction.close, close {
-            triggerContext.getTriggerParentLayout()?.removeFromSuperview()
+            triggerContext.closeInApp("CTA")
         }
         // TODO 01/11/21: Add In-App browser and AR
     }
