@@ -26,6 +26,8 @@ struct Constants {
     static let STORAGE_FB_TOKEN = "fb_token"
     static let STORAGE_DEVICE_ID = "cooee_device_id"
     static let STORAGE_DEVICE_UUID = "cooee_device_uuid"
+    static let STORAGE_ACTIVATED_TRIGGERS="activated_triggers"
+    static let STORAGE_ACTIVE_TRIGGER = "active_trigger"
     // endregion
 
     // KEEP_ALIVE_TIME_IN_MS will be in SECONDS

@@ -12,7 +12,7 @@ import UIKit
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-public class EngagementTriggerHelper {
+public enum EngagementTriggerHelper {
     // MARK: Public
 
     public static func renderInAppTriggerFromJSONString(_ rawTriggerData: String) {
@@ -21,6 +21,30 @@ public class EngagementTriggerHelper {
         // storeActiveTriggerDetails(context, triggerData);
 
         renderInAppTrigger(triggerData)
+    }
+
+    // MARK: Internal
+
+    static func storeActiveTriggerDetails(triggerData: TriggerData) {
+        var activeTriggers: [EmbeddedTrigger] = LocalStorageHelper.getTypedArray(key: Constants.STORAGE_ACTIVATED_TRIGGERS, clazz: EmbeddedTrigger.self)
+        let embeddedTrigger = EmbeddedTrigger(trigger: triggerData)
+        activeTriggers.append(embeddedTrigger)
+        LocalStorageHelper.putArray(key: Constants.STORAGE_ACTIVATED_TRIGGERS, array: activeTriggers)
+    }
+
+    static func getActiveTriggers() -> [EmbeddedTrigger] {
+        var activeTriggers: [EmbeddedTrigger] = LocalStorageHelper.getTypedArray(key: Constants.STORAGE_ACTIVATED_TRIGGERS, clazz: EmbeddedTrigger.self)
+        
+        for index in activeTriggers.startIndex ..< activeTriggers.endIndex {
+            
+            if activeTriggers[index].isExpired() {
+                activeTriggers.remove(at: index)
+            }
+            
+        }
+        
+        LocalStorageHelper.putArray(key: Constants.STORAGE_ACTIVATED_TRIGGERS, array: activeTriggers)
+        return activeTriggers
     }
 
     // MARK: Private
@@ -42,10 +66,17 @@ public class EngagementTriggerHelper {
 
         do {
             if let visibleController = UIApplication.shared.topMostViewController() {
-                 try InAppTriggerScene.instance.updateViewWith(data: data!, on: visibleController)
+                try InAppTriggerScene.instance.updateViewWith(data: data!, on: visibleController)
+                setActiveTrigger(data!)
             }
         } catch {
             CooeeFactory.shared.sentryHelper.capture(message: "Couldn't show Engagement Trigger", error: error as NSError)
         }
+    }
+    
+    private static func setActiveTrigger(_ data: TriggerData){
+        let embededTrigger = EmbeddedTrigger(trigger: data)
+        
+        LocalStorageHelper.putAnyClass(key: Constants.STORAGE_ACTIVE_TRIGGER, data: embededTrigger)
     }
 }
