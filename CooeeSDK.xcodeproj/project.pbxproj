@@ -51,7 +51,6 @@
 		759E15F3271061520040F09C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 759E15F2271061520040F09C /* GoogleService-Info.plist */; };
 		75A0981027070FD800C2057B /* AppLifeCycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A0980F27070FD800C2057B /* AppLifeCycle.swift */; };
 		75A098122707132100C2057B /* CooeeBootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A098112707132100C2057B /* CooeeBootstrap.swift */; };
-		75BBEF0F272FFEA800E532EF /* DemoInAppOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BBEF0E272FFEA800E532EF /* DemoInAppOne.swift */; };
 		75DD8793271575EA00A272BB /* CooeeJobUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD8792271575EA00A272BB /* CooeeJobUtils.swift */; };
 		75DD87962715924B00A272BB /* PendingTaskJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87952715924B00A272BB /* PendingTaskJob.swift */; };
 		75DD87982715927B00A272BB /* PendingTaskJobProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87972715927B00A272BB /* PendingTaskJobProcessor.swift */; };
@@ -195,7 +194,6 @@
 		759E15F2271061520040F09C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75A0980F27070FD800C2057B /* AppLifeCycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLifeCycle.swift; sourceTree = "<group>"; };
 		75A098112707132100C2057B /* CooeeBootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeBootstrap.swift; sourceTree = "<group>"; };
-		75BBEF0E272FFEA800E532EF /* DemoInAppOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoInAppOne.swift; sourceTree = "<group>"; };
 		75DD8792271575EA00A272BB /* CooeeJobUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeJobUtils.swift; sourceTree = "<group>"; };
 		75DD87952715924B00A272BB /* PendingTaskJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTaskJob.swift; sourceTree = "<group>"; };
 		75DD87972715927B00A272BB /* PendingTaskJobProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTaskJobProcessor.swift; sourceTree = "<group>"; };
@@ -642,7 +640,6 @@
 				AC0B8B7A9B8DFBE2F5B76514 /* InAppAnimationProvider.swift */,
 				AC0B8822C3E3E958FA16FEFE /* renderer */,
 				AC0B8653FB4CB92835FDFF80 /* TriggerContext.swift */,
-				75BBEF0E272FFEA800E532EF /* DemoInAppOne.swift */,
 			);
 			path = inapp;
 			sourceTree = "<group>";
@@ -947,7 +944,6 @@
 				757E405C26FA08D5008352F3 /* DeviceAuthResponse.swift in Sources */,
 				7518746A274CE35E00BF267F /* ShapeRenderer.swift in Sources */,
 				751E1329270C7074002CF442 /* DateUtil.swift in Sources */,
-				75BBEF0F272FFEA800E532EF /* DemoInAppOne.swift in Sources */,
 				75DD87CC271EF4BA00A272BB /* Alignment.swift in Sources */,
 				751BC7DA26F35E32002D8358 /* AppInfo.swift in Sources */,
 				75729E7426F497FD006EB506 /* TriggerData.swift in Sources */,
