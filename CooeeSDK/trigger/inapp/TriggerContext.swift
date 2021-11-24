@@ -16,6 +16,8 @@ class TriggerContext {
 
     private var triggerData: TriggerData?
     private var triggerParentLayout: UIView?
+    private var closedEventProps = [String: Any]()
+    private var callback: ((_ result: [String: Any]?) -> ())? = nil
 
     public func getTriggerData() -> TriggerData? {
         triggerData
@@ -31,5 +33,18 @@ class TriggerContext {
 
     public func setTriggerParentLayout(triggerParentLayout: UIView) {
         self.triggerParentLayout = triggerParentLayout
+    }
+    
+    public func closeInApp(_ closeBehaviour: String){
+        closedEventProps.updateValue(closeBehaviour, forKey: "closeBehaviour")
+        callback!(nil)
+    }
+    
+    public func onExit(callback: @escaping (_ result: [String: Any]?) -> ()) {
+        self.callback = callback
+    }
+    
+    public func getClosedEventProps() -> [String: Any]{
+        closedEventProps
     }
 }
