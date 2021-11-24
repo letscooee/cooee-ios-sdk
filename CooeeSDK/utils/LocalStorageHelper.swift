@@ -49,38 +49,43 @@ class LocalStorageHelper {
     static func getTypedArray<T: Codable>(key: String, clazz: T.Type) -> [T] {
         if let rawString = getString(key: key) {
             var arr: [T]?
+
             do {
                 arr = try JSONDecoder().decode([T].self, from: rawString.data(using: .utf8)!)
-            } catch {}
+            } catch {
+            }
+
             return arr ?? [T]()
         } else {
             return [T]()
         }
     }
 
-    static func putArray<T: Codable>(key: String, array: [T]) {
-        guard let data = try? JSONSerialization.data(withJSONObject: array, options: []) else {
-            return
-        }
-        putString(key: key, value: String(data: data, encoding: String.Encoding.utf8)!)
+    static func putArray<T: HandyJSON>(key: String, array: [T]) {
+        putString(key: key, value: array.toJSONString()!)
     }
-    
+
     static func putAnyClass<T: Codable>(key: String, data: T) {
         guard let data = try? JSONEncoder().encode(data) else {
             return
         }
         putString(key: key, value: String(data: data, encoding: String.Encoding.utf8)!)
     }
-    
+
     static func getEmbeddedTrigger<T: Codable>(key: String, clazz: T.Type) -> T? {
         if let rawString = getString(key: key) {
             var arr: T?
             do {
                 arr = try JSONDecoder().decode(T.self, from: rawString.data(using: .utf8)!)
-            } catch {}
+            } catch {
+            }
             return arr
         } else {
             return nil
         }
+    }
+
+    static func remove(key: String) {
+        UserDefaults.standard.set(nil, forKey: key)
     }
 }
