@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		75187468274CD6F000BF267F /* ElementsRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75187467274CD6F000BF267F /* ElementsRenderer.swift */; };
+		7518746A274CE35E00BF267F /* ShapeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75187469274CE35E00BF267F /* ShapeRenderer.swift */; };
+		7518746C274DF8C100BF267F /* PartElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7518746B274DF8BF00BF267F /* PartElement.swift */; };
 		751BC78226F3108A002D8358 /* CooeeSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 751BC78026F3108A002D8358 /* CooeeSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		751BC78F26F31162002D8358 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC78E26F31162002D8358 /* AppDelegate.swift */; };
 		751BC79126F31162002D8358 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC79026F31162002D8358 /* SceneDelegate.swift */; };
@@ -139,6 +142,9 @@
 /* Begin PBXFileReference section */
 		5F6A13389002428C5D489894 /* Pods-CooeeSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.debug.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		5FC8F5B4B05D83373A281F12 /* Pods-Cooee iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS.debug.xcconfig"; path = "Target Support Files/Pods-Cooee iOS/Pods-Cooee iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		75187467274CD6F000BF267F /* ElementsRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsRenderer.swift; sourceTree = "<group>"; };
+		75187469274CE35E00BF267F /* ShapeRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeRenderer.swift; sourceTree = "<group>"; };
+		7518746B274DF8BF00BF267F /* PartElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartElement.swift; sourceTree = "<group>"; };
 		751BC77D26F3108A002D8358 /* CooeeSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CooeeSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		751BC78026F3108A002D8358 /* CooeeSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CooeeSDK.h; sourceTree = "<group>"; };
 		751BC78126F3108A002D8358 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -533,6 +539,7 @@
 				AC0B86FED7478E8BCDAAC99D /* TextElement.swift */,
 				AC0B83A6575EA932ACCB0D2F /* VideoElement.swift */,
 				AC0B8829F5B44FE4A5E23E66 /* ShapeElement.swift */,
+				7518746B274DF8BF00BF267F /* PartElement.swift */,
 			);
 			path = elements;
 			sourceTree = "<group>";
@@ -613,6 +620,8 @@
 				AC0B832FF3BC900263507255 /* ImageRenderer.swift */,
 				AC0B898DBA7B1DE088837B41 /* TextRenderer.swift */,
 				AC0B814783FAE5CBC0031163 /* ButtonRenderer.swift */,
+				75187467274CD6F000BF267F /* ElementsRenderer.swift */,
+				75187469274CE35E00BF267F /* ShapeRenderer.swift */,
 			);
 			path = renderer;
 			sourceTree = "<group>";
@@ -936,6 +945,7 @@
 				75729E7826F4C131006EB506 /* LocalStorageHelper.swift in Sources */,
 				75DD87CE271EF4D500A272BB /* Font.swift in Sources */,
 				757E405C26FA08D5008352F3 /* DeviceAuthResponse.swift in Sources */,
+				7518746A274CE35E00BF267F /* ShapeRenderer.swift in Sources */,
 				751E1329270C7074002CF442 /* DateUtil.swift in Sources */,
 				75BBEF0F272FFEA800E532EF /* DemoInAppOne.swift in Sources */,
 				75DD87CC271EF4BA00A272BB /* Alignment.swift in Sources */,
@@ -981,6 +991,7 @@
 				75DD87A6271D6F2400A272BB /* Background.swift in Sources */,
 				AC0B843D6FCF6D51FBCA7FD7 /* ProfileTaskProcessor.swift in Sources */,
 				AC0B874545303FDF69FF4E95 /* DictionaryPrototype.swift in Sources */,
+				75187468274CD6F000BF267F /* ElementsRenderer.swift in Sources */,
 				75DD87B6271D7D2000A272BB /* Shadow.swift in Sources */,
 				75DD87B0271D787900A272BB /* Border.swift in Sources */,
 				AC0B83940A8AA5D45A0E64D9 /* EventTaskProcessor.swift in Sources */,
@@ -1005,6 +1016,7 @@
 				AC0B8BC022480FDA5C51B478 /* TriggerContext.swift in Sources */,
 				AC0B8DBA39461B9A35158784 /* Extensions.swift in Sources */,
 				AC0B81656327520249E6A428 /* UnitUtil.swift in Sources */,
+				7518746C274DF8C100BF267F /* PartElement.swift in Sources */,
 				AC0B85C98A085703F48B2067 /* RendererExtensions.swift in Sources */,
 				AC0B887F64D2646212E0E763 /* ElementType.swift in Sources */,
 				AC0B8F9ACEAD15992DF79CC2 /* EngagementTriggerHelper.swift in Sources */,
