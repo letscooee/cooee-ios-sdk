@@ -42,15 +42,7 @@ public class EngagementTriggerHelper {
 
         do {
             if let visibleController = UIApplication.shared.topMostViewController() {
-                // try InAppTriggerScene.instance.updateViewWith(data: data!, on: visibleController)
-                let host = UIHostingController(rootView: DemoInAppOne(data: data!))
-                guard let hostView = host.view else {
-                    print("fail to load swiftUI")
-                    return
-                }
-                hostView.translatesAutoresizingMaskIntoConstraints = false
-                visibleController.view.addSubview(hostView)
-                // hostView.centerMe
+                 try InAppTriggerScene.instance.updateViewWith(data: data!, on: visibleController)
             }
         } catch {
             CooeeFactory.shared.sentryHelper.capture(message: "Couldn't show Engagement Trigger", error: error as NSError)
