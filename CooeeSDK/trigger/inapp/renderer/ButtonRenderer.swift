@@ -3,6 +3,7 @@
 //
 
 import Foundation
+import SwiftUI
 import UIKit
 
 /**
@@ -11,56 +12,42 @@ import UIKit
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-class ButtonRenderer: AbstractInAppRenderer {
+struct ButtonRenderer: View {
     // MARK: Lifecycle
 
-    init(_ parentElement: UIView, _ elementData: BaseElement, _ triggerContext: TriggerContext, _ isFlex: Bool) {
-        self.buttonData = elementData as! ButtonElement
-        super.init(triggerContext: triggerContext, elementData: elementData, parentElement: parentElement, isFlex: isFlex)
+    init(_ element: ButtonElement, _ triggerContext: TriggerContext) {
+        self.parentTextElement = element
+        self.childrens = element.prs!
+        self.triggerContext = triggerContext
     }
 
     // MARK: Internal
 
-    override func render() -> UIKit.UIView {
-        let button = UIButton()
-        button.setTitle(buttonData.txt, for: .normal)
-        processTextData(button)
-        return newElement!
-    }
+    let parentTextElement: ButtonElement
+    let childrens: [PartElement]
+    let triggerContext: TriggerContext
 
-    internal func processTextData(_ view: UIView) {
-        newElement = view
+    var body: some View {
+        ForEach(childrens) { child in
 
-        processFontBlock()
-        processAlignmentBlock()
-        processColourBlock()
-    }
+            let textColour: Color = child.getPartColour() ?? parentTextElement.getColour() ?? Color(hex: "#000000")
+            let font = parentTextElement.getFont()
+            let _: CGFloat? = parentTextElement.f?.getLineHeight()
 
-    // MARK: Private
-
-    private var buttonData: ButtonElement
-
-    private func processColourBlock() {
-        if buttonData.c == nil {
-            return
+            let temp = child.getPartText().trimmingCharacters(in: .whitespacesAndNewlines)
+            if temp.count > 0 {
+                Text(child.getPartText())
+                    .foregroundColor(textColour)
+                    .font(font)
+                    .bold(child.isBold())
+                    .italic(child.isItalic())
+                    .underline(child.addUnderLine())
+                    .strikethrough(child.addStrickThrough())
+//                    .if(lineHeight != nil) {
+//                        $0.fontWithLineHeight(font: font, lineHeight: lineHeight!)
+//                    }
+                    .modifier(AbstractInAppRenderer(elementData: parentTextElement, triggerContext: triggerContext))
+            }
         }
-
-        (newElement as! UIButton).setTitleColor(buttonData.c!.getColour(), for: .normal)
-    }
-
-    private func processAlignmentBlock() {
-        if buttonData.alg == nil {
-            return
-        }
-
-        (newElement as! UIButton).contentHorizontalAlignment = buttonData.getButtonAlignment()
-    }
-
-    private func processFontBlock() {
-        if buttonData.f == nil {
-            return
-        }
-
-        (newElement as! UIButton).titleLabel?.font = UIFont.systemFont(ofSize: buttonData.f!.getSize())
     }
 }

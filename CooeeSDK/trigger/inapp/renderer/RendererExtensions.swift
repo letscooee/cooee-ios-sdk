@@ -3,10 +3,10 @@
 //
 
 import Foundation
+import SwiftUI
 import UIKit
 
 extension UIView {
-
     /**
      Create a shape containing dashed border and add it as sub layer in UIView
      - Parameters:
@@ -17,7 +17,7 @@ extension UIView {
        - cornerRadius: Radius of corner in Int
      */
     func addDashedBorder(colour: UIColor, width: CGFloat, dashWidth: CGFloat, dashGap: CGFloat, cornerRadius: CGFloat) {
-        let shapeLayer: CAShapeLayer = CAShapeLayer()
+        let shapeLayer = CAShapeLayer()
         let frameSize = self.frame.size
         let shapeRect = CGRect(x: 0, y: 0, width: frameSize.width, height: frameSize.height)
 
@@ -46,7 +46,7 @@ extension UIView {
         layer.shadowColor = colour.cgColor
 
         // shadow opacity can be applied between 0 and 1
-        layer.shadowOpacity = Float((elevation / 100))
+        layer.shadowOpacity = Float(elevation / 100)
         layer.shadowOffset = CGSize(width: -1, height: 1)
         layer.shadowRadius = 1
 
@@ -62,7 +62,96 @@ extension UIView {
      */
     func rotate(angle: Int) {
         let radians = CGFloat(angle) / 180.0 * CGFloat.pi
-        let rotation = self.transform.rotated(by: radians);
+        let rotation = self.transform.rotated(by: radians)
         self.transform = rotation
+    }
+}
+
+extension Color {
+    init(hex: String, alpha: Double = 100) {
+        var hexString = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int: UInt64 = 0
+
+        Scanner(string: hexString).scanHexInt64(&int)
+
+        let r, g, b: UInt64
+        switch hexString.count {
+        case 3: // RGB (12-bit)
+            (r, g, b) = ((int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+        case 6: // RGB (24-bit)
+            (r, g, b) = ((int >> 16) & 0xFF, (int >> 8) & 0xFF, int & 0xFF)
+        case 8: // ARGB (32-bit)
+            (r, g, b) = (int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+        default:
+            (r, g, b) = (1, 1, 0)
+        }
+
+        self.init(
+            red: Double(r) / 255,
+            green: Double(b) / 255,
+            blue: Double(g) / 255,
+            opacity: Double(alpha) / 100
+        )
+    }
+}
+
+public extension View {
+    @ViewBuilder
+    internal func `if`<Transform: View>(_ condition: Bool, transform: (Self) -> Transform) -> some View {
+        if condition { transform(self) }
+        else { self }
+    }
+
+    func frame(_ width: CGFloat, _ height: CGFloat) -> some View {
+        self.frame(width: width, height: height)
+    }
+
+    func width(_ width: CGFloat) -> some View {
+        self.frame(width: width)
+    }
+
+    func height(_ height: CGFloat) -> some View {
+        self.frame(height: height)
+    }
+    
+    func fontWithLineHeight(font: UIFont, lineHeight: CGFloat) -> some View {
+            ModifiedContent(content: self, modifier: FontWithLineHeight(font: font, lineHeight: lineHeight))
+        }
+}
+
+public extension Text {
+    func bold(_ isBold: Bool) -> Text{
+        if isBold{
+            return self.bold()
+        }else{
+            return self
+        }
+    }
+    
+    func italic(_ isItalic: Bool) -> Text{
+        if isItalic{
+            return self.italic()
+        }else{
+            return self
+        }
+    }
+    func underline(_ addUnderline: Bool) -> Text{
+        if addUnderline{
+            return self.underline()
+        }else{
+            return self
+        }
+    }
+}
+
+struct FontWithLineHeight: ViewModifier {
+    let font: UIFont
+    let lineHeight: CGFloat
+
+    func body(content: Content) -> some View {
+        content
+            .font(SwiftUI.Font(font))
+            .lineSpacing(lineHeight - font.lineHeight)
+            .padding(.vertical, (lineHeight - font.lineHeight) / 2)
     }
 }

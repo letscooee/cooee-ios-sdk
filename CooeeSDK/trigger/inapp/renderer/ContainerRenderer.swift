@@ -3,6 +3,7 @@
 //
 
 import Foundation
+import SwiftUI
 import UIKit
 
 /**
@@ -11,32 +12,27 @@ import UIKit
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-class ContainerRenderer: GroupRenderer {
+struct ContainerRenderer: View {
+    // MARK: Lifecycle
 
-    private var layers: [Layer]
-    private var container: UIView
-
-    init(_ container: UIView, _ parentView: UIView, _ element: Container, _ layers: [Layer], _ triggerContext: TriggerContext) {
-        self.layers = layers
-        self.container = container
-        super.init(parentView, element, triggerContext, true)
+    init(inAppTrigger data: InAppTrigger, _ triggerContext: TriggerContext) {
+        self.container = data.cont!
+        self.elements = data.elems!
+        self.triggerContext = triggerContext
     }
 
-    override func render() -> UIView {
-        newElement = container
-        processCommonBlocks()
-        return newElement!
+    // MARK: Internal
+
+    var body: some View {
+        ZStack {
+            ElementsRenderer(elements, triggerContext)
+        }.modifier(AbstractInAppRenderer(elementData: container, triggerContext: triggerContext, isContainer: true))
+
     }
 
-    override func processSizePositionBlock() {
-        let deviceInfo = CooeeFactory.shared.deviceInfo
-        let calculatedWidth = deviceInfo.getDeviceWidth()
-        let calculatedHeight = deviceInfo.getDeviceHeight()
-        let calculatedX = elementData.getX(self.parentElement)
-        let calculatedY = elementData.getY(self.parentElement)
-        print("calculated Width \(calculatedWidth)")
-        print("calculated Height \(calculatedHeight)")
+    // MARK: Private
 
-        self.newElement?.frame = CGRect(x: calculatedX, y: calculatedY, width: calculatedWidth, height: calculatedHeight)
-    }
+    private var container: Container
+    private var elements: [[String: Any]]
+    private var triggerContext: TriggerContext
 }

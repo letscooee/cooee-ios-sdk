@@ -3,6 +3,7 @@
 //
 
 import Foundation
+import SwiftUI
 import UIKit
 
 /**
@@ -11,184 +12,83 @@ import UIKit
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-class AbstractInAppRenderer: InAppRenderer {
-    // MARK: Lifecycle
+struct AbstractInAppRenderer: ViewModifier {
+    var elementData: BaseElement
+    var triggerContext: TriggerContext
+    var isContainer: Bool = false
+    let deviceWidth = UIScreen.main.bounds.width
+    let deviceHeight = UIScreen.main.bounds.height
 
-    init(triggerContext: TriggerContext, elementData: BaseElement, parentElement: UIView, isFlex: Bool) {
-        self.triggerContext = triggerContext
-        self.elementData = elementData
-        self.parentElement = parentElement
-        self.isFlex = isFlex
-    }
+    @State var font = SwiftUI.Font.system(size: 14)
 
-    // MARK: Internal
-
-    internal var triggerContext: TriggerContext
-    internal var elementData: BaseElement
-    internal var parentElement: UIView
-
-    /**
-     The newest element that will be rendered by the instance of this renderer.
-     */
-    internal var newElement: UIView?
-    internal var isFlex: Bool
-
-    func render() -> UIView {
-        return UIView()
-    }
-
-    internal func processCommonBlocks() {
-        self.processSizePositionBlock()
-        self.processBackground()
-        self.processBorderBlock()
-        self.processShadowBlock()
-        self.processTransformBlock()
-        self.processSpacing()
-        self.processClickBlock()
-
-        // TODO: 26/10/21: Check for position apply of UIView
-        // self.applyPositionBlock()
-        self.addElementToHierarchy()
-    }
-
-    private func processClickBlock() {
-        let clickAction = self.elementData.getClickAction()
-
-        if clickAction == nil {
-            return
-        }
-
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(self.checkAction))
-        self.newElement!.addGestureRecognizer(gesture)
-
-    }
-
-    @objc func checkAction(sender: UITapGestureRecognizer) {
-        print("******************* Taped")
-    }
-
-    // MARK: Private
-
-    private func addElementToHierarchy() {
-        self.parentElement.addSubview(self.newElement!)
-    }
-
-    private func processSpacing() {
-        var spacing = self.elementData.spc
-
-        if spacing == nil {
-            return
-        }
-
-        spacing!.calculatedPaddingAndMargin(self.parentElement)
-
-        /*let marginLeft = spacing!.getMarginLeft(self.parentElement)
-        let marginRight = spacing!.getMarginRight(self.parentElement)
-        let marginTop = spacing!.getMarginTop(self.parentElement)
-        let marginBottom = spacing!.getMarginBottom(self.parentElement)
-
-        self.newElement?.layoutMargins = UIEdgeInsets(top: marginTop, left: marginLeft, bottom: marginBottom, right: marginRight)*/
-
-        // TODO: 26/10/21: Check for padding
-    }
-
-    internal func processSizePositionBlock() {
-
-        let calculatedWidth = elementData.getCalculatedWidth()
+    @ViewBuilder func body(content: Content) -> some View {
+        // process height and width
         let calculatedHeight = elementData.getCalculatedHeight()
-        let calculatedX = elementData.getX(self.parentElement)
-        let calculatedY = elementData.getY(self.parentElement)
-        print("calculated Width \(calculatedWidth)")
-        print("calculated Height \(calculatedHeight)")
+        let calculatedWidth = elementData.getCalculatedWidth()
+        let calculatedX = elementData.getX() + ((calculatedWidth ?? 0)/2)
+        let calculatedY = elementData.getY() + ((calculatedHeight ?? 0)/2)
+        let _ = print("\(elementData)")
+        let _ = print("x: \(elementData.getX()), y: \(elementData.getY())")
+        let _ = print("h: \(calculatedHeight), w: \(calculatedWidth), dh: \(deviceHeight), dw: \(deviceWidth)")
 
-        self.newElement?.frame = CGRect(x: calculatedX, y: calculatedY, width: calculatedWidth!, height: calculatedHeight!)
-        //self.newElement?.frame.size.height = calculatedHeight
-
-        /*self.newElement?.translatesAutoresizingMaskIntoConstraints = true
-        self.parentElement.setNeedsLayout()
-        self.newElement?.layoutIfNeeded()
-        self.newElement?.autoresizingMask = [.flexibleHeight, .flexibleWidth]*/
-    }
-
-    private func processTransformBlock() {
-        let transform = self.elementData.trf
-
-        if transform == nil {
-            return
+        content.if(elementData.spc != nil) { $0.padding(.bottom, elementData.spc!.getPaddingBottom())
+            .padding(.top, elementData.spc!.getPaddingTop())
+            .padding(.leading, elementData.spc!.getPaddingLeft())
+            .padding(.trailing, elementData.spc!.getPaddingRight())
         }
-
-        self.newElement?.rotate(angle: transform!.getRotation())
-    }
-
-    private func processShadowBlock() {
-        let shadow = self.elementData.shadow
-
-        if shadow == nil {
-            return
+        .if(elementData.bg != nil && elementData.bg!.s != nil && elementData.bg!.s!.g != nil) {
+            $0.background(
+                LinearGradient(gradient: SwiftUI.Gradient(colors: [Color(hex: elementData.bg!.s!.g!.c1!), Color(hex: elementData.bg!.s!.g!.c2!)]), startPoint: .top, endPoint: .bottom)
+            )
         }
-
-        let shadowColour = shadow!.getColour()
-        let elevation = shadow!.getElevation()
-
-        self.newElement?.dropShadow(elevation: elevation, colour: shadowColour)
-    }
-
-    private func processBorderBlock() {
-        if self.elementData.br == nil {
-            return
+        .if(elementData.bg != nil && elementData.bg!.s != nil && elementData.bg!.s!.g == nil) {
+            $0.background(Color(hex: elementData.bg!.s!.h!, alpha: elementData.bg!.s!.getAlpha()).offset(x: elementData.getX().pixelsToPoints(), y: elementData.getY().pixelsToPoints()))
+            // process image and glossy
         }
-
-        let border = self.elementData.br!
-
-        let borderColor = border.getColour() ?? UIColor.clear
-        let cornerRadius = border.getRadius(self.parentElement)
-
-        if border.getStyle() == Border.Style.SOLID {
-            self.newElement?.layer.borderColor = borderColor.cgColor
-            self.newElement?.layer.borderWidth = CGFloat(border.getWidth(self.parentElement))
-
-        } else if border.getStyle() == Border.Style.DASH {
-            self.newElement?.addDashedBorder(colour: borderColor, width: border.getWidth(self.parentElement),
-                    dashWidth: border.getDashWidth(self.parentElement), dashGap: border.getDashGap(self.parentElement),
-                    cornerRadius: cornerRadius)
+        .if(elementData.br != nil && elementData.br!.getStyle() == Border.Style.SOLID) {
+            $0.overlay(
+                RoundedRectangle(cornerRadius: elementData.br!.getRadius())
+                    .stroke(Color(hex: elementData.br!.getColour(), alpha: elementData.br!.getAlpha()), lineWidth: elementData.br!.getWidth())
+                    .offset(x: elementData.getX().pixelsToPoints(), y: elementData.getY().pixelsToPoints())
+            )
         }
-
-        self.newElement?.layer.cornerRadius = CGFloat(border.getRadius(self.parentElement))
-    }
-
-    private func processBackground() {
-        if self.elementData.bg == nil {
-            return
+        .if(elementData.br != nil && elementData.br!.getStyle() == Border.Style.DASH) {
+            $0.overlay(
+                RoundedRectangle(cornerRadius: elementData.br!.getRadius())
+                    .strokeBorder(
+                        style: StrokeStyle(
+                            lineWidth: elementData.br!.getWidth(),
+                            dash: [elementData.br!.getDashGap(), elementData.br!.getDashWidth()]
+                        )
+                    )
+                    .foregroundColor(Color(hex: elementData.br!.getColour(), alpha: elementData.br!.getAlpha()))
+            )
+        }.if(elementData.shadow != nil) {
+            $0.shadow(radius: CGFloat(elementData.shadow!.getElevation()))
         }
-
-        let background = self.elementData.bg!
-
-        if background.s != nil {
-            self.newElement?.backgroundColor = background.s!.getColour()
-        } else if background.g != nil {
-            self.applyGlassmorphism(background.g!)
-        } else if background.i != nil {
-            self.applyBackgroundImage(background.i!)
+        .if(isContainer){
+            $0.frame(width: deviceWidth, height: deviceHeight)
         }
-    }
-
-    private func applyBackgroundImage(_ image: Image) {
-        DispatchQueue.main.async {
-            let data = try? Data(contentsOf: URL(string: image.src!)!)
-            if let imageData = data {
-                if let uiImage = UIImage(data: imageData) {
-                    self.newElement!.backgroundColor = UIColor(patternImage: uiImage)
+        .if(calculatedWidth != nil && calculatedHeight != nil && !isContainer) {
+            $0.frame(width: calculatedWidth!, height: calculatedHeight!)//.position(x: elementData.getX()+(calculatedWidth/2), y: elementData.getY()+(calculatedHeight/2))
+        }
+        .if(calculatedWidth != nil && calculatedHeight == nil && !isContainer) {
+            $0.width(calculatedWidth!)//.position(x: elementData.getX()+(calculatedWidth/2), y: elementData.getY())
+        }
+        .if(calculatedWidth == nil && calculatedHeight != nil && !isContainer) {
+            $0.height(calculatedHeight!)//.position(x: elementData.getX(), y: elementData.getY()+(calculatedHeight/2))
+        }
+        .if (!isContainer) {
+            $0.position(x: calculatedX, y: calculatedY)
+        }
+        .gesture(
+            TapGesture()
+                .onEnded { _ in
+                    if let clickAction = elementData.getClickAction(){
+                        ClickActionExecutor(clickAction, triggerContext).execute()
+                    }
                 }
-            }
-        }
-    }
-
-    private func applyGlassmorphism(_ glossy: Glossy) {
-        let blurEffect = UIBlurEffect(style: .light)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = self.newElement!.bounds
-        blurEffectView.alpha = 0.8
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.newElement!.addSubview(blurEffectView)
+        )
+        
     }
 }

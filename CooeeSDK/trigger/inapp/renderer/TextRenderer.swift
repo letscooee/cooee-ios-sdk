@@ -3,6 +3,7 @@
 //
 
 import Foundation
+import SwiftUI
 import UIKit
 
 /**
@@ -11,73 +12,42 @@ import UIKit
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-class TextRenderer: AbstractInAppRenderer {
+struct TextRenderer: View {
     // MARK: Lifecycle
 
-    init(_ parentElement: UIView, _ elementData: BaseElement, _ triggerContext: TriggerContext, _ isFlex: Bool) {
-        self.textData = elementData as! TextElement
-        super.init(triggerContext: triggerContext, elementData: elementData, parentElement: parentElement, isFlex: isFlex)
+    init(_ element: TextElement, _ triggerContext: TriggerContext) {
+        self.parentTextElement = element
+        self.childrens = element.prs!
+        self.triggerContext = triggerContext
     }
 
     // MARK: Internal
 
-    override func render() -> UIView {
-        if textData.prs != nil, !(textData.prs!.isEmpty) {
-            processParts()
-        } else {
-            let textView = UILabel()
-            textView.text = textData.txt
-            processTextData(textView)
-        }
-        processCommonBlocks()
-        return newElement!
-    }
+    let parentTextElement: TextElement
+    let childrens: [PartElement]
+    let triggerContext: TriggerContext
 
-    internal func processTextData(_ view: UIView) {
-        newElement = view
+    var body: some View {
+        ForEach(childrens) { child in
 
-        processFontBlock()
-        processAlignmentBlock()
-        processColourBlock()
-    }
+            let textColour: Color = child.getPartColour() ?? parentTextElement.getColour() ?? Color(hex: "#000000")
+            let font = parentTextElement.getFont()
+            let _: CGFloat? = parentTextElement.f?.getLineHeight()
 
-    // MARK: Private
-
-    private var textData: TextElement
-
-    private func processColourBlock() {
-        if textData.c == nil {
-            return
-        }
-
-        (newElement as! UILabel).textColor = textData.c!.getColour()
-    }
-
-    private func processAlignmentBlock() {
-        if textData.alg == nil {
-            return
-        }
-
-        (newElement as! UILabel).textAlignment = textData.getAlignment()
-    }
-
-    private func processFontBlock() {
-        if textData.f == nil {
-            return
-        }
-
-        (newElement as! UILabel).font = UIFont.systemFont(ofSize: textData.f!.getSize())
-    }
-
-    private func processParts() {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        newElement = stackView
-        processCommonBlocks()
-
-        for child in textData.prs! {
-            // TODO: 27/10/21: watch for size of element
-            _ = TextRenderer(newElement!, child, triggerContext, isFlex).render()
+            let temp = child.getPartText().trimmingCharacters(in: .whitespacesAndNewlines)
+            if temp.count > 0 {
+                Text(child.getPartText())
+                    .foregroundColor(textColour)
+                    .font(font)
+                    .bold(child.isBold())
+                    .italic(child.isItalic())
+                    .underline(child.addUnderLine())
+                    .strikethrough(child.addStrickThrough())
+//                    .if(lineHeight != nil) {
+//                        $0.fontWithLineHeight(font: font, lineHeight: lineHeight!)
+//                    }
+                    .modifier(AbstractInAppRenderer(elementData: parentTextElement, triggerContext: triggerContext))
+            }
         }
     }
 }

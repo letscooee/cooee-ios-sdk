@@ -3,7 +3,7 @@
 //
 
 import Foundation
-import UIKit
+import SwiftUI
 
 /**
  Renders a ImageElement
@@ -11,45 +11,56 @@ import UIKit
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-class ImageRenderer: AbstractInAppRenderer {
-    // MARK: Lifecycle
+struct ImageRenderer<Placeholder: View, ConfiguredImage: View>: View {
+    var url: URL
+    private let placeholder: () -> Placeholder
+    private let image: (SwiftUI.Image) -> ConfiguredImage
 
-    init(_ parentView: UIView, _ element: BaseElement, _ triggerContext: TriggerContext, _ isFlex: Bool) {
-        super.init(triggerContext: triggerContext, elementData: element, parentElement: parentView, isFlex: isFlex)
+    @ObservedObject var imageLoader: ImageLoaderService
+    @State var imageData: UIImage?
+
+    init(
+        url: URL,
+        @ViewBuilder placeholder: @escaping () -> Placeholder,
+        @ViewBuilder image: @escaping (SwiftUI.Image) -> ConfiguredImage
+    ) {
+        self.url = url
+        self.placeholder = placeholder
+        self.image = image
+        self.imageLoader = ImageLoaderService(url: url)
     }
 
-    // MARK: Internal
-
-    override func render() -> UIView {
-        let imageView = UIImageView()
-
-        // ref. https://stackoverflow.com/a/4895327/9256497
-        imageView.contentMode = .scaleAspectFit
-        if let imageElement = elementData as? ImageElement {
-            loadImage(imageElement.src, imageView)
+    @ViewBuilder private var imageContent: some View {
+        if let data = imageData {
+            image(SwiftUI.Image(uiImage: data))
+        } else {
+            placeholder()
         }
-
-        newElement = imageView
-        processCommonBlocks()
-
-        return newElement!
     }
 
-    // MARK: Private
+    var body: some View {
+        imageContent
+            .onReceive(imageLoader.$image) { imageData in
+                self.imageData = imageData
+            }
+    }
+}
 
-    private func loadImage(_ url: String?, _ imageView: UIImageView) {
-        if url?.isEmpty ?? true {
-            return
-        }
+class ImageLoaderService: ObservableObject {
+    @Published var image = UIImage()
 
-        DispatchQueue.main.async {
-            let data = try? Data(contentsOf: URL(string: url!)!)
-            if let imageData = data {
-                if let uiImage = UIImage(data: imageData) {
-                    imageView.image = uiImage
-                    //self.updateSize(uiImage.size.width, uiImage.size.height)
-                }
+    convenience init(url: URL) {
+        self.init()
+        loadImage(for: url)
+    }
+
+    func loadImage(for url: URL) {
+        let task = URLSession.shared.dataTask(with: url) { data, _, _ in
+            guard let data = data else { return }
+            DispatchQueue.main.async {
+                self.image = UIImage(data: data) ?? UIImage()
             }
         }
+        task.resume()
     }
 }
