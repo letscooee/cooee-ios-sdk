@@ -34,17 +34,17 @@ public enum EngagementTriggerHelper {
 
     static func getActiveTriggers() -> [EmbeddedTrigger] {
         var activeTriggers: [EmbeddedTrigger] = LocalStorageHelper.getTypedArray(key: Constants.STORAGE_ACTIVATED_TRIGGERS, clazz: EmbeddedTrigger.self)
-        
+        var activeTriggersCurrent: [EmbeddedTrigger] = [EmbeddedTrigger]()
         for index in activeTriggers.startIndex ..< activeTriggers.endIndex {
             
-            if activeTriggers[index].isExpired() {
-                activeTriggers.remove(at: index)
+            if !activeTriggers[index].isExpired() {
+                activeTriggersCurrent.append(activeTriggers[index])
             }
             
         }
         
-        LocalStorageHelper.putArray(key: Constants.STORAGE_ACTIVATED_TRIGGERS, array: activeTriggers)
-        return activeTriggers
+        LocalStorageHelper.putArray(key: Constants.STORAGE_ACTIVATED_TRIGGERS, array: activeTriggersCurrent)
+        return activeTriggersCurrent
     }
 
     // MARK: Private
@@ -63,11 +63,11 @@ public enum EngagementTriggerHelper {
         if runtimeData.isInBackground() {
             return
         }
-
+        storeActiveTriggerDetails(triggerData: data!)
         do {
             if let visibleController = UIApplication.shared.topMostViewController() {
-                try InAppTriggerScene.instance.updateViewWith(data: data!, on: visibleController)
                 setActiveTrigger(data!)
+                try InAppTriggerScene.instance.updateViewWith(data: data!, on: visibleController)
             }
         } catch {
             CooeeFactory.shared.sentryHelper.capture(message: "Couldn't show Engagement Trigger", error: error as NSError)
