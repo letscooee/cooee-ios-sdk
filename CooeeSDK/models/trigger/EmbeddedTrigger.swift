@@ -8,10 +8,19 @@
 import Foundation
 import HandyJSON
 
+/**
+ This class store data related to triggers which are active/activated by clicking on the trigger notification or by
+ looking an in-app trigger(in future). This would be commonly sent with events {@link com.letscooee.models.Event}
+ as <code>activeTrigger</code>.
+ 
+ - Author: Ashish Gaikwad
+ - Since: 0.1.0
+ */
 class EmbeddedTrigger: Codable, HandyJSON {
     // MARK: Lifecycle
 
-    required init() {}
+    required init() {
+    }
 
     init(triggerID: String, engagementID: String, expireAt: Int64) {
         self.triggerID = triggerID

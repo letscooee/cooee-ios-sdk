@@ -8,6 +8,10 @@
 import Foundation
 import SwiftUI
 
+/**
+ - Author: Ashish Gaikwad
+ - Since: 0.1.0
+ */
 class PartElement: BaseElement, Identifiable {
     // MARK: Public
 
