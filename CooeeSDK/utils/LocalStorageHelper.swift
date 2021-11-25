@@ -61,18 +61,18 @@ class LocalStorageHelper {
         }
     }
 
-    static func putArray<T: HandyJSON>(key: String, array: [T]) {
+    static func putTypedArray<T: HandyJSON>(key: String, array: [T]) {
         putString(key: key, value: array.toJSONString()!)
     }
 
-    static func putAnyClass<T: Codable>(key: String, data: T) {
+    static func putTypedClass<T: Codable>(key: String, data: T) {
         guard let data = try? JSONEncoder().encode(data) else {
             return
         }
         putString(key: key, value: String(data: data, encoding: String.Encoding.utf8)!)
     }
 
-    static func getEmbeddedTrigger<T: Codable>(key: String, clazz: T.Type) -> T? {
+    static func getTypedClass<T: Codable>(key: String, clazz: T.Type) -> T? {
         if let rawString = getString(key: key) {
             var arr: T?
             do {

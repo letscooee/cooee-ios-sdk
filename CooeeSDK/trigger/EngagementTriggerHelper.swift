@@ -29,7 +29,7 @@ public enum EngagementTriggerHelper {
         var activeTriggers: [EmbeddedTrigger] = LocalStorageHelper.getTypedArray(key: Constants.STORAGE_ACTIVATED_TRIGGERS, clazz: EmbeddedTrigger.self)
         let embeddedTrigger = EmbeddedTrigger(trigger: triggerData)
         activeTriggers.append(embeddedTrigger)
-        LocalStorageHelper.putArray(key: Constants.STORAGE_ACTIVATED_TRIGGERS, array: activeTriggers)
+        LocalStorageHelper.putTypedArray(key: Constants.STORAGE_ACTIVATED_TRIGGERS, array: activeTriggers)
     }
 
     static func getActiveTriggers() -> [EmbeddedTrigger] {
@@ -43,7 +43,7 @@ public enum EngagementTriggerHelper {
             
         }
         
-        LocalStorageHelper.putArray(key: Constants.STORAGE_ACTIVATED_TRIGGERS, array: activeTriggersCurrent)
+        LocalStorageHelper.putTypedArray(key: Constants.STORAGE_ACTIVATED_TRIGGERS, array: activeTriggersCurrent)
         return activeTriggersCurrent
     }
 
@@ -77,6 +77,6 @@ public enum EngagementTriggerHelper {
     private static func setActiveTrigger(_ data: TriggerData){
         let embededTrigger = EmbeddedTrigger(trigger: data)
         
-        LocalStorageHelper.putAnyClass(key: Constants.STORAGE_ACTIVE_TRIGGER, data: embededTrigger)
+        LocalStorageHelper.putTypedClass(key: Constants.STORAGE_ACTIVE_TRIGGER, data: embededTrigger)
     }
 }
