@@ -36,6 +36,9 @@
 		751E134B270F1771002CF442 /* PendingTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E134A270F1771002CF442 /* PendingTaskProcessor.swift */; };
 		751E134D270F22AB002CF442 /* AbstractPendingTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E134C270F22AB002CF442 /* AbstractPendingTaskProcessor.swift */; };
 		751E1350270F2F4D002CF442 /* letscooee.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 751E134E270F2F4B002CF442 /* letscooee.xcdatamodeld */; };
+		756BAA112754FE1300C7A84F /* Pods_Cooee_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6DD165866F91815E65CF7F1 /* Pods_Cooee_iOS.framework */; };
+		756BAA142754FE2300C7A84F /* Pods_CooeeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB800582A4AF75A48137B606 /* Pods_CooeeSDK.framework */; };
+		756BAA18275502D800C7A84F /* CooeeSDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 751BC77D26F3108A002D8358 /* CooeeSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		75729E6E26F45828006EB506 /* InfoPlistReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E6D26F45828006EB506 /* InfoPlistReader.swift */; };
 		75729E7226F493AB006EB506 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7126F493AB006EB506 /* Event.swift */; };
 		75729E7426F497FD006EB506 /* TriggerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7326F497FD006EB506 /* TriggerData.swift */; };
@@ -75,6 +78,7 @@
 		75DD87CE271EF4D500A272BB /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87CD271EF4D500A272BB /* Font.swift */; };
 		75FA7DB627217B1F0060A425 /* InAppTriggerScene.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FA7DB527217B1F0060A425 /* InAppTriggerScene.xib */; };
 		75FA7DB9272982DC0060A425 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FA7DB8272982DC0060A425 /* ProfileViewController.swift */; };
+		75FA7DBD272A75AE0060A425 /* samplepayloadone.json in Resources */ = {isa = PBXBuildFile; fileRef = 75FA7DBC272A75AE0060A425 /* samplepayloadone.json */; };
 		AC0B81656327520249E6A428 /* UnitUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B865FAF31BB9A143DEA07 /* UnitUtil.swift */; };
 		AC0B81F74E2154808AECB63A /* ImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B832FF3BC900263507255 /* ImageRenderer.swift */; };
 		AC0B821F476A2352C203E056 /* ShapeElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8829F5B44FE4A5E23E66 /* ShapeElement.swift */; };
@@ -111,8 +115,6 @@
 		AC0B8E5C2D7FCA755C9F8910 /* TextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B86FED7478E8BCDAAC99D /* TextElement.swift */; };
 		AC0B8E841AD56FEB009D2A89 /* SessionConcludeTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */; };
 		AC0B8F9ACEAD15992DF79CC2 /* EngagementTriggerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B804DEA9B9A9EB7E1FD5F /* EngagementTriggerHelper.swift */; };
-		C17CD8950D3CBB4254E3AEBD /* Pods_Cooee_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6DD165866F91815E65CF7F1 /* Pods_Cooee_iOS.framework */; };
-		E4B53257B1CEA855270672CE /* Pods_CooeeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB800582A4AF75A48137B606 /* Pods_CooeeSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +140,19 @@
 			remoteInfo = CooeeSDK;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		756BAA172755027A00C7A84F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				756BAA18275502D800C7A84F /* CooeeSDK.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5F6A13389002428C5D489894 /* Pods-CooeeSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.debug.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.debug.xcconfig"; sourceTree = "<group>"; };
@@ -219,6 +234,7 @@
 		75DD87CD271EF4D500A272BB /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		75FA7DB527217B1F0060A425 /* InAppTriggerScene.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InAppTriggerScene.xib; sourceTree = "<group>"; };
 		75FA7DB8272982DC0060A425 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		75FA7DBC272A75AE0060A425 /* samplepayloadone.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = samplepayloadone.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.json; };
 		77F56F40EDA5A57940AA34BC /* Pods-Cooee iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS.release.xcconfig"; path = "Target Support Files/Pods-Cooee iOS/Pods-Cooee iOS.release.xcconfig"; sourceTree = "<group>"; };
 		7F5B66C3F5CF5A3CF236A788 /* Pods-CooeeSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.release.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.release.xcconfig"; sourceTree = "<group>"; };
 		AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionConcludeTaskProcessor.swift; sourceTree = "<group>"; };
@@ -266,7 +282,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4B53257B1CEA855270672CE /* Pods_CooeeSDK.framework in Frameworks */,
+				756BAA142754FE2300C7A84F /* Pods_CooeeSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,7 +290,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C17CD8950D3CBB4254E3AEBD /* Pods_Cooee_iOS.framework in Frameworks */,
+				756BAA112754FE1300C7A84F /* Pods_Cooee_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +379,7 @@
 				751BC79926F31165002D8358 /* LaunchScreen.storyboard */,
 				751BC79C26F31165002D8358 /* Info.plist */,
 				75FA7DB8272982DC0060A425 /* ProfileViewController.swift */,
+				75FA7DBC272A75AE0060A425 /* samplepayloadone.json */,
 			);
 			path = "Cooee iOS";
 			sourceTree = "<group>";
@@ -706,10 +723,11 @@
 			buildConfigurationList = 751BC7B326F31165002D8358 /* Build configuration list for PBXNativeTarget "Cooee iOS" */;
 			buildPhases = (
 				F08EEB1D9951D9869E98CCB5 /* [CP] Check Pods Manifest.lock */,
+				756BAA172755027A00C7A84F /* CopyFiles */,
 				751BC78826F31162002D8358 /* Sources */,
 				751BC78926F31162002D8358 /* Frameworks */,
 				751BC78A26F31162002D8358 /* Resources */,
-				558C32F477C5E194243002DA /* [CP] Embed Pods Frameworks */,
+				5CFC774A00B8A139651B704F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -841,6 +859,7 @@
 				751BC79B26F31165002D8358 /* LaunchScreen.storyboard in Resources */,
 				759E15F3271061520040F09C /* GoogleService-Info.plist in Resources */,
 				751BC79826F31165002D8358 /* Assets.xcassets in Resources */,
+				75FA7DBD272A75AE0060A425 /* samplepayloadone.json in Resources */,
 				751BC79626F31162002D8358 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -869,7 +888,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		558C32F477C5E194243002DA /* [CP] Embed Pods Frameworks */ = {
+		5CFC774A00B8A139651B704F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
