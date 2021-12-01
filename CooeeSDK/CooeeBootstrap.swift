@@ -5,9 +5,9 @@
 //  Created by Ashish Gaikwad on 01/10/21.
 //
 
-import Foundation
 import FirebaseCore
 import FirebaseMessaging
+import Foundation
 
 /**
  A one time initializer class which initialises the Cooee SDK. This is used internally by the SDK
@@ -15,13 +15,41 @@ import FirebaseMessaging
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-class CooeeBootstrap {
-    public init() {
+class CooeeBootstrap: NSObject {
+    // MARK: Lifecycle
+
+    override public init() {
+        super.init()
         _ = CooeeFactory.shared
         _ = AppLifeCycle.shared
         registerFirebase()
         updateFirebaseToken()
+        swizzleDidReceiveRemoteNotification()
         startPendingTaskJob()
+    }
+
+    // MARK: Private
+    /**
+     Registers custom didReceiveRemoteNotification on current appDelegate
+     */
+    private func swizzleDidReceiveRemoteNotification() {
+        let appDelegate = UIApplication.shared.delegate
+        let appDelegateClass: AnyClass? = object_getClass(appDelegate)
+
+        let originalSelector = #selector(UIApplicationDelegate.application(_:didReceiveRemoteNotification:fetchCompletionHandler:))
+        let swizzledSelector = #selector(CooeeBootstrap.application(_:didReceiveRemoteNotification:fetchCompletionHandler:))
+
+        guard let swizzledMethod = class_getInstanceMethod(CooeeBootstrap.self, swizzledSelector) else {
+            return
+        }
+
+        if let originalMethod = class_getInstanceMethod(appDelegateClass, originalSelector) {
+            // exchange implementation
+            method_exchangeImplementations(originalMethod, swizzledMethod)
+        } else {
+            // add implementation
+            class_addMethod(appDelegateClass, swizzledSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod))
+        }
     }
 
     private func startPendingTaskJob() {
@@ -30,16 +58,57 @@ class CooeeBootstrap {
 
     private func registerFirebase() {
         FirebaseApp.configure()
-        let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-        UIApplication.shared.registerUserNotificationSettings(settings)
+        UNUserNotificationCenter.current().delegate = self
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: { _, _ in })
+
+        Messaging.messaging().delegate = self
         UIApplication.shared.registerForRemoteNotifications()
+        NotificationCenter.default.addObserver(self, selector: #selector(createTrigger(_:)), name: NSNotification.Name(rawValue: "cooeeNotification"), object: nil)
     }
 
     private func updateFirebaseToken() {
-        Messaging.messaging().token { (token, _) in
+        Messaging.messaging().token { token, _ in
             var requestBody = [String: Any]()
             requestBody["firebaseToken"] = token
             CooeeFactory.shared.safeHttpService.updatePushToken(requestData: requestBody)
         }
+    }
+
+    @objc private func createTrigger(_ notification: Notification) {
+        if let userData = notification.userInfo {
+            print(userData)
+        }
+    }
+}
+
+extension CooeeBootstrap: MessagingDelegate {
+    public func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        print("Firebase registration token framework: \(fcmToken ?? "")")
+    }
+}
+
+extension CooeeBootstrap {
+    @objc
+    public func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "cooeeNotification"), object: nil, userInfo: userInfo)
+        completionHandler(.newData)
+    }
+}
+
+extension CooeeBootstrap: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "cooeeNotification"), object: nil, userInfo: userInfo)
+        completionHandler([[.badge, .sound, .alert]])
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "cooeeNotification"), object: nil, userInfo: userInfo)
+        print(userInfo)
+        completionHandler()
     }
 }
