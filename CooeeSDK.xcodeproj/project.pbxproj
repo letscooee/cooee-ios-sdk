@@ -195,6 +195,7 @@
 		751E134A270F1771002CF442 /* PendingTaskProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTaskProcessor.swift; sourceTree = "<group>"; };
 		751E134C270F22AB002CF442 /* AbstractPendingTaskProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractPendingTaskProcessor.swift; sourceTree = "<group>"; };
 		751E134F270F2F4C002CF442 /* letscooee.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = letscooee.xcdatamodel; sourceTree = "<group>"; };
+		756BAA1B275637A300C7A84F /* Cooee iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cooee iOS.entitlements"; sourceTree = "<group>"; };
 		75729E6D26F45828006EB506 /* InfoPlistReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPlistReader.swift; sourceTree = "<group>"; };
 		75729E7126F493AB006EB506 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		75729E7326F497FD006EB506 /* TriggerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerData.swift; sourceTree = "<group>"; };
@@ -370,6 +371,7 @@
 		751BC78D26F31162002D8358 /* Cooee iOS */ = {
 			isa = PBXGroup;
 			children = (
+				756BAA1B275637A300C7A84F /* Cooee iOS.entitlements */,
 				759E15F2271061520040F09C /* GoogleService-Info.plist */,
 				751BC78E26F31162002D8358 /* AppDelegate.swift */,
 				751BC79026F31162002D8358 /* SceneDelegate.swift */,
@@ -1307,6 +1309,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Cooee iOS/Cooee iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 26TM6S5QFS;
 				INFOPLIST_FILE = "Cooee iOS/Info.plist";
@@ -1327,6 +1330,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Cooee iOS/Cooee iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 26TM6S5QFS;
 				INFOPLIST_FILE = "Cooee iOS/Info.plist";
