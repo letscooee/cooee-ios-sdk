@@ -104,7 +104,7 @@ class SentryHelper {
 
         SentrySDK.start { options in
             options.dsn = SentryHelper.COOEE_DSN
-            options.debug = self.sdkInfo.cachedInfo.isDebugging
+            options.debug = false
             options.releaseName = "com.letscooee@\(self.sdkInfo.cachedInfo.sdkVersion)+\(self.sdkInfo.cachedInfo.sdkLongVersion)"
             options.environment = self.sdkInfo.cachedInfo.isDebugging ? "development" : "production"
             self.setupFilterToExcludeNonCooeeEvents(options)
