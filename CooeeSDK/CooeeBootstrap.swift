@@ -29,6 +29,7 @@ class CooeeBootstrap: NSObject {
     }
 
     // MARK: Private
+    
     /**
      Registers custom didReceiveRemoteNotification on current appDelegate
      */
@@ -61,8 +62,8 @@ class CooeeBootstrap: NSObject {
         UNUserNotificationCenter.current().delegate = self
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(
-                options: authOptions,
-                completionHandler: { _, _ in })
+            options: authOptions,
+            completionHandler: { _, _ in })
 
         Messaging.messaging().delegate = self
         UIApplication.shared.registerForRemoteNotifications()
@@ -93,15 +94,24 @@ extension CooeeBootstrap {
 
 extension CooeeBootstrap: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        let userInfo = notification.request.content.userInfo
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "cooeeNotification"), object: nil, userInfo: userInfo)
         completionHandler([[.badge, .sound, .alert]])
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "cooeeNotification"), object: nil, userInfo: userInfo)
-        print(userInfo)
+        let rawTriggerData = userInfo["triggerData"]
+
+        if rawTriggerData == nil {
+            return
+        }
+
+        let triggerData = TriggerData.deserialize(from: "\(rawTriggerData!)")
+
+        if triggerData == nil {
+            return
+        }
+
+        NotificationService.sendEvent("CE Notification Clicked", withTriggerData: triggerData!)
         completionHandler()
     }
 }
