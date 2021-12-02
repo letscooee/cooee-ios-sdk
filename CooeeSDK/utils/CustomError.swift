@@ -15,6 +15,10 @@ import Foundation
 enum CustomError: String, LocalizedError {
     case PropertyError = "Property name cannot start with 'CE '"
     case EmptyInAppData = "Couldn't render In-App because trigger data is null"
+    case emptyData
+    case invalidImage
+
+    // MARK: Public
 
     public var errorDescription: String? {
         self.rawValue
