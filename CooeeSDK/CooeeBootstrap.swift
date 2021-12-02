@@ -66,7 +66,6 @@ class CooeeBootstrap: NSObject {
 
         Messaging.messaging().delegate = self
         UIApplication.shared.registerForRemoteNotifications()
-        NotificationCenter.default.addObserver(self, selector: #selector(createTrigger(_:)), name: NSNotification.Name(rawValue: "cooeeNotification"), object: nil)
     }
 
     private func updateFirebaseToken() {
@@ -74,12 +73,6 @@ class CooeeBootstrap: NSObject {
             var requestBody = [String: Any]()
             requestBody["firebaseToken"] = token
             CooeeFactory.shared.safeHttpService.updatePushToken(requestData: requestBody)
-        }
-    }
-
-    @objc private func createTrigger(_ notification: Notification) {
-        if let userData = notification.userInfo {
-            print(userData)
         }
     }
 }
@@ -93,7 +86,7 @@ extension CooeeBootstrap: MessagingDelegate {
 extension CooeeBootstrap {
     @objc
     public func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "cooeeNotification"), object: nil, userInfo: userInfo)
+        _ = NotificationService(userInfo: userInfo)
         completionHandler(.newData)
     }
 }
