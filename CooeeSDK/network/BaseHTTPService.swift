@@ -22,7 +22,7 @@ class BaseHTTPService {
         // MARK: Lifecycle
 
         init() {
-            dictionary = ["device-name": DeviceInfo.shared.cachedInfo.name,
+            dictionary = ["device-name": DeviceInfo.shared.cachedInfo.name.urlEncoded!,
                           "sdk-version": SDKInfo.shared.cachedInfo.sdkVersion,
                           "sdk-version-code": SDKInfo.shared.cachedInfo.sdkLongVersion,
                           "app-version": AppInfo.shared.getAppVersion()]
