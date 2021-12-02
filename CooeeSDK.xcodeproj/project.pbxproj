@@ -39,6 +39,9 @@
 		756BAA112754FE1300C7A84F /* Pods_Cooee_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6DD165866F91815E65CF7F1 /* Pods_Cooee_iOS.framework */; };
 		756BAA142754FE2300C7A84F /* Pods_CooeeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB800582A4AF75A48137B606 /* Pods_CooeeSDK.framework */; };
 		756BAA18275502D800C7A84F /* CooeeSDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 751BC77D26F3108A002D8358 /* CooeeSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		756BAA1E27577C3F00C7A84F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756BAA1D27577C3E00C7A84F /* NotificationService.swift */; };
+		756BAA212757873500C7A84F /* PushNotificationTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756BAA202757873500C7A84F /* PushNotificationTrigger.swift */; };
+		756BAA2327588C3600C7A84F /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756BAA2227588C3500C7A84F /* ImageDownloader.swift */; };
 		75729E6E26F45828006EB506 /* InfoPlistReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E6D26F45828006EB506 /* InfoPlistReader.swift */; };
 		75729E7226F493AB006EB506 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7126F493AB006EB506 /* Event.swift */; };
 		75729E7426F497FD006EB506 /* TriggerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7326F497FD006EB506 /* TriggerData.swift */; };
@@ -196,6 +199,9 @@
 		751E134C270F22AB002CF442 /* AbstractPendingTaskProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractPendingTaskProcessor.swift; sourceTree = "<group>"; };
 		751E134F270F2F4C002CF442 /* letscooee.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = letscooee.xcdatamodel; sourceTree = "<group>"; };
 		756BAA1B275637A300C7A84F /* Cooee iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cooee iOS.entitlements"; sourceTree = "<group>"; };
+		756BAA1D27577C3E00C7A84F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		756BAA202757873500C7A84F /* PushNotificationTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationTrigger.swift; sourceTree = "<group>"; };
+		756BAA2227588C3500C7A84F /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		75729E6D26F45828006EB506 /* InfoPlistReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPlistReader.swift; sourceTree = "<group>"; };
 		75729E7126F493AB006EB506 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		75729E7326F497FD006EB506 /* TriggerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerData.swift; sourceTree = "<group>"; };
@@ -349,6 +355,7 @@
 		751BC77F26F3108A002D8358 /* CooeeSDK */ = {
 			isa = PBXGroup;
 			children = (
+				756BAA1C27577C1600C7A84F /* notification */,
 				75DD87C5271ECCE500A272BB /* enums */,
 				75DD87912715759B00A272BB /* scheduler */,
 				751E1341270ED06E002CF442 /* database */,
@@ -469,6 +476,22 @@
 			path = processor;
 			sourceTree = "<group>";
 		};
+		756BAA1C27577C1600C7A84F /* notification */ = {
+			isa = PBXGroup;
+			children = (
+				756BAA1D27577C3E00C7A84F /* NotificationService.swift */,
+			);
+			path = notification;
+			sourceTree = "<group>";
+		};
+		756BAA1F2757872400C7A84F /* push */ = {
+			isa = PBXGroup;
+			children = (
+				756BAA202757873500C7A84F /* PushNotificationTrigger.swift */,
+			);
+			path = push;
+			sourceTree = "<group>";
+		};
 		75729E6C26F45768006EB506 /* utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -483,6 +506,7 @@
 				75DD87C1271D9B1C00A272BB /* AnyValue.swift */,
 				AC0B8EA2BBEED727BA8558D9 /* Extensions.swift */,
 				AC0B86C18D2F7EE03C624F8B /* ui */,
+				756BAA2227588C3500C7A84F /* ImageDownloader.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -540,6 +564,7 @@
 		75DD87A0271D6D1700A272BB /* trigger */ = {
 			isa = PBXGroup;
 			children = (
+				756BAA1F2757872400C7A84F /* push */,
 				75DD87A4271D6F0100A272BB /* blocks */,
 				75DD87A1271D6EA700A272BB /* elements */,
 				75729E7326F497FD006EB506 /* TriggerData.swift */,
@@ -960,10 +985,12 @@
 			files = (
 				75A098122707132100C2057B /* CooeeBootstrap.swift in Sources */,
 				75DD87CA271EE39700A272BB /* BaseTextElement.swift in Sources */,
+				756BAA1E27577C3F00C7A84F /* NotificationService.swift in Sources */,
 				751E1325270C350C002CF442 /* SessionManager.swift in Sources */,
 				75DD87C0271D822600A272BB /* BrowserContent.swift in Sources */,
 				75729E8526F9BA27006EB506 /* DevicePropertyCollector.swift in Sources */,
 				75729E7826F4C131006EB506 /* LocalStorageHelper.swift in Sources */,
+				756BAA212757873500C7A84F /* PushNotificationTrigger.swift in Sources */,
 				75DD87CE271EF4D500A272BB /* Font.swift in Sources */,
 				757E405C26FA08D5008352F3 /* DeviceAuthResponse.swift in Sources */,
 				7518746A274CE35E00BF267F /* ShapeRenderer.swift in Sources */,
@@ -1014,6 +1041,7 @@
 				AC0B874545303FDF69FF4E95 /* DictionaryPrototype.swift in Sources */,
 				75187468274CD6F000BF267F /* ElementsRenderer.swift in Sources */,
 				75DD87B6271D7D2000A272BB /* Shadow.swift in Sources */,
+				756BAA2327588C3600C7A84F /* ImageDownloader.swift in Sources */,
 				75DD87B0271D787900A272BB /* Border.swift in Sources */,
 				AC0B83940A8AA5D45A0E64D9 /* EventTaskProcessor.swift in Sources */,
 				AC0B850DFCDC2005C3A115B0 /* PushTokenTaskProcessor.swift in Sources */,
