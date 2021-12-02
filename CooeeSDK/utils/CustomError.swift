@@ -17,6 +17,7 @@ enum CustomError: String, LocalizedError {
     case EmptyInAppData = "Couldn't render In-App because trigger data is null"
     case emptyData
     case invalidImage
+    case notificationFailed = "Fail to render notification"
 
     // MARK: Public
 
