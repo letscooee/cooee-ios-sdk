@@ -65,16 +65,13 @@ class PendingTaskDAO {
 
     func update(_ pendingTask: PendingTasks) {
         let context = database.viewContext
+
         do {
-            let fetchUser: NSFetchRequest<PendingTasks> = PendingTasks.fetchRequest()
+            let results = try? context.existingObject(with: pendingTask.objectID)
 
-            fetchUser.predicate = NSPredicate(format: "id = %@", "\(pendingTask.id)")
-
-            let results = try? context.fetch(fetchUser)
-
-            if results?.count != 0 {
-                results?.first?.setValue(pendingTask.attempts, forKey: "attempts")
-                results?.first?.setValue(pendingTask.lastAttempted, forKey: "lastAttempted")
+            if results != nil {
+                results?.setValue(pendingTask.attempts, forKey: "attempts")
+                results?.setValue(pendingTask.lastAttempted, forKey: "lastAttempted")
             }
 
             try context.save()
