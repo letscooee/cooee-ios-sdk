@@ -23,17 +23,19 @@ class NotificationService {
         if triggerData!.v != nil, triggerData!.v! >= 4, triggerData!.v! < 5 {
             print("Unsupported payload version")
         }
-        NotificationService.sendEvent("CE Notification Recieved", withTriggerData: triggerData!)
+        NotificationService.sendEvent("CE Notification Received", withTriggerData: triggerData!)
         UNUserNotificationCenter.current().getNotificationSettings { settings in
 
             guard settings.authorizationStatus == .authorized else {
                 return
             }
             let content = UNMutableNotificationContent()
+            let title: String = self.getTextFromPart(from: triggerData?.getPushNotification()?.getTitle()?.prs ?? [PartElement]())
+            let body: String = self.getTextFromPart(from: triggerData?.getPushNotification()?.getBody()?.prs ?? [PartElement]())
 
             content.categoryIdentifier = "debitOverdraftNotification"
-            content.title = triggerData?.getPushNotification()?.getTitle()?.text ?? ""
-            content.body = triggerData?.getPushNotification()?.getBody()?.text ?? ""
+            content.title = title
+            content.body = body
             content.sound = UNNotificationSound.default
             content.userInfo = userInfo
 
@@ -42,7 +44,7 @@ class NotificationService {
                     return
                 }
 
-                let attachement = try? UNNotificationAttachment(identifier: "attachment", url: fileURL, options: nil)
+                let attachement = try? UNNotificationAttachment(identifier: "image", url: fileURL, options: nil)
 
                 content.attachments = [attachement!]
 
@@ -63,6 +65,11 @@ class NotificationService {
 
     // MARK: Internal
 
+    static func sendEvent(_ eventName: String, withTriggerData triggerData: TriggerData) {
+        let event = Event(eventName: eventName, triggerData: triggerData)
+        CooeeFactory.shared.safeHttpService.sendEvent(event: event)
+    }
+
     func getMediaAttachment(for urlString: String, completion: @escaping (UIImage?) -> Void) {
         guard let url = URL(string: urlString) else {
             completion(nil)
@@ -78,12 +85,18 @@ class NotificationService {
         }
     }
 
-    // MARK: Private
+    func getTextFromPart(from parts: [PartElement]) -> String {
+        var string = ""
+        let count = parts.count - 1
 
-    static func sendEvent(_ eventName: String, withTriggerData triggerData: TriggerData) {
-        let event = Event(eventName: eventName, triggerData: triggerData)
-        CooeeFactory.shared.safeHttpService.sendEvent(event: event)
+        for index in 0...count {
+            string += parts[index].getPartText().trimmingCharacters(in: .newlines)
+        }
+
+        return string
     }
+
+    // MARK: Private
 
     @objc private func createTrigger(_ notification: Notification) {
         if let userData = notification.userInfo {
