@@ -65,6 +65,7 @@ public class EngagementTriggerHelper {
      */
     static func renderInAppFromPushNotification(for triggerData: TriggerData) {
         let runtimeData = CooeeFactory.shared.runtimeData
+        storeActiveTriggerDetails(triggerData: triggerData)
 
         if runtimeData.isFirstForeground() {
             Timer.scheduledTimer(withTimeInterval: Constants.TIME_TO_WAIT_SECONDS, repeats: false) { _ in
