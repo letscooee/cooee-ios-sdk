@@ -25,7 +25,8 @@ struct ElementsRenderer: View {
     // MARK: Internal
 
     var body: some View {
-        ForEach(0 ..< elements.count) { index in
+        let count:Int = elements.count
+        ForEach(0 ..< count) { index in
             let child = elements[index]
             let baseElement = BaseElement.deserialize(from: child)
 

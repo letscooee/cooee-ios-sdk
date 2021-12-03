@@ -29,7 +29,7 @@ struct AbstractInAppRenderer: ViewModifier {
         let calculatedY = elementData.getY() + ((calculatedHeight ?? 0)/2)
         let _ = print("\(elementData)")
         let _ = print("x: \(elementData.getX()), y: \(elementData.getY())")
-        let _ = print("h: \(calculatedHeight), w: \(calculatedWidth), dh: \(deviceHeight), dw: \(deviceWidth)")
+        let _ = print("h: \(String(describing: calculatedHeight)), w: \(String(describing: calculatedWidth)), dh: \(deviceHeight), dw: \(deviceWidth)")
 
         content.if(elementData.spc != nil) { $0.padding(.bottom, elementData.spc!.getPaddingBottom())
             .padding(.top, elementData.spc!.getPaddingTop())
