@@ -19,7 +19,7 @@ class WebService: NSObject {
 
     static let shared = WebService()
 
-    func getResponse(fromURL: String, method: httpMethod, params: [String: Any?], header: [String: String]) throws -> [String:Any]? {
+    func getResponse(fromURL: String, method: httpMethod, params: [String: Any?], header: [String: String]) throws -> [String: Any]? {
         let url = URL(string: getCompleteURL(url: fromURL))!
         let group = DispatchGroup()
         var request = URLRequest(url: url)
@@ -29,10 +29,12 @@ class WebService: NSObject {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.httpMethod = method.rawValue
-        request.httpBody = params.percentEncoded()
+        if method != .GET {
+            request.httpBody = params.percentEncoded()
+        }
         request.allHTTPHeaderFields = header
         print("""
-              \n-------WS Params--------\n 
+              \n-------WS Params--------\n
               Request Body:\(params)\n
               Request Headers:\(header)\n
               Request URL:\(url)\n
@@ -40,7 +42,7 @@ class WebService: NSObject {
               """)
 
         group.enter()
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        let task = URLSession.shared.dataTask(with: request) { data, _, error in
             responseData = data
             responseError = error
             group.leave()
@@ -52,7 +54,7 @@ class WebService: NSObject {
 
     // MARK: Private
 
-    private func processResponse(_ data: Data?, _ error: Error?) throws -> [String:Any]? {
+    private func processResponse(_ data: Data?, _ error: Error?) throws -> [String: Any]? {
         guard let data = data, error == nil
         else {
             print("error", error ?? "Unknown error")
@@ -66,7 +68,6 @@ class WebService: NSObject {
               """)
 
         return responseString
-
     }
 
     private func appendSessionID(params: [String: Any?]) -> [String: Any?] {
