@@ -29,7 +29,9 @@ class InAppTriggerHelper {
         thread.async {
             let trigger = getIANFromRawIAN(from: doHTTPForIAN(id: triggerData.id!))
 
-            callback(trigger)
+            DispatchQueue.main.async {
+                callback(trigger)
+            }
         }
     }
 
@@ -46,7 +48,7 @@ class InAppTriggerHelper {
             return nil
         }
 
-        return InAppTrigger.deserialize(from: data!)
+        return (TriggerData.deserialize(from: data!))?.getInAppTrigger()
     }
 
     /**
