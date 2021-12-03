@@ -22,14 +22,17 @@ class CooeeBootstrap: NSObject {
         super.init()
         _ = CooeeFactory.shared
         _ = AppLifeCycle.shared
-        registerFirebase()
-        updateFirebaseToken()
-        swizzleDidReceiveRemoteNotification()
-        startPendingTaskJob()
+
+        DispatchQueue.main.async {
+            self.registerFirebase()
+            self.updateFirebaseToken()
+            self.swizzleDidReceiveRemoteNotification()
+            self.startPendingTaskJob()
+        }
     }
 
     // MARK: Private
-    
+
     /**
      Registers custom didReceiveRemoteNotification on current appDelegate
      */
@@ -62,8 +65,8 @@ class CooeeBootstrap: NSObject {
         UNUserNotificationCenter.current().delegate = self
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(
-            options: authOptions,
-            completionHandler: { _, _ in })
+                options: authOptions,
+                completionHandler: { _, _ in })
 
         Messaging.messaging().delegate = self
         UIApplication.shared.registerForRemoteNotifications()
@@ -113,7 +116,7 @@ extension CooeeBootstrap: UNUserNotificationCenterDelegate {
 
         NotificationService.sendEvent("CE Notification Clicked", withTriggerData: triggerData!)
         EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData!)
-        
+
         completionHandler()
     }
 }
