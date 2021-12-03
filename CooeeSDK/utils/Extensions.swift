@@ -100,4 +100,11 @@ extension String {
         let allowedCharacterSet = CharacterSet.alphanumerics.union(CharacterSet(charactersIn: "~-_."))
         return self.addingPercentEncoding(withAllowedCharacters: allowedCharacterSet)
     }
+    
+    func convertToDictionary() -> [String: Any]? {
+            if let data = data(using: .utf8) {
+                return try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+            }
+            return nil
+        }
 }
