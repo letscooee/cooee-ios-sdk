@@ -112,6 +112,8 @@ extension CooeeBootstrap: UNUserNotificationCenterDelegate {
         }
 
         NotificationService.sendEvent("CE Notification Clicked", withTriggerData: triggerData!)
+        EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData!)
+        
         completionHandler()
     }
 }
