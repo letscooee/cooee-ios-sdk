@@ -19,6 +19,10 @@ struct TriggerData: HandyJSON {
         ian
     }
 
+    public mutating func setInAppTrigger(inAppTrigger: InAppTrigger) {
+        self.ian = inAppTrigger
+    }
+
     public func getPushNotification() -> PushNotificationTrigger? {
         pn
     }
