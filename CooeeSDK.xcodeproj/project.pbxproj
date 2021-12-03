@@ -42,6 +42,8 @@
 		756BAA1E27577C3F00C7A84F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756BAA1D27577C3E00C7A84F /* NotificationService.swift */; };
 		756BAA212757873500C7A84F /* PushNotificationTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756BAA202757873500C7A84F /* PushNotificationTrigger.swift */; };
 		756BAA2327588C3600C7A84F /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756BAA2227588C3500C7A84F /* ImageDownloader.swift */; };
+		756BAA252758EFFE00C7A84F /* InAppTriggerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756BAA242758EFFE00C7A84F /* InAppTriggerHelper.swift */; };
+		756BAA272758FB8900C7A84F /* CustomDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756BAA262758FB8900C7A84F /* CustomDeserializer.swift */; };
 		75729E6E26F45828006EB506 /* InfoPlistReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E6D26F45828006EB506 /* InfoPlistReader.swift */; };
 		75729E7226F493AB006EB506 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7126F493AB006EB506 /* Event.swift */; };
 		75729E7426F497FD006EB506 /* TriggerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7326F497FD006EB506 /* TriggerData.swift */; };
@@ -202,6 +204,8 @@
 		756BAA1D27577C3E00C7A84F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		756BAA202757873500C7A84F /* PushNotificationTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationTrigger.swift; sourceTree = "<group>"; };
 		756BAA2227588C3500C7A84F /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
+		756BAA242758EFFE00C7A84F /* InAppTriggerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppTriggerHelper.swift; sourceTree = "<group>"; };
+		756BAA262758FB8900C7A84F /* CustomDeserializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDeserializer.swift; sourceTree = "<group>"; };
 		75729E6D26F45828006EB506 /* InfoPlistReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPlistReader.swift; sourceTree = "<group>"; };
 		75729E7126F493AB006EB506 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		75729E7326F497FD006EB506 /* TriggerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerData.swift; sourceTree = "<group>"; };
@@ -519,6 +523,7 @@
 				757E405926F9FF54008352F3 /* DeviceAuthenticationBody.swift */,
 				757E405B26FA08D5008352F3 /* DeviceAuthResponse.swift */,
 				AC0B885A897ACFB8EBF772D0 /* DictionaryPrototype.swift */,
+				756BAA262758FB8900C7A84F /* CustomDeserializer.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -697,6 +702,7 @@
 				AC0B8C6F71D493FD0E2871F2 /* inapp */,
 				AC0B804DEA9B9A9EB7E1FD5F /* EngagementTriggerHelper.swift */,
 				AC0B888C98F1D87FF05F204A /* action */,
+				756BAA242758EFFE00C7A84F /* InAppTriggerHelper.swift */,
 			);
 			path = trigger;
 			sourceTree = "<group>";
@@ -994,6 +1000,7 @@
 				75DD87CE271EF4D500A272BB /* Font.swift in Sources */,
 				757E405C26FA08D5008352F3 /* DeviceAuthResponse.swift in Sources */,
 				7518746A274CE35E00BF267F /* ShapeRenderer.swift in Sources */,
+				756BAA252758EFFE00C7A84F /* InAppTriggerHelper.swift in Sources */,
 				751E1329270C7074002CF442 /* DateUtil.swift in Sources */,
 				75DD87CC271EF4BA00A272BB /* Alignment.swift in Sources */,
 				751BC7DA26F35E32002D8358 /* AppInfo.swift in Sources */,
@@ -1026,6 +1033,7 @@
 				75DD87A3271D6EDB00A272BB /* BaseElement.swift in Sources */,
 				75729E7D26F87593006EB506 /* WebService.swift in Sources */,
 				757E405826F9FA16008352F3 /* BaseHTTPService.swift in Sources */,
+				756BAA272758FB8900C7A84F /* CustomDeserializer.swift in Sources */,
 				75DD87982715927B00A272BB /* PendingTaskJobProcessor.swift in Sources */,
 				75729E6E26F45828006EB506 /* InfoPlistReader.swift in Sources */,
 				75DD87AC271D76E400A272BB /* Glossy.swift in Sources */,

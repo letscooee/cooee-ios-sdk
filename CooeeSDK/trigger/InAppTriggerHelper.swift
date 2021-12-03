@@ -1,0 +1,66 @@
+//
+//  InAppTriggerHelper.swift
+//  CooeeSDK
+//
+//  Created by Ashish Gaikwad on 02/12/21.
+//
+
+import Foundation
+
+/**
+ A small helper class for in-app trigger for fetching data from server.
+
+ - Author: Ashish Gaikwad
+ - Since: 1.0.0
+ */
+class InAppTriggerHelper {
+    // MARK: Internal
+
+    /**
+     Load in-app data on a separate thread through a http call to server.
+
+     - Parameters:
+       - triggerData: engagement trigger {@link TriggerData}
+       - callback: callback on complete
+     */
+    static func loadLazyData(for triggerData: TriggerData, callback: @escaping (_ result: InAppTrigger?) -> ()) {
+        let thread = DispatchQueue.global()
+
+        thread.async {
+            let trigger = getIANFromRawIAN(from: doHTTPForIAN(id: triggerData.id!))
+
+            callback(trigger)
+        }
+    }
+
+    // MARK: Private
+
+    /**
+     Convert raw in-app data received from {@link #doHTTPForIAN} to InAppTrigger instance.
+
+     - Parameter data: raw in-app data
+     - Returns: InAppTrigger instance
+     */
+    private static func getIANFromRawIAN(from data: [String: Any]?) -> InAppTrigger? {
+        if data == nil {
+            return nil
+        }
+
+        return InAppTrigger.deserialize(from: data!)
+    }
+
+    /**
+     Perform HTTP call to get IAN(In-App Notification Data) from server.
+
+     - Parameter triggerId: trigger id received from FCM
+     - Returns: response data from server
+     */
+    private static func doHTTPForIAN(id triggerId: String) -> [String: Any]? {
+        do {
+            return try CooeeFactory.shared.baseHttpService.loadTriggerDetails(id: triggerId)
+        } catch {
+            CooeeFactory.shared.sentryHelper.capture(error: error as NSError)
+        }
+        return nil
+    }
+}
