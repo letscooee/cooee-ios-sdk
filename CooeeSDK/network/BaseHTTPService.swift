@@ -98,7 +98,7 @@ class BaseHTTPService {
     }
 
     func loadTriggerDetails(id triggerId: String) throws -> [String: Any] {
-        let response = try webService.getResponse(fromURL: "\(Constants.trackEvent)\(triggerId)", method: .GET, params: [String: Any](),
+        let response = try webService.getResponse(fromURL: "\(Constants.triggerDetails)\(triggerId)", method: .GET, params: [String: Any](),
                 header: commonHeaders.getDictionary())
         return response ?? [String: Any]()
     }
