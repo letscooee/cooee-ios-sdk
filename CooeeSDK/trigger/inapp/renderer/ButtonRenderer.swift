@@ -37,16 +37,16 @@ struct ButtonRenderer: View {
             let temp = child.getPartText().trimmingCharacters(in: .whitespacesAndNewlines)
             if temp.count > 0 {
                 Text(child.getPartText())
-                    .foregroundColor(textColour)
-                    .font(font)
-                    .bold(child.isBold())
-                    .italic(child.isItalic())
-                    .underline(child.addUnderLine())
-                    .strikethrough(child.addStrickThrough())
+                        .foregroundColor(textColour)
+                        .font(font)
+                        .bold(child.isBold())
+                        .italic(child.isItalic())
+                        .underline(child.addUnderLine())
+                        .strikethrough(child.addStrickThrough())
 //                    .if(lineHeight != nil) {
 //                        $0.fontWithLineHeight(font: font, lineHeight: lineHeight!)
 //                    }
-                    .modifier(AbstractInAppRenderer(elementData: parentTextElement, triggerContext: triggerContext))
+                //.modifier(AbstractInAppRenderer(elementData: parentTextElement, triggerContext: triggerContext, isContainer: false))
             }
         }
     }

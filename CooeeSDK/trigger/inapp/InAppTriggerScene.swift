@@ -59,18 +59,20 @@ class InAppTriggerScene: UIView {
         triggerContext.setTriggerParentLayout(triggerParentLayout: parentView)
         // TODO 27/10/21: add closing provision
         setAnimations()
-        triggerContext.onExit(){data in self.finish()}
-        
+        triggerContext.onExit() { data in
+            self.finish()
+        }
+
         let host = UIHostingController(rootView: ContainerRenderer(inAppTrigger: inAppData!, triggerContext))
         guard let hostView = host.view else {
             print("fail to load swiftUI")
             return
         }
         hostView.translatesAutoresizingMaskIntoConstraints = false
-        
-        viewController.view.addSubview(parentView)
+        hostView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         parentView.addSubview(hostView)
-        
+        viewController.view.addSubview(parentView)
+
         startTime = Date()
         sendTriggerDisplayedEvent()
     }
@@ -103,12 +105,12 @@ class InAppTriggerScene: UIView {
         exit.type = CATransitionType.push
         exit.subtype = exitAnimation
     }
-    
-    private func finish(){
+
+    private func finish() {
         var closedEventProps = triggerContext.getClosedEventProps()
         let duration = DateUtils.getDateDifferenceInSeconds(startDate: startTime!, endDate: Date())
         closedEventProps.updateValue(duration, forKey: "Duration")
-        
+
         var event = Event(eventName: "CE Trigger Closed", properties: closedEventProps)
         event.withTrigger(triggerData: triggerData!)
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)

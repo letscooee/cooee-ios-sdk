@@ -23,11 +23,18 @@ struct ContainerRenderer: View {
 
     // MARK: Internal
 
-    var body: some View {
-        ZStack {
-            ElementRenderer(elements, triggerContext)
-        }.modifier(AbstractInAppRenderer(elementData: container, triggerContext: triggerContext, isContainer: true))
+    let deviceWidth = UIScreen.main.bounds.width
+    let deviceHeight = UIScreen.main.bounds.height
 
+    var body: some View {
+
+        ZStack(alignment: .topLeading) {
+            ZStack {
+            }.modifier(AbstractInAppRenderer(elementData: container, triggerContext: triggerContext, isContainer: true))
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+
+            ElementRenderer(elements, triggerContext)
+        }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
     }
 
     // MARK: Private

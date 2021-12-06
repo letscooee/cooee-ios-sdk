@@ -25,7 +25,9 @@ struct ShapeRenderer: View {
     // MARK: Internal
 
     var body: some View {
-        ZStack {}.modifier(AbstractInAppRenderer(elementData: shapeElement, triggerContext: triggerContext))
+        ZStack {
+            Text("").position(x: 0, y: 0)
+        }//.modifier(AbstractInAppRenderer(elementData: shapeElement, triggerContext: triggerContext, isContainer: false))
     }
 
     // MARK: Private
