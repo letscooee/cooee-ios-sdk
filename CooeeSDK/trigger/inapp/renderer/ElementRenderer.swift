@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 /**
- Renders all elements according to there type
+ Renders all elements according to their type
 
  - Author: Ashish Gaikwad
  - Since: 0.1.0
