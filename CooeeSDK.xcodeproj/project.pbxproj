@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		75187468274CD6F000BF267F /* ElementsRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75187467274CD6F000BF267F /* ElementsRenderer.swift */; };
+		75187468274CD6F000BF267F /* ElementRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75187467274CD6F000BF267F /* ElementRenderer.swift */; };
 		7518746A274CE35E00BF267F /* ShapeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75187469274CE35E00BF267F /* ShapeRenderer.swift */; };
 		7518746C274DF8C100BF267F /* PartElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7518746B274DF8BF00BF267F /* PartElement.swift */; };
 		75187470274E343C00BF267F /* EmbeddedTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7518746F274E343C00BF267F /* EmbeddedTrigger.swift */; };
@@ -162,7 +162,7 @@
 /* Begin PBXFileReference section */
 		5F6A13389002428C5D489894 /* Pods-CooeeSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.debug.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		5FC8F5B4B05D83373A281F12 /* Pods-Cooee iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS.debug.xcconfig"; path = "Target Support Files/Pods-Cooee iOS/Pods-Cooee iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		75187467274CD6F000BF267F /* ElementsRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsRenderer.swift; sourceTree = "<group>"; };
+		75187467274CD6F000BF267F /* ElementRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementRenderer.swift; sourceTree = "<group>"; };
 		75187469274CE35E00BF267F /* ShapeRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeRenderer.swift; sourceTree = "<group>"; };
 		7518746B274DF8BF00BF267F /* PartElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartElement.swift; sourceTree = "<group>"; };
 		7518746F274E343C00BF267F /* EmbeddedTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedTrigger.swift; sourceTree = "<group>"; };
@@ -670,7 +670,7 @@
 				AC0B832FF3BC900263507255 /* ImageRenderer.swift */,
 				AC0B898DBA7B1DE088837B41 /* TextRenderer.swift */,
 				AC0B814783FAE5CBC0031163 /* ButtonRenderer.swift */,
-				75187467274CD6F000BF267F /* ElementsRenderer.swift */,
+				75187467274CD6F000BF267F /* ElementRenderer.swift */,
 				75187469274CE35E00BF267F /* ShapeRenderer.swift */,
 			);
 			path = renderer;
@@ -1047,7 +1047,7 @@
 				75DD87A6271D6F2400A272BB /* Background.swift in Sources */,
 				AC0B843D6FCF6D51FBCA7FD7 /* ProfileTaskProcessor.swift in Sources */,
 				AC0B874545303FDF69FF4E95 /* DictionaryPrototype.swift in Sources */,
-				75187468274CD6F000BF267F /* ElementsRenderer.swift in Sources */,
+				75187468274CD6F000BF267F /* ElementRenderer.swift in Sources */,
 				75DD87B6271D7D2000A272BB /* Shadow.swift in Sources */,
 				756BAA2327588C3600C7A84F /* ImageDownloader.swift in Sources */,
 				75DD87B0271D787900A272BB /* Border.swift in Sources */,

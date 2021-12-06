@@ -25,7 +25,7 @@ struct ContainerRenderer: View {
 
     var body: some View {
         ZStack {
-            ElementsRenderer(elements, triggerContext)
+            ElementRenderer(elements, triggerContext)
         }.modifier(AbstractInAppRenderer(elementData: container, triggerContext: triggerContext, isContainer: true))
 
     }

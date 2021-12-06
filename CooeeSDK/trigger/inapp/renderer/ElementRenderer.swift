@@ -14,7 +14,7 @@ import SwiftUI
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-struct ElementsRenderer: View {
+struct ElementRenderer: View {
     // MARK: Lifecycle
 
     init(_ elements: [[String: Any]], _ triggerContext: TriggerContext) {
