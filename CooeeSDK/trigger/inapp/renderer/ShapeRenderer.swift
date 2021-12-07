@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 /**
- Renders Shape Element
+ Check for shape element and renders a ZStack with base element properties
 
  - Author: Ashish Gaikwad
  - Since: 0.1.0
