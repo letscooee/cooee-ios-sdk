@@ -8,6 +8,10 @@
 import Foundation
 import HandyJSON
 
+/**
+ - Author: Ashish Gaikwad
+ - Since: 1.0.1
+ */
 struct PushNotificationTrigger: HandyJSON {
     // MARK: Public
 
