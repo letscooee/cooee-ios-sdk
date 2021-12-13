@@ -113,6 +113,7 @@
 		AC0B8B3175C8E3905037A0FE /* InAppTriggerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8AA3294AAAB6B9AF197A /* InAppTriggerScene.swift */; };
 		AC0B8BC022480FDA5C51B478 /* TriggerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8653FB4CB92835FDFF80 /* TriggerContext.swift */; };
 		AC0B8BC8CD85A03FB49FFA10 /* ButtonRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B814783FAE5CBC0031163 /* ButtonRenderer.swift */; };
+		AC0B8CE48A6861AA5B35C879 /* CooeeCTADelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8FE80388BD5A3A3517E9 /* CooeeCTADelegate.swift */; };
 		AC0B8D16CF18A09786614250 /* TextAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8ADD9332621266B45210 /* TextAlignment.swift */; };
 		AC0B8DBA39461B9A35158784 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8EA2BBEED727BA8558D9 /* Extensions.swift */; };
 		AC0B8E13066BD7C37F8B65E8 /* VideoElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B83A6575EA932ACCB0D2F /* VideoElement.swift */; };
@@ -284,6 +285,7 @@
 		AC0B8EA2BBEED727BA8558D9 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AC0B8ED273C05CC69495D48B /* PendingTaskService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingTaskService.swift; sourceTree = "<group>"; };
 		AC0B8F1A3240B22206AC68B6 /* PendingTaskType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingTaskType.swift; sourceTree = "<group>"; };
+		AC0B8FE80388BD5A3A3517E9 /* CooeeCTADelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CooeeCTADelegate.swift; sourceTree = "<group>"; };
 		BB800582A4AF75A48137B606 /* Pods_CooeeSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CooeeSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6DD165866F91815E65CF7F1 /* Pods_Cooee_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cooee_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -511,6 +513,7 @@
 				AC0B8EA2BBEED727BA8558D9 /* Extensions.swift */,
 				AC0B86C18D2F7EE03C624F8B /* ui */,
 				756BAA2227588C3500C7A84F /* ImageDownloader.swift */,
+				AC0B8FE80388BD5A3A3517E9 /* CooeeCTADelegate.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -1084,6 +1087,7 @@
 				AC0B82977F7EFDA50155FEC3 /* ClickActionExecutor.swift in Sources */,
 				AC0B8B26F975F50E0AC0F12F /* PermissionType.swift in Sources */,
 				AC0B821F476A2352C203E056 /* ShapeElement.swift in Sources */,
+				AC0B8CE48A6861AA5B35C879 /* CooeeCTADelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
