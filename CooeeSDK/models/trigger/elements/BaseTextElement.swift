@@ -53,6 +53,21 @@ class BaseTextElement: BaseElement {
         }
     }
 
+    public func getSwiftUIAlignment() -> SwiftUI.Alignment {
+        switch alg {
+            case 0:
+                return .center
+            case 1:
+                return .leading
+            case 2:
+                return .trailing
+            case .none:
+                return .center
+            case .some:
+                return .center
+        }
+    }
+
     public func getColour() -> Color? {
         return c == nil ? nil : Color(hex: c!.getColour(), alpha: c!.getAlpha())
     }
