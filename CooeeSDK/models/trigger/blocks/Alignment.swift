@@ -10,8 +10,10 @@ import HandyJSON
 import UIKit
 
 /**
+ Alignment is class which provide text properties like text alignment or text direction
+
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
 struct Alignment: HandyJSON {
     // MARK: Public
@@ -29,28 +31,28 @@ struct Alignment: HandyJSON {
     public func getAlignment() -> NSTextAlignment {
         switch align {
 
-        case .CENTER:
-            return .center
-        case .LEFT:
-            return .left
-        case .RIGHT:
-            return .right
-        case .none:
-            return .center
+            case .CENTER:
+                return .center
+            case .LEFT:
+                return .left
+            case .RIGHT:
+                return .right
+            case .none:
+                return .center
         }
     }
-    
+
     public func getButtonAlignment() -> UIControl.ContentHorizontalAlignment {
         switch align {
 
-        case .CENTER:
-            return .center
-        case .LEFT:
-            return .left
-        case .RIGHT:
-            return .right
-        case .none:
-            return .center
+            case .CENTER:
+                return .center
+            case .LEFT:
+                return .left
+            case .RIGHT:
+                return .right
+            case .none:
+                return .center
         }
     }
 }

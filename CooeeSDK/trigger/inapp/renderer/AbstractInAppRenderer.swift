@@ -7,10 +7,10 @@ import SwiftUI
 import UIKit
 
 /**
- Process all common propertied of the element
+ Process all common properties from BaseElement
 
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
 struct AbstractInAppRenderer: ViewModifier {
     var elementData: BaseElement
@@ -42,7 +42,7 @@ struct AbstractInAppRenderer: ViewModifier {
             )
         }
         .if(elementData.bg != nil && elementData.bg!.s != nil && elementData.bg!.s!.g == nil) {
-            $0.background(Color(hex: elementData.bg!.s!.h!, alpha: elementData.bg!.s!.getAlpha()).offset(x: elementData.getX().pixelsToPoints(), y: elementData.getY().pixelsToPoints()))
+            $0.background(Color(hex: elementData.bg!.s!.getColour(), alpha: elementData.bg!.s!.getAlpha()).offset(x: elementData.getX().pixelsToPoints(), y: elementData.getY().pixelsToPoints()))
             // process image and glossy
         }
         .if(elementData.br != nil && elementData.br!.getStyle() == Border.Style.SOLID) {
@@ -89,6 +89,6 @@ struct AbstractInAppRenderer: ViewModifier {
                     }
                 }
         )
-        
+
     }
 }

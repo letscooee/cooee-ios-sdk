@@ -6,10 +6,14 @@ import Foundation
 import HandyJSON
 
 /**
+ Types of alignment which can be assigned to text
+
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
 enum TextAlignment: String, HandyJSONEnum {
-    
-    case LEFT, CENTER, RIGHT
+
+    case LEFT
+    case CENTER
+    case RIGHT
 }

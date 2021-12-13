@@ -6,7 +6,7 @@ import Foundation
 import UIKit
 
 /**
- Process ClickAction of the element
+ Process ClickAction of the element and work accordingly
 
  - Author: Ashish Gaikwad
  - Since: 0.1.0
@@ -21,17 +21,30 @@ class ClickActionExecutor {
         self.triggerContext = triggerContext
     }
 
+    /**
+     Execute all the key properties from ClickAction
+     */
     public func execute() {
         passKeyValueToApp()
         updateUserProperties()
         executeExternal()
 
-        if let close = clickAction.close, close {
-            triggerContext.closeInApp("CTA")
-        }
+        closeInApp()
         // TODO 01/11/21: Add In-App browser and AR
     }
 
+    /**
+     Close InApp and give control to InAppScene
+     */
+    private func closeInApp() {
+        if let close = clickAction.close, close {
+            triggerContext.closeInApp("CTA")
+        }
+    }
+
+    /**
+     Process external block from ClickAction and opens URL in external browser
+     */
     private func executeExternal() {
         let external = clickAction.ext
 
@@ -45,6 +58,9 @@ class ClickActionExecutor {
 
     }
 
+    /**
+     Process UserProperties block in ClickAction and send it to server
+     */
     private func updateUserProperties() {
         let userProperties = clickAction.up
 
@@ -55,6 +71,9 @@ class ClickActionExecutor {
         CooeeFactory.shared.safeHttpService.updateUserPropertyOnly(userProperty: userProperties!)
     }
 
+    /**
+     Process KeyValue block in ClickAction and sends it back to App via CooeeCTADelegate
+     */
     private func passKeyValueToApp() {
         let keyValues = clickAction.kv
 

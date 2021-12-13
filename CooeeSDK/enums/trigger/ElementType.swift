@@ -9,9 +9,9 @@ import HandyJSON
  Types of elements possible in a engagement trigger.
 
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
-enum ElementType: Int, HandyJSONEnum,CaseIterable {
+enum ElementType: Int, HandyJSONEnum, CaseIterable {
 
     case IMAGE = 1
     case TEXT = 2

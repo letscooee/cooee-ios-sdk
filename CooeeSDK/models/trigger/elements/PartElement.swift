@@ -8,6 +8,12 @@
 import Foundation
 import SwiftUI
 
+/**
+ Part holds text, and its particular properties like Bold, Italic, Underline, Strikethrough and colour
+
+ - Author: Ashish Gaikwad
+ - Since: 1.3.0
+ */
 class PartElement: BaseElement, Identifiable {
     // MARK: Public
 
@@ -23,7 +29,7 @@ class PartElement: BaseElement, Identifiable {
         u ?? false
     }
 
-    public func addStrickThrough() -> Bool {
+    public func addStrikeThrough() -> Bool {
         st ?? false
     }
 

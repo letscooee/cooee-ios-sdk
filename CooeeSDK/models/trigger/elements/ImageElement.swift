@@ -5,13 +5,16 @@
 import Foundation
 
 /**
+ ImageElement is a class which holds image src and all its base properties
+
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
 class ImageElement: BaseElement {
     // MARK: Lifecycle
 
-    required init() {}
+    required init() {
+    }
 
     // MARK: Internal
 

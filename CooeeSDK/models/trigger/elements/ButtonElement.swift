@@ -5,11 +5,14 @@
 import Foundation
 
 /**
+ Button element extent is used to provide all base properties to ButtonRenderer. But it uses TextElement as its parent
+
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
 class ButtonElement: TextElement {
     // MARK: Lifecycle
 
-    required init() {}
+    required init() {
+    }
 }

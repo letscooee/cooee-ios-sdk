@@ -8,6 +8,12 @@
 import Foundation
 import SwiftUI
 
+/**
+ Process and render all elements present in payload
+
+ - Author: Ashish Gaikwad
+ - Since: 1.3.0
+ */
 struct ElementsRenderer: View {
     // MARK: Lifecycle
 
@@ -19,6 +25,7 @@ struct ElementsRenderer: View {
     // MARK: Internal
 
     var body: some View {
+
         ForEach(0 ..< elements.count) { index in
             let child = elements[index]
             let baseElement = BaseElement.deserialize(from: child)

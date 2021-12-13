@@ -10,43 +10,46 @@ import HandyJSON
 import SwiftUI
 
 /**
+ BaseTextElement holds the text Alignment, Font and Colour
+
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
 class BaseTextElement: BaseElement {
     // MARK: Lifecycle
 
-    required init() {}
+    required init() {
+    }
 
     // MARK: Public
 
     public func getAlignment() -> NSTextAlignment {
         switch alg {
-        case 0:
-            return .center
-        case 1:
-            return .left
-        case 2:
-            return .right
-        case .none:
-            return .center
-        case .some:
-            return .center
+            case 0:
+                return .center
+            case 1:
+                return .left
+            case 2:
+                return .right
+            case .none:
+                return .center
+            case .some:
+                return .center
         }
     }
 
     public func getButtonAlignment() -> UIControl.ContentHorizontalAlignment {
         switch alg {
-        case 0:
-            return .center
-        case 1:
-            return .left
-        case 2:
-            return .right
-        case .none:
-            return .center
-        case .some:
-            return .center
+            case 0:
+                return .center
+            case 1:
+                return .left
+            case 2:
+                return .right
+            case .none:
+                return .center
+            case .some:
+                return .center
         }
     }
 
@@ -64,8 +67,8 @@ class BaseTextElement: BaseElement {
 
     // MARK: Internal
 
-    var txt: String?
-    var alg: Int?
-    var f: Font?
-    var c: Colour?
+    private var txt: String?
+    private var alg: Int?
+    private var f: Font?
+    private var c: Colour?
 }

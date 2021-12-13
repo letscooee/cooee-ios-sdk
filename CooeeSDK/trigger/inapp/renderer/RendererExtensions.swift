@@ -7,6 +7,7 @@ import SwiftUI
 import UIKit
 
 extension UIView {
+
     /**
      Create a shape containing dashed border and add it as sub layer in UIView
      - Parameters:
@@ -68,6 +69,13 @@ extension UIView {
 }
 
 extension Color {
+
+    /**
+     Create Color from given hex
+     - Parameters:
+       - hex: colour in hexadecimal string
+       - alpha: alpha value to be added in colour
+     */
     init(hex: String, alpha: Double = 100) {
         var hexString = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int: UInt64 = 0
@@ -76,30 +84,41 @@ extension Color {
 
         let r, g, b: UInt64
         switch hexString.count {
-        case 3: // RGB (12-bit)
-            (r, g, b) = ((int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
-        case 6: // RGB (24-bit)
-            (r, g, b) = ((int >> 16) & 0xFF, (int >> 8) & 0xFF, int & 0xFF)
-        case 8: // ARGB (32-bit)
-            (r, g, b) = (int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
-        default:
-            (r, g, b) = (1, 1, 0)
+            case 3: // RGB (12-bit)
+                (r, g, b) = ((int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+            case 6: // RGB (24-bit)
+                (r, g, b) = ((int >> 16) & 0xFF, (int >> 8) & 0xFF, int & 0xFF)
+            case 8: // ARGB (32-bit)
+                (r, g, b) = (int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+            default:
+                (r, g, b) = (1, 1, 0)
         }
 
         self.init(
-            red: Double(r) / 255,
-            green: Double(b) / 255,
-            blue: Double(g) / 255,
-            opacity: Double(alpha) / 100
+                red: Double(r) / 255,
+                green: Double(b) / 255,
+                blue: Double(g) / 255,
+                opacity: Double(alpha) / 100
         )
     }
 }
 
 public extension View {
+
+    /**
+     Extension to add multiple properties to the element via if condition
+
+     - Parameters:
+       - condition: Any user condition
+     - Returns: View to which condition is added
+     */
     @ViewBuilder
     internal func `if`<Transform: View>(_ condition: Bool, transform: (Self) -> Transform) -> some View {
-        if condition { transform(self) }
-        else { self }
+        if condition {
+            transform(self)
+        } else {
+            self
+        }
     }
 
     func frame(_ width: CGFloat, _ height: CGFloat) -> some View {
@@ -113,45 +132,48 @@ public extension View {
     func height(_ height: CGFloat) -> some View {
         self.frame(height: height)
     }
-    
+
     func fontWithLineHeight(font: UIFont, lineHeight: CGFloat) -> some View {
-            ModifiedContent(content: self, modifier: FontWithLineHeight(font: font, lineHeight: lineHeight))
-        }
+        ModifiedContent(content: self, modifier: FontWithLineHeight(font: font, lineHeight: lineHeight))
+    }
 }
 
 public extension Text {
-    func bold(_ isBold: Bool) -> Text{
-        if isBold{
+
+    func bold(_ isBold: Bool) -> Text {
+        if isBold {
             return self.bold()
-        }else{
+        } else {
             return self
         }
     }
-    
-    func italic(_ isItalic: Bool) -> Text{
-        if isItalic{
+
+    func italic(_ isItalic: Bool) -> Text {
+        if isItalic {
             return self.italic()
-        }else{
+        } else {
             return self
         }
     }
-    func underline(_ addUnderline: Bool) -> Text{
-        if addUnderline{
+
+    func underline(_ addUnderline: Bool) -> Text {
+        if addUnderline {
             return self.underline()
-        }else{
+        } else {
             return self
         }
     }
 }
 
 struct FontWithLineHeight: ViewModifier {
+
     let font: UIFont
     let lineHeight: CGFloat
 
     func body(content: Content) -> some View {
         content
-            .font(SwiftUI.Font(font))
-            .lineSpacing(lineHeight - font.lineHeight)
-            .padding(.vertical, (lineHeight - font.lineHeight) / 2)
+                .font(SwiftUI.Font(font))
+                .lineSpacing(lineHeight - font.lineHeight)
+                .padding(.vertical, (lineHeight - font.lineHeight) / 2)
     }
 }

@@ -8,8 +8,10 @@ import AVFoundation
 import SwiftUI
 
 /**
+ InAppTriggerScene is a class which process iam block from payload and renders UI to the screen with the help of SwiftUI
+
  - Author: Ashish Gaikwad
- - Since:
+ - Since: 1.3.0
  */
 class InAppTriggerScene: UIView {
     var parentView: UIView!
@@ -23,17 +25,6 @@ class InAppTriggerScene: UIView {
     private let exit = CATransition()
     public static let instance = InAppTriggerScene()
     private var startTime: Date? = nil
-
-//    override init (frame : CGRect) {
-//        super.init(frame : frame)
-//        //Bundle.main.loadNibNamed("CustomPopup", owner: self, options: nil)
-//        commonInit()
-//    }
-//
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
 
     private func commonInit() {
         let bundle = Bundle(for: type(of: self))
@@ -59,18 +50,20 @@ class InAppTriggerScene: UIView {
         triggerContext.setTriggerParentLayout(triggerParentLayout: parentView)
         // TODO 27/10/21: add closing provision
         setAnimations()
-        triggerContext.onExit(){data in self.finish()}
-        
+        triggerContext.onExit() { data in
+            self.finish()
+        }
+
         let host = UIHostingController(rootView: ContainerRenderer(inAppTrigger: inAppData!, triggerContext))
         guard let hostView = host.view else {
-            print("fail to load swiftUI")
+            CooeeFactory.shared.sentryHelper.capture(message: "Loading SwiftUI failed")
             return
         }
         hostView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         viewController.view.addSubview(parentView)
         parentView.addSubview(hostView)
-        
+
         startTime = Date()
         sendTriggerDisplayedEvent()
     }
@@ -103,12 +96,12 @@ class InAppTriggerScene: UIView {
         exit.type = CATransitionType.push
         exit.subtype = exitAnimation
     }
-    
-    private func finish(){
+
+    private func finish() {
         var closedEventProps = triggerContext.getClosedEventProps()
         let duration = DateUtils.getDateDifferenceInSeconds(startDate: startTime!, endDate: Date())
         closedEventProps.updateValue(duration, forKey: "Duration")
-        
+
         var event = Event(eventName: "CE Trigger Closed", properties: closedEventProps)
         event.withTrigger(triggerData: triggerData!)
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)

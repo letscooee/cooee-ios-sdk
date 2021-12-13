@@ -10,13 +10,18 @@ import HandyJSON
 import UIKit
 
 /**
+ Colour os class which holds colour variants for element
+ It can be solid background or it may have alpha in it
+ or it may have gradient.
+ It can have recolour with alpha or gradient at a time
+
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
 struct Colour: HandyJSON {
 
-    var h: String?
-    var a: Int?
+    private var h: String?
+    private var a: Int?
     var g: Gradient?
 
     func getColour() -> UIColor {
@@ -26,8 +31,8 @@ struct Colour: HandyJSON {
     func getColour() -> String {
         return h ?? "#000000"
     }
-    
-    func getAlpha() -> Double{
+
+    func getAlpha() -> Double {
         Double(a ?? 100)
     }
 }

@@ -6,9 +6,15 @@ import Foundation
 import HandyJSON
 
 /**
+ Permissions which can be asked via InApp
+
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
 enum PermissionType: String, HandyJSONEnum {
-    case LOCATION, CAMERA, PHONE_DETAILS, STORAGE
+
+    case LOCATION
+    case CAMERA
+    case PHONE_DETAILS
+    case STORAGE
 }

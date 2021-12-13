@@ -10,8 +10,10 @@ import HandyJSON
 import SwiftUI
 
 /**
+ Font is class which holds the font properties like font size, line height, font family,
+
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
 struct Font: HandyJSON {
     // MARK: Public
@@ -36,10 +38,10 @@ struct Font: HandyJSON {
 
     // MARK: Internal
 
-    var s: Float?
-    var ff: String?
-    var tf: String?
-    var lh: Float?
+    private var s: Float?
+    private var ff: String?
+    private var tf: String?
+    private var lh: Float?
 
     // MARK: Private
 

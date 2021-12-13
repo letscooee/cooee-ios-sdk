@@ -12,7 +12,7 @@ import SwiftUI
 
 /**
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
 struct Border: HandyJSON {
     // MARK: Public
@@ -51,7 +51,7 @@ struct Border: HandyJSON {
     }
 
     public func getColour() -> String {
-        return c?.h! ?? "#ffffff"
+        return c?.getColour() ?? "#000000"
     }
     
     public func getAlpha() -> Double {
