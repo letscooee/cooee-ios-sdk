@@ -10,8 +10,9 @@ import HandyJSON
 
 /**
  LocalStorageHelper is used to store local shared preference data
+
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
 class LocalStorageHelper {
     static func putString(key: String, value: String) {
@@ -65,11 +66,9 @@ class LocalStorageHelper {
         putString(key: key, value: array.toJSONString()!)
     }
 
-    static func putTypedClass<T: Codable>(key: String, data: T) {
-        guard let data = try? JSONEncoder().encode(data) else {
-            return
-        }
-        putString(key: key, value: String(data: data, encoding: String.Encoding.utf8)!)
+    static func putTypedClass<T: HandyJSON>(key: String, data: T) {
+
+        putString(key: key, value: data.toJSONString()!)
     }
 
     static func getTypedClass<T: Codable>(key: String, clazz: T.Type) -> T? {
