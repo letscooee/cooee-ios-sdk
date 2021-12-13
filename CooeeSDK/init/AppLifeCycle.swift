@@ -58,6 +58,8 @@ class AppLifeCycle: NSObject {
             return
         }
 
+        runtimeData.setInForeground()
+
         let backgroundDuration = runtimeData.getTimeInBackgroundInSeconds()
 
         if backgroundDuration > Constants.IDLE_TIME_IN_SECONDS {
