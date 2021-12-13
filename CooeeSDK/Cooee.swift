@@ -96,11 +96,11 @@ public final class CooeeSDK {
         CooeeFactory.shared.userAuthService.getUserID()
     }
 
-    public func setOnCTAListener(onCTAHandler: @escaping (_ result: [String: Any]) -> ()) {
+    public func setOnCTADelegate(_ onCTAHandler: CooeeCTADelegate) {
         self.onCTAHandler = onCTAHandler
     }
 
-    public func getOnCTAListener() -> ((_ result: [String: Any]) -> ())? {
+    public func getOnCTAListener() -> CooeeCTADelegate? {
         onCTAHandler
     }
 
@@ -111,5 +111,5 @@ public final class CooeeSDK {
     private let safeHttpService: SafeHTTPService
     private let runtimeData: RuntimeData
     private let sentryHelper: SentryHelper
-    private var onCTAHandler: ((_ result: [String: Any]) -> ())? = nil
+    private var onCTAHandler: CooeeCTADelegate? = nil
 }

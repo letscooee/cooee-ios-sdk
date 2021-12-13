@@ -84,6 +84,6 @@ class ClickActionExecutor {
         guard let onCTAListener = CooeeSDK.getInstance().getOnCTAListener() else {
             return
         }
-        onCTAListener(keyValues!)
+        onCTAListener.onCTAResponce(payload: keyValues!)
     }
 }
