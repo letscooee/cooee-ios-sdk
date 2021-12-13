@@ -43,7 +43,6 @@ struct TextRenderer: View {
                         .italic(child.isItalic())
                         .underline(child.addUnderLine())
                         .strikethrough(child.addStrikeThrough())
-                        .modifier(AbstractInAppRenderer(elementData: parentTextElement, triggerContext: triggerContext))
             }
         }
     }

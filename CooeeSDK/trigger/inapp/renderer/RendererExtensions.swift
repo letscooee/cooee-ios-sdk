@@ -77,7 +77,7 @@ extension Color {
        - alpha: alpha value to be added in colour
      */
     init(hex: String, alpha: Double = 100) {
-        var hexString = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        let hexString = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int: UInt64 = 0
 
         Scanner(string: hexString).scanHexInt64(&int)

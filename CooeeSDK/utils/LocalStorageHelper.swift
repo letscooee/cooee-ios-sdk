@@ -74,6 +74,7 @@ class LocalStorageHelper {
     static func getTypedClass<T: Codable>(key: String, clazz: T.Type) -> T? {
         if let rawString = getString(key: key) {
             var arr: T?
+
             do {
                 arr = try JSONDecoder().decode(T.self, from: rawString.data(using: .utf8)!)
             } catch {

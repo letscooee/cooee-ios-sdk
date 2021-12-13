@@ -10,11 +10,11 @@ import Foundation
 import UIKit
 
 /**
-  Handle insert, fetch, update, delete operations on PendingTask table
- 
-  - Author: Ashish Gaikwad
-  - Since: 0.1.0
-  */
+ Handle insert, fetch, update, delete operations on PendingTask table
+
+ - Author: Ashish Gaikwad
+ - Since: 0.1.0
+ */
 class PendingTaskDAO {
     // MARK: Lifecycle
 
@@ -34,7 +34,8 @@ class PendingTaskDAO {
 
         do {
             try context.save()
-        } catch {}
+        } catch {
+        }
         return task
     }
 
@@ -46,7 +47,8 @@ class PendingTaskDAO {
         do {
             let pendingTasks = try context.fetch(fetchRequest)
             return pendingTasks
-        } catch _ {}
+        } catch _ {
+        }
         return [PendingTasks]()
     }
 
@@ -57,25 +59,25 @@ class PendingTaskDAO {
 
         do {
             try context.save()
-        } catch {}
+        } catch {
+        }
     }
 
     func update(_ pendingTask: PendingTasks) {
         let context = database.viewContext
-        let fetchUser: NSFetchRequest<PendingTasks> = PendingTasks.fetchRequest()
 
-        fetchUser.predicate = NSPredicate(format: "id = %@", "\(pendingTask.id)")
-
-        let results = try? context.fetch(fetchUser)
-
-        if results?.count != 0 {
-            results?.first?.setValue(pendingTask.attempts, forKey: "attempts")
-            results?.first?.setValue(pendingTask.lastAttempted, forKey: "lastAttempted")
-        }
         do {
+            let results = try? context.existingObject(with: pendingTask.objectID)
+
+            if results != nil {
+                results?.setValue(pendingTask.attempts, forKey: "attempts")
+                results?.setValue(pendingTask.lastAttempted, forKey: "lastAttempted")
+            }
+
             try context.save()
 
-        } catch {}
+        } catch {
+        }
     }
 
     // MARK: Private

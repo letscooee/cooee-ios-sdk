@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 /**
- Renders Shape Element with its all Base Properties
+ Check for shape element and renders a ZStack with base element properties
 
  - Author: Ashish Gaikwad
  - Since: 1.3.0
@@ -25,7 +25,9 @@ struct ShapeRenderer: View {
     // MARK: Internal
 
     var body: some View {
-        ZStack {}.modifier(AbstractInAppRenderer(elementData: shapeElement, triggerContext: triggerContext))
+        ZStack {
+            Text("").position(x: 0, y: 0)
+        }
     }
 
     // MARK: Private

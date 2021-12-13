@@ -60,9 +60,9 @@ class InAppTriggerScene: UIView {
             return
         }
         hostView.translatesAutoresizingMaskIntoConstraints = false
-
-        viewController.view.addSubview(parentView)
+        hostView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         parentView.addSubview(hostView)
+        viewController.view.addSubview(parentView)
 
         startTime = Date()
         sendTriggerDisplayedEvent()

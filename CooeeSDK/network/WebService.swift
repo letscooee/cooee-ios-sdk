@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import HandyJSON
 
 /**
  Send any request to server
@@ -18,7 +19,7 @@ class WebService: NSObject {
 
     static let shared = WebService()
 
-    func getResponse<T: Decodable>(fromURL: String, method: httpMethod, params: [String: Any?], header: [String: String], t: T.Type) throws -> T? {
+    func getResponse(fromURL: String, method: httpMethod, params: [String: Any?], header: [String: String]) throws -> [String: Any]? {
         let url = URL(string: getCompleteURL(url: fromURL))!
         let group = DispatchGroup()
         var request = URLRequest(url: url)
@@ -28,10 +29,12 @@ class WebService: NSObject {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.httpMethod = method.rawValue
-        request.httpBody = params.percentEncoded()
+        if method != .GET {
+            request.httpBody = params.percentEncoded()
+        }
         request.allHTTPHeaderFields = header
         print("""
-              \n-------WS Params--------\n 
+              \n-------WS Params--------\n
               Request Body:\(params)\n
               Request Headers:\(header)\n
               Request URL:\(url)\n
@@ -39,34 +42,32 @@ class WebService: NSObject {
               """)
 
         group.enter()
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        let task = URLSession.shared.dataTask(with: request) { data, _, error in
             responseData = data
             responseError = error
             group.leave()
         }
         task.resume()
         group.wait()
-        return try processResponse(responseData, responseError, t)
+        return try processResponse(responseData, responseError)
     }
 
     // MARK: Private
 
-    private func processResponse<T: Decodable>(_ data: Data?, _ error: Error?, _ t: T.Type) throws -> T? {
+    private func processResponse(_ data: Data?, _ error: Error?) throws -> [String: Any]? {
         guard let data = data, error == nil
         else {
             print("error", error ?? "Unknown error")
             throw error!
         }
-        let responseString = String(data: data, encoding: .utf8)
+        let responseString = String(data: data, encoding: .utf8)?.convertToDictionary()
         print("""
               \n-------WS Response--------\n
-              \(responseString ?? "")\n
+              \(String(describing: responseString))\n
               -------End WS Response--------
               """)
 
-        let decodedResponse = try? JSONDecoder().decode(t.self, from: data)
-        return decodedResponse
-
+        return responseString
     }
 
     private func appendSessionID(params: [String: Any?]) -> [String: Any?] {

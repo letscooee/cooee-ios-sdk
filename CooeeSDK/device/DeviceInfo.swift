@@ -22,7 +22,6 @@ class DeviceInfo {
 
         var manufacture = "Apple"
         var networkUtility = NetworkUtility.shared
-        var deviceBattery = UIDevice.current.batteryLevel * 100
         var networkProvider = NetworkUtility.shared.getCarrierName()
         var networkType = NetworkUtility.shared.getNetworkType()
         var isWIFIConnected = (NetworkUtility.shared.getNetworkType() == "WIFI") ? true : false
@@ -31,6 +30,11 @@ class DeviceInfo {
 
         let totalRAM = ProcessInfo.processInfo.physicalMemory / 1024 / 1024
         let dpi = 1.0
+
+        var deviceBattery: Float {
+            UIDevice.current.isBatteryMonitoringEnabled = true
+            return UIDevice.current.batteryLevel * 100
+        }
 
         var availableRAM: Int64 {
             var pagesize: vm_size_t = 0
@@ -102,7 +106,10 @@ class DeviceInfo {
         }
 
         var isBTOn: Bool {
-            let centralManager = CBCentralManager()
+            let options = [
+                CBCentralManagerOptionShowPowerAlertKey: NSNumber(value: false)
+            ]
+            let centralManager = CBCentralManager(delegate: nil, queue: nil, options: options)
             if centralManager.state == .poweredOn {
                 return true
             }

@@ -13,15 +13,30 @@ import HandyJSON
  - Since: 0.1.0
  */
 struct TriggerData: HandyJSON {
+    // MARK: Public
+
+    public func getInAppTrigger() -> InAppTrigger? {
+        ian
+    }
+
+    public mutating func setInAppTrigger(inAppTrigger: InAppTrigger) {
+        self.ian = inAppTrigger
+    }
+
+    public func getPushNotification() -> PushNotificationTrigger? {
+        pn
+    }
+
+    // MARK: Internal
 
     var id: String?
     var v: Double?
     var engagementID: String?
     var `internal`: Bool? = false
     var expireAt: Int64?
-    private var ian: InAppTrigger?
 
-    public func getInAppTrigger() -> InAppTrigger? {
-        ian
-    }
+    // MARK: Private
+
+    private var ian: InAppTrigger?
+    private var pn: PushNotificationTrigger?
 }
