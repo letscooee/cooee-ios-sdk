@@ -13,8 +13,12 @@ import HandyJSON
  - Since: 0.1.0
  */
 struct Glossy: HandyJSON {
-    
-    var r: Int?
+
+    private var r: Int?
     var s: Int?
     var clr: Colour?
+
+    public func getRadius() -> CGFloat {
+        CGFloat(r ?? 18)
+    }
 }

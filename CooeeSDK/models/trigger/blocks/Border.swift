@@ -7,8 +7,8 @@
 
 import Foundation
 import HandyJSON
-import UIKit
 import SwiftUI
+import UIKit
 
 /**
  - Author: Ashish Gaikwad
@@ -21,21 +21,12 @@ struct Border: HandyJSON {
         case SOLID, DASH
     }
 
-    // MARK: Internal
-
-    private var r: Float?
-    private var w: Float?
-    private var dw: Float?
-    private var dg: Float?
-    private var c: Colour?
-    private var s: Int?
-
     public func getWidth(_ parent: UIView? = nil) -> CGFloat {
-        return CGFloat(w ?? 0)
+        return UnitUtil.getScaledPixel(w ?? 0)
     }
 
     public func getRadius(_ parent: UIView? = nil) -> CGFloat {
-        return CGFloat(r ?? 0)
+        return UnitUtil.getScaledPixel(r ?? 0)
     }
 
     public func getDashWidth(_ parent: UIView? = nil) -> CGFloat {
@@ -53,21 +44,30 @@ struct Border: HandyJSON {
     public func getColour() -> String {
         return c?.getColour() ?? "#000000"
     }
-    
+
     public func getAlpha() -> Double {
         return c?.getAlpha() ?? 100
     }
 
     public func getStyle() -> Style {
-        switch (s) {
+        switch s {
         case 1:
             return Style.SOLID
         case 2:
             return Style.DASH
         case .none:
             return Style.SOLID
-        case .some(_):
+        case .some:
             return Style.SOLID
         }
     }
+
+    // MARK: Private
+
+    private var r: Float?
+    private var w: Float?
+    private var dw: Float?
+    private var dg: Float?
+    private var c: Colour?
+    private var s: Int?
 }
