@@ -91,7 +91,7 @@ class BaseHTTPService {
     }
 
     func sendEvent(event: Event) throws {
-        _ = try webService.getResponse(fromURL: Constants.trackEvent, method: .POST, params: event.toDictionary(),
+        _ = try webService.getResponse(fromURL: Constants.trackEvent, method: .POST, params: event.toJSON()!,
                 header: commonHeaders.getDictionary(), t: [String: String].self)
     }
 }

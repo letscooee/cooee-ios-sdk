@@ -8,6 +8,12 @@
 import Foundation
 import SwiftUI
 
+/**
+ Renders Shape Element
+
+ - Author: Ashish Gaikwad
+ - Since: 0.1.0
+ */
 struct ShapeRenderer: View {
     // MARK: Lifecycle
 

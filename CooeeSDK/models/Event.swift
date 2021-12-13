@@ -40,7 +40,8 @@ struct Event: HandyJSON {
     var sessionID: String?
     var sessionNumber: Int?
     var screenName: String?
-    var activeTriggers: [[String: Any]]?
+    var activeTriggers: [EmbeddedTrigger]?
+    var activeTrigger: EmbeddedTrigger?
     var occurred: String?
     var deviceProps: [String: Any]?
 
@@ -55,6 +56,7 @@ struct Event: HandyJSON {
          "sessionNumber": sessionNumber,
          "screenName": screenName,
          "activeTriggers": activeTriggers,
+         "trigger": activeTrigger,
          "occurred": occurred,
          "deviceProps": deviceProps] as [String: Any?]
     }

@@ -10,6 +10,7 @@
 		75187468274CD6F000BF267F /* ElementsRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75187467274CD6F000BF267F /* ElementsRenderer.swift */; };
 		7518746A274CE35E00BF267F /* ShapeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75187469274CE35E00BF267F /* ShapeRenderer.swift */; };
 		7518746C274DF8C100BF267F /* PartElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7518746B274DF8BF00BF267F /* PartElement.swift */; };
+		75187470274E343C00BF267F /* EmbeddedTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7518746F274E343C00BF267F /* EmbeddedTrigger.swift */; };
 		751BC78226F3108A002D8358 /* CooeeSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 751BC78026F3108A002D8358 /* CooeeSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		751BC78F26F31162002D8358 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC78E26F31162002D8358 /* AppDelegate.swift */; };
 		751BC79126F31162002D8358 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC79026F31162002D8358 /* SceneDelegate.swift */; };
@@ -144,6 +145,7 @@
 		75187467274CD6F000BF267F /* ElementsRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsRenderer.swift; sourceTree = "<group>"; };
 		75187469274CE35E00BF267F /* ShapeRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeRenderer.swift; sourceTree = "<group>"; };
 		7518746B274DF8BF00BF267F /* PartElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartElement.swift; sourceTree = "<group>"; };
+		7518746F274E343C00BF267F /* EmbeddedTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedTrigger.swift; sourceTree = "<group>"; };
 		751BC77D26F3108A002D8358 /* CooeeSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CooeeSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		751BC78026F3108A002D8358 /* CooeeSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CooeeSDK.h; sourceTree = "<group>"; };
 		751BC78126F3108A002D8358 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -523,6 +525,7 @@
 				75DD87A1271D6EA700A272BB /* elements */,
 				75729E7326F497FD006EB506 /* TriggerData.swift */,
 				AC0B87F48A6E7645ED14E223 /* inapp */,
+				7518746F274E343C00BF267F /* EmbeddedTrigger.swift */,
 			);
 			path = trigger;
 			sourceTree = "<group>";
@@ -946,6 +949,7 @@
 				751E1329270C7074002CF442 /* DateUtil.swift in Sources */,
 				75DD87CC271EF4BA00A272BB /* Alignment.swift in Sources */,
 				751BC7DA26F35E32002D8358 /* AppInfo.swift in Sources */,
+				75187470274E343C00BF267F /* EmbeddedTrigger.swift in Sources */,
 				75729E7426F497FD006EB506 /* TriggerData.swift in Sources */,
 				751BC7BE26F311DB002D8358 /* AppController.swift in Sources */,
 				75DD87BE271D81E300A272BB /* ClickAction.swift in Sources */,

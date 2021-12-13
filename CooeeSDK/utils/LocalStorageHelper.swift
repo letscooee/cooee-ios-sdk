@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import HandyJSON
 
 /**
  LocalStorageHelper is used to store local shared preference data
@@ -13,7 +14,6 @@ import Foundation
  - Since: 0.1.0
  */
 class LocalStorageHelper {
-
     static func putString(key: String, value: String) {
         UserDefaults.standard.set(value, forKey: key)
     }
@@ -44,5 +44,48 @@ class LocalStorageHelper {
 
     static func getLong(key: String, defaultValue: Int64) -> Int64 {
         return UserDefaults.standard.value(forKey: key) as? Int64 ?? defaultValue
+    }
+
+    static func getTypedArray<T: Codable>(key: String, clazz: T.Type) -> [T] {
+        if let rawString = getString(key: key) {
+            var arr: [T]?
+
+            do {
+                arr = try JSONDecoder().decode([T].self, from: rawString.data(using: .utf8)!)
+            } catch {
+            }
+
+            return arr ?? [T]()
+        } else {
+            return [T]()
+        }
+    }
+
+    static func putTypedArray<T: HandyJSON>(key: String, array: [T]) {
+        putString(key: key, value: array.toJSONString()!)
+    }
+
+    static func putTypedClass<T: Codable>(key: String, data: T) {
+        guard let data = try? JSONEncoder().encode(data) else {
+            return
+        }
+        putString(key: key, value: String(data: data, encoding: String.Encoding.utf8)!)
+    }
+
+    static func getTypedClass<T: Codable>(key: String, clazz: T.Type) -> T? {
+        if let rawString = getString(key: key) {
+            var arr: T?
+            do {
+                arr = try JSONDecoder().decode(T.self, from: rawString.data(using: .utf8)!)
+            } catch {
+            }
+            return arr
+        } else {
+            return nil
+        }
+    }
+
+    static func remove(key: String) {
+        UserDefaults.standard.set(nil, forKey: key)
     }
 }
