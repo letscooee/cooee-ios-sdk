@@ -41,8 +41,24 @@ struct AbstractInAppRenderer: ViewModifier {
                     )
                 }
                 .if(elementData.bg != nil && elementData.bg!.s != nil && elementData.bg!.s!.g == nil) {
-                    $0.background(Color(hex: elementData.bg!.s!.h!, alpha: elementData.bg!.s!.getAlpha()))//.offset(x: elementData.getX().pixelsToPoints(), y: elementData.getY().pixelsToPoints()))
+                    $0.background(Color(hex: elementData.bg!.s!.getColour()!, alpha: elementData.bg!.s!.getAlpha()))//.offset(x: elementData.getX().pixelsToPoints(), y: elementData.getY().pixelsToPoints()))
                     // process image and glossy
+                }
+                .if(elementData.bg != nil && elementData.bg!.g != nil) {
+
+                    $0.blur(radius: elementData.bg!.g!.getRadius())
+
+                }
+                .if(elementData.bg != nil && elementData.bg!.i != nil) {
+                    $0.background(ImageRenderer(
+                            url: URL(string: elementData.bg!.i!.src!)!,
+                            placeholder: {
+                                // Place holder should be added
+                            },
+                            image: {
+                                $0.resizable()
+                            }
+                    ))
                 }
                 .if(elementData.br != nil && elementData.br!.getStyle() == Border.Style.SOLID) {
                     $0.overlay(
@@ -62,7 +78,11 @@ struct AbstractInAppRenderer: ViewModifier {
                                     )
                                     .foregroundColor(Color(hex: elementData.br!.getColour(), alpha: elementData.br!.getAlpha()))
                     )
-                }.if(elementData.shadow != nil) {
+                }
+                .if(elementData.br != nil) {
+                    $0.cornerRadius(elementData.br!.getRadius())
+                }
+                .if(elementData.shadow != nil) {
                     $0.shadow(radius: CGFloat(elementData.shadow!.getElevation()))
                 }
                 .if(calculatedWidth != nil && calculatedHeight != nil && !isContainer) {

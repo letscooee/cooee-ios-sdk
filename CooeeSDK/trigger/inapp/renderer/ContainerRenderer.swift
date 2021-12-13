@@ -10,7 +10,7 @@ import UIKit
  Renders the top most container of the in-app.
 
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
 struct ContainerRenderer: View {
     // MARK: Lifecycle
@@ -30,11 +30,16 @@ struct ContainerRenderer: View {
 
         ZStack(alignment: .topLeading) {
             ZStack {
+                Text("").position(x: 0, y: 0)
             }.modifier(AbstractInAppRenderer(elementData: container, triggerContext: triggerContext, isContainer: true))
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
 
-            ElementRenderer(elements, triggerContext)
-        }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                //.blur(radius: 18)
+
+
+            ElementRenderer(elements, triggerContext).background(Color.white.opacity(0))
+        }
+        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
     }
 
     // MARK: Private
