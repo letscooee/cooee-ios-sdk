@@ -31,6 +31,7 @@ class InAppTriggerScene: UIView {
         let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
         _ = nib.instantiate(withOwner: self, options: nil).first as! UIView
         parentView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        parentView.insetsLayoutMarginsFromSafeArea = false
         parentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
 
@@ -55,11 +56,12 @@ class InAppTriggerScene: UIView {
             self.finish()
         }
 
-        let host = UIHostingController(rootView: ContainerRenderer(inAppTrigger: inAppData!, triggerContext))
+        let host = UIHostingController(rootView: ContainerRenderer(inAppTrigger: inAppData!, triggerContext).edgesIgnoringSafeArea(.all))
         guard let hostView = host.view else {
             CooeeFactory.shared.sentryHelper.capture(message: "Loading SwiftUI failed")
             return
         }
+        hostView.insetsLayoutMarginsFromSafeArea = false
         hostView.translatesAutoresizingMaskIntoConstraints = false
         hostView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         hostView.backgroundColor = UIColor.white.withAlphaComponent(0.0)
