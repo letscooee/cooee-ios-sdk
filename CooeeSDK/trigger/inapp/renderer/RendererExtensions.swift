@@ -7,7 +7,7 @@ import SwiftUI
 import UIKit
 
 extension UIView {
-
+    
     /**
      Create a shape containing dashed border and add it as sub layer in UIView
      - Parameters:
@@ -71,7 +71,6 @@ extension UIView {
         let blurEffect = UIBlurEffect(style: style)
         let blurView = UIVisualEffectView(effect: blurEffect)
         blurView.frame = self.frame
-        //blurView.alpha = 0.8 //alpha*10/100
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.addSubview(blurView)
         self.sendSubviewToBack(blurView)
@@ -79,7 +78,7 @@ extension UIView {
 }
 
 extension Color {
-
+    
     /**
      Create Color from given hex
      - Parameters:
@@ -87,12 +86,12 @@ extension Color {
        - alpha: alpha value to be added in colour
      */
     init(hex: String, alpha: Double = 100) {
-        self.init(UIColor(hexString: hex,(alpha/100)))
+        self.init(UIColor(hexString: hex, alpha / 100))
     }
 }
 
 public extension View {
-
+    
     /**
      Extension to add multiple properties to the element via if condition
 
@@ -102,11 +101,8 @@ public extension View {
      */
     @ViewBuilder
     internal func `if`<Transform: View>(_ condition: Bool, transform: (Self) -> Transform) -> some View {
-        if condition {
-            transform(self)
-        } else {
-            self
-        }
+        if condition { transform(self) }
+        else { self }
     }
 
     func frame(_ width: CGFloat, _ height: CGFloat) -> some View {
@@ -120,6 +116,7 @@ public extension View {
     func height(_ height: CGFloat) -> some View {
         self.frame(height: height)
     }
+
     func align(_ height: CGFloat) -> some View {
         self.frame(height: height)
     }
@@ -130,7 +127,7 @@ public extension View {
 }
 
 public extension Text {
-
+    
     func bold(_ isBold: Bool) -> Text {
         if isBold {
             return self.bold()
@@ -157,14 +154,14 @@ public extension Text {
 }
 
 struct FontWithLineHeight: ViewModifier {
-
+    
     let font: UIFont
     let lineHeight: CGFloat
 
     func body(content: Content) -> some View {
         content
-                .font(SwiftUI.Font(font))
-                .lineSpacing(lineHeight - font.lineHeight)
-                .padding(.vertical, (lineHeight - font.lineHeight) / 2)
+            .font(SwiftUI.Font(self.font))
+            .lineSpacing(self.lineHeight - self.font.lineHeight)
+            .padding(.vertical, (self.lineHeight - self.font.lineHeight) / 2)
     }
 }
