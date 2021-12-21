@@ -23,8 +23,6 @@ struct AbstractInAppRenderer: ViewModifier {
         // process height and width
         let calculatedHeight = elementData.getCalculatedHeight()
         let calculatedWidth = elementData.getCalculatedWidth()
-        let calculatedX = elementData.getX() + ((calculatedWidth ?? 0) / 2)
-        let calculatedY = elementData.getY() + ((calculatedHeight ?? 0) / 2)
         let _ = print("\(elementData)")
         let _ = print("x: \(elementData.getX()), y: \(elementData.getY())")
         let _ = print("h: \(String(describing: calculatedHeight)), w: \(String(describing: calculatedWidth)), dh: \(deviceHeight), dw: \(deviceWidth)")
@@ -41,13 +39,7 @@ struct AbstractInAppRenderer: ViewModifier {
                     )
                 }
                 .if(elementData.bg != nil && elementData.bg!.s != nil && elementData.bg!.s!.g == nil) {
-                    $0.background(Color(hex: elementData.bg!.s!.getColour()!, alpha: elementData.bg!.s!.getAlpha()))//.offset(x: elementData.getX().pixelsToPoints(), y: elementData.getY().pixelsToPoints()))
-                    // process image and glossy
-                }
-                .if(elementData.bg != nil && elementData.bg!.g != nil) {
-
-                    $0.blur(radius: elementData.bg!.g!.getRadius())
-
+                    $0.background(Color(hex: elementData.bg!.s!.getColour(), alpha: elementData.bg!.s!.getAlpha()))
                 }
                 .if(elementData.bg != nil && elementData.bg!.i != nil) {
                     $0.background(ImageRenderer(
@@ -64,7 +56,7 @@ struct AbstractInAppRenderer: ViewModifier {
                     $0.overlay(
                             RoundedRectangle(cornerRadius: elementData.br!.getRadius())
                                     .stroke(Color(hex: elementData.br!.getColour(), alpha: elementData.br!.getAlpha()), lineWidth: elementData.br!.getWidth())
-                            //.offset(x: elementData.getX().pixelsToPoints(), y: elementData.getY().pixelsToPoints())
+                            // .offset(x: elementData.getX().pixelsToPoints(), y: elementData.getY().pixelsToPoints())
                     )
                 }
                 .if(elementData.br != nil && elementData.br!.getStyle() == Border.Style.DASH) {
@@ -94,7 +86,7 @@ struct AbstractInAppRenderer: ViewModifier {
                 .if(calculatedWidth == nil && calculatedHeight != nil && !isContainer) {
                     $0.height(calculatedHeight!)
                 }
-                .if(elementData.getX() != 0.0) {
+                .if(elementData.getX() != 0.0 || elementData.getY() != 0.0) {
                     $0.offset(x: elementData.getX(), y: elementData.getY())
                 }
                 .gesture(
@@ -105,6 +97,5 @@ struct AbstractInAppRenderer: ViewModifier {
                                     }
                                 }
                 )
-
     }
 }
