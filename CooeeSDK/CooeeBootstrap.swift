@@ -83,7 +83,9 @@ class CooeeBootstrap: NSObject {
 
 extension CooeeBootstrap: MessagingDelegate {
     public func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        print("Firebase registration token framework: \(fcmToken ?? "")")
+        var requestBody = [String: Any]()
+        requestBody["firebaseToken"] = fcmToken
+        CooeeFactory.shared.safeHttpService.updatePushToken(requestData: requestBody)
     }
 }
 
