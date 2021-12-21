@@ -15,7 +15,6 @@ import SwiftUI
  */
 class InAppTriggerScene: UIView {
     var parentView: UIView!
-    private var container: UIView?
 
     private var triggerData: TriggerData?
     private var inAppData: InAppTrigger?
@@ -82,6 +81,7 @@ class InAppTriggerScene: UIView {
         if let currentOrientation = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.windowScene?.interfaceOrientation {
             deviceDefaultOrientation = currentOrientation
         }
+
         UIDevice.current.setValue(orientation.rawValue, forKey: "orientation")
         UIViewController.attemptRotationToDeviceOrientation()
     }
