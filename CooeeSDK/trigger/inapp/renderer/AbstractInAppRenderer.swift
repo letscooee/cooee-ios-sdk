@@ -48,9 +48,12 @@ struct AbstractInAppRenderer: ViewModifier {
                                 // Place holder should be added
                             },
                             image: {
-                                $0.resizable()
+                                $0.resizable().scaledToFill()
                             }
                     ))
+                }
+                .if(elementData.bg != nil && elementData.bg!.i != nil) {
+                    $0.clipped()
                 }
                 .if(elementData.br != nil && elementData.br!.getStyle() == Border.Style.SOLID) {
                     $0.overlay(
