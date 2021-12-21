@@ -31,7 +31,7 @@ struct ContainerRenderer: View {
         ZStack(alignment: .topLeading) {
             ZStack {
                 Text("").position(x: 0, y: 0)
-            }.modifier(AbstractInAppRenderer(elementData: container, triggerContext: triggerContext, isContainer: true))
+            }
                 .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
 
                 //.blur(radius: 18)
@@ -39,6 +39,7 @@ struct ContainerRenderer: View {
 
             ElementRenderer(elements, triggerContext).background(Color.white.opacity(0))
         }
+        .modifier(AbstractInAppRenderer(elementData: container, triggerContext: triggerContext, isContainer: true))
         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
     }
 
