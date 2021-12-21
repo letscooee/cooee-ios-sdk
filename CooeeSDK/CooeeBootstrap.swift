@@ -20,13 +20,13 @@ class CooeeBootstrap: NSObject {
 
     override public init() {
         super.init()
+        self.swizzleDidReceiveRemoteNotification()
         _ = CooeeFactory.shared
         _ = AppLifeCycle.shared
 
         DispatchQueue.main.async {
             self.registerFirebase()
             self.updateFirebaseToken()
-            self.swizzleDidReceiveRemoteNotification()
             self.startPendingTaskJob()
         }
     }
