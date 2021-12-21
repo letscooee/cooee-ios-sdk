@@ -39,7 +39,7 @@ class EmbeddedTrigger: Codable, HandyJSON {
     // MARK: Public
 
     public func getExpireAt() -> Int64 {
-        return expireAt ?? 0
+        return expireAt ?? Int64(Date().timeIntervalSince1970 * 1000)
     }
 
     public func isExpired() -> Bool {

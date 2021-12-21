@@ -30,11 +30,11 @@ struct Border: HandyJSON {
     }
 
     public func getDashWidth(_ parent: UIView? = nil) -> CGFloat {
-        return UnitUtil.getScaledPixel(dw!)
+        return dw == nil ? 10 : UnitUtil.getScaledPixel(dw!)
     }
 
     public func getDashGap(_ parent: UIView? = nil) -> CGFloat {
-        return UnitUtil.getScaledPixel(dg!)
+        return  dg == nil ? 10 : UnitUtil.getScaledPixel(dg!)
     }
 
     public func getColour() -> UIColor? {
