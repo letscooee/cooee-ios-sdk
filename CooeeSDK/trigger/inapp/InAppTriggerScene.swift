@@ -26,6 +26,8 @@ class InAppTriggerScene: UIView {
     public static let instance = InAppTriggerScene()
     private var startTime: Date? = nil
 
+    private var deviceDefaultOrientation: UIInterfaceOrientation = UIInterfaceOrientation.portrait
+
     private func commonInit() {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
@@ -44,9 +46,7 @@ class InAppTriggerScene: UIView {
         if self.inAppData == nil {
             throw CustomError.EmptyInAppData
         }
-
-        container = UIView()
-        container?.frame = parentView.frame
+        updateDeviceOrientation(inAppData!.getOrientation())
         triggerContext.setTriggerData(triggerData: triggerData!)
         triggerContext.setTriggerParentLayout(triggerParentLayout: parentView)
         triggerContext.setPresentViewController(presentViewController: viewController)
@@ -75,6 +75,16 @@ class InAppTriggerScene: UIView {
 
         startTime = Date()
         sendTriggerDisplayedEvent()
+    }
+
+
+    private func updateDeviceOrientation(_ orientation: UIInterfaceOrientation) {
+
+        if let currentOrientation = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.windowScene?.interfaceOrientation {
+            deviceDefaultOrientation = currentOrientation
+        }
+        UIDevice.current.setValue(orientation.rawValue, forKey: "orientation")
+        UIViewController.attemptRotationToDeviceOrientation()
     }
 
     private func sendTriggerDisplayedEvent() {
@@ -114,6 +124,8 @@ class InAppTriggerScene: UIView {
         var event = Event(eventName: "CE Trigger Closed", properties: closedEventProps)
         event.withTrigger(triggerData: triggerData!)
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)
-        parentView!.removeFromSuperview()
+
+        // revert device to previous device orientation
+        updateDeviceOrientation(deviceDefaultOrientation)
     }
 }
