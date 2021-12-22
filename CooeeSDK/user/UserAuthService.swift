@@ -10,8 +10,9 @@ import Foundation
 
 /**
  Utility class to register user with server and to provide related data
+
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
 class UserAuthService {
     // MARK: Lifecycle
@@ -57,6 +58,11 @@ class UserAuthService {
         self.baseHttp?.commonHeaders.sdkToken = self.sdkToken
         self.baseHttp?.commonHeaders.userID = self.userID
         self.sentryHelper.setUserId(id: self.userID!)
+
+        // send screenshot once sdk token is acquired/published
+        DispatchQueue.main.async {
+            ScreenShotUtility.captureAndSendScreenShot()
+        }
     }
 
     func getUserID() -> String? {

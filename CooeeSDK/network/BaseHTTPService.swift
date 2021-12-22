@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 /**
   A base or lower level HTTP service which simply hits the backend for given request. It does not perform
@@ -14,7 +15,7 @@ import Foundation
  Make sure these methods are not called in the main-thread.
 
   - Author: Ashish Gaikwad
-  - Since: 0.1.0
+  - Since: 1.3.0
   */
 class BaseHTTPService {
     class CommonHeaders {
@@ -110,5 +111,10 @@ class BaseHTTPService {
 
     func getAppConfig(appID: String) throws -> [String: Any]? {
         return try publicApiClient.getAppConfig(appID: appID)
+    }
+    
+    func uploadScreenshot(imageToUpload: UIImage, screenName: String) throws -> [String: Any]?{
+        let response = try publicApiClient.uploadImage(imageToUpload: imageToUpload, screenName: screenName, header: commonHeaders.getDictionary())
+        return response
     }
 }

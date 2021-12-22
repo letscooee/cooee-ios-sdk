@@ -1,5 +1,5 @@
 //
-//  CooeeBootstarp.swift
+//  CooeeBootstrap.swift
 //  CooeeSDK
 //
 //  Created by Ashish Gaikwad on 01/10/21.
@@ -13,7 +13,7 @@ import Foundation
  A one time initializer class which initialises the Cooee SDK. This is used internally by the SDK
  and should be quick.
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
 class CooeeBootstrap: NSObject {
     // MARK: Lifecycle
@@ -23,11 +23,12 @@ class CooeeBootstrap: NSObject {
         self.swizzleDidReceiveRemoteNotification()
         _ = CooeeFactory.shared
         _ = AppLifeCycle.shared
-
+        
         DispatchQueue.main.async {
             self.registerFirebase()
             self.updateFirebaseToken()
             self.startPendingTaskJob()
+            FontProcessor.checkAndUpdateBrandFonts()
         }
     }
 
