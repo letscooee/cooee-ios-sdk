@@ -126,3 +126,28 @@ extension String {
             return nil
         }
 }
+
+extension Array {
+    
+    var toJsonString: String?{
+        guard let data = try? JSONSerialization.data(withJSONObject: self, options: []) else {
+                return nil
+        }
+        return String(data: data, encoding: String.Encoding.utf8)
+    }
+}
+
+extension Date {
+    
+    func get(_ type: Calendar.Component)-> String {
+        let calendar = Calendar.current
+        let t = calendar.component(type, from: self)
+        return (t < 10 ? "0\(t)" : t.description)
+    }
+}
+
+extension Int {
+  var doubleValue: Double {
+    return Double(self)
+  }
+}

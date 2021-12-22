@@ -28,7 +28,7 @@ class LocalStorageHelper {
     }
 
     static func getInt(key: String, defaultValue: Int?) -> Int {
-        return UserDefaults.standard.value(forKey: key) as! Int
+        return UserDefaults.standard.value(forKey: key) as? Int ?? 0
     }
 
     static func putBoolean(key: String, value: Bool) {
