@@ -43,4 +43,11 @@ struct Constants {
     static let saveFCM = "/v1/user/setFirebaseToken"
     static let updateProfile = "/v1/user/update"
     // endregion
+
+    // region Units
+    public static let UNIT_PIXEL = "px";
+    public static let UNIT_PERCENT = "%";
+    public static let UNIT_VIEWPORT_HEIGHT = "vh";
+    public static let UNIT_VIEWPORT_WIDTH = "vw";
+    // endregion
 }

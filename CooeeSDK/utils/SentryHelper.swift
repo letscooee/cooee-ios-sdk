@@ -80,7 +80,7 @@ class SentryHelper {
     }
 
     public func capture(message: String, error: NSError) {
-        print("""
+        NSLog("""
               \(Constants.TAG) \(message)
               \n\(error)
               """)

@@ -63,14 +63,14 @@ class RuntimeData {
     }
 
     public func getTimeInForegroundInSeconds() -> Int64 {
-        return self.getDateDifferenceInSeconds(startDate: self.lastEnterForeground!, endDate: self.lastEnterBackground!)
+        return DateUtils.getDateDifferenceInSeconds(startDate: self.lastEnterForeground!, endDate: self.lastEnterBackground!)
     }
 
     public func getTimeInBackgroundInSeconds() -> Int64 {
         if self.lastEnterBackground == nil {
             return 0
         }
-        return self.getDateDifferenceInSeconds(startDate: self.lastEnterBackground!, endDate: Date())
+        return DateUtils.getDateDifferenceInSeconds(startDate: self.lastEnterBackground!, endDate: Date())
     }
 
     public func setCurrentScreenName(name: String) {
@@ -98,11 +98,4 @@ class RuntimeData {
     private var lastEnterBackground: Date?
     private var currentScreenName: String?
 
-    private func getDateDifferenceInSeconds(startDate: Date, endDate: Date) -> Int64 {
-        let calendar = Calendar.current
-        let unitFlags = Set<Calendar.Component>([.second])
-        let dateComponents = calendar.dateComponents(unitFlags, from: startDate, to: endDate)
-        let seconds = dateComponents.second
-        return Int64(seconds!)
-    }
 }
