@@ -81,6 +81,12 @@ class SafeHTTPService {
             event.sessionID = sessionID
             event.sessionNumber = Int(sessionManager.getCurrentSessionNumber())
         }
+        
+        let trigger = LocalStorageHelper.getTypedClass(key: Constants.STORAGE_ACTIVE_TRIGGER, clazz: EmbeddedTrigger.self)
+        
+        event.activeTriggers = EngagementTriggerHelper.getActiveTriggers()
+        event.activeTrigger = trigger
+        event.screenName = runtimeData.getCurrentScreenName()
 
         let pendingTask = pendingTaskService.newTask(event)
 
