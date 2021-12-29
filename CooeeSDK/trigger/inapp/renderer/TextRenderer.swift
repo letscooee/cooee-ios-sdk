@@ -35,7 +35,7 @@ struct TextRenderer: View {
             ForEach(children) { child in
 
                 let textColour: Color = child.getPartColour() ?? parentTextElement.getColour() ?? Color(hex: "#000000")
-                let font = parentTextElement.getFont()
+                let font = parentTextElement.getFont(for: child)
                 let alignment = parentTextElement.getSwiftUIAlignment()
 
                 let last1 = Array(child.getPartText())

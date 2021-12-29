@@ -26,15 +26,15 @@ struct Font: HandyJSON {
         return lh == nil ? nil : UnitUtil.getScaledPixel(s!)
     }
 
-    public func getFont() -> SwiftUI.Font {
+    public func getFont(for partElement: PartElement) -> SwiftUI.Font {
         var font = SwiftUI.Font.system(size: getSize(), design: .default)
 
-        
+
         if ff != nil {
             font = SwiftUI.Font.custom(ff!, size: getSize())
         }
-        
-        if tf != nil, let newFont = processTypeFace(){
+
+        if tf != nil, let newFont = processTypeFace(for: partElement) {
             font = newFont
         }
 
@@ -51,19 +51,60 @@ struct Font: HandyJSON {
     // MARK: Private
 
     private static let DEFAULT_SIZE: CGFloat = UIFont.systemFontSize
-    
-    private func processTypeFace() -> SwiftUI.Font? {
-        
-        let fontDir = FontProcessor.getFontsStorageDirectory()
-        let fontFile = fontDir.appendingPathComponent("\(tf!).ttf")
-        
+
+    private func processTypeFace(for partElement: PartElement) -> SwiftUI.Font? {
+
+        let font = checkForSystemFont()
+
+        if font != nil {
+            return font
+        }
+
+        let fontFile = getFontPath(of: tf!)
+
+        if !FileManager.default.fileExists(atPath: fontFile.path) {
+            return fontWithCustomStyle(partElement)
+        }
+
+        UIFont.register(from: fontFile)
+
+        return SwiftUI.Font.custom(tf!, size: getSize())
+
+    }
+
+    private func checkForSystemFont() -> SwiftUI.Font? {
+        for family in UIFont.familyNames {
+            if family.caseInsensitiveCompare(tf!) == .orderedSame {
+                return SwiftUI.Font.custom(family, size: getSize())
+            }
+        }
+        return nil
+    }
+
+    private func fontWithCustomStyle(_ partElement: PartElement) -> SwiftUI.Font? {
+        var typeFace = "\(tf!.lowercased().trimmingCharacters(in: .whitespacesAndNewlines))-"
+
+        if partElement.isBold() {
+            typeFace = "\(typeFace)bold"
+        }
+
+        if partElement.isItalic() {
+            typeFace = "\(typeFace)italic"
+        }
+
+        let fontFile = getFontPath(of: typeFace)
+
         if !FileManager.default.fileExists(atPath: fontFile.path) {
             return nil
         }
-        
+
         UIFont.register(from: fontFile)
-        
-        return SwiftUI.Font.custom(tf!, size: getSize())
-        
+
+        return SwiftUI.Font.custom(typeFace, size: getSize())
+    }
+
+    private func getFontPath(of name: String) -> URL {
+        let fontDir = FontProcessor.getFontsStorageDirectory()
+        return fontDir.appendingPathComponent("\(tf!).ttf")
     }
 }

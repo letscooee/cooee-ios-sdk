@@ -67,7 +67,7 @@ class BaseTextElement: BaseElement {
                 return .leading
         }
     }
-    
+
     public func getSwiftUIAlignment() -> SwiftUI.Alignment {
         switch alg {
             case 0:
@@ -87,11 +87,11 @@ class BaseTextElement: BaseElement {
         return c == nil ? nil : Color(hex: c!.getColour(), alpha: c!.getAlpha())
     }
 
-    public func getFont() -> SwiftUI.Font {
+    public func getFont(for part: PartElement) -> SwiftUI.Font {
         if f == nil {
             return SwiftUI.Font.system(size: 14)
         } else {
-            return f!.getFont()
+            return f!.getFont(for: part)
         }
     }
 
