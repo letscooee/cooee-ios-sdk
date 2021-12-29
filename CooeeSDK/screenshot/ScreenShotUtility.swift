@@ -45,7 +45,7 @@ class ScreenShotUtility {
         do {
             let response = try CooeeFactory.shared.baseHttpService.uploadScreenshot(imageToUpload: screenShot!, screenName: screenName)
 
-            if response != nil, response!["saved"] as! Bool {
+            if response != nil && response!["saved"] != nil && response!["saved"] as! Bool {
                 updateLastSentTime(for: screenName)
             }
         } catch {
