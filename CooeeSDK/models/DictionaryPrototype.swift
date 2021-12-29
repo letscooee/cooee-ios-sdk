@@ -15,16 +15,16 @@ struct DictionaryPrototype: HandyJSON {
 
     func toDictionary() -> [String: Any] {
         [
-            "sessionID": sessionID,
-            "occurred": occurred
+            "sessionID": sessionID ?? "",
+            "occurred": occurred ?? ""
         ] as [String: Any]
     }
 
     func toProfileDictionary() throws -> [String: Any] {
         [
-            "sessionID": sessionID,
-            "userProperties": userProperties,
-            "userData": userData
+            "sessionID": sessionID ?? "",
+            "userProperties": userProperties ?? "",
+            "userData": userData ?? ""
         ] as [String: Any]
     }
 }

@@ -10,10 +10,16 @@ import CooeeSDK
 import HandyJSON
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CooeeCTADelegate {
+
+    func onCTAResponse(payload: [String : Any]) {
+        print(payload)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         let cooeeSDK = CooeeSDK.getInstance()
+        cooeeSDK.setOnCTADelegate(self)
         cooeeSDK.setCurrentScreen(screenName: "Main")
         do {
             try cooeeSDK.sendEvent(eventName: "View Load", eventProperties: [String: Any]())

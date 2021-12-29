@@ -17,7 +17,7 @@ public class EngagementTriggerHelper {
 
     public static func renderInAppTriggerFromJSONString(_ rawTriggerData: String) {
         let triggerData = TriggerData.deserialize(from: rawTriggerData)
-        // TODO: 27/10/21: store active trigger details
+
         storeActiveTriggerDetails(triggerData: triggerData!)
 
         renderInAppTrigger(triggerData)
@@ -44,20 +44,38 @@ public class EngagementTriggerHelper {
      - Returns: Array of <code>EmbeddedTrigger</code>
      */
     static func getActiveTriggers() -> [EmbeddedTrigger] {
-        var activeTriggers: [EmbeddedTrigger] = LocalStorageHelper.getTypedArray(key: Constants.STORAGE_ACTIVATED_TRIGGERS,
+        let activeTriggers: [EmbeddedTrigger] = LocalStorageHelper.getTypedArray(key: Constants.STORAGE_ACTIVATED_TRIGGERS,
                 clazz: EmbeddedTrigger.self)
-        var activeTriggersCurrent: [EmbeddedTrigger] = [EmbeddedTrigger]()
+        var activeTriggersCurrent = [EmbeddedTrigger]()
 
         for index in activeTriggers.startIndex..<activeTriggers.endIndex {
-
             if !activeTriggers[index].isExpired() {
                 activeTriggersCurrent.append(activeTriggers[index])
             }
-
         }
 
         LocalStorageHelper.putTypedArray(key: Constants.STORAGE_ACTIVATED_TRIGGERS, array: activeTriggersCurrent)
         return activeTriggersCurrent
+    }
+
+    /**
+     Render the In-App trigger when a push notification was clicked.
+
+     - Parameter triggerData: Data to render in-app.
+     */
+    static func renderInAppFromPushNotification(for triggerData: TriggerData) {
+        let runtimeData = CooeeFactory.shared.runtimeData
+        storeActiveTriggerDetails(triggerData: triggerData)
+
+        if runtimeData.isFirstForeground() {
+            Timer.scheduledTimer(withTimeInterval: Constants.TIME_TO_WAIT_SECONDS, repeats: false) { _ in
+                loadLazyData(for: triggerData)
+            }
+        } else {
+            Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { _ in
+                loadLazyData(for: triggerData)
+            }
+        }
     }
 
     // MARK: Private
@@ -96,5 +114,23 @@ public class EngagementTriggerHelper {
         let embeddedTrigger = EmbeddedTrigger(trigger: data)
 
         LocalStorageHelper.putTypedClass(key: Constants.STORAGE_ACTIVE_TRIGGER, data: embeddedTrigger)
+    }
+
+    /**
+     Fetch Trigger InApp data from server
+
+     - Parameter triggerData: Data to render in-app.
+     */
+    private static func loadLazyData(for triggerData: TriggerData) {
+        InAppTriggerHelper.loadLazyData(for: triggerData) { data in
+            if data == nil {
+                return
+            }
+
+            var triggerData = triggerData
+            triggerData.setInAppTrigger(inAppTrigger: data!)
+
+            renderInAppTrigger(triggerData)
+        }
     }
 }

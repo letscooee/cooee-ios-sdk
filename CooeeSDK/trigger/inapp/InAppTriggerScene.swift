@@ -48,6 +48,7 @@ class InAppTriggerScene: UIView {
         container?.frame = parentView.frame
         triggerContext.setTriggerData(triggerData: triggerData!)
         triggerContext.setTriggerParentLayout(triggerParentLayout: parentView)
+        triggerContext.setPresentViewController(presentViewController: viewController)
         // TODO 27/10/21: add closing provision
         setAnimations()
         triggerContext.onExit() { data in
@@ -60,9 +61,15 @@ class InAppTriggerScene: UIView {
             return
         }
         hostView.translatesAutoresizingMaskIntoConstraints = false
-
-        viewController.view.addSubview(parentView)
+        hostView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        hostView.backgroundColor = UIColor.white.withAlphaComponent(0.0)
         parentView.addSubview(hostView)
+        parentView.backgroundColor = UIColor.white.withAlphaComponent(0.0)
+        viewController.view.addSubview(parentView)
+
+        if inAppData!.cont != nil && inAppData!.cont!.bg != nil && inAppData!.cont!.bg!.g != nil {
+            parentView.addBlurredBackground(style: .light, alpha: inAppData!.cont!.bg!.g!.getRadius())
+        }
 
         startTime = Date()
         sendTriggerDisplayedEvent()

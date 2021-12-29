@@ -28,6 +28,8 @@ class ClickActionExecutor {
         passKeyValueToApp()
         updateUserProperties()
         executeExternal()
+        updateApp()
+        share()
 
         closeInApp()
         // TODO 01/11/21: Add In-App browser and AR
@@ -39,6 +41,40 @@ class ClickActionExecutor {
     private func closeInApp() {
         if let close = clickAction.close, close {
             triggerContext.closeInApp("CTA")
+        }
+    }
+
+    private func share() {
+        let share = clickAction.share
+
+        if share == nil {
+            return
+        }
+
+        // text to share
+        let text = share!["text"] ?? ""
+
+        // set up activity view controller
+        let textToShare = [text]
+        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = triggerContext.getTriggerParentLayout() // so that iPads won't crash
+
+        // exclude some activity types from the list (optional)
+        activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook]
+
+        // present the view controller
+        triggerContext.getPresentViewController()?.present(activityViewController, animated: true, completion: nil)
+    }
+
+    private func updateApp() {
+        let update = clickAction.updateApp
+
+        if update == nil || (update!.u?.isEmpty ?? true) {
+            return
+        }
+
+        if let url = URL(string: update!.u!) {
+            UIApplication.shared.open(url)
         }
     }
 
@@ -55,7 +91,6 @@ class ClickActionExecutor {
         if let url = URL(string: external!.u!) {
             UIApplication.shared.open(url)
         }
-
     }
 
     /**
@@ -84,6 +119,6 @@ class ClickActionExecutor {
         guard let onCTAListener = CooeeSDK.getInstance().getOnCTAListener() else {
             return
         }
-        onCTAListener(keyValues!)
+        onCTAListener.onCTAResponce(payload: keyValues!)
     }
 }

@@ -35,6 +35,7 @@ struct Constants {
     static let IDLE_TIME_IN_SECONDS = 30 * 60
     static let SYSTEM_DATA_PREFIX = "CE"
     static let TAG = "\(Date()) CooeeSDK - "
+    static let TIME_TO_WAIT_SECONDS = 6.0 ;
 
     // region All Server Endpoint
     static let BASE_URL = "https://api.sdk.letscooee.com"
@@ -44,6 +45,7 @@ struct Constants {
     static let keepAlive = "/v1/session/keepAlive"
     static let saveFCM = "/v1/user/setFirebaseToken"
     static let updateProfile = "/v1/user/update"
+    static let triggerDetails = "/v1/trigger/details/"
     // endregion
 
     // region Units

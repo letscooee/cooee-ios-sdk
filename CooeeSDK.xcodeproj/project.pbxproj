@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		75187468274CD6F000BF267F /* ElementsRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75187467274CD6F000BF267F /* ElementsRenderer.swift */; };
+		75187468274CD6F000BF267F /* ElementRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75187467274CD6F000BF267F /* ElementRenderer.swift */; };
 		7518746A274CE35E00BF267F /* ShapeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75187469274CE35E00BF267F /* ShapeRenderer.swift */; };
 		7518746C274DF8C100BF267F /* PartElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7518746B274DF8BF00BF267F /* PartElement.swift */; };
 		75187470274E343C00BF267F /* EmbeddedTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7518746F274E343C00BF267F /* EmbeddedTrigger.swift */; };
@@ -36,6 +36,14 @@
 		751E134B270F1771002CF442 /* PendingTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E134A270F1771002CF442 /* PendingTaskProcessor.swift */; };
 		751E134D270F22AB002CF442 /* AbstractPendingTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E134C270F22AB002CF442 /* AbstractPendingTaskProcessor.swift */; };
 		751E1350270F2F4D002CF442 /* letscooee.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 751E134E270F2F4B002CF442 /* letscooee.xcdatamodeld */; };
+		756BAA112754FE1300C7A84F /* Pods_Cooee_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6DD165866F91815E65CF7F1 /* Pods_Cooee_iOS.framework */; };
+		756BAA142754FE2300C7A84F /* Pods_CooeeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB800582A4AF75A48137B606 /* Pods_CooeeSDK.framework */; };
+		756BAA18275502D800C7A84F /* CooeeSDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 751BC77D26F3108A002D8358 /* CooeeSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		756BAA1E27577C3F00C7A84F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756BAA1D27577C3E00C7A84F /* NotificationService.swift */; };
+		756BAA212757873500C7A84F /* PushNotificationTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756BAA202757873500C7A84F /* PushNotificationTrigger.swift */; };
+		756BAA2327588C3600C7A84F /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756BAA2227588C3500C7A84F /* ImageDownloader.swift */; };
+		756BAA252758EFFE00C7A84F /* InAppTriggerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756BAA242758EFFE00C7A84F /* InAppTriggerHelper.swift */; };
+		756BAA272758FB8900C7A84F /* CustomDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756BAA262758FB8900C7A84F /* CustomDeserializer.swift */; };
 		75729E6E26F45828006EB506 /* InfoPlistReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E6D26F45828006EB506 /* InfoPlistReader.swift */; };
 		75729E7226F493AB006EB506 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7126F493AB006EB506 /* Event.swift */; };
 		75729E7426F497FD006EB506 /* TriggerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7326F497FD006EB506 /* TriggerData.swift */; };
@@ -75,6 +83,7 @@
 		75DD87CE271EF4D500A272BB /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87CD271EF4D500A272BB /* Font.swift */; };
 		75FA7DB627217B1F0060A425 /* InAppTriggerScene.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FA7DB527217B1F0060A425 /* InAppTriggerScene.xib */; };
 		75FA7DB9272982DC0060A425 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FA7DB8272982DC0060A425 /* ProfileViewController.swift */; };
+		75FA7DBD272A75AE0060A425 /* samplepayloadone.json in Resources */ = {isa = PBXBuildFile; fileRef = 75FA7DBC272A75AE0060A425 /* samplepayloadone.json */; };
 		AC0B81656327520249E6A428 /* UnitUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B865FAF31BB9A143DEA07 /* UnitUtil.swift */; };
 		AC0B81F74E2154808AECB63A /* ImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B832FF3BC900263507255 /* ImageRenderer.swift */; };
 		AC0B821F476A2352C203E056 /* ShapeElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8829F5B44FE4A5E23E66 /* ShapeElement.swift */; };
@@ -104,6 +113,7 @@
 		AC0B8B3175C8E3905037A0FE /* InAppTriggerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8AA3294AAAB6B9AF197A /* InAppTriggerScene.swift */; };
 		AC0B8BC022480FDA5C51B478 /* TriggerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8653FB4CB92835FDFF80 /* TriggerContext.swift */; };
 		AC0B8BC8CD85A03FB49FFA10 /* ButtonRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B814783FAE5CBC0031163 /* ButtonRenderer.swift */; };
+		AC0B8CE48A6861AA5B35C879 /* CooeeCTADelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8FE80388BD5A3A3517E9 /* CooeeCTADelegate.swift */; };
 		AC0B8D16CF18A09786614250 /* TextAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8ADD9332621266B45210 /* TextAlignment.swift */; };
 		AC0B8DBA39461B9A35158784 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8EA2BBEED727BA8558D9 /* Extensions.swift */; };
 		AC0B8E13066BD7C37F8B65E8 /* VideoElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B83A6575EA932ACCB0D2F /* VideoElement.swift */; };
@@ -111,8 +121,6 @@
 		AC0B8E5C2D7FCA755C9F8910 /* TextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B86FED7478E8BCDAAC99D /* TextElement.swift */; };
 		AC0B8E841AD56FEB009D2A89 /* SessionConcludeTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */; };
 		AC0B8F9ACEAD15992DF79CC2 /* EngagementTriggerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B804DEA9B9A9EB7E1FD5F /* EngagementTriggerHelper.swift */; };
-		C17CD8950D3CBB4254E3AEBD /* Pods_Cooee_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6DD165866F91815E65CF7F1 /* Pods_Cooee_iOS.framework */; };
-		E4B53257B1CEA855270672CE /* Pods_CooeeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB800582A4AF75A48137B606 /* Pods_CooeeSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,10 +147,23 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		756BAA172755027A00C7A84F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				756BAA18275502D800C7A84F /* CooeeSDK.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		5F6A13389002428C5D489894 /* Pods-CooeeSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.debug.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		5FC8F5B4B05D83373A281F12 /* Pods-Cooee iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS.debug.xcconfig"; path = "Target Support Files/Pods-Cooee iOS/Pods-Cooee iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		75187467274CD6F000BF267F /* ElementsRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsRenderer.swift; sourceTree = "<group>"; };
+		75187467274CD6F000BF267F /* ElementRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementRenderer.swift; sourceTree = "<group>"; };
 		75187469274CE35E00BF267F /* ShapeRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeRenderer.swift; sourceTree = "<group>"; };
 		7518746B274DF8BF00BF267F /* PartElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartElement.swift; sourceTree = "<group>"; };
 		7518746F274E343C00BF267F /* EmbeddedTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedTrigger.swift; sourceTree = "<group>"; };
@@ -180,6 +201,12 @@
 		751E134A270F1771002CF442 /* PendingTaskProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTaskProcessor.swift; sourceTree = "<group>"; };
 		751E134C270F22AB002CF442 /* AbstractPendingTaskProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractPendingTaskProcessor.swift; sourceTree = "<group>"; };
 		751E134F270F2F4C002CF442 /* letscooee.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = letscooee.xcdatamodel; sourceTree = "<group>"; };
+		756BAA1B275637A300C7A84F /* Cooee iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cooee iOS.entitlements"; sourceTree = "<group>"; };
+		756BAA1D27577C3E00C7A84F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		756BAA202757873500C7A84F /* PushNotificationTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationTrigger.swift; sourceTree = "<group>"; };
+		756BAA2227588C3500C7A84F /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
+		756BAA242758EFFE00C7A84F /* InAppTriggerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppTriggerHelper.swift; sourceTree = "<group>"; };
+		756BAA262758FB8900C7A84F /* CustomDeserializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDeserializer.swift; sourceTree = "<group>"; };
 		75729E6D26F45828006EB506 /* InfoPlistReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPlistReader.swift; sourceTree = "<group>"; };
 		75729E7126F493AB006EB506 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		75729E7326F497FD006EB506 /* TriggerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerData.swift; sourceTree = "<group>"; };
@@ -219,6 +246,7 @@
 		75DD87CD271EF4D500A272BB /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		75FA7DB527217B1F0060A425 /* InAppTriggerScene.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InAppTriggerScene.xib; sourceTree = "<group>"; };
 		75FA7DB8272982DC0060A425 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		75FA7DBC272A75AE0060A425 /* samplepayloadone.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = samplepayloadone.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.json; };
 		77F56F40EDA5A57940AA34BC /* Pods-Cooee iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS.release.xcconfig"; path = "Target Support Files/Pods-Cooee iOS/Pods-Cooee iOS.release.xcconfig"; sourceTree = "<group>"; };
 		7F5B66C3F5CF5A3CF236A788 /* Pods-CooeeSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.release.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.release.xcconfig"; sourceTree = "<group>"; };
 		AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionConcludeTaskProcessor.swift; sourceTree = "<group>"; };
@@ -257,6 +285,7 @@
 		AC0B8EA2BBEED727BA8558D9 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AC0B8ED273C05CC69495D48B /* PendingTaskService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingTaskService.swift; sourceTree = "<group>"; };
 		AC0B8F1A3240B22206AC68B6 /* PendingTaskType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingTaskType.swift; sourceTree = "<group>"; };
+		AC0B8FE80388BD5A3A3517E9 /* CooeeCTADelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CooeeCTADelegate.swift; sourceTree = "<group>"; };
 		BB800582A4AF75A48137B606 /* Pods_CooeeSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CooeeSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6DD165866F91815E65CF7F1 /* Pods_Cooee_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cooee_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -266,7 +295,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4B53257B1CEA855270672CE /* Pods_CooeeSDK.framework in Frameworks */,
+				756BAA142754FE2300C7A84F /* Pods_CooeeSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,7 +303,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C17CD8950D3CBB4254E3AEBD /* Pods_Cooee_iOS.framework in Frameworks */,
+				756BAA112754FE1300C7A84F /* Pods_Cooee_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +361,7 @@
 		751BC77F26F3108A002D8358 /* CooeeSDK */ = {
 			isa = PBXGroup;
 			children = (
+				756BAA1C27577C1600C7A84F /* notification */,
 				75DD87C5271ECCE500A272BB /* enums */,
 				75DD87912715759B00A272BB /* scheduler */,
 				751E1341270ED06E002CF442 /* database */,
@@ -354,6 +384,7 @@
 		751BC78D26F31162002D8358 /* Cooee iOS */ = {
 			isa = PBXGroup;
 			children = (
+				756BAA1B275637A300C7A84F /* Cooee iOS.entitlements */,
 				759E15F2271061520040F09C /* GoogleService-Info.plist */,
 				751BC78E26F31162002D8358 /* AppDelegate.swift */,
 				751BC79026F31162002D8358 /* SceneDelegate.swift */,
@@ -363,6 +394,7 @@
 				751BC79926F31165002D8358 /* LaunchScreen.storyboard */,
 				751BC79C26F31165002D8358 /* Info.plist */,
 				75FA7DB8272982DC0060A425 /* ProfileViewController.swift */,
+				75FA7DBC272A75AE0060A425 /* samplepayloadone.json */,
 			);
 			path = "Cooee iOS";
 			sourceTree = "<group>";
@@ -450,6 +482,22 @@
 			path = processor;
 			sourceTree = "<group>";
 		};
+		756BAA1C27577C1600C7A84F /* notification */ = {
+			isa = PBXGroup;
+			children = (
+				756BAA1D27577C3E00C7A84F /* NotificationService.swift */,
+			);
+			path = notification;
+			sourceTree = "<group>";
+		};
+		756BAA1F2757872400C7A84F /* push */ = {
+			isa = PBXGroup;
+			children = (
+				756BAA202757873500C7A84F /* PushNotificationTrigger.swift */,
+			);
+			path = push;
+			sourceTree = "<group>";
+		};
 		75729E6C26F45768006EB506 /* utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -464,6 +512,8 @@
 				75DD87C1271D9B1C00A272BB /* AnyValue.swift */,
 				AC0B8EA2BBEED727BA8558D9 /* Extensions.swift */,
 				AC0B86C18D2F7EE03C624F8B /* ui */,
+				756BAA2227588C3500C7A84F /* ImageDownloader.swift */,
+				AC0B8FE80388BD5A3A3517E9 /* CooeeCTADelegate.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -476,6 +526,7 @@
 				757E405926F9FF54008352F3 /* DeviceAuthenticationBody.swift */,
 				757E405B26FA08D5008352F3 /* DeviceAuthResponse.swift */,
 				AC0B885A897ACFB8EBF772D0 /* DictionaryPrototype.swift */,
+				756BAA262758FB8900C7A84F /* CustomDeserializer.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -521,6 +572,7 @@
 		75DD87A0271D6D1700A272BB /* trigger */ = {
 			isa = PBXGroup;
 			children = (
+				756BAA1F2757872400C7A84F /* push */,
 				75DD87A4271D6F0100A272BB /* blocks */,
 				75DD87A1271D6EA700A272BB /* elements */,
 				75729E7326F497FD006EB506 /* TriggerData.swift */,
@@ -621,7 +673,7 @@
 				AC0B832FF3BC900263507255 /* ImageRenderer.swift */,
 				AC0B898DBA7B1DE088837B41 /* TextRenderer.swift */,
 				AC0B814783FAE5CBC0031163 /* ButtonRenderer.swift */,
-				75187467274CD6F000BF267F /* ElementsRenderer.swift */,
+				75187467274CD6F000BF267F /* ElementRenderer.swift */,
 				75187469274CE35E00BF267F /* ShapeRenderer.swift */,
 			);
 			path = renderer;
@@ -653,6 +705,7 @@
 				AC0B8C6F71D493FD0E2871F2 /* inapp */,
 				AC0B804DEA9B9A9EB7E1FD5F /* EngagementTriggerHelper.swift */,
 				AC0B888C98F1D87FF05F204A /* action */,
+				756BAA242758EFFE00C7A84F /* InAppTriggerHelper.swift */,
 			);
 			path = trigger;
 			sourceTree = "<group>";
@@ -706,10 +759,11 @@
 			buildConfigurationList = 751BC7B326F31165002D8358 /* Build configuration list for PBXNativeTarget "Cooee iOS" */;
 			buildPhases = (
 				F08EEB1D9951D9869E98CCB5 /* [CP] Check Pods Manifest.lock */,
+				756BAA172755027A00C7A84F /* CopyFiles */,
 				751BC78826F31162002D8358 /* Sources */,
 				751BC78926F31162002D8358 /* Frameworks */,
 				751BC78A26F31162002D8358 /* Resources */,
-				558C32F477C5E194243002DA /* [CP] Embed Pods Frameworks */,
+				5CFC774A00B8A139651B704F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -841,6 +895,7 @@
 				751BC79B26F31165002D8358 /* LaunchScreen.storyboard in Resources */,
 				759E15F3271061520040F09C /* GoogleService-Info.plist in Resources */,
 				751BC79826F31165002D8358 /* Assets.xcassets in Resources */,
+				75FA7DBD272A75AE0060A425 /* samplepayloadone.json in Resources */,
 				751BC79626F31162002D8358 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -869,7 +924,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		558C32F477C5E194243002DA /* [CP] Embed Pods Frameworks */ = {
+		5CFC774A00B8A139651B704F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -939,13 +994,16 @@
 			files = (
 				75A098122707132100C2057B /* CooeeBootstrap.swift in Sources */,
 				75DD87CA271EE39700A272BB /* BaseTextElement.swift in Sources */,
+				756BAA1E27577C3F00C7A84F /* NotificationService.swift in Sources */,
 				751E1325270C350C002CF442 /* SessionManager.swift in Sources */,
 				75DD87C0271D822600A272BB /* BrowserContent.swift in Sources */,
 				75729E8526F9BA27006EB506 /* DevicePropertyCollector.swift in Sources */,
 				75729E7826F4C131006EB506 /* LocalStorageHelper.swift in Sources */,
+				756BAA212757873500C7A84F /* PushNotificationTrigger.swift in Sources */,
 				75DD87CE271EF4D500A272BB /* Font.swift in Sources */,
 				757E405C26FA08D5008352F3 /* DeviceAuthResponse.swift in Sources */,
 				7518746A274CE35E00BF267F /* ShapeRenderer.swift in Sources */,
+				756BAA252758EFFE00C7A84F /* InAppTriggerHelper.swift in Sources */,
 				751E1329270C7074002CF442 /* DateUtil.swift in Sources */,
 				75DD87CC271EF4BA00A272BB /* Alignment.swift in Sources */,
 				751BC7DA26F35E32002D8358 /* AppInfo.swift in Sources */,
@@ -978,6 +1036,7 @@
 				75DD87A3271D6EDB00A272BB /* BaseElement.swift in Sources */,
 				75729E7D26F87593006EB506 /* WebService.swift in Sources */,
 				757E405826F9FA16008352F3 /* BaseHTTPService.swift in Sources */,
+				756BAA272758FB8900C7A84F /* CustomDeserializer.swift in Sources */,
 				75DD87982715927B00A272BB /* PendingTaskJobProcessor.swift in Sources */,
 				75729E6E26F45828006EB506 /* InfoPlistReader.swift in Sources */,
 				75DD87AC271D76E400A272BB /* Glossy.swift in Sources */,
@@ -991,8 +1050,9 @@
 				75DD87A6271D6F2400A272BB /* Background.swift in Sources */,
 				AC0B843D6FCF6D51FBCA7FD7 /* ProfileTaskProcessor.swift in Sources */,
 				AC0B874545303FDF69FF4E95 /* DictionaryPrototype.swift in Sources */,
-				75187468274CD6F000BF267F /* ElementsRenderer.swift in Sources */,
+				75187468274CD6F000BF267F /* ElementRenderer.swift in Sources */,
 				75DD87B6271D7D2000A272BB /* Shadow.swift in Sources */,
+				756BAA2327588C3600C7A84F /* ImageDownloader.swift in Sources */,
 				75DD87B0271D787900A272BB /* Border.swift in Sources */,
 				AC0B83940A8AA5D45A0E64D9 /* EventTaskProcessor.swift in Sources */,
 				AC0B850DFCDC2005C3A115B0 /* PushTokenTaskProcessor.swift in Sources */,
@@ -1027,6 +1087,7 @@
 				AC0B82977F7EFDA50155FEC3 /* ClickActionExecutor.swift in Sources */,
 				AC0B8B26F975F50E0AC0F12F /* PermissionType.swift in Sources */,
 				AC0B821F476A2352C203E056 /* ShapeElement.swift in Sources */,
+				AC0B8CE48A6861AA5B35C879 /* CooeeCTADelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1233,6 +1294,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 10001;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 26TM6S5QFS;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1245,6 +1307,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.letscooee.CooeeSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1261,6 +1324,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 10001;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 26TM6S5QFS;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1273,6 +1337,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.letscooee.CooeeSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1288,6 +1353,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Cooee iOS/Cooee iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 26TM6S5QFS;
 				INFOPLIST_FILE = "Cooee iOS/Info.plist";
@@ -1308,6 +1374,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Cooee iOS/Cooee iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 26TM6S5QFS;
 				INFOPLIST_FILE = "Cooee iOS/Info.plist";

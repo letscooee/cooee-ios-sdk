@@ -66,6 +66,16 @@ extension UIView {
         let rotation = self.transform.rotated(by: radians)
         self.transform = rotation
     }
+
+    func addBlurredBackground(style: UIBlurEffect.Style, alpha: CGFloat) {
+        let blurEffect = UIBlurEffect(style: style)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.frame = self.frame
+        //blurView.alpha = 0.8 //alpha*10/100
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.addSubview(blurView)
+        self.sendSubviewToBack(blurView)
+    }
 }
 
 extension Color {
@@ -77,29 +87,7 @@ extension Color {
        - alpha: alpha value to be added in colour
      */
     init(hex: String, alpha: Double = 100) {
-        var hexString = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
-        var int: UInt64 = 0
-
-        Scanner(string: hexString).scanHexInt64(&int)
-
-        let r, g, b: UInt64
-        switch hexString.count {
-            case 3: // RGB (12-bit)
-                (r, g, b) = ((int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
-            case 6: // RGB (24-bit)
-                (r, g, b) = ((int >> 16) & 0xFF, (int >> 8) & 0xFF, int & 0xFF)
-            case 8: // ARGB (32-bit)
-                (r, g, b) = (int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
-            default:
-                (r, g, b) = (1, 1, 0)
-        }
-
-        self.init(
-                red: Double(r) / 255,
-                green: Double(b) / 255,
-                blue: Double(g) / 255,
-                opacity: Double(alpha) / 100
-        )
+        self.init(UIColor(hexString: hex,(alpha/100)))
     }
 }
 
@@ -130,6 +118,9 @@ public extension View {
     }
 
     func height(_ height: CGFloat) -> some View {
+        self.frame(height: height)
+    }
+    func align(_ height: CGFloat) -> some View {
         self.frame(height: height)
     }
 

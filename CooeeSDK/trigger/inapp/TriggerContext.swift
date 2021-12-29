@@ -13,11 +13,7 @@ import UIKit
  - Since: 0.1.0
  */
 class TriggerContext {
-
-    private var triggerData: TriggerData?
-    private var triggerParentLayout: UIView?
-    private var closedEventProps = [String: Any]()
-    private var callback: ((_ result: [String: Any]?) -> ())? = nil
+    // MARK: Public
 
     public func getTriggerData() -> TriggerData? {
         triggerData
@@ -47,4 +43,20 @@ class TriggerContext {
     public func getClosedEventProps() -> [String: Any]{
         closedEventProps
     }
+
+    public func getPresentViewController() -> UIViewController? {
+        presentViewController
+    }
+
+    public func setPresentViewController(presentViewController: UIViewController) {
+        self.presentViewController = presentViewController
+    }
+
+    // MARK: Private
+
+    private var triggerData: TriggerData?
+    private var triggerParentLayout: UIView?
+    private var closedEventProps = [String: Any]()
+    private var callback: ((_ result: [String: Any]?) -> ())?
+    private var presentViewController: UIViewController?
 }

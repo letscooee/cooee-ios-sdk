@@ -32,18 +32,25 @@ struct TextRenderer: View {
 
             let textColour: Color = child.getPartColour() ?? parentTextElement.getColour() ?? Color(hex: "#000000")
             let font = parentTextElement.getFont()
+            let alignment = parentTextElement.getSwiftUIAlignment()
 
-            let temp = child.getPartText().trimmingCharacters(in: .whitespacesAndNewlines)
+            let last1 = Array(child.getPartText())
+            let newString: String? = Character(extendedGraphemeClusterLiteral: Array(last1)[last1.count - 1]).isNewline ?
+                    String(child.getPartText().dropLast(1))
+                    :
+                    child.getPartText()
+
+            let temp = newString!.trimmingCharacters(in: .whitespacesAndNewlines)
 
             if temp.count > 0 {
-                Text(child.getPartText())
+                Text(newString!)
                         .foregroundColor(textColour)
                         .font(font)
                         .bold(child.isBold())
                         .italic(child.isItalic())
                         .underline(child.addUnderLine())
                         .strikethrough(child.addStrikeThrough())
-                        .modifier(AbstractInAppRenderer(elementData: parentTextElement, triggerContext: triggerContext))
+                        .frame(alignment: alignment)
             }
         }
     }
