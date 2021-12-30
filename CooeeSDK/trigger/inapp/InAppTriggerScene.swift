@@ -44,7 +44,7 @@ class InAppTriggerScene: UIView {
         if self.inAppData == nil {
             throw CustomError.EmptyInAppData
         }
-        updateDeviceOrientation(inAppData!.getOrientation())
+        //updateDeviceOrientation(inAppData!.getOrientation()) // Skipping orientation lock in 1.3.0 release
         triggerContext.setTriggerData(triggerData: triggerData!)
         triggerContext.setTriggerParentLayout(triggerParentLayout: parentView)
         triggerContext.setPresentViewController(presentViewController: viewController)
@@ -137,6 +137,6 @@ class InAppTriggerScene: UIView {
         })
 
         // revert device to previous device orientation
-        updateDeviceOrientation(deviceDefaultOrientation)
+        //updateDeviceOrientation(deviceDefaultOrientation) // Skipping orientation lock in 1.3.0 release
     }
 }
