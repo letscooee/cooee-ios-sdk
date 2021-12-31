@@ -29,7 +29,6 @@ struct Font: HandyJSON {
     public func getFont(for partElement: PartElement) -> SwiftUI.Font {
         var font = SwiftUI.Font.system(size: getSize(), design: .default)
 
-
         if ff != nil {
             font = SwiftUI.Font.custom(ff!, size: getSize())
         }
@@ -52,8 +51,12 @@ struct Font: HandyJSON {
 
     private static let DEFAULT_SIZE: CGFloat = UIFont.systemFontSize
 
+    /**
+     Process ``ft`` and get font from storage
+     - Parameter partElement: Instance of <code>PartElement</code> whose style need to be updated
+     - Returns: Instance of <code>PartElement</code> whose style need to be updated
+     */
     private func processTypeFace(for partElement: PartElement) -> SwiftUI.Font? {
-
         let font = checkForSystemFont()
 
         if font != nil {
@@ -69,18 +72,34 @@ struct Font: HandyJSON {
         UIFont.register(from: fontFile)
 
         return SwiftUI.Font.custom(tf!, size: getSize())
-
     }
 
+    /**
+     Access and check ``tf`` in ``UIFont.familyNames`` list
+
+     - Returns: Optional ``SwiftUI.Font`` if font is available, Otherwise ``null``
+     */
     private func checkForSystemFont() -> SwiftUI.Font? {
         for family in UIFont.familyNames {
             if family.caseInsensitiveCompare(tf!) == .orderedSame {
                 return SwiftUI.Font.custom(family, size: getSize())
             }
         }
+
         return nil
     }
 
+    /**
+     Generates font name with the help of part style and search related file in storage
+            Lowercase & trim ``Font.ft`` e.g. poppins<br/>
+            |
+            |- Check if part is Bold and add 'bold' in font name eg. poppins-bold
+            |
+            |- Check if part is Italic and add 'italic' in font name eg. poppins-italic, poppins-bolditalic
+
+     - Parameter partElement: Instance of <code>PartElement</code> whose style need to be updated
+     - Returns: Optional ``SwiftUI.Font`` if file is present, Otherwise ``null``
+     */
     private func fontWithCustomStyle(_ partElement: PartElement) -> SwiftUI.Font? {
         var typeFace = "\(tf!.lowercased().trimmingCharacters(in: .whitespacesAndNewlines))-"
 
@@ -103,6 +122,12 @@ struct Font: HandyJSON {
         return SwiftUI.Font.custom(typeFace, size: getSize())
     }
 
+    /**
+     Generates ``URL`` from file name
+
+     - Parameter name: Name of the file for which path need to be create
+     - Returns: ``URL`` of the given file
+     */
     private func getFontPath(of name: String) -> URL {
         let fontDir = FontProcessor.getFontsStorageDirectory()
         return fontDir.appendingPathComponent("\(tf!).ttf")
