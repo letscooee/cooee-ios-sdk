@@ -47,12 +47,12 @@ class CooeeBootstrap: NSObject {
             return
         }
 
-        if notificationClickAction == 1 {
+        if launchType == 1 {
             self.launchInApp(with: triggerData)
-        } else if notificationClickAction == 2 {
+        } else if launchType == 2 {
             // Launch Self AR
             //EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
-        } else if notificationClickAction == 3 {
+        } else if launchType == 3 {
             // Launch Native AR
         }
 
