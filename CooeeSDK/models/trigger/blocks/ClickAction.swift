@@ -16,11 +16,12 @@ struct ClickAction: HandyJSON {
 
     var iab: BrowserContent?
     var ext: BrowserContent?
-    var updateApp: BrowserContent?
-    var prompt: PermissionType?
+    var updt: BrowserContent?
+    var pmpt: PermissionType?
     var up: [String: Any]?
     var kv: [String: Any]?
     var share: [String: Any]?
     var close: Bool? = false
-    var appAR: AppAR?
+    var ntvAR: AppAR?
+    var open: Int?
 }

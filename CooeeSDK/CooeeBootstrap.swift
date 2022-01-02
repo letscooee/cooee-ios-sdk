@@ -36,12 +36,35 @@ class CooeeBootstrap: NSObject {
 
     func notificationClicked(_ triggerData: TriggerData) {
         NotificationService.sendEvent("CE Notification Clicked", withTriggerData: triggerData)
-        EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
+
+        guard let notificationClickAction = triggerData.getPushNotification()?.getClickAction() else {
+            self.launchInApp(with: triggerData)
+            return
+        }
+
+        guard  let launchType = notificationClickAction.open else {
+            self.launchInApp(with: triggerData)
+            return
+        }
+
+        if notificationClickAction == 1 {
+            self.launchInApp(with: triggerData)
+        } else if notificationClickAction == 2 {
+            // Launch Self AR
+            //EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
+        } else if notificationClickAction == 3 {
+            // Launch Native AR
+        }
+
     }
 
     // MARK: Private
 
-    /**
+    private func launchInApp(with triggerData: TriggerData) {
+        EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
+    }
+
+/**
      Registers custom didReceiveRemoteNotification on current appDelegate
      */
     private func swizzleDidReceiveRemoteNotification() {

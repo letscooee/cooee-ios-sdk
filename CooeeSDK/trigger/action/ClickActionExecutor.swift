@@ -82,7 +82,7 @@ class ClickActionExecutor {
     }
 
     private func updateApp() {
-        let update = clickAction.updateApp
+        let update = clickAction.updt
 
         if update == nil || (update!.u?.isEmpty ?? true) {
             return
