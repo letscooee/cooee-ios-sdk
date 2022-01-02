@@ -23,13 +23,20 @@ class CooeeBootstrap: NSObject {
         self.swizzleDidReceiveRemoteNotification()
         _ = CooeeFactory.shared
         _ = AppLifeCycle.shared
-        
+
         DispatchQueue.main.async {
             self.registerFirebase()
             self.updateFirebaseToken()
             self.startPendingTaskJob()
             FontProcessor.checkAndUpdateBrandFonts()
         }
+    }
+
+    // MARK: Internal
+
+    func notificationClicked(_ triggerData: TriggerData) {
+        NotificationService.sendEvent("CE Notification Clicked", withTriggerData: triggerData)
+        EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
     }
 
     // MARK: Private
@@ -117,8 +124,17 @@ extension CooeeBootstrap: UNUserNotificationCenterDelegate {
             return
         }
 
-        NotificationService.sendEvent("CE Notification Clicked", withTriggerData: triggerData!)
-        EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData!)
+        switch response.actionIdentifier {
+            case UNNotificationDismissActionIdentifier:
+                NotificationService.sendEvent("CE Notification Cancelled", withTriggerData: triggerData!)
+                break
+            case UNNotificationDefaultActionIdentifier:
+                self.notificationClicked(triggerData!)
+                break
+            default:
+                // Handle other actions
+                break
+        }
 
         completionHandler()
     }
