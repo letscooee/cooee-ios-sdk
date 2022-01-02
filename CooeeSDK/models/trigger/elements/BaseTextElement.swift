@@ -53,18 +53,33 @@ class BaseTextElement: BaseElement {
         }
     }
 
-    public func getSwiftUIAlignment() -> SwiftUI.Alignment {
+    public func getSwiftUIHorizontalAlignment() -> SwiftUI.HorizontalAlignment {
         switch alg {
             case 0:
-                return .center
-            case 1:
                 return .leading
+            case 1:
+                return .center
             case 2:
                 return .trailing
             case .none:
-                return .center
+                return .leading
             case .some:
+                return .leading
+        }
+    }
+    
+    public func getSwiftUIAlignment() -> SwiftUI.Alignment {
+        switch alg {
+            case 0:
+                return .leading
+            case 1:
                 return .center
+            case 2:
+                return .trailing
+            case .none:
+                return .leading
+            case .some:
+                return .leading
         }
     }
 

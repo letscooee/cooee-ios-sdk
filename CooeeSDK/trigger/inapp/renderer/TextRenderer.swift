@@ -28,29 +28,37 @@ struct TextRenderer: View {
     let triggerContext: TriggerContext
 
     var body: some View {
-        ForEach(children) { child in
 
-            let textColour: Color = child.getPartColour() ?? parentTextElement.getColour() ?? Color(hex: "#000000")
-            let font = parentTextElement.getFont()
-            let alignment = parentTextElement.getSwiftUIAlignment()
+        let horizontalAlignment = parentTextElement.getSwiftUIHorizontalAlignment()
 
-            let last1 = Array(child.getPartText())
-            let newString: String? = Character(extendedGraphemeClusterLiteral: Array(last1)[last1.count - 1]).isNewline ?
-                    String(child.getPartText().dropLast(1))
-                    :
-                    child.getPartText()
+        VStack(alignment: horizontalAlignment) {
+            ForEach(children) { child in
 
-            let temp = newString!.trimmingCharacters(in: .whitespacesAndNewlines)
+                let textColour: Color = child.getPartColour() ?? parentTextElement.getColour() ?? Color(hex: "#000000")
+                let font = parentTextElement.getFont()
+                let alignment = parentTextElement.getSwiftUIAlignment()
 
-            if temp.count > 0 {
-                Text(newString!)
-                        .foregroundColor(textColour)
-                        .font(font)
-                        .bold(child.isBold())
-                        .italic(child.isItalic())
-                        .underline(child.addUnderLine())
-                        .strikethrough(child.addStrikeThrough())
-                        .frame(alignment: alignment)
+                let last1 = Array(child.getPartText())
+                let newString: String? = Character(extendedGraphemeClusterLiteral: Array(last1)[last1.count - 1]).isNewline ?
+                        String(child.getPartText().dropLast(1))
+                        :
+                        child.getPartText()
+
+                let temp = newString!.trimmingCharacters(in: .whitespacesAndNewlines)
+
+                if temp.count > 0 {
+                    Text(newString!)
+                            .foregroundColor(textColour)
+                            .font(font)
+                            .bold(child.isBold())
+                            .italic(child.isItalic())
+                            .underline(child.addUnderLine())
+                            .strikethrough(child.addStrikeThrough())
+                            .if(parentTextElement.getCalculatedWidth() != nil) {
+                                $0.frame(width: parentTextElement.getCalculatedWidth()!, alignment: alignment)
+                            }
+                            .frame(alignment: alignment)
+                }
             }
         }
     }

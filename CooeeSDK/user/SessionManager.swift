@@ -66,7 +66,7 @@ class SessionManager {
     public func conclude() {
         var requestData = [String: Any]()
         requestData["sessionID"] = getCurrentSessionID()
-        requestData["occurred"] = Date()
+        requestData["occurred"] = DateUtils.formatDateToUTCString(date:Date())
         LocalStorageHelper.remove(key: Constants.STORAGE_ACTIVE_TRIGGER)
         CooeeFactory.shared.safeHttpService.sendSessionConcludedEvent(requestData: requestData)
         destroySession()

@@ -4,6 +4,7 @@
 
 import Foundation
 import UIKit
+import SafariServices
 
 /**
  Process ClickAction of the element and work accordingly
@@ -28,13 +29,27 @@ class ClickActionExecutor {
         passKeyValueToApp()
         updateUserProperties()
         executeExternal()
+        launchInAppBrowser()
         updateApp()
         share()
 
         closeInApp()
-        // TODO 01/11/21: Add In-App browser and AR
+        // TODO 21/12/21: Add AR
     }
 
+    /**
+     Check for InApp Browser data and launch InApp Browser using SafariService
+     */
+    private func launchInAppBrowser(){
+        if (clickAction.iab == nil || clickAction.iab!.u == nil){
+            return
+        }
+        
+        let url = URL(string: clickAction.iab!.u!)!
+        let safariVC = SFSafariViewController(url: url)
+        triggerContext.getPresentViewController()!.present(safariVC, animated: true, completion: nil)
+    }
+    
     /**
      Close InApp and give control to InAppScene
      */
@@ -119,6 +134,6 @@ class ClickActionExecutor {
         guard let onCTAListener = CooeeSDK.getInstance().getOnCTAListener() else {
             return
         }
-        onCTAListener.onCTAResponce(payload: keyValues!)
+        onCTAListener.onCTAResponse(payload: keyValues!)
     }
 }

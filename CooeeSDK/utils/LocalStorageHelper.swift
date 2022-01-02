@@ -28,7 +28,7 @@ class LocalStorageHelper {
     }
 
     static func getInt(key: String, defaultValue: Int?) -> Int {
-        return UserDefaults.standard.value(forKey: key) as! Int
+        return UserDefaults.standard.value(forKey: key) as? Int ?? 0
     }
 
     static func putBoolean(key: String, value: Bool) {
@@ -87,5 +87,18 @@ class LocalStorageHelper {
 
     static func remove(key: String) {
         UserDefaults.standard.set(nil, forKey: key)
+    }
+
+    static func getDictionary(_ key: String, defaultValue: [String: Any]?) -> [String: Any]? {
+        let rawString = getString(key: key)
+        if rawString == nil {
+            return nil
+        }
+
+        return rawString!.convertToDictionary()
+    }
+
+    static func putDictionary(_ data: [String: Any], for key: String) {
+        putString(key: key, value: String(data: data.percentEncoded()!, encoding: .utf8)!)
     }
 }

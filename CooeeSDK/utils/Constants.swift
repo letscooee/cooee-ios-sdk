@@ -10,7 +10,7 @@ import Foundation
 /**
  The Constants struct contains all the constants required by SDK
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
 struct Constants {
 
@@ -28,6 +28,7 @@ struct Constants {
     static let STORAGE_DEVICE_UUID = "cooee_device_uuid"
     static let STORAGE_ACTIVATED_TRIGGERS="activated_triggers"
     static let STORAGE_ACTIVE_TRIGGER = "active_trigger"
+    static let STORAGE_SCREENSHOT_SYNC_TIME = "screenshot_sync_time"
     // endregion
 
     // KEEP_ALIVE_TIME_IN_MS will be in SECONDS
@@ -36,6 +37,8 @@ struct Constants {
     static let SYSTEM_DATA_PREFIX = "CE"
     static let TAG = "\(Date()) CooeeSDK - "
     static let TIME_TO_WAIT_SECONDS = 6.0 ;
+    static let FONT_REFRESH_INTERVAL_DAYS = 7
+    static let SCREENSHOT_SEND_INTERVAL_HOURS = 6
 
     // region All Server Endpoint
     static let BASE_URL = "https://api.sdk.letscooee.com"
@@ -46,6 +49,9 @@ struct Constants {
     static let saveFCM = "/v1/user/setFirebaseToken"
     static let updateProfile = "/v1/user/update"
     static let triggerDetails = "/v1/trigger/details/"
+    static let appConfig = "/v1/app/config/"
+    static let uploadScreenshot = "/v1/app/uploadScreenshot"
+    
     // endregion
 
     // region Units

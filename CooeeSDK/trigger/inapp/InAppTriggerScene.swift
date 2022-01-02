@@ -15,22 +15,23 @@ import SwiftUI
  */
 class InAppTriggerScene: UIView {
     var parentView: UIView!
-    private var container: UIView?
 
     private var triggerData: TriggerData?
     private var inAppData: InAppTrigger?
 
     private var sentryHelper: SentryHelper?
     private var triggerContext = TriggerContext()
-    private let exit = CATransition()
     public static let instance = InAppTriggerScene()
     private var startTime: Date? = nil
+
+    private var deviceDefaultOrientation: UIInterfaceOrientation = UIInterfaceOrientation.portrait
 
     private func commonInit() {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
         _ = nib.instantiate(withOwner: self, options: nil).first as! UIView
         parentView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        parentView.insetsLayoutMarginsFromSafeArea = false
         parentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
 
@@ -43,36 +44,46 @@ class InAppTriggerScene: UIView {
         if self.inAppData == nil {
             throw CustomError.EmptyInAppData
         }
-
-        container = UIView()
-        container?.frame = parentView.frame
+        //updateDeviceOrientation(inAppData!.getOrientation()) // Skipping orientation lock in 1.3.0 release
         triggerContext.setTriggerData(triggerData: triggerData!)
         triggerContext.setTriggerParentLayout(triggerParentLayout: parentView)
         triggerContext.setPresentViewController(presentViewController: viewController)
-        // TODO 27/10/21: add closing provision
-        setAnimations()
+
         triggerContext.onExit() { data in
             self.finish()
         }
 
-        let host = UIHostingController(rootView: ContainerRenderer(inAppTrigger: inAppData!, triggerContext))
+        let host = UIHostingController(rootView: ContainerRenderer(inAppTrigger: inAppData!, triggerContext).edgesIgnoringSafeArea(.all))
         guard let hostView = host.view else {
             CooeeFactory.shared.sentryHelper.capture(message: "Loading SwiftUI failed")
             return
         }
+        hostView.insetsLayoutMarginsFromSafeArea = false
         hostView.translatesAutoresizingMaskIntoConstraints = false
         hostView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         hostView.backgroundColor = UIColor.white.withAlphaComponent(0.0)
         parentView.addSubview(hostView)
         parentView.backgroundColor = UIColor.white.withAlphaComponent(0.0)
-        viewController.view.addSubview(parentView)
-
         if inAppData!.cont != nil && inAppData!.cont!.bg != nil && inAppData!.cont!.bg!.g != nil {
             parentView.addBlurredBackground(style: .light, alpha: inAppData!.cont!.bg!.g!.getRadius())
         }
+        setAnimations()
+        viewController.view.addSubview(parentView)
+
 
         startTime = Date()
         sendTriggerDisplayedEvent()
+    }
+
+
+    private func updateDeviceOrientation(_ orientation: UIInterfaceOrientation) {
+
+        if let currentOrientation = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.windowScene?.interfaceOrientation {
+            deviceDefaultOrientation = currentOrientation
+        }
+
+        UIDevice.current.setValue(orientation.rawValue, forKey: "orientation")
+        UIViewController.attemptRotationToDeviceOrientation()
     }
 
     private func sendTriggerDisplayedEvent() {
@@ -95,13 +106,8 @@ class InAppTriggerScene: UIView {
         enter.repeatCount = 0
         enter.type = CATransitionType.moveIn
         enter.subtype = enterAnimation
-        container?.layer.add(enter, forKey: nil)
-
-
-        exit.duration = 0.5
-        exit.repeatCount = 0
-        exit.type = CATransitionType.push
-        exit.subtype = exitAnimation
+        enter.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        parentView?.layer.add(enter, forKey: nil)
     }
 
     private func finish() {
@@ -112,6 +118,25 @@ class InAppTriggerScene: UIView {
         var event = Event(eventName: "CE Trigger Closed", properties: closedEventProps)
         event.withTrigger(triggerData: triggerData!)
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)
-        parentView!.removeFromSuperview()
+
+        // exit animation
+        let exitAnimation = inAppData!.cont?.animation?.exit ?? .SLIDE_OUT_LEFT
+        UIView.animate(withDuration: 0.5, animations: {
+            switch exitAnimation {
+                case .SLIDE_OUT_LEFT:
+                    self.parentView.frame = CGRect(x: (0 - UIScreen.main.bounds.width), y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                case .SLIDE_OUT_TOP:
+                    self.parentView.frame = CGRect(x: 0, y: (0 - UIScreen.main.bounds.height), width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                case .SLIDE_OUT_DOWN:
+                    return self.parentView.frame = CGRect(x: 0, y: (0 + UIScreen.main.bounds.height), width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                case .SLIDE_OUT_RIGHT:
+                    self.parentView.frame = CGRect(x: (0 + UIScreen.main.bounds.width), y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            }
+        }, completion: { (finished: Bool) in
+            self.parentView.removeFromSuperview()
+        })
+
+        // revert device to previous device orientation
+        //updateDeviceOrientation(deviceDefaultOrientation) // Skipping orientation lock in 1.3.0 release
     }
 }

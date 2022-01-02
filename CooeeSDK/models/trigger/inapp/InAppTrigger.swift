@@ -10,11 +10,29 @@ import HandyJSON
  - Since: 0.1.0
  */
 class InAppTrigger: HandyJSON {
+    // MARK: Lifecycle
+
+    required init() {}
+
+    // MARK: Public
+
+    public func getOrientation() -> UIInterfaceOrientation {
+        switch o {
+        case 1:
+            return UIInterfaceOrientation.portrait
+        case 2:
+            return UIInterfaceOrientation.landscapeLeft
+
+        case .none:
+            return UIInterfaceOrientation.portrait
+        case .some:
+            return UIInterfaceOrientation.portrait
+        }
+    }
+
+    // MARK: Internal
 
     var cont: Container?
     var elems: [[String: Any]]?
-
-    required init() {
-
-    }
+    private var o: Int?
 }

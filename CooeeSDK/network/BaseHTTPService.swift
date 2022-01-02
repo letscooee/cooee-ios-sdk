@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 /**
   A base or lower level HTTP service which simply hits the backend for given request. It does not perform
@@ -14,10 +15,9 @@ import Foundation
  Make sure these methods are not called in the main-thread.
 
   - Author: Ashish Gaikwad
-  - Since: 0.1.0
+  - Since: 1.3.0
   */
 class BaseHTTPService {
-
     class CommonHeaders {
         // MARK: Lifecycle
 
@@ -50,6 +50,8 @@ class BaseHTTPService {
     static let shared = BaseHTTPService()
 
     let webService = WebService.shared
+    let externalApiClient = ExternalApiClient.shared
+    let publicApiClient = PublicApiClient.shared
     let commonHeaders = CommonHeaders()
 
     func sendFirebaseToken(token: String?) throws {
@@ -101,5 +103,18 @@ class BaseHTTPService {
         let response = try webService.getResponse(fromURL: "\(Constants.triggerDetails)\(triggerId)", method: .GET, params: [String: Any](),
                 header: commonHeaders.getDictionary())
         return response ?? [String: Any]()
+    }
+
+    func downloadFont(_ url: URL, atPath filePath: URL) throws {
+        try externalApiClient.downloadFile(webURL: url, filePath: filePath)
+    }
+
+    func getAppConfig(appID: String) throws -> [String: Any]? {
+        return try publicApiClient.getAppConfig(appID: appID)
+    }
+    
+    func uploadScreenshot(imageToUpload: UIImage, screenName: String) throws -> [String: Any]?{
+        let response = try publicApiClient.uploadImage(imageToUpload: imageToUpload, screenName: screenName, header: commonHeaders.getDictionary())
+        return response
     }
 }

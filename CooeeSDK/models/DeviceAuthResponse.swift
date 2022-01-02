@@ -9,10 +9,13 @@ import Foundation
 import HandyJSON
 
 /**
+ DeviceAuthResponse Holds successful response from server if device get register
+
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
 struct DeviceAuthResponse: Decodable, HandyJSON {
+
     var id: String?
     var deviceID: String?
     var sdkToken: String?

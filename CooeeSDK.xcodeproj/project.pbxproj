@@ -57,6 +57,11 @@
 		757E405A26F9FF54008352F3 /* DeviceAuthenticationBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757E405926F9FF54008352F3 /* DeviceAuthenticationBody.swift */; };
 		757E405C26FA08D5008352F3 /* DeviceAuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757E405B26FA08D5008352F3 /* DeviceAuthResponse.swift */; };
 		758660D626FAFA89006B40DC /* SDKInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758660D526FAFA89006B40DC /* SDKInfo.swift */; };
+		7599DCC32771EB0E002CEB1A /* FontProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7599DCC22771EB0E002CEB1A /* FontProcessor.swift */; };
+		7599DCC52771ECEF002CEB1A /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7599DCC42771ECEF002CEB1A /* AppFont.swift */; };
+		7599DCC82771FFDE002CEB1A /* ExternalApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7599DCC72771FFDE002CEB1A /* ExternalApiClient.swift */; };
+		7599DCCB277221BB002CEB1A /* PublicApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7599DCCA277221BB002CEB1A /* PublicApiClient.swift */; };
+		7599DCCE2772FE94002CEB1A /* ScreenShotUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7599DCCD2772FE93002CEB1A /* ScreenShotUtility.swift */; };
 		759E15F3271061520040F09C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 759E15F2271061520040F09C /* GoogleService-Info.plist */; };
 		75A0981027070FD800C2057B /* AppLifeCycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A0980F27070FD800C2057B /* AppLifeCycle.swift */; };
 		75A098122707132100C2057B /* CooeeBootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A098112707132100C2057B /* CooeeBootstrap.swift */; };
@@ -220,6 +225,11 @@
 		757E405926F9FF54008352F3 /* DeviceAuthenticationBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAuthenticationBody.swift; sourceTree = "<group>"; };
 		757E405B26FA08D5008352F3 /* DeviceAuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAuthResponse.swift; sourceTree = "<group>"; };
 		758660D526FAFA89006B40DC /* SDKInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKInfo.swift; sourceTree = "<group>"; };
+		7599DCC22771EB0E002CEB1A /* FontProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontProcessor.swift; sourceTree = "<group>"; };
+		7599DCC42771ECEF002CEB1A /* AppFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
+		7599DCC72771FFDE002CEB1A /* ExternalApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalApiClient.swift; sourceTree = "<group>"; };
+		7599DCCA277221BB002CEB1A /* PublicApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicApiClient.swift; sourceTree = "<group>"; };
+		7599DCCD2772FE93002CEB1A /* ScreenShotUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenShotUtility.swift; sourceTree = "<group>"; };
 		759E15F2271061520040F09C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75A0980F27070FD800C2057B /* AppLifeCycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLifeCycle.swift; sourceTree = "<group>"; };
 		75A098112707132100C2057B /* CooeeBootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeBootstrap.swift; sourceTree = "<group>"; };
@@ -361,6 +371,8 @@
 		751BC77F26F3108A002D8358 /* CooeeSDK */ = {
 			isa = PBXGroup;
 			children = (
+				7599DCCC2772FE74002CEB1A /* screenshot */,
+				7599DCC12771EAF5002CEB1A /* font */,
 				756BAA1C27577C1600C7A84F /* notification */,
 				75DD87C5271ECCE500A272BB /* enums */,
 				75DD87912715759B00A272BB /* scheduler */,
@@ -527,6 +539,7 @@
 				757E405B26FA08D5008352F3 /* DeviceAuthResponse.swift */,
 				AC0B885A897ACFB8EBF772D0 /* DictionaryPrototype.swift */,
 				756BAA262758FB8900C7A84F /* CustomDeserializer.swift */,
+				7599DCC42771ECEF002CEB1A /* AppFont.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -544,11 +557,45 @@
 		75729E7B26F87387006EB506 /* network */ = {
 			isa = PBXGroup;
 			children = (
+				7599DCC9277221A4002CEB1A /* internal */,
+				7599DCC62771FFC7002CEB1A /* external */,
 				75729E7C26F87593006EB506 /* WebService.swift */,
 				757E405726F9FA16008352F3 /* BaseHTTPService.swift */,
 				AC0B8B65ED15E2A6D74A0F03 /* SafeHTTPService.swift */,
 			);
 			path = network;
+			sourceTree = "<group>";
+		};
+		7599DCC12771EAF5002CEB1A /* font */ = {
+			isa = PBXGroup;
+			children = (
+				7599DCC22771EB0E002CEB1A /* FontProcessor.swift */,
+			);
+			path = font;
+			sourceTree = "<group>";
+		};
+		7599DCC62771FFC7002CEB1A /* external */ = {
+			isa = PBXGroup;
+			children = (
+				7599DCC72771FFDE002CEB1A /* ExternalApiClient.swift */,
+			);
+			path = external;
+			sourceTree = "<group>";
+		};
+		7599DCC9277221A4002CEB1A /* internal */ = {
+			isa = PBXGroup;
+			children = (
+				7599DCCA277221BB002CEB1A /* PublicApiClient.swift */,
+			);
+			path = internal;
+			sourceTree = "<group>";
+		};
+		7599DCCC2772FE74002CEB1A /* screenshot */ = {
+			isa = PBXGroup;
+			children = (
+				7599DCCD2772FE93002CEB1A /* ScreenShotUtility.swift */,
+			);
+			path = screenshot;
 			sourceTree = "<group>";
 		};
 		75DD87912715759B00A272BB /* scheduler */ = {
@@ -1028,6 +1075,7 @@
 				751E1350270F2F4D002CF442 /* letscooee.xcdatamodeld in Sources */,
 				75729E8126F8AD47006EB506 /* UserAuthService.swift in Sources */,
 				751E1348270EDEBD002CF442 /* PendingTaskDAO.swift in Sources */,
+				7599DCCB277221BB002CEB1A /* PublicApiClient.swift in Sources */,
 				75DD87C2271D9B1C00A272BB /* AnyValue.swift in Sources */,
 				75DD87AA271D6F9D00A272BB /* Gradient.swift in Sources */,
 				75DD8793271575EA00A272BB /* CooeeJobUtils.swift in Sources */,
@@ -1036,11 +1084,14 @@
 				75DD87A3271D6EDB00A272BB /* BaseElement.swift in Sources */,
 				75729E7D26F87593006EB506 /* WebService.swift in Sources */,
 				757E405826F9FA16008352F3 /* BaseHTTPService.swift in Sources */,
+				7599DCC82771FFDE002CEB1A /* ExternalApiClient.swift in Sources */,
+				7599DCC52771ECEF002CEB1A /* AppFont.swift in Sources */,
 				756BAA272758FB8900C7A84F /* CustomDeserializer.swift in Sources */,
 				75DD87982715927B00A272BB /* PendingTaskJobProcessor.swift in Sources */,
 				75729E6E26F45828006EB506 /* InfoPlistReader.swift in Sources */,
 				75DD87AC271D76E400A272BB /* Glossy.swift in Sources */,
 				75729E8326F9A34A006EB506 /* NetworkUtility.swift in Sources */,
+				7599DCCE2772FE94002CEB1A /* ScreenShotUtility.swift in Sources */,
 				758660D626FAFA89006B40DC /* SDKInfo.swift in Sources */,
 				AC0B830AA583B38E12F76E5C /* CooeeFactory.swift in Sources */,
 				AC0B85211B7F2B8520801AFF /* PendingTask.swift in Sources */,
@@ -1050,6 +1101,7 @@
 				75DD87A6271D6F2400A272BB /* Background.swift in Sources */,
 				AC0B843D6FCF6D51FBCA7FD7 /* ProfileTaskProcessor.swift in Sources */,
 				AC0B874545303FDF69FF4E95 /* DictionaryPrototype.swift in Sources */,
+				7599DCC32771EB0E002CEB1A /* FontProcessor.swift in Sources */,
 				75187468274CD6F000BF267F /* ElementRenderer.swift in Sources */,
 				75DD87B6271D7D2000A272BB /* Shadow.swift in Sources */,
 				756BAA2327588C3600C7A84F /* ImageDownloader.swift in Sources */,
@@ -1355,12 +1407,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Cooee iOS/Cooee iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 26TM6S5QFS;
 				INFOPLIST_FILE = "Cooee iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.letscooee.Cooee-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1376,12 +1430,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Cooee iOS/Cooee iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 26TM6S5QFS;
 				INFOPLIST_FILE = "Cooee iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.letscooee.Cooee-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

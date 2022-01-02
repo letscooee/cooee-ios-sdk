@@ -1,5 +1,5 @@
 //
-//  CooeeBootstarp.swift
+//  CooeeBootstrap.swift
 //  CooeeSDK
 //
 //  Created by Ashish Gaikwad on 01/10/21.
@@ -13,21 +13,22 @@ import Foundation
  A one time initializer class which initialises the Cooee SDK. This is used internally by the SDK
  and should be quick.
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
 class CooeeBootstrap: NSObject {
     // MARK: Lifecycle
 
     override public init() {
         super.init()
+        self.swizzleDidReceiveRemoteNotification()
         _ = CooeeFactory.shared
         _ = AppLifeCycle.shared
-
+        
         DispatchQueue.main.async {
             self.registerFirebase()
             self.updateFirebaseToken()
-            self.swizzleDidReceiveRemoteNotification()
             self.startPendingTaskJob()
+            FontProcessor.checkAndUpdateBrandFonts()
         }
     }
 
@@ -83,7 +84,9 @@ class CooeeBootstrap: NSObject {
 
 extension CooeeBootstrap: MessagingDelegate {
     public func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        print("Firebase registration token framework: \(fcmToken ?? "")")
+        var requestBody = [String: Any]()
+        requestBody["firebaseToken"] = fcmToken
+        CooeeFactory.shared.safeHttpService.updatePushToken(requestData: requestBody)
     }
 }
 
