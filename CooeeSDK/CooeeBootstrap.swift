@@ -23,7 +23,7 @@ class CooeeBootstrap: NSObject {
         self.swizzleDidReceiveRemoteNotification()
         _ = CooeeFactory.shared
         _ = AppLifeCycle.shared
-        
+
         DispatchQueue.main.async {
             self.registerFirebase()
             self.updateFirebaseToken()
@@ -32,9 +32,39 @@ class CooeeBootstrap: NSObject {
         }
     }
 
+    // MARK: Internal
+
+    func notificationClicked(_ triggerData: TriggerData) {
+        NotificationService.sendEvent("CE Notification Clicked", withTriggerData: triggerData)
+
+        guard let notificationClickAction = triggerData.getPushNotification()?.getClickAction() else {
+            self.launchInApp(with: triggerData)
+            return
+        }
+
+        guard  let launchType = notificationClickAction.open else {
+            self.launchInApp(with: triggerData)
+            return
+        }
+
+        if launchType == 1 {
+            self.launchInApp(with: triggerData)
+        } else if launchType == 2 {
+            // Launch Self AR
+            //EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
+        } else if launchType == 3 {
+            // Launch Native AR
+        }
+
+    }
+
     // MARK: Private
 
-    /**
+    private func launchInApp(with triggerData: TriggerData) {
+        EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
+    }
+
+/**
      Registers custom didReceiveRemoteNotification on current appDelegate
      */
     private func swizzleDidReceiveRemoteNotification() {
@@ -117,8 +147,17 @@ extension CooeeBootstrap: UNUserNotificationCenterDelegate {
             return
         }
 
-        NotificationService.sendEvent("CE Notification Clicked", withTriggerData: triggerData!)
-        EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData!)
+        switch response.actionIdentifier {
+            case UNNotificationDismissActionIdentifier:
+                NotificationService.sendEvent("CE Notification Cancelled", withTriggerData: triggerData!)
+                break
+            case UNNotificationDefaultActionIdentifier:
+                self.notificationClicked(triggerData!)
+                break
+            default:
+                // Handle other actions
+                break
+        }
 
         completionHandler()
     }

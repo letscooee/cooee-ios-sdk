@@ -27,6 +27,10 @@ struct PushNotificationTrigger: HandyJSON {
         si
     }
 
+    public func getClickAction() -> ClickAction? {
+        clc
+    }
+
     // MARK: Private
 
     private var t: TextElement?
@@ -34,4 +38,5 @@ struct PushNotificationTrigger: HandyJSON {
     private var si: String?
     private var li: String?
     private var btns: [ButtonElement]?
+    private var clc: ClickAction?
 }

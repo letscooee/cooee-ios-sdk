@@ -14,6 +14,7 @@ target 'Cooee iOS' do
   pod 'CooeeSDK', path: '../CooeeSDK'
   target 'CooeeSDK' do
     project 'CooeeSDK.xcodeproj'
-         inherit! :search_paths
+        inherit! :search_paths
+	#pod 'UnityFramework', path: "../../../AR/iOS/ar-renderer-ios-library"
    end
 end
