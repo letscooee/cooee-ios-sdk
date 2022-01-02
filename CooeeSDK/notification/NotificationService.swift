@@ -33,8 +33,8 @@ class NotificationService {
 
         self.triggerData = TriggerData.deserialize(from: "\(rawTriggerData!)")
 
-        if triggerData!.v != nil, triggerData!.v! >= 4, triggerData!.v! < 5 {
-            print("Unsupported payload version")
+        if triggerData!.v == nil, triggerData!.v! >= 4.0, triggerData!.v! < 5.0 {
+            print("Unsupported payload version \(triggerData!.v!)")
             return
         }
 
@@ -142,7 +142,7 @@ class NotificationService {
         let count = parts.count - 1
 
         for index in 0...count {
-            string += parts[index].getPartText().trimmingCharacters(in: .newlines)
+            string = "\(string) \(parts[index].getPartText().trimmingCharacters(in: .newlines))"
         }
 
         return string
