@@ -29,6 +29,7 @@ class CooeeBootstrap: NSObject {
             self.updateFirebaseToken()
             self.startPendingTaskJob()
             FontProcessor.checkAndUpdateBrandFonts()
+            ARHelper.initAndShowUnity()
         }
     }
 
@@ -68,6 +69,7 @@ class CooeeBootstrap: NSObject {
      Registers custom didReceiveRemoteNotification on current appDelegate
      */
     private func swizzleDidReceiveRemoteNotification() {
+        NSLog("Sizzling didReceiveRemoteNotification:fetchCompletionHandler")
         let appDelegate = UIApplication.shared.delegate
         let appDelegateClass: AnyClass? = object_getClass(appDelegate)
 
@@ -80,11 +82,14 @@ class CooeeBootstrap: NSObject {
 
         if let originalMethod = class_getInstanceMethod(appDelegateClass, originalSelector) {
             // exchange implementation
+            NSLog("1")
             method_exchangeImplementations(originalMethod, swizzledMethod)
         } else {
             // add implementation
+            NSLog("2")
             class_addMethod(appDelegateClass, swizzledSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod))
         }
+        NSLog("Sizzling Complate")
     }
 
     private func startPendingTaskJob() {

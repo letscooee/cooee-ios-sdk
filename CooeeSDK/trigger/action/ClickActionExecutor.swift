@@ -3,8 +3,8 @@
 //
 
 import Foundation
-import UIKit
 import SafariServices
+import UIKit
 
 /**
  Process ClickAction of the element and work accordingly
@@ -13,14 +13,14 @@ import SafariServices
  - Since: 0.1.0
  */
 class ClickActionExecutor {
-
-    private let clickAction: ClickAction
-    private let triggerContext: TriggerContext
+    // MARK: Lifecycle
 
     init(_ clickAction: ClickAction, _ triggerContext: TriggerContext) {
         self.clickAction = clickAction
         self.triggerContext = triggerContext
     }
+
+    // MARK: Public
 
     /**
      Execute all the key properties from ClickAction
@@ -32,24 +32,49 @@ class ClickActionExecutor {
         launchInAppBrowser()
         updateApp()
         share()
-
+        showAR()
         closeInApp()
-        // TODO 21/12/21: Add AR
+    }
+
+    // MARK: Private
+
+    private let clickAction: ClickAction
+    private let triggerContext: TriggerContext
+
+    private func showAR() {
+        guard let launchFeature = clickAction.open else {
+            return
+        }
+
+        if launchFeature == 1 {
+            // show Self AR
+        } else if launchFeature == 2 {
+            launchOTFAR()
+        }
+    }
+
+    private func launchOTFAR() {
+        guard let appAR = clickAction.ntvAR else {
+            return
+        }
+
+        ARHelper.checkForARAndLaunch(with: appAR, forTrigger: triggerContext.getTriggerData(),
+                on: triggerContext.getPresentViewController()!)
     }
 
     /**
      Check for InApp Browser data and launch InApp Browser using SafariService
      */
-    private func launchInAppBrowser(){
-        if (clickAction.iab == nil || clickAction.iab!.u == nil){
+    private func launchInAppBrowser() {
+        if clickAction.iab == nil || clickAction.iab!.u == nil {
             return
         }
-        
+
         let url = URL(string: clickAction.iab!.u!)!
         let safariVC = SFSafariViewController(url: url)
         triggerContext.getPresentViewController()!.present(safariVC, animated: true, completion: nil)
     }
-    
+
     /**
      Close InApp and give control to InAppScene
      */
