@@ -143,5 +143,5 @@ spec.dependency 'FirebaseMessaging'
 spec.dependency 'BSON'
 spec.dependency 'HandyJSON'
 spec.dependency 'Sentry'
-#spec.dependency 'UnityFramework'
+spec.dependency 'CooeeOTFAR'
 end
