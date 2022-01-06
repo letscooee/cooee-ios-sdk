@@ -40,6 +40,10 @@ class PartElement: BaseElement, Identifiable {
     public func getPartText() -> String {
         return txt ?? ""
     }
+    
+    public func setPartText(_ text: String){
+        txt=text
+    }
 
     // MARK: Private
 
