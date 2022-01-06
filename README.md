@@ -29,9 +29,9 @@ You can check the latest version of the plugin from [Github](https://github.com/
 Add following in your info.plist file inside  <dict>..</dict>:
 
 ```
-<key>CooeeAppID</key>
+<key>COOEE_APP_ID</key>
 <string>MY_COOEE_APP_ID </string>
-<key>CooeeSecretKey</key>
+<key>COOEE_APP_SECRET</key>
 <string>MY_COOEE_APP_SECRET</string>
 ```
 
@@ -44,24 +44,29 @@ Also, to fetch user location, following needs to be added to info.plist:
 <string>App uses location to search retailer location</string>
 ```
 
-### Step 3:  Setup Cooee
+### Step 3: Initialize CooeeSDK in your app
 
-To start using Cooee you need to setup Cooe in your appdelegate file inside didFinishLaunching methood with the firebase token. Use the following code to initialise
+To start using CooeeSDK you need it in your `AppDelegate` file inside `didFinishLaunching` method with the firebase token. Use the following code to initialise
 
+1. Import CooeeSDK module in your `UIApplicationDelegate`:
+```swift
+import CooeeSDK
 ```
-RegisterUser.shared.setup("<Firebase token>")
+
+2. Configure a FirebaseApp shared instance, typically in your app's `application:didFinishLaunchingWithOptions:` method:
+
+```swift
+AppController.configure()
 ```
-
-
 ### Step 4: Track Custom Events
 
 Once you integrate the SDK, Cooee will automatically start tracking events. You can view the collected events in System Default Events. Apart from these, you can track custom events as well.
 
-```
-let sdkInstance = RegisterUser.shared
+```swift
+let cooeeSDK = CooeeSDK.getInstance()
 var eventProperties = ["product id":"1234"]
 eventProperties["product name"] = "Brush"
-sdkInstance.sendEvent(withName: "Add To Cart", properties: eventProperties)
+cooeeSDK.sendEvent(withName: "Add To Cart", properties: eventProperties)
 ```
 
 ### Step 5: Track User Properties
@@ -69,8 +74,8 @@ sdkInstance.sendEvent(withName: "Add To Cart", properties: eventProperties)
 As the user launches the app for the first time, Cooee will create a user profile for them. By default, we add multiple properties for a particular user which you can see in System Default User Properties. Along with these default properties, additional custom attributes properties can also be shared. We encourage mobile apps to share all properties for better machine learning modelling.
 
 
-```
-let sdkInstance = RegisterUser.shared
+```swift
+let cooeeSDK = CooeeSDK.getInstance()
 
 var userProperties = ["purchased_before":"yes"]
 userProperties["product_viewed"] = "5"
@@ -78,5 +83,5 @@ userProperties["product_viewed"] = "5"
 var userData = ["name":"Jane Doe"]
 userData["monile"] = "1234567890"
 
-sdkInstance.updateProfile(withProperties: userProperties, andData: userData)
+cooeeSDK.updateProfile(withProperties: userProperties, andData: userData)
 ```
