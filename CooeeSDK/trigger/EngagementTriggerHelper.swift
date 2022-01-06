@@ -78,6 +78,24 @@ public class EngagementTriggerHelper {
         }
     }
 
+    /**
+     Fetch Trigger InApp data from server
+
+     - Parameter triggerData: Data to render in-app.
+     */
+    static func loadLazyData(for triggerData: TriggerData) {
+        InAppTriggerHelper.loadLazyData(for: triggerData) { data in
+            if data == nil {
+                return
+            }
+
+            var triggerData = triggerData
+            triggerData.setInAppTrigger(inAppTrigger: data!)
+
+            renderInAppTrigger(triggerData)
+        }
+    }
+
     // MARK: Private
 
     /**
@@ -114,23 +132,5 @@ public class EngagementTriggerHelper {
         let embeddedTrigger = EmbeddedTrigger(trigger: data)
 
         LocalStorageHelper.putTypedClass(key: Constants.STORAGE_ACTIVE_TRIGGER, data: embeddedTrigger)
-    }
-
-    /**
-     Fetch Trigger InApp data from server
-
-     - Parameter triggerData: Data to render in-app.
-     */
-    private static func loadLazyData(for triggerData: TriggerData) {
-        InAppTriggerHelper.loadLazyData(for: triggerData) { data in
-            if data == nil {
-                return
-            }
-
-            var triggerData = triggerData
-            triggerData.setInAppTrigger(inAppTrigger: data!)
-
-            renderInAppTrigger(triggerData)
-        }
     }
 }
