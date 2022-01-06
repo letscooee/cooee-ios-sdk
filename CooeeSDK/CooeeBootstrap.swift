@@ -29,8 +29,8 @@ class CooeeBootstrap: NSObject {
             self.updateFirebaseToken()
             self.startPendingTaskJob()
             FontProcessor.checkAndUpdateBrandFonts()
-            ARHelper.initAndShowUnity()
         }
+        ARHelper.initAndShowUnity()
     }
 
     // MARK: Internal
