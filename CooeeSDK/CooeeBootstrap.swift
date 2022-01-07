@@ -30,7 +30,7 @@ class CooeeBootstrap: NSObject {
             self.startPendingTaskJob()
             FontProcessor.checkAndUpdateBrandFonts()
         }
-        ARHelper.initAndShowUnity()
+        // ARHelper.initAndShowUnity()
     }
 
     // MARK: Internal

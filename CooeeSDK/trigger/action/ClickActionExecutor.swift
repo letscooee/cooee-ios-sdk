@@ -54,12 +54,12 @@ class ClickActionExecutor {
     }
 
     private func launchOTFAR() {
-        guard let appAR = clickAction.ntvAR else {
+        /*guard let appAR = clickAction.ntvAR else {
             return
         }
 
         ARHelper.checkForARAndLaunch(with: appAR, forTrigger: triggerContext.getTriggerData(),
-                on: triggerContext.getPresentViewController()!)
+                on: triggerContext.getPresentViewController()!)*/
     }
 
     /**
