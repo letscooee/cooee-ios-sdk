@@ -1,5 +1,14 @@
 #  Change Log
 
+# 1.3.1
+
+1. Fix issue with cocopod dependency
+
+# 1.3.0
+
+1. Add support to notifications service
+2. Add InApp and AR support
+
 # 1.2.5
 
 1. Explicitly setting minimum target deployment to 13.0
