@@ -15,5 +15,13 @@ target 'Cooee iOS' do
   target 'CooeeSDK' do
     project 'CooeeSDK.xcodeproj'
         inherit! :search_paths
+        # https://stackoverflow.com/a/37289688/2405040
+        post_install do |installer|
+          installer.pods_project.targets.each do |target|
+            target.build_configurations.each do |config|
+              config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+            end
+          end
+        end
    end
 end
