@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
 #
 
 spec.name         = "CooeeSDK"
-spec.version      = "1.3.2"
+spec.version      = "1.3.4"
 spec.summary      = "Hyper-personalised Mobile App Re-Engagement via Machine Learning"
 
 # This description is used to generate tags and improve search results.
@@ -91,7 +91,7 @@ spec.source       = { :git => "https://github.com/letscooee/cooee-ios-sdk.git", 
 #  Not including the public_header_files will make all headers public.
 #
 
- spec.source_files  = "CooeeSDK/**/*.*","CooeeSDK/database/task/letscooee.xcdatamodeld"
+spec.source_files  = "CooeeSDK/**/*.*","CooeeSDK/database/task/letscooee.xcdatamodeld"
 #spec.exclude_files = "Classes/Exclude"
 
 # spec.public_header_files = "Classes/**/*.h"
@@ -105,7 +105,7 @@ spec.source       = { :git => "https://github.com/letscooee/cooee-ios-sdk.git", 
 #  non-essential files like tests, examples and documentation.
 #
 
- spec.resource  = "CooeeSDK/database/task/letscooee.xcdatamodeld"
+spec.resource  = "CooeeSDK/database/task/letscooee.xcdatamodeld"
 # spec.resources = "Resources/*.png"
 
 # spec.preserve_paths = "FilesToSave", "MoreFilesToSave"
