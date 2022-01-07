@@ -23,8 +23,8 @@ class CooeeDatabase {
     // MARK: Internal
 
     lazy var persistentContainer: NSPersistentContainer = {
-        let messageKitBundle = Bundle(identifier: identifier)
-        let modelURL = messageKitBundle!.url(forResource: self.model, withExtension: "momd")!
+        let messageKitBundle = Bundle(for: type(of: self))
+        let modelURL = messageKitBundle.url(forResource: self.model, withExtension: "momd")!
         let managedObjectModel = NSManagedObjectModel(contentsOf: modelURL)
 
         let container = NSPersistentContainer(name: self.model, managedObjectModel: managedObjectModel!)
