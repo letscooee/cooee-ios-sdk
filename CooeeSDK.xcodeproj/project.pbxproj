@@ -86,7 +86,6 @@
 		75DD87CA271EE39700A272BB /* BaseTextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87C9271EE39700A272BB /* BaseTextElement.swift */; };
 		75DD87CC271EF4BA00A272BB /* Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87CB271EF4BA00A272BB /* Alignment.swift */; };
 		75DD87CE271EF4D500A272BB /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87CD271EF4D500A272BB /* Font.swift */; };
-		75EF49D22788341400CF932D /* CooeeSDK-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 751BC78126F3108A002D8358 /* CooeeSDK-Info.plist */; };
 		75FA7DB627217B1F0060A425 /* InAppTriggerScene.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FA7DB527217B1F0060A425 /* InAppTriggerScene.xib */; };
 		75FA7DB9272982DC0060A425 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FA7DB8272982DC0060A425 /* ProfileViewController.swift */; };
 		75FA7DBD272A75AE0060A425 /* samplepayloadone.json in Resources */ = {isa = PBXBuildFile; fileRef = 75FA7DBC272A75AE0060A425 /* samplepayloadone.json */; };
@@ -930,7 +929,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75EF49D22788341400CF932D /* CooeeSDK-Info.plist in Resources */,
 				75FA7DB627217B1F0060A425 /* InAppTriggerScene.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
