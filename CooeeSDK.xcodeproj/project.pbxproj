@@ -39,7 +39,6 @@
 		751E1350270F2F4D002CF442 /* letscooee.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 751E134E270F2F4B002CF442 /* letscooee.xcdatamodeld */; };
 		756BAA112754FE1300C7A84F /* Pods_Cooee_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6DD165866F91815E65CF7F1 /* Pods_Cooee_iOS.framework */; };
 		756BAA142754FE2300C7A84F /* Pods_CooeeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB800582A4AF75A48137B606 /* Pods_CooeeSDK.framework */; };
-		756BAA18275502D800C7A84F /* CooeeSDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 751BC77D26F3108A002D8358 /* CooeeSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		756BAA1E27577C3F00C7A84F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756BAA1D27577C3E00C7A84F /* NotificationService.swift */; };
 		756BAA212757873500C7A84F /* PushNotificationTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756BAA202757873500C7A84F /* PushNotificationTrigger.swift */; };
 		756BAA2327588C3600C7A84F /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756BAA2227588C3500C7A84F /* ImageDownloader.swift */; };
@@ -87,6 +86,7 @@
 		75DD87CA271EE39700A272BB /* BaseTextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87C9271EE39700A272BB /* BaseTextElement.swift */; };
 		75DD87CC271EF4BA00A272BB /* Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87CB271EF4BA00A272BB /* Alignment.swift */; };
 		75DD87CE271EF4D500A272BB /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87CD271EF4D500A272BB /* Font.swift */; };
+		75EF49D22788341400CF932D /* CooeeSDK-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 751BC78126F3108A002D8358 /* CooeeSDK-Info.plist */; };
 		75FA7DB627217B1F0060A425 /* InAppTriggerScene.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FA7DB527217B1F0060A425 /* InAppTriggerScene.xib */; };
 		75FA7DB9272982DC0060A425 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FA7DB8272982DC0060A425 /* ProfileViewController.swift */; };
 		75FA7DBD272A75AE0060A425 /* samplepayloadone.json in Resources */ = {isa = PBXBuildFile; fileRef = 75FA7DBC272A75AE0060A425 /* samplepayloadone.json */; };
@@ -153,30 +153,17 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		756BAA172755027A00C7A84F /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				756BAA18275502D800C7A84F /* CooeeSDK.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		5F6A13389002428C5D489894 /* Pods-CooeeSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.debug.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.debug.xcconfig"; sourceTree = "<group>"; };
-		75186DC527808FC600DD6744 /* ARHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARHelper.swift; sourceTree = "<group>"; };
 		5FC8F5B4B05D83373A281F12 /* Pods-Cooee iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS.debug.xcconfig"; path = "Target Support Files/Pods-Cooee iOS/Pods-Cooee iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		75186DC527808FC600DD6744 /* ARHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARHelper.swift; sourceTree = "<group>"; };
 		75187467274CD6F000BF267F /* ElementRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementRenderer.swift; sourceTree = "<group>"; };
 		75187469274CE35E00BF267F /* ShapeRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeRenderer.swift; sourceTree = "<group>"; };
 		7518746B274DF8BF00BF267F /* PartElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartElement.swift; sourceTree = "<group>"; };
 		7518746F274E343C00BF267F /* EmbeddedTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedTrigger.swift; sourceTree = "<group>"; };
 		751BC77D26F3108A002D8358 /* CooeeSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CooeeSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		751BC78026F3108A002D8358 /* CooeeSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CooeeSDK.h; sourceTree = "<group>"; };
-		751BC78126F3108A002D8358 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		751BC78126F3108A002D8358 /* CooeeSDK-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CooeeSDK-Info.plist"; sourceTree = "<group>"; };
 		751BC78C26F31162002D8358 /* Cooee iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cooee iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		751BC78E26F31162002D8358 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		751BC79026F31162002D8358 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -256,6 +243,7 @@
 		75DD87C9271EE39700A272BB /* BaseTextElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextElement.swift; sourceTree = "<group>"; };
 		75DD87CB271EF4BA00A272BB /* Alignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alignment.swift; sourceTree = "<group>"; };
 		75DD87CD271EF4D500A272BB /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		75EF49A727876C7600CF932D /* FirebaseCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75FA7DB527217B1F0060A425 /* InAppTriggerScene.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InAppTriggerScene.xib; sourceTree = "<group>"; };
 		75FA7DB8272982DC0060A425 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		75FA7DBC272A75AE0060A425 /* samplepayloadone.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = samplepayloadone.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.json; };
@@ -348,7 +336,6 @@
 			isa = PBXGroup;
 			children = (
 				75186DC527808FC600DD6744 /* ARHelper.swift */,
-
 			);
 			path = ar;
 			sourceTree = "<group>";
@@ -396,7 +383,7 @@
 				751BC7C326F31A26002D8358 /* device */,
 				751BC7BC26F311A3002D8358 /* init */,
 				751BC78026F3108A002D8358 /* CooeeSDK.h */,
-				751BC78126F3108A002D8358 /* Info.plist */,
+				751BC78126F3108A002D8358 /* CooeeSDK-Info.plist */,
 				751BC7BF26F3123E002D8358 /* Cooee.swift */,
 				75A098112707132100C2057B /* CooeeBootstrap.swift */,
 				AC0B851DC5B190221B669F38 /* CooeeFactory.swift */,
@@ -699,6 +686,7 @@
 		A1345D19EC596FAD6A5DCFA7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				75EF49A727876C7600CF932D /* FirebaseCore.framework */,
 				BB800582A4AF75A48137B606 /* Pods_CooeeSDK.framework */,
 				E6DD165866F91815E65CF7F1 /* Pods_Cooee_iOS.framework */,
 			);
@@ -818,7 +806,6 @@
 			buildConfigurationList = 751BC7B326F31165002D8358 /* Build configuration list for PBXNativeTarget "Cooee iOS" */;
 			buildPhases = (
 				F08EEB1D9951D9869E98CCB5 /* [CP] Check Pods Manifest.lock */,
-				756BAA172755027A00C7A84F /* CopyFiles */,
 				751BC78826F31162002D8358 /* Sources */,
 				751BC78926F31162002D8358 /* Frameworks */,
 				751BC78A26F31162002D8358 /* Resources */,
@@ -943,6 +930,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75EF49D22788341400CF932D /* CooeeSDK-Info.plist in Resources */,
 				75FA7DB627217B1F0060A425 /* InAppTriggerScene.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1365,7 +1353,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = CooeeSDK/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/CooeeSDK/CooeeSDK-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1396,7 +1384,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = CooeeSDK/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/CooeeSDK/CooeeSDK-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -91,8 +91,8 @@ spec.source       = { :git => "https://github.com/letscooee/cooee-ios-sdk.git", 
 #  Not including the public_header_files will make all headers public.
 #
 
-# spec.source_files  = "Classes", "Classes/**/*.{h,m}"
-spec.exclude_files = "Classes/Exclude"
+ spec.source_files  = "CooeeSDK/**/*.*","CooeeSDK/database/task/letscooee.xcdatamodeld"
+#spec.exclude_files = "Classes/Exclude"
 
 # spec.public_header_files = "Classes/**/*.h"
 
@@ -105,7 +105,7 @@ spec.exclude_files = "Classes/Exclude"
 #  non-essential files like tests, examples and documentation.
 #
 
-# spec.resource  = "icon.png"
+ spec.resource  = "CooeeSDK/database/task/letscooee.xcdatamodeld"
 # spec.resources = "Resources/*.png"
 
 # spec.preserve_paths = "FilesToSave", "MoreFilesToSave"
@@ -116,7 +116,7 @@ spec.exclude_files = "Classes/Exclude"
 #  Link your library with frameworks, or libraries. Libraries do not include
 #  the lib prefix of their name.
 #
-
+spec.frameworks = 'CoreData'
 # spec.framework  = "SomeFramework"
 # spec.frameworks = "SomeFramework", "AnotherFramework"
 # spec.vendored_frameworks = "CooeeSDK.xcframework "

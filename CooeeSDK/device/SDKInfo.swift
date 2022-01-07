@@ -14,17 +14,38 @@ import Foundation
  - Since: 0.1.0
  */
 class SDKInfo {
+    // MARK: Lifecycle
+
+    init() {
+        bundle = Bundle(for: type(of: self))
+        cachedInfo = CachedInfo(bundle: bundle)
+    }
+
+    // MARK: Internal
+
     struct CachedInfo {
-        let sdkVersion = Bundle(identifier: "com.letscooee.CooeeSDK")?.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
-        let sdkLongVersion = Bundle(identifier: "com.letscooee.CooeeSDK")?.infoDictionary?["CFBundleVersion"] as? String ?? ""
+        // MARK: Lifecycle
+
+        init(bundle: Bundle) {
+            self.bundle = bundle
+            sdkVersion = bundle.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+            sdkLongVersion = bundle.infoDictionary?["CFBundleVersion"] as? String ?? ""
+        }
+
+        // MARK: Internal
+
+        let bundle: Bundle
+        let sdkVersion: String
+        let sdkLongVersion: String
 
         var isDebugging: Bool {
-            let mode = Bundle(identifier: "com.letscooee.CooeeSDK")?.infoDictionary?["Configuration"] as? String ?? "Debug"
+            let mode = bundle.infoDictionary?["Configuration"] as? String ?? "Debug"
             return (mode.equals("Debug"))
         }
     }
 
     static let shared = SDKInfo()
 
-    let cachedInfo = CachedInfo()
+    let bundle: Bundle
+    let cachedInfo: CachedInfo
 }
