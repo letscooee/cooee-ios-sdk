@@ -24,8 +24,9 @@ struct ElementRenderer: View {
 
     // MARK: Internal
 
-    var body: some View {
+    @State var childSize: CGSize = .zero
 
+    var body: some View {
         let count: Int = elements.count
         ForEach(0..<count) { index in
             let child = elements[index]
@@ -35,7 +36,7 @@ struct ElementRenderer: View {
                 let textElement = TextElement.deserialize(from: child)
 
                 // TODO: Solution is working good but not a good approach to pace element in background of view; Need to rework
-                if textElement!.getCalculatedWidth() ?? 0 < deviceWidth {
+                if textElement!.getCalculatedWidth() ?? 0 <= deviceWidth {
                     TextRenderer(textElement!, triggerContext)
                             .modifier(AbstractInAppRenderer(elementData: textElement!, triggerContext: triggerContext, isContainer: false))
                 } else {
@@ -43,16 +44,33 @@ struct ElementRenderer: View {
                     }.background(
                             TextRenderer(textElement!, triggerContext)
                                     .modifier(AbstractInAppRenderer(elementData: textElement!, triggerContext: triggerContext, isContainer: false))
-                    ).if(textElement!.getCalculatedWidth() != nil && textElement!.getCalculatedWidth()! > deviceWidth) {
-                        $0.frame(maxWidth: deviceWidth)
-                    }.if(textElement!.getCalculatedWidth() != nil && textElement!.getCalculatedWidth()! < deviceWidth) {
-                        $0.frame(width: deviceWidth)
+
+                                    // Reference to add GeometryReader & onPreferenceChange which will help to keep watch on height of element
+                                    // https://stackoverflow.com/a/56782264/9256497
+
+                                    .height(childSize.height)
+                                    .background(
+                                            GeometryReader { proxy in
+                                                Color.clear
+                                                        .preference(
+                                                        key: SizePreferenceKey.self,
+                                                        value: proxy.size
+                                                )
+                                            }
+                                    )
+
+                                    .onPreferenceChange(SizePreferenceKey.self) { preferences in
+                                        self.childSize = preferences
+                                    }
+
+                    ).if(textElement!.getCalculatedWidth()! > deviceWidth) {
+                        $0.frame(maxWidth: deviceWidth, maxHeight: childSize.height)
                     }
                 }
             } else if ElementType.BUTTON == baseElement!.getElementType() {
                 let buttonElement = ButtonElement.deserialize(from: child)
 
-                if buttonElement!.getCalculatedWidth() ?? 0 < deviceWidth {
+                if buttonElement!.getCalculatedWidth() ?? 0 <= deviceWidth {
                     ButtonRenderer(buttonElement!, triggerContext)
                             .modifier(AbstractInAppRenderer(elementData: buttonElement!, triggerContext: triggerContext, isContainer: false))
                 } else {
@@ -60,16 +78,33 @@ struct ElementRenderer: View {
                     }.background(
                             ButtonRenderer(buttonElement!, triggerContext)
                                     .modifier(AbstractInAppRenderer(elementData: buttonElement!, triggerContext: triggerContext, isContainer: false))
-                    ).if(buttonElement!.getCalculatedWidth() != nil && buttonElement!.getCalculatedWidth()! > deviceWidth) {
-                        $0.frame(maxWidth: deviceWidth)
-                    }.if(buttonElement!.getCalculatedWidth() != nil && buttonElement!.getCalculatedWidth()! < deviceWidth) {
-                        $0.frame(width: deviceWidth)
+
+                                    // Reference to add GeometryReader & onPreferenceChange which will help to keep watch on height of element
+                                    // https://stackoverflow.com/a/56782264/9256497
+                                    
+                                    .height(childSize.height)
+                                    .background(
+                                            GeometryReader { proxy in
+                                                Color.clear
+                                                        .preference(
+                                                        key: SizePreferenceKey.self,
+                                                        value: proxy.size
+                                                )
+                                            }
+                                    )
+
+                                    .onPreferenceChange(SizePreferenceKey.self) { preferences in
+                                        self.childSize = preferences
+                                    }
+
+                    ).if(buttonElement!.getCalculatedWidth()! > deviceWidth) {
+                        $0.frame(maxWidth: deviceWidth, maxHeight: childSize.height)
                     }
                 }
             } else if ElementType.IMAGE == baseElement!.getElementType() {
                 let imageElement = ImageElement.deserialize(from: child)
 
-                if imageElement!.getCalculatedWidth()! < deviceWidth && imageElement!.getCalculatedHeight()! < deviceHeight {
+                if imageElement!.getCalculatedWidth()! <= deviceWidth && imageElement!.getCalculatedHeight()! <= deviceHeight {
                     ImageRenderer(
                             url: URL(string: imageElement!.src!)!,
                             placeholder: {
@@ -103,7 +138,7 @@ struct ElementRenderer: View {
             } else if ElementType.SHAPE == baseElement!.getElementType() {
                 let shapeElement = ShapeElement.deserialize(from: child)
 
-                if shapeElement!.getCalculatedWidth()! < deviceWidth && shapeElement!.getCalculatedHeight()! < deviceHeight {
+                if shapeElement!.getCalculatedWidth()! <= deviceWidth && shapeElement!.getCalculatedHeight()! <= deviceHeight {
                     ShapeRenderer(shapeElement!, triggerContext)
                             .modifier(AbstractInAppRenderer(elementData: shapeElement!, triggerContext: triggerContext, isContainer: false))
                 } else {
