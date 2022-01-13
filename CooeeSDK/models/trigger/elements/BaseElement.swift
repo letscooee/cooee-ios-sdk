@@ -67,6 +67,10 @@ class BaseElement: HandyJSON {
     public func getClickAction() -> ClickAction? {
         clc
     }
+    
+    public func getSpacing() -> Spacing {
+        spc ?? Spacing()
+    }
 
     // MARK: Internal
 

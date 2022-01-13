@@ -30,6 +30,7 @@ struct AbstractInAppRenderer: ViewModifier {
         let _ = print("x: \(elementData.getX()), y: \(elementData.getY())")
         let _ = print("h: \(String(describing: calculatedHeight)), w: \(String(describing: calculatedWidth)), dh: \(deviceHeight), dw: \(deviceWidth)")
 
+        // MARK: Spacing
         content.if(elementData.spc != nil) {
                     $0.padding(.bottom, elementData.spc!.getPaddingBottom())
                             .padding(.top, elementData.spc!.getPaddingTop())
@@ -58,15 +59,28 @@ struct AbstractInAppRenderer: ViewModifier {
                 .if(elementData.bg != nil && elementData.bg!.i != nil) {
                     $0.clipped()
                 }
+        
                 .if(elementData.br != nil && elementData.br!.getStyle() == Border.Style.SOLID) {
-                    $0.overlay(
+                    $0.padding(.bottom, elementData.getSpacing().getPaddingBottom(add: elementData.br!.getWidth()))
+                        .padding(.top, elementData.getSpacing().getPaddingTop(add: elementData.br!.getWidth()))
+                        .padding(.leading, elementData.getSpacing().getPaddingLeft(add: elementData.br!.getWidth()))
+                        .padding(.trailing, elementData.getSpacing().getPaddingRight(add: elementData.br!.getWidth()))
+                        .overlay(
                             RoundedRectangle(cornerRadius: elementData.br!.getRadius())
-                                    .stroke(Color(hex: elementData.br!.getColour(), alpha: elementData.br!.getAlpha()), lineWidth: elementData.br!.getWidth())
-                            // .offset(x: elementData.getX().pixelsToPoints(), y: elementData.getY().pixelsToPoints())
+                                .strokeBorder(
+                                        style: StrokeStyle(
+                                                lineWidth: elementData.br!.getWidth()
+                                        )
+                                )
+                                .foregroundColor(Color(hex: elementData.br!.getColour(), alpha: elementData.br!.getAlpha()))
                     )
                 }
                 .if(elementData.br != nil && elementData.br!.getStyle() == Border.Style.DASH) {
-                    $0.overlay(
+                    $0.padding(.bottom, elementData.getSpacing().getPaddingBottom(add: elementData.br!.getWidth()))
+                        .padding(.top, elementData.getSpacing().getPaddingTop(add: elementData.br!.getWidth()))
+                        .padding(.leading, elementData.getSpacing().getPaddingLeft(add: elementData.br!.getWidth()))
+                        .padding(.trailing, elementData.getSpacing().getPaddingRight(add: elementData.br!.getWidth()))
+                        .overlay(
                             RoundedRectangle(cornerRadius: elementData.br!.getRadius())
                                     .strokeBorder(
                                             style: StrokeStyle(
