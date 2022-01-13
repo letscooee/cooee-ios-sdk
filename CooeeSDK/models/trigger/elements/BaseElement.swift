@@ -21,6 +21,29 @@ class BaseElement: HandyJSON {
 
     // MARK: Public
 
+    public func getX(for viewWidth: CGFloat) -> CGFloat {
+        
+        if viewWidth > UIScreen.main.bounds.width {
+            let calculatedExtraSpace = viewWidth - UIScreen.main.bounds.width
+            
+            return (getX() + (calculatedExtraSpace/2))
+        }
+        
+        
+        return x == nil ? 0 : UnitUtil.getScaledPixel(x!)
+    }
+
+    public func getY(for viewHeight: CGFloat) -> CGFloat {
+        
+        if viewHeight > UIScreen.main.bounds.height {
+            let calculatedExtraSpace = viewHeight - UIScreen.main.bounds.height
+            
+            return (getY() + (calculatedExtraSpace/2))
+        }
+        
+        return y == nil ? 0 : UnitUtil.getScaledPixel(y!)
+    }
+    
     public func getX(_ parentView: UIView? = nil) -> CGFloat {
         return x == nil ? 0 : UnitUtil.getScaledPixel(x!)
     }

@@ -23,6 +23,9 @@ struct AbstractInAppRenderer: ViewModifier {
         // process height and width
         let calculatedHeight = elementData.getCalculatedHeight()
         let calculatedWidth = elementData.getCalculatedWidth()
+        let calculatedX = elementData.getX(for: calculatedWidth ?? 0)
+        let calculatedY = elementData.getY(for: calculatedHeight ?? 0)
+        
         let _ = print("\(elementData)")
         let _ = print("x: \(elementData.getX()), y: \(elementData.getY())")
         let _ = print("h: \(String(describing: calculatedHeight)), w: \(String(describing: calculatedWidth)), dh: \(deviceHeight), dw: \(deviceWidth)")
@@ -90,7 +93,7 @@ struct AbstractInAppRenderer: ViewModifier {
                     $0.height(calculatedHeight!)
                 }
                 .if(elementData.getX() != 0.0 || elementData.getY() != 0.0) {
-                    $0.offset(x: elementData.getX(), y: elementData.getY())
+                    $0.offset(x: calculatedX, y: calculatedY)
                 }
                 .gesture(
                         TapGesture()
