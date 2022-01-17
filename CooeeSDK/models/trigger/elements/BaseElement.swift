@@ -76,7 +76,7 @@ class BaseElement: HandyJSON {
 
     var bg: Background?
     var br: Border?
-    var shadow: Shadow?
+    var shd: Shadow?
     var spc: Spacing?
     var trf: Transform?
     var clc: ClickAction?
