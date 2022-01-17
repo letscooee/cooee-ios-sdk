@@ -93,6 +93,11 @@ class BaseHTTPService {
         _ = try webService.getResponse(fromURL: Constants.updateProfile, method: .PUT, params: requestData,
                 header: commonHeaders.getDictionary())
     }
+    
+    func updateDeviceProp(requestData: [String: Any]) throws {
+        _ = try webService.getResponse(fromURL: Constants.deviceUpdate, method: .PUT, params: requestData,
+                header: commonHeaders.getDictionary())
+    }
 
     func sendEvent(event: Event) throws {
         _ = try webService.getResponse(fromURL: Constants.trackEvent, method: .POST, params: event.toJSON()!,

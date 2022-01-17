@@ -59,9 +59,9 @@ class NewSessionExecutor {
      */
 
     private func sendSuccessiveLaunchEvent() {
-        sendDefaultUserProperties(userProperties: nil)
+        sendDefaultDeviceProperties(userProperties: nil)
 
-        let event = Event(eventName: "CE App Launched", properties: devicePropertyCollector.getCommonEventProperties())
+        let event = Event(eventName: "CE App Launched", deviceProps: devicePropertyCollector.getMutableDeviceProps())
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)
     }
 
@@ -69,26 +69,23 @@ class NewSessionExecutor {
      * Runs when app is opened for the first time after sdkToken is received from server asynchronously
      */
     private func sendFirstLaunchEvent() {
-        var userProperties = [String: Any]()
-        userProperties["CE First Launch Time"] = DateUtils.formatDateToUTCString(date: Date())
-        userProperties["CE Installed Time"] = devicePropertyCollector.getAppInstallDate()
-        sendDefaultUserProperties(userProperties: userProperties)
+        var firstLaunchProps = [String: Any]()
+        firstLaunchProps["firstLaunch"] = DateUtils.formatDateToUTCString(date: Date())
+        firstLaunchProps["installedTime"] = devicePropertyCollector.getAppInstallDate()
+        sendDefaultDeviceProperties(userProperties: firstLaunchProps)
 
-        let event = Event(eventName: "CE App Installed", properties: devicePropertyCollector.getCommonEventProperties())
+        let event = Event(eventName: "CE App Installed", deviceProps: devicePropertyCollector.getMutableDeviceProps())
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)
     }
 
-    private func sendDefaultUserProperties(userProperties: [String: Any]?) {
-        var dictionary = devicePropertyCollector.getDefaultValues()
+    private func sendDefaultDeviceProperties(userProperties: [String: Any]?) {
+        var dictionary = devicePropertyCollector.getImmutableDeviceProps()
         if userProperties != nil {
             dictionary.merge(userProperties!) { _, new in
                 new
             }
         }
 
-        dictionary["CE Session Count"] = sessionManager.getCurrentSessionNumber()
-        dictionary["CE Last Launch Time"] = DateUtils.formatDateToUTCString(date: Date())
-
-        CooeeFactory.shared.safeHttpService.updateUserPropertyOnly(userProperty: dictionary)
+        CooeeFactory.shared.safeHttpService.updateDeviceProperty(deviceProp: ["props": dictionary])
     }
 }

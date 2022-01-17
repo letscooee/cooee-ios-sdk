@@ -16,42 +16,57 @@ import Foundation
 class DevicePropertyCollector {
     // MARK: Public
 
-    public func getCommonEventProperties() -> [String: Any?] {
-        [
-            "CE App Version": appInfo.cachedInfo.version,
-            "CE SDK Version": sdkInfo.cachedInfo.sdkVersion,
-            "CE OS Version": deviceInfo.cachedInfo.osVersion,
-            "CE Network Provider": deviceInfo.cachedInfo.networkProvider,
-            "CE Network Type": deviceInfo.cachedInfo.networkType,
-            "CE Bluetooth On": deviceInfo.cachedInfo.isBTOn,
-            "CE Wifi Connected": deviceInfo.cachedInfo.isWIFIConnected,
-            "CE Device Battery": deviceInfo.cachedInfo.deviceBattery
+    public func getMutableDeviceProps() -> [String: Any?] {
+        let storage = [
+            "tot": deviceInfo.cachedInfo.totalSpace,
+            "avl": deviceInfo.cachedInfo.freeSpace
         ]
+        
+        let memory = [
+            "tot": deviceInfo.cachedInfo.totalRAM,
+            "avl": deviceInfo.cachedInfo.availableRAM
+        ] as [String: Any]
+        
+        let os = [
+            "ver": deviceInfo.cachedInfo.osVersion,
+            "name": Constants.PLATFORM
+        ]
+        
+        let battery = [
+            "c": deviceInfo.cachedInfo.isBatteryCharging,
+            "l": deviceInfo.cachedInfo.deviceBattery
+        ] as [String: Any]
+        
+        return [
+            "storage": storage,
+            "mem": memory,
+            "os": os,
+            "bat": battery,
+            "locale": Bundle.main.preferredLocalizations[0],
+            "bt": deviceInfo.cachedInfo.isBTOn,
+            "wifi": deviceInfo.cachedInfo.isWIFIConnected,
+            "orientation": deviceInfo.cachedInfo.deviceOrientation
+        ] as [String: Any]
     }
 
     // MARK: Internal
 
-    func getDefaultValues() -> [String: Any] {
-        [
-            "CE Device Orientation": deviceInfo.cachedInfo.deviceOrientation,
-            "CE Device Model": deviceInfo.cachedInfo.deviceModel,
-            "CE Device Manufacture": "Apple",
-            "CE Available Internal Memory": deviceInfo.cachedInfo.freeSpace,
-            "CE Total Internal Memory": deviceInfo.cachedInfo.totalSpace,
-            "CE Device Battery": deviceInfo.cachedInfo.deviceBattery,
-            "CE Network Provider": deviceInfo.cachedInfo.networkProvider,
-            "CE Network Type": deviceInfo.cachedInfo.networkType,
-            "CE Bluetooth On": deviceInfo.cachedInfo.isBTOn,
-            "CE Wifi Connected": deviceInfo.cachedInfo.isWIFIConnected,
-            "CE OS": "IOS",
-            "CE OS Version": deviceInfo.cachedInfo.osVersion,
-            "CE SDK Version": "\(sdkInfo.cachedInfo.sdkVersion)+\(sdkInfo.cachedInfo.sdkLongVersion)",
-            "CE App Version": appInfo.cachedInfo.version,
-            "CE Screen Resolution": "\(deviceInfo.getDeviceWidth())x\(deviceInfo.getDeviceHeight())",
-            "CE Package Name": "\(appInfo.getAppPackage())",
-            "CE Total RAM": (deviceInfo.cachedInfo.totalSpace),
-            "CE Available RAM": deviceInfo.cachedInfo.availableRAM,
-            "CE DPI": deviceInfo.cachedInfo.dpi
+    func getImmutableDeviceProps() -> [String: Any] {
+        let display = [
+            "w": deviceInfo.cachedInfo.width,
+            "h": deviceInfo.cachedInfo.height,
+            "dpi": deviceInfo.cachedInfo.dpi
+        ]
+        
+        let device = [
+            "model": deviceInfo.cachedInfo.deviceModel,
+            "vender": deviceInfo.cachedInfo.manufacture
+        ]
+        
+        return [
+            "display": display,
+            "device": device,
+            "ar": deviceInfo.cachedInfo.arSupport
         ]
     }
 

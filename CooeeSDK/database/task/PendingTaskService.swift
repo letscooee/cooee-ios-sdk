@@ -70,7 +70,7 @@ class PendingTaskService {
 
     // MARK: Private
 
-    private static let PROCESSORS: [PendingTaskProcessor] = [EventTaskProcessor(), ProfileTaskProcessor(), PushTokenTaskProcessor(), SessionConcludeTaskProcessor()]
+    private static let PROCESSORS: [PendingTaskProcessor] = [EventTaskProcessor(), ProfileTaskProcessor(), DeviceTaskProcessor(), PushTokenTaskProcessor(), SessionConcludeTaskProcessor()]
 
     private var pendingTaskDAO: PendingTaskDAO
 }

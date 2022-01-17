@@ -30,6 +30,12 @@ struct Event: HandyJSON {
         self.properties = properties
         occurred = DateUtils.formatDateToUTCString(date: Date())
     }
+    
+    init(eventName: String, deviceProps: [String: Any?]) {
+        name = eventName
+        self.deviceProps = deviceProps as [String : Any]
+        occurred = DateUtils.formatDateToUTCString(date: Date())
+    }
 
     init(from decoder: Decoder) throws {}
 

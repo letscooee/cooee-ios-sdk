@@ -39,6 +39,7 @@ struct Constants {
     static let TIME_TO_WAIT_SECONDS = 6.0 ;
     static let FONT_REFRESH_INTERVAL_DAYS = 7
     static let SCREENSHOT_SEND_INTERVAL_HOURS = 6
+    static let PLATFORM = "iOS"
 
     // region All Server Endpoint
     static let BASE_URL = "https://api.sdk.letscooee.com"
@@ -48,6 +49,7 @@ struct Constants {
     static let keepAlive = "/v1/session/keepAlive"
     static let saveFCM = "/v1/user/setFirebaseToken"
     static let updateProfile = "/v1/user/update"
+    static let deviceUpdate = "/v1/device/update"
     static let triggerDetails = "/v1/trigger/details/"
     static let appConfig = "/v1/app/config/"
     static let uploadScreenshot = "/v1/app/uploadScreenshot"

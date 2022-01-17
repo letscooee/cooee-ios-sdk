@@ -36,6 +36,12 @@ class DeviceInfo {
             return UIDevice.current.batteryLevel * 100
         }
 
+        var isBatteryCharging: Bool {
+            UIDevice.current.isBatteryMonitoringEnabled = true
+
+            return UIDevice.current.batteryState == .charging
+        }
+
         var availableRAM: Int64 {
             var pagesize: vm_size_t = 0
 
@@ -56,7 +62,7 @@ class DeviceInfo {
                     vm_stat.inactive_count +
                     vm_stat.wire_count) * Int64(pagesize)
             let mem_free = Int64(vm_stat.free_count) * Int64(pagesize)
-            return mem_free
+            return mem_free / 1024 / 1024
         }
 
         var name: String {
@@ -88,7 +94,7 @@ class DeviceInfo {
                 guard let totalDiskSpaceInBytes = try FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory())[FileAttributeKey.systemFreeSize] as? Int64 else {
                     return 0
                 }
-                return totalDiskSpaceInBytes
+                return totalDiskSpaceInBytes / 1024 / 1024
             } catch {
                 return 0
             }
@@ -99,7 +105,7 @@ class DeviceInfo {
                 guard let totalDiskSpaceInBytes = try FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory())[FileAttributeKey.systemSize] as? Int64 else {
                     return 0
                 }
-                return totalDiskSpaceInBytes
+                return totalDiskSpaceInBytes / 1024 / 1024
             } catch {
                 return 0
             }
