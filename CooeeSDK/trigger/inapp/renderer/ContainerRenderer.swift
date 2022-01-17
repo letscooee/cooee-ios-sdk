@@ -28,7 +28,7 @@ struct ContainerRenderer: View {
 
     var body: some View {
         let contentAlignment = container.getGravity()
-        
+
         ZStack(alignment: .topLeading) {
             ZStack {
                 Text("").position(x: 0, y: 0)
@@ -36,14 +36,14 @@ struct ContainerRenderer: View {
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
 
             // .blur(radius: 18)
-            ZStack {
+            ZStack(alignment: contentAlignment) {
                 Text("").position(x: 0, y: 0)
                 ZStack(alignment: .topLeading) {
                     Text("").position(x: 0, y: 0)
                     ElementRenderer(elements, triggerContext).background(Color.white.opacity(0))
                 }.clipped().frame(UnitUtil.getScaledPixel(1080), UnitUtil.getScaledPixel(1920))
             }
-            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height,alignment: contentAlignment)
+            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         }
         .modifier(AbstractInAppRenderer(elementData: container, triggerContext: triggerContext, isContainer: true))
         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
