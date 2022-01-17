@@ -27,17 +27,21 @@ struct ContainerRenderer: View {
     let deviceHeight = UIScreen.main.bounds.height
 
     var body: some View {
-
         ZStack(alignment: .topLeading) {
             ZStack {
                 Text("").position(x: 0, y: 0)
             }
-                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
 
-                //.blur(radius: 18)
-
-
-            ElementRenderer(elements, triggerContext).background(Color.white.opacity(0))
+            // .blur(radius: 18)
+            ZStack {
+                Text("").position(x: 0, y: 0)
+                ZStack(alignment: .topLeading) {
+                    Text("").position(x: 0, y: 0)
+                    ElementRenderer(elements, triggerContext).background(Color.white.opacity(0))
+                }.clipped().frame(UnitUtil.getScaledPixel(1080), UnitUtil.getScaledPixel(1920))
+            }
+            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height,alignment: .center)
         }
         .modifier(AbstractInAppRenderer(elementData: container, triggerContext: triggerContext, isContainer: true))
         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
