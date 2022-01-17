@@ -90,7 +90,7 @@ class NotificationService {
             return
         }
 
-        if CooeeFactory.shared.runtimeData.isInForeground() {
+        if triggerData!.getPushNotification() == nil {
             EngagementTriggerHelper.loadLazyData(for: triggerData!)
             return
         }
