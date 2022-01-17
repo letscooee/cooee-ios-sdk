@@ -27,6 +27,8 @@ struct ContainerRenderer: View {
     let deviceHeight = UIScreen.main.bounds.height
 
     var body: some View {
+        let contentAlignment = container.getGravity()
+        
         ZStack(alignment: .topLeading) {
             ZStack {
                 Text("").position(x: 0, y: 0)
@@ -41,7 +43,7 @@ struct ContainerRenderer: View {
                     ElementRenderer(elements, triggerContext).background(Color.white.opacity(0))
                 }.clipped().frame(UnitUtil.getScaledPixel(1080), UnitUtil.getScaledPixel(1920))
             }
-            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height,alignment: .center)
+            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height,alignment: contentAlignment)
         }
         .modifier(AbstractInAppRenderer(elementData: container, triggerContext: triggerContext, isContainer: true))
         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
