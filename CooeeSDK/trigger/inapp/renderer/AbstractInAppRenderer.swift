@@ -61,18 +61,9 @@ struct AbstractInAppRenderer: ViewModifier {
                 }
         
                 .if(elementData.br != nil && elementData.br!.getStyle() == Border.Style.SOLID) {
-                    $0.padding(.bottom, elementData.getSpacing().getPaddingBottom(add: elementData.br!.getWidth()))
-                        .padding(.top, elementData.getSpacing().getPaddingTop(add: elementData.br!.getWidth()))
-                        .padding(.leading, elementData.getSpacing().getPaddingLeft(add: elementData.br!.getWidth()))
-                        .padding(.trailing, elementData.getSpacing().getPaddingRight(add: elementData.br!.getWidth()))
-                        .overlay(
+                    $0.overlay(
                             RoundedRectangle(cornerRadius: elementData.br!.getRadius())
-                                .strokeBorder(
-                                        style: StrokeStyle(
-                                                lineWidth: elementData.br!.getWidth()
-                                        )
-                                )
-                                .foregroundColor(Color(hex: elementData.br!.getColour(), alpha: elementData.br!.getAlpha()))
+                                .stroke(Color(hex: elementData.br!.getColour(), alpha: elementData.br!.getAlpha()), lineWidth: elementData.br!.getWidth())
                     )
                 }
                 .if(elementData.br != nil && elementData.br!.getStyle() == Border.Style.DASH) {
