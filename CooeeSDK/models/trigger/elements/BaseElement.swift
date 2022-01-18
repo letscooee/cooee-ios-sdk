@@ -11,7 +11,7 @@ import UIKit
 
 /**
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
 class BaseElement: HandyJSON {
     // MARK: Lifecycle
@@ -22,28 +22,35 @@ class BaseElement: HandyJSON {
     // MARK: Public
 
     public func getX(for viewWidth: CGFloat) -> CGFloat {
-        
+
         if viewWidth > UIScreen.main.bounds.width {
             let calculatedExtraSpace = viewWidth - UIScreen.main.bounds.width
-            
-            return (getX() + (calculatedExtraSpace/2))
+
+            return (getX() + (calculatedExtraSpace / 2))
         }
-        
-        
+
+
         return x == nil ? 0 : UnitUtil.getScaledPixel(x!)
     }
 
     public func getY(for viewHeight: CGFloat) -> CGFloat {
-        
+
         if viewHeight > UIScreen.main.bounds.height {
+            let safeArea = UIApplication.shared.connectedScenes.filter({ $0.activationState == .foregroundActive }).map({ $0 as? UIWindowScene }).compactMap({ $0 }).first?.windows.filter({ $0.isKeyWindow }).first?.safeAreaInsets
+            let safeAreaTop = safeArea?.top ?? 40
+            let safeAreaBottom = safeArea?.bottom ?? 40
             let calculatedExtraSpace = viewHeight - UIScreen.main.bounds.height
-            
-            return (getY() + (calculatedExtraSpace/2))
+
+            if safeAreaTop > 20 {
+                return (getY() + (calculatedExtraSpace / 2)) + (safeAreaBottom + safeAreaTop)
+            }
+
+            return (getY() + (calculatedExtraSpace / 2))
         }
-        
+
         return y == nil ? 0 : UnitUtil.getScaledPixel(y!)
     }
-    
+
     public func getX(_ parentView: UIView? = nil) -> CGFloat {
         return x == nil ? 0 : UnitUtil.getScaledPixel(x!)
     }
@@ -67,7 +74,7 @@ class BaseElement: HandyJSON {
     public func getClickAction() -> ClickAction? {
         clc
     }
-    
+
     public func getSpacing() -> Spacing {
         spc ?? Spacing()
     }
