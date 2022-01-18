@@ -93,15 +93,17 @@ class BaseHTTPService {
         _ = try webService.getResponse(fromURL: Constants.updateProfile, method: .PUT, params: requestData,
                 header: commonHeaders.getDictionary())
     }
-    
+
     func updateDeviceProp(requestData: [String: Any]) throws {
         _ = try webService.getResponse(fromURL: Constants.deviceUpdate, method: .PUT, params: requestData,
                 header: commonHeaders.getDictionary())
     }
 
     func sendEvent(event: Event) throws {
-        _ = try webService.getResponse(fromURL: Constants.trackEvent, method: .POST, params: event.toJSON()!,
+        let responseData = try webService.getResponse(fromURL: Constants.trackEvent, method: .POST, params: event.toJSON()!,
                 header: commonHeaders.getDictionary())
+
+        EngagementTriggerHelper.renderInAppTriggerFromResponse(response: responseData);
     }
 
     func loadTriggerDetails(id triggerId: String) throws -> [String: Any] {
@@ -117,8 +119,8 @@ class BaseHTTPService {
     func getAppConfig(appID: String) throws -> [String: Any]? {
         return try publicApiClient.getAppConfig(appID: appID)
     }
-    
-    func uploadScreenshot(imageToUpload: UIImage, screenName: String) throws -> [String: Any]?{
+
+    func uploadScreenshot(imageToUpload: UIImage, screenName: String) throws -> [String: Any]? {
         let response = try publicApiClient.uploadImage(imageToUpload: imageToUpload, screenName: screenName, header: commonHeaders.getDictionary())
         return response
     }
