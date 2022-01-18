@@ -64,9 +64,9 @@ class InAppTriggerScene: UIView {
         hostView.backgroundColor = UIColor.white.withAlphaComponent(0.0)
         parentView.addSubview(hostView)
         parentView.backgroundColor = UIColor.white.withAlphaComponent(0.0)
-        if inAppData!.cont != nil && inAppData!.cont!.bg != nil && inAppData!.cont!.bg!.g != nil {
-            parentView.addBlurredBackground(style: .light, alpha: inAppData!.cont!.bg!.g!.getRadius())
-        }
+//        if inAppData!.cont != nil && inAppData!.cont!.bg != nil && inAppData!.cont!.bg!.g != nil {
+//            parentView.addBlurredBackground(style: .light, alpha: inAppData!.cont!.bg!.g!.getRadius())
+//        }
         setAnimations()
         viewController.view.addSubview(parentView)
 

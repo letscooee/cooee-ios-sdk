@@ -32,6 +32,8 @@ struct ContainerRenderer: View {
         ZStack(alignment: .topLeading) {
             ZStack {
                 Text("").position(x: 0, y: 0)
+            }.if (container.bg != nil && container.bg!.g != nil) {
+                $0.background(BlurBackground(effect: UIBlurEffect(style: .light)))
             }
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
 
@@ -54,4 +56,10 @@ struct ContainerRenderer: View {
     private var container: Container
     private var elements: [[String: Any]]
     private var triggerContext: TriggerContext
+}
+
+struct BlurBackground: UIViewRepresentable {
+    var effect: UIVisualEffect?
+    func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
+    func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
 }
