@@ -28,7 +28,8 @@ struct Spacing: HandyJSON {
      - Returns: padding in ``CGFloat``
      */
     public func getPaddingLeft(add value: CGFloat = 0) -> CGFloat {
-        return UnitUtil.getScaledPixel(pl ?? p ?? 0) + value
+        let padding = UnitUtil.getScaledPixel(pl ?? p ?? 0)
+        return padding == 0 ? value : padding
     }
 
     /**
@@ -41,7 +42,8 @@ struct Spacing: HandyJSON {
      - Returns: padding in ``CGFloat``
      */
     public func getPaddingRight(add value: CGFloat = 0) -> CGFloat {
-        return UnitUtil.getScaledPixel(pr ?? p ?? 0) + value
+        let padding = UnitUtil.getScaledPixel(pr ?? p ?? 0)
+        return padding == 0 ? value : padding
     }
 
     /**
@@ -54,7 +56,8 @@ struct Spacing: HandyJSON {
      - Returns: padding in ``CGFloat``
      */
     public func getPaddingTop(add value: CGFloat = 0) -> CGFloat {
-        return UnitUtil.getScaledPixel(pt ?? p ?? 0) + value
+        let padding = UnitUtil.getScaledPixel(pt ?? p ?? 0)
+        return padding == 0 ? value : padding
     }
 
     /**
@@ -67,7 +70,8 @@ struct Spacing: HandyJSON {
      - Returns: padding in ``CGFloat``
      */
     public func getPaddingBottom(add value: CGFloat = 0) -> CGFloat {
-        return UnitUtil.getScaledPixel(pb ?? p ?? 0) + value
+        let padding = UnitUtil.getScaledPixel(pb ?? p ?? 0)
+        return padding == 0 ? value : padding
     }
 
     // MARK: Private
