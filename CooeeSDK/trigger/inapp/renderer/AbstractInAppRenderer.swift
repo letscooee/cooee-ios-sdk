@@ -86,7 +86,7 @@ struct AbstractInAppRenderer: ViewModifier {
                     $0.cornerRadius(elementData.br!.getRadius())
                 }
                 .if(elementData.shd != nil) {
-                    $0.shadow(radius: CGFloat(elementData.shd!.getElevation()))
+                    $0.shadow(radius: CGFloat(elementData.shd!.getElevation()), x: 20, y: 20)
                 }
                 .if(calculatedWidth != nil && calculatedHeight != nil && !isContainer) {
                     $0.frame(width: calculatedWidth!, height: calculatedHeight!)
