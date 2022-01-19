@@ -38,12 +38,12 @@ struct ElementRenderer: View {
                 // TODO: Solution is working good but not a good approach to pace element in background of view; Need to rework
                 if textElement!.getCalculatedWidth() ?? 0 <= deviceWidth {
                     TextRenderer(textElement!, triggerContext)
-                            .modifier(AbstractInAppRenderer(elementData: textElement!, triggerContext: triggerContext, isContainer: false))
+                            .modifier(AbstractInAppRenderer(elementData: textElement!, triggerContext: triggerContext, isText: true))
                 } else {
                     ZStack {
                     }.background(
                             TextRenderer(textElement!, triggerContext)
-                                    .modifier(AbstractInAppRenderer(elementData: textElement!, triggerContext: triggerContext, isContainer: false))
+                                    .modifier(AbstractInAppRenderer(elementData: textElement!, triggerContext: triggerContext, isText: true))
 
                                     // Reference to add GeometryReader & onPreferenceChange which will help to keep watch on height of element
                                     // https://stackoverflow.com/a/56782264/9256497
@@ -72,12 +72,12 @@ struct ElementRenderer: View {
 
                 if buttonElement!.getCalculatedWidth() ?? 0 <= deviceWidth {
                     ButtonRenderer(buttonElement!, triggerContext)
-                            .modifier(AbstractInAppRenderer(elementData: buttonElement!, triggerContext: triggerContext, isContainer: false))
+                            .modifier(AbstractInAppRenderer(elementData: buttonElement!, triggerContext: triggerContext, isText: true))
                 } else {
                     ZStack {
                     }.background(
                             ButtonRenderer(buttonElement!, triggerContext)
-                                    .modifier(AbstractInAppRenderer(elementData: buttonElement!, triggerContext: triggerContext, isContainer: false))
+                                    .modifier(AbstractInAppRenderer(elementData: buttonElement!, triggerContext: triggerContext, isText: true))
 
                                     // Reference to add GeometryReader & onPreferenceChange which will help to keep watch on height of element
                                     // https://stackoverflow.com/a/56782264/9256497
