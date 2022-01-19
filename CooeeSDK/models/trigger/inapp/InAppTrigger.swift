@@ -7,7 +7,7 @@ import HandyJSON
 
 /**
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
 class InAppTrigger: HandyJSON {
     // MARK: Lifecycle
@@ -30,9 +30,22 @@ class InAppTrigger: HandyJSON {
         }
     }
 
+    public func getCanvasWidth() -> Float {
+        w ?? 1080
+    }
+
+    public func getCanvasHeight() -> Float {
+        h ?? 1920
+    }
+
     // MARK: Internal
 
-    var cont: Container?
-    var elems: [[String: Any]]?
-    private var o: Int?
+    var cont: Container?        // Container
+    var elems: [[String: Any]]? // Elements
+
+    // MARK: Private
+
+    private var o: Int?         // In-App orientation
+    private var w: Float?       // In-App canvas width
+    private var h: Float?       // In-App canvas height
 }

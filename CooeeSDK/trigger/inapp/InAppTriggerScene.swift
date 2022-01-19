@@ -2,10 +2,10 @@
 // Created by Ashish Gaikwad on 21/10/21.
 //
 
-import Foundation
-import UIKit
 import AVFoundation
+import Foundation
 import SwiftUI
+import UIKit
 
 /**
  InAppTriggerScene is a class which process iam block from payload and renders UI to the screen with the help of SwiftUI
@@ -14,17 +14,65 @@ import SwiftUI
  - Since: 1.3.0
  */
 class InAppTriggerScene: UIView {
+    // MARK: Public
+
+    public static let instance = InAppTriggerScene()
+
+    public func updateViewWith(data: TriggerData, on viewController: UIViewController) throws {
+        parentView = UIView()
+        commonInit()
+        triggerData = data
+        inAppData = data.getInAppTrigger()
+
+        publishCanvasSize()
+
+        if inAppData == nil {
+            throw CustomError.EmptyInAppData
+        }
+        // updateDeviceOrientation(inAppData!.getOrientation()) // Skipping orientation lock in 1.3.0 release
+        triggerContext.setTriggerData(triggerData: triggerData!)
+        triggerContext.setTriggerParentLayout(triggerParentLayout: parentView)
+        triggerContext.setPresentViewController(presentViewController: viewController)
+
+        triggerContext.onExit { _ in
+            self.finish()
+        }
+
+        let host = UIHostingController(rootView: ContainerRenderer(inAppTrigger: inAppData!, triggerContext).edgesIgnoringSafeArea(.all))
+        guard let hostView = host.view else {
+            CooeeFactory.shared.sentryHelper.capture(message: "Loading SwiftUI failed")
+            return
+        }
+
+        hostView.insetsLayoutMarginsFromSafeArea = false
+        hostView.translatesAutoresizingMaskIntoConstraints = false
+        hostView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        hostView.backgroundColor = UIColor.white.withAlphaComponent(0.0)
+
+        parentView.addSubview(hostView)
+        parentView.backgroundColor = UIColor.white.withAlphaComponent(0.0)
+
+        setAnimations()
+        viewController.view.addSubview(parentView)
+
+        startTime = Date()
+        sendTriggerDisplayedEvent()
+    }
+
+    // MARK: Internal
+
     var parentView: UIView!
+
+    // MARK: Private
 
     private var triggerData: TriggerData?
     private var inAppData: InAppTrigger?
 
     private var sentryHelper: SentryHelper?
     private var triggerContext = TriggerContext()
-    public static let instance = InAppTriggerScene()
-    private var startTime: Date? = nil
+    private var startTime: Date?
 
-    private var deviceDefaultOrientation: UIInterfaceOrientation = UIInterfaceOrientation.portrait
+    private var deviceDefaultOrientation = UIInterfaceOrientation.portrait
 
     private func commonInit() {
         let bundle = Bundle(for: type(of: self))
@@ -35,49 +83,12 @@ class InAppTriggerScene: UIView {
         parentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
 
-    public func updateViewWith(data: TriggerData, on viewController: UIViewController) throws {
-        parentView = UIView()
-        commonInit()
-        self.triggerData = data
-        self.inAppData = data.getInAppTrigger()
-
-        if self.inAppData == nil {
-            throw CustomError.EmptyInAppData
-        }
-        //updateDeviceOrientation(inAppData!.getOrientation()) // Skipping orientation lock in 1.3.0 release
-        triggerContext.setTriggerData(triggerData: triggerData!)
-        triggerContext.setTriggerParentLayout(triggerParentLayout: parentView)
-        triggerContext.setPresentViewController(presentViewController: viewController)
-
-        triggerContext.onExit() { data in
-            self.finish()
-        }
-
-        let host = UIHostingController(rootView: ContainerRenderer(inAppTrigger: inAppData!, triggerContext).edgesIgnoringSafeArea(.all))
-        guard let hostView = host.view else {
-            CooeeFactory.shared.sentryHelper.capture(message: "Loading SwiftUI failed")
-            return
-        }
-        hostView.insetsLayoutMarginsFromSafeArea = false
-        hostView.translatesAutoresizingMaskIntoConstraints = false
-        hostView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        hostView.backgroundColor = UIColor.white.withAlphaComponent(0.0)
-        parentView.addSubview(hostView)
-        parentView.backgroundColor = UIColor.white.withAlphaComponent(0.0)
-//        if inAppData!.cont != nil && inAppData!.cont!.bg != nil && inAppData!.cont!.bg!.g != nil {
-//            parentView.addBlurredBackground(style: .light, alpha: inAppData!.cont!.bg!.g!.getRadius())
-//        }
-        setAnimations()
-        viewController.view.addSubview(parentView)
-
-
-        startTime = Date()
-        sendTriggerDisplayedEvent()
+    private func publishCanvasSize() {
+        UnitUtil.STANDARD_RESOLUTION_WIDTH = inAppData?.getCanvasWidth() ?? 1080
+        UnitUtil.STANDARD_RESOLUTION_HEIGHT = inAppData?.getCanvasHeight() ?? 1920
     }
 
-
     private func updateDeviceOrientation(_ orientation: UIInterfaceOrientation) {
-
         if let currentOrientation = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.windowScene?.interfaceOrientation {
             deviceDefaultOrientation = currentOrientation
         }
@@ -124,19 +135,19 @@ class InAppTriggerScene: UIView {
         UIView.animate(withDuration: 0.5, animations: {
             switch exitAnimation {
                 case .SLIDE_OUT_LEFT:
-                    self.parentView.frame = CGRect(x: (0 - UIScreen.main.bounds.width), y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                    self.parentView.frame = CGRect(x: 0 - UIScreen.main.bounds.width, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                 case .SLIDE_OUT_TOP:
-                    self.parentView.frame = CGRect(x: 0, y: (0 - UIScreen.main.bounds.height), width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                    self.parentView.frame = CGRect(x: 0, y: 0 - UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                 case .SLIDE_OUT_DOWN:
-                    return self.parentView.frame = CGRect(x: 0, y: (0 + UIScreen.main.bounds.height), width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                    return self.parentView.frame = CGRect(x: 0, y: 0 + UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                 case .SLIDE_OUT_RIGHT:
-                    self.parentView.frame = CGRect(x: (0 + UIScreen.main.bounds.width), y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                    self.parentView.frame = CGRect(x: 0 + UIScreen.main.bounds.width, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             }
-        }, completion: { (finished: Bool) in
+        }, completion: { (_: Bool) in
             self.parentView.removeFromSuperview()
         })
 
         // revert device to previous device orientation
-        //updateDeviceOrientation(deviceDefaultOrientation) // Skipping orientation lock in 1.3.0 release
+        // updateDeviceOrientation(deviceDefaultOrientation) // Skipping orientation lock in 1.3.0 release
     }
 }
