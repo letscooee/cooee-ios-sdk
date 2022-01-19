@@ -81,19 +81,19 @@ class BaseElement: HandyJSON {
 
     // MARK: Internal
 
-    var bg: Background?
-    var br: Border?
-    var shd: Shadow?
-    var spc: Spacing?
-    var trf: Transform?
-    var clc: ClickAction?
+    var bg: Background?     // Background
+    var br: Border?         // Border
+    var shd: Shadow?        // Shadow
+    var spc: Spacing?       // Spacing
+    var trf: Transform?     // Transform
+    var clc: ClickAction?   // ClickAction
 
     // MARK: Private
 
-    private var t: Int?
-    private var x: Float?
-    private var y: Float?
-    private var z: Float?
-    private var w: Float?
-    private var h: Float?
+    private var t: Int?     // Type
+    private var x: Float?   // X position
+    private var y: Float?   // Y position
+    private var z: Float?   // Z index
+    private var w: Float?   // Width
+    private var h: Float?   // Height
 }
