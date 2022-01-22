@@ -4,9 +4,6 @@
 //
 //  Created by Ashish Gaikwad on 01/10/21.
 //
-
-import FirebaseCore
-import FirebaseMessaging
 import Foundation
 
 /**
@@ -21,12 +18,10 @@ class CooeeBootstrap: NSObject {
     override public init() {
         super.init()
         self.swizzleDidReceiveRemoteNotification()
-        _ = CooeeFactory.shared
+        self.registerForPushNotification()
         _ = AppLifeCycle.shared
-
         DispatchQueue.main.async {
-            self.registerFirebase()
-            self.updateFirebaseToken()
+            _ = CooeeFactory.shared
             self.startPendingTaskJob()
             FontProcessor.checkAndUpdateBrandFonts()
         }
@@ -36,7 +31,7 @@ class CooeeBootstrap: NSObject {
     // MARK: Internal
 
     func notificationClicked(_ triggerData: TriggerData) {
-        NotificationService.sendEvent("CE Notification Clicked", withTriggerData: triggerData)
+        CooeeNotificationService.sendEvent("CE Notification Clicked", withTriggerData: triggerData)
 
         guard let notificationClickAction = triggerData.getPushNotification()?.getClickAction() else {
             self.launchInApp(with: triggerData)
@@ -92,39 +87,21 @@ class CooeeBootstrap: NSObject {
         CooeeJobUtils.schedulePendingTaskJob()
     }
 
-    private func registerFirebase() {
-        FirebaseApp.configure()
+    private func registerForPushNotification() {
         UNUserNotificationCenter.current().delegate = self
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(
                 options: authOptions,
                 completionHandler: { _, _ in })
 
-        Messaging.messaging().delegate = self
         UIApplication.shared.registerForRemoteNotifications()
-    }
-
-    private func updateFirebaseToken() {
-        Messaging.messaging().token { token, _ in
-            var requestBody = [String: Any]()
-            requestBody["firebaseToken"] = token
-            CooeeFactory.shared.safeHttpService.updatePushToken(requestData: requestBody)
-        }
-    }
-}
-
-extension CooeeBootstrap: MessagingDelegate {
-    public func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        var requestBody = [String: Any]()
-        requestBody["firebaseToken"] = fcmToken
-        CooeeFactory.shared.safeHttpService.updatePushToken(requestData: requestBody)
     }
 }
 
 extension CooeeBootstrap {
     @objc
     public func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        _ = NotificationService(userInfo: userInfo)
+        _ = CooeeNotificationService(userInfo: userInfo)
         completionHandler(.newData)
     }
 }
@@ -150,7 +127,7 @@ extension CooeeBootstrap: UNUserNotificationCenterDelegate {
 
         switch response.actionIdentifier {
             case UNNotificationDismissActionIdentifier:
-                NotificationService.sendEvent("CE Notification Cancelled", withTriggerData: triggerData!)
+                CooeeNotificationService.sendEvent("CE Notification Cancelled", withTriggerData: triggerData!)
                 break
             case UNNotificationDefaultActionIdentifier:
                 self.notificationClicked(triggerData!)
