@@ -44,6 +44,8 @@ class AppLifeCycle: NSObject {
 
         let session = Event(eventName: "CE App Background", properties: sessionProperties)
         CooeeFactory.shared.safeHttpService.sendEvent(event: session)
+
+        CooeeNotificationService.processPendingNotification()
     }
 
     @objc func appMovedToLaunch() {
