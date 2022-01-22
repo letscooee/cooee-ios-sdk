@@ -8,7 +8,7 @@
 import Foundation
 import NotificationCenter
 
-class NotificationService {
+class CooeeNotificationService {
     // MARK: Lifecycle
 
     init(userInfo: [AnyHashable: Any]) {
