@@ -26,6 +26,11 @@ class UnitUtil {
 
     public static func getScaledPixel(_ value: Float) -> CGFloat {
         getScalingFactor()
+
+        if SCALLING_FACTOR > 1 {
+            SCALLING_FACTOR = 1
+        }
+
         return CGFloat(value * SCALLING_FACTOR)
     }
 
