@@ -42,7 +42,7 @@ public final class CooeeSDK {
     public func sendEvent(eventName: String, eventProperties: [String: Any]) throws {
         for (key, _) in eventProperties {
             let prefix = String(key.prefix(2))
-            print(prefix)
+
             if prefix.caseInsensitiveCompare(Constants.SYSTEM_DATA_PREFIX) == .orderedSame {
                 throw CustomError.PropertyError
             }
@@ -102,6 +102,25 @@ public final class CooeeSDK {
 
     public func getOnCTAListener() -> CooeeCTADelegate? {
         onCTAHandler
+    }
+
+    /**
+     Send APNS device token to server
+     - Parameter data: data provided by application(application:didRegisterForRemoteNotificationsWithDeviceToken:)
+     */
+    public func setDeviceToken(token data: Data?) {
+
+        guard let rawToken = data else {
+            NSLog("Received empty device token")
+            return
+        }
+
+        let tokenString = rawToken.reduce("", { $0 + String(format: "%02X", $1) })
+        var requestBody = [String: Any]()
+        requestBody["pushToken"] = tokenString
+
+        CooeeFactory.shared.safeHttpService.updatePushToken(requestData: requestBody)
+
     }
 
     // MARK: Private
