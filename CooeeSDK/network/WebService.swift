@@ -17,6 +17,11 @@ import HandyJSON
 class WebService: NSObject {
     // MARK: Internal
 
+    override init(){
+        debuging = SDKInfo.shared.cachedInfo.isDebugging
+    }
+    
+    let debugging:Bool
     static let shared = WebService()
 
     func getResponse(fromURL: String, method: httpMethod, params: [String: Any?], header: [String: String]) throws -> [String: Any]? {
@@ -33,13 +38,16 @@ class WebService: NSObject {
             request.httpBody = params.percentEncoded()
         }
         request.allHTTPHeaderFields = header
-        print("""
+        
+        if debugging {
+        NSLog("""
               \n-------WS Params--------\n
               Request Body:\(params)\n
               Request Headers:\(header)\n
               Request URL:\(url)\n
               -------End WS Params--------
               """)
+        }
 
         group.enter()
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
@@ -57,15 +65,17 @@ class WebService: NSObject {
     private func processResponse(_ data: Data?, _ error: Error?) throws -> [String: Any]? {
         guard let data = data, error == nil
         else {
-            print("error", error ?? "Unknown error")
             throw error!
         }
         let responseString = String(data: data, encoding: .utf8)?.convertToDictionary()
-        print("""
+        
+        if debugging {
+        NSLog("""
               \n-------WS Response--------\n
               \(String(describing: responseString))\n
               -------End WS Response--------
               """)
+        }
 
         return responseString
     }

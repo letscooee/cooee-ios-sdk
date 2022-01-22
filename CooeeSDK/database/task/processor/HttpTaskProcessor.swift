@@ -32,11 +32,11 @@ class HttpTaskProcessor<T: HandyJSON>: AbstractPendingTaskProcessor<T> {
      - Parameter task: Task to process.
      */
     override func process(_ task: PendingTasks) {
-        print("Processing Task: \(task.id)")
+        NSLog("Processing Task: \(task.id)")
         let data = deserialize(task)
 
         if !(userAuthService.hasToken()) {
-            print("Don't have SDK token. Abort processing \(task.id)")
+            NSLog("Don't have SDK token. Abort processing \(task.id)")
             return
         }
 

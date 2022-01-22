@@ -9,10 +9,10 @@ import Foundation
 
 class PendingTaskJob: PendingTaskJobProcessor {
     func startJob() {
-        print("PendingTaskJob running")
+        NSLog("PendingTaskJob running")
         let deviceAuthService = CooeeFactory.shared.userAuthService
         if !deviceAuthService.hasToken() {
-            print("Abort PendingTaskJob. Do not have the SDK token")
+            NSLog("Abort PendingTaskJob. Do not have the SDK token")
             return
         }
 
