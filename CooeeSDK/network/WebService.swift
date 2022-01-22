@@ -18,10 +18,11 @@ class WebService: NSObject {
     // MARK: Internal
 
     override init(){
-        debuging = SDKInfo.shared.cachedInfo.isDebugging
+        debugging = SDKInfo.shared.cachedInfo.isDebugging
     }
     
     let debugging:Bool
+    
     static let shared = WebService()
 
     func getResponse(fromURL: String, method: httpMethod, params: [String: Any?], header: [String: String]) throws -> [String: Any]? {
