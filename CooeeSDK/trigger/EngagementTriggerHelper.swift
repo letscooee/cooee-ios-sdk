@@ -10,10 +10,31 @@ import UIKit
  A small helper class for any kind of engagement trigger like caching or retrieving from local storage.
 
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
 public class EngagementTriggerHelper {
     // MARK: Public
+
+    /**
+      Start rendering the in-app trigger from the the raw response received from the backend API.
+
+      - Parameter data: Data received from the backend
+      */
+    public static func renderInAppTriggerFromResponse(response data: [String: Any]?) {
+        if data == nil {
+            return
+        }
+
+        guard let rawTriggerData = data!["triggerData"] as? [String: Any] else {
+            return
+        }
+
+        guard let triggerData = TriggerData.deserialize(from: rawTriggerData) else {
+            return
+        }
+
+        renderInAppTrigger(triggerData)
+    }
 
     public static func renderInAppTriggerFromJSONString(_ rawTriggerData: String) {
         let triggerData = TriggerData.deserialize(from: rawTriggerData)
@@ -67,15 +88,7 @@ public class EngagementTriggerHelper {
         let runtimeData = CooeeFactory.shared.runtimeData
         storeActiveTriggerDetails(triggerData: triggerData)
 
-        if runtimeData.isFirstForeground() {
-            Timer.scheduledTimer(withTimeInterval: Constants.TIME_TO_WAIT_SECONDS, repeats: false) { _ in
-                loadLazyData(for: triggerData)
-            }
-        } else {
-            Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { _ in
-                loadLazyData(for: triggerData)
-            }
-        }
+        loadLazyData(for: triggerData)
     }
 
     /**

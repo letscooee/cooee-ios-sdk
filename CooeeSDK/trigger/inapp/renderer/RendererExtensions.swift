@@ -7,7 +7,7 @@ import SwiftUI
 import UIKit
 
 extension UIView {
-    
+
     /**
      Create a shape containing dashed border and add it as sub layer in UIView
      - Parameters:
@@ -71,6 +71,8 @@ extension UIView {
         let blurEffect = UIBlurEffect(style: style)
         let blurView = UIVisualEffectView(effect: blurEffect)
         blurView.frame = self.frame
+        blurView.layer.cornerRadius = 15
+        blurView.clipsToBounds = true
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.addSubview(blurView)
         self.sendSubviewToBack(blurView)
@@ -78,7 +80,7 @@ extension UIView {
 }
 
 extension Color {
-    
+
     /**
      Create Color from given hex
      - Parameters:
@@ -91,7 +93,7 @@ extension Color {
 }
 
 public extension View {
-    
+
     /**
      Extension to add multiple properties to the element via if condition
 
@@ -101,8 +103,11 @@ public extension View {
      */
     @ViewBuilder
     internal func `if`<Transform: View>(_ condition: Bool, transform: (Self) -> Transform) -> some View {
-        if condition { transform(self) }
-        else { self }
+        if condition {
+            transform(self)
+        } else {
+            self
+        }
     }
 
     func frame(_ width: CGFloat, _ height: CGFloat) -> some View {
@@ -127,7 +132,7 @@ public extension View {
 }
 
 public extension Text {
-    
+
     func bold(_ isBold: Bool) -> Text {
         if isBold {
             return self.bold()
@@ -154,33 +159,33 @@ public extension Text {
 }
 
 struct FontWithLineHeight: ViewModifier {
-    
+
     let font: UIFont
     let lineHeight: CGFloat
 
     func body(content: Content) -> some View {
         content
-            .font(SwiftUI.Font(self.font))
-            .lineSpacing(self.lineHeight - self.font.lineHeight)
-            .padding(.vertical, (self.lineHeight - self.font.lineHeight) / 2)
+                .font(SwiftUI.Font(self.font))
+                .lineSpacing(self.lineHeight - self.font.lineHeight)
+                .padding(.vertical, (self.lineHeight - self.font.lineHeight) / 2)
     }
 }
 
 extension UIFont {
-    
-  static func register(from url: URL) {
-    guard let fontDataProvider = CGDataProvider(url: url as CFURL) else {
-      print("could not get reference to font data provider")
-      return
+
+    static func register(from url: URL) {
+        guard let fontDataProvider = CGDataProvider(url: url as CFURL) else {
+            NSLog("Could not get reference to font data provider")
+            return
+        }
+        guard let font = CGFont(fontDataProvider) else {
+            NSLog("Could not get font from coregraphics")
+            return
+        }
+        var error: Unmanaged<CFError>?
+        guard CTFontManagerRegisterGraphicsFont(font, &error) else {
+            NSLog("Error registering font: \(error.debugDescription)")
+            return
+        }
     }
-    guard let font = CGFont(fontDataProvider) else {
-      print("could not get font from coregraphics")
-      return
-    }
-    var error: Unmanaged<CFError>?
-    guard CTFontManagerRegisterGraphicsFont(font, &error) else {
-      print("error registering font: \(error.debugDescription)")
-      return
-    }
-  }
 }

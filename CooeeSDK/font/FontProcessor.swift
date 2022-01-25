@@ -44,7 +44,7 @@ class FontProcessor {
         do {
             return try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
         } catch {
-            print(error)
+            NSLog("Fail to get write access \(error)")
             return URL(string: "")!
         }
     }
@@ -124,7 +124,7 @@ class FontProcessor {
         let outputList = [AppFont].deserialize(from: rawFontList)
 
         if outputList == nil {
-            print("Received empty font list")
+            NSLog("Received empty font list")
             return
         }
 

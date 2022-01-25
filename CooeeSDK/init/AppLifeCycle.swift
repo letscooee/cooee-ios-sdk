@@ -44,35 +44,42 @@ class AppLifeCycle: NSObject {
 
         let session = Event(eventName: "CE App Background", properties: sessionProperties)
         CooeeFactory.shared.safeHttpService.sendEvent(event: session)
+
+        CooeeNotificationService.processPendingNotification()
     }
 
     @objc func appMovedToLaunch() {
         runtimeData.setInForeground()
-        NewSessionExecutor().execute()
+        DispatchQueue.main.async {
+            NewSessionExecutor().execute()
+        }
+
     }
 
     @objc func appMovedToForeground() {
-        keepSessionAlive()
+        DispatchQueue.main.async {
+            self.keepSessionAlive()
 
-        if runtimeData.isFirstForeground() {
-            return
-        }
+            if self.runtimeData.isFirstForeground() {
+                return
+            }
 
-        runtimeData.setInForeground()
+            self.runtimeData.setInForeground()
 
-        let backgroundDuration = runtimeData.getTimeInBackgroundInSeconds()
+            let backgroundDuration = self.runtimeData.getTimeInBackgroundInSeconds()
 
-        if backgroundDuration > Constants.IDLE_TIME_IN_SECONDS {
-            sessionManager.conclude()
+            if backgroundDuration > Constants.IDLE_TIME_IN_SECONDS {
+                self.sessionManager.conclude()
 
-            NewSessionExecutor().execute()
-            print("After 30 min of App Background " + "Session Concluded")
-        } else {
-            var eventProps = [String: Any]()
-            eventProps["Background Duration"] = backgroundDuration
-            let session = Event(eventName: "CE App Foreground", properties: eventProps)
+                NewSessionExecutor().execute()
+                NSLog("After 30 min of App Background " + "Session Concluded")
+            } else {
+                var eventProps = [String: Any]()
+                eventProps["Background Duration"] = backgroundDuration
+                let session = Event(eventName: "CE App Foreground", properties: eventProps)
 
-            CooeeFactory.shared.safeHttpService.sendEvent(event: session)
+                CooeeFactory.shared.safeHttpService.sendEvent(event: session)
+            }
         }
     }
 

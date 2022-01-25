@@ -17,7 +17,6 @@ import UIKit
 public class AppController {
 
     public static func configure() {
-        print("init")
         _ = CooeeBootstrap()
     }
 }

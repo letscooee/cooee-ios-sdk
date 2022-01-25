@@ -24,8 +24,9 @@ struct ElementRenderer: View {
 
     // MARK: Internal
 
-    var body: some View {
+    @State var childSize: CGSize = .zero
 
+    var body: some View {
         let count: Int = elements.count
         ForEach(0..<count) { index in
             let child = elements[index]
@@ -34,31 +35,125 @@ struct ElementRenderer: View {
             if ElementType.TEXT == baseElement!.getElementType() {
                 let textElement = TextElement.deserialize(from: child)
 
-                TextRenderer(textElement!, triggerContext)
-                        .modifier(AbstractInAppRenderer(elementData: textElement!, triggerContext: triggerContext, isContainer: false))
+                // TODO: Solution is working good but not a good approach to pace element in background of view; Need to rework
+                if textElement!.getCalculatedWidth() ?? 0 <= deviceWidth {
+                    TextRenderer(textElement!, triggerContext)
+                            .modifier(AbstractInAppRenderer(elementData: textElement!, triggerContext: triggerContext, isText: true))
+                } else {
+                    ZStack {
+                    }.background(
+                            TextRenderer(textElement!, triggerContext)
+                                    .modifier(AbstractInAppRenderer(elementData: textElement!, triggerContext: triggerContext, isText: true))
+
+                                    // Reference to add GeometryReader & onPreferenceChange which will help to keep watch on height of element
+                                    // https://stackoverflow.com/a/56782264/9256497
+
+                                    .height(childSize.height)
+                                    .background(
+                                            GeometryReader { proxy in
+                                                Color.clear
+                                                        .preference(
+                                                        key: SizePreferenceKey.self,
+                                                        value: proxy.size
+                                                )
+                                            }
+                                    )
+
+                                    .onPreferenceChange(SizePreferenceKey.self) { preferences in
+                                        self.childSize = preferences
+                                    }
+
+                    ).if(textElement!.getCalculatedWidth()! > deviceWidth) {
+                        $0.frame(maxWidth: deviceWidth, maxHeight: childSize.height)
+                    }
+                }
             } else if ElementType.BUTTON == baseElement!.getElementType() {
                 let buttonElement = ButtonElement.deserialize(from: child)
 
-                ButtonRenderer(buttonElement!, triggerContext)
-                        .modifier(AbstractInAppRenderer(elementData: buttonElement!, triggerContext: triggerContext, isContainer: false))
+                if buttonElement!.getCalculatedWidth() ?? 0 <= deviceWidth {
+                    ButtonRenderer(buttonElement!, triggerContext)
+                            .modifier(AbstractInAppRenderer(elementData: buttonElement!, triggerContext: triggerContext, isText: true))
+                } else {
+                    ZStack {
+                    }.background(
+                            ButtonRenderer(buttonElement!, triggerContext)
+                                    .modifier(AbstractInAppRenderer(elementData: buttonElement!, triggerContext: triggerContext, isText: true))
+
+                                    // Reference to add GeometryReader & onPreferenceChange which will help to keep watch on height of element
+                                    // https://stackoverflow.com/a/56782264/9256497
+                                    
+                                    .height(childSize.height)
+                                    .background(
+                                            GeometryReader { proxy in
+                                                Color.clear
+                                                        .preference(
+                                                        key: SizePreferenceKey.self,
+                                                        value: proxy.size
+                                                )
+                                            }
+                                    )
+
+                                    .onPreferenceChange(SizePreferenceKey.self) { preferences in
+                                        self.childSize = preferences
+                                    }
+
+                    ).if(buttonElement!.getCalculatedWidth()! > deviceWidth) {
+                        $0.frame(maxWidth: deviceWidth, maxHeight: childSize.height)
+                    }
+                }
             } else if ElementType.IMAGE == baseElement!.getElementType() {
                 let imageElement = ImageElement.deserialize(from: child)
 
-                // process image
-                ImageRenderer(
-                        url: URL(string: imageElement!.src!)!,
-                        placeholder: {
-                            // Image("placeholder").frame(width: 40) // etc.
-                        },
-                        image: {
-                            $0.resizable() // etc.
-                        }
-                ).modifier(AbstractInAppRenderer(elementData: imageElement!, triggerContext: triggerContext, isContainer: false))
+                if imageElement!.getCalculatedWidth()! <= deviceWidth && imageElement!.getCalculatedHeight()! <= deviceHeight {
+                    ImageRenderer(
+                            url: URL(string: imageElement!.src!)!,
+                            placeholder: {
+                                // Image("placeholder").frame(width: 40) // etc.
+                            },
+                            image: {
+                                $0.resizable() // etc.
+                            }
+                    ).modifier(AbstractInAppRenderer(elementData: imageElement!, triggerContext: triggerContext, isContainer: false))
+                } else {
+                    ZStack {
+                    }.background(
+                            ImageRenderer(
+                                    url: URL(string: imageElement!.src!)!,
+                                    placeholder: {
+                                        // Image("placeholder").frame(width: 40) // etc.
+                                    },
+                                    image: {
+                                        $0.resizable() // etc.
+                                    }
+                            ).modifier(AbstractInAppRenderer(elementData: imageElement!, triggerContext: triggerContext, isContainer: false))
+                    ).if(imageElement!.getCalculatedWidth()! > deviceWidth && imageElement!.getCalculatedHeight()! > deviceHeight) {
+                        $0.frame(maxWidth: deviceWidth, maxHeight: deviceHeight)
+                    }.if(imageElement!.getCalculatedWidth()! > deviceWidth && imageElement!.getCalculatedHeight()! < deviceHeight) {
+                        $0.frame(maxWidth: deviceWidth, maxHeight: imageElement!.getCalculatedHeight()!)
+                    }.if(imageElement!.getCalculatedWidth()! < deviceWidth && imageElement!.getCalculatedHeight()! > deviceHeight) {
+                        $0.frame(maxWidth: imageElement!.getCalculatedWidth()!, maxHeight: deviceHeight)
+                    }
+                }
+
             } else if ElementType.SHAPE == baseElement!.getElementType() {
                 let shapeElement = ShapeElement.deserialize(from: child)
 
-                ShapeRenderer(shapeElement!, triggerContext)
-                        .modifier(AbstractInAppRenderer(elementData: shapeElement!, triggerContext: triggerContext, isContainer: false))
+                if shapeElement!.getCalculatedWidth()! <= deviceWidth && shapeElement!.getCalculatedHeight()! <= deviceHeight {
+                    ShapeRenderer(shapeElement!, triggerContext)
+                            .modifier(AbstractInAppRenderer(elementData: shapeElement!, triggerContext: triggerContext, isContainer: false))
+                } else {
+                    ZStack {
+                    }.background(
+                            ShapeRenderer(shapeElement!, triggerContext)
+                                    .modifier(AbstractInAppRenderer(elementData: shapeElement!, triggerContext: triggerContext, isContainer: false))
+                    ).if(shapeElement!.getCalculatedWidth()! > deviceWidth && shapeElement!.getCalculatedHeight()! > deviceHeight) {
+                        $0.frame(maxWidth: deviceWidth, maxHeight: deviceHeight)
+                    }.if(shapeElement!.getCalculatedWidth()! > deviceWidth && shapeElement!.getCalculatedHeight()! < deviceHeight) {
+                        $0.frame(maxWidth: deviceWidth, maxHeight: shapeElement!.getCalculatedHeight()!)
+                    }.if(shapeElement!.getCalculatedWidth()! < deviceWidth && shapeElement!.getCalculatedHeight()! > deviceHeight) {
+                        $0.frame(maxWidth: shapeElement!.getCalculatedWidth()!, maxHeight: deviceHeight)
+                    }
+                }
             } else {
                 ZStack {
                 }
@@ -70,4 +165,6 @@ struct ElementRenderer: View {
 
     private var elements: [[String: Any]]
     private var triggerContext: TriggerContext
+    private let deviceWidth = UIScreen.main.bounds.width
+    private let deviceHeight = UIScreen.main.bounds.height
 }

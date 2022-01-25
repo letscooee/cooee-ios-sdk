@@ -36,7 +36,7 @@ class InfoPlistReader {
                     appSecret = propList["COOEE_APP_SECRET"] as? String ?? ""
                 }
             } catch {
-                print(error)
+                NSLog("Fail to read Info.plist: \(error)")
             }
         }
     }

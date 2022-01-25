@@ -53,7 +53,7 @@ class PendingTaskDAO {
     }
 
     func delete(_ pendingTask: PendingTasks) {
-        print("Deleting Task \(pendingTask.id)")
+        NSLog("Deleting Task \(pendingTask.id)")
         let context = database.viewContext
         context.delete(pendingTask)
 

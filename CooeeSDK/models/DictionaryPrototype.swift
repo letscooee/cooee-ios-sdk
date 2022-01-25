@@ -10,8 +10,9 @@ struct DictionaryPrototype: HandyJSON {
     var userProperties: [String: Any]?
     var userData: [String: Any]?
     var sessionID: String?
+    var props: [String: Any]?
     var occurred: Date?
-    var firebaseToken: String?
+    var pushToken: String?
 
     func toDictionary() -> [String: Any] {
         [
@@ -25,6 +26,14 @@ struct DictionaryPrototype: HandyJSON {
             "sessionID": sessionID ?? "",
             "userProperties": userProperties ?? "",
             "userData": userData ?? ""
+        ] as [String: Any]
+    }
+    
+    func toDeviceDictionary() throws -> [String: Any] {
+        [
+            "sessionID": sessionID ?? "",
+            "userProperties": userProperties ?? "",
+            "props": props ?? ""
         ] as [String: Any]
     }
 }

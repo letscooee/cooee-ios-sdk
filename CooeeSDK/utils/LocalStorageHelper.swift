@@ -15,36 +15,49 @@ import HandyJSON
  - Since: 1.3.0
  */
 class LocalStorageHelper {
+    
+    private static var bundleId: String {
+        Bundle.main.bundleIdentifier ?? "com.letscooee.CooeeSDK"
+    }
+    
     static func putString(key: String, value: String) {
-        UserDefaults.standard.set(value, forKey: key)
+        let userDefault = UserDefaults(suiteName: "group.\(bundleId)")
+        userDefault?.set(value, forKey: key)
     }
 
     static func getString(key: String) -> String? {
-        return UserDefaults.standard.value(forKey: key) as? String
+        let userDefault = UserDefaults(suiteName: "group.\(bundleId)")
+        return userDefault?.value(forKey: key) as? String
     }
 
     static func putInt(key: String, value: Int) {
-        UserDefaults.standard.set(value, forKey: key)
+        let userDefault = UserDefaults(suiteName: "group.\(bundleId)")
+        userDefault?.set(value, forKey: key)
     }
 
     static func getInt(key: String, defaultValue: Int?) -> Int {
-        return UserDefaults.standard.value(forKey: key) as? Int ?? 0
+        let userDefault = UserDefaults(suiteName: "group.\(bundleId)")
+        return userDefault?.value(forKey: key) as? Int ?? 0
     }
 
     static func putBoolean(key: String, value: Bool) {
-        UserDefaults.standard.set(value, forKey: key)
+        let userDefault = UserDefaults(suiteName: "group.\(bundleId)")
+        userDefault?.set(value, forKey: key)
     }
 
     static func getBoolean(key: String, defaultValue: Bool?) -> Bool? {
-        return UserDefaults.standard.value(forKey: key) as? Bool ?? defaultValue
+        let userDefault = UserDefaults(suiteName: "group.\(bundleId)")
+        return userDefault?.value(forKey: key) as? Bool ?? defaultValue
     }
 
     static func putLong(key: String, value: Int64?) {
-        UserDefaults.standard.set(value, forKey: key)
+        let userDefault = UserDefaults(suiteName: "group.\(bundleId)")
+        userDefault?.set(value, forKey: key)
     }
 
     static func getLong(key: String, defaultValue: Int64) -> Int64 {
-        return UserDefaults.standard.value(forKey: key) as? Int64 ?? defaultValue
+        let userDefault = UserDefaults(suiteName: "group.\(bundleId)")
+        return userDefault?.value(forKey: key) as? Int64 ?? defaultValue
     }
 
     static func getTypedArray<T: Codable>(key: String, clazz: T.Type) -> [T] {
@@ -86,7 +99,8 @@ class LocalStorageHelper {
     }
 
     static func remove(key: String) {
-        UserDefaults.standard.set(nil, forKey: key)
+        let userDefault = UserDefaults(suiteName: "group.\(bundleId)")
+        userDefault?.set(nil, forKey: key)
     }
 
     static func getDictionary(_ key: String, defaultValue: [String: Any]?) -> [String: Any]? {

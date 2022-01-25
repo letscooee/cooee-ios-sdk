@@ -492,6 +492,13 @@
 			path = processor;
 			sourceTree = "<group>";
 		};
+		75679B6B27905BB100A09837 /* helper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = helper;
+			sourceTree = "<group>";
+		};
 		756BAA1C27577C1600C7A84F /* notification */ = {
 			isa = PBXGroup;
 			children = (
@@ -712,6 +719,7 @@
 		AC0B8822C3E3E958FA16FEFE /* renderer */ = {
 			isa = PBXGroup;
 			children = (
+				75679B6B27905BB100A09837 /* helper */,
 				AC0B87F35B1BE71267F02947 /* InAppRenderer.swift */,
 				AC0B8CAD418C022E74D59D3F /* AbstractInAppRenderer.swift */,
 				AC0B8A91EC01FFA1820B6560 /* RendererExtensions.swift */,

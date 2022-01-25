@@ -28,7 +28,6 @@ class RuntimeData {
      Update app went to background
      */
     public func setInBackground() {
-        print("App went to background")
         self.inBackground = true
         self.lastEnterBackground = Date()
     }
@@ -37,7 +36,6 @@ class RuntimeData {
      Update app came to foreground
      */
     public func setInForeground() {
-        print("App went to foreground")
         self.inBackground = false
         self.lastEnterForeground = Date()
     }
@@ -74,7 +72,6 @@ class RuntimeData {
     }
 
     public func setCurrentScreenName(name: String) {
-        print("Updated screen: " + name)
         self.currentScreenName = name
     }
 
