@@ -17,8 +17,6 @@ class CooeeBootstrap: NSObject {
 
     override public init() {
         super.init()
-        self.swizzleDidReceiveRemoteNotification()
-        self.registerForPushNotification()
         _ = AppLifeCycle.shared
         DispatchQueue.main.async {
             _ = CooeeFactory.shared
@@ -92,9 +90,22 @@ class CooeeBootstrap: NSObject {
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(
                 options: authOptions,
-                completionHandler: { _, _ in })
+                completionHandler: { _, _ in
+                    self.registerCategory()
+                }
+                
+        )
 
         UIApplication.shared.registerForRemoteNotifications()
+    }
+    
+    private func registerCategory() -> Void{
+
+        let category : UNNotificationCategory = UNNotificationCategory.init(identifier: "COOEENOTIFICATION", actions: [], intentIdentifiers: [], options: [])
+
+        let center = UNUserNotificationCenter.current()
+        center.setNotificationCategories([category])
+
     }
 }
 
