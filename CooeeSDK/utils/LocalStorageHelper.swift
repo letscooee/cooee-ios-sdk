@@ -17,7 +17,7 @@ import HandyJSON
 class LocalStorageHelper {
     
     private static var bundleId: String {
-        Bundle.main.bundleIdentifier ?? "com.letscooee.CooeeSDK"
+        return "com.letscooee.\(Bundle.main.object(forInfoDictionaryKey: "COOEE_APP_ID") ?? "")"
     }
     
     static func putString(key: String, value: String) {

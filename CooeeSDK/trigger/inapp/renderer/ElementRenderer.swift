@@ -28,7 +28,7 @@ struct ElementRenderer: View {
 
     var body: some View {
         let count: Int = elements.count
-        ForEach(0..<count) { index in
+        ForEach(0..<count, id:\.self) { index in
             let child = elements[index]
             let baseElement = BaseElement.deserialize(from: child)
 

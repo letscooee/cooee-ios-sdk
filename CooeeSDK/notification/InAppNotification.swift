@@ -233,7 +233,7 @@ extension UILabel {
 
         let newSize = text.boundingRect(with: CGSize(width: textWidth, height: CGFloat.greatestFiniteMagnitude),
                                         options: NSStringDrawingOptions.usesLineFragmentOrigin,
-                                        attributes: [NSAttributedString.Key.font: font], context: nil)
+                                        attributes: [NSAttributedString.Key.font: font!], context: nil)
 
         contentSize.height = ceil(newSize.size.height) + insetsHeight
         contentSize.width = ceil(newSize.size.width) + insetsWidth

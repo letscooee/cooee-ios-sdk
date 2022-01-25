@@ -85,7 +85,7 @@ public class EngagementTriggerHelper {
      - Parameter triggerData: Data to render in-app.
      */
     static func renderInAppFromPushNotification(for triggerData: TriggerData) {
-        let runtimeData = CooeeFactory.shared.runtimeData
+        _ = CooeeFactory.shared.runtimeData
         storeActiveTriggerDetails(triggerData: triggerData)
 
         loadLazyData(for: triggerData)
