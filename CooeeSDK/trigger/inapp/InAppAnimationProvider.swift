@@ -23,7 +23,7 @@ class InAppAnimationProvider {
     public static func getEnterAnimation(animation: Animation?) -> CATransitionSubtype {
 
         if animation == nil || animation?.enter == nil {
-            return CATransitionSubtype.fromLeft
+            return CATransitionSubtype.fromRight
         }
 
         switch animation?.enter! {
@@ -36,7 +36,7 @@ class InAppAnimationProvider {
         case .SLIDE_IN_RIGHT:
             return CATransitionSubtype.fromRight
         case .none:
-            return CATransitionSubtype.fromLeft
+            return CATransitionSubtype.fromRight
         }
     }
 
@@ -49,7 +49,7 @@ class InAppAnimationProvider {
     public static func getExitAnimation(animation: Animation?) -> CATransitionSubtype {
 
         if animation == nil || animation?.exit == nil {
-            return CATransitionSubtype.fromLeft
+            return CATransitionSubtype.fromRight
         }
 
         switch animation?.exit! {
@@ -62,7 +62,7 @@ class InAppAnimationProvider {
         case .SLIDE_OUT_RIGHT:
             return CATransitionSubtype.fromRight
         case .none:
-            return CATransitionSubtype.fromLeft
+            return CATransitionSubtype.fromRight
         }
     }
 }

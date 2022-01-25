@@ -53,7 +53,25 @@ class InAppTriggerScene: UIView {
         parentView.backgroundColor = UIColor.white.withAlphaComponent(0.0)
 
         setAnimations()
-        viewController.view.addSubview(parentView)
+
+        let enterAnimation = inAppData!.cont?.animation?.enter ?? .SLIDE_IN_RIGHT
+
+        setParentPositionMoveInAnimation(enterAnimation)
+
+        UIView.animate(withDuration: 0.5, animations: {
+            viewController.view.addSubview(self.parentView)
+            switch enterAnimation {
+                case .SLIDE_IN_LEFT:
+                    self.parentView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                case .SLIDE_IN_TOP:
+                    self.parentView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                case .SLIDE_IN_DOWN:
+                    return self.parentView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                case .SLIDE_IN_RIGHT:
+                    self.parentView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            }
+        }, completion: nil)
+
 
         startTime = Date()
         sendTriggerDisplayedEvent()
@@ -73,6 +91,24 @@ class InAppTriggerScene: UIView {
     private var startTime: Date?
 
     private var deviceDefaultOrientation = UIInterfaceOrientation.portrait
+
+    /**
+     Check for the Move-In animation and change the frame of parent view
+
+     - Parameter animation: move-in animation
+     */
+    private func setParentPositionMoveInAnimation(_ animation: Animation.EntranceAnimation) {
+        switch animation {
+            case .SLIDE_IN_LEFT:
+                self.parentView.frame = CGRect(x: 0 - UIScreen.main.bounds.width, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            case .SLIDE_IN_TOP:
+                self.parentView.frame = CGRect(x: 0, y: 0 - UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            case .SLIDE_IN_DOWN:
+                return self.parentView.frame = CGRect(x: 0, y: 0 + UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            case .SLIDE_IN_RIGHT:
+                self.parentView.frame = CGRect(x: 0 + UIScreen.main.bounds.width, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        }
+    }
 
     private func commonInit() {
         let bundle = Bundle(for: type(of: self))
@@ -131,7 +167,7 @@ class InAppTriggerScene: UIView {
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)
 
         // exit animation
-        let exitAnimation = inAppData!.cont?.animation?.exit ?? .SLIDE_OUT_LEFT
+        let exitAnimation = inAppData!.cont?.animation?.exit ?? .SLIDE_OUT_RIGHT
         UIView.animate(withDuration: 0.5, animations: {
             switch exitAnimation {
                 case .SLIDE_OUT_LEFT:
