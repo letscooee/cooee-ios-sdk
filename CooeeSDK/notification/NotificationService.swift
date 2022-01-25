@@ -8,12 +8,72 @@
 import Foundation
 import NotificationCenter
 
-class CooeeNotificationService {
+public class CooeeNotificationService {
     // MARK: Lifecycle
 
     init(userInfo: [AnyHashable: Any]) {
         self.userInfo = userInfo
         processPN()
+    }
+
+    // MARK: Public
+
+    public static func updateContent(_ mutableNotificationContent: UNMutableNotificationContent, with userInfo: [AnyHashable: Any]) -> UNMutableNotificationContent? {
+        let content = mutableNotificationContent
+        let rawTriggerData = userInfo["triggerData"]
+
+        if rawTriggerData == nil {
+            return content
+        }
+
+        let triggerData = TriggerData.deserialize(from: "\(rawTriggerData!)")
+
+        if triggerData!.v == nil, triggerData!.v! >= 4.0, triggerData!.v! < 5.0 {
+            NSLog("Unsupported payload version \(triggerData!.v!)")
+            return content
+        }
+
+        if triggerData!.getPushNotification() == nil {
+            EngagementTriggerHelper.loadLazyData(for: triggerData!)
+            return nil
+        }
+
+        guard let pushNotification = triggerData?.getPushNotification() else {
+            return content
+        }
+
+        CooeeNotificationService.sendEvent("CE Notification Received", withTriggerData: triggerData!)
+
+        let title: String = getTextFromPart(from: pushNotification.getTitle()?.prs ?? [PartElement]())
+        let body: String = getTextFromPart(from: pushNotification.getBody()?.prs ?? [PartElement]())
+
+        content.categoryIdentifier = "CooeeNotification"
+        content.title = title
+        content.body = body
+        content.sound = UNNotificationSound.default
+        content.userInfo = userInfo
+
+        if pushNotification.getSmallImage() == nil {
+            sendEvent("CE Notification Viewed", withTriggerData: triggerData!)
+            return content
+        } else {
+            guard let url = URL(string: pushNotification.getSmallImage()!) else {
+                return content
+            }
+
+            guard let imageData = NSData(contentsOf: url) else {
+                return content
+            }
+
+            guard let attachment = UNNotificationAttachment.create(imageFileIdentifier: "image.jpg", data: imageData, options: nil) else {
+                NSLog("Error in UNNotificationAttachment.create()")
+                return content
+            }
+
+            content.attachments = [attachment]
+            sendEvent("CE Notification Viewed", withTriggerData: triggerData!)
+            return content
+        }
     }
 
     // MARK: Internal
@@ -177,7 +237,7 @@ class CooeeNotificationService {
             let title: String = CooeeNotificationService.getTextFromPart(from: pushNotification.getTitle()?.prs ?? [PartElement]())
             let body: String = CooeeNotificationService.getTextFromPart(from: pushNotification.getBody()?.prs ?? [PartElement]())
 
-            content.categoryIdentifier = "CooeeNotification"
+            content.categoryIdentifier = "COOEENOTIFICATION"
             content.title = title
             content.body = body
             content.sound = UNNotificationSound.default
