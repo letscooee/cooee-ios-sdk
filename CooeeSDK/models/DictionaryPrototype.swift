@@ -12,7 +12,7 @@ struct DictionaryPrototype: HandyJSON {
     var sessionID: String?
     var props: [String: Any]?
     var occurred: Date?
-    var firebaseToken: String?
+    var pushToken: String?
 
     func toDictionary() -> [String: Any] {
         [

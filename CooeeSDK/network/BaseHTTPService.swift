@@ -59,7 +59,7 @@ class BaseHTTPService {
             return
         }
         var requestData = [String: Any]()
-        requestData["firebaseToken"] = token!
+        requestData["pushToken"] = token!
 
         _ = try webService.getResponse(fromURL: Constants.saveFCM, method: .POST, params: requestData,
                 header: commonHeaders.getDictionary())
