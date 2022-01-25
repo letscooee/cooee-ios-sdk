@@ -88,15 +88,7 @@ public class EngagementTriggerHelper {
         let runtimeData = CooeeFactory.shared.runtimeData
         storeActiveTriggerDetails(triggerData: triggerData)
 
-        if runtimeData.isFirstForeground() {
-            Timer.scheduledTimer(withTimeInterval: Constants.TIME_TO_WAIT_SECONDS, repeats: false) { _ in
-                loadLazyData(for: triggerData)
-            }
-        } else {
-            Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { _ in
-                loadLazyData(for: triggerData)
-            }
-        }
+        loadLazyData(for: triggerData)
     }
 
     /**
