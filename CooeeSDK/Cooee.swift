@@ -109,18 +109,59 @@ public final class CooeeSDK {
      - Parameter data: data provided by application(application:didRegisterForRemoteNotificationsWithDeviceToken:)
      */
     public func setDeviceToken(token data: Data?) {
-
         guard let rawToken = data else {
             NSLog("Received empty device token")
             return
         }
 
-        let tokenString = rawToken.reduce("", { $0 + String(format: "%02X", $1) })
+        let tokenString = rawToken.reduce("") {
+            $0 + String(format: "%02X", $1)
+        }
         var requestBody = [String: Any]()
         requestBody["pushToken"] = tokenString
 
         CooeeFactory.shared.safeHttpService.updatePushToken(requestData: requestBody)
+    }
 
+    /**
+     Accepts data received from user ``userNotificationCenter(:didReceive:withCompletionHandler:)`` and perform related
+     actions by Cooee
+
+     - Parameter response:``UNNotificationResponse`` provided by ``userNotificationCenter(:didReceive:withCompletionHandler:)``
+     */
+    public func notificationAction(_ response: UNNotificationResponse) {
+        guard let triggerData = getTriggerData(response.notification) else {
+            return
+        }
+
+        switch response.actionIdentifier {
+            case UNNotificationDismissActionIdentifier:
+                CooeeNotificationService.sendEvent("CE Notification Cancelled", withTriggerData: triggerData)
+            case UNNotificationDefaultActionIdentifier:
+                notificationClicked(triggerData)
+            default:
+                // Handle other actions
+                break
+        }
+    }
+
+    /**
+     Checks for Cooee Notification for foreground status otherwise returns default ``UNNotificationPresentationOptions``
+
+     - Parameter notification: ``UNNotification`` provided by ``userNotificationCenter(_:willPresent:withCompletionHandler:)``
+     - Returns:
+     */
+    public func presentNotification(_ notification: UNNotification) -> UNNotificationPresentationOptions {
+        guard let triggerData = getTriggerData(notification) else {
+            return [.alert, .sound, .badge]
+        }
+
+        if triggerData.getPushNotification() == nil {
+            launchInApp(with: triggerData)
+            return []
+        }
+
+        return [.alert, .sound, .badge]
     }
 
     // MARK: Private
@@ -130,5 +171,66 @@ public final class CooeeSDK {
     private let safeHttpService: SafeHTTPService
     private let runtimeData: RuntimeData
     private let sentryHelper: SentryHelper
-    private var onCTAHandler: CooeeCTADelegate? = nil
+    private var onCTAHandler: CooeeCTADelegate?
+
+    /**
+     Extract trigger data from raw ``UNNotification``
+
+     - Parameter notification: raw ``UNNotification``
+     - Returns: optional ``TriggerData``
+     */
+    private func getTriggerData(_ notification: UNNotification) -> TriggerData? {
+        let userInfo = notification.request.content.userInfo
+
+        let rawTriggerData = userInfo["triggerData"]
+
+        if rawTriggerData == nil {
+            return nil
+        }
+
+        guard let triggerData = TriggerData.deserialize(from: "\(rawTriggerData!)") else {
+            return nil
+        }
+
+        return triggerData
+    }
+
+    /**
+     Performs the notification click action
+
+     - Parameter triggerData: ``TriggerData`` received via click action of push notification
+     */
+    private func notificationClicked(_ triggerData: TriggerData) {
+        if triggerData.getPushNotification() != nil {
+            CooeeNotificationService.sendEvent("CE Notification Clicked", withTriggerData: triggerData)
+        }
+
+        guard let notificationClickAction = triggerData.getPushNotification()?.getClickAction() else {
+            launchInApp(with: triggerData)
+            return
+        }
+
+        guard let launchType = notificationClickAction.open else {
+            launchInApp(with: triggerData)
+            return
+        }
+
+        if launchType == 1 {
+            launchInApp(with: triggerData)
+        } else if launchType == 2 {
+            // Launch Self AR
+            // EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
+        } else if launchType == 3 {
+            // Launch Native AR
+        }
+    }
+
+    /**
+     Provide data to the ``EngagementTriggerHelper.renderInAppFromPushNotification`` to launch in-App
+
+     - Parameter triggerData: ``TriggerData``
+     */
+    private func launchInApp(with triggerData: TriggerData) {
+        EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
+    }
 }
