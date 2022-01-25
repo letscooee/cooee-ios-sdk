@@ -1,5 +1,14 @@
 # Change Log
 
+#1.3.6
+
+### Fixes
+1. App group access for user default.
+
+### Chore
+
+1. Remove warnings.
+
 #1.3.5
 
 ### Feature
