@@ -17,12 +17,12 @@ import HandyJSON
 class WebService: NSObject {
     // MARK: Internal
 
-    override init(){
+    override init() {
         debugging = SDKInfo.shared.cachedInfo.isDebugging
     }
-    
-    let debugging:Bool
-    
+
+    let debugging: Bool
+
     static let shared = WebService()
 
     func getResponse(fromURL: String, method: httpMethod, params: [String: Any?], header: [String: String]) throws -> [String: Any]? {
@@ -39,15 +39,13 @@ class WebService: NSObject {
             request.httpBody = params.percentEncoded()
         }
         request.allHTTPHeaderFields = header
-        
+
         if debugging {
-        NSLog("""
-              \n-------WS Params--------\n
-              Request Body:\(params)\n
-              Request Headers:\(header)\n
-              Request URL:\(url)\n
-              -------End WS Params--------
-              """)
+            NSLog("""
+                  \n-------WS Params--------\n
+                  Request Body:\(params)\n
+                  -------End WS Params--------
+                  """)
         }
 
         group.enter()
@@ -64,21 +62,11 @@ class WebService: NSObject {
     // MARK: Private
 
     private func processResponse(_ data: Data?, _ error: Error?) throws -> [String: Any]? {
-        guard let data = data, error == nil
-        else {
+        guard let data = data, error == nil else {
             throw error!
         }
-        let responseString = String(data: data, encoding: .utf8)?.convertToDictionary()
-        
-        if debugging {
-        NSLog("""
-              \n-------WS Response--------\n
-              \(String(describing: responseString))\n
-              -------End WS Response--------
-              """)
-        }
 
-        return responseString
+        return String(data: data, encoding: .utf8)?.convertToDictionary()
     }
 
     private func appendSessionID(params: [String: Any?]) -> [String: Any?] {

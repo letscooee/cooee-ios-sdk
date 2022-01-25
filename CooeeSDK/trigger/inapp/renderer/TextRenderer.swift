@@ -50,7 +50,7 @@ struct TextRenderer: View {
                 }
                 .frame(alignment: alignment)
                 .onPreferenceChange(SizePreferenceKey.self) { preferences in
-                    let _ = print("height: \(preferences.height) width: \(preferences.width)")
+                    //let _ = print("height: \(preferences.height) width: \(preferences.width)")
                     self.childSize = preferences
                 }
     }

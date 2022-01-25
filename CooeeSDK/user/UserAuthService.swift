@@ -33,12 +33,12 @@ class UserAuthService {
     func acquireSDKToken() {
         self.lock.lock()
         if self.hasToken() {
-            print("Already has SDK token")
+            NSLog("Already has SDK token")
             self.populateUserDataFromStorage()
             return
         }
 
-        print("Attempt to acquire SDK token")
+        NSLog("Attempt to acquire SDK token")
 
         self.getSDKTokenFromServer()
         self.lock.unlock()
@@ -51,8 +51,8 @@ class UserAuthService {
 
     func updateAPI() {
         if SDKInfo.shared.cachedInfo.isDebugging {
-            print("SDK Token - \(self.sdkToken ?? "")")
-            print("User ID - \(self.userID ?? "")")
+            NSLog("SDK Token - \(self.sdkToken ?? "")")
+            NSLog("User ID - \(self.userID ?? "")")
         }
 
         self.baseHttp?.commonHeaders.sdkToken = self.sdkToken
@@ -89,11 +89,11 @@ class UserAuthService {
         self.deviceID = LocalStorageHelper.getString(key: Constants.STORAGE_DEVICE_ID)
 
         if self.sdkToken == nil {
-            print("No SDK token found in preference")
+            NSLog("No SDK token found in preference")
         }
 
         if self.userID == nil {
-            print("No user ID found in preference")
+            NSLog("No user ID found in preference")
         }
 
         self.updateAPI()
