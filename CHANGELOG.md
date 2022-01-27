@@ -1,6 +1,12 @@
 # Change Log
 
-#1.3.6
+# 1.3.7
+
+### Improvements
+1. Expose public classes and their methods for Objective-C
+
+
+# 1.3.6
 
 ### Fixes
 1. App group access for user default.
@@ -9,7 +15,7 @@
 
 1. Remove warnings.
 
-#1.3.5
+# 1.3.5
 
 ### Feature
 
