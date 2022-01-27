@@ -13,10 +13,11 @@ import UIKit
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-public final class CooeeSDK {
+@objc
+public final class CooeeSDK: NSObject {
     // MARK: Lifecycle
 
-    init() {
+    override init() {
         self.safeHttpService = CooeeFactory.shared.safeHttpService
         self.runtimeData = RuntimeData.shared
         self.sentryHelper = CooeeFactory.shared.sentryHelper
@@ -24,7 +25,7 @@ public final class CooeeSDK {
     }
 
     // MARK: Public
-
+    @objc
     public static func getInstance() -> CooeeSDK {
         if shared == nil {
             shared = CooeeSDK()
@@ -39,6 +40,7 @@ public final class CooeeSDK {
        - eventProperties: Properties associated with the event
      - Throws: Throws {@link CustomError#PropertyError} if user try to send any property start with {@link Constants.SYSTEM_DATA_PREFIX}
      */
+    @objc
     public func sendEvent(eventName: String, eventProperties: [String: Any]) throws {
         for (key, _) in eventProperties {
             let prefix = String(key.prefix(2))
@@ -56,6 +58,7 @@ public final class CooeeSDK {
      Send given user data to the server
      - Parameter userData: The common user data like name, email.
      */
+    @objc
     public func updateUserData(userData: [String: Any]) {
         sentryHelper.setUserInfo(userData: userData)
         safeHttpService.updateUserDataOnly(userData: userData)
@@ -65,6 +68,7 @@ public final class CooeeSDK {
      Send given user properties to the server
      - Parameter userProperties: The additional user properties.
      */
+    @objc
     public func updateUserProperties(userProperties: [String: Any]) {
         safeHttpService.updateUserPropertyOnly(userProperty: userProperties)
     }
@@ -75,6 +79,7 @@ public final class CooeeSDK {
        - userData: The common user data like name, email.
        - userProperties: The additional user properties.
      */
+    @objc
     public func updateUserProfile(userData: [String: Any], userProperties: [String: Any]) {
         sentryHelper.setUserInfo(userData: userData)
         safeHttpService.updateUserProfile(userData: userData, userProperties: userProperties)
@@ -84,6 +89,7 @@ public final class CooeeSDK {
      Set current screen name where user navigated.
      - Parameter screenName: Name of the screen. Like Login, Cart, Wishlist etc.
      */
+    @objc
     public func setCurrentScreen(screenName: String) {
         runtimeData.setCurrentScreenName(name: screenName)
     }
@@ -92,14 +98,17 @@ public final class CooeeSDK {
      Provide the userID of the current user
      - Returns: String value
      */
+    @objc
     public func getUserID() -> String? {
         CooeeFactory.shared.userAuthService.getUserID()
     }
 
+    @objc
     public func setOnCTADelegate(_ onCTAHandler: CooeeCTADelegate) {
         self.onCTAHandler = onCTAHandler
     }
 
+    @objc
     public func getOnCTAListener() -> CooeeCTADelegate? {
         onCTAHandler
     }
@@ -108,6 +117,7 @@ public final class CooeeSDK {
      Send APNS device token to server
      - Parameter data: data provided by application(application:didRegisterForRemoteNotificationsWithDeviceToken:)
      */
+    @objc
     public func setDeviceToken(token data: Data?) {
         guard let rawToken = data else {
             NSLog("Received empty device token")
@@ -129,6 +139,7 @@ public final class CooeeSDK {
 
      - Parameter response:``UNNotificationResponse`` provided by ``userNotificationCenter(:didReceive:withCompletionHandler:)``
      */
+    @objc
     public func notificationAction(_ response: UNNotificationResponse) {
         guard let triggerData = getTriggerData(response.notification) else {
             return
@@ -151,6 +162,7 @@ public final class CooeeSDK {
      - Parameter notification: ``UNNotification`` provided by ``userNotificationCenter(_:willPresent:withCompletionHandler:)``
      - Returns:
      */
+    @objc
     public func presentNotification(_ notification: UNNotification) -> UNNotificationPresentationOptions {
         guard let triggerData = getTriggerData(notification) else {
             return [.alert, .sound, .badge]

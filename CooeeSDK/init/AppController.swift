@@ -14,8 +14,10 @@ import UIKit
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-public class AppController {
+@objc
+public class AppController: NSObject {
 
+    @objc
     public static func configure() {
         _ = CooeeBootstrap()
     }

@@ -8,16 +8,19 @@
 import Foundation
 import NotificationCenter
 
-public class CooeeNotificationService {
+@objc
+public class CooeeNotificationService: NSObject {
     // MARK: Lifecycle
 
     init(userInfo: [AnyHashable: Any]) {
         self.userInfo = userInfo
+        super.init()
         processPN()
     }
 
     // MARK: Public
 
+    @objc
     public static func updateContent(_ mutableNotificationContent: UNMutableNotificationContent, with userInfo: [AnyHashable: Any]) -> UNMutableNotificationContent? {
         let content = mutableNotificationContent
         let rawTriggerData = userInfo["triggerData"]
