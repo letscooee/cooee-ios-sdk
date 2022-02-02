@@ -59,7 +59,7 @@ class ClickActionExecutor {
         }
 
         ARHelper.checkForARAndLaunch(with: appAR, forTrigger: triggerContext.getTriggerData(),
-                on: triggerContext.getPresentViewController()!)*/
+                on: triggerContext.getPresentViewController()?)*/
     }
 
     /**
@@ -72,7 +72,7 @@ class ClickActionExecutor {
 
         let url = URL(string: clickAction.iab!.u!)!
         let safariVC = SFSafariViewController(url: url)
-        triggerContext.getPresentViewController()!.present(safariVC, animated: true, completion: nil)
+        triggerContext.getPresentViewController()?.present(safariVC, animated: true, completion: nil)
     }
 
     /**
@@ -103,7 +103,7 @@ class ClickActionExecutor {
         // set up activity view controller
         let textToShare = [text]
         let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = triggerContext.getTriggerParentLayout() // so that iPads won't crash
+        activityViewController.popoverPresentationController?.sourceView = triggerContext.getPresentViewController()?.view // so that iPads won't crash
 
         // exclude some activity types from the list (optional)
         activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook]
