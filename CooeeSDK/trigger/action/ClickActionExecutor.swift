@@ -83,7 +83,11 @@ class ClickActionExecutor {
             return
         }
 
-        if close, clickAction.isOnlyCloseCTA() {
+        if !close {
+            return
+        }
+        
+        if clickAction.isOnlyCloseCTA() {
             triggerContext.closeInApp("Close")
         } else {
             triggerContext.closeInApp("CTA")
