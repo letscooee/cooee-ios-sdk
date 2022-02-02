@@ -160,7 +160,7 @@ class InAppTriggerScene: UIView {
     private func finish() {
         var closedEventProps = triggerContext.getClosedEventProps()
         let duration = DateUtils.getDateDifferenceInSeconds(startDate: startTime!, endDate: Date())
-        closedEventProps.updateValue(duration, forKey: "Duration")
+        closedEventProps.updateValue(duration, forKey: "duration")
 
         var event = Event(eventName: "CE Trigger Closed", properties: closedEventProps)
         event.withTrigger(triggerData: triggerData!)
