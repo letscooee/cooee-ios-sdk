@@ -113,7 +113,7 @@ struct ElementRenderer: View {
                             image: {
                                 $0.frame(width: imageElement!.getCalculatedWidth() ?? 0, height: imageElement!.getCalculatedHeight() ?? 0)
                             },
-                            data: imageElement as! BaseElement
+                            data: imageElement!
                     ).modifier(AbstractInAppRenderer(elementData: imageElement!, triggerContext: triggerContext, isContainer: false))
                 } else {
                     ZStack {
@@ -126,7 +126,7 @@ struct ElementRenderer: View {
                                     image: {
                                         $0.frame(width: imageElement!.getCalculatedWidth()!, height: imageElement!.getCalculatedHeight()!)
                                     },
-                                    data: imageElement as! BaseElement
+                                    data: imageElement!
                             ).modifier(AbstractInAppRenderer(elementData: imageElement!, triggerContext: triggerContext, isContainer: false))
                     ).if(imageElement!.getCalculatedWidth()! > deviceWidth && imageElement!.getCalculatedHeight()! > deviceHeight) {
                         $0.frame(maxWidth: deviceWidth, maxHeight: deviceHeight)
