@@ -81,7 +81,7 @@ struct ElementRenderer: View {
 
                                     // Reference to add GeometryReader & onPreferenceChange which will help to keep watch on height of element
                                     // https://stackoverflow.com/a/56782264/9256497
-                                    
+
                                     .height(childSize.height)
                                     .background(
                                             GeometryReader { proxy in
@@ -111,8 +111,9 @@ struct ElementRenderer: View {
                                 // Image("placeholder").frame(width: 40) // etc.
                             },
                             image: {
-                                $0.resizable() // etc.
-                            }
+                                $0.frame(width: imageElement!.getCalculatedWidth() ?? 0, height: imageElement!.getCalculatedHeight() ?? 0)
+                            },
+                            data: imageElement as! BaseElement
                     ).modifier(AbstractInAppRenderer(elementData: imageElement!, triggerContext: triggerContext, isContainer: false))
                 } else {
                     ZStack {
@@ -123,8 +124,9 @@ struct ElementRenderer: View {
                                         // Image("placeholder").frame(width: 40) // etc.
                                     },
                                     image: {
-                                        $0.resizable() // etc.
-                                    }
+                                        $0.frame(width: imageElement!.getCalculatedWidth()!, height: imageElement!.getCalculatedHeight()!)
+                                    },
+                                    data: imageElement as! BaseElement
                             ).modifier(AbstractInAppRenderer(elementData: imageElement!, triggerContext: triggerContext, isContainer: false))
                     ).if(imageElement!.getCalculatedWidth()! > deviceWidth && imageElement!.getCalculatedHeight()! > deviceHeight) {
                         $0.frame(maxWidth: deviceWidth, maxHeight: deviceHeight)

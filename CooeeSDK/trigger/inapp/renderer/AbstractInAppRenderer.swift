@@ -56,8 +56,9 @@ struct AbstractInAppRenderer: ViewModifier {
                         // Place holder should be added
                     },
                     image: {
-                        $0.resizable().scaledToFill().cornerRadius(elementData.br?.getRadius() ?? 0)
-                    }
+                        $0.cornerRadius(elementData.br?.getRadius() ?? 0)
+                    },
+                    data:elementData
                 ).cornerRadius(elementData.br?.getRadius() ?? 0)
             ).cornerRadius(elementData.br?.getRadius() ?? 0)
         }
