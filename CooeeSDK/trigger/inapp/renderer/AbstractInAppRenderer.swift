@@ -125,6 +125,9 @@ struct AbstractInAppRenderer: ViewModifier {
         .if(elementData.shd != nil) {
             $0.shadow(radius: CGFloat(elementData.shd!.getElevation()), x: 20, y: 20)
         }
+        .if(elementData.trf != nil) {
+            $0.rotationEffect(elementData.trf!.getRotation())
+        }
         .if(calculatedWidth != nil && calculatedHeight != nil && !isContainer) {
             $0.frame(width: calculatedWidth!, height: calculatedHeight!)
         }
