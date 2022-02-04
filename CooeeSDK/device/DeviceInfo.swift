@@ -24,7 +24,7 @@ class DeviceInfo {
         var networkUtility = NetworkUtility.shared
         var networkProvider = NetworkUtility.shared.getCarrierName()
         var networkType = NetworkUtility.shared.getNetworkType()
-        var isWIFIConnected = (NetworkUtility.shared.getNetworkType() == "WIFI") ? true : false
+        var isWIFIConnected = NetworkUtility.shared.isConnectedToWifi()
 
         let osVersion = String(ProcessInfo().operatingSystemVersion.majorVersion) + "." + String(ProcessInfo().operatingSystemVersion.minorVersion) + "." + String(ProcessInfo().operatingSystemVersion.patchVersion)
 

@@ -37,11 +37,17 @@ class DevicePropertyCollector {
             "l": deviceInfo.cachedInfo.deviceBattery
         ] as [String: Any]
         
+        let network = [
+            "opr": deviceInfo.cachedInfo.networkProvider,
+            "type": deviceInfo.cachedInfo.networkType,
+        ] as [String: Any]
+        
         return [
             "storage": storage,
             "mem": memory,
             "os": os,
             "bat": battery,
+            "net": network,
             "locale": Bundle.main.preferredLocalizations[0],
             "bt": deviceInfo.cachedInfo.isBTOn,
             "wifi": deviceInfo.cachedInfo.isWIFIConnected,
