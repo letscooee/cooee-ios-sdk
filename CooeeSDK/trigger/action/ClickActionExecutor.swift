@@ -2,6 +2,8 @@
 // Created by Ashish Gaikwad on 01/11/21.
 //
 
+import AVFoundation
+import CoreLocation
 import Foundation
 import SafariServices
 import UIKit
@@ -12,7 +14,7 @@ import UIKit
  - Author: Ashish Gaikwad
  - Since: 1.3.0
  */
-class ClickActionExecutor {
+class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
     // MARK: Lifecycle
 
     init(_ clickAction: ClickAction, _ triggerContext: TriggerContext) {
@@ -33,13 +35,88 @@ class ClickActionExecutor {
         updateApp()
         share()
         showAR()
-        closeInApp()
+        let isAnyPermissionRequested = processPrompts()
+        closeInApp(isAnyPermissionRequested)
+    }
+
+    // MARK: Internal
+
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+            case .notDetermined:
+                print("notDetermined")
+                locationManager?.requestWhenInUseAuthorization()
+            default:
+                DispatchQueue.main.async {
+                    self.updateDeviceProps()
+                }
+        }
     }
 
     // MARK: Private
 
     private let clickAction: ClickAction
     private let triggerContext: TriggerContext
+    private var locationManager: CLLocationManager?
+    private var permissionManager: PermissionManager?
+
+    private func processPrompts() -> Bool {
+        guard let prompt = clickAction.pmpt else {
+            return false
+        }
+
+        permissionManager = PermissionManager()
+
+        if prompt == .PUSH {
+            requestPushNotificationPermission()
+            return true
+        } else if prompt == .CAMERA {
+            requestCameraPermissionPermission()
+            return true
+        } else if prompt == .LOCATION {
+            locationManager = CLLocationManager()
+            locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager?.delegate = self
+            return true
+        }
+
+        return false
+    }
+
+    private func requestCameraPermissionPermission() {
+        AVCaptureDevice.requestAccess(for: .video) { _ in
+            DispatchQueue.main.async {
+                self.updateDeviceProps()
+            }
+        }
+    }
+
+    private func requestPushNotificationPermission() {
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: authOptions,
+            completionHandler: { _, _ in
+                DispatchQueue.main.async {
+                    self.updateDeviceProps()
+                }
+            }
+        )
+    }
+
+    private func updateDeviceProps() {
+        guard let permissionProps = permissionManager?.getPermissionInformation() else {
+            return
+        }
+        let deviceProperties = ["props": permissionProps]
+
+        do {
+            try CooeeFactory.shared.baseHttpService.updateDeviceProp(requestData: deviceProperties)
+        } catch {
+            CooeeFactory.shared.sentryHelper.capture(error: error as NSError)
+        }
+
+        closeInApp(false)
+    }
 
     private func showAR() {
         guard let launchFeature = clickAction.open else {
@@ -54,12 +131,12 @@ class ClickActionExecutor {
     }
 
     private func launchOTFAR() {
-        /*guard let appAR = clickAction.ntvAR else {
-            return
-        }
+        /* guard let appAR = clickAction.ntvAR else {
+             return
+         }
 
-        ARHelper.checkForARAndLaunch(with: appAR, forTrigger: triggerContext.getTriggerData(),
-                on: triggerContext.getPresentViewController()?)*/
+         ARHelper.checkForARAndLaunch(with: appAR, forTrigger: triggerContext.getTriggerData(),
+                 on: triggerContext.getPresentViewController()?) */
     }
 
     /**
@@ -78,7 +155,7 @@ class ClickActionExecutor {
     /**
      Close InApp and give control to InAppScene
      */
-    private func closeInApp() {
+    private func closeInApp(_ permissionRequested: Bool) {
         guard let close = clickAction.close else {
             return
         }
@@ -86,10 +163,10 @@ class ClickActionExecutor {
         if !close {
             return
         }
-        
+
         if clickAction.isOnlyCloseCTA() {
             triggerContext.closeInApp("Close")
-        } else {
+        } else if !permissionRequested {
             triggerContext.closeInApp("CTA")
         }
     }
