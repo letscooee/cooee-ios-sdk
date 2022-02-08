@@ -43,13 +43,25 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
-            case .notDetermined:
-                print("notDetermined")
-                locationManager?.requestWhenInUseAuthorization()
-            default:
-                DispatchQueue.main.async {
-                    self.updateDeviceProps()
-                }
+        case .notDetermined:
+            print("notDetermined")
+            locationManager?.requestWhenInUseAuthorization()
+        default:
+            DispatchQueue.main.async {
+                self.updateDeviceProps()
+            }
+        }
+    }
+
+    @available(iOS 14.0, *)
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .notDetermined:
+            manager.requestWhenInUseAuthorization()
+        default:
+            DispatchQueue.main.async {
+                self.updateDeviceProps()
+            }
         }
     }
 
@@ -75,9 +87,15 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
             return true
         } else if prompt == .LOCATION {
             locationManager = CLLocationManager()
-            locationManager?.desiredAccuracy = kCLLocationAccuracyBest
             locationManager?.delegate = self
-            return true
+            locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+
+            // Will prompt for permission but will let us know status need to fix issue
+            locationManager?.requestWhenInUseAuthorization()
+
+            // TODO: Fix permission promp
+            // Send true to close inapp when location permission
+            return false
         }
 
         return false
