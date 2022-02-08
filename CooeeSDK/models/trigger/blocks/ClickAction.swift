@@ -13,9 +13,16 @@ import HandyJSON
  - Since: 1.3.0
  */
 struct ClickAction: HandyJSON {
+    // MARK: Lifecycle
+
+    init() {}
+
+    init(isContainer: Bool) {
+        self.close = isContainer
+    }
+
     // MARK: Public
 
-    
     public func isOnlyCloseCTA() -> Bool {
         return iab == nil && ext == nil && updt == nil && pmpt == nil && up == nil && kv == nil && share == nil && open == nil
     }

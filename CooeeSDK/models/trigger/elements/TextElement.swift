@@ -14,8 +14,6 @@ import SwiftUI
 class TextElement: BaseTextElement, Identifiable {
     // MARK: Lifecycle
 
-    required init() {
-    }
 
     // MARK: Public
 

@@ -16,7 +16,10 @@ import UIKit
 class BaseElement: HandyJSON {
     // MARK: Lifecycle
 
-    required init() {
+    required init() {}
+
+    init(_ background: Background) {
+        self.bg = background
     }
 
     // MARK: Public
@@ -29,12 +32,10 @@ class BaseElement: HandyJSON {
             return (getX() + (calculatedExtraSpace / 2))
         }
 
-
         return x == nil ? 0 : UnitUtil.getScaledPixel(x!)
     }
 
     public func getY(for viewHeight: CGFloat) -> CGFloat {
-
         if viewHeight > UIScreen.main.bounds.height {
             let safeArea = UIApplication.shared.connectedScenes.filter({ $0.activationState == .foregroundActive }).map({ $0 as? UIWindowScene }).compactMap({ $0 }).first?.windows.filter({ $0.isKeyWindow }).first?.safeAreaInsets
             let safeAreaTop = safeArea?.top ?? 40

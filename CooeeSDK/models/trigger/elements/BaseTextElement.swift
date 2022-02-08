@@ -18,8 +18,6 @@ import SwiftUI
 class BaseTextElement: BaseElement {
     // MARK: Lifecycle
 
-    required init() {
-    }
 
     // MARK: Public
 
