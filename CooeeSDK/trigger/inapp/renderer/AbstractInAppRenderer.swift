@@ -145,6 +145,8 @@ struct AbstractInAppRenderer: ViewModifier {
                 .onEnded { _ in
                     if let clickAction = elementData.getClickAction() {
                         ClickActionExecutor(clickAction, triggerContext).execute()
+                    }else if(isContainer){
+                        ClickActionExecutor(ClickAction(isContainer: isContainer), triggerContext).execute()
                     }
                 }
         )
