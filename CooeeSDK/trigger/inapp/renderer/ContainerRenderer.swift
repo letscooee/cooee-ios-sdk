@@ -16,6 +16,7 @@ struct ContainerRenderer: View {
     // MARK: Lifecycle
 
     init(inAppTrigger data: InAppTrigger, _ triggerContext: TriggerContext) {
+        self.inAppTrigger = data
         self.container = data.cont!
         self.elements = data.elems!
         self.triggerContext = triggerContext
@@ -27,12 +28,15 @@ struct ContainerRenderer: View {
     let deviceHeight = UIScreen.main.bounds.height
 
     var body: some View {
-        let contentAlignment = container.getGravity()
+        let contentAlignment = inAppTrigger.getGravity() ?? container.getGravity()
 
         ZStack(alignment: .topLeading) {
             ZStack {
                 Text("").position(x: 0, y: 0)
-            }.if (container.bg != nil && container.bg!.g != nil) {
+            }.if (inAppTrigger.getBackground() != nil){
+                $0.modifier(AbstractInAppRenderer(elementData: BaseElement(inAppTrigger.getBackground()!), triggerContext: triggerContext, isContainer: true))
+            }
+            .if (inAppTrigger.getBackground() == nil && container.bg != nil && container.bg!.g != nil) {
                 $0.background(BlurBackground(effect: UIBlurEffect(style: .light)))
             }
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
@@ -43,11 +47,13 @@ struct ContainerRenderer: View {
                 ZStack(alignment: .topLeading) {
                     Text("").position(x: 0, y: 0)
                     ElementRenderer(elements, triggerContext).background(Color.white.opacity(0))
-                }.clipped().frame(UnitUtil.getScaledPixel(1080), UnitUtil.getScaledPixel(1920))
+                }.modifier(AbstractInAppRenderer(elementData: container, triggerContext: triggerContext, isContainer: false))
+                    .clipped()
+                    .frame(UnitUtil.getScaledPixel(1080), UnitUtil.getScaledPixel(1920))
             }
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         }
-        .modifier(AbstractInAppRenderer(elementData: container, triggerContext: triggerContext, isContainer: true))
+        
         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
     }
 
@@ -56,6 +62,7 @@ struct ContainerRenderer: View {
     private var container: Container
     private var elements: [[String: Any]]
     private var triggerContext: TriggerContext
+    private var inAppTrigger: InAppTrigger
 }
 
 struct BlurBackground: UIViewRepresentable {
