@@ -158,13 +158,17 @@ class InAppTriggerScene: UIView {
     }
 
     private func finish() {
-        var closedEventProps = triggerContext.getClosedEventProps()
-        let duration = DateUtils.getDateDifferenceInSeconds(startDate: startTime!, endDate: Date())
-        closedEventProps.updateValue(duration, forKey: "duration")
+        
+        DispatchQueue.main.async {
+            var closedEventProps = self.triggerContext.getClosedEventProps()
+            let duration = DateUtils.getDateDifferenceInSeconds(startDate: self.startTime!, endDate: Date())
+            closedEventProps.updateValue(duration, forKey: "duration")
 
-        var event = Event(eventName: "CE Trigger Closed", properties: closedEventProps)
-        event.withTrigger(triggerData: triggerData!)
-        CooeeFactory.shared.safeHttpService.sendEvent(event: event)
+            var event = Event(eventName: "CE Trigger Closed", properties: closedEventProps)
+            event.withTrigger(triggerData: self.triggerData!)
+            CooeeFactory.shared.safeHttpService.sendEvent(event: event)
+        }
+        
 
         // exit animation
         let exitAnimation = inAppData!.cont?.animation?.exit ?? .SLIDE_OUT_RIGHT
