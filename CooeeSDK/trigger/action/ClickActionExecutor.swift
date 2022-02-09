@@ -43,25 +43,25 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
-        case .notDetermined:
-            print("notDetermined")
-            locationManager?.requestWhenInUseAuthorization()
-        default:
-            DispatchQueue.main.async {
-                self.updateDeviceProps()
-            }
+            case .notDetermined:
+                print("notDetermined")
+                locationManager?.requestWhenInUseAuthorization()
+            default:
+                DispatchQueue.main.async {
+                    self.updateDeviceProps()
+                }
         }
     }
 
     @available(iOS 14.0, *)
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
-        case .notDetermined:
-            manager.requestWhenInUseAuthorization()
-        default:
-            DispatchQueue.main.async {
-                self.updateDeviceProps()
-            }
+            case .notDetermined:
+                manager.requestWhenInUseAuthorization()
+            default:
+                DispatchQueue.main.async {
+                    self.updateDeviceProps()
+                }
         }
     }
 
