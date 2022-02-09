@@ -10,7 +10,7 @@ import UIKit
  Process ClickAction of the element and work accordingly
 
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
 class ClickActionExecutor {
     // MARK: Lifecycle
@@ -46,9 +46,9 @@ class ClickActionExecutor {
             return
         }
 
-        if launchFeature == 1 {
-            // show Self AR
-        } else if launchFeature == 2 {
+        if launchFeature == 2 {
+            // TODO: Launch Self AR
+        } else if launchFeature == 3 {
             launchOTFAR()
         }
     }
@@ -59,7 +59,7 @@ class ClickActionExecutor {
         }
 
         ARHelper.checkForARAndLaunch(with: appAR, forTrigger: triggerContext.getTriggerData(),
-                on: triggerContext.getPresentViewController()!)*/
+                on: triggerContext.getPresentViewController()?)*/
     }
 
     /**
@@ -72,14 +72,24 @@ class ClickActionExecutor {
 
         let url = URL(string: clickAction.iab!.u!)!
         let safariVC = SFSafariViewController(url: url)
-        triggerContext.getPresentViewController()!.present(safariVC, animated: true, completion: nil)
+        triggerContext.getPresentViewController()?.present(safariVC, animated: true, completion: nil)
     }
 
     /**
      Close InApp and give control to InAppScene
      */
     private func closeInApp() {
-        if let close = clickAction.close, close {
+        guard let close = clickAction.close else {
+            return
+        }
+
+        if !close {
+            return
+        }
+        
+        if clickAction.isOnlyCloseCTA() {
+            triggerContext.closeInApp("Close")
+        } else {
             triggerContext.closeInApp("CTA")
         }
     }
@@ -97,7 +107,7 @@ class ClickActionExecutor {
         // set up activity view controller
         let textToShare = [text]
         let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = triggerContext.getTriggerParentLayout() // so that iPads won't crash
+        activityViewController.popoverPresentationController?.sourceView = triggerContext.getPresentViewController()?.view // so that iPads won't crash
 
         // exclude some activity types from the list (optional)
         activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook]

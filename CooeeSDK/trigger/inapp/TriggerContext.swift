@@ -5,7 +5,6 @@
 import Foundation
 import UIKit
 
-
 /**
  A simple data holder class shared across different renderers.
 
@@ -30,17 +29,20 @@ class TriggerContext {
     public func setTriggerParentLayout(triggerParentLayout: UIView) {
         self.triggerParentLayout = triggerParentLayout
     }
-    
-    public func closeInApp(_ closeBehaviour: String){
+
+    public func closeInApp(_ closeBehaviour: String) {
         closedEventProps.updateValue(closeBehaviour, forKey: "closeBehaviour")
-        callback!(nil)
+
+        if let callback = self.callback {
+            callback(nil)
+        }
     }
-    
+
     public func onExit(callback: @escaping (_ result: [String: Any]?) -> ()) {
         self.callback = callback
     }
-    
-    public func getClosedEventProps() -> [String: Any]{
+
+    public func getClosedEventProps() -> [String: Any] {
         closedEventProps
     }
 

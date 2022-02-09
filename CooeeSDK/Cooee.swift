@@ -229,11 +229,14 @@ public final class CooeeSDK: NSObject {
 
         if launchType == 1 {
             launchInApp(with: triggerData)
-        } else if launchType == 2 {
-            // Launch Self AR
-            // EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
-        } else if launchType == 3 {
-            // Launch Native AR
+        } else {
+            let triggerContext = TriggerContext()
+            triggerContext.setTriggerData(triggerData: triggerData)
+            if let activeViewController = UIApplication.shared.topMostViewController(){
+                triggerContext.setPresentViewController(presentViewController: activeViewController)
+            }
+            
+            ClickActionExecutor(notificationClickAction, triggerContext).execute()
         }
     }
 
