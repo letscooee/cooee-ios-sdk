@@ -72,6 +72,11 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
     private var locationManager: CLLocationManager?
     private var permissionManager: PermissionManager?
 
+    /**
+     Check for and process ``prompt`` CTA
+
+     - returns: Return ``Bool`` ``true`` if any permission is requested, Otherwise ``false``
+     */
     private func processPrompts() -> Bool {
         guard let prompt = clickAction.pmpt else {
             return false
@@ -79,23 +84,29 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
 
         permissionManager = PermissionManager()
 
-        if prompt == .PUSH {
-            requestPushNotificationPermission()
-            return true
-        } else if prompt == .CAMERA {
-            requestCameraPermissionPermission()
-            return true
-        } else if prompt == .LOCATION {
-            locationManager = CLLocationManager()
-            locationManager?.delegate = self
-            locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+        switch prompt {
+            case 1:
+                requestCameraPermissionPermission()
+                return true
+            case 2:
+                locationManager = CLLocationManager()
+                locationManager?.delegate = self
+                locationManager?.desiredAccuracy = kCLLocationAccuracyBest
 
-            // Will prompt for permission but will let us know status need to fix issue
-            locationManager?.requestWhenInUseAuthorization()
+                // Will prompt for permission but will let us know status need to fix issue
+                locationManager?.requestWhenInUseAuthorization()
 
-            // TODO: Fix permission promp
-            // Send true to close inapp when location permission
-            return false
+                // TODO: Fix permission promp
+                // Send true to close inapp when location permission
+                return false
+            case 3:
+                requestPushNotificationPermission()
+                return true
+            case 4, 5:
+                // These two permissions are not required in iOS
+                updateDeviceProps()
+            default:
+                CooeeFactory.shared.sentryHelper.capture(message: "Invalid Permission: Value \(String(describing: prompt))")
         }
 
         return false

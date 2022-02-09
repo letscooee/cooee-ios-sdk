@@ -24,21 +24,22 @@ class PermissionManager {
         permissionDetails = [String: Any]()
 
         for permission in permissions {
-            if permission == .LOCATION {
-                checkLocationPermissionAndFetchDetails()
-            } else if permission == .PUSH {
-                checkPushNotificationPermission()
-            } else if permission == .STORAGE {
-                // No need to access storage till we need access other directory in internal sorage
-                // iOS provide access to app specific directory and some common shared directory
-                // Hence we do not need this STORAGE permission in iOS
-                permissionDetails?.updateValue("GRANTED", forKey: permission.rawValue)
-            } else if permission == .PHONE_DETAILS {
-                // This permission Android specific and require to access network type.
-                // iOS by default grant this permission
-                permissionDetails?.updateValue("GRANTED", forKey: permission.rawValue)
-            } else if permission == .CAMERA {
-                checkCameraPermission()
+            switch permission {
+                case .LOCATION:
+                    checkLocationPermissionAndFetchDetails()
+                case .CAMERA:
+                    checkCameraPermission()
+                case .PHONE_DETAILS:
+                    // This permission Android specific and require to access network type.
+                    // iOS by default grant this permission
+                    permissionDetails?.updateValue("GRANTED", forKey: permission.rawValue)
+                case .STORAGE:
+                    // No need to access storage till we need access other directory in internal sorage
+                    // iOS provide access to app specific directory and some common shared directory
+                    // Hence we do not need this STORAGE permission in iOS
+                    permissionDetails?.updateValue("GRANTED", forKey: permission.rawValue)
+                case .PUSH:
+                    checkPushNotificationPermission()
             }
         }
 
@@ -73,9 +74,9 @@ class PermissionManager {
             notificationSettings = settings
             semaspore.signal()
         })
-        
+
         semaspore.wait()
-        
+
         switch notificationSettings?.authorizationStatus {
             case .authorized, .provisional:
                 permissionDetails?.updateValue("GRANTED", forKey: PermissionType.PUSH.rawValue)
