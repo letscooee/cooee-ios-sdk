@@ -11,7 +11,7 @@ target 'Cooee iOS' do
   #pod 'Firebase/Messaging'
   #pod 'Firebase'
   #pod 'BSON'
-  pod 'CooeeSDK', path: '../CooeeSDK'
+  pod 'CooeeSDK', path: '../ios-sdk'
   target 'CooeeSDK' do
     project 'CooeeSDK.xcodeproj'
         inherit! :search_paths

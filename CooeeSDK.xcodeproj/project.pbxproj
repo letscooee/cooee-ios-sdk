@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		750F14CC27ABBF2400369101 /* GIFImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750F14CB27ABBF2400369101 /* GIFImageView.swift */; };
 		75186DC627808FC700DD6744 /* ARHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75186DC527808FC600DD6744 /* ARHelper.swift */; };
 		75187468274CD6F000BF267F /* ElementRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75187467274CD6F000BF267F /* ElementRenderer.swift */; };
 		7518746A274CE35E00BF267F /* ShapeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75187469274CE35E00BF267F /* ShapeRenderer.swift */; };
@@ -155,6 +156,7 @@
 /* Begin PBXFileReference section */
 		5F6A13389002428C5D489894 /* Pods-CooeeSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.debug.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		5FC8F5B4B05D83373A281F12 /* Pods-Cooee iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS.debug.xcconfig"; path = "Target Support Files/Pods-Cooee iOS/Pods-Cooee iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		750F14CB27ABBF2400369101 /* GIFImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFImageView.swift; sourceTree = "<group>"; };
 		75186DC527808FC600DD6744 /* ARHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARHelper.swift; sourceTree = "<group>"; };
 		75187467274CD6F000BF267F /* ElementRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementRenderer.swift; sourceTree = "<group>"; };
 		75187469274CE35E00BF267F /* ShapeRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeRenderer.swift; sourceTree = "<group>"; };
@@ -331,6 +333,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		750F14CA27ABBF0900369101 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				750F14CB27ABBF2400369101 /* GIFImageView.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
 		75186DC427808F4F00DD6744 /* ar */ = {
 			isa = PBXGroup;
 			children = (
@@ -744,6 +754,7 @@
 		AC0B8C6F71D493FD0E2871F2 /* inapp */ = {
 			isa = PBXGroup;
 			children = (
+				750F14CA27ABBF0900369101 /* utils */,
 				AC0B8AA3294AAAB6B9AF197A /* InAppTriggerScene.swift */,
 				75FA7DB527217B1F0060A425 /* InAppTriggerScene.xib */,
 				AC0B8B7A9B8DFBE2F5B76514 /* InAppAnimationProvider.swift */,
@@ -1092,6 +1103,7 @@
 				75729E7D26F87593006EB506 /* WebService.swift in Sources */,
 				757E405826F9FA16008352F3 /* BaseHTTPService.swift in Sources */,
 				7599DCC82771FFDE002CEB1A /* ExternalApiClient.swift in Sources */,
+				750F14CC27ABBF2400369101 /* GIFImageView.swift in Sources */,
 				7599DCC52771ECEF002CEB1A /* AppFont.swift in Sources */,
 				756BAA272758FB8900C7A84F /* CustomDeserializer.swift in Sources */,
 				75DD87982715927B00A272BB /* PendingTaskJobProcessor.swift in Sources */,
@@ -1399,6 +1411,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.1;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.letscooee.CooeeSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

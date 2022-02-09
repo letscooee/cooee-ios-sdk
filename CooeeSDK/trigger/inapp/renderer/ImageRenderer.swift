@@ -4,7 +4,6 @@
 
 import Foundation
 import SwiftUI
-
 /**
  Renders a ImageElement
 
@@ -12,31 +11,26 @@ import SwiftUI
  - Since: 0.1.0
  */
 struct ImageRenderer<Placeholder: View, ConfiguredImage: View>: View {
-    var url: URL
-    private let placeholder: () -> Placeholder
-    private let image: (SwiftUI.Image) -> ConfiguredImage
-
-    @ObservedObject var imageLoader: ImageLoaderService
-    @State var imageData: UIImage?
+    // MARK: Lifecycle
 
     init(
         url: URL,
         @ViewBuilder placeholder: @escaping () -> Placeholder,
-        @ViewBuilder image: @escaping (SwiftUI.Image) -> ConfiguredImage
+        @ViewBuilder image: @escaping (GIFImageView) -> ConfiguredImage,
+        data: BaseElement
     ) {
         self.url = url
         self.placeholder = placeholder
         self.image = image
+        self.baseData = data
         self.imageLoader = ImageLoaderService(url: url)
     }
 
-    @ViewBuilder private var imageContent: some View {
-        if let data = imageData {
-            image(SwiftUI.Image(uiImage: data))
-        } else {
-            placeholder()
-        }
-    }
+    // MARK: Internal
+
+    var url: URL
+    @ObservedObject var imageLoader: ImageLoaderService
+    @State var imageData: UIImage?
 
     var body: some View {
         imageContent
@@ -44,21 +38,39 @@ struct ImageRenderer<Placeholder: View, ConfiguredImage: View>: View {
                 self.imageData = imageData
             }
     }
+
+    // MARK: Private
+
+    private let placeholder: () -> Placeholder
+    private let image: (GIFImageView) -> ConfiguredImage
+    private let baseData: BaseElement
+
+    @ViewBuilder private var imageContent: some View {
+        if let data = imageData {
+            image(GIFImageView(imageData: data, baseElement: baseData))
+        } else {
+            placeholder()
+        }
+    }
 }
 
 class ImageLoaderService: ObservableObject {
-    @Published var image = UIImage()
+    // MARK: Lifecycle
 
     convenience init(url: URL) {
         self.init()
         loadImage(for: url)
     }
 
+    // MARK: Internal
+
+    @Published var image = UIImage()
+
     func loadImage(for url: URL) {
         let task = URLSession.shared.dataTask(with: url) { data, _, _ in
             guard let data = data else { return }
             DispatchQueue.main.async {
-                self.image = UIImage(data: data) ?? UIImage()
+                self.image = UIImage.gif(data: data)!
             }
         }
         task.resume()
