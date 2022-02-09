@@ -11,41 +11,41 @@ import HandyJSON
 import UIKit
 
 class ViewController: UIViewController, CooeeCTADelegate {
+    
+    let cooeeSDK = CooeeSDK.getInstance()
 
-    func onCTAResponse(payload: [String : Any]) {
+    @IBOutlet var parentView: UIView!
+
+    func onCTAResponse(payload: [String: Any]) {
         print(payload)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let cooeeSDK = CooeeSDK.getInstance()
+        UIGraphicsBeginImageContext(parentView.frame.size)
+        UIImage(named: "banner")?.draw(in: view.bounds)
+
+        if let image = UIGraphicsGetImageFromCurrentImageContext() {
+            UIGraphicsEndImageContext()
+            parentView.backgroundColor = UIColor(patternImage: image)
+        } else {
+            UIGraphicsEndImageContext()
+            debugPrint("Image not available")
+        }
+
         cooeeSDK.setOnCTADelegate(self)
         cooeeSDK.setCurrentScreen(screenName: "Main")
-        do {
-            try cooeeSDK.sendEvent(eventName: "View Load", eventProperties: [String: Any]())
-        } catch {}
 
         cooeeSDK.updateUserData(userData: ["name": "Ashish Gaikwad", "email": "ashish@iostest.com", "mobile": 9874563210])
     }
 
     @IBAction func loadPayload(_ sender: Any) {
         do {
-            if let bundlePath = Bundle.main.url(forResource: "samplepayloadone",
-                                                withExtension: "json")
-            {
-                print("path obtained")
-                let jsonData = try Data(contentsOf: bundlePath)
-
-                var json = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as? [String: Any]
-                json?.updateValue(ObjectId().hexString, forKey: "id")
-                json?.updateValue(ObjectId().hexString, forKey: "engagementID")
-                json?.updateValue((Date().timeIntervalSince1970*1000) + (5*60*1000), forKey: "expireAt")
-
-                let rawString = String(data: json!.percentEncoded()!, encoding: .utf8)
-                EngagementTriggerHelper.renderInAppTriggerFromJSONString(rawString!)
-            } else {
-                print("file not found")
-            }
+            let eventProperties = [
+                "product id": "1234",
+                "product name": "Brush"
+            ]
+            try cooeeSDK.sendEvent(eventName: "Add To Cart", eventProperties: eventProperties)
         } catch {
             print(error)
         }
