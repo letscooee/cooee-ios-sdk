@@ -25,6 +25,7 @@ public final class CooeeSDK: NSObject {
     }
 
     // MARK: Public
+
     @objc
     public static func getInstance() -> CooeeSDK {
         if shared == nil {
@@ -176,6 +177,18 @@ public final class CooeeSDK: NSObject {
         return [.alert, .sound, .badge]
     }
 
+    /**
+     Use to set wrapper name. Can use only in Flutter/Cordova/React-Native to keep track of wrappers
+
+     - parameters:
+     - wrapperName: Name of the wrapper
+    - warning:  Can use only in Flutter/Cordova/React-Native to keep track of wrappers
+     */
+    @objc
+    public func setWrapper(_ wrapperName: String) {
+        CooeeFactory.shared.baseHttpService.commonHeaders.wrapper = wrapperName
+    }
+
     // MARK: Private
 
     private static var shared: CooeeSDK?
@@ -232,10 +245,10 @@ public final class CooeeSDK: NSObject {
         } else {
             let triggerContext = TriggerContext()
             triggerContext.setTriggerData(triggerData: triggerData)
-            if let activeViewController = UIApplication.shared.topMostViewController(){
+            if let activeViewController = UIApplication.shared.topMostViewController() {
                 triggerContext.setPresentViewController(presentViewController: activeViewController)
             }
-            
+
             ClickActionExecutor(notificationClickAction, triggerContext).execute()
         }
     }
