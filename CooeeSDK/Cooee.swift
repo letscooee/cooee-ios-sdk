@@ -42,8 +42,9 @@ public final class CooeeSDK: NSObject {
      - Throws: Throws {@link CustomError#PropertyError} if user try to send any property start with {@link Constants.SYSTEM_DATA_PREFIX}
      */
     @objc
-    public func sendEvent(eventName: String, eventProperties: [String: Any]) throws {
-        for (key, _) in eventProperties {
+    public func sendEvent(eventName: String, eventProperties: [String: Any]? = [String: Any]()) throws {
+        
+        for (key, _) in eventProperties ?? [String: Any]() {
             let prefix = String(key.prefix(2))
 
             if prefix.caseInsensitiveCompare(Constants.SYSTEM_DATA_PREFIX) == .orderedSame {
@@ -51,7 +52,7 @@ public final class CooeeSDK: NSObject {
             }
         }
 
-        let event = Event(eventName: eventName, properties: eventProperties)
+        let event = Event(eventName: eventName, properties: eventProperties ?? [String: Any]())
         safeHttpService.sendEvent(event: event)
     }
 
