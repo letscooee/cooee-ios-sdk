@@ -31,7 +31,7 @@ class CooeeFactory {
 
         sessionManager = SessionManager.shared
         baseHttpService = BaseHTTPService.shared
-        userAuthService = UserAuthService(sentryHelper)
+        userAuthService = DeviceAuthService(sentryHelper)
         userAuthService.acquireSDKToken()
         pendingTaskService = PendingTaskService()
         runtimeData = RuntimeData.shared
@@ -47,7 +47,7 @@ class CooeeFactory {
     let appInfo: AppInfo
     let deviceInfo: DeviceInfo
     let infoPlistReader: InfoPlistReader
-    let userAuthService: UserAuthService
+    let userAuthService: DeviceAuthService
     let baseHttpService: BaseHTTPService
     let sdkInfo: SDKInfo
     let sessionManager: SessionManager

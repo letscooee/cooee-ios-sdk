@@ -14,7 +14,7 @@ import Foundation
  - Author: Ashish Gaikwad
  - Since: 1.3.0
  */
-class UserAuthService {
+class DeviceAuthService {
     // MARK: Lifecycle
 
     init(_ helper: SentryHelper) {
