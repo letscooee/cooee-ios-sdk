@@ -107,8 +107,13 @@ class UserAuthService {
         self.uuID = ObjectId().hexString
         let appInfo = InfoPlistReader.shared
         let props = DevicePropertyCollector().getImmutableDeviceProps()
+        
+        if appInfo.appID.isEmpty {
+            NSLog("Missing App credentials in Info.plist. Check Integration https://docs.letscooee.com/developers/ios/quickstart")
+            return
+        }
 
-        let authBody = DeviceAuthenticationBody(appID: appInfo.appID, appSecret: appInfo.appSecret, uuid: self.uuID!, props: props)
+        let authBody = DeviceAuthenticationBody(appID: appInfo.appID, uuid: self.uuID!, props: props)
         self.baseHttp?.registerDevice(body: authBody) {
             result, error in
             if let result = result {

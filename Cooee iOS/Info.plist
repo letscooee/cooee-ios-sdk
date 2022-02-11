@@ -26,8 +26,6 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>COOEE_APP_ID</key>
 	<string>5f9136107d618d7d123cc118</string>
-	<key>COOEE_APP_SECRET</key>
-	<string>TEST-6107d618d7d123cc118</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
