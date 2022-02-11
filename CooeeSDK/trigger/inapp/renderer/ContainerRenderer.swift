@@ -33,12 +33,9 @@ struct ContainerRenderer: View {
         ZStack(alignment: .topLeading) {
             ZStack {
                 Text("").position(x: 0, y: 0)
-            }.if (inAppTrigger.getBackground() != nil){
-                $0.modifier(AbstractInAppRenderer(elementData: BaseElement(inAppTrigger.getBackground()!), triggerContext: triggerContext, isContainer: true))
             }
-            .if (inAppTrigger.getBackground() == nil && container.bg != nil && container.bg!.g != nil) {
-                $0.background(BlurBackground(effect: UIBlurEffect(style: .light)))
-            }
+            .modifier(AbstractInAppRenderer(elementData: BaseElement(inAppTrigger.getBackground(), inAppTrigger.getClickAction()!), triggerContext: triggerContext, isContainer: true))
+            
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
 
             // .blur(radius: 18)

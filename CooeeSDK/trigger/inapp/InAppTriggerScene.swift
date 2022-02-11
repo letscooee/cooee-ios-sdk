@@ -38,6 +38,9 @@ class InAppTriggerScene: UIView {
             self.finish()
         }
 
+        checkAndUpdateInAppBackground()
+        checkAndUpdateInAppClickAction()
+
         let host = UIHostingController(rootView: ContainerRenderer(inAppTrigger: inAppData!, triggerContext).edgesIgnoringSafeArea(.all))
         guard let hostView = host.view else {
             CooeeFactory.shared.sentryHelper.capture(message: "Loading SwiftUI failed")
@@ -72,7 +75,6 @@ class InAppTriggerScene: UIView {
             }
         }, completion: nil)
 
-
         startTime = Date()
         sendTriggerDisplayedEvent()
     }
@@ -91,6 +93,37 @@ class InAppTriggerScene: UIView {
     private var startTime: Date?
 
     private var deviceDefaultOrientation = UIInterfaceOrientation.portrait
+
+    /**
+     Check for ``InAppTrigger`` background. If background is ``nil`` then move ``Container`` background to ``InAppTrigger`` background
+     */
+    private func checkAndUpdateInAppBackground() {
+        if inAppData!.getBackground() != nil {
+            return
+        }
+
+        guard let container = inAppData?.cont else {
+            return
+        }
+
+        inAppData!.setBackground(container.bg)
+
+        // Once container background is added to InAppTrigger background remove
+        // background from container
+        container.bg = nil
+        inAppData!.cont = container
+    }
+
+    /**
+     Check ``ClickAction`` in ``InAppTrigger``. If its ``nil`` then add default ``ClickAction`` to close In-App
+     */
+    private func checkAndUpdateInAppClickAction() {
+        if inAppData!.getClickAction() != nil {
+            return
+        }
+
+        inAppData!.setClickAction(ClickAction(isContainer: true))
+    }
 
     /**
      Check for the Move-In animation and change the frame of parent view
@@ -158,7 +191,6 @@ class InAppTriggerScene: UIView {
     }
 
     private func finish() {
-        
         DispatchQueue.main.async {
             var closedEventProps = self.triggerContext.getClosedEventProps()
             let duration = DateUtils.getDateDifferenceInSeconds(startDate: self.startTime!, endDate: Date())
@@ -168,7 +200,6 @@ class InAppTriggerScene: UIView {
             event.withTrigger(triggerData: self.triggerData!)
             CooeeFactory.shared.safeHttpService.sendEvent(event: event)
         }
-        
 
         // exit animation
         let exitAnimation = inAppData!.cont?.animation?.exit ?? .SLIDE_OUT_RIGHT
