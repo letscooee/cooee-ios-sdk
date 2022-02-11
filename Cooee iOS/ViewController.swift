@@ -36,7 +36,7 @@ class ViewController: UIViewController, CooeeCTADelegate {
         cooeeSDK.setOnCTADelegate(self)
         cooeeSDK.setCurrentScreen(screenName: "Main")
 
-        cooeeSDK.updateUserData(userData: ["name": "Ashish Gaikwad", "email": "ashish@iostest.com", "mobile": 9874563210])
+        cooeeSDK.updateUserProfile(["name": "Ashish Gaikwad", "email": "ashish@iostest.com", "mobile": 9874563210])
     }
 
     @IBAction func loadPayload(_ sender: Any) {
@@ -45,7 +45,8 @@ class ViewController: UIViewController, CooeeCTADelegate {
                 "product id": "1234",
                 "product name": "Brush"
             ]
-            try cooeeSDK.sendEvent(eventName: "Add To Cart", eventProperties: eventProperties)
+            try cooeeSDK.sendEvent(eventName: "Add To Cart")
+            try cooeeSDK.sendEvent(eventName: "Add To Cart",eventProperties: eventProperties)
         } catch {
             print(error)
         }

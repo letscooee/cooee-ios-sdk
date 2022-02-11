@@ -39,7 +39,8 @@ public final class CooeeSDK: NSObject {
      - Parameters:
        - eventName: Name the event like onDeviceReady
        - eventProperties: Properties associated with the event
-     - Throws: Throws {@link CustomError#PropertyError} if user try to send any property start with {@link Constants.SYSTEM_DATA_PREFIX}
+     - Throws: Throws ``CustomError/PropertyError`` if user try to send any property start with "CE "
+     - See:
      */
     @objc
     public func sendEvent(eventName: String, eventProperties: [String: Any]? = [String: Any]()) throws {
@@ -60,19 +61,20 @@ public final class CooeeSDK: NSObject {
      Send given user data to the server
      - Parameter userData: The common user data like name, email.
      */
+    @available(*, deprecated, renamed: "updateUserProfile(_:)")
     @objc
     public func updateUserData(userData: [String: Any]) {
-        sentryHelper.setUserInfo(userData: userData)
-        safeHttpService.updateUserDataOnly(userData: userData)
+        updateUserProfile(userData: userData, userProperties: [String: Any]())
     }
 
     /**
      Send given user properties to the server
      - Parameter userProperties: The additional user properties.
      */
+    @available(*, deprecated, renamed: "updateUserProfile(_:)")
     @objc
     public func updateUserProperties(userProperties: [String: Any]) {
-        safeHttpService.updateUserPropertyOnly(userProperty: userProperties)
+        updateUserProfile(userData: [String: Any](), userProperties: userProperties)
     }
 
     /**
@@ -81,10 +83,20 @@ public final class CooeeSDK: NSObject {
        - userData: The common user data like name, email.
        - userProperties: The additional user properties.
      */
+    @available(*, deprecated, renamed: "updateUserProfile(_:)")
     @objc
     public func updateUserProfile(userData: [String: Any], userProperties: [String: Any]) {
+        var requestData = [String: Any]()
+        requestData.merge(userProperties){(current,_) in current}
+        requestData.merge(userData){(current,_) in current}
+        sentryHelper.setUserInfo(userData: requestData)
+        safeHttpService.updateUserProfile(userData: requestData)
+    }
+    
+    @objc
+    public func updateUserProfile(_ userData:[String: Any]){
         sentryHelper.setUserInfo(userData: userData)
-        safeHttpService.updateUserProfile(userData: userData, userProperties: userProperties)
+        safeHttpService.updateUserProfile(userData: userData)
     }
 
     /**
