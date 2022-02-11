@@ -48,6 +48,9 @@ struct AbstractInAppRenderer: ViewModifier {
         .if(elementData.bg != nil && elementData.bg!.s != nil && elementData.bg!.s!.g == nil) {
             $0.background(Color(hex: elementData.bg!.s!.getColour(), alpha: elementData.bg!.s!.getAlpha()).cornerRadius(elementData.br?.getRadius() ?? 0))
         }
+        .if(elementData.bg != nil && elementData.bg!.g != nil) {
+            $0.background(BlurBackground(effect: UIBlurEffect(style: .light)))
+        }
         .if(elementData.bg != nil && elementData.bg!.i != nil) {
             $0.background(
                 ImageRenderer(
