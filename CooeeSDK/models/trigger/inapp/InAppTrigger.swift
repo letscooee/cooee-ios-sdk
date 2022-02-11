@@ -54,6 +54,18 @@ class InAppTrigger: HandyJSON {
         bg
     }
 
+    public func setBackground(_ background: Background?) {
+        bg = background
+    }
+
+    public func getClickAction() -> ClickAction? {
+        clc
+    }
+
+    public func setClickAction(_ clickAction: ClickAction) {
+        clc = clickAction
+    }
+
     // MARK: Internal
 
     var cont: Container?        // Container
@@ -65,4 +77,5 @@ class InAppTrigger: HandyJSON {
     private var w: Float?       // In-App canvas width
     private var h: Float?       // In-App canvas height
     private var bg: Background? // Full screen background
+    private var clc: ClickAction? // InApp Click Action
 }

@@ -18,8 +18,9 @@ class BaseElement: HandyJSON {
 
     required init() {}
 
-    init(_ background: Background) {
+    init(_ background: Background?, _ clickAction: ClickAction) {
         self.bg = background
+        self.clc = clickAction
     }
 
     // MARK: Public
