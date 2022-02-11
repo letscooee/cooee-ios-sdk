@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                         application.registerForRemoteNotifications()
                     }
                 }else{
-                    NSLog("Error \(error?.localizedDescription)")
+                    NSLog("Error \(String(describing: error?.localizedDescription))")
                 }
             }
         )
