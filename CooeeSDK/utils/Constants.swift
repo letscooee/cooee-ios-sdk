@@ -47,7 +47,7 @@ struct Constants {
     static let trackEvent = "/v1/event/track/"
     static let concludeSession = "/v1/session/conclude"
     static let keepAlive = "/v1/session/keepAlive"
-    static let saveFCM = "/v1/user/setPushToken"
+    static let saveFCM = "/v1/device/setPushToken"
     static let updateProfile = "/v1/user/update"
     static let deviceUpdate = "/v1/device/update"
     static let triggerDetails = "/v1/trigger/details/"
