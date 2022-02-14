@@ -25,7 +25,7 @@ struct ClickAction: HandyJSON {
     var iab: BrowserContent?
     var ext: BrowserContent?
     var updt: BrowserContent?
-    var pmpt: Int??
+    var pmpt: Int?
     var up: [String: Any]?
     var kv: [String: Any]?
     var share: [String: Any]?
