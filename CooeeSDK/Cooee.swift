@@ -43,9 +43,15 @@ public final class CooeeSDK: NSObject {
      - See:
      */
     @objc
-    public func sendEvent(eventName: String, eventProperties: [String: Any]? = [String: Any]()) throws {
-        
-        for (key, _) in eventProperties ?? [String: Any]() {
+    public func sendEvent(eventName: String, eventProperties: [String: Any]? = nil) throws {
+
+        guard let eventProperties = eventProperties else {
+            let event = Event(eventName: eventName)
+            safeHttpService.sendEvent(event: event)
+            return
+        }
+
+        for (key, _) in eventProperties {
             let prefix = String(key.prefix(2))
 
             if prefix.caseInsensitiveCompare(Constants.SYSTEM_DATA_PREFIX) == .orderedSame {
@@ -53,7 +59,7 @@ public final class CooeeSDK: NSObject {
             }
         }
 
-        let event = Event(eventName: eventName, properties: eventProperties ?? [String: Any]())
+        let event = Event(eventName: eventName, properties: eventProperties)
         safeHttpService.sendEvent(event: event)
     }
 
@@ -87,14 +93,14 @@ public final class CooeeSDK: NSObject {
     @objc
     public func updateUserProfile(userData: [String: Any], userProperties: [String: Any]) {
         var requestData = [String: Any]()
-        requestData.merge(userProperties){(current,_) in current}
-        requestData.merge(userData){(current,_) in current}
+        requestData.merge(userProperties) { (current, _) in current}
+        requestData.merge(userData) { (current, _) in current}
         sentryHelper.setUserInfo(userData: requestData)
         safeHttpService.updateUserProfile(userData: requestData)
     }
-    
+
     @objc
-    public func updateUserProfile(_ userData:[String: Any]){
+    public func updateUserProfile(_ userData: [String: Any]) {
         sentryHelper.setUserInfo(userData: userData)
         safeHttpService.updateUserProfile(userData: userData)
     }
