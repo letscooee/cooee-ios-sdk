@@ -11,7 +11,7 @@ import HandyJSON
 import UIKit
 
 class ViewController: UIViewController, CooeeCTADelegate {
-    
+
     let cooeeSDK = CooeeSDK.getInstance()
 
     @IBOutlet var parentView: UIView!
@@ -36,7 +36,11 @@ class ViewController: UIViewController, CooeeCTADelegate {
         cooeeSDK.setOnCTADelegate(self)
         cooeeSDK.setCurrentScreen(screenName: "Main")
 
-        cooeeSDK.updateUserProfile(["name": "Ashish Gaikwad", "email": "ashish@iostest.com", "mobile": 9874563210])
+        do {
+            try cooeeSDK.updateUserProfile(["name": "Ashish Gaikwad", "email": "ashish@iostest.com", "mobile": 9874563210])
+        } catch {
+            NSLog("\(error.localizedDescription)")
+        }
     }
 
     @IBAction func loadPayload(_ sender: Any) {
@@ -46,7 +50,7 @@ class ViewController: UIViewController, CooeeCTADelegate {
                 "product name": "Brush"
             ]
             try cooeeSDK.sendEvent(eventName: "Add To Cart")
-            try cooeeSDK.sendEvent(eventName: "Add To Cart",eventProperties: eventProperties)
+            try cooeeSDK.sendEvent(eventName: "Add To Cart", eventProperties: eventProperties)
         } catch {
             print(error)
         }
