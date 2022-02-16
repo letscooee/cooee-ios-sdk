@@ -20,6 +20,7 @@ struct ContainerRenderer: View {
         self.container = data.cont!
         self.elements = data.elems!
         self.triggerContext = triggerContext
+        updateScalingFactor()
     }
 
     // MARK: Internal
@@ -34,24 +35,22 @@ struct ContainerRenderer: View {
             ZStack {
                 Text("").position(x: 0, y: 0)
             }
-            .modifier(AbstractInAppRenderer(elementData: BaseElement(inAppTrigger.getBackground(), inAppTrigger.getClickAction()!), triggerContext: triggerContext, isContainer: true))
-            
-            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                    .modifier(AbstractInAppRenderer(elementData: inAppTrigger, triggerContext: triggerContext, isContainer: true))
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
 
-            // .blur(radius: 18)
             ZStack(alignment: contentAlignment) {
                 Text("").position(x: 0, y: 0)
                 ZStack(alignment: .topLeading) {
                     Text("").position(x: 0, y: 0)
                     ElementRenderer(elements, triggerContext).background(Color.white.opacity(0))
-                }.modifier(AbstractInAppRenderer(elementData: container, triggerContext: triggerContext, isContainer: false))
-                    .clipped()
-                    .frame(UnitUtil.getScaledPixel(1080), UnitUtil.getScaledPixel(1920))
+                }
+                        .modifier(AbstractInAppRenderer(elementData: container, triggerContext: triggerContext, isContainer: false))
+                        .clipped()
+                        .frame(UnitUtil.getScaledPixel(container.getWidth()), UnitUtil.getScaledPixel(container.getHeight()))
             }
-            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         }
-        
-        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
     }
 
     // MARK: Private
@@ -60,10 +59,31 @@ struct ContainerRenderer: View {
     private var elements: [[String: Any]]
     private var triggerContext: TriggerContext
     private var inAppTrigger: InAppTrigger
+
+    private func updateScalingFactor() {
+        var scalingFactor: Float
+        if triggerContext.getDeviceInfo().getDeviceWidth() < triggerContext.getDeviceInfo().getDeviceHeight() {
+            let shortEdge = min(Constants.STANDARD_RESOLUTION_WIDTH, Constants.STANDARD_RESOLUTION_HEIGHT)
+            print("container width:\(container.getWidth()), short edge:\(shortEdge)")
+            scalingFactor = Float(triggerContext.getDeviceInfo().getDeviceWidth()) / shortEdge
+        } else {
+            let longEdge = max(Constants.STANDARD_RESOLUTION_WIDTH, Constants.STANDARD_RESOLUTION_HEIGHT)
+            print("container height:\(container.getHeight()), long edge:\(longEdge)")
+            scalingFactor = Float(triggerContext.getDeviceInfo().getDeviceHeight()) / longEdge
+        }
+        //triggerContext.setScalingFactor(min(scalingFactor, 1))
+        UnitUtil.setScalingFactor(scalingFactor: min(scalingFactor, 1))
+    }
 }
 
 struct BlurBackground: UIViewRepresentable {
     var effect: UIVisualEffect?
-    func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
-    func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
+
+    func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView {
+        UIVisualEffectView()
+    }
+
+    func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) {
+        uiView.effect = effect
+    }
 }

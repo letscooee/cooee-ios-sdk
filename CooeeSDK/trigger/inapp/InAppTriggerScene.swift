@@ -24,8 +24,6 @@ class InAppTriggerScene: UIView {
         triggerData = data
         inAppData = data.getInAppTrigger()
 
-        publishCanvasSize()
-
         if inAppData == nil {
             throw CustomError.EmptyInAppData
         }
@@ -37,9 +35,6 @@ class InAppTriggerScene: UIView {
         triggerContext.onExit { _ in
             self.finish()
         }
-
-        checkAndUpdateInAppBackground()
-        checkAndUpdateInAppClickAction()
 
         let host = UIHostingController(rootView: ContainerRenderer(inAppTrigger: inAppData!, triggerContext).edgesIgnoringSafeArea(.all))
         guard let hostView = host.view else {
@@ -95,37 +90,6 @@ class InAppTriggerScene: UIView {
     private var deviceDefaultOrientation = UIInterfaceOrientation.portrait
 
     /**
-     Check for ``InAppTrigger`` background. If background is ``nil`` then move ``Container`` background to ``InAppTrigger`` background
-     */
-    private func checkAndUpdateInAppBackground() {
-        if inAppData!.getBackground() != nil {
-            return
-        }
-
-        guard let container = inAppData?.cont else {
-            return
-        }
-
-        inAppData!.setBackground(container.bg)
-
-        // Once container background is added to InAppTrigger background remove
-        // background from container
-        container.bg = nil
-        inAppData!.cont = container
-    }
-
-    /**
-     Check ``ClickAction`` in ``InAppTrigger``. If its ``nil`` then add default ``ClickAction`` to close In-App
-     */
-    private func checkAndUpdateInAppClickAction() {
-        if inAppData!.getClickAction() != nil {
-            return
-        }
-
-        inAppData!.setClickAction(ClickAction(isContainer: true))
-    }
-
-    /**
      Check for the Move-In animation and change the frame of parent view
 
      - Parameter animation: move-in animation
@@ -150,11 +114,6 @@ class InAppTriggerScene: UIView {
         parentView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         parentView.insetsLayoutMarginsFromSafeArea = false
         parentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-    }
-
-    private func publishCanvasSize() {
-        UnitUtil.STANDARD_RESOLUTION_WIDTH = inAppData?.getCanvasWidth() ?? 1080
-        UnitUtil.STANDARD_RESOLUTION_HEIGHT = inAppData?.getCanvasHeight() ?? 1920
     }
 
     private func updateDeviceOrientation(_ orientation: UIInterfaceOrientation) {

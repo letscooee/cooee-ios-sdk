@@ -16,17 +16,12 @@ import UIKit
 class BaseElement: HandyJSON {
     // MARK: Lifecycle
 
-    required init() {}
-
-    init(_ background: Background?, _ clickAction: ClickAction) {
-        self.bg = background
-        self.clc = clickAction
+    required init() {
     }
 
     // MARK: Public
 
     public func getX(for viewWidth: CGFloat) -> CGFloat {
-
         if viewWidth > UIScreen.main.bounds.width {
             let calculatedExtraSpace = viewWidth - UIScreen.main.bounds.width
 
@@ -38,7 +33,19 @@ class BaseElement: HandyJSON {
 
     public func getY(for viewHeight: CGFloat) -> CGFloat {
         if viewHeight > UIScreen.main.bounds.height {
-            let safeArea = UIApplication.shared.connectedScenes.filter({ $0.activationState == .foregroundActive }).map({ $0 as? UIWindowScene }).compactMap({ $0 }).first?.windows.filter({ $0.isKeyWindow }).first?.safeAreaInsets
+            let safeArea = UIApplication.shared.connectedScenes.filter {
+                        $0.activationState == .foregroundActive
+                    }
+                    .map {
+                        $0 as? UIWindowScene
+                    }
+                    .compactMap {
+                        $0
+                    }
+                    .first?.windows.filter {
+                        $0.isKeyWindow
+                    }
+                    .first?.safeAreaInsets
             let safeAreaTop = safeArea?.top ?? 40
             let safeAreaBottom = safeArea?.bottom ?? 40
             let calculatedExtraSpace = viewHeight - UIScreen.main.bounds.height
@@ -81,21 +88,37 @@ class BaseElement: HandyJSON {
         spc ?? Spacing()
     }
 
+    public func getWidth() -> Float {
+        w ?? 0
+    }
+
+    public func getHeight() -> Float {
+        h ?? 0
+    }
+
+    public func getBackground() -> Background? {
+        bg
+    }
+
+    public func setBackground(_ background: Background?) {
+        bg = background
+    }
+
     // MARK: Internal
 
-    var bg: Background?     // Background
-    var br: Border?         // Border
-    var shd: Shadow?        // Shadow
-    var spc: Spacing?       // Spacing
-    var trf: Transform?     // Transform
-    var clc: ClickAction?   // ClickAction
+    var br: Border? // Border
+    var shd: Shadow? // Shadow
+    var spc: Spacing? // Spacing
+    var trf: Transform? // Transform
+    var clc: ClickAction? // ClickAction
 
     // MARK: Private
 
-    private var t: Int?     // Type
-    private var x: Float?   // X position
-    private var y: Float?   // Y position
-    private var z: Float?   // Z index
-    private var w: Float?   // Width
-    private var h: Float?   // Height
+    private var bg: Background? // Background
+    private var t: Int? // Type
+    private var x: Float? // X position
+    private var y: Float? // Y position
+    private var z: Float? // Z index
+    private var w: Float? // Width
+    private var h: Float? // Height
 }

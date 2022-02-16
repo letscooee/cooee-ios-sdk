@@ -9,7 +9,7 @@ import UIKit
  A simple data holder class shared across different renderers.
 
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
 class TriggerContext {
     // MARK: Public
@@ -54,6 +54,10 @@ class TriggerContext {
         self.presentViewController = presentViewController
     }
 
+    public func getDeviceInfo() -> DeviceInfo {
+        deviceInfo
+    }
+
     // MARK: Private
 
     private var triggerData: TriggerData?
@@ -61,4 +65,5 @@ class TriggerContext {
     private var closedEventProps = [String: Any]()
     private var callback: ((_ result: [String: Any]?) -> ())?
     private var presentViewController: UIViewController?
+    private var deviceInfo: DeviceInfo = CooeeFactory.shared.deviceInfo
 }

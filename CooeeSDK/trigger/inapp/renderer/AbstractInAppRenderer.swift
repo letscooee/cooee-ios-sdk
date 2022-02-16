@@ -40,21 +40,21 @@ struct AbstractInAppRenderer: ViewModifier {
                 .padding(.leading, elementData.spc!.getPaddingLeft())
                 .padding(.trailing, elementData.spc!.getPaddingRight())
         }
-        .if(elementData.bg != nil && elementData.bg!.s != nil && elementData.bg!.s!.g != nil) {
+        .if(elementData.getBackground() != nil && elementData.getBackground()!.s != nil && elementData.getBackground()!.s!.g != nil) {
             $0.background(
-                LinearGradient(gradient: SwiftUI.Gradient(colors: [Color(hex: elementData.bg!.s!.g!.c1!), Color(hex: elementData.bg!.s!.g!.c2!)]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: SwiftUI.Gradient(colors: [Color(hex: elementData.getBackground()!.s!.g!.c1!), Color(hex: elementData.getBackground()!.s!.g!.c2!)]), startPoint: .top, endPoint: .bottom)
             ).cornerRadius(elementData.br?.getRadius() ?? 0)
         }
-        .if(elementData.bg != nil && elementData.bg!.s != nil && elementData.bg!.s!.g == nil) {
-            $0.background(Color(hex: elementData.bg!.s!.getColour(), alpha: elementData.bg!.s!.getAlpha()).cornerRadius(elementData.br?.getRadius() ?? 0))
+        .if(elementData.getBackground() != nil && elementData.getBackground()!.s != nil && elementData.getBackground()!.s!.g == nil) {
+            $0.background(Color(hex: elementData.getBackground()!.s!.getColour(), alpha: elementData.getBackground()!.s!.getAlpha()).cornerRadius(elementData.br?.getRadius() ?? 0))
         }
-        .if(elementData.bg != nil && elementData.bg!.g != nil) {
+        .if(elementData.getBackground() != nil && elementData.getBackground()!.g != nil) {
             $0.background(BlurBackground(effect: UIBlurEffect(style: .light)))
         }
-        .if(elementData.bg != nil && elementData.bg!.i != nil) {
+        .if(elementData.getBackground() != nil && elementData.getBackground()!.i != nil) {
             $0.background(
                 ImageRenderer(
-                    url: URL(string: elementData.bg!.i!.src!)!,
+                    url: URL(string: elementData.getBackground()!.i!.src!)!,
                     placeholder: {
                         // Place holder should be added
                     },
@@ -65,7 +65,7 @@ struct AbstractInAppRenderer: ViewModifier {
                 ).cornerRadius(elementData.br?.getRadius() ?? 0)
             ).cornerRadius(elementData.br?.getRadius() ?? 0)
         }
-        .if(elementData.bg != nil && elementData.bg!.i != nil) {
+        .if(elementData.getBackground() != nil && elementData.getBackground()!.i != nil) {
             $0.clipped()
         }
         .if(elementData.br != nil && elementData.br!.getStyle() == Border.Style.SOLID && isText) {

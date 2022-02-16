@@ -10,27 +10,15 @@ import SwiftUI
  - Author: Ashish Gaikwad
  - Since: 1.3.0
  */
-class InAppTrigger: HandyJSON {
-    // MARK: Lifecycle
-
-    required init() {}
-
+class InAppTrigger: BaseElement {
     // MARK: Public
 
-    public func getCanvasWidth() -> Float {
-        w ?? 1080
-    }
-
-    public func getCanvasHeight() -> Float {
-        h ?? 1920
-    }
-
     public func getGravity() -> SwiftUI.Alignment {
-        if o == nil {
-            o = cont?.getGravity()
+        if gvt == nil {
+            gvt = cont?.getGravity()
         }
 
-        switch o {
+        switch gvt {
             case 1:
                 return SwiftUI.Alignment.topLeading
             case 2:
@@ -54,32 +42,25 @@ class InAppTrigger: HandyJSON {
         }
     }
 
-    public func getBackground() -> Background? {
-        bg
+    override public func getBackground() -> Background? {
+        if super.getBackground() == nil {
+            super.setBackground(cont?.getBackground())
+            cont?.setBackground(nil)
+        }
+
+        return super.getBackground()
     }
 
-    public func setBackground(_ background: Background?) {
-        bg = background
-    }
-
-    public func getClickAction() -> ClickAction? {
-        clc
-    }
-
-    public func setClickAction(_ clickAction: ClickAction) {
-        clc = clickAction
+    override public func getClickAction() -> ClickAction {
+        clc ?? ClickAction(isContainer: true)
     }
 
     // MARK: Internal
 
-    var cont: Container?        // Container
+    var cont: Container? // Container
     var elems: [[String: Any]]? // Elements
 
     // MARK: Private
 
-    private var o: Int?         // In-App contaoner gravity
-    private var w: Float?       // In-App canvas width
-    private var h: Float?       // In-App canvas height
-    private var bg: Background? // Full screen background
-    private var clc: ClickAction? // InApp Click Action
+    private var gvt: Int? // In-App contaoner gravity
 }
