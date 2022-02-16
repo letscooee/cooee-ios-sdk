@@ -25,7 +25,11 @@ class InAppTrigger: HandyJSON {
         h ?? 1920
     }
 
-    public func getGravity() -> SwiftUI.Alignment? {
+    public func getGravity() -> SwiftUI.Alignment {
+        if o == nil {
+            o = cont?.getGravity()
+        }
+
         switch o {
             case 1:
                 return SwiftUI.Alignment.topLeading
@@ -44,9 +48,9 @@ class InAppTrigger: HandyJSON {
             case 9:
                 return SwiftUI.Alignment.bottomTrailing
             case .none:
-                return nil
+                return SwiftUI.Alignment.center
             case .some:
-                return nil
+                return SwiftUI.Alignment.center
         }
     }
 

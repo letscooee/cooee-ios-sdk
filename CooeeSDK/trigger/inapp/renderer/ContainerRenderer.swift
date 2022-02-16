@@ -28,7 +28,7 @@ struct ContainerRenderer: View {
     let deviceHeight = UIScreen.main.bounds.height
 
     var body: some View {
-        let contentAlignment = inAppTrigger.getGravity() ?? container.getGravity()
+        let contentAlignment = inAppTrigger.getGravity()
 
         ZStack(alignment: .topLeading) {
             ZStack {
