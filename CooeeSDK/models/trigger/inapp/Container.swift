@@ -15,11 +15,11 @@ class Container: BaseElement {
     // MARK: Public
 
     public override func getWidth() -> Float {
-        super.getWidth() <= 0 ? Constants.STANDARD_RESOLUTION_WIDTH : super.getWidth()
+        super.getWidth() <= 0 ? Constants.DEFAULT_RESOLUTION_WIDTH : super.getWidth()
     }
 
     override func getHeight() -> Float {
-        super.getHeight() <= 0 ? Constants.STANDARD_RESOLUTION_HEIGHT : super.getHeight()
+        super.getHeight() <= 0 ? Constants.DEFAULT_RESOLUTION_HEIGHT : super.getHeight()
     }
 
     public func getGravity() -> Int? {

@@ -17,8 +17,8 @@ struct ClickAction: HandyJSON {
 
     init() {}
 
-    init(isContainer: Bool) {
-        self.close = isContainer
+    init(shouldClose: Bool) {
+        self.close = shouldClose
     }
 
     // MARK: Public

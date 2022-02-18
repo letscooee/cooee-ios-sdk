@@ -43,6 +43,7 @@ class InAppTrigger: BaseElement {
     }
 
     override public func getBackground() -> Background? {
+        // Todo: Remove Implementation once the background is implemented in CP
         if super.getBackground() == nil {
             super.setBackground(cont?.getBackground())
             cont?.setBackground(nil)
@@ -52,7 +53,7 @@ class InAppTrigger: BaseElement {
     }
 
     override public func getClickAction() -> ClickAction {
-        clc ?? ClickAction(isContainer: true)
+        clc ?? ClickAction(shouldClose: true)
     }
 
     // MARK: Internal

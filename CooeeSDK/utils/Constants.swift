@@ -40,8 +40,8 @@ struct Constants {
     static let FONT_REFRESH_INTERVAL_DAYS = 7
     static let SCREENSHOT_SEND_INTERVAL_HOURS = 6
     static let PLATFORM = "iOS"
-    static let STANDARD_RESOLUTION_WIDTH: Float = 1080
-    static let STANDARD_RESOLUTION_HEIGHT: Float = 1920
+    static let DEFAULT_RESOLUTION_WIDTH: Float = 1080
+    static let DEFAULT_RESOLUTION_HEIGHT: Float = 1920
 
     // region All Server Endpoint
     static let BASE_URL = "https://api.sdk.letscooee.com"

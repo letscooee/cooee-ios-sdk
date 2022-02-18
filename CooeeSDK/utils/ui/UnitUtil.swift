@@ -19,7 +19,7 @@ class UnitUtil {
     }
 
     public static func setScalingFactor(scalingFactor: Float) {
-        UnitUtil.scalingFactor = scalingFactor
+        UnitUtil.scalingFactor = min(scalingFactor, 1)
     }
 
     // MARK: Private

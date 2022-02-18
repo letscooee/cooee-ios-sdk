@@ -24,7 +24,7 @@ class BaseHTTPService {
         init() {
             dictionary = ["device-name": DeviceInfo.shared.cachedInfo.name.urlEncoded!,
                           "sdk-version": SDKInfo.shared.cachedInfo.sdkVersion,
-                          "sdk-version-code": SDKInfo.shared.cachedInfo.sdkLongVersion,
+                          "sdk-version-code": SDKInfo.shared.cachedInfo.getVersionNumber(),
                           "app-version": AppInfo.shared.getAppVersion()]
         }
 
@@ -45,7 +45,7 @@ class BaseHTTPService {
             }
             
             if !(wrapper?.isEmpty ?? true) {
-                dictionary["sdk-wrapper"] = wrapper ?? ""
+                dictionary["sdk-wrapper"] = wrapper!
             }
 
             return dictionary

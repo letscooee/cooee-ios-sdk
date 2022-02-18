@@ -63,14 +63,14 @@ struct ContainerRenderer: View {
     private func updateScalingFactor() {
         var scalingFactor: Float
         if triggerContext.getDeviceInfo().getDeviceWidth() < triggerContext.getDeviceInfo().getDeviceHeight() {
-            let shortEdge = min(Constants.STANDARD_RESOLUTION_WIDTH, Constants.STANDARD_RESOLUTION_HEIGHT)
+            let shortEdge = min(Constants.DEFAULT_RESOLUTION_WIDTH, Constants.DEFAULT_RESOLUTION_HEIGHT)
             scalingFactor = Float(triggerContext.getDeviceInfo().getDeviceWidth()) / shortEdge
         } else {
-            let longEdge = max(Constants.STANDARD_RESOLUTION_WIDTH, Constants.STANDARD_RESOLUTION_HEIGHT)
+            let longEdge = max(Constants.DEFAULT_RESOLUTION_WIDTH, Constants.DEFAULT_RESOLUTION_HEIGHT)
             scalingFactor = Float(triggerContext.getDeviceInfo().getDeviceHeight()) / longEdge
         }
 
-        UnitUtil.setScalingFactor(scalingFactor: min(scalingFactor, 1))
+        UnitUtil.setScalingFactor(scalingFactor: scalingFactor)
     }
 }
 

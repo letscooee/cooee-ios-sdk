@@ -40,18 +40,18 @@ struct AbstractInAppRenderer: ViewModifier {
                 .padding(.leading, elementData.spc!.getPaddingLeft())
                 .padding(.trailing, elementData.spc!.getPaddingRight())
         }
-        .if(elementData.getBackground() != nil && elementData.getBackground()!.s != nil && elementData.getBackground()!.s!.g != nil) {
+        .if(elementData.getBackground()?.s?.g != nil) {
             $0.background(
                 LinearGradient(gradient: SwiftUI.Gradient(colors: [Color(hex: elementData.getBackground()!.s!.g!.c1!), Color(hex: elementData.getBackground()!.s!.g!.c2!)]), startPoint: .top, endPoint: .bottom)
             ).cornerRadius(elementData.br?.getRadius() ?? 0)
         }
-        .if(elementData.getBackground() != nil && elementData.getBackground()!.s != nil && elementData.getBackground()!.s!.g == nil) {
+        .if(elementData.getBackground()?.s != nil && elementData.getBackground()?.s?.g == nil) {
             $0.background(Color(hex: elementData.getBackground()!.s!.getColour(), alpha: elementData.getBackground()!.s!.getAlpha()).cornerRadius(elementData.br?.getRadius() ?? 0))
         }
-        .if(elementData.getBackground() != nil && elementData.getBackground()!.g != nil) {
+        .if(elementData.getBackground()?.g != nil) {
             $0.background(BlurBackground(effect: UIBlurEffect(style: .light)))
         }
-        .if(elementData.getBackground() != nil && elementData.getBackground()!.i != nil) {
+        .if(elementData.getBackground()?.i != nil) {
             $0.background(
                 ImageRenderer(
                     url: URL(string: elementData.getBackground()!.i!.src!)!,
@@ -65,10 +65,10 @@ struct AbstractInAppRenderer: ViewModifier {
                 ).cornerRadius(elementData.br?.getRadius() ?? 0)
             ).cornerRadius(elementData.br?.getRadius() ?? 0)
         }
-        .if(elementData.getBackground() != nil && elementData.getBackground()!.i != nil) {
+        .if(elementData.getBackground()?.i != nil) {
             $0.clipped()
         }
-        .if(elementData.br != nil && elementData.br!.getStyle() == Border.Style.SOLID && isText) {
+        .if(elementData.br?.getStyle() == Border.Style.SOLID && isText) {
             $0.padding(.bottom, elementData.getSpacing().getPaddingBottom(add: elementData.br!.getWidth()))
                 .padding(.top, elementData.getSpacing().getPaddingTop(add: elementData.br!.getWidth()))
                 .padding(.leading, elementData.getSpacing().getPaddingLeft(add: elementData.br!.getWidth()))
@@ -83,7 +83,7 @@ struct AbstractInAppRenderer: ViewModifier {
                         .foregroundColor(Color(hex: elementData.br!.getColour(), alpha: elementData.br!.getAlpha()))
                 )
         }
-        .if(elementData.br != nil && elementData.br!.getStyle() == Border.Style.SOLID && !isText) {
+        .if(elementData.br?.getStyle() == Border.Style.SOLID && !isText) {
             $0.overlay(
                 RoundedRectangle(cornerRadius: elementData.br!.getRadius())
                     .strokeBorder(
@@ -94,7 +94,7 @@ struct AbstractInAppRenderer: ViewModifier {
                     .foregroundColor(Color(hex: elementData.br!.getColour(), alpha: elementData.br!.getAlpha()))
             )
         }
-        .if(elementData.br != nil && elementData.br!.getStyle() == Border.Style.DASH && isText) {
+        .if(elementData.br?.getStyle() == Border.Style.DASH && isText) {
             $0.padding(.bottom, elementData.getSpacing().getPaddingBottom(add: elementData.br!.getWidth()))
                 .padding(.top, elementData.getSpacing().getPaddingTop(add: elementData.br!.getWidth()))
                 .padding(.leading, elementData.getSpacing().getPaddingLeft(add: elementData.br!.getWidth()))
@@ -110,7 +110,7 @@ struct AbstractInAppRenderer: ViewModifier {
                         .foregroundColor(Color(hex: elementData.br!.getColour(), alpha: elementData.br!.getAlpha()))
                 )
         }
-        .if(elementData.br != nil && elementData.br!.getStyle() == Border.Style.DASH && !isText) {
+        .if(elementData.br?.getStyle() == Border.Style.DASH && !isText) {
             $0.overlay(
                     RoundedRectangle(cornerRadius: elementData.br!.getRadius())
                         .strokeBorder(
