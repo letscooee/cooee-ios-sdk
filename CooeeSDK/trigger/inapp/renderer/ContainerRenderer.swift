@@ -64,14 +64,12 @@ struct ContainerRenderer: View {
         var scalingFactor: Float
         if triggerContext.getDeviceInfo().getDeviceWidth() < triggerContext.getDeviceInfo().getDeviceHeight() {
             let shortEdge = min(Constants.STANDARD_RESOLUTION_WIDTH, Constants.STANDARD_RESOLUTION_HEIGHT)
-            print("container width:\(container.getWidth()), short edge:\(shortEdge)")
             scalingFactor = Float(triggerContext.getDeviceInfo().getDeviceWidth()) / shortEdge
         } else {
             let longEdge = max(Constants.STANDARD_RESOLUTION_WIDTH, Constants.STANDARD_RESOLUTION_HEIGHT)
-            print("container height:\(container.getHeight()), long edge:\(longEdge)")
             scalingFactor = Float(triggerContext.getDeviceInfo().getDeviceHeight()) / longEdge
         }
-        //triggerContext.setScalingFactor(min(scalingFactor, 1))
+
         UnitUtil.setScalingFactor(scalingFactor: min(scalingFactor, 1))
     }
 }
