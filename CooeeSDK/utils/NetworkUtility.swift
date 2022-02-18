@@ -36,11 +36,7 @@ class NetworkUtility {
             return false
         }
 
-        if !isWWAN {
-            return true
-        } else {
-            return false
-        }
+        return !isWWAN
     }
 
     func getCarrierName() -> String {
