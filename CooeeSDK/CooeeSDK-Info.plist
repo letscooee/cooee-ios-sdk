@@ -20,5 +20,7 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>Configuration</key>
 	<string>${CONFIGURATION}</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location for better exp</string>
 </dict>
 </plist>

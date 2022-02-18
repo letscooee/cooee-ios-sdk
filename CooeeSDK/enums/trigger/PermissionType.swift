@@ -11,10 +11,11 @@ import HandyJSON
  - Author: Ashish Gaikwad
  - Since: 1.3.0
  */
-enum PermissionType: String, HandyJSONEnum {
+enum PermissionType: String, HandyJSONEnum, CaseIterable {
 
     case LOCATION
     case CAMERA
     case PHONE_DETAILS
     case STORAGE
+    case PUSH
 }

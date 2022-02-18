@@ -13,6 +13,7 @@
 		7518746A274CE35E00BF267F /* ShapeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75187469274CE35E00BF267F /* ShapeRenderer.swift */; };
 		7518746C274DF8C100BF267F /* PartElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7518746B274DF8BF00BF267F /* PartElement.swift */; };
 		75187470274E343C00BF267F /* EmbeddedTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7518746F274E343C00BF267F /* EmbeddedTrigger.swift */; };
+		751BB5CA27AD07F800097210 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BB5C927AD07F800097210 /* PermissionManager.swift */; };
 		751BC78226F3108A002D8358 /* CooeeSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 751BC78026F3108A002D8358 /* CooeeSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		751BC78F26F31162002D8358 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC78E26F31162002D8358 /* AppDelegate.swift */; };
 		751BC79126F31162002D8358 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC79026F31162002D8358 /* SceneDelegate.swift */; };
@@ -162,6 +163,7 @@
 		75187469274CE35E00BF267F /* ShapeRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeRenderer.swift; sourceTree = "<group>"; };
 		7518746B274DF8BF00BF267F /* PartElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartElement.swift; sourceTree = "<group>"; };
 		7518746F274E343C00BF267F /* EmbeddedTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedTrigger.swift; sourceTree = "<group>"; };
+		751BB5C927AD07F800097210 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
 		751BC77D26F3108A002D8358 /* CooeeSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CooeeSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		751BC78026F3108A002D8358 /* CooeeSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CooeeSDK.h; sourceTree = "<group>"; };
 		751BC78126F3108A002D8358 /* CooeeSDK-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CooeeSDK-Info.plist"; sourceTree = "<group>"; };
@@ -349,6 +351,14 @@
 			path = ar;
 			sourceTree = "<group>";
 		};
+		751BB5C827AD07C800097210 /* permission */ = {
+			isa = PBXGroup;
+			children = (
+				751BB5C927AD07F800097210 /* PermissionManager.swift */,
+			);
+			path = permission;
+			sourceTree = "<group>";
+		};
 		751BC77326F3108A002D8358 = {
 			isa = PBXGroup;
 			children = (
@@ -378,6 +388,7 @@
 		751BC77F26F3108A002D8358 /* CooeeSDK */ = {
 			isa = PBXGroup;
 			children = (
+				751BB5C827AD07C800097210 /* permission */,
 				75186DC427808F4F00DD6744 /* ar */,
 				7599DCCC2772FE74002CEB1A /* screenshot */,
 				7599DCC12771EAF5002CEB1A /* font */,
@@ -1150,6 +1161,7 @@
 				7518746C274DF8C100BF267F /* PartElement.swift in Sources */,
 				AC0B85C98A085703F48B2067 /* RendererExtensions.swift in Sources */,
 				AC0B887F64D2646212E0E763 /* ElementType.swift in Sources */,
+				751BB5CA27AD07F800097210 /* PermissionManager.swift in Sources */,
 				AC0B8F9ACEAD15992DF79CC2 /* EngagementTriggerHelper.swift in Sources */,
 				AC0B89F78916B1BFA5BA4196 /* ContainerRenderer.swift in Sources */,
 				AC0B81F74E2154808AECB63A /* ImageRenderer.swift in Sources */,

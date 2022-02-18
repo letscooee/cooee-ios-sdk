@@ -5,6 +5,7 @@
 //  Created by Ashish Gaikwad on 01/10/21.
 //
 import Foundation
+import UIKit
 
 /**
  A one time initializer class which initialises the Cooee SDK. This is used internally by the SDK

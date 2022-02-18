@@ -7,16 +7,20 @@
 
 import Foundation
 import HandyJSON
+import SwiftUI
 
 /**
  - Author: Ashish Gaikwad
- - Since: 0.1.0
+ - Since: 1.3.0
  */
 struct Transform: HandyJSON {
+    // MARK: Public
 
-    private var rot: Int?
-
-    public func getRotation() -> Int {
-        rot ?? 0
+    public func getRotation() -> Angle {
+        Angle(degrees: Double(rot ?? 0))
     }
+
+    // MARK: Private
+
+    private var rot: Int? // Rotation in degree
 }
