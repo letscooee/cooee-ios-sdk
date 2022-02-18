@@ -50,8 +50,6 @@ class InAppTriggerScene: UIView {
         parentView.addSubview(hostView)
         parentView.backgroundColor = UIColor.white.withAlphaComponent(0.0)
 
-        setAnimations()
-
         let enterAnimation = inAppData!.cont?.animation?.enter ?? .SLIDE_IN_RIGHT
 
         setParentPositionMoveInAnimation(enterAnimation)
@@ -128,25 +126,6 @@ class InAppTriggerScene: UIView {
     private func sendTriggerDisplayedEvent() {
         let event = Event(eventName: "CE Trigger Displayed", triggerData: triggerData!)
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)
-    }
-
-    private func setAnimations() {
-        if let animation = inAppData?.cont?.animation {
-            let enterAnimation = InAppAnimationProvider.getEnterAnimation(animation: animation)
-            let exitAnimation = InAppAnimationProvider.getExitAnimation(animation: animation)
-
-            overrideAnimation(enterAnimation, exitAnimation)
-        }
-    }
-
-    private func overrideAnimation(_ enterAnimation: CATransitionSubtype, _ exitAnimation: CATransitionSubtype) {
-        let enter = CATransition()
-        enter.duration = 0.5
-        enter.repeatCount = 0
-        enter.type = CATransitionType.moveIn
-        enter.subtype = enterAnimation
-        enter.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-        parentView?.layer.add(enter, forKey: nil)
     }
 
     private func finish() {
