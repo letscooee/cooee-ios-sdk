@@ -50,7 +50,7 @@ class InAppTriggerScene: UIView {
         parentView.addSubview(hostView)
         parentView.backgroundColor = UIColor.white.withAlphaComponent(0.0)
 
-        let enterAnimation = inAppData!.cont?.animation?.enter ?? .SLIDE_IN_RIGHT
+        let enterAnimation = inAppData!.anim?.en ?? .SLIDE_IN_RIGHT
 
         setParentPositionMoveInAnimation(enterAnimation)
 
@@ -139,7 +139,7 @@ class InAppTriggerScene: UIView {
         }
 
         // exit animation
-        let exitAnimation = inAppData!.cont?.animation?.exit ?? .SLIDE_OUT_RIGHT
+        let exitAnimation = inAppData!.anim?.ex ?? .SLIDE_OUT_RIGHT
         UIView.animate(withDuration: 0.5, animations: {
             switch exitAnimation {
                 case .SLIDE_OUT_LEFT:

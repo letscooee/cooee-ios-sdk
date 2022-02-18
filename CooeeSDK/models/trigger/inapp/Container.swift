@@ -26,10 +26,6 @@ class Container: BaseElement {
         o
     }
 
-    // MARK: Internal
-
-    var animation: Animation?
-
     // MARK: Private
 
     private var o: Int? // Position of the In-App on the container
