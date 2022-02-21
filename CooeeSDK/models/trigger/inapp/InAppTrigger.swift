@@ -60,6 +60,7 @@ class InAppTrigger: BaseElement {
 
     var cont: Container? // Container
     var elems: [[String: Any]]? // Elements
+    var anim: Animation? // Animation
 
     // MARK: Private
 

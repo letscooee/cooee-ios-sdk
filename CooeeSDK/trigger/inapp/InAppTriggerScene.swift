@@ -50,24 +50,13 @@ class InAppTriggerScene: UIView {
         parentView.addSubview(hostView)
         parentView.backgroundColor = UIColor.white.withAlphaComponent(0.0)
 
-        setAnimations()
-
-        let enterAnimation = inAppData!.cont?.animation?.enter ?? .SLIDE_IN_RIGHT
+        let enterAnimation = inAppData!.anim?.en ?? .SLIDE_IN_RIGHT
 
         setParentPositionMoveInAnimation(enterAnimation)
 
         UIView.animate(withDuration: 0.5, animations: {
             viewController.view.addSubview(self.parentView)
-            switch enterAnimation {
-                case .SLIDE_IN_LEFT:
-                    self.parentView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                case .SLIDE_IN_TOP:
-                    self.parentView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                case .SLIDE_IN_DOWN:
-                    return self.parentView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                case .SLIDE_IN_RIGHT:
-                    self.parentView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-            }
+            self.parentView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         }, completion: nil)
 
         startTime = Date()
@@ -104,6 +93,14 @@ class InAppTriggerScene: UIView {
                 return self.parentView.frame = CGRect(x: 0, y: 0 + UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             case .SLIDE_IN_RIGHT:
                 self.parentView.frame = CGRect(x: 0 + UIScreen.main.bounds.width, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            case .SLIDE_IN_TOP_LEFT:
+                self.parentView.frame = CGRect(x: 0 - UIScreen.main.bounds.width, y: 0 - UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            case .SLIDE_IN_TOP_RIGHT:
+                self.parentView.frame = CGRect(x: 0 + UIScreen.main.bounds.width, y: 0 - UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            case .SLIDE_IN_BOTTOM_LEFT:
+                self.parentView.frame = CGRect(x: 0 - UIScreen.main.bounds.width, y: 0 + UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            case .SLIDE_IN_BOTTOM_RIGHT:
+                self.parentView.frame = CGRect(x: 0 + UIScreen.main.bounds.width, y: 0 + UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         }
     }
 
@@ -130,25 +127,6 @@ class InAppTriggerScene: UIView {
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)
     }
 
-    private func setAnimations() {
-        if let animation = inAppData?.cont?.animation {
-            let enterAnimation = InAppAnimationProvider.getEnterAnimation(animation: animation)
-            let exitAnimation = InAppAnimationProvider.getExitAnimation(animation: animation)
-
-            overrideAnimation(enterAnimation, exitAnimation)
-        }
-    }
-
-    private func overrideAnimation(_ enterAnimation: CATransitionSubtype, _ exitAnimation: CATransitionSubtype) {
-        let enter = CATransition()
-        enter.duration = 0.5
-        enter.repeatCount = 0
-        enter.type = CATransitionType.moveIn
-        enter.subtype = enterAnimation
-        enter.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-        parentView?.layer.add(enter, forKey: nil)
-    }
-
     private func finish() {
         DispatchQueue.main.async {
             var closedEventProps = self.triggerContext.getClosedEventProps()
@@ -161,7 +139,7 @@ class InAppTriggerScene: UIView {
         }
 
         // exit animation
-        let exitAnimation = inAppData!.cont?.animation?.exit ?? .SLIDE_OUT_RIGHT
+        let exitAnimation = inAppData!.anim?.ex ?? .SLIDE_OUT_RIGHT
         UIView.animate(withDuration: 0.5, animations: {
             switch exitAnimation {
                 case .SLIDE_OUT_LEFT:
@@ -172,6 +150,14 @@ class InAppTriggerScene: UIView {
                     return self.parentView.frame = CGRect(x: 0, y: 0 + UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                 case .SLIDE_OUT_RIGHT:
                     self.parentView.frame = CGRect(x: 0 + UIScreen.main.bounds.width, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                case .SLIDE_OUT_BOTTOM_LEFT:
+                    self.parentView.frame = CGRect(x: 0 - UIScreen.main.bounds.width, y: 0 + UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                case .SLIDE_OUT_BOTTOM_RIGHT:
+                    self.parentView.frame = CGRect(x: 0 + UIScreen.main.bounds.width, y: 0 + UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                case .SLIDE_OUT_TOP_LEFT:
+                    self.parentView.frame = CGRect(x: 0 - UIScreen.main.bounds.width, y: 0 - UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                case .SLIDE_OUT_TOP_RIGHT:
+                    self.parentView.frame = CGRect(x: 0 + UIScreen.main.bounds.width, y: 0 - UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             }
         }, completion: { (_: Bool) in
             self.parentView.removeFromSuperview()
