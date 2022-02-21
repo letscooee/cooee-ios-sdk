@@ -1,5 +1,26 @@
 # Change Log
 
+# 1.3.8
+
+### Feature
+
+1. Add entry and exit animation from corners.
+2. Remove requirement for `COOEE_SECRET_KEY`.
+3. Push Notification can perform CTA action.
+
+### Improvement
+
+1. InAppBrowser is replaced with CustomTabsIntent.
+2. InApp will have its own base property.
+3. InApp will have default close CTA.
+4. Update property key for duration in CTA, Foreground, Background.
+5. Expose `CooeeSDK.updateUserProfile(_:)` API.
+
+### Deprecated
+
+1. Deprecated `CooeeSDK.updateUserData(userData:)`, `CooeeSDK.updateUserProperties(userProperties)`, 
+`CooeeSDK.updateUserProfile(userData:userProperties:)`.
+
 # 1.3.7
 
 ### Improvements
