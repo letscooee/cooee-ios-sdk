@@ -24,7 +24,7 @@ class BaseHTTPService {
         init() {
             dictionary = ["device-name": DeviceInfo.shared.cachedInfo.name.urlEncoded!,
                           "sdk-version": SDKInfo.shared.cachedInfo.sdkVersion,
-                          "sdk-version-code": SDKInfo.shared.cachedInfo.sdkLongVersion,
+                          "sdk-version-code": SDKInfo.shared.cachedInfo.getVersionNumber(),
                           "app-version": AppInfo.shared.getAppVersion()]
         }
 
@@ -33,6 +33,7 @@ class BaseHTTPService {
         var sdkToken: String?
         var userID: String?
         var dictionary: [String: String]
+        var wrapper: String?
 
         func getDictionary() -> [String: String] {
             if !(sdkToken?.isEmpty ?? true) {
@@ -41,6 +42,10 @@ class BaseHTTPService {
 
             if !(userID?.isEmpty ?? true) {
                 dictionary["user-id"] = userID ?? ""
+            }
+            
+            if !(wrapper?.isEmpty ?? true) {
+                dictionary["sdk-wrapper"] = wrapper!
             }
 
             return dictionary
@@ -103,7 +108,7 @@ class BaseHTTPService {
         let responseData = try webService.getResponse(fromURL: Constants.trackEvent, method: .POST, params: event.toJSON()!,
                 header: commonHeaders.getDictionary())
 
-        EngagementTriggerHelper.renderInAppTriggerFromResponse(response: responseData);
+        EngagementTriggerHelper.renderInAppTriggerFromResponse(response: responseData)
     }
 
     func loadTriggerDetails(id triggerId: String) throws -> [String: Any] {

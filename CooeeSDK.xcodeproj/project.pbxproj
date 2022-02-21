@@ -18,7 +18,6 @@
 		751BC78F26F31162002D8358 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC78E26F31162002D8358 /* AppDelegate.swift */; };
 		751BC79126F31162002D8358 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC79026F31162002D8358 /* SceneDelegate.swift */; };
 		751BC79326F31162002D8358 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC79226F31162002D8358 /* ViewController.swift */; };
-		751BC79626F31162002D8358 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 751BC79426F31162002D8358 /* Main.storyboard */; };
 		751BC79826F31165002D8358 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 751BC79726F31165002D8358 /* Assets.xcassets */; };
 		751BC79B26F31165002D8358 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 751BC79926F31165002D8358 /* LaunchScreen.storyboard */; };
 		751BC7A626F31165002D8358 /* Cooee_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751BC7A526F31165002D8358 /* Cooee_iOSTests.swift */; };
@@ -52,7 +51,7 @@
 		75729E7826F4C131006EB506 /* LocalStorageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7726F4C131006EB506 /* LocalStorageHelper.swift */; };
 		75729E7A26F4C4A1006EB506 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7926F4C4A1006EB506 /* Constants.swift */; };
 		75729E7D26F87593006EB506 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E7C26F87593006EB506 /* WebService.swift */; };
-		75729E8126F8AD47006EB506 /* UserAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E8026F8AD47006EB506 /* UserAuthService.swift */; };
+		75729E8126F8AD47006EB506 /* DeviceAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E8026F8AD47006EB506 /* DeviceAuthService.swift */; };
 		75729E8326F9A34A006EB506 /* NetworkUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E8226F9A34A006EB506 /* NetworkUtility.swift */; };
 		75729E8526F9BA27006EB506 /* DevicePropertyCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75729E8426F9BA27006EB506 /* DevicePropertyCollector.swift */; };
 		757E405826F9FA16008352F3 /* BaseHTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757E405726F9FA16008352F3 /* BaseHTTPService.swift */; };
@@ -67,6 +66,11 @@
 		759E15F3271061520040F09C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 759E15F2271061520040F09C /* GoogleService-Info.plist */; };
 		75A0981027070FD800C2057B /* AppLifeCycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A0980F27070FD800C2057B /* AppLifeCycle.swift */; };
 		75A098122707132100C2057B /* CooeeBootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A098112707132100C2057B /* CooeeBootstrap.swift */; };
+		75C58B4427B3C7E600F840A9 /* DeviceTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C58B4327B3C7E600F840A9 /* DeviceTaskProcessor.swift */; };
+		75C58B4627B3C88700F840A9 /* InAppNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C58B4527B3C88700F840A9 /* InAppNotification.swift */; };
+		75C58B4727B3CDBB00F840A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 751BC79426F31162002D8358 /* Main.storyboard */; };
+		75D5A79F27BD25360028F742 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D5A79E27BD25360028F742 /* NotificationService.swift */; };
+		75D5A7A327BD25360028F742 /* NotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 75D5A79C27BD25360028F742 /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		75DD8793271575EA00A272BB /* CooeeJobUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD8792271575EA00A272BB /* CooeeJobUtils.swift */; };
 		75DD87962715924B00A272BB /* PendingTaskJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87952715924B00A272BB /* PendingTaskJob.swift */; };
 		75DD87982715927B00A272BB /* PendingTaskJobProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87972715927B00A272BB /* PendingTaskJobProcessor.swift */; };
@@ -90,7 +94,7 @@
 		75DD87CE271EF4D500A272BB /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87CD271EF4D500A272BB /* Font.swift */; };
 		75FA7DB627217B1F0060A425 /* InAppTriggerScene.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FA7DB527217B1F0060A425 /* InAppTriggerScene.xib */; };
 		75FA7DB9272982DC0060A425 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FA7DB8272982DC0060A425 /* ProfileViewController.swift */; };
-		75FA7DBD272A75AE0060A425 /* samplepayloadone.json in Resources */ = {isa = PBXBuildFile; fileRef = 75FA7DBC272A75AE0060A425 /* samplepayloadone.json */; };
+		845EA7B1FBA21D2F3B541959 /* Pods_Cooee_iOS_NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FB3C78ADC3AE14DA34275B8 /* Pods_Cooee_iOS_NotificationService.framework */; };
 		AC0B81656327520249E6A428 /* UnitUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B865FAF31BB9A143DEA07 /* UnitUtil.swift */; };
 		AC0B81F74E2154808AECB63A /* ImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B832FF3BC900263507255 /* ImageRenderer.swift */; };
 		AC0B821F476A2352C203E056 /* ShapeElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8829F5B44FE4A5E23E66 /* ShapeElement.swift */; };
@@ -152,9 +156,32 @@
 			remoteGlobalIDString = 751BC77C26F3108A002D8358;
 			remoteInfo = CooeeSDK;
 		};
+		75D5A7A127BD25360028F742 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 751BC77426F3108A002D8358 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 75D5A79B27BD25360028F742;
+			remoteInfo = NotificationService;
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		75D5A7A427BD25360028F742 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				75D5A7A327BD25360028F742 /* NotificationService.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		1B3F1C7011C0D156CE983BEE /* Pods-Cooee iOS-NotificationService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS-NotificationService.release.xcconfig"; path = "Target Support Files/Pods-Cooee iOS-NotificationService/Pods-Cooee iOS-NotificationService.release.xcconfig"; sourceTree = "<group>"; };
+		22DEC80C8F984C873DF23407 /* Pods-Cooee iOS-NotificationService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS-NotificationService.debug.xcconfig"; path = "Target Support Files/Pods-Cooee iOS-NotificationService/Pods-Cooee iOS-NotificationService.debug.xcconfig"; sourceTree = "<group>"; };
 		5F6A13389002428C5D489894 /* Pods-CooeeSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.debug.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		5FC8F5B4B05D83373A281F12 /* Pods-Cooee iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS.debug.xcconfig"; path = "Target Support Files/Pods-Cooee iOS/Pods-Cooee iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		750F14CB27ABBF2400369101 /* GIFImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFImageView.swift; sourceTree = "<group>"; };
@@ -210,7 +237,7 @@
 		75729E7726F4C131006EB506 /* LocalStorageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageHelper.swift; sourceTree = "<group>"; };
 		75729E7926F4C4A1006EB506 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		75729E7C26F87593006EB506 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
-		75729E8026F8AD47006EB506 /* UserAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthService.swift; sourceTree = "<group>"; };
+		75729E8026F8AD47006EB506 /* DeviceAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAuthService.swift; sourceTree = "<group>"; };
 		75729E8226F9A34A006EB506 /* NetworkUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkUtility.swift; sourceTree = "<group>"; };
 		75729E8426F9BA27006EB506 /* DevicePropertyCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicePropertyCollector.swift; sourceTree = "<group>"; };
 		757E405726F9FA16008352F3 /* BaseHTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseHTTPService.swift; sourceTree = "<group>"; };
@@ -225,6 +252,12 @@
 		759E15F2271061520040F09C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75A0980F27070FD800C2057B /* AppLifeCycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLifeCycle.swift; sourceTree = "<group>"; };
 		75A098112707132100C2057B /* CooeeBootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeBootstrap.swift; sourceTree = "<group>"; };
+		75C58B4327B3C7E600F840A9 /* DeviceTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceTaskProcessor.swift; sourceTree = "<group>"; };
+		75C58B4527B3C88700F840A9 /* InAppNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppNotification.swift; sourceTree = "<group>"; };
+		75D5A79C27BD25360028F742 /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		75D5A79E27BD25360028F742 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		75D5A7A027BD25360028F742 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		75D5A7A827BD25980028F742 /* NotificationService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationService.entitlements; sourceTree = "<group>"; };
 		75DD8792271575EA00A272BB /* CooeeJobUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeJobUtils.swift; sourceTree = "<group>"; };
 		75DD87952715924B00A272BB /* PendingTaskJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTaskJob.swift; sourceTree = "<group>"; };
 		75DD87972715927B00A272BB /* PendingTaskJobProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTaskJobProcessor.swift; sourceTree = "<group>"; };
@@ -252,6 +285,7 @@
 		75FA7DBC272A75AE0060A425 /* samplepayloadone.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = samplepayloadone.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.json; };
 		77F56F40EDA5A57940AA34BC /* Pods-Cooee iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS.release.xcconfig"; path = "Target Support Files/Pods-Cooee iOS/Pods-Cooee iOS.release.xcconfig"; sourceTree = "<group>"; };
 		7F5B66C3F5CF5A3CF236A788 /* Pods-CooeeSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.release.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.release.xcconfig"; sourceTree = "<group>"; };
+		8FB3C78ADC3AE14DA34275B8 /* Pods_Cooee_iOS_NotificationService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cooee_iOS_NotificationService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionConcludeTaskProcessor.swift; sourceTree = "<group>"; };
 		AC0B804DEA9B9A9EB7E1FD5F /* EngagementTriggerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngagementTriggerHelper.swift; sourceTree = "<group>"; };
 		AC0B805A34D46C1243CFFC5A /* ProfileTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTaskProcessor.swift; sourceTree = "<group>"; };
@@ -332,6 +366,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		75D5A79927BD25360028F742 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				845EA7B1FBA21D2F3B541959 /* Pods_Cooee_iOS_NotificationService.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -367,6 +409,7 @@
 				751BC7A426F31165002D8358 /* Cooee iOSTests */,
 				751BC7AF26F31165002D8358 /* Cooee iOSUITests */,
 				751BC7CF26F35881002D8358 /* CooeeSDKTests */,
+				75D5A79D27BD25360028F742 /* NotificationService */,
 				751BC77E26F3108A002D8358 /* Products */,
 				F5A9C2586D74C0CECB931D98 /* Pods */,
 				A1345D19EC596FAD6A5DCFA7 /* Frameworks */,
@@ -381,6 +424,7 @@
 				751BC7A126F31165002D8358 /* Cooee iOSTests.xctest */,
 				751BC7AC26F31165002D8358 /* Cooee iOSUITests.xctest */,
 				751BC7CE26F35881002D8358 /* CooeeSDKTests.xctest */,
+				75D5A79C27BD25360028F742 /* NotificationService.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -502,6 +546,7 @@
 		751E1349270F174C002CF442 /* processor */ = {
 			isa = PBXGroup;
 			children = (
+				75C58B4327B3C7E600F840A9 /* DeviceTaskProcessor.swift */,
 				751E134A270F1771002CF442 /* PendingTaskProcessor.swift */,
 				751E134C270F22AB002CF442 /* AbstractPendingTaskProcessor.swift */,
 				AC0B8D0C0E553156E3B76C31 /* HttpTaskProcessor.swift */,
@@ -523,6 +568,7 @@
 		756BAA1C27577C1600C7A84F /* notification */ = {
 			isa = PBXGroup;
 			children = (
+				75C58B4527B3C88700F840A9 /* InAppNotification.swift */,
 				756BAA1D27577C3E00C7A84F /* NotificationService.swift */,
 			);
 			path = notification;
@@ -573,7 +619,7 @@
 		75729E7526F49AF0006EB506 /* user */ = {
 			isa = PBXGroup;
 			children = (
-				75729E8026F8AD47006EB506 /* UserAuthService.swift */,
+				75729E8026F8AD47006EB506 /* DeviceAuthService.swift */,
 				751E1324270C350C002CF442 /* SessionManager.swift */,
 				751E1326270C4C47002CF442 /* NewSessionExecutor.swift */,
 			);
@@ -622,6 +668,16 @@
 				7599DCCD2772FE93002CEB1A /* ScreenShotUtility.swift */,
 			);
 			path = screenshot;
+			sourceTree = "<group>";
+		};
+		75D5A79D27BD25360028F742 /* NotificationService */ = {
+			isa = PBXGroup;
+			children = (
+				75D5A7A827BD25980028F742 /* NotificationService.entitlements */,
+				75D5A79E27BD25360028F742 /* NotificationService.swift */,
+				75D5A7A027BD25360028F742 /* Info.plist */,
+			);
+			path = NotificationService;
 			sourceTree = "<group>";
 		};
 		75DD87912715759B00A272BB /* scheduler */ = {
@@ -716,6 +772,7 @@
 				75EF49A727876C7600CF932D /* FirebaseCore.framework */,
 				BB800582A4AF75A48137B606 /* Pods_CooeeSDK.framework */,
 				E6DD165866F91815E65CF7F1 /* Pods_Cooee_iOS.framework */,
+				8FB3C78ADC3AE14DA34275B8 /* Pods_Cooee_iOS_NotificationService.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -793,6 +850,8 @@
 				7F5B66C3F5CF5A3CF236A788 /* Pods-CooeeSDK.release.xcconfig */,
 				5FC8F5B4B05D83373A281F12 /* Pods-Cooee iOS.debug.xcconfig */,
 				77F56F40EDA5A57940AA34BC /* Pods-Cooee iOS.release.xcconfig */,
+				22DEC80C8F984C873DF23407 /* Pods-Cooee iOS-NotificationService.debug.xcconfig */,
+				1B3F1C7011C0D156CE983BEE /* Pods-Cooee iOS-NotificationService.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -839,10 +898,12 @@
 				751BC78926F31162002D8358 /* Frameworks */,
 				751BC78A26F31162002D8358 /* Resources */,
 				5CFC774A00B8A139651B704F /* [CP] Embed Pods Frameworks */,
+				75D5A7A427BD25360028F742 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				75D5A7A227BD25360028F742 /* PBXTargetDependency */,
 			);
 			name = "Cooee iOS";
 			productName = "Cooee iOS";
@@ -903,13 +964,31 @@
 			productReference = 751BC7CE26F35881002D8358 /* CooeeSDKTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		75D5A79B27BD25360028F742 /* NotificationService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 75D5A7A727BD25360028F742 /* Build configuration list for PBXNativeTarget "NotificationService" */;
+			buildPhases = (
+				7F6D04C890EC5A112BCCB21C /* [CP] Check Pods Manifest.lock */,
+				75D5A79827BD25360028F742 /* Sources */,
+				75D5A79927BD25360028F742 /* Frameworks */,
+				75D5A79A27BD25360028F742 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NotificationService;
+			productName = NotificationService;
+			productReference = 75D5A79C27BD25360028F742 /* NotificationService.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		751BC77426F3108A002D8358 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1250;
+				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					751BC77C26F3108A002D8358 = {
@@ -929,6 +1008,9 @@
 					};
 					751BC7CD26F35881002D8358 = {
 						CreatedOnToolsVersion = 12.5.1;
+					};
+					75D5A79B27BD25360028F742 = {
+						CreatedOnToolsVersion = 13.2.1;
 					};
 				};
 			};
@@ -950,6 +1032,7 @@
 				751BC7A026F31165002D8358 /* Cooee iOSTests */,
 				751BC7AB26F31165002D8358 /* Cooee iOSUITests */,
 				751BC7CD26F35881002D8358 /* CooeeSDKTests */,
+				75D5A79B27BD25360028F742 /* NotificationService */,
 			);
 		};
 /* End PBXProject section */
@@ -967,11 +1050,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75C58B4727B3CDBB00F840A9 /* Main.storyboard in Resources */,
 				751BC79B26F31165002D8358 /* LaunchScreen.storyboard in Resources */,
 				759E15F3271061520040F09C /* GoogleService-Info.plist in Resources */,
 				751BC79826F31165002D8358 /* Assets.xcassets in Resources */,
-				75FA7DBD272A75AE0060A425 /* samplepayloadone.json in Resources */,
-				751BC79626F31162002D8358 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -996,6 +1078,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		75D5A79A27BD25360028F742 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -1014,6 +1103,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cooee iOS/Pods-Cooee iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7F6D04C890EC5A112BCCB21C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cooee iOS-NotificationService-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		982D38708C85762D82363B7B /* [CP] Check Pods Manifest.lock */ = {
@@ -1102,7 +1213,7 @@
 				75DD87BA271D80B700A272BB /* Spacing.swift in Sources */,
 				751BC7C726F31A4B002D8358 /* DeviceInfo.swift in Sources */,
 				751E1350270F2F4D002CF442 /* letscooee.xcdatamodeld in Sources */,
-				75729E8126F8AD47006EB506 /* UserAuthService.swift in Sources */,
+				75729E8126F8AD47006EB506 /* DeviceAuthService.swift in Sources */,
 				751E1348270EDEBD002CF442 /* PendingTaskDAO.swift in Sources */,
 				7599DCCB277221BB002CEB1A /* PublicApiClient.swift in Sources */,
 				75DD87C2271D9B1C00A272BB /* AnyValue.swift in Sources */,
@@ -1137,6 +1248,8 @@
 				756BAA2327588C3600C7A84F /* ImageDownloader.swift in Sources */,
 				75DD87B0271D787900A272BB /* Border.swift in Sources */,
 				AC0B83940A8AA5D45A0E64D9 /* EventTaskProcessor.swift in Sources */,
+				75C58B4427B3C7E600F840A9 /* DeviceTaskProcessor.swift in Sources */,
+				75C58B4627B3C88700F840A9 /* InAppNotification.swift in Sources */,
 				AC0B850DFCDC2005C3A115B0 /* PushTokenTaskProcessor.swift in Sources */,
 				AC0B8E841AD56FEB009D2A89 /* SessionConcludeTaskProcessor.swift in Sources */,
 				75DD879A2716FD3600A272BB /* SentryHelper.swift in Sources */,
@@ -1209,6 +1322,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		75D5A79827BD25360028F742 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75D5A79F27BD25360028F742 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1226,6 +1347,11 @@
 			isa = PBXTargetDependency;
 			target = 751BC77C26F3108A002D8358 /* CooeeSDK */;
 			targetProxy = 751BC7D426F35881002D8358 /* PBXContainerItemProxy */;
+		};
+		75D5A7A227BD25360028F742 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 75D5A79B27BD25360028F742 /* NotificationService */;
+			targetProxy = 75D5A7A127BD25360028F742 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1437,18 +1563,19 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5FC8F5B4B05D83373A281F12 /* Pods-Cooee iOS.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Cooee iOS/Cooee iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = 26TM6S5QFS;
 				INFOPLIST_FILE = "Cooee iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.10;
+				MARKETING_VERSION = 0.0.17;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.letscooee.Cooee-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1460,18 +1587,19 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 77F56F40EDA5A57940AA34BC /* Pods-Cooee iOS.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Cooee iOS/Cooee iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = 26TM6S5QFS;
 				INFOPLIST_FILE = "Cooee iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.10;
+				MARKETING_VERSION = 0.0.17;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.letscooee.Cooee-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1601,6 +1729,64 @@
 			};
 			name = Release;
 		};
+		75D5A7A527BD25360028F742 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 22DEC80C8F984C873DF23407 /* Pods-Cooee iOS-NotificationService.debug.xcconfig */;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 26TM6S5QFS;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NotificationService;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.letscooee.Cooee-iOS.NotificationService";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		75D5A7A627BD25360028F742 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B3F1C7011C0D156CE983BEE /* Pods-Cooee iOS-NotificationService.release.xcconfig */;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 26TM6S5QFS;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NotificationService;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.letscooee.Cooee-iOS.NotificationService";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1654,6 +1840,15 @@
 			buildConfigurations = (
 				751BC7D726F35881002D8358 /* Debug */,
 				751BC7D826F35881002D8358 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		75D5A7A727BD25360028F742 /* Build configuration list for PBXNativeTarget "NotificationService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75D5A7A527BD25360028F742 /* Debug */,
+				75D5A7A627BD25360028F742 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

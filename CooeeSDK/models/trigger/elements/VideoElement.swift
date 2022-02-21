@@ -11,7 +11,6 @@ import Foundation
 class VideoElement: BaseElement {
     // MARK: Lifecycle
 
-    required init() {}
 
     // MARK: Internal
 

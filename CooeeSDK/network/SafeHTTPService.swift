@@ -40,10 +40,9 @@ class SafeHTTPService {
         sendEvent(event: event, createSession: false)
     }
 
-    public func updateUserProfile(userData: [String: Any], userProperties: [String: Any]) {
-        var requestData = [String: Any]()
-        requestData["userProperties"] = userProperties
-        requestData["userData"] = userData
+    
+    public func updateUserProfile(userData: [String: Any]) {
+        var requestData = userData
         requestData["sessionID"] = sessionManager.getCurrentSessionID()
         let pendingTask = pendingTaskService.newTask(data: requestData, pendingTaskType: PendingTaskType.API_UPDATE_PROFILE)
         attemptTaskImmediately(pendingTask)
@@ -59,17 +58,9 @@ class SafeHTTPService {
         attemptTaskImmediately(pendingTask);
     }
 
-    func updateUserPropertyOnly(userProperty: [String: Any]) {
-        updateUserProfile(userData: [String: Any](), userProperties: userProperty)
-    }
-
     func updateDeviceProperty(deviceProp: [String: Any]) {
         let pendingTask = pendingTaskService.newTask(data: deviceProp, pendingTaskType: PendingTaskType.API_DEVICE_PROFILE)
         attemptTaskImmediately(pendingTask)
-    }
-
-    func updateUserDataOnly(userData: [String: Any]) {
-        updateUserProfile(userData: userData, userProperties: [String: Any]())
     }
 
     // MARK: Private

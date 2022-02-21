@@ -14,9 +14,8 @@ import Foundation
 struct DeviceAuthenticationBody {
     // MARK: Lifecycle
 
-    init(appID: String, appSecret: String, uuid: String, props: [String: Any]) {
+    init(appID: String, uuid: String, props: [String: Any]) {
         self.appID = appID
-        self.appSecret = appSecret
         self.uuid = uuid
         self.props = props
     }
@@ -24,7 +23,6 @@ struct DeviceAuthenticationBody {
     // MARK: Internal
 
     var appID: String
-    var appSecret: String
     var uuid: String
     var props: [String: Any]
     var sdk = "IOS"
@@ -33,7 +31,6 @@ struct DeviceAuthenticationBody {
         var dictionary = [String: Any]()
 
         dictionary["appID"] = appID
-        dictionary["appSecret"] = appSecret
         dictionary["uuid"] = uuid
         dictionary["props"] = props
         dictionary["sdk"] = sdk

@@ -13,6 +13,4 @@ import Foundation
 class ButtonElement: TextElement {
     // MARK: Lifecycle
 
-    required init() {
-    }
 }

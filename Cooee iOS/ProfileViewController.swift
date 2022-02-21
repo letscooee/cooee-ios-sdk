@@ -39,9 +39,13 @@ class ProfileViewController: UIViewController {
             showAlert("Mobile No. can't be empty", false)
         }
 
-        cooeeSDK.updateUserData(userData: ["name": name!,
-                                           "email": email!,
-                                           "mobile": mobile!])
+        do {
+            try cooeeSDK.updateUserProfile(["name": name!, "email": email!, "mobile": mobile!])
+        } catch {
+            showAlert("\(error.localizedDescription)", false)
+            return
+        }
+
         showAlert("Profile Updated", true)
     }
 

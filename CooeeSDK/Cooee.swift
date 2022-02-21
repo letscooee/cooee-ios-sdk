@@ -25,6 +25,7 @@ public final class CooeeSDK: NSObject {
     }
 
     // MARK: Public
+
     @objc
     public static func getInstance() -> CooeeSDK {
         if shared == nil {
@@ -38,19 +39,19 @@ public final class CooeeSDK: NSObject {
      - Parameters:
        - eventName: Name the event like onDeviceReady
        - eventProperties: Properties associated with the event
-     - Throws: Throws {@link CustomError#PropertyError} if user try to send any property start with {@link Constants.SYSTEM_DATA_PREFIX}
+     - Throws: Throws ``CustomError/PropertyError`` if user try to send any property start with "CE "
      */
     @objc
-    public func sendEvent(eventName: String, eventProperties: [String: Any]) throws {
-        for (key, _) in eventProperties {
-            let prefix = String(key.prefix(2))
-
-            if prefix.caseInsensitiveCompare(Constants.SYSTEM_DATA_PREFIX) == .orderedSame {
-                throw CustomError.PropertyError
-            }
+    public func sendEvent(eventName: String, eventProperties: [String: Any]? = nil) throws {
+        var event: Event
+        if eventProperties == nil {
+            event = Event(eventName: eventName)
+        } else if isContainSystemDataPrefix(eventProperties!) {
+            throw CustomError.PropertyError
+        } else {
+            event = Event(eventName: eventName, properties: eventProperties!)
         }
 
-        let event = Event(eventName: eventName, properties: eventProperties)
         safeHttpService.sendEvent(event: event)
     }
 
@@ -58,19 +59,20 @@ public final class CooeeSDK: NSObject {
      Send given user data to the server
      - Parameter userData: The common user data like name, email.
      */
+    @available(*, deprecated, renamed: "updateUserProfile(_:)")
     @objc
-    public func updateUserData(userData: [String: Any]) {
-        sentryHelper.setUserInfo(userData: userData)
-        safeHttpService.updateUserDataOnly(userData: userData)
+    public func updateUserData(userData: [String: Any]) throws {
+        try updateUserProfile(userData: userData, userProperties: [String: Any]())
     }
 
     /**
      Send given user properties to the server
      - Parameter userProperties: The additional user properties.
      */
+    @available(*, deprecated, renamed: "updateUserProfile(_:)")
     @objc
-    public func updateUserProperties(userProperties: [String: Any]) {
-        safeHttpService.updateUserPropertyOnly(userProperty: userProperties)
+    public func updateUserProperties(userProperties: [String: Any]) throws {
+        try updateUserProfile(userData: [String: Any](), userProperties: userProperties)
     }
 
     /**
@@ -79,10 +81,33 @@ public final class CooeeSDK: NSObject {
        - userData: The common user data like name, email.
        - userProperties: The additional user properties.
      */
+    @available(*, deprecated, renamed: "updateUserProfile(_:)")
     @objc
-    public func updateUserProfile(userData: [String: Any], userProperties: [String: Any]) {
+    public func updateUserProfile(userData: [String: Any], userProperties: [String: Any]) throws {
+        var requestData = [String: Any]()
+        requestData.merge(userProperties) { (current, _) in
+            current
+        }
+        requestData.merge(userData) { (current, _) in
+            current
+        }
+
+        try updateUserProfile(requestData)
+    }
+
+    /**
+     Send the given user data and user properties to the server.
+     - Parameter userData: The common user data like name, email, etc.
+     - Throws: Throws ``CustomError/PropertyError`` if user try to send any property start with "CE "
+     */
+    @objc
+    public func updateUserProfile(_ userData: [String: Any]) throws {
+        if isContainSystemDataPrefix(userData) {
+            throw CustomError.PropertyError
+        }
+
         sentryHelper.setUserInfo(userData: userData)
-        safeHttpService.updateUserProfile(userData: userData, userProperties: userProperties)
+        safeHttpService.updateUserProfile(userData: userData)
     }
 
     /**
@@ -176,6 +201,18 @@ public final class CooeeSDK: NSObject {
         return [.alert, .sound, .badge]
     }
 
+    /**
+     Use to set wrapper name. Can use only in Flutter/Cordova/React-Native to keep track of wrappers
+
+     - parameters:
+     - wrapperName: Name of the wrapper
+    - warning:  Can use only in Flutter/Cordova/React-Native to keep track of wrappers
+     */
+    @objc
+    public func setWrapper(_ wrapperName: String) {
+        CooeeFactory.shared.baseHttpService.commonHeaders.wrapper = wrapperName
+    }
+
     // MARK: Private
 
     private static var shared: CooeeSDK?
@@ -232,10 +269,10 @@ public final class CooeeSDK: NSObject {
         } else {
             let triggerContext = TriggerContext()
             triggerContext.setTriggerData(triggerData: triggerData)
-            if let activeViewController = UIApplication.shared.topMostViewController(){
+            if let activeViewController = UIApplication.shared.topMostViewController() {
                 triggerContext.setPresentViewController(presentViewController: activeViewController)
             }
-            
+
             ClickActionExecutor(notificationClickAction, triggerContext).execute()
         }
     }
@@ -247,5 +284,21 @@ public final class CooeeSDK: NSObject {
      */
     private func launchInApp(with triggerData: TriggerData) {
         EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
+    }
+
+    /**
+     Checks if ``Dictionary`` contains ``SYSTEM_DATA_PREFIX`` in keys
+     - Parameter props: ``Dictionary`` to check
+     - Returns: ``Bool`` indicating if ``Dictionary`` contains ``SYSTEM_DATA_PREFIX`` in keys
+     */
+    private func isContainSystemDataPrefix(_ props: [String: Any]) -> Bool {
+        for (key, _) in props {
+            let prefix = String(key.prefix(2))
+
+            if prefix.caseInsensitiveCompare(Constants.SYSTEM_DATA_PREFIX) == .orderedSame {
+                return true
+            }
+        }
+        return false
     }
 }

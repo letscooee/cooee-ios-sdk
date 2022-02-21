@@ -259,7 +259,7 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
             return
         }
 
-        CooeeFactory.shared.safeHttpService.updateUserPropertyOnly(userProperty: userProperties!)
+        CooeeFactory.shared.safeHttpService.updateUserProfile(userData: userProperties!)
     }
 
     /**

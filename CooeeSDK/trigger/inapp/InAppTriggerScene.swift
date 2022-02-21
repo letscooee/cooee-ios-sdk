@@ -24,8 +24,6 @@ class InAppTriggerScene: UIView {
         triggerData = data
         inAppData = data.getInAppTrigger()
 
-        publishCanvasSize()
-
         if inAppData == nil {
             throw CustomError.EmptyInAppData
         }
@@ -71,7 +69,6 @@ class InAppTriggerScene: UIView {
                     self.parentView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             }
         }, completion: nil)
-
 
         startTime = Date()
         sendTriggerDisplayedEvent()
@@ -119,11 +116,6 @@ class InAppTriggerScene: UIView {
         parentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
 
-    private func publishCanvasSize() {
-        UnitUtil.STANDARD_RESOLUTION_WIDTH = inAppData?.getCanvasWidth() ?? 1080
-        UnitUtil.STANDARD_RESOLUTION_HEIGHT = inAppData?.getCanvasHeight() ?? 1920
-    }
-
     private func updateDeviceOrientation(_ orientation: UIInterfaceOrientation) {
         if let currentOrientation = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.windowScene?.interfaceOrientation {
             deviceDefaultOrientation = currentOrientation
@@ -158,7 +150,6 @@ class InAppTriggerScene: UIView {
     }
 
     private func finish() {
-        
         DispatchQueue.main.async {
             var closedEventProps = self.triggerContext.getClosedEventProps()
             let duration = DateUtils.getDateDifferenceInSeconds(startDate: self.startTime!, endDate: Date())
@@ -168,7 +159,6 @@ class InAppTriggerScene: UIView {
             event.withTrigger(triggerData: self.triggerData!)
             CooeeFactory.shared.safeHttpService.sendEvent(event: event)
         }
-        
 
         // exit animation
         let exitAnimation = inAppData!.cont?.animation?.exit ?? .SLIDE_OUT_RIGHT

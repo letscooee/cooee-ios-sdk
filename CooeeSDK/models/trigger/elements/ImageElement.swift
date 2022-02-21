@@ -13,8 +13,6 @@ import Foundation
 class ImageElement: BaseElement {
     // MARK: Lifecycle
 
-    required init() {
-    }
 
     // MARK: Internal
 
