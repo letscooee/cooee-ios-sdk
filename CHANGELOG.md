@@ -1,6 +1,11 @@
 # Change Log
 
-# 1.3.8
+# 1.3.9
+
+### Fixes
+1. Fix PermissionType issue.
+
+# 1.3.8 (Unreleased)
 
 ### Feature
 
