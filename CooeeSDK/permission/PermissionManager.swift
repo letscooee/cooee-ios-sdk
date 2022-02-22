@@ -38,7 +38,7 @@ class PermissionManager {
 
         // This permission Android specific and require to access network type.
         // iOS by default grant this permission
-        permissionDetails?.updateValue(GRANTED, forKey: PermissionType.NETWORK_TYPE.rawValue)
+        permissionDetails?.updateValue(GRANTED, forKey: PermissionType.PHONE_DETAILS.rawValue)
 
         // No need to access storage till we need access other directory in internal storage
         // iOS provide access to app specific directory and some common shared directory
