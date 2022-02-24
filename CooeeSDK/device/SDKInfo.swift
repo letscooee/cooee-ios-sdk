@@ -38,7 +38,7 @@ class SDKInfo {
 
         var isDebugging: Bool {
             let mode = bundle.infoDictionary?["Configuration"] as? String ?? "Debug"
-            return (mode.equals("Debug"))
+            return (mode == "Debug")
         }
 
         func getVersionNumber() -> String {

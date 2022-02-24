@@ -5,7 +5,6 @@
 //  Created by Ashish Gaikwad on 20/09/21.
 //
 
-import BSON
 import Foundation
 
 /**
@@ -104,7 +103,7 @@ class DeviceAuthService {
      * other endpoints.
      */
     private func getSDKTokenFromServer() {
-        self.uuID = ObjectId().hexString
+        self.uuID = ObjectID().hexString
         let appInfo = InfoPlistReader.shared
         let props = DevicePropertyCollector().getImmutableDeviceProps()
         

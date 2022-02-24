@@ -5,7 +5,6 @@
 //  Created by Ashish Gaikwad on 05/10/21.
 //
 
-import BSON
 import Foundation
 
 /**
@@ -30,7 +29,7 @@ class SessionManager {
         }
 
         currentSessionStartTime = Date()
-        currentSessionID = ObjectId().hexString
+        currentSessionID = ObjectID().hexString
 
         bumpSessionNumber()
     }
