@@ -1,6 +1,12 @@
 # Change Log
 
-# 1.3.9
+# 1.3.10
+
+### Chore
+
+1. Remove external dependency (BSON)
+
+# 1.3.9 (Unreleased)
 
 ### Fixes
 1. Fix PermissionType issue.

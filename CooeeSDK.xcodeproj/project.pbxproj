@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5A6F9A1DDBF07FBC46E25BFB /* Pods_Cooee_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D98C15F0CFE5E9C11BB59E /* Pods_Cooee_iOS.framework */; };
-		721177C2D9BC042612422204 /* Pods_Cooee_iOS_NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9F161F8DD3A9CEE58890F29 /* Pods_Cooee_iOS_NotificationService.framework */; };
+		1511F379F257FEA8E65A882D /* Pods_Cooee_iOS_NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE1ED3489B8E33865DB85A8B /* Pods_Cooee_iOS_NotificationService.framework */; };
+		2501049BCE1D0CF217E98AA0 /* Pods_Cooee_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DC1240C2530105DE255DD23 /* Pods_Cooee_iOS.framework */; };
+		660821B67C395ABB6DB1A1F9 /* Pods_CooeeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F677A29B0C2ECFBA68ACC5 /* Pods_CooeeSDK.framework */; };
 		750F14CC27ABBF2400369101 /* GIFImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750F14CB27ABBF2400369101 /* GIFImageView.swift */; };
 		75186DC627808FC700DD6744 /* ARHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75186DC527808FC600DD6744 /* ARHelper.swift */; };
 		75187468274CD6F000BF267F /* ElementRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75187467274CD6F000BF267F /* ElementRenderer.swift */; };
@@ -131,7 +132,6 @@
 		AC0B8E5C2D7FCA755C9F8910 /* TextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B86FED7478E8BCDAAC99D /* TextElement.swift */; };
 		AC0B8E841AD56FEB009D2A89 /* SessionConcludeTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */; };
 		AC0B8F9ACEAD15992DF79CC2 /* EngagementTriggerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B804DEA9B9A9EB7E1FD5F /* EngagementTriggerHelper.swift */; };
-		AEA6A68C2054C3152273CB2A /* Pods_CooeeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A00CB36C5514BCCD109A7A8 /* Pods_CooeeSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,8 +180,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2970E73BD2361283F1F012AE /* Pods-Cooee iOS-NotificationService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS-NotificationService.debug.xcconfig"; path = "Target Support Files/Pods-Cooee iOS-NotificationService/Pods-Cooee iOS-NotificationService.debug.xcconfig"; sourceTree = "<group>"; };
-		4A00CB36C5514BCCD109A7A8 /* Pods_CooeeSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CooeeSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DC1240C2530105DE255DD23 /* Pods_Cooee_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cooee_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		10F677A29B0C2ECFBA68ACC5 /* Pods_CooeeSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CooeeSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		140D65B7AFA9BB7ECF54A09E /* Pods-CooeeSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.debug.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		5B02A00D1DF6161DD0E7CC87 /* Pods-Cooee iOS-NotificationService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS-NotificationService.debug.xcconfig"; path = "Target Support Files/Pods-Cooee iOS-NotificationService/Pods-Cooee iOS-NotificationService.debug.xcconfig"; sourceTree = "<group>"; };
 		750F14CB27ABBF2400369101 /* GIFImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFImageView.swift; sourceTree = "<group>"; };
 		75186DC527808FC600DD6744 /* ARHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARHelper.swift; sourceTree = "<group>"; };
 		75187467274CD6F000BF267F /* ElementRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementRenderer.swift; sourceTree = "<group>"; };
@@ -282,8 +284,6 @@
 		75FA7DB527217B1F0060A425 /* InAppTriggerScene.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InAppTriggerScene.xib; sourceTree = "<group>"; };
 		75FA7DB8272982DC0060A425 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		75FA7DBC272A75AE0060A425 /* samplepayloadone.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = samplepayloadone.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.json; };
-		826670BD30CDDDBAB4DE8F31 /* Pods-Cooee iOS-NotificationService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS-NotificationService.release.xcconfig"; path = "Target Support Files/Pods-Cooee iOS-NotificationService/Pods-Cooee iOS-NotificationService.release.xcconfig"; sourceTree = "<group>"; };
-		85D98C15F0CFE5E9C11BB59E /* Pods_Cooee_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cooee_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionConcludeTaskProcessor.swift; sourceTree = "<group>"; };
 		AC0B804DEA9B9A9EB7E1FD5F /* EngagementTriggerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngagementTriggerHelper.swift; sourceTree = "<group>"; };
 		AC0B805A34D46C1243CFFC5A /* ProfileTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTaskProcessor.swift; sourceTree = "<group>"; };
@@ -320,11 +320,11 @@
 		AC0B8ED273C05CC69495D48B /* PendingTaskService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingTaskService.swift; sourceTree = "<group>"; };
 		AC0B8F1A3240B22206AC68B6 /* PendingTaskType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingTaskType.swift; sourceTree = "<group>"; };
 		AC0B8FE80388BD5A3A3517E9 /* CooeeCTADelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CooeeCTADelegate.swift; sourceTree = "<group>"; };
-		B597097DC90177C609339034 /* Pods-CooeeSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.release.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.release.xcconfig"; sourceTree = "<group>"; };
-		C9F161F8DD3A9CEE58890F29 /* Pods_Cooee_iOS_NotificationService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cooee_iOS_NotificationService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CD30322360B9F7CD979F2B4A /* Pods-Cooee iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS.release.xcconfig"; path = "Target Support Files/Pods-Cooee iOS/Pods-Cooee iOS.release.xcconfig"; sourceTree = "<group>"; };
-		DDE508EBB651C4C308F9EE82 /* Pods-Cooee iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS.debug.xcconfig"; path = "Target Support Files/Pods-Cooee iOS/Pods-Cooee iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		FE74056EC15A943FDFEC777B /* Pods-CooeeSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.debug.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		B45E080945CABB68730A19A8 /* Pods-Cooee iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS.debug.xcconfig"; path = "Target Support Files/Pods-Cooee iOS/Pods-Cooee iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		B646C2B5365301529B9F8F0C /* Pods-Cooee iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS.release.xcconfig"; path = "Target Support Files/Pods-Cooee iOS/Pods-Cooee iOS.release.xcconfig"; sourceTree = "<group>"; };
+		DA9F04E0EA21D26E7EA059CF /* Pods-Cooee iOS-NotificationService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS-NotificationService.release.xcconfig"; path = "Target Support Files/Pods-Cooee iOS-NotificationService/Pods-Cooee iOS-NotificationService.release.xcconfig"; sourceTree = "<group>"; };
+		EE1ED3489B8E33865DB85A8B /* Pods_Cooee_iOS_NotificationService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cooee_iOS_NotificationService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC8586BF5E4583AE2329D2BA /* Pods-CooeeSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.release.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -332,7 +332,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEA6A68C2054C3152273CB2A /* Pods_CooeeSDK.framework in Frameworks */,
+				660821B67C395ABB6DB1A1F9 /* Pods_CooeeSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,7 +340,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A6F9A1DDBF07FBC46E25BFB /* Pods_Cooee_iOS.framework in Frameworks */,
+				2501049BCE1D0CF217E98AA0 /* Pods_Cooee_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,7 +370,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				721177C2D9BC042612422204 /* Pods_Cooee_iOS_NotificationService.framework in Frameworks */,
+				1511F379F257FEA8E65A882D /* Pods_Cooee_iOS_NotificationService.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -771,9 +771,9 @@
 			isa = PBXGroup;
 			children = (
 				75EF49A727876C7600CF932D /* FirebaseCore.framework */,
-				85D98C15F0CFE5E9C11BB59E /* Pods_Cooee_iOS.framework */,
-				C9F161F8DD3A9CEE58890F29 /* Pods_Cooee_iOS_NotificationService.framework */,
-				4A00CB36C5514BCCD109A7A8 /* Pods_CooeeSDK.framework */,
+				0DC1240C2530105DE255DD23 /* Pods_Cooee_iOS.framework */,
+				EE1ED3489B8E33865DB85A8B /* Pods_Cooee_iOS_NotificationService.framework */,
+				10F677A29B0C2ECFBA68ACC5 /* Pods_CooeeSDK.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -846,12 +846,12 @@
 		F5A9C2586D74C0CECB931D98 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				DDE508EBB651C4C308F9EE82 /* Pods-Cooee iOS.debug.xcconfig */,
-				CD30322360B9F7CD979F2B4A /* Pods-Cooee iOS.release.xcconfig */,
-				2970E73BD2361283F1F012AE /* Pods-Cooee iOS-NotificationService.debug.xcconfig */,
-				826670BD30CDDDBAB4DE8F31 /* Pods-Cooee iOS-NotificationService.release.xcconfig */,
-				FE74056EC15A943FDFEC777B /* Pods-CooeeSDK.debug.xcconfig */,
-				B597097DC90177C609339034 /* Pods-CooeeSDK.release.xcconfig */,
+				B45E080945CABB68730A19A8 /* Pods-Cooee iOS.debug.xcconfig */,
+				B646C2B5365301529B9F8F0C /* Pods-Cooee iOS.release.xcconfig */,
+				5B02A00D1DF6161DD0E7CC87 /* Pods-Cooee iOS-NotificationService.debug.xcconfig */,
+				DA9F04E0EA21D26E7EA059CF /* Pods-Cooee iOS-NotificationService.release.xcconfig */,
+				140D65B7AFA9BB7ECF54A09E /* Pods-CooeeSDK.debug.xcconfig */,
+				FC8586BF5E4583AE2329D2BA /* Pods-CooeeSDK.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -874,7 +874,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 751BC78526F3108A002D8358 /* Build configuration list for PBXNativeTarget "CooeeSDK" */;
 			buildPhases = (
-				4CD65A5E671F76338BAE7534 /* [CP] Check Pods Manifest.lock */,
+				0EB17C5C9BE3F39F360AF342 /* [CP] Check Pods Manifest.lock */,
 				751BC77826F3108A002D8358 /* Headers */,
 				751BC77926F3108A002D8358 /* Sources */,
 				751BC77A26F3108A002D8358 /* Frameworks */,
@@ -893,12 +893,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 751BC7B326F31165002D8358 /* Build configuration list for PBXNativeTarget "Cooee iOS" */;
 			buildPhases = (
-				24DA03F55F859D32DEAC4EBE /* [CP] Check Pods Manifest.lock */,
+				8C5572625006DAC2151B82EE /* [CP] Check Pods Manifest.lock */,
 				751BC78826F31162002D8358 /* Sources */,
 				751BC78926F31162002D8358 /* Frameworks */,
 				751BC78A26F31162002D8358 /* Resources */,
 				75D5A7A427BD25360028F742 /* Embed App Extensions */,
-				C9CF07AF582DAE60F8B81027 /* [CP] Embed Pods Frameworks */,
+				6376FA7EA530F3EFAB8B5A0A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -968,7 +968,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 75D5A7A727BD25360028F742 /* Build configuration list for PBXNativeTarget "NotificationService" */;
 			buildPhases = (
-				1140D893A6118A3C99B89964 /* [CP] Check Pods Manifest.lock */,
+				A6F8AB67E69993DC18AA5856 /* [CP] Check Pods Manifest.lock */,
 				75D5A79827BD25360028F742 /* Sources */,
 				75D5A79927BD25360028F742 /* Frameworks */,
 				75D5A79A27BD25360028F742 /* Resources */,
@@ -1088,51 +1088,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1140D893A6118A3C99B89964 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Cooee iOS-NotificationService-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		24DA03F55F859D32DEAC4EBE /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Cooee iOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4CD65A5E671F76338BAE7534 /* [CP] Check Pods Manifest.lock */ = {
+		0EB17C5C9BE3F39F360AF342 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1154,7 +1110,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C9CF07AF582DAE60F8B81027 /* [CP] Embed Pods Frameworks */ = {
+		6376FA7EA530F3EFAB8B5A0A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1169,6 +1125,50 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cooee iOS/Pods-Cooee iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8C5572625006DAC2151B82EE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cooee iOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A6F8AB67E69993DC18AA5856 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cooee iOS-NotificationService-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1499,7 +1499,7 @@
 		};
 		751BC78626F3108A002D8358 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FE74056EC15A943FDFEC777B /* Pods-CooeeSDK.debug.xcconfig */;
+			baseConfigurationReference = 140D65B7AFA9BB7ECF54A09E /* Pods-CooeeSDK.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1530,7 +1530,7 @@
 		};
 		751BC78726F3108A002D8358 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B597097DC90177C609339034 /* Pods-CooeeSDK.release.xcconfig */;
+			baseConfigurationReference = FC8586BF5E4583AE2329D2BA /* Pods-CooeeSDK.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1561,7 +1561,7 @@
 		};
 		751BC7B426F31165002D8358 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DDE508EBB651C4C308F9EE82 /* Pods-Cooee iOS.debug.xcconfig */;
+			baseConfigurationReference = B45E080945CABB68730A19A8 /* Pods-Cooee iOS.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1585,7 +1585,7 @@
 		};
 		751BC7B526F31165002D8358 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CD30322360B9F7CD979F2B4A /* Pods-Cooee iOS.release.xcconfig */;
+			baseConfigurationReference = B646C2B5365301529B9F8F0C /* Pods-Cooee iOS.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1731,7 +1731,7 @@
 		};
 		75D5A7A527BD25360028F742 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2970E73BD2361283F1F012AE /* Pods-Cooee iOS-NotificationService.debug.xcconfig */;
+			baseConfigurationReference = 5B02A00D1DF6161DD0E7CC87 /* Pods-Cooee iOS-NotificationService.debug.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
@@ -1760,7 +1760,7 @@
 		};
 		75D5A7A627BD25360028F742 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 826670BD30CDDDBAB4DE8F31 /* Pods-Cooee iOS-NotificationService.release.xcconfig */;
+			baseConfigurationReference = DA9F04E0EA21D26E7EA059CF /* Pods-Cooee iOS-NotificationService.release.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
