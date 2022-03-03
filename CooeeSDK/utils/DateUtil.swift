@@ -23,6 +23,7 @@ class DateUtils {
     static func formatDateToUTCString(date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "EEE MMM dd HH:mm:ss zzz yyyy"
+        formatter.locale = Locale(identifier: "en_US")
         formatter.timeZone = NSTimeZone(abbreviation: "UTC") as TimeZone?
         return formatter.string(from: date)
     }
