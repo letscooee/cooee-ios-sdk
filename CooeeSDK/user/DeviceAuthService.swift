@@ -87,12 +87,14 @@ class DeviceAuthService {
         self.userID = LocalStorageHelper.getString(key: Constants.STORAGE_USER_ID)
         self.deviceID = LocalStorageHelper.getString(key: Constants.STORAGE_DEVICE_ID)
 
-        if self.sdkToken == nil {
+        if self.sdkToken?.isEmpty ?? true {
             NSLog("No SDK token found in preference")
+            return
         }
 
-        if self.userID == nil {
+        if self.userID?.isEmpty ?? true {
             NSLog("No user ID found in preference")
+            return
         }
 
         self.updateAPI()
