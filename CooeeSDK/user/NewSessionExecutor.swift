@@ -59,23 +59,24 @@ class NewSessionExecutor {
      */
 
     private func sendSuccessiveLaunchEvent() {
-        sendDefaultDeviceProperties(userProperties: nil)
-
-        let event = Event(eventName: "CE App Launched", deviceProps: devicePropertyCollector.getMutableDeviceProps())
+        let mutableDeviceProperty = devicePropertyCollector.getMutableDeviceProps()
+        let event = Event(eventName: "CE App Launched", deviceProps: mutableDeviceProperty)
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)
+
+        sendDefaultDeviceProperties(userProperties: mutableDeviceProperty)
     }
 
     /**
      * Runs when app is opened for the first time after sdkToken is received from server asynchronously
      */
     private func sendFirstLaunchEvent() {
+        let event = Event(eventName: "CE App Installed", deviceProps: devicePropertyCollector.getMutableDeviceProps())
+        CooeeFactory.shared.safeHttpService.sendEvent(event: event)
+
         var firstLaunchProps = [String: Any]()
         firstLaunchProps["firstLaunch"] = DateUtils.formatDateToUTCString(date: Date())
         firstLaunchProps["installedTime"] = devicePropertyCollector.getAppInstallDate()
         sendDefaultDeviceProperties(userProperties: firstLaunchProps)
-
-        let event = Event(eventName: "CE App Installed", deviceProps: devicePropertyCollector.getMutableDeviceProps())
-        CooeeFactory.shared.safeHttpService.sendEvent(event: event)
     }
 
     private func sendDefaultDeviceProperties(userProperties: [String: Any]?) {
