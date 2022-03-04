@@ -1,5 +1,14 @@
 # Change Log
 
+# 1.3.11
+
+### Fixes
+
+1. Do not upload screenshots if SDK token has not been acquired yet.
+2. Use US locale for date formatting.
+3. Fix release/debug mode detection.
+4. Update device after launch or install event.
+
 # 1.3.10
 
 ### Chore
