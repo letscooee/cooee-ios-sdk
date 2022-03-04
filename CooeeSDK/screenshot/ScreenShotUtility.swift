@@ -25,6 +25,7 @@ class ScreenShotUtility {
 
         if !isAppInDebugMode {
             NSLog("Skipping screenshot send as App is not in debug mode")
+            return
         }
 
         let screenShot = UIApplication.shared.makeSnapshot()

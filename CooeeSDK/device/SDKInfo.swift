@@ -37,7 +37,7 @@ class SDKInfo {
         let sdkVersion: String
 
         var isDebugging: Bool {
-            let mode = bundle.infoDictionary?["Configuration"] as? String ?? "Debug"
+            let mode = bundle.infoDictionary?["Configuration"] as? String ?? "Release"
             return (mode == "Debug")
         }
 

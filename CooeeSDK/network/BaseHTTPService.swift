@@ -43,9 +43,17 @@ class BaseHTTPService {
             if !(userID?.isEmpty ?? true) {
                 dictionary["user-id"] = userID ?? ""
             }
-            
+
             if !(wrapper?.isEmpty ?? true) {
                 dictionary["sdk-wrapper"] = wrapper!
+            }
+
+            if AppInfo.shared.isAppDebugging() {
+                dictionary["app-debug"] = "1"
+            }
+
+            if SDKInfo.shared.cachedInfo.isDebugging {
+                dictionary["sdk-debug"] = "1"
             }
 
             return dictionary

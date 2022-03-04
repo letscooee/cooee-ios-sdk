@@ -40,6 +40,8 @@ class WebService: NSObject {
         }
         request.allHTTPHeaderFields = header
 
+        let eventName = params["name"] as? String ?? ""
+        NSLog("Request: Method=\(method.rawValue), URL=\(url.path), Event=\(eventName)")
         if debugging {
             NSLog("""
                   \n-------WS Params--------\n
