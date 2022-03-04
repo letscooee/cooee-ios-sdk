@@ -59,8 +59,10 @@ class DeviceAuthService {
         self.sentryHelper.setUserId(id: self.userID!)
 
         // send screenshot once sdk token is acquired/published
-        DispatchQueue.main.async {
-            ScreenShotUtility.captureAndSendScreenShot()
+        if !(sdkToken?.isEmpty ?? true) {
+            DispatchQueue.main.async {
+                ScreenShotUtility.captureAndSendScreenShot()
+            }
         }
     }
 
@@ -89,12 +91,10 @@ class DeviceAuthService {
 
         if self.sdkToken?.isEmpty ?? true {
             NSLog("No SDK token found in preference")
-            return
         }
 
         if self.userID?.isEmpty ?? true {
             NSLog("No user ID found in preference")
-            return
         }
 
         self.updateAPI()
@@ -108,7 +108,7 @@ class DeviceAuthService {
         self.uuID = ObjectID().hexString
         let appInfo = InfoPlistReader.shared
         let props = DevicePropertyCollector().getImmutableDeviceProps()
-        
+
         if appInfo.appID.isEmpty {
             NSLog("Missing App credentials in Info.plist. Check Integration https://docs.letscooee.com/developers/ios/quickstart")
             return
