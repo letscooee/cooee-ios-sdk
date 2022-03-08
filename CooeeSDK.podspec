@@ -111,11 +111,11 @@ spec.resource  = "CooeeSDK/database/task/letscooee.xcdatamodeld"
 # spec.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
 # https://github.com/CocoaPods/CocoaPods/issues/10065#issuecomment-694266259
-spec.pod_target_xcconfig = {
-    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
-}
-spec.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
-}
+#spec.pod_target_xcconfig = {
+#    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+#}
+#spec.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+#}
 # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 #
 #  Link your library with frameworks, or libraries. Libraries do not include

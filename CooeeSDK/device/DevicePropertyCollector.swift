@@ -22,7 +22,7 @@ class DevicePropertyCollector {
 
     // MARK: Public
 
-    public func getMutableDeviceProps() -> [String: Any?] {
+    public func getMutableDeviceProps() -> [String: Any] {
         let storage = [
             "tot": deviceInfo.cachedInfo.totalSpace,
             "avl": deviceInfo.cachedInfo.freeSpace
