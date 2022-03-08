@@ -1,5 +1,11 @@
 # Change Log
 
+# 1.3.12
+
+### Improvements
+1. Remove warnings from framework.
+2. Remove restriction from iOS Simulators.
+
 # 1.3.11
 
 ### Fixes
