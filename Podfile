@@ -26,6 +26,6 @@ target 'Cooee iOS' do
   end
 
   target 'NotificationService' do
-    pod 'CooeeSDK', path: '../ios-sdk'
+    inherit! :search_paths
   end
 end
