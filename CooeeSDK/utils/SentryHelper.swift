@@ -100,6 +100,8 @@ class SentryHelper {
             return
         }
 
+        SentrySDK.setUser(user)
+
         SentrySDK.start { options in
             options.dsn = SentryHelper.COOEE_DSN
             options.releaseName = "com.letscooee@\(self.sdkInfo.cachedInfo.sdkVersion)+\(self.sdkInfo.cachedInfo.getVersionNumber())"
