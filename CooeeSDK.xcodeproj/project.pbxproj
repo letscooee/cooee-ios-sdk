@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6AE2E42CD10D1EF8358FE37B /* Pods_CooeeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F95722A845BCED0EFCC5F9 /* Pods_CooeeSDK.framework */; };
+		750D470927DA10C00029E18E /* SentryTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750D470827DA10BF0029E18E /* SentryTransaction.swift */; };
 		750F14CC27ABBF2400369101 /* GIFImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750F14CB27ABBF2400369101 /* GIFImageView.swift */; };
 		75186DC627808FC700DD6744 /* ARHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75186DC527808FC600DD6744 /* ARHelper.swift */; };
 		75187468274CD6F000BF267F /* ElementRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75187467274CD6F000BF267F /* ElementRenderer.swift */; };
@@ -183,6 +184,7 @@
 		2CF371C9509012D66398CDCD /* Pods-CooeeSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.release.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.release.xcconfig"; sourceTree = "<group>"; };
 		40F95722A845BCED0EFCC5F9 /* Pods_CooeeSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CooeeSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E3C4339AB28F65789A12A24 /* Pods-Cooee iOS-NotificationService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS-NotificationService.debug.xcconfig"; path = "Target Support Files/Pods-Cooee iOS-NotificationService/Pods-Cooee iOS-NotificationService.debug.xcconfig"; sourceTree = "<group>"; };
+		750D470827DA10BF0029E18E /* SentryTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentryTransaction.swift; sourceTree = "<group>"; };
 		750F14CB27ABBF2400369101 /* GIFImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFImageView.swift; sourceTree = "<group>"; };
 		75186DC527808FC600DD6744 /* ARHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARHelper.swift; sourceTree = "<group>"; };
 		75187467274CD6F000BF267F /* ElementRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementRenderer.swift; sourceTree = "<group>"; };
@@ -601,6 +603,7 @@
 				756BAA2227588C3500C7A84F /* ImageDownloader.swift */,
 				AC0B8FE80388BD5A3A3517E9 /* CooeeCTADelegate.swift */,
 				75D0238527C67023009A320B /* ObjectID.swift */,
+				750D470827DA10BF0029E18E /* SentryTransaction.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -1266,6 +1269,7 @@
 				AC0B8E5C2D7FCA755C9F8910 /* TextElement.swift in Sources */,
 				AC0B8E13066BD7C37F8B65E8 /* VideoElement.swift in Sources */,
 				AC0B8B29AC11EB84B287A922 /* Container.swift in Sources */,
+				750D470927DA10C00029E18E /* SentryTransaction.swift in Sources */,
 				AC0B861B3D2AEA999CEC1A10 /* Animation.swift in Sources */,
 				AC0B880EBE65FCACBE4C063B /* InAppTrigger.swift in Sources */,
 				AC0B8B3175C8E3905037A0FE /* InAppTriggerScene.swift in Sources */,
