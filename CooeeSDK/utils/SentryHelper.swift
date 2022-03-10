@@ -106,6 +106,15 @@ class SentryHelper {
             options.dsn = SentryHelper.COOEE_DSN
             options.releaseName = "com.letscooee@\(self.sdkInfo.cachedInfo.sdkVersion)+\(self.sdkInfo.cachedInfo.getVersionNumber())"
             options.environment = self.sdkInfo.cachedInfo.isDebugging ? "development" : "production"
+            options.tracesSampler = { context in
+                if context.transactionContext.name == "CooeeFactory.init()" {
+                    return 0.75
+                } else if context.transactionContext.name == "CooeeInApp.load()" {
+                    return 0.75
+                } else {
+                    return 0
+                }
+            }
             self.setupFilterToExcludeNonCooeeEvents(options)
         }
         self.setupGlobalTags()
