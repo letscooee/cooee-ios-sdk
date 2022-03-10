@@ -25,8 +25,8 @@ class CooeeFactory {
         sentryHelper.initSentry()
 
         let transaction = SentrySDK.startTransaction(
-            name: "CooeeFactory.init()",
-            operation: "task"
+                name: SentryTransaction.COOEE_FACTORY_INIT.rawValue,
+                operation: "task"
         )
 
         sessionManager = SessionManager.shared
@@ -36,7 +36,7 @@ class CooeeFactory {
         pendingTaskService = PendingTaskService()
         runtimeData = RuntimeData.shared
         safeHttpService = SafeHTTPService(pendingTaskService: pendingTaskService, sessionManager: sessionManager, runtimeData: runtimeData)
-        
+
         transaction.finish()
     }
 

@@ -102,14 +102,14 @@ class SentryHelper {
 
         SentrySDK.setUser(user)
 
+        let sentryTransactions = SentryTransaction.valueList()
         SentrySDK.start { options in
             options.dsn = SentryHelper.COOEE_DSN
             options.releaseName = "com.letscooee@\(self.sdkInfo.cachedInfo.sdkVersion)+\(self.sdkInfo.cachedInfo.getVersionNumber())"
             options.environment = self.sdkInfo.cachedInfo.isDebugging ? "development" : "production"
             options.tracesSampler = { context in
-                if context.transactionContext.name == "CooeeFactory.init()" {
-                    return 0.75
-                } else if context.transactionContext.name == "CooeeInApp.load()" {
+                if sentryTransactions.contains(context.transactionContext.name) {
+                    print("Transaction name: \(context.transactionContext.name)")
                     return 0.75
                 } else {
                     return 0

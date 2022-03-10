@@ -21,8 +21,8 @@ class InAppTriggerScene: UIView {
 
     public func updateViewWith(data: TriggerData, on viewController: UIViewController) throws {
         let sentryTransaction = SentrySDK.startTransaction(
-                name: "CooeeInApp.load()",
-                operation: "loadInApp"
+                name: SentryTransaction.COOEE_INAPP_SCENE.rawValue,
+                operation: "load"
         )
 
         parentView = UIView()
