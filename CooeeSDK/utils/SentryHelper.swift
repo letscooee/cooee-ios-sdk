@@ -21,7 +21,7 @@ class SentryHelper {
         self.appInfo = appInfo
         self.sdkInfo = sdkInfo
         self.infoPlistReader = infoPlistReader
-        self.enabled = sdkInfo.cachedInfo.isDebugging
+        self.enabled = !sdkInfo.cachedInfo.isDebugging
     }
 
     // MARK: Public
@@ -102,7 +102,6 @@ class SentryHelper {
 
         SentrySDK.start { options in
             options.dsn = SentryHelper.COOEE_DSN
-            options.debug = false
             options.releaseName = "com.letscooee@\(self.sdkInfo.cachedInfo.sdkVersion)+\(self.sdkInfo.cachedInfo.getVersionNumber())"
             options.environment = self.sdkInfo.cachedInfo.isDebugging ? "development" : "production"
             self.setupFilterToExcludeNonCooeeEvents(options)
@@ -166,11 +165,7 @@ class SentryHelper {
             }
         }
 
-        if event.error == nil {
-            return false
-        }
-
-        let description = "\(String(describing: event.error))"
+        let description = "\(String(describing: event.serialize().toJSONString()))"
 
         return description.lowercased().contains("cooee")
     }
