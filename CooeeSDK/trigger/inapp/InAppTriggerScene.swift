@@ -6,6 +6,7 @@ import AVFoundation
 import Foundation
 import SwiftUI
 import UIKit
+import Sentry
 
 /**
  InAppTriggerScene is a class which process iam block from payload and renders UI to the screen with the help of SwiftUI
@@ -19,6 +20,11 @@ class InAppTriggerScene: UIView {
     public static let instance = InAppTriggerScene()
 
     public func updateViewWith(data: TriggerData, on viewController: UIViewController) throws {
+        let sentryTransaction = SentrySDK.startTransaction(
+                name: "CooeeInApp.load()",
+                operation: "loadInApp"
+        )
+
         parentView = UIView()
         commonInit()
         triggerData = data
@@ -61,6 +67,8 @@ class InAppTriggerScene: UIView {
 
         startTime = Date()
         sendTriggerDisplayedEvent()
+
+        sentryTransaction.finish()
     }
 
     // MARK: Internal
