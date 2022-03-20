@@ -21,7 +21,7 @@ class SentryHelper {
         self.appInfo = appInfo
         self.sdkInfo = sdkInfo
         self.infoPlistReader = infoPlistReader
-        self.enabled = sdkInfo.cachedInfo.isDebugging
+        self.enabled = !sdkInfo.cachedInfo.isDebugging
     }
 
     // MARK: Public
@@ -100,11 +100,21 @@ class SentryHelper {
             return
         }
 
+        SentrySDK.setUser(user)
+
+        let sentryTransactions = SentryTransaction.valueList()
         SentrySDK.start { options in
             options.dsn = SentryHelper.COOEE_DSN
-            options.debug = false
             options.releaseName = "com.letscooee@\(self.sdkInfo.cachedInfo.sdkVersion)+\(self.sdkInfo.cachedInfo.getVersionNumber())"
             options.environment = self.sdkInfo.cachedInfo.isDebugging ? "development" : "production"
+            options.tracesSampler = { context in
+                if sentryTransactions.contains(context.transactionContext.name) {
+                    print("Transaction name: \(context.transactionContext.name)")
+                    return 0.75
+                } else {
+                    return 0
+                }
+            }
             self.setupFilterToExcludeNonCooeeEvents(options)
         }
         self.setupGlobalTags()
@@ -166,11 +176,7 @@ class SentryHelper {
             }
         }
 
-        if event.error == nil {
-            return false
-        }
-
-        let description = "\(String(describing: event.error))"
+        let description = "\(String(describing: event.serialize().toJSONString()))"
 
         return description.lowercased().contains("cooee")
     }

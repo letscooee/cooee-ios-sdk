@@ -92,7 +92,7 @@ spec.source       = { :git => "https://github.com/letscooee/cooee-ios-sdk.git", 
 #
 
 spec.source_files  = "CooeeSDK/**/*.*","CooeeSDK/database/task/letscooee.xcdatamodeld"
-#spec.exclude_files = "Classes/Exclude"
+spec.exclude_files = "CooeeSDK/CooeeSDK-Info.plist"
 
 # spec.public_header_files = "Classes/**/*.h"
 
