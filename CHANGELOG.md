@@ -1,12 +1,20 @@
 # Change Log
 
-# 1.3.12
+## 1.3.13 (2022-03-24)
+
+### Fixes
+
+1. Fix `newline` character issue when text is `bold`/`italic`.
+2. Fix `border` issue when padding is applied.
+3. Fix Sentry not working issue.
+
+## 1.3.12
 
 ### Improvements
 1. Remove warnings from framework.
 2. Remove restriction from iOS Simulators.
 
-# 1.3.11
+## 1.3.11
 
 ### Fixes
 
@@ -15,18 +23,18 @@
 3. Fix release/debug mode detection.
 4. Update device after launch or install event.
 
-# 1.3.10
+## 1.3.10
 
 ### Chore
 
 1. Remove external dependency (BSON)
 
-# 1.3.9 (Unreleased)
+## 1.3.9 (Unreleased)
 
 ### Fixes
 1. Fix PermissionType issue.
 
-# 1.3.8 (Unreleased)
+## 1.3.8 (Unreleased)
 
 ### Feature
 
@@ -47,13 +55,13 @@
 1. Deprecated `CooeeSDK.updateUserData(userData:)`, `CooeeSDK.updateUserProperties(userProperties)`, 
 `CooeeSDK.updateUserProfile(userData:userProperties:)`.
 
-# 1.3.7
+## 1.3.7
 
 ### Improvements
 1. Expose public classes and their methods for Objective-C
 
 
-# 1.3.6
+## 1.3.6
 
 ### Fixes
 1. App group access for user default.
@@ -62,7 +70,7 @@
 
 1. Remove warnings.
 
-# 1.3.5
+## 1.3.5
 
 ### Feature
 
@@ -84,28 +92,28 @@
 
 1. Remove AR support.
 
-# 1.3.1 1.3.2, 1.3.3, 1.3.4
+## 1.3.1 1.3.2, 1.3.3, 1.3.4
 
 1. Release patch
 
-# 1.3.0
+## 1.3.0
 
 1. Add support to notifications service
 2. Add InApp and AR support
 
-# 1.2.5
+## 1.2.5
 
 1. Explicitly setting minimum target deployment to 13.0
 
-# 1.2.4
+## 1.2.4
 
 1. Not asking the location permission explicitly.
 
-# 1.2.3
+## 1.2.3
 
 1. Data properties are now sent as is without converting to strings.
 
-# 1.2.2
+## 1.2.2
 
 1. Server calls are secured internally by making sure the access token exists.
 2. Renaming a few classes.
