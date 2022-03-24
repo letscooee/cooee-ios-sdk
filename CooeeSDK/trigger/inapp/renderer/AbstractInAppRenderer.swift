@@ -69,10 +69,10 @@ struct AbstractInAppRenderer: ViewModifier {
             $0.clipped()
         }
         .if(elementData.br?.getStyle() == Border.Style.SOLID && isText) {
-            $0.padding(.bottom, elementData.getSpacing().getPaddingBottom(add: elementData.br!.getWidth()))
-                .padding(.top, elementData.getSpacing().getPaddingTop(add: elementData.br!.getWidth()))
-                .padding(.leading, elementData.getSpacing().getPaddingLeft(add: elementData.br!.getWidth()))
-                .padding(.trailing, elementData.getSpacing().getPaddingRight(add: elementData.br!.getWidth()))
+            $0.padding(.bottom, elementData.getSpacing().getPaddingBottomForBorder(replaceWith: elementData.br!.getWidth()))
+                .padding(.top, elementData.getSpacing().getPaddingTopForBorder(replaceWith: elementData.br!.getWidth()))
+                .padding(.leading, elementData.getSpacing().getPaddingLeftForBorder(replaceWith: elementData.br!.getWidth()))
+                .padding(.trailing, elementData.getSpacing().getPaddingRightForBorder(replaceWith: elementData.br!.getWidth()))
                 .overlay(
                     RoundedRectangle(cornerRadius: elementData.br!.getRadius())
                         .strokeBorder(
