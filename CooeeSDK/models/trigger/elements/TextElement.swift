@@ -25,8 +25,8 @@ class TextElement: BaseTextElement, Identifiable {
     public func getSinglePart() -> Text {
         var text = Text("")
 
-        for part in prs! {
-            let index = prs!.lastIndex(where: { $0.getPartText() == part.getPartText() })
+        for index in 0..<prs!.count {
+            let part = prs![index]
             var partText = part.getPartText()
             let textColour: Color = part.getPartColour() ?? getColour() ?? Color(hex: "#000000")
             let font = getFont(for: part)
