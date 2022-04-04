@@ -41,6 +41,7 @@
 		751E134D270F22AB002CF442 /* AbstractPendingTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E134C270F22AB002CF442 /* AbstractPendingTaskProcessor.swift */; };
 		751E1350270F2F4D002CF442 /* letscooee.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 751E134E270F2F4B002CF442 /* letscooee.xcdatamodeld */; };
 		751E9E5127D9D91F008786CF /* InAppTriggerScene.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FA7DB527217B1F0060A425 /* InAppTriggerScene.xib */; };
+		7555227027FADC53002DBFFF /* LocalStorageHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555226F27FADC53002DBFFF /* LocalStorageHelperTest.swift */; };
 		752D1BD227F5B9FB001995E7 /* CooeeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752D1BD127F5B9FB001995E7 /* CooeeTest.swift */; };
 		756BAA1E27577C3F00C7A84F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756BAA1D27577C3E00C7A84F /* NotificationService.swift */; };
 		756BAA212757873500C7A84F /* PushNotificationTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756BAA202757873500C7A84F /* PushNotificationTrigger.swift */; };
@@ -237,6 +238,7 @@
 		751E134A270F1771002CF442 /* PendingTaskProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTaskProcessor.swift; sourceTree = "<group>"; };
 		751E134C270F22AB002CF442 /* AbstractPendingTaskProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractPendingTaskProcessor.swift; sourceTree = "<group>"; };
 		751E134F270F2F4C002CF442 /* letscooee.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = letscooee.xcdatamodel; sourceTree = "<group>"; };
+		7555226F27FADC53002DBFFF /* LocalStorageHelperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageHelperTest.swift; sourceTree = "<group>"; };
 		752D1BD127F5B9FB001995E7 /* CooeeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeTest.swift; sourceTree = "<group>"; };
 		756BAA1B275637A300C7A84F /* Cooee iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cooee iOS.entitlements"; sourceTree = "<group>"; };
 		756BAA1D27577C3E00C7A84F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
@@ -535,6 +537,7 @@
 		751BC7CF26F35881002D8358 /* CooeeSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				7555226E27FADC26002DBFFF /* utils */,
 				75FF1EFE27FABF50001E51E0 /* Device */,
 				751BC7D026F35881002D8358 /* CooeeSDKTests.swift */,
 				751BC7D226F35881002D8358 /* Info.plist */,
@@ -578,6 +581,14 @@
 				AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */,
 			);
 			path = processor;
+			sourceTree = "<group>";
+		};
+		7555226E27FADC26002DBFFF /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				7555226F27FADC53002DBFFF /* LocalStorageHelperTest.swift */,
+			);
+			path = utils;
 			sourceTree = "<group>";
 		};
 		75679B6B27905BB100A09837 /* helper */ = {
@@ -1114,6 +1125,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7555227527FB06D3002DBFFF /* payload.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1383,6 +1395,7 @@
 				751BC7D126F35881002D8358 /* CooeeSDKTests.swift in Sources */,
 				752D1BD227F5B9FB001995E7 /* CooeeTest.swift in Sources */,
 				75FF1F0027FAC18B001E51E0 /* DeviceInfoTest.swift in Sources */,
+				7555227027FADC53002DBFFF /* LocalStorageHelperTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
