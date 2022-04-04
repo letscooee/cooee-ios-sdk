@@ -30,82 +30,77 @@ class DeviceInfoTest: XCTestCase {
     }
 
     func test_device_model() {
-        let manufacturer = deviceInfo.cachedInfo.deviceModel
-        XCTAssert(manufacturer == "iPhone Simulator")
+        let deviceModel = deviceInfo.cachedInfo.deviceModel
+        XCTAssert(deviceModel == "iPhone Simulator")
     }
 
     func test_device_network_type() {
-        let manufacturer = deviceInfo.cachedInfo.networkType
-        XCTAssert(manufacturer == "Unknown")
+        let networkType = deviceInfo.cachedInfo.networkType
+        XCTAssert(networkType == "Unknown")
     }
 
     func test_device_network_provider() {
-        let manufacturer = deviceInfo.cachedInfo.networkProvider
-        XCTAssert(manufacturer == "Unknown")
+        let networkProvider = deviceInfo.cachedInfo.networkProvider
+        XCTAssert(networkProvider == "Unknown")
     }
 
     func test_device_network_total_storage() {
-        let manufacturer = deviceInfo.cachedInfo.totalSpace
-        XCTAssert(manufacturer == 476282)
+        let totalSpace = deviceInfo.cachedInfo.totalSpace
+        XCTAssert(totalSpace == 476282)
     }
 
     func test_device_network_total_ram() {
-        let manufacturer = deviceInfo.cachedInfo.totalRAM
-        XCTAssert(manufacturer == 8192)
+        let totalRAM = deviceInfo.cachedInfo.totalRAM
+        XCTAssert(totalRAM == 8192)
     }
 
     func test_device_os_version() {
-        let manufacturer = deviceInfo.cachedInfo.osVersion
-        XCTAssert(manufacturer == "15.4.0")
+        let osVersion = deviceInfo.cachedInfo.osVersion
+        XCTAssert(osVersion == "15.4.0")
     }
 
     func test_device_name() {
-        let manufacturer = deviceInfo.cachedInfo.name
-        XCTAssert(manufacturer == "iPhone 13 Pro")
-    }
-
-    func test_device_os() {
-        let manufacturer = deviceInfo.cachedInfo.name
-        XCTAssert(manufacturer == "iPhone 13 Pro")
+        let deviceName = deviceInfo.cachedInfo.name
+        XCTAssert(deviceName == "iPhone 12 Pro")
     }
 
     func test_device_is_bluetooth_turned_on() {
-        let manufacturer = deviceInfo.cachedInfo.isBTOn
-        XCTAssert(manufacturer == false)
+        let isBluetoothOn = deviceInfo.cachedInfo.isBTOn
+        XCTAssert(isBluetoothOn == false)
     }
 
     func test_device_is_ar_supported() {
-        let manufacturer = deviceInfo.cachedInfo.arSupport
-        XCTAssert(manufacturer == false)
+        let isARSupported = deviceInfo.cachedInfo.arSupport
+        XCTAssert(isARSupported == false)
     }
 
     func test_device_orientation() {
-        let manufacturer = deviceInfo.cachedInfo.deviceOrientation
-        XCTAssert(manufacturer == "Portrait")
+        let orientation = deviceInfo.cachedInfo.deviceOrientation
+        XCTAssert(orientation == "Portrait")
     }
 
     func test_device_is_wifi_on() {
-        let manufacturer = deviceInfo.cachedInfo.isWIFIConnected
-        XCTAssert(manufacturer == true)
+        let isWIFIConnected = deviceInfo.cachedInfo.isWIFIConnected
+        XCTAssert(isWIFIConnected == true)
     }
 
     func test_device_device_height() {
-        let manufacturer = deviceInfo.cachedInfo.height
-        XCTAssert(manufacturer == 844)
+        let height = deviceInfo.cachedInfo.height
+        XCTAssert(height == 844)
     }
 
     func test_device_device_width() {
-        let manufacturer = deviceInfo.cachedInfo.width
-        XCTAssert(manufacturer == 390)
+        let width = deviceInfo.cachedInfo.width
+        XCTAssert(width == 390)
     }
 
     func test_device_device_battery_charged_in_percent() {
-        let manufacturer = deviceInfo.cachedInfo.deviceBattery
-        XCTAssert(manufacturer == -100)
+        let battery = deviceInfo.cachedInfo.deviceBattery
+        XCTAssert(battery == -100)
     }
 
     func test_device_device_battery_charging() {
-        let manufacturer = deviceInfo.cachedInfo.isBatteryCharging
-        XCTAssert(manufacturer == false)
+        let isBatteryCharging = deviceInfo.cachedInfo.isBatteryCharging
+        XCTAssert(isBatteryCharging == false)
     }
 }
