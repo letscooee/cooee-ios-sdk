@@ -20,7 +20,7 @@ public class EngagementTriggerHelper {
 
       - Parameter data: Data received from the backend
       */
-    public static func renderInAppTriggerFromResponse(response data: [String: Any]?) {
+    public func renderInAppTriggerFromResponse(response data: [String: Any]?) {
         if data == nil {
             return
         }
@@ -36,10 +36,12 @@ public class EngagementTriggerHelper {
         renderInAppTrigger(triggerData)
     }
 
-    public static func renderInAppTriggerFromJSONString(_ rawTriggerData: String) {
-        let triggerData = TriggerData.deserialize(from: rawTriggerData)
+    public func renderInAppTriggerFromJSONString(_ rawTriggerData: String) {
+        guard let triggerData = TriggerData.deserialize(from: rawTriggerData) else {
+            return
+        }
 
-        storeActiveTriggerDetails(triggerData: triggerData!)
+        EngagementTriggerHelper.storeActiveTriggerDetails(triggerData: triggerData)
 
         renderInAppTrigger(triggerData)
     }
@@ -84,9 +86,14 @@ public class EngagementTriggerHelper {
 
      - Parameter triggerData: Data to render in-app.
      */
-    static func renderInAppFromPushNotification(for triggerData: TriggerData) {
+    func renderInAppFromPushNotification(for triggerData: TriggerData) {
         _ = CooeeFactory.shared.runtimeData
-        storeActiveTriggerDetails(triggerData: triggerData)
+
+        if (triggerData.id?.isEmpty ?? true) {
+            return
+        }
+
+        EngagementTriggerHelper.storeActiveTriggerDetails(triggerData: triggerData)
 
         loadLazyData(for: triggerData)
     }
@@ -96,7 +103,11 @@ public class EngagementTriggerHelper {
 
      - Parameter triggerData: Data to render in-app.
      */
-    static func loadLazyData(for triggerData: TriggerData) {
+    func loadLazyData(for triggerData: TriggerData) {
+        if (triggerData.id?.isEmpty ?? true) {
+            return
+        }
+
         InAppTriggerHelper.loadLazyData(for: triggerData) { data in
             if data == nil {
                 return
@@ -105,7 +116,7 @@ public class EngagementTriggerHelper {
             var triggerData = triggerData
             triggerData.setInAppTrigger(inAppTrigger: data!)
 
-            renderInAppTrigger(triggerData)
+            self.renderInAppTrigger(triggerData)
         }
     }
 
@@ -116,7 +127,7 @@ public class EngagementTriggerHelper {
 
      - Parameter data: received and parsed trigger data.
      */
-    private static func renderInAppTrigger(_ data: TriggerData?) {
+   func renderInAppTrigger(_ data: TriggerData?) {
         if data == nil {
             return
         }
@@ -128,7 +139,7 @@ public class EngagementTriggerHelper {
 
         do {
             if let visibleController = UIApplication.shared.topMostViewController() {
-                setActiveTrigger(data!)
+                EngagementTriggerHelper.setActiveTrigger(data!)
                 try InAppTriggerScene.instance.updateViewWith(data: data!, on: visibleController)
             }
         } catch {
