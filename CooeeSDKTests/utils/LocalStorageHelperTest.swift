@@ -76,7 +76,6 @@ class LocalStorageHelperTest: XCTestCase {
         let storedArray: EmbeddedTrigger? = LocalStorageHelper.getTypedClass(key: STORAGE_TEST_KET, clazz: EmbeddedTrigger.self)
         
         XCTAssertNotNil(storedArray)
-        XCTAssertEqual(embadedTrigger.toJSONString(), storedArray?.toJSONString())
         XCTAssertEqual(embadedTrigger.getExpireAt(), storedArray?.getExpireAt())
     }
 
