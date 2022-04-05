@@ -12,7 +12,7 @@
 		<key>Cooee iOSTests.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>11</integer>
+			<integer>4</integer>
 		</dict>
 		<key>CooeeSDK.xcscheme</key>
 		<dict>
@@ -24,7 +24,7 @@
 		<key>CooeeSDK.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>12</integer>
+			<integer>5</integer>
 		</dict>
 		<key>CooeeSDKTests.xcscheme_^#shared#^_</key>
 		<dict>
