@@ -23,101 +23,117 @@ class EngagementTriggerHelperTest: BaseTestCase {
         mockEngagementTriggerHelper = nil
     }
 
+    func assertLoadInAppFromResponse(_ data: [String: Any]?, _ assertType: Bool) {
+        mockEngagementTriggerHelper.renderInAppTriggerFromResponse(response: data)
+
+        if assertType {
+            XCTAssertTrue(mockEngagementTriggerHelper.hasCalledRenderInAppTrigger)
+        } else {
+            XCTAssertFalse(mockEngagementTriggerHelper.hasCalledRenderInAppTrigger)
+        }
+    }
+
     func test_load_in_app_from_empty_response() {
         XCTAssertNotNil(samplePayloadMap)
 
-        mockEngagementTriggerHelper.renderInAppTriggerFromResponse(response: [String: Any]())
-        XCTAssertFalse(mockEngagementTriggerHelper.hasCalledRenderInAppTrigger)
+        assertLoadInAppFromResponse([String: Any](), false)
     }
 
     func test_load_in_app_from_nil_response() {
         XCTAssertNotNil(samplePayloadMap)
 
-        mockEngagementTriggerHelper.renderInAppTriggerFromResponse(response: nil)
-        XCTAssertFalse(mockEngagementTriggerHelper.hasCalledRenderInAppTrigger)
+        assertLoadInAppFromResponse(nil, false)
     }
 
     func test_load_in_app_from_valid_response() {
         XCTAssertNotNil(samplePayloadMap)
 
         let response: [String: Any] = ["triggerData": samplePayloadMap as Any]
-        mockEngagementTriggerHelper.renderInAppTriggerFromResponse(response: response)
-        XCTAssertTrue(mockEngagementTriggerHelper.hasCalledRenderInAppTrigger)
+        assertLoadInAppFromResponse(response, true)
     }
-    
+
     func test_load_in_app_from_invalid_response() {
         XCTAssertNotNil(samplePayloadMap)
 
         let response: [String: Any] = ["triggerData": samplePayload as Any]
-        mockEngagementTriggerHelper.renderInAppTriggerFromResponse(response: response)
-        XCTAssertFalse(mockEngagementTriggerHelper.hasCalledRenderInAppTrigger)
+        assertLoadInAppFromResponse(response, false)
     }
-    
-    func test_load_in_app_from_valid_json_string() {
+
+    func assertLoadInAppFromJSONString(_ assertType: Bool) {
         XCTAssertNotNil(samplePayload)
 
         mockEngagementTriggerHelper.renderInAppTriggerFromJSONString(samplePayload)
-        XCTAssertTrue(mockEngagementTriggerHelper.hasCalledRenderInAppTrigger)
+        if assertType {
+            XCTAssertTrue(mockEngagementTriggerHelper.hasCalledRenderInAppTrigger)
+        } else {
+            XCTAssertFalse(mockEngagementTriggerHelper.hasCalledRenderInAppTrigger)
+        }
     }
-    
+
+    func test_load_in_app_from_valid_json_string() {
+        assertLoadInAppFromJSONString(true)
+    }
+
     func test_load_in_app_from_invalid_json_string() {
         samplePayload = "Hi, this is invalid JSON string"
-        XCTAssertNotNil(samplePayload)
-
-        mockEngagementTriggerHelper.renderInAppTriggerFromJSONString(samplePayload)
-        XCTAssertFalse(mockEngagementTriggerHelper.hasCalledRenderInAppTrigger)
+        assertLoadInAppFromJSONString(false)
     }
-    
+
     func test_load_in_app_from_empty_json_string() {
         samplePayload = ""
-        XCTAssertNotNil(samplePayload)
+        assertLoadInAppFromJSONString(false)
+    }
 
-        mockEngagementTriggerHelper.renderInAppTriggerFromJSONString(samplePayload)
-        XCTAssertFalse(mockEngagementTriggerHelper.hasCalledRenderInAppTrigger)
+    func assertRenderInAppFromPushNotification(_ data: TriggerData, _ assertType: Bool) {
+        mockEngagementTriggerHelper.renderInAppFromPushNotification(for: data)
+
+        if assertType {
+            XCTAssertTrue(mockEngagementTriggerHelper.hasCalledLoadLazyData)
+        } else {
+            XCTAssertFalse(mockEngagementTriggerHelper.hasCalledLoadLazyData)
+        }
     }
-    
-    func test_render_in_app_from_valid_push_notification(){
+
+    func test_render_in_app_from_valid_push_notification() {
         XCTAssertNotNil(triggerData)
-        
-        mockEngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
-        XCTAssertTrue(mockEngagementTriggerHelper.hasCalledLoadLazyData)
+
+        assertRenderInAppFromPushNotification(triggerData, true)
     }
-    
-    func test_render_in_app_from_invalid_push_notification(){
-        mockEngagementTriggerHelper.renderInAppFromPushNotification(for: TriggerData())
-        XCTAssertFalse(mockEngagementTriggerHelper.hasCalledLoadLazyData)
+
+    func test_render_in_app_from_invalid_push_notification() {
+        assertRenderInAppFromPushNotification(TriggerData(), false)
     }
-    
-    func test_load_lazy_data_from_valid_trigger(){
+
+    func test_load_lazy_data_from_valid_trigger() {
         XCTAssertNotNil(triggerData)
-        
+
         mockEngagementTriggerHelper.loadLazyData(for: triggerData)
         XCTAssertTrue(mockEngagementTriggerHelper.hasCalledLoadLazyData)
     }
-    
-    func test_load_lazy_data_from_invalid_trigger(){
+
+    func test_load_lazy_data_from_invalid_trigger() {
         mockEngagementTriggerHelper.loadLazyData(for: TriggerData())
         XCTAssertFalse(mockEngagementTriggerHelper.hasCalledRenderInAppTrigger)
     }
-    
-    func test_store_active_trigger(){
+
+    func test_store_active_trigger() {
         LocalStorageHelper.remove(key: Constants.STORAGE_ACTIVATED_TRIGGERS)
         XCTAssertNotNil(triggerData)
-        
+
         EngagementTriggerHelper.storeActiveTriggerDetails(triggerData: triggerData)
-        
+
         let activeTriggers = EngagementTriggerHelper.getActiveTriggers()
         XCTAssertEqual(activeTriggers.count, 1)
         let embededTrigger = activeTriggers[0]
         XCTAssertEqual(embededTrigger.getExpireAt(), triggerData.expireAt)
     }
-    
-    func test_store_expired_trigger(){
+
+    func test_store_expired_trigger() {
         LocalStorageHelper.remove(key: Constants.STORAGE_ACTIVATED_TRIGGERS)
         XCTAssertNotNil(expiredTriggerData)
-        
+
         EngagementTriggerHelper.storeActiveTriggerDetails(triggerData: expiredTriggerData)
-        
+
         let activeTriggers = EngagementTriggerHelper.getActiveTriggers()
         XCTAssertEqual(activeTriggers.count, 0)
     }
