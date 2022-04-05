@@ -41,6 +41,7 @@
 		751E134D270F22AB002CF442 /* AbstractPendingTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E134C270F22AB002CF442 /* AbstractPendingTaskProcessor.swift */; };
 		751E1350270F2F4D002CF442 /* letscooee.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 751E134E270F2F4B002CF442 /* letscooee.xcdatamodeld */; };
 		751E9E5127D9D91F008786CF /* InAppTriggerScene.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FA7DB527217B1F0060A425 /* InAppTriggerScene.xib */; };
+		752A211F27FC4943003C6E8F /* InAppTriggerSceneTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752A211E27FC4943003C6E8F /* InAppTriggerSceneTest.swift */; };
 		752D1BD227F5B9FB001995E7 /* CooeeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752D1BD127F5B9FB001995E7 /* CooeeTest.swift */; };
 		7555227027FADC53002DBFFF /* LocalStorageHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555226F27FADC53002DBFFF /* LocalStorageHelperTest.swift */; };
 		7555227527FB06D3002DBFFF /* payload.json in Resources */ = {isa = PBXBuildFile; fileRef = 7555227427FB06D3002DBFFF /* payload.json */; };
@@ -242,6 +243,7 @@
 		751E134A270F1771002CF442 /* PendingTaskProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTaskProcessor.swift; sourceTree = "<group>"; };
 		751E134C270F22AB002CF442 /* AbstractPendingTaskProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractPendingTaskProcessor.swift; sourceTree = "<group>"; };
 		751E134F270F2F4C002CF442 /* letscooee.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = letscooee.xcdatamodel; sourceTree = "<group>"; };
+		752A211E27FC4943003C6E8F /* InAppTriggerSceneTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppTriggerSceneTest.swift; sourceTree = "<group>"; };
 		752D1BD127F5B9FB001995E7 /* CooeeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeTest.swift; sourceTree = "<group>"; };
 		7555226F27FADC53002DBFFF /* LocalStorageHelperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageHelperTest.swift; sourceTree = "<group>"; };
 		7555227427FB06D3002DBFFF /* payload.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = payload.json; sourceTree = "<group>"; };
@@ -594,6 +596,14 @@
 			path = processor;
 			sourceTree = "<group>";
 		};
+		752A211D27FC4916003C6E8F /* inapp */ = {
+			isa = PBXGroup;
+			children = (
+				752A211E27FC4943003C6E8F /* InAppTriggerSceneTest.swift */,
+			);
+			path = inapp;
+			sourceTree = "<group>";
+		};
 		7555226E27FADC26002DBFFF /* utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -605,6 +615,7 @@
 		7555227D27FB3A55002DBFFF /* trigger */ = {
 			isa = PBXGroup;
 			children = (
+				752A211D27FC4916003C6E8F /* inapp */,
 				7555227E27FB3A73002DBFFF /* EngagementTriggerHelperTest.swift */,
 			);
 			path = trigger;
@@ -1057,7 +1068,7 @@
 		751BC77426F3108A002D8358 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1320;
+				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					751BC77C26F3108A002D8358 = {
@@ -1412,6 +1423,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				752A211F27FC4943003C6E8F /* InAppTriggerSceneTest.swift in Sources */,
 				751BC7D126F35881002D8358 /* CooeeSDKTests.swift in Sources */,
 				7555227A27FB1914002DBFFF /* AppInfoTest.swift in Sources */,
 				752D1BD227F5B9FB001995E7 /* CooeeTest.swift in Sources */,
