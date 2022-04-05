@@ -17,14 +17,14 @@
 		<key>CooeeSDK.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
+			<false/>
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
 		<key>CooeeSDK.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>4</integer>
 		</dict>
 		<key>CooeeSDKTests.xcscheme_^#shared#^_</key>
 		<dict>
@@ -42,22 +42,22 @@
 		<key>751BC77C26F3108A002D8358</key>
 		<dict>
 			<key>primary</key>
-			<true />
+			<true/>
 		</dict>
 		<key>751BC78B26F31162002D8358</key>
 		<dict>
 			<key>primary</key>
-			<true />
+			<true/>
 		</dict>
 		<key>751BC7A026F31165002D8358</key>
 		<dict>
 			<key>primary</key>
-			<true />
+			<true/>
 		</dict>
 		<key>751BC7AB26F31165002D8358</key>
 		<dict>
 			<key>primary</key>
-			<true />
+			<true/>
 		</dict>
 		<key>751BC7CD26F35881002D8358</key>
 		<dict>
@@ -67,7 +67,7 @@
 		<key>75D5A79B27BD25360028F742</key>
 		<dict>
 			<key>primary</key>
-			<true />
+			<true/>
 		</dict>
 	</dict>
 </dict>
