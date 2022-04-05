@@ -144,17 +144,17 @@ public class InAppNotification: UIViewController {
         CooeeNotificationService.sendEvent("CE Notification Clicked", withTriggerData: triggerData)
 
         guard let notificationClickAction = triggerData.getPushNotification()?.getClickAction() else {
-            EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
+            EngagementTriggerHelper().renderInAppFromPushNotification(for: triggerData)
             return
         }
 
         guard  let launchType = notificationClickAction.open else {
-            EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
+            EngagementTriggerHelper().renderInAppFromPushNotification(for: triggerData)
             return
         }
 
         if launchType == 1 {
-            EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
+            EngagementTriggerHelper().renderInAppFromPushNotification(for: triggerData)
         } else if launchType == 2 {
             // Launch Self AR
             //EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)

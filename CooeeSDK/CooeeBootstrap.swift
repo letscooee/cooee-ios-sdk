@@ -56,7 +56,7 @@ class CooeeBootstrap: NSObject {
     // MARK: Private
 
     private func launchInApp(with triggerData: TriggerData) {
-        EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
+        EngagementTriggerHelper().renderInAppFromPushNotification(for: triggerData)
     }
 
 /**
