@@ -4,9 +4,9 @@
 
 import AVFoundation
 import Foundation
+import Sentry
 import SwiftUI
 import UIKit
-import Sentry
 
 /**
  InAppTriggerScene is a class which process iam block from payload and renders UI to the screen with the help of SwiftUI
@@ -33,6 +33,15 @@ class InAppTriggerScene: UIView {
         if inAppData == nil {
             throw CustomError.EmptyInAppData
         }
+
+        if inAppData!.cont == nil {
+            throw NSError(domain: "Invalid InApp Containt", code: 0, userInfo: nil)
+        }
+
+        if inAppData!.elems == nil {
+            throw NSError(domain: "Invalid InApp Elements", code: 0, userInfo: nil)
+        }
+
         // updateDeviceOrientation(inAppData!.getOrientation()) // Skipping orientation lock in 1.3.0 release
         triggerContext.setTriggerData(triggerData: triggerData!)
         triggerContext.setTriggerParentLayout(triggerParentLayout: parentView)
@@ -53,7 +62,11 @@ class InAppTriggerScene: UIView {
         hostView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         hostView.backgroundColor = UIColor.white.withAlphaComponent(0.0)
 
-        parentView.addSubview(hostView)
+        let moveAhead = addViewToParentView(hostView)
+        if !moveAhead {
+            return
+        }
+
         parentView.backgroundColor = UIColor.white.withAlphaComponent(0.0)
 
         let enterAnimation = inAppData!.anim?.en ?? .SLIDE_IN_RIGHT
@@ -74,6 +87,11 @@ class InAppTriggerScene: UIView {
     // MARK: Internal
 
     var parentView: UIView!
+
+    func addViewToParentView(_ hostView: UIView) -> Bool {
+        parentView.addSubview(hostView)
+        return true
+    }
 
     // MARK: Private
 
@@ -113,9 +131,9 @@ class InAppTriggerScene: UIView {
     }
 
     private func commonInit() {
-        let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-        _ = nib.instantiate(withOwner: self, options: nil).first as! UIView
+//        let bundle = Bundle(for: type(of: self))
+//        let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
+//        _ = nib.instantiate(withOwner: self, options: nil).first as! UIView
         parentView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         parentView.insetsLayoutMarginsFromSafeArea = false
         parentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
