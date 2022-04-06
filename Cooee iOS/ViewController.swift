@@ -10,7 +10,6 @@ import HandyJSON
 import UIKit
 
 class ViewController: UIViewController, CooeeCTADelegate {
-
     let cooeeSDK = CooeeSDK.getInstance()
 
     @IBOutlet var parentView: UIView!
@@ -45,9 +44,26 @@ class ViewController: UIViewController, CooeeCTADelegate {
     @IBAction func loadPayload(_ sender: Any) {
         do {
             let eventProperties = [
-                "product id": "1234",
-                "product name": "Brush"
-            ]
+                "item": [
+                    "product_id": "1234",
+                    "product_name": "Brush"
+                ],
+                "items": [
+                    [
+                        "product_id": "1234",
+                        "product_name": "Brush"
+                    ],
+                    [
+                        "product_id": "1234",
+                        "product_name": "Brush"
+                    ]
+                ],
+                "stringValue": "This is test String",
+                "intValue": 1234567,
+                "booleanValue": true,
+                "doubleValue": 123.123
+            ] as [String: Any]
+
             try cooeeSDK.sendEvent(eventName: "Add To Cart")
             try cooeeSDK.sendEvent(eventName: "Add To Cart", eventProperties: eventProperties)
         } catch {
