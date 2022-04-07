@@ -35,7 +35,7 @@ class InAppTriggerScene: UIView {
         }
 
         if inAppData!.cont == nil {
-            throw NSError(domain: "Invalid InApp Containt", code: 0, userInfo: nil)
+            throw NSError(domain: "Invalid InApp Container", code: 0, userInfo: nil)
         }
 
         if inAppData!.elems == nil {

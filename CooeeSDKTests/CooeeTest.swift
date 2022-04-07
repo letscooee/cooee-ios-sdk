@@ -32,7 +32,7 @@ class CooeeTest: XCTestCase {
         ]
     ] as [String: Any]
     
-    let inValidEventProperties = [
+    let invalidEventProperties = [
         "CE stringValue": "foo",
         "CE intValue": 123,
         "CE boolValue": true,
@@ -117,7 +117,7 @@ class CooeeTest: XCTestCase {
     
     func test_send_event_with_invalid_valid_properties() {
         do {
-            try cooeeSDK.sendEvent(eventName: eventName, eventProperties: inValidEventProperties)
+            try cooeeSDK.sendEvent(eventName: eventName, eventProperties: invalidEventProperties)
             XCTAssertTrue(false)
         } catch {
             XCTAssertNotNil(error)
