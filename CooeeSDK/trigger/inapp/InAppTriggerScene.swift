@@ -22,46 +22,47 @@ class InAppTriggerScene: UIView {
     public func updateViewWith(data: TriggerData, on viewController: UIViewController) throws {
         triggerData = data
         self.viewController = viewController
+        
         if parentView != nil {
             perform(#selector(renderNewInApp), with: nil, afterDelay: 5)
             finish()
-        }else{
+        } else {
             perform(#selector(renderNewInApp), with: nil, afterDelay: 0.1)
         }
     }
-    
+
+    // MARK: Internal
+
+    var parentView: UIView!
+
     @objc func renderNewInApp() {
         let sentryTransaction = SentrySDK.startTransaction(
             name: SentryTransaction.COOEE_INAPP_SCENE.rawValue,
             operation: "load"
         )
 
-        do{
-            try self.renderInApp(triggerData!, viewController!)
+        do {
+            try renderInApp(triggerData!, viewController!)
 
-            let enterAnimation = self.inAppData!.anim?.en ?? .SLIDE_IN_RIGHT
+            let enterAnimation = inAppData!.anim?.en ?? .SLIDE_IN_RIGHT
 
-            self.setParentPositionMoveInAnimation(enterAnimation)
+            setParentPositionMoveInAnimation(enterAnimation)
 
-        UIView.animate(withDuration: 0.5, animations: {
-            self.viewController!.view.addSubview(self.parentView)
-            self.parentView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        }, completion: nil)
+            UIView.animate(withDuration: 0.5, animations: {
+                self.viewController!.view.addSubview(self.parentView)
+                self.parentView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            }, completion: nil)
 
-            self.startTime = Date()
-            self.sendTriggerDisplayedEvent()
-        }catch{
+            startTime = Date()
+            sendTriggerDisplayedEvent()
+        } catch {
             CooeeFactory.shared.sentryHelper.capture(error: error as NSError)
         }
 
         sentryTransaction.finish()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(self.screenRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(screenRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
-
-    // MARK: Internal
-
-    var parentView: UIView!
 
     @objc func screenRotated() {
         switch UIDevice.current.orientation {
