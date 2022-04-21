@@ -4,9 +4,9 @@
 
 import AVFoundation
 import Foundation
+import Sentry
 import SwiftUI
 import UIKit
-import Sentry
 
 /**
  InAppTriggerScene is a class which process iam block from payload and renders UI to the screen with the help of SwiftUI
@@ -20,11 +20,65 @@ class InAppTriggerScene: UIView {
     public static let instance = InAppTriggerScene()
 
     public func updateViewWith(data: TriggerData, on viewController: UIViewController) throws {
+        triggerData = data
+        self.viewController = viewController
+        if parentView != nil {
+            perform(#selector(renderNewInApp), with: nil, afterDelay: 5)
+            finish()
+        }else{
+            perform(#selector(renderNewInApp), with: nil, afterDelay: 0.1)
+        }
+    }
+    
+    @objc func renderNewInApp() {
         let sentryTransaction = SentrySDK.startTransaction(
-                name: SentryTransaction.COOEE_INAPP_SCENE.rawValue,
-                operation: "load"
+            name: SentryTransaction.COOEE_INAPP_SCENE.rawValue,
+            operation: "load"
         )
 
+        do{
+            try self.renderInApp(triggerData!, viewController!)
+
+            let enterAnimation = self.inAppData!.anim?.en ?? .SLIDE_IN_RIGHT
+
+            self.setParentPositionMoveInAnimation(enterAnimation)
+
+        UIView.animate(withDuration: 0.5, animations: {
+            self.viewController!.view.addSubview(self.parentView)
+            self.parentView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        }, completion: nil)
+
+            self.startTime = Date()
+            self.sendTriggerDisplayedEvent()
+        }catch{
+            CooeeFactory.shared.sentryHelper.capture(error: error as NSError)
+        }
+
+        sentryTransaction.finish()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(self.screenRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+
+    // MARK: Internal
+
+    var parentView: UIView!
+
+    @objc func screenRotated() {
+        switch UIDevice.current.orientation {
+            case .landscapeLeft, .landscapeRight, .portrait, .portraitUpsideDown:
+                parentView?.removeFromSuperview()
+                do {
+                    try renderInApp(triggerData!, triggerContext.getPresentViewController()!)
+                    triggerContext.getPresentViewController()!.view.addSubview(parentView)
+                } catch {
+                    CooeeFactory.shared.sentryHelper.capture(error: error as NSError)
+                }
+            default:
+                print("other (such as face up & down)")
+        }
+    }
+
+    func renderInApp(_ data: TriggerData, _ viewController: UIViewController) throws {
         parentView = UIView()
         commonInit()
         triggerData = data
@@ -55,29 +109,12 @@ class InAppTriggerScene: UIView {
 
         parentView.addSubview(hostView)
         parentView.backgroundColor = UIColor.white.withAlphaComponent(0.0)
-
-        let enterAnimation = inAppData!.anim?.en ?? .SLIDE_IN_RIGHT
-
-        setParentPositionMoveInAnimation(enterAnimation)
-
-        UIView.animate(withDuration: 0.5, animations: {
-            viewController.view.addSubview(self.parentView)
-            self.parentView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        }, completion: nil)
-
-        startTime = Date()
-        sendTriggerDisplayedEvent()
-
-        sentryTransaction.finish()
     }
-
-    // MARK: Internal
-
-    var parentView: UIView!
 
     // MARK: Private
 
     private var triggerData: TriggerData?
+    private var viewController: UIViewController?
     private var inAppData: InAppTrigger?
 
     private var sentryHelper: SentryHelper?
@@ -94,21 +131,21 @@ class InAppTriggerScene: UIView {
     private func setParentPositionMoveInAnimation(_ animation: Animation.EntranceAnimation) {
         switch animation {
             case .SLIDE_IN_LEFT:
-                self.parentView.frame = CGRect(x: 0 - UIScreen.main.bounds.width, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                parentView.frame = CGRect(x: 0 - UIScreen.main.bounds.width, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             case .SLIDE_IN_TOP:
-                self.parentView.frame = CGRect(x: 0, y: 0 - UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                parentView.frame = CGRect(x: 0, y: 0 - UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             case .SLIDE_IN_DOWN:
-                return self.parentView.frame = CGRect(x: 0, y: 0 + UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                return parentView.frame = CGRect(x: 0, y: 0 + UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             case .SLIDE_IN_RIGHT:
-                self.parentView.frame = CGRect(x: 0 + UIScreen.main.bounds.width, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                parentView.frame = CGRect(x: 0 + UIScreen.main.bounds.width, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             case .SLIDE_IN_TOP_LEFT:
-                self.parentView.frame = CGRect(x: 0 - UIScreen.main.bounds.width, y: 0 - UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                parentView.frame = CGRect(x: 0 - UIScreen.main.bounds.width, y: 0 - UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             case .SLIDE_IN_TOP_RIGHT:
-                self.parentView.frame = CGRect(x: 0 + UIScreen.main.bounds.width, y: 0 - UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                parentView.frame = CGRect(x: 0 + UIScreen.main.bounds.width, y: 0 - UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             case .SLIDE_IN_BOTTOM_LEFT:
-                self.parentView.frame = CGRect(x: 0 - UIScreen.main.bounds.width, y: 0 + UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                parentView.frame = CGRect(x: 0 - UIScreen.main.bounds.width, y: 0 + UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             case .SLIDE_IN_BOTTOM_RIGHT:
-                self.parentView.frame = CGRect(x: 0 + UIScreen.main.bounds.width, y: 0 + UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                parentView.frame = CGRect(x: 0 + UIScreen.main.bounds.width, y: 0 + UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         }
     }
 
@@ -169,6 +206,7 @@ class InAppTriggerScene: UIView {
             }
         }, completion: { (_: Bool) in
             self.parentView.removeFromSuperview()
+            NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
         })
 
         // revert device to previous device orientation
