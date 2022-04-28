@@ -67,15 +67,9 @@ struct ContainerRenderer: View {
         let displayHeight = triggerContext.getDeviceInfo().getDeviceHeight()
 
         var scalingFactor: Float = 1
-        if containerWidth < containerHeight {
-            scalingFactor = Float(displayHeight) / containerHeight
-        } else if containerWidth > containerHeight {
+        if displayWidth / displayHeight < CGFloat(containerWidth) / CGFloat(containerHeight) {
             scalingFactor = Float(displayWidth) / containerWidth
-        }
-
-        if (containerWidth * scalingFactor) > Float(displayWidth) {
-            scalingFactor = Float(displayWidth) / containerWidth
-        } else if (containerHeight * scalingFactor) > Float(displayHeight) {
+        } else {
             scalingFactor = Float(displayHeight) / containerHeight
         }
 
