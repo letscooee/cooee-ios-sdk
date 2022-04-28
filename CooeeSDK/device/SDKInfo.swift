@@ -28,7 +28,7 @@ class SDKInfo {
 
         init(bundle: Bundle) {
             self.bundle = bundle
-            sdkVersion = CooeeMeta.versionString
+            sdkVersion = Constants.VERSION_STRING
         }
 
         // MARK: Internal

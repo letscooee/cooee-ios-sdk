@@ -73,7 +73,6 @@
 		75D0238627C67023009A320B /* ObjectID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D0238527C67023009A320B /* ObjectID.swift */; };
 		75D5A79F27BD25360028F742 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D5A79E27BD25360028F742 /* NotificationService.swift */; };
 		75D5A7A327BD25360028F742 /* NotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 75D5A79C27BD25360028F742 /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		75D9C96C2811670C009A6CF7 /* CooeeMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D9C96B2811670C009A6CF7 /* CooeeMeta.swift */; };
 		75DD8793271575EA00A272BB /* CooeeJobUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD8792271575EA00A272BB /* CooeeJobUtils.swift */; };
 		75DD87962715924B00A272BB /* PendingTaskJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87952715924B00A272BB /* PendingTaskJob.swift */; };
 		75DD87982715927B00A272BB /* PendingTaskJobProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87972715927B00A272BB /* PendingTaskJobProcessor.swift */; };
@@ -261,7 +260,6 @@
 		75D5A79E27BD25360028F742 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		75D5A7A027BD25360028F742 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75D5A7A827BD25980028F742 /* NotificationService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationService.entitlements; sourceTree = "<group>"; };
-		75D9C96B2811670C009A6CF7 /* CooeeMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeMeta.swift; sourceTree = "<group>"; };
 		75DD8792271575EA00A272BB /* CooeeJobUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeJobUtils.swift; sourceTree = "<group>"; };
 		75DD87952715924B00A272BB /* PendingTaskJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTaskJob.swift; sourceTree = "<group>"; };
 		75DD87972715927B00A272BB /* PendingTaskJobProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTaskJobProcessor.swift; sourceTree = "<group>"; };
@@ -606,7 +604,6 @@
 				AC0B8FE80388BD5A3A3517E9 /* CooeeCTADelegate.swift */,
 				75D0238527C67023009A320B /* ObjectID.swift */,
 				750D470827DA10BF0029E18E /* SentryTransaction.swift */,
-				75D9C96B2811670C009A6CF7 /* CooeeMeta.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -1292,7 +1289,6 @@
 				AC0B8A6AEF61B3EE1611B5EC /* TextRenderer.swift in Sources */,
 				AC0B8BC8CD85A03FB49FFA10 /* ButtonRenderer.swift in Sources */,
 				AC0B82977F7EFDA50155FEC3 /* ClickActionExecutor.swift in Sources */,
-				75D9C96C2811670C009A6CF7 /* CooeeMeta.swift in Sources */,
 				AC0B8B26F975F50E0AC0F12F /* PermissionType.swift in Sources */,
 				AC0B821F476A2352C203E056 /* ShapeElement.swift in Sources */,
 				AC0B8CE48A6861AA5B35C879 /* CooeeCTADelegate.swift in Sources */,

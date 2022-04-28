@@ -64,4 +64,8 @@ struct Constants {
     public static let UNIT_VIEWPORT_HEIGHT = "vh";
     public static let UNIT_VIEWPORT_WIDTH = "vw";
     // endregion
+    
+    // region SDK Info
+    static let VERSION_STRING = "1.3.13"
+    // endregion
 }
