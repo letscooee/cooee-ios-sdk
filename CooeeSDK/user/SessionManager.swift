@@ -23,13 +23,18 @@ class SessionManager {
 
     // MARK: Public
 
-    public func startNewSession() {
+
+    /**
+     Creates a new session if ``currentSessionID`` is empty or null.
+     */
+    private func startNewSession() {
         if !(currentSessionID?.isEmpty ?? true) {
             return
         }
 
         currentSessionStartTime = Date()
         currentSessionID = ObjectID().hexString
+        LocalStorageHelper.putString(key: Constants.STORAGE_ACTIVE_SESSION, value: currentSessionID!)
 
         bumpSessionNumber()
     }
@@ -42,9 +47,14 @@ class SessionManager {
      - returns:The current or new session id.
      */
     public func getCurrentSessionID(createNew: Bool) -> String {
-        if currentSessionID?.isEmpty ?? true, createNew {
+        currentSessionID = LocalStorageHelper.getString(key: Constants.STORAGE_ACTIVE_SESSION)
+        currentSessionNumber = Int64(LocalStorageHelper.getLong(key: Constants.STORAGE_SESSION_NUMBER, defaultValue: 0))
+
+        if createNew {
             startNewSession()
         }
+
+        LocalStorageHelper.putDate(key: Constants.STORAGE_LAST_SESSION_USE_TIME, value: Date())
 
         return currentSessionID!
     }
@@ -65,10 +75,11 @@ class SessionManager {
     public func conclude() {
         var requestData = [String: Any]()
         requestData["sessionID"] = getCurrentSessionID()
-        requestData["occurred"] = DateUtils.formatDateToUTCString(date:Date())
-        LocalStorageHelper.remove(key: Constants.STORAGE_ACTIVE_TRIGGER)
-        CooeeFactory.shared.safeHttpService.sendSessionConcludedEvent(requestData: requestData)
+        requestData["occurred"] = DateUtils.formatDateToUTCString(date: Date())
+        LocalStorageHelper.remove(key: Constants.STORAGE_LAST_SESSION_USE_TIME)
+        LocalStorageHelper.remove(key: Constants.STORAGE_ACTIVE_SESSION)
         destroySession()
+        CooeeFactory.shared.safeHttpService.sendSessionConcludedEvent(requestData: requestData)
     }
 
     public func destroySession() {
