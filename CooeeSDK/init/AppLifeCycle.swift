@@ -50,6 +50,7 @@ class AppLifeCycle: NSObject {
 
     @objc func appMovedToLaunch() {
         runtimeData.setInForeground()
+        _ = sessionManager.checkSessionValidity()
         DispatchQueue.main.async {
             NewSessionExecutor().execute()
         }
@@ -57,6 +58,7 @@ class AppLifeCycle: NSObject {
     }
 
     @objc func appMovedToForeground() {
+        _ = sessionManager.checkSessionValidity()
         DispatchQueue.main.async {
             self.keepSessionAlive()
 
