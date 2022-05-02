@@ -86,7 +86,6 @@ class AppLifeCycle: NSObject {
     @objc func appMovedToKill() {
         // Stop Pending task job once app get killed
         CooeeJobUtils.timer?.invalidate()
-        sessionManager.conclude()
     }
 
     func currentTimeInMilliSeconds() -> Int {
