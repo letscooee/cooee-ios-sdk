@@ -76,9 +76,11 @@ class SessionManager {
         var requestData = [String: Any]()
         requestData["sessionID"] = getCurrentSessionID()
         requestData["occurred"] = DateUtils.formatDateToUTCString(date: Date())
+
         LocalStorageHelper.remove(key: Constants.STORAGE_LAST_SESSION_USE_TIME)
         LocalStorageHelper.remove(key: Constants.STORAGE_ACTIVE_SESSION)
         destroySession()
+
         CooeeFactory.shared.safeHttpService.sendSessionConcludedEvent(requestData: requestData)
     }
 
