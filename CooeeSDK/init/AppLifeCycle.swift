@@ -68,18 +68,12 @@ class AppLifeCycle: NSObject {
 
             let backgroundDuration = self.runtimeData.getTimeInBackgroundInSeconds()
 
-            if backgroundDuration > Constants.IDLE_TIME_IN_SECONDS {
-                self.sessionManager.conclude()
+            var eventProps = [String: Any]()
+            eventProps["iaDur"] = backgroundDuration
+            let session = Event(eventName: "CE App Foreground", properties: eventProps)
 
-                NewSessionExecutor().execute()
-                NSLog("After 30 min of App Background " + "Session Concluded")
-            } else {
-                var eventProps = [String: Any]()
-                eventProps["iaDur"] = backgroundDuration
-                let session = Event(eventName: "CE App Foreground", properties: eventProps)
+            CooeeFactory.shared.safeHttpService.sendEvent(event: session)
 
-                CooeeFactory.shared.safeHttpService.sendEvent(event: session)
-            }
         }
     }
 
