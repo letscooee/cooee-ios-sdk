@@ -109,4 +109,29 @@ class SessionManager {
 
         LocalStorageHelper.putLong(key: Constants.STORAGE_SESSION_NUMBER, value: currentSessionNumber)
     }
+
+    /**
+     Checks if the session is valid. If the session is not valid, then conclude that session.
+
+     - Returns: <code>true</code> if the session is valid.
+     */
+    public func checkSessionValidity() -> Bool {
+        if getLastSessionUsed() > Constants.IDLE_TIME_IN_SECONDS {
+            conclude()
+            return true
+        }
+
+        return false
+    }
+
+    /**
+     Returns the time in seconds since the last time the session was used.
+
+     - Returns: The time in seconds since the last time the session was used.
+     */
+    private func getLastSessionUsed() -> Int {
+        let date = LocalStorageHelper.getDate(key: Constants.STORAGE_LAST_SESSION_USE_TIME, defaultValue: Date())!
+
+        return Int(Date().timeIntervalSince(date))
+    }
 }
