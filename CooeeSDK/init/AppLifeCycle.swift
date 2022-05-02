@@ -35,7 +35,7 @@ class AppLifeCycle: NSObject {
         runtimeData.setInBackground()
 
         // stop sending check message of session alive on app background
-        timer?.invalidate()
+        sessionManager.stopSessionAlive()
 
         let duration = runtimeData.getTimeInForegroundInSeconds()
 
@@ -60,7 +60,7 @@ class AppLifeCycle: NSObject {
     @objc func appMovedToForeground() {
         _ = sessionManager.checkSessionValidity()
         DispatchQueue.main.async {
-            self.keepSessionAlive()
+            self.sessionManager.keepSessionAlive()
 
             if self.runtimeData.isFirstForeground() {
                 return
@@ -95,18 +95,4 @@ class AppLifeCycle: NSObject {
     private var runtimeData: RuntimeData
     private let notificationCenter = NotificationCenter.default
     private let sessionManager: SessionManager
-    private var timer: Timer?
-
-    /**
-     * Send server check message every 5 min that session is still alive
-     */
-    private func keepSessionAlive() {
-        // send server check message every 5 min that session is still alive
-        timer = Timer.scheduledTimer(timeInterval: TimeInterval(Constants.KEEP_ALIVE_TIME_IN_MS), target: self,
-                selector: #selector(keepAlive), userInfo: nil, repeats: true)
-    }
-
-    @objc private func keepAlive() {
-        sessionManager.pingServerToKeepAlive()
-    }
 }

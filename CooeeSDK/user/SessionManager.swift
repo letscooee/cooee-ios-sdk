@@ -102,25 +102,6 @@ class SessionManager {
         CooeeFactory.shared.baseHttpService.keepAliveSession(body: requestData)
     }
 
-    // MARK: Internal
-
-    static let shared = SessionManager()
-
-    // MARK: Private
-
-    private let runtimeData: RuntimeData
-
-    private var currentSessionID: String?
-    private var currentSessionNumber: Int64?
-    private var currentSessionStartTime: Date?
-
-    private func bumpSessionNumber() {
-        currentSessionNumber = Int64(LocalStorageHelper.getLong(key: Constants.STORAGE_SESSION_NUMBER, defaultValue: 0))
-        currentSessionNumber! += 1
-
-        LocalStorageHelper.putLong(key: Constants.STORAGE_SESSION_NUMBER, value: currentSessionNumber)
-    }
-
     /**
      Checks if the session is valid. If the session is not valid, then conclude that session.
 
@@ -136,6 +117,41 @@ class SessionManager {
     }
 
     /**
+     Send server check message every 5 min that session is still alive
+     */
+    public func keepSessionAlive() {
+        // send server check message every 5 min that session is still alive
+        timer = Timer.scheduledTimer(timeInterval: TimeInterval(Constants.KEEP_ALIVE_TIME_IN_MS), target: self,
+                selector: #selector(keepAlive), userInfo: nil, repeats: true)
+    }
+
+    /**
+     Stop the timer that keeps the session alive.
+     */
+    public func stopSessionAlive() {
+        timer?.invalidate()
+    }
+
+    // MARK: Internal
+
+    static let shared = SessionManager()
+
+    // MARK: Private
+
+    private let runtimeData: RuntimeData
+    private var currentSessionID: String?
+    private var currentSessionNumber: Int64?
+    private var currentSessionStartTime: Date?
+    private var timer: Timer?
+
+    private func bumpSessionNumber() {
+        currentSessionNumber = Int64(LocalStorageHelper.getLong(key: Constants.STORAGE_SESSION_NUMBER, defaultValue: 0))
+        currentSessionNumber! += 1
+
+        LocalStorageHelper.putLong(key: Constants.STORAGE_SESSION_NUMBER, value: currentSessionNumber)
+    }
+
+    /**
      Returns the time in seconds since the last time the session was used.
 
      - Returns: The time in seconds since the last time the session was used.
@@ -144,5 +160,9 @@ class SessionManager {
         let date = LocalStorageHelper.getDate(key: Constants.STORAGE_LAST_SESSION_USE_TIME, defaultValue: Date())!
 
         return Int(Date().timeIntervalSince(date))
+    }
+
+    @objc private func keepAlive() {
+        pingServerToKeepAlive()
     }
 }
