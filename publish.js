@@ -2,11 +2,11 @@ const fs = require('fs');
 const child = require("child_process");
 
 let newVersion = process.argv[2];
-let podspecFilePath = 'CooeeSDK.podspec';
+const podspecFilePath = 'CooeeSDK.podspec';
 let podspecData = fs.readFileSync(podspecFilePath, "utf8");
-let oldVersion = podspecData.match(/spec.version      = "[^"]+"/)[0].split('=')[1].trim().replaceAll('"', '');
-let versionFilePath = 'CooeeSDK/utils/Constants.swift';
-let githubOrigin = 'git@github.com:letscooee/cooee-ios-sdk.git';
+const oldVersion = podspecData.match(/spec.version      = "[^"]+"/)[0].split('=')[1].trim().replaceAll('"', '');
+const versionFilePath = 'CooeeSDK/utils/Constants.swift';
+const githubOrigin = 'git@github.com:letscooee/cooee-ios-sdk.git';
 
 if (!newVersion) {
     console.log('Please specify a version number/updater');
@@ -60,7 +60,7 @@ function pushCodeAndPublishPod() {
 
     var child = require('child_process')
     child.exec(`git remote add gh ${githubOrigin}` +
-        ' git add CooeeSDK/utils/Constants.swift CooeeSDK.podspec CHANGELOG.md &&' +
+        ` git add ${versionFilePath} ${podspecFilePath} CHANGELOG.md &&` +
         ` git commit -m "release:v${newVersion}" &&` +
         ` git tag ${newVersion} &&` +
         ' git push origin main &&' +
