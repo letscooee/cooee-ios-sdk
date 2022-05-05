@@ -35,7 +35,7 @@ class AppLifeCycle: NSObject {
         runtimeData.setInBackground()
 
         // stop sending check message of session alive on app background
-        timer?.invalidate()
+        sessionManager.stopSessionAlive()
 
         let duration = runtimeData.getTimeInForegroundInSeconds()
 
@@ -50,6 +50,7 @@ class AppLifeCycle: NSObject {
 
     @objc func appMovedToLaunch() {
         runtimeData.setInForeground()
+        _ = sessionManager.checkSessionValidity()
         DispatchQueue.main.async {
             NewSessionExecutor().execute()
         }
@@ -57,8 +58,9 @@ class AppLifeCycle: NSObject {
     }
 
     @objc func appMovedToForeground() {
+        _ = sessionManager.checkSessionValidity()
         DispatchQueue.main.async {
-            self.keepSessionAlive()
+            self.sessionManager.keepSessionAlive()
 
             if self.runtimeData.isFirstForeground() {
                 return
@@ -68,25 +70,18 @@ class AppLifeCycle: NSObject {
 
             let backgroundDuration = self.runtimeData.getTimeInBackgroundInSeconds()
 
-            if backgroundDuration > Constants.IDLE_TIME_IN_SECONDS {
-                self.sessionManager.conclude()
+            var eventProps = [String: Any]()
+            eventProps["iaDur"] = backgroundDuration
+            let session = Event(eventName: "CE App Foreground", properties: eventProps)
 
-                NewSessionExecutor().execute()
-                NSLog("After 30 min of App Background " + "Session Concluded")
-            } else {
-                var eventProps = [String: Any]()
-                eventProps["iaDur"] = backgroundDuration
-                let session = Event(eventName: "CE App Foreground", properties: eventProps)
+            CooeeFactory.shared.safeHttpService.sendEvent(event: session)
 
-                CooeeFactory.shared.safeHttpService.sendEvent(event: session)
-            }
         }
     }
 
     @objc func appMovedToKill() {
         // Stop Pending task job once app get killed
         CooeeJobUtils.timer?.invalidate()
-        sessionManager.conclude()
     }
 
     func currentTimeInMilliSeconds() -> Int {
@@ -100,18 +95,4 @@ class AppLifeCycle: NSObject {
     private var runtimeData: RuntimeData
     private let notificationCenter = NotificationCenter.default
     private let sessionManager: SessionManager
-    private var timer: Timer?
-
-    /**
-     * Send server check message every 5 min that session is still alive
-     */
-    private func keepSessionAlive() {
-        // send server check message every 5 min that session is still alive
-        timer = Timer.scheduledTimer(timeInterval: TimeInterval(Constants.KEEP_ALIVE_TIME_IN_MS), target: self,
-                selector: #selector(keepAlive), userInfo: nil, repeats: true)
-    }
-
-    @objc private func keepAlive() {
-        sessionManager.pingServerToKeepAlive()
-    }
 }

@@ -29,6 +29,8 @@ struct Constants {
     static let STORAGE_ACTIVATED_TRIGGERS = "activated_triggers"
     static let STORAGE_ACTIVE_TRIGGER = "active_trigger"
     static let STORAGE_SCREENSHOT_SYNC_TIME = "screenshot_sync_time"
+    static let STORAGE_ACTIVE_SESSION = "active_session"
+    static let STORAGE_LAST_SESSION_USE_TIME = "last_session_use_time"
     // endregion
 
     // KEEP_ALIVE_TIME_IN_MS will be in SECONDS
