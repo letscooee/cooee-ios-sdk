@@ -77,6 +77,8 @@ class SessionManager {
         requestData["sessionID"] = getCurrentSessionID()
         requestData["occurred"] = DateUtils.formatDateToUTCString(date: Date())
 
+        // Remove Active trigger from the session
+        LocalStorageHelper.remove(key: Constants.STORAGE_ACTIVE_TRIGGER)
         LocalStorageHelper.remove(key: Constants.STORAGE_LAST_SESSION_USE_TIME)
         LocalStorageHelper.remove(key: Constants.STORAGE_ACTIVE_SESSION)
         destroySession()
