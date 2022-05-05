@@ -28,7 +28,7 @@ class SDKInfo {
 
         init(bundle: Bundle) {
             self.bundle = bundle
-            sdkVersion = bundle.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+            sdkVersion = Constants.VERSION_STRING
         }
 
         // MARK: Internal
