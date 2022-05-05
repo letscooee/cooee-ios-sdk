@@ -73,7 +73,7 @@ class SafeHTTPService {
         var event = event
         let sessionID = sessionManager.getCurrentSessionID(createNew: createSession)
 
-        if !(sessionID.isEmpty) {
+        if !(sessionID.isEmpty) && createSession {
             event.sessionID = sessionID
             event.sessionNumber = Int(sessionManager.getCurrentSessionNumber())
         }

@@ -15,11 +15,11 @@ import HandyJSON
  - Since: 1.3.0
  */
 class LocalStorageHelper {
-    
+
     private static var bundleId: String {
         return "com.letscooee.\(Bundle.main.object(forInfoDictionaryKey: "COOEE_APP_ID") ?? "")"
     }
-    
+
     static func putString(key: String, value: String) {
         let userDefault = UserDefaults(suiteName: "group.\(bundleId)")
         userDefault?.set(value, forKey: key)
@@ -114,5 +114,31 @@ class LocalStorageHelper {
 
     static func putDictionary(_ data: [String: Any], for key: String) {
         putString(key: key, value: String(data: data.percentEncoded()!, encoding: .utf8)!)
+    }
+
+    /**
+     This method is used to store Date in local storage
+
+     - Parameters:
+       - key: key to store data
+       - value: Date to store
+     */
+    static func putDate(key: String, value: Date) {
+        let userDefault = UserDefaults(suiteName: "group.\(bundleId)")
+        userDefault?.set(value, forKey: key)
+    }
+
+    /**
+     This method is used to get Date from local storage
+
+     - Parameters:
+       - key: key to get data
+       - defaultValue: default value if key is not found
+
+     - Returns: Date value if key is found, otherwise default value
+     */
+    static func getDate(key: String, defaultValue: Date?) -> Date? {
+        let userDefault = UserDefaults(suiteName: "group.\(bundleId)")
+        return userDefault?.value(forKey: key) as? Date ?? defaultValue
     }
 }

@@ -23,13 +23,18 @@ class SessionManager {
 
     // MARK: Public
 
-    public func startNewSession() {
+
+    /**
+     Creates a new session if ``currentSessionID`` is empty or null.
+     */
+    private func startNewSession() {
         if !(currentSessionID?.isEmpty ?? true) {
             return
         }
 
         currentSessionStartTime = Date()
         currentSessionID = ObjectID().hexString
+        LocalStorageHelper.putString(key: Constants.STORAGE_ACTIVE_SESSION, value: currentSessionID!)
 
         bumpSessionNumber()
     }
@@ -42,9 +47,14 @@ class SessionManager {
      - returns:The current or new session id.
      */
     public func getCurrentSessionID(createNew: Bool) -> String {
-        if currentSessionID?.isEmpty ?? true, createNew {
+        currentSessionID = LocalStorageHelper.getString(key: Constants.STORAGE_ACTIVE_SESSION)
+        currentSessionNumber = Int64(LocalStorageHelper.getLong(key: Constants.STORAGE_SESSION_NUMBER, defaultValue: 0))
+
+        if createNew {
             startNewSession()
         }
+
+        LocalStorageHelper.putDate(key: Constants.STORAGE_LAST_SESSION_USE_TIME, value: Date())
 
         return currentSessionID!
     }
@@ -65,10 +75,15 @@ class SessionManager {
     public func conclude() {
         var requestData = [String: Any]()
         requestData["sessionID"] = getCurrentSessionID()
-        requestData["occurred"] = DateUtils.formatDateToUTCString(date:Date())
+        requestData["occurred"] = DateUtils.formatDateToUTCString(date: Date())
+
+        // Remove Active trigger from the session
         LocalStorageHelper.remove(key: Constants.STORAGE_ACTIVE_TRIGGER)
-        CooeeFactory.shared.safeHttpService.sendSessionConcludedEvent(requestData: requestData)
+        LocalStorageHelper.remove(key: Constants.STORAGE_LAST_SESSION_USE_TIME)
+        LocalStorageHelper.remove(key: Constants.STORAGE_ACTIVE_SESSION)
         destroySession()
+
+        CooeeFactory.shared.safeHttpService.sendSessionConcludedEvent(requestData: requestData)
     }
 
     public func destroySession() {
@@ -91,6 +106,36 @@ class SessionManager {
         CooeeFactory.shared.baseHttpService.keepAliveSession(body: requestData)
     }
 
+    /**
+     Checks if the session is valid. If the session is not valid, then conclude that session.
+
+     - Returns: <code>true</code> if the session is valid.
+     */
+    public func checkSessionValidity() -> Bool {
+        if getLastSessionUsed() > Constants.IDLE_TIME_IN_SECONDS {
+            conclude()
+            return true
+        }
+
+        return false
+    }
+
+    /**
+     Send server check message every 5 min that session is still alive
+     */
+    public func keepSessionAlive() {
+        // send server check message every 5 min that session is still alive
+        timer = Timer.scheduledTimer(timeInterval: TimeInterval(Constants.KEEP_ALIVE_TIME_IN_MS), target: self,
+                selector: #selector(keepAlive), userInfo: nil, repeats: true)
+    }
+
+    /**
+     Stop the timer that keeps the session alive.
+     */
+    public func stopSessionAlive() {
+        timer?.invalidate()
+    }
+
     // MARK: Internal
 
     static let shared = SessionManager()
@@ -98,15 +143,30 @@ class SessionManager {
     // MARK: Private
 
     private let runtimeData: RuntimeData
-
     private var currentSessionID: String?
     private var currentSessionNumber: Int64?
     private var currentSessionStartTime: Date?
+    private var timer: Timer?
 
     private func bumpSessionNumber() {
         currentSessionNumber = Int64(LocalStorageHelper.getLong(key: Constants.STORAGE_SESSION_NUMBER, defaultValue: 0))
         currentSessionNumber! += 1
 
         LocalStorageHelper.putLong(key: Constants.STORAGE_SESSION_NUMBER, value: currentSessionNumber)
+    }
+
+    /**
+     Returns the time in seconds since the last time the session was used.
+
+     - Returns: The time in seconds since the last time the session was used.
+     */
+    private func getLastSessionUsed() -> Int {
+        let date = LocalStorageHelper.getDate(key: Constants.STORAGE_LAST_SESSION_USE_TIME, defaultValue: Date())!
+
+        return Int(Date().timeIntervalSince(date))
+    }
+
+    @objc private func keepAlive() {
+        pingServerToKeepAlive()
     }
 }
