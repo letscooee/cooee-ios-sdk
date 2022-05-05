@@ -61,13 +61,16 @@ struct ContainerRenderer: View {
     private var inAppTrigger: InAppTrigger
 
     private func updateScalingFactor() {
-        var scalingFactor: Float
-        if triggerContext.getDeviceInfo().getDeviceWidth() < triggerContext.getDeviceInfo().getDeviceHeight() {
-            let shortEdge = min(Constants.DEFAULT_RESOLUTION_WIDTH, Constants.DEFAULT_RESOLUTION_HEIGHT)
-            scalingFactor = Float(triggerContext.getDeviceInfo().getDeviceWidth()) / shortEdge
+        let containerWidth = container.getWidth()
+        let containerHeight = container.getHeight()
+        let displayWidth = triggerContext.getDeviceInfo().getDeviceWidth()
+        let displayHeight = triggerContext.getDeviceInfo().getDeviceHeight()
+
+        var scalingFactor: Float = 1
+        if displayWidth / displayHeight < CGFloat(containerWidth) / CGFloat(containerHeight) {
+            scalingFactor = Float(displayWidth) / containerWidth
         } else {
-            let longEdge = max(Constants.DEFAULT_RESOLUTION_WIDTH, Constants.DEFAULT_RESOLUTION_HEIGHT)
-            scalingFactor = Float(triggerContext.getDeviceInfo().getDeviceHeight()) / longEdge
+            scalingFactor = Float(displayHeight) / containerHeight
         }
 
         UnitUtil.setScalingFactor(scalingFactor: scalingFactor)
