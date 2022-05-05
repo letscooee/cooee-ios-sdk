@@ -37,7 +37,7 @@ public class CooeeNotificationService: NSObject {
         }
 
         if triggerData!.getPushNotification() == nil {
-            EngagementTriggerHelper.loadLazyData(for: triggerData!)
+            EngagementTriggerHelper().loadLazyData(for: triggerData!)
             return nil
         }
 
@@ -220,7 +220,7 @@ public class CooeeNotificationService: NSObject {
         }
 
         if CooeeNotificationService.triggerData!.getPushNotification() == nil {
-            EngagementTriggerHelper.loadLazyData(for: CooeeNotificationService.triggerData!)
+            EngagementTriggerHelper().loadLazyData(for: CooeeNotificationService.triggerData!)
             return
         }
 

@@ -283,7 +283,7 @@ public final class CooeeSDK: NSObject {
      - Parameter triggerData: ``TriggerData``
      */
     private func launchInApp(with triggerData: TriggerData) {
-        EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
+        EngagementTriggerHelper().renderInAppFromPushNotification(for: triggerData)
     }
 
     /**

@@ -28,4 +28,8 @@ target 'Cooee iOS' do
   target 'NotificationService' do
     inherit! :search_paths
   end
+  
+  target 'CooeeSDKTests' do
+    inherit! :search_paths
+  end
 end

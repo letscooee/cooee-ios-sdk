@@ -55,7 +55,7 @@ class NetworkUtility {
         let carrierType = networkInfo.serviceCurrentRadioAccessTechnology
 
         guard let carrierTypeName = carrierType?.first?.value else {
-            return "UNKNOWN"
+            return "Unknown"
         }
 
         var is5G: Bool = false

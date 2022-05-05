@@ -41,6 +41,13 @@
 		751E134D270F22AB002CF442 /* AbstractPendingTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E134C270F22AB002CF442 /* AbstractPendingTaskProcessor.swift */; };
 		751E1350270F2F4D002CF442 /* letscooee.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 751E134E270F2F4B002CF442 /* letscooee.xcdatamodeld */; };
 		751E9E5127D9D91F008786CF /* InAppTriggerScene.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FA7DB527217B1F0060A425 /* InAppTriggerScene.xib */; };
+		752A211F27FC4943003C6E8F /* InAppTriggerSceneTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752A211E27FC4943003C6E8F /* InAppTriggerSceneTest.swift */; };
+		752D1BD227F5B9FB001995E7 /* CooeeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752D1BD127F5B9FB001995E7 /* CooeeTest.swift */; };
+		7555227027FADC53002DBFFF /* LocalStorageHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555226F27FADC53002DBFFF /* LocalStorageHelperTest.swift */; };
+		7555227527FB06D3002DBFFF /* payload.json in Resources */ = {isa = PBXBuildFile; fileRef = 7555227427FB06D3002DBFFF /* payload.json */; };
+		7555227727FB07AA002DBFFF /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555227627FB07AA002DBFFF /* BaseTestCase.swift */; };
+		7555227A27FB1914002DBFFF /* AppInfoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555227927FB1914002DBFFF /* AppInfoTest.swift */; };
+		7555227F27FB3A73002DBFFF /* EngagementTriggerHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555227E27FB3A73002DBFFF /* EngagementTriggerHelperTest.swift */; };
 		756BAA1E27577C3F00C7A84F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756BAA1D27577C3E00C7A84F /* NotificationService.swift */; };
 		756BAA212757873500C7A84F /* PushNotificationTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756BAA202757873500C7A84F /* PushNotificationTrigger.swift */; };
 		756BAA2327588C3600C7A84F /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756BAA2227588C3500C7A84F /* ImageDownloader.swift */; };
@@ -95,6 +102,7 @@
 		75DD87CC271EF4BA00A272BB /* Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87CB271EF4BA00A272BB /* Alignment.swift */; };
 		75DD87CE271EF4D500A272BB /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87CD271EF4D500A272BB /* Font.swift */; };
 		75FA7DB9272982DC0060A425 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FA7DB8272982DC0060A425 /* ProfileViewController.swift */; };
+		75FF1F0027FAC18B001E51E0 /* DeviceInfoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF1EFF27FAC18B001E51E0 /* DeviceInfoTest.swift */; };
 		AC0B81656327520249E6A428 /* UnitUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B865FAF31BB9A143DEA07 /* UnitUtil.swift */; };
 		AC0B81F74E2154808AECB63A /* ImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B832FF3BC900263507255 /* ImageRenderer.swift */; };
 		AC0B821F476A2352C203E056 /* ShapeElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8829F5B44FE4A5E23E66 /* ShapeElement.swift */; };
@@ -133,6 +141,7 @@
 		AC0B8F9ACEAD15992DF79CC2 /* EngagementTriggerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B804DEA9B9A9EB7E1FD5F /* EngagementTriggerHelper.swift */; };
 		BEB73FBAC60DCFBA7C64AEFD /* Pods_NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 940E9EC9E9208D74AAF0FF42 /* Pods_NotificationService.framework */; };
 		E2FACEB3E0C1C0E425AADDC6 /* Pods_Cooee_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44E0CBC1B3361F69A091296 /* Pods_Cooee_iOS.framework */; };
+		FF64B8020C798FE90017B7F3 /* Pods_CooeeSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1FF417D73BD246F5EC283C7 /* Pods_CooeeSDKTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -156,6 +165,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 751BC77C26F3108A002D8358;
 			remoteInfo = CooeeSDK;
+		};
+		752D1BCF27F5B88A001995E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 751BC77426F3108A002D8358 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 751BC78B26F31162002D8358;
+			remoteInfo = "Cooee iOS";
 		};
 		75D5A7A127BD25360028F742 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -183,6 +199,7 @@
 /* Begin PBXFileReference section */
 		2CF371C9509012D66398CDCD /* Pods-CooeeSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.release.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.release.xcconfig"; sourceTree = "<group>"; };
 		40F95722A845BCED0EFCC5F9 /* Pods_CooeeSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CooeeSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		603D2783BC9483768B39CEE1 /* Pods-CooeeSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDKTests.debug.xcconfig"; path = "Target Support Files/Pods-CooeeSDKTests/Pods-CooeeSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6E3C4339AB28F65789A12A24 /* Pods-Cooee iOS-NotificationService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS-NotificationService.debug.xcconfig"; path = "Target Support Files/Pods-Cooee iOS-NotificationService/Pods-Cooee iOS-NotificationService.debug.xcconfig"; sourceTree = "<group>"; };
 		750D470827DA10BF0029E18E /* SentryTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentryTransaction.swift; sourceTree = "<group>"; };
 		750F14CB27ABBF2400369101 /* GIFImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFImageView.swift; sourceTree = "<group>"; };
@@ -226,6 +243,13 @@
 		751E134A270F1771002CF442 /* PendingTaskProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTaskProcessor.swift; sourceTree = "<group>"; };
 		751E134C270F22AB002CF442 /* AbstractPendingTaskProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractPendingTaskProcessor.swift; sourceTree = "<group>"; };
 		751E134F270F2F4C002CF442 /* letscooee.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = letscooee.xcdatamodel; sourceTree = "<group>"; };
+		752A211E27FC4943003C6E8F /* InAppTriggerSceneTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppTriggerSceneTest.swift; sourceTree = "<group>"; };
+		752D1BD127F5B9FB001995E7 /* CooeeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeTest.swift; sourceTree = "<group>"; };
+		7555226F27FADC53002DBFFF /* LocalStorageHelperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageHelperTest.swift; sourceTree = "<group>"; };
+		7555227427FB06D3002DBFFF /* payload.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = payload.json; sourceTree = "<group>"; };
+		7555227627FB07AA002DBFFF /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
+		7555227927FB1914002DBFFF /* AppInfoTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoTest.swift; sourceTree = "<group>"; };
+		7555227E27FB3A73002DBFFF /* EngagementTriggerHelperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngagementTriggerHelperTest.swift; sourceTree = "<group>"; };
 		756BAA1B275637A300C7A84F /* Cooee iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cooee iOS.entitlements"; sourceTree = "<group>"; };
 		756BAA1D27577C3E00C7A84F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		756BAA202757873500C7A84F /* PushNotificationTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationTrigger.swift; sourceTree = "<group>"; };
@@ -285,6 +309,7 @@
 		75FA7DB527217B1F0060A425 /* InAppTriggerScene.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InAppTriggerScene.xib; sourceTree = "<group>"; };
 		75FA7DB8272982DC0060A425 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		75FA7DBC272A75AE0060A425 /* samplepayloadone.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = samplepayloadone.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.json; };
+		75FF1EFF27FAC18B001E51E0 /* DeviceInfoTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoTest.swift; sourceTree = "<group>"; };
 		940E9EC9E9208D74AAF0FF42 /* Pods_NotificationService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NotificationService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		982FA7C3912702032D2546A2 /* Pods-CooeeSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDK.debug.xcconfig"; path = "Target Support Files/Pods-CooeeSDK/Pods-CooeeSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionConcludeTaskProcessor.swift; sourceTree = "<group>"; };
@@ -324,7 +349,9 @@
 		AC0B8F1A3240B22206AC68B6 /* PendingTaskType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingTaskType.swift; sourceTree = "<group>"; };
 		AC0B8FE80388BD5A3A3517E9 /* CooeeCTADelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CooeeCTADelegate.swift; sourceTree = "<group>"; };
 		B17A8EC182166ECF2E4853CE /* Pods-NotificationService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationService.debug.xcconfig"; path = "Target Support Files/Pods-NotificationService/Pods-NotificationService.debug.xcconfig"; sourceTree = "<group>"; };
+		B1FF417D73BD246F5EC283C7 /* Pods_CooeeSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CooeeSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25670B21C7A0D5EC1DBAB81 /* Pods-Cooee iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS.debug.xcconfig"; path = "Target Support Files/Pods-Cooee iOS/Pods-Cooee iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		E400F6D13FB165100E365227 /* Pods-CooeeSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooeeSDKTests.release.xcconfig"; path = "Target Support Files/Pods-CooeeSDKTests/Pods-CooeeSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		E44E0CBC1B3361F69A091296 /* Pods_Cooee_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cooee_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFED981CE3C18B64CDD59C5B /* Pods-Cooee iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS.release.xcconfig"; path = "Target Support Files/Pods-Cooee iOS/Pods-Cooee iOS.release.xcconfig"; sourceTree = "<group>"; };
 		F146435E1DD483917C554E0E /* Pods-Cooee iOS-NotificationService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS-NotificationService.release.xcconfig"; path = "Target Support Files/Pods-Cooee iOS-NotificationService/Pods-Cooee iOS-NotificationService.release.xcconfig"; sourceTree = "<group>"; };
@@ -367,6 +394,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				751BC7D326F35881002D8358 /* CooeeSDK.framework in Frameworks */,
+				FF64B8020C798FE90017B7F3 /* Pods_CooeeSDKTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,8 +547,14 @@
 		751BC7CF26F35881002D8358 /* CooeeSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				7555227D27FB3A55002DBFFF /* trigger */,
+				7555226E27FADC26002DBFFF /* utils */,
+				75FF1EFE27FABF50001E51E0 /* Device */,
 				751BC7D026F35881002D8358 /* CooeeSDKTests.swift */,
 				751BC7D226F35881002D8358 /* Info.plist */,
+				752D1BD127F5B9FB001995E7 /* CooeeTest.swift */,
+				7555227427FB06D3002DBFFF /* payload.json */,
+				7555227627FB07AA002DBFFF /* BaseTestCase.swift */,
 			);
 			path = CooeeSDKTests;
 			sourceTree = "<group>";
@@ -560,6 +594,31 @@
 				AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */,
 			);
 			path = processor;
+			sourceTree = "<group>";
+		};
+		752A211D27FC4916003C6E8F /* inapp */ = {
+			isa = PBXGroup;
+			children = (
+				752A211E27FC4943003C6E8F /* InAppTriggerSceneTest.swift */,
+			);
+			path = inapp;
+			sourceTree = "<group>";
+		};
+		7555226E27FADC26002DBFFF /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				7555226F27FADC53002DBFFF /* LocalStorageHelperTest.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		7555227D27FB3A55002DBFFF /* trigger */ = {
+			isa = PBXGroup;
+			children = (
+				752A211D27FC4916003C6E8F /* inapp */,
+				7555227E27FB3A73002DBFFF /* EngagementTriggerHelperTest.swift */,
+			);
+			path = trigger;
 			sourceTree = "<group>";
 		};
 		75679B6B27905BB100A09837 /* helper */ = {
@@ -772,6 +831,15 @@
 			path = trigger;
 			sourceTree = "<group>";
 		};
+		75FF1EFE27FABF50001E51E0 /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				75FF1EFF27FAC18B001E51E0 /* DeviceInfoTest.swift */,
+				7555227927FB1914002DBFFF /* AppInfoTest.swift */,
+			);
+			path = Device;
+			sourceTree = "<group>";
+		};
 		A1345D19EC596FAD6A5DCFA7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -779,6 +847,7 @@
 				E44E0CBC1B3361F69A091296 /* Pods_Cooee_iOS.framework */,
 				40F95722A845BCED0EFCC5F9 /* Pods_CooeeSDK.framework */,
 				940E9EC9E9208D74AAF0FF42 /* Pods_NotificationService.framework */,
+				B1FF417D73BD246F5EC283C7 /* Pods_CooeeSDKTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -859,6 +928,8 @@
 				2CF371C9509012D66398CDCD /* Pods-CooeeSDK.release.xcconfig */,
 				B17A8EC182166ECF2E4853CE /* Pods-NotificationService.debug.xcconfig */,
 				F484B0A8225BB1B042316001 /* Pods-NotificationService.release.xcconfig */,
+				603D2783BC9483768B39CEE1 /* Pods-CooeeSDKTests.debug.xcconfig */,
+				E400F6D13FB165100E365227 /* Pods-CooeeSDKTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -957,6 +1028,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 751BC7D626F35881002D8358 /* Build configuration list for PBXNativeTarget "CooeeSDKTests" */;
 			buildPhases = (
+				4C8093C1705A100F1E603472 /* [CP] Check Pods Manifest.lock */,
 				751BC7CA26F35881002D8358 /* Sources */,
 				751BC7CB26F35881002D8358 /* Frameworks */,
 				751BC7CC26F35881002D8358 /* Resources */,
@@ -965,6 +1037,7 @@
 			);
 			dependencies = (
 				751BC7D526F35881002D8358 /* PBXTargetDependency */,
+				752D1BD027F5B88A001995E7 /* PBXTargetDependency */,
 			);
 			name = CooeeSDKTests;
 			productName = CooeeSDKTests;
@@ -995,7 +1068,7 @@
 		751BC77426F3108A002D8358 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1320;
+				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					751BC77C26F3108A002D8358 = {
@@ -1015,6 +1088,7 @@
 					};
 					751BC7CD26F35881002D8358 = {
 						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = 751BC78B26F31162002D8358;
 					};
 					75D5A79B27BD25360028F742 = {
 						CreatedOnToolsVersion = 13.2.1;
@@ -1082,6 +1156,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7555227527FB06D3002DBFFF /* payload.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1150,6 +1225,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Cooee iOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4C8093C1705A100F1E603472 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CooeeSDKTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1326,7 +1423,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				752A211F27FC4943003C6E8F /* InAppTriggerSceneTest.swift in Sources */,
 				751BC7D126F35881002D8358 /* CooeeSDKTests.swift in Sources */,
+				7555227A27FB1914002DBFFF /* AppInfoTest.swift in Sources */,
+				752D1BD227F5B9FB001995E7 /* CooeeTest.swift in Sources */,
+				7555227727FB07AA002DBFFF /* BaseTestCase.swift in Sources */,
+				7555227F27FB3A73002DBFFF /* EngagementTriggerHelperTest.swift in Sources */,
+				75FF1F0027FAC18B001E51E0 /* DeviceInfoTest.swift in Sources */,
+				7555227027FADC53002DBFFF /* LocalStorageHelperTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1355,6 +1459,11 @@
 			isa = PBXTargetDependency;
 			target = 751BC77C26F3108A002D8358 /* CooeeSDK */;
 			targetProxy = 751BC7D426F35881002D8358 /* PBXContainerItemProxy */;
+		};
+		752D1BD027F5B88A001995E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 751BC78B26F31162002D8358 /* Cooee iOS */;
+			targetProxy = 752D1BCF27F5B88A001995E7 /* PBXContainerItemProxy */;
 		};
 		75D5A7A227BD25360028F742 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1511,7 +1620,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10001;
+				CURRENT_PROJECT_VERSION = 10313;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 26TM6S5QFS;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1525,7 +1634,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.12;
+				MARKETING_VERSION = 1.3.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.letscooee.CooeeSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1542,7 +1651,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10001;
+				CURRENT_PROJECT_VERSION = 10313;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 26TM6S5QFS;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1556,7 +1665,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.12;
+				MARKETING_VERSION = 1.3.13;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.letscooee.CooeeSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1701,9 +1810,12 @@
 		};
 		751BC7D726F35881002D8358 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 603D2783BC9483768B39CEE1 /* Pods-CooeeSDKTests.debug.xcconfig */;
 			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UGT2YZCLD5;
+				DEVELOPMENT_TEAM = 26TM6S5QFS;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/**";
 				INFOPLIST_FILE = CooeeSDKTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1715,14 +1827,18 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cooee iOS.app/Cooee iOS";
 			};
 			name = Debug;
 		};
 		751BC7D826F35881002D8358 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E400F6D13FB165100E365227 /* Pods-CooeeSDKTests.release.xcconfig */;
 			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UGT2YZCLD5;
+				DEVELOPMENT_TEAM = 26TM6S5QFS;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/**";
 				INFOPLIST_FILE = CooeeSDKTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1734,6 +1850,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cooee iOS.app/Cooee iOS";
 			};
 			name = Release;
 		};
