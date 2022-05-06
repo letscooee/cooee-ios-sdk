@@ -1,5 +1,16 @@
 # Change Log
 
+## 1.3.14 (2022-05-06)
+
+### Improvements
+
+1. Improve InApp Rendering and orientation management.
+2. Improve session management.
+
+### Fixes
+
+1. Fix SDK version getting override by app version.
+
 ## 1.3.13 (2022-03-24)
 
 ### Fixes
