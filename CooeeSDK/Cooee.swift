@@ -51,8 +51,9 @@ public final class CooeeSDK: NSObject {
         } else {
             event = Event(eventName: eventName, properties: eventProperties!)
         }
-
-        safeHttpService.sendEvent(event: event)
+        DispatchQueue.global().async {
+            self.safeHttpService.sendEvent(event: event)
+        }
     }
 
     /**
@@ -105,9 +106,10 @@ public final class CooeeSDK: NSObject {
         if isContainSystemDataPrefix(userData) {
             throw CustomError.PropertyError
         }
-
-        sentryHelper.setUserInfo(userData: userData)
-        safeHttpService.updateUserProfile(userData: userData)
+        DispatchQueue.global().async {
+            self.sentryHelper.setUserInfo(userData: userData)
+            self.safeHttpService.updateUserProfile(userData: userData)
+        }
     }
 
     /**
