@@ -207,12 +207,14 @@ public final class CooeeSDK: NSObject {
      Use to set wrapper name. Can use only in Flutter/Cordova/React-Native to keep track of wrappers
 
      - parameters:
-     - wrapperName: Name of the wrapper
-    - warning:  Can use only in Flutter/Cordova/React-Native to keep track of wrappers
+       - wrapperInformation: WrapperInformation object
+     - warning:  Can use only in Flutter/Cordova/React-Native to keep track of wrappers
      */
     @objc
-    public func setWrapper(_ wrapperName: String) {
-        CooeeFactory.shared.baseHttpService.commonHeaders.wrapper = wrapperName
+    public func updateWrapper(_ wrapperInformation: [String: Any]) {
+        DispatchQueue.global().async {
+            self.safeHttpService.updateDeviceProperty(deviceProp: wrapperInformation)
+        }
     }
 
     // MARK: Private
