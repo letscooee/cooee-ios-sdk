@@ -157,7 +157,9 @@ public final class CooeeSDK: NSObject {
         var requestBody = [String: Any]()
         requestBody["pushToken"] = tokenString
 
-        CooeeFactory.shared.safeHttpService.updatePushToken(requestData: requestBody)
+        DispatchQueue.global().async {
+            self.safeHttpService.updatePushToken(requestData: requestBody)
+        }
     }
 
     /**
