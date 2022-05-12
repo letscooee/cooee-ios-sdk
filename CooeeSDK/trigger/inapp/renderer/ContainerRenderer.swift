@@ -27,7 +27,8 @@ struct ContainerRenderer: View {
         if orientation == .landscapeLeft || orientation == .landscapeRight {
             displayWidth = displayWidth - (UIApplication.shared.windows.first?.safeAreaInsets.left ?? 40)
                 - (UIApplication.shared.windows.first?.safeAreaInsets.right ?? 40)
-        } else { // if orientation == .portrait || orientation == .portraitUpsideDown {
+        } else {
+            //Will take portrait safe area padding for all other orientations
             displayHeight = displayHeight - (UIApplication.shared.windows.first?.safeAreaInsets.top ?? 40)
                 - (UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 40)
         }
