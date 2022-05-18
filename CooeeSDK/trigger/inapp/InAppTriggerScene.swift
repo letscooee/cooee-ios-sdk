@@ -106,7 +106,7 @@ class InAppTriggerScene: UIView {
             self.finish()
         }
 
-        let host = UIHostingController(rootView: ContainerRenderer(inAppTrigger: inAppData!, triggerContext).edgesIgnoringSafeArea(.all))
+        let host = UIHostingController(rootView: ContainerRenderer(inAppTrigger: inAppData!, triggerContext))
         guard let hostView = host.view else {
             CooeeFactory.shared.sentryHelper.capture(message: "Loading SwiftUI failed")
             return
