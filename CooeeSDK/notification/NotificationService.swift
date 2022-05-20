@@ -47,17 +47,24 @@ public class CooeeNotificationService: NSObject {
 
         CooeeNotificationService.sendEvent("CE Notification Received", withTriggerData: triggerData!)
 
-        let title: String = getTextFromPart(from: pushNotification.getTitle()?.prs ?? [PartElement]())
-        let subTitle: String = getTextFromPart(from: pushNotification.getSubTitle()?.prs ?? [PartElement]())
-        let body: String = getTextFromPart(from: pushNotification.getBody()?.prs ?? [PartElement]())
+        let title: String? = getTextFromPart(from: pushNotification.getTitle())
+        let subTitle: String? = getTextFromPart(from: pushNotification.getSubTitle())
+        let body: String? = getTextFromPart(from: pushNotification.getBody())
 
         content.categoryIdentifier = "CooeeNotification"
-        content.title = title
-        content.body = body
         content.sound = UNNotificationSound.default
         content.userInfo = userInfo
-        if !subTitle.isEmpty {
+
+        if let title = title {
+            content.title = title
+        }
+
+        if let subTitle = subTitle, !subTitle.isEmpty {
             content.subtitle = subTitle
+        }
+
+        if let body = body {
+            content.body = body
         }
 
         let smallImage = pushNotification.getSmallImage()
@@ -127,11 +134,19 @@ public class CooeeNotificationService: NSObject {
     /**
      Process all parts and create one string to show in PN
 
-     - Parameter parts: list of <code>PartElement</code>
+     - Parameter textElement: The text element to be processed.
      - Returns: String
      */
-    static func getTextFromPart(from parts: [PartElement]) -> String {
+    static func getTextFromPart(from textElement: TextElement?) -> String? {
+        if textElement == nil {
+            return nil
+        }
+
         var string = ""
+        guard let parts = textElement!.prs else {
+            return nil
+        }
+
         let count = parts.count - 1
 
         for index in 0...count {
@@ -204,6 +219,8 @@ public class CooeeNotificationService: NSObject {
       request to  <code>UNUserNotificationCenter</code> and sent "CE Notification Viewed" event
 
      - Parameter content: Instance of <code>UNMutableNotificationContent</code>
+     - Parameter image: Image to be shown in Notification
+     - Parameter silent: If true, the notification will not be shown in the notification center.
      */
     private static func renderPN(_ content: UNMutableNotificationContent, _ image: UIImage? = nil, silent: Bool = false) {
         let isForeground = CooeeFactory.shared.runtimeData.isInForeground()
@@ -224,7 +241,7 @@ public class CooeeNotificationService: NSObject {
         UNUserNotificationCenter.current().add(request) { data in
             if !silent {
                 if data == nil {
-                    CooeeNotificationService.sendEvent("CE Notification Viewed", withTriggerData: self.triggerData!)
+                    CooeeNotificationService.sendEvent("CE Notification Viewed", withTriggerData: triggerData!)
                 } else {
                     CooeeFactory.shared.sentryHelper.capture(error: data! as NSError)
                 }
@@ -267,8 +284,8 @@ public class CooeeNotificationService: NSObject {
             }
 
             let content = UNMutableNotificationContent()
-            let title: String = CooeeNotificationService.getTextFromPart(from: pushNotification.getTitle()?.prs ?? [PartElement]())
-            let body: String = CooeeNotificationService.getTextFromPart(from: pushNotification.getBody()?.prs ?? [PartElement]())
+            let title: String = CooeeNotificationService.getTextFromPart(from: pushNotification.getTitle()) ?? ""
+            let body: String = CooeeNotificationService.getTextFromPart(from: pushNotification.getBody()) ?? ""
 
             content.categoryIdentifier = "COOEENOTIFICATION"
             content.title = title
