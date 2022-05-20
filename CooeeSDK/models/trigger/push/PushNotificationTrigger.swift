@@ -27,6 +27,10 @@ struct PushNotificationTrigger: HandyJSON {
         si
     }
 
+    public func getLargeImage() -> String? {
+        li
+    }
+
     public func getClickAction() -> ClickAction? {
         clc
     }

@@ -56,30 +56,56 @@ public class CooeeNotificationService: NSObject {
         content.sound = UNNotificationSound.default
         content.userInfo = userInfo
 
-        if pushNotification.getSmallImage() == nil {
+        let smallImage = pushNotification.getSmallImage()
+        let largeImage = pushNotification.getLargeImage()
+
+        if smallImage?.isEmpty ?? true && largeImage?.isEmpty ?? true {
             sendEvent("CE Notification Viewed", withTriggerData: triggerData!)
             return content
         } else {
-            guard let url = URL(string: pushNotification.getSmallImage()!) else {
-                return content
+            var attachments = [UNNotificationAttachment]()
+            if let smallImageAttachment = getAttachment(from: smallImage) {
+                attachments.append(smallImageAttachment)
             }
 
-            guard let imageData = NSData(contentsOf: url) else {
-                return content
+            if let largeImageAttachment = getAttachment(from: largeImage) {
+                attachments.append(largeImageAttachment)
             }
 
-            guard let attachment = UNNotificationAttachment.create(imageFileIdentifier: "image.jpg", data: imageData, options: nil) else {
-                NSLog("Error in UNNotificationAttachment.create()")
-                return content
-            }
-
-            content.attachments = [attachment]
+            content.attachments = attachments
             sendEvent("CE Notification Viewed", withTriggerData: triggerData!)
             return content
         }
     }
 
     // MARK: Internal
+
+    /**
+     Download the image from the given URL and return the UNNotificationAttachment.
+
+     - Parameter imageURL: The URL of the image to be downloaded.
+     - Returns: The UNNotificationAttachment. Nil if the image could not be downloaded.
+     */
+    private class func getAttachment(from imageURL: String?) -> UNNotificationAttachment? {
+        if imageURL == nil {
+            return nil
+        }
+
+        guard let url = URL(string: imageURL!) else {
+            return nil
+        }
+
+        guard let imageData = NSData(contentsOf: url) else {
+            return nil
+        }
+
+        guard let attachment = UNNotificationAttachment.create(imageFileIdentifier: "image.jpg", data: imageData, options: nil) else {
+            NSLog("Error in UNNotificationAttachment.create()")
+            return nil
+        }
+
+        return attachment
+    }
 
     /**
      Create and send the event to the server
