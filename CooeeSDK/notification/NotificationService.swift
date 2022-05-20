@@ -48,6 +48,7 @@ public class CooeeNotificationService: NSObject {
         CooeeNotificationService.sendEvent("CE Notification Received", withTriggerData: triggerData!)
 
         let title: String = getTextFromPart(from: pushNotification.getTitle()?.prs ?? [PartElement]())
+        let subTitle: String = getTextFromPart(from: pushNotification.getSubTitle()?.prs ?? [PartElement]())
         let body: String = getTextFromPart(from: pushNotification.getBody()?.prs ?? [PartElement]())
 
         content.categoryIdentifier = "CooeeNotification"
@@ -55,6 +56,9 @@ public class CooeeNotificationService: NSObject {
         content.body = body
         content.sound = UNNotificationSound.default
         content.userInfo = userInfo
+        if !subTitle.isEmpty {
+            content.subtitle = subTitle
+        }
 
         let smallImage = pushNotification.getSmallImage()
         let largeImage = pushNotification.getLargeImage()
