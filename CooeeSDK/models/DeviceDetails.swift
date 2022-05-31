@@ -24,6 +24,7 @@ class DeviceDetails: HandyJSON {
         if let props = props {
             dict["props"] = props
         }
+
         if let wrp = wrp {
             dict["wrp"] = wrp.toDictionary()
         }

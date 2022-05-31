@@ -30,12 +30,15 @@ class WrapperDetails: HandyJSON {
         if let name = name {
             dict["name"] = name
         }
+
         if let ver = ver {
             dict["ver"] = ver
         }
+
         if let code = code {
             dict["code"] = code
         }
+
         return dict
     }
 }
