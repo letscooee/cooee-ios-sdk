@@ -41,6 +41,8 @@
 		751E134D270F22AB002CF442 /* AbstractPendingTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E134C270F22AB002CF442 /* AbstractPendingTaskProcessor.swift */; };
 		751E1350270F2F4D002CF442 /* letscooee.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 751E134E270F2F4B002CF442 /* letscooee.xcdatamodeld */; };
 		751E9E5127D9D91F008786CF /* InAppTriggerScene.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FA7DB527217B1F0060A425 /* InAppTriggerScene.xib */; };
+		751F856C28464D18001B9656 /* WrapperType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8D3AE6909072583CC338 /* WrapperType.swift */; };
+		751F856D28464D29001B9656 /* WrapperDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B837BF5A14AEAEEEA0C95 /* WrapperDetails.swift */; };
 		752A211F27FC4943003C6E8F /* InAppTriggerSceneTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752A211E27FC4943003C6E8F /* InAppTriggerSceneTest.swift */; };
 		752D1BD227F5B9FB001995E7 /* CooeeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752D1BD127F5B9FB001995E7 /* CooeeTest.swift */; };
 		7555227027FADC53002DBFFF /* LocalStorageHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555226F27FADC53002DBFFF /* LocalStorageHelperTest.swift */; };
@@ -103,6 +105,7 @@
 		75DD87CE271EF4D500A272BB /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD87CD271EF4D500A272BB /* Font.swift */; };
 		75FA7DB9272982DC0060A425 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FA7DB8272982DC0060A425 /* ProfileViewController.swift */; };
 		75FF1F0027FAC18B001E51E0 /* DeviceInfoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF1EFF27FAC18B001E51E0 /* DeviceInfoTest.swift */; };
+		AC0B801AE5F5B4DC3DD73942 /* DeviceDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8FA4CD8ACA8151E9B65D /* DeviceDetails.swift */; };
 		AC0B81656327520249E6A428 /* UnitUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B865FAF31BB9A143DEA07 /* UnitUtil.swift */; };
 		AC0B81F74E2154808AECB63A /* ImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B832FF3BC900263507255 /* ImageRenderer.swift */; };
 		AC0B821F476A2352C203E056 /* ShapeElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8829F5B44FE4A5E23E66 /* ShapeElement.swift */; };
@@ -318,6 +321,7 @@
 		AC0B814783FAE5CBC0031163 /* ButtonRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonRenderer.swift; sourceTree = "<group>"; };
 		AC0B82787896FE8BB64A3542 /* ClickActionExecutor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickActionExecutor.swift; sourceTree = "<group>"; };
 		AC0B832FF3BC900263507255 /* ImageRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRenderer.swift; sourceTree = "<group>"; };
+		AC0B837BF5A14AEAEEEA0C95 /* WrapperDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrapperDetails.swift; sourceTree = "<group>"; };
 		AC0B83A6575EA932ACCB0D2F /* VideoElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoElement.swift; sourceTree = "<group>"; };
 		AC0B83B047A3106F25C50B41 /* ContainerRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerRenderer.swift; sourceTree = "<group>"; };
 		AC0B851DC5B190221B669F38 /* CooeeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CooeeFactory.swift; sourceTree = "<group>"; };
@@ -341,12 +345,14 @@
 		AC0B8CAD418C022E74D59D3F /* AbstractInAppRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractInAppRenderer.swift; sourceTree = "<group>"; };
 		AC0B8D0C0E553156E3B76C31 /* HttpTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpTaskProcessor.swift; sourceTree = "<group>"; };
 		AC0B8D173E6FFB9D0659EA78 /* EventTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTaskProcessor.swift; sourceTree = "<group>"; };
+		AC0B8D3AE6909072583CC338 /* WrapperType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrapperType.swift; sourceTree = "<group>"; };
 		AC0B8D61FEAA5B2A4130CBD3 /* ImageElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageElement.swift; sourceTree = "<group>"; };
 		AC0B8D73DB6AA189BD02953E /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		AC0B8D9905508EE356785965 /* ElementType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementType.swift; sourceTree = "<group>"; };
 		AC0B8EA2BBEED727BA8558D9 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AC0B8ED273C05CC69495D48B /* PendingTaskService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingTaskService.swift; sourceTree = "<group>"; };
 		AC0B8F1A3240B22206AC68B6 /* PendingTaskType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingTaskType.swift; sourceTree = "<group>"; };
+		AC0B8FA4CD8ACA8151E9B65D /* DeviceDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceDetails.swift; sourceTree = "<group>"; };
 		AC0B8FE80388BD5A3A3517E9 /* CooeeCTADelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CooeeCTADelegate.swift; sourceTree = "<group>"; };
 		B17A8EC182166ECF2E4853CE /* Pods-NotificationService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationService.debug.xcconfig"; path = "Target Support Files/Pods-NotificationService/Pods-NotificationService.debug.xcconfig"; sourceTree = "<group>"; };
 		B1FF417D73BD246F5EC283C7 /* Pods_CooeeSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CooeeSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -677,6 +683,8 @@
 				AC0B885A897ACFB8EBF772D0 /* DictionaryPrototype.swift */,
 				756BAA262758FB8900C7A84F /* CustomDeserializer.swift */,
 				7599DCC42771ECEF002CEB1A /* AppFont.swift */,
+				AC0B837BF5A14AEAEEEA0C95 /* WrapperDetails.swift */,
+				AC0B8FA4CD8ACA8151E9B65D /* DeviceDetails.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -817,6 +825,7 @@
 			isa = PBXGroup;
 			children = (
 				75DD87C6271ECCF000A272BB /* trigger */,
+				AC0B8D3AE6909072583CC338 /* WrapperType.swift */,
 			);
 			path = enums;
 			sourceTree = "<group>";
@@ -1340,6 +1349,7 @@
 				758660D626FAFA89006B40DC /* SDKInfo.swift in Sources */,
 				AC0B830AA583B38E12F76E5C /* CooeeFactory.swift in Sources */,
 				AC0B85211B7F2B8520801AFF /* PendingTask.swift in Sources */,
+				751F856D28464D29001B9656 /* WrapperDetails.swift in Sources */,
 				75DD87962715924B00A272BB /* PendingTaskJob.swift in Sources */,
 				AC0B8518BD3390F14BA56E86 /* PendingTaskType.swift in Sources */,
 				AC0B8269B7CDB037E372F8B3 /* HttpTaskProcessor.swift in Sources */,
@@ -1362,6 +1372,7 @@
 				75DD87AE271D77CA00A272BB /* Image.swift in Sources */,
 				AC0B8D16CF18A09786614250 /* TextAlignment.swift in Sources */,
 				AC0B85D43CEF7B19BA99BD79 /* ButtonElement.swift in Sources */,
+				751F856C28464D18001B9656 /* WrapperType.swift in Sources */,
 				AC0B83AC5BBFE158F4379789 /* ImageElement.swift in Sources */,
 				AC0B8E5C2D7FCA755C9F8910 /* TextElement.swift in Sources */,
 				AC0B8E13066BD7C37F8B65E8 /* VideoElement.swift in Sources */,
@@ -1389,6 +1400,7 @@
 				AC0B8B26F975F50E0AC0F12F /* PermissionType.swift in Sources */,
 				AC0B821F476A2352C203E056 /* ShapeElement.swift in Sources */,
 				AC0B8CE48A6861AA5B35C879 /* CooeeCTADelegate.swift in Sources */,
+				AC0B801AE5F5B4DC3DD73942 /* DeviceDetails.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
