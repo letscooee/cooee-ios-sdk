@@ -70,23 +70,25 @@ public class CooeeNotificationService: NSObject {
         let smallImage = pushNotification.getSmallImage()
         let largeImage = pushNotification.getLargeImage()
 
-        if smallImage?.isEmpty ?? true && largeImage?.isEmpty ?? true {
-            sendEvent("CE Notification Viewed", withTriggerData: triggerData!)
-            return content
-        } else {
-            var attachments = [UNNotificationAttachment]()
+        let hasSmallImage = !(smallImage?.isEmpty ?? true)
+        let hasLargeImage = !(largeImage?.isEmpty ?? true)
+
+        var attachments = [UNNotificationAttachment]()
+
+        if hasSmallImage {
             if let smallImageAttachment = getAttachment(from: smallImage) {
                 attachments.append(smallImageAttachment)
+                content.attachments = attachments
             }
-
+        } else if hasLargeImage {
             if let largeImageAttachment = getAttachment(from: largeImage) {
                 attachments.append(largeImageAttachment)
+                content.attachments = attachments
             }
-
-            content.attachments = attachments
-            sendEvent("CE Notification Viewed", withTriggerData: triggerData!)
-            return content
         }
+
+        sendEvent("CE Notification Viewed", withTriggerData: triggerData!)
+        return content
     }
 
     // MARK: Internal
