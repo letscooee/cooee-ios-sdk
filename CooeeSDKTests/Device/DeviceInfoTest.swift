@@ -69,11 +69,6 @@ class DeviceInfoTest: XCTestCase {
         XCTAssert(isBluetoothOn == false)
     }
 
-    func test_device_is_ar_supported() {
-        let isARSupported = deviceInfo.cachedInfo.arSupport
-        XCTAssertTrue(isARSupported)
-    }
-
     func test_device_orientation() {
         let orientation = deviceInfo.cachedInfo.deviceOrientation
         XCTAssert(orientation == "Portrait")
