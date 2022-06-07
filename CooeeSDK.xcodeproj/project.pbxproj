@@ -71,7 +71,6 @@
 		7599DCC82771FFDE002CEB1A /* ExternalApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7599DCC72771FFDE002CEB1A /* ExternalApiClient.swift */; };
 		7599DCCB277221BB002CEB1A /* PublicApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7599DCCA277221BB002CEB1A /* PublicApiClient.swift */; };
 		7599DCCE2772FE94002CEB1A /* ScreenShotUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7599DCCD2772FE93002CEB1A /* ScreenShotUtility.swift */; };
-		759E15F3271061520040F09C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 759E15F2271061520040F09C /* GoogleService-Info.plist */; };
 		75A0981027070FD800C2057B /* AppLifeCycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A0980F27070FD800C2057B /* AppLifeCycle.swift */; };
 		75A098122707132100C2057B /* CooeeBootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A098112707132100C2057B /* CooeeBootstrap.swift */; };
 		75C58B4427B3C7E600F840A9 /* DeviceTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C58B4327B3C7E600F840A9 /* DeviceTaskProcessor.swift */; };
@@ -274,7 +273,6 @@
 		7599DCC72771FFDE002CEB1A /* ExternalApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalApiClient.swift; sourceTree = "<group>"; };
 		7599DCCA277221BB002CEB1A /* PublicApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicApiClient.swift; sourceTree = "<group>"; };
 		7599DCCD2772FE93002CEB1A /* ScreenShotUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenShotUtility.swift; sourceTree = "<group>"; };
-		759E15F2271061520040F09C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75A0980F27070FD800C2057B /* AppLifeCycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLifeCycle.swift; sourceTree = "<group>"; };
 		75A098112707132100C2057B /* CooeeBootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeBootstrap.swift; sourceTree = "<group>"; };
 		75C58B4327B3C7E600F840A9 /* DeviceTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceTaskProcessor.swift; sourceTree = "<group>"; };
@@ -492,7 +490,6 @@
 			isa = PBXGroup;
 			children = (
 				756BAA1B275637A300C7A84F /* Cooee iOS.entitlements */,
-				759E15F2271061520040F09C /* GoogleService-Info.plist */,
 				751BC78E26F31162002D8358 /* AppDelegate.swift */,
 				751BC79026F31162002D8358 /* SceneDelegate.swift */,
 				751BC79226F31162002D8358 /* ViewController.swift */,
@@ -1133,7 +1130,6 @@
 			files = (
 				75C58B4727B3CDBB00F840A9 /* Main.storyboard in Resources */,
 				751BC79B26F31165002D8358 /* LaunchScreen.storyboard in Resources */,
-				759E15F3271061520040F09C /* GoogleService-Info.plist in Resources */,
 				751BC79826F31165002D8358 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
