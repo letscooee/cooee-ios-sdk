@@ -10,7 +10,6 @@
 		6AE2E42CD10D1EF8358FE37B /* Pods_CooeeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F95722A845BCED0EFCC5F9 /* Pods_CooeeSDK.framework */; };
 		750D470927DA10C00029E18E /* SentryTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750D470827DA10BF0029E18E /* SentryTransaction.swift */; };
 		750F14CC27ABBF2400369101 /* GIFImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750F14CB27ABBF2400369101 /* GIFImageView.swift */; };
-		75186DC627808FC700DD6744 /* ARHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75186DC527808FC600DD6744 /* ARHelper.swift */; };
 		75187468274CD6F000BF267F /* ElementRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75187467274CD6F000BF267F /* ElementRenderer.swift */; };
 		7518746A274CE35E00BF267F /* ShapeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75187469274CE35E00BF267F /* ShapeRenderer.swift */; };
 		7518746C274DF8C100BF267F /* PartElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7518746B274DF8BF00BF267F /* PartElement.swift */; };
@@ -202,7 +201,6 @@
 		6E3C4339AB28F65789A12A24 /* Pods-Cooee iOS-NotificationService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cooee iOS-NotificationService.debug.xcconfig"; path = "Target Support Files/Pods-Cooee iOS-NotificationService/Pods-Cooee iOS-NotificationService.debug.xcconfig"; sourceTree = "<group>"; };
 		750D470827DA10BF0029E18E /* SentryTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentryTransaction.swift; sourceTree = "<group>"; };
 		750F14CB27ABBF2400369101 /* GIFImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFImageView.swift; sourceTree = "<group>"; };
-		75186DC527808FC600DD6744 /* ARHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARHelper.swift; sourceTree = "<group>"; };
 		75187467274CD6F000BF267F /* ElementRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementRenderer.swift; sourceTree = "<group>"; };
 		75187469274CE35E00BF267F /* ShapeRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeRenderer.swift; sourceTree = "<group>"; };
 		7518746B274DF8BF00BF267F /* PartElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartElement.swift; sourceTree = "<group>"; };
@@ -415,14 +413,6 @@
 			path = utils;
 			sourceTree = "<group>";
 		};
-		75186DC427808F4F00DD6744 /* ar */ = {
-			isa = PBXGroup;
-			children = (
-				75186DC527808FC600DD6744 /* ARHelper.swift */,
-			);
-			path = ar;
-			sourceTree = "<group>";
-		};
 		751BB5C827AD07C800097210 /* permission */ = {
 			isa = PBXGroup;
 			children = (
@@ -463,7 +453,6 @@
 			isa = PBXGroup;
 			children = (
 				751BB5C827AD07C800097210 /* permission */,
-				75186DC427808F4F00DD6744 /* ar */,
 				7599DCCC2772FE74002CEB1A /* screenshot */,
 				7599DCC12771EAF5002CEB1A /* font */,
 				756BAA1C27577C1600C7A84F /* notification */,
@@ -1292,7 +1281,6 @@
 				756BAA252758EFFE00C7A84F /* InAppTriggerHelper.swift in Sources */,
 				751E1329270C7074002CF442 /* DateUtil.swift in Sources */,
 				75DD87CC271EF4BA00A272BB /* Alignment.swift in Sources */,
-				75186DC627808FC700DD6744 /* ARHelper.swift in Sources */,
 				751BC7DA26F35E32002D8358 /* AppInfo.swift in Sources */,
 				75187470274E343C00BF267F /* EmbeddedTrigger.swift in Sources */,
 				75729E7426F497FD006EB506 /* TriggerData.swift in Sources */,
