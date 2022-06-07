@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.3.15 (2022-06-08)
+
+### Improvements
+
+1. Remove ARKit uses.
+
 ## 1.3.14 (2022-05-06)
 
 ### Improvements
