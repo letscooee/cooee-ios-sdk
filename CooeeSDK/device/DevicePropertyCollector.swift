@@ -82,7 +82,6 @@ class DevicePropertyCollector {
         return [
             "display": display,
             "device": device,
-            "ar": deviceInfo.cachedInfo.arSupport
         ]
     }
 

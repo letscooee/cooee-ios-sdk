@@ -5,7 +5,6 @@
 //  Created by Ashish Gaikwad on 16/09/21.
 //
 
-import ARKit
 import CoreBluetooth
 import Foundation
 import UIKit
@@ -75,10 +74,6 @@ class DeviceInfo {
 
         var height: CGFloat {
             return UIScreen.main.bounds.height
-        }
-
-        var arSupport: Bool {
-            return ARConfiguration.isSupported
         }
 
         var deviceOrientation: String {
