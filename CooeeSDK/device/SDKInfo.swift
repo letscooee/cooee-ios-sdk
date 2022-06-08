@@ -29,12 +29,14 @@ class SDKInfo {
         init(bundle: Bundle) {
             self.bundle = bundle
             sdkVersion = Constants.VERSION_STRING
+            sdkVersionCode = Constants.VERSION_CODE
         }
 
         // MARK: Internal
 
         let bundle: Bundle
         let sdkVersion: String
+        let sdkVersionCode: Int
 
         var isDebugging: Bool {
             let mode = bundle.infoDictionary?["Configuration"] as? String ?? "Release"

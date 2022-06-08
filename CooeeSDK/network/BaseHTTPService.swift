@@ -24,7 +24,7 @@ class BaseHTTPService {
         init() {
             dictionary = ["device-name": DeviceInfo.shared.cachedInfo.name.urlEncoded!,
                           "sdk-version": SDKInfo.shared.cachedInfo.sdkVersion,
-                          "sdk-version-code": SDKInfo.shared.cachedInfo.getVersionNumber(),
+                          "sdk-version-code": "\(SDKInfo.shared.cachedInfo.sdkVersionCode)",
                           "app-version": AppInfo.shared.getAppVersion()]
         }
 

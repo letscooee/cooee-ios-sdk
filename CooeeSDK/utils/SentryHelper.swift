@@ -105,7 +105,7 @@ class SentryHelper {
         let sentryTransactions = SentryTransaction.valueList()
         SentrySDK.start { options in
             options.dsn = SentryHelper.COOEE_DSN
-            options.releaseName = "com.letscooee@\(self.sdkInfo.cachedInfo.sdkVersion)+\(self.sdkInfo.cachedInfo.getVersionNumber())"
+            options.releaseName = "com.letscooee@\(self.sdkInfo.cachedInfo.sdkVersion)+\(self.sdkInfo.cachedInfo.sdkVersionCode)"
             options.environment = self.sdkInfo.cachedInfo.isDebugging ? "development" : "production"
             options.tracesSampler = { context in
                 if sentryTransactions.contains(context.transactionContext.name) {
