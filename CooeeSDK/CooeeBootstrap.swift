@@ -30,39 +30,9 @@ class CooeeBootstrap: NSObject {
         // ARHelper.initAndShowUnity()
     }
 
-    // MARK: Internal
-
-    func notificationClicked(_ triggerData: TriggerData) {
-        CooeeNotificationService.sendEvent("CE Notification Clicked", withTriggerData: triggerData)
-
-        guard let notificationClickAction = triggerData.getPushNotification()?.getClickAction() else {
-            self.launchInApp(with: triggerData)
-            return
-        }
-
-        guard  let launchType = notificationClickAction.open else {
-            self.launchInApp(with: triggerData)
-            return
-        }
-
-        if launchType == 1 {
-            self.launchInApp(with: triggerData)
-        } else if launchType == 2 {
-            // Launch Self AR
-            //EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
-        } else if launchType == 3 {
-            // Launch Native AR
-        }
-
-    }
-
     // MARK: Private
 
-    private func launchInApp(with triggerData: TriggerData) {
-        EngagementTriggerHelper().renderInAppFromPushNotification(for: triggerData)
-    }
-
-/**
+    /**
      Registers custom didReceiveRemoteNotification on current appDelegate
      */
     private func swizzleDidReceiveRemoteNotification() {
@@ -89,27 +59,11 @@ class CooeeBootstrap: NSObject {
         CooeeJobUtils.schedulePendingTaskJob()
     }
 
-    private func registerForPushNotification() {
-        UNUserNotificationCenter.current().delegate = self
-        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(
-                options: authOptions,
-                completionHandler: { _, _ in
-                    self.registerCategory()
-                }
-
-        )
-
-        UIApplication.shared.registerForRemoteNotifications()
-    }
-
-    private func registerCategory() -> Void {
-
-        let category: UNNotificationCategory = UNNotificationCategory.init(identifier: "CooeeNotification", actions: [], intentIdentifiers: [], options: .customDismissAction)
+    private func registerCategory() {
+        let category = UNNotificationCategory(identifier: "CooeeNotification", actions: [], intentIdentifiers: [], options: .customDismissAction)
 
         let center = UNUserNotificationCenter.current()
         center.setNotificationCategories([category])
-
     }
 }
 
@@ -131,41 +85,5 @@ extension CooeeBootstrap {
         }
         CacheTriggerContent().loadAndSaveTriggerData(triggerData, forNotification: notificationID as! String)
         completionHandler(.newData)
-    }
-}
-
-extension CooeeBootstrap: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([[.badge, .sound, .alert]])
-    }
-
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        let userInfo = response.notification.request.content.userInfo
-        let rawTriggerData = userInfo["triggerData"]
-
-        if rawTriggerData == nil {
-            return
-        }
-
-        let triggerData = TriggerData.deserialize(from: "\(rawTriggerData!)")
-
-        if triggerData == nil {
-            return
-        }
-
-        switch response.actionIdentifier {
-            case UNNotificationDismissActionIdentifier:
-                CooeeNotificationService.sendEvent("CE Notification Cancelled", withTriggerData: triggerData!)
-                break
-            case UNNotificationDefaultActionIdentifier:
-                self.notificationClicked(triggerData!)
-                break
-            default:
-                // Handle other actions
-                break
-        }
-
-
-        completionHandler()
     }
 }
