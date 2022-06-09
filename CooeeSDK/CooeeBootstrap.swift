@@ -70,7 +70,6 @@ class CooeeBootstrap: NSObject {
 extension CooeeBootstrap {
     @objc
     public func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        NSLog("*** PN Got \(userInfo)")
         guard let rawTriggerData = userInfo["triggerData"] else {
             return
         }
