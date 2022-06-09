@@ -44,6 +44,7 @@ public class CooeeNotificationService: NSObject {
     public static func updateContentFromRequest(_ request: UNNotificationRequest) -> UNMutableNotificationContent? {
         var userInfo = request.content.userInfo
         userInfo["notificationID"] = request.identifier
+        userInfo["sdkCode"] = Constants.VERSION_CODE
         return updateNotificationContent((request.content.mutableCopy() as! UNMutableNotificationContent), with: userInfo)
     }
 
@@ -56,7 +57,6 @@ public class CooeeNotificationService: NSObject {
      - Returns: MutableNotificationContent object which has updated content
      */
     private static func updateNotificationContent(_ mutableNotificationContent: UNMutableNotificationContent, with userInfo: [AnyHashable: Any]) -> UNMutableNotificationContent? {
-        NSLog("*** posted")
         let content = mutableNotificationContent
         let rawTriggerData = userInfo["triggerData"]
 
