@@ -4,6 +4,7 @@
 //
 //  Created by Ashish Gaikwad on 01/10/21.
 //
+
 import Foundation
 import UIKit
 
@@ -18,6 +19,7 @@ class CooeeBootstrap: NSObject {
 
     override public init() {
         super.init()
+        swizzleDidReceiveRemoteNotification()
         _ = AppLifeCycle.shared
         DispatchQueue.main.async {
             _ = CooeeFactory.shared
@@ -95,15 +97,15 @@ class CooeeBootstrap: NSObject {
                 completionHandler: { _, _ in
                     self.registerCategory()
                 }
-                
+
         )
 
         UIApplication.shared.registerForRemoteNotifications()
     }
-    
-    private func registerCategory() -> Void{
 
-        let category : UNNotificationCategory = UNNotificationCategory.init(identifier: "CooeeNotification", actions: [], intentIdentifiers: [], options: .customDismissAction)
+    private func registerCategory() -> Void {
+
+        let category: UNNotificationCategory = UNNotificationCategory.init(identifier: "CooeeNotification", actions: [], intentIdentifiers: [], options: .customDismissAction)
 
         let center = UNUserNotificationCenter.current()
         center.setNotificationCategories([category])
@@ -114,7 +116,20 @@ class CooeeBootstrap: NSObject {
 extension CooeeBootstrap {
     @objc
     public func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        _ = CooeeNotificationService(userInfo: userInfo)
+        NSLog("*** PN Got \(userInfo)")
+        guard let rawTriggerData = userInfo["triggerData"] else {
+            return
+        }
+
+        guard let notificationID = userInfo["notificationID"] else {
+            return
+        }
+
+        guard let triggerData = TriggerData.deserialize(from: "\(rawTriggerData)") else {
+            NSLog("Fail to deserialize triggerData")
+            return
+        }
+        CacheTriggerContent().loadAndSaveTriggerData(triggerData, forNotification: notificationID as! String)
         completionHandler(.newData)
     }
 }
