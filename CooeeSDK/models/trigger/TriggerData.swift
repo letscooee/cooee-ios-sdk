@@ -15,12 +15,16 @@ import HandyJSON
 struct TriggerData: HandyJSON {
     // MARK: Public
 
+    public static func fromHSON(from jsonString: String) -> TriggerData {
+        TriggerData.deserialize(from: jsonString) ?? TriggerData()
+    }
+
     public func getInAppTrigger() -> InAppTrigger? {
         ian
     }
 
-    public mutating func setInAppTrigger(inAppTrigger: InAppTrigger) {
-        self.ian = inAppTrigger
+    public mutating func setInAppTrigger(inAppTrigger: InAppTrigger?) {
+        ian = inAppTrigger
     }
 
     public func getPushNotification() -> PushNotificationTrigger? {
