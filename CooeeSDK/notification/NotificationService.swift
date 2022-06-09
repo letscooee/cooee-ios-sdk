@@ -20,8 +20,43 @@ public class CooeeNotificationService: NSObject {
 
     // MARK: Public
 
+    /**
+     This method Updates Notification content and returns data back to extension.
+
+     - Parameters:
+       - mutableNotificationContent: MutableNotificationContent object which is used to update notification content
+       - userInfo: userInfo dictionary which is passed from notification
+     - Returns: MutableNotificationContent object which has updated content
+     */
+    @available(*, deprecated, renamed: "updateContentFromRequest(_:)")
     @objc
     public static func updateContent(_ mutableNotificationContent: UNMutableNotificationContent, with userInfo: [AnyHashable: Any]) -> UNMutableNotificationContent? {
+        updateNotificationContent(mutableNotificationContent, with: userInfo)
+    }
+
+    /**
+     This method Updates Notification content and returns data back to extension.
+
+     - Parameter request: UNNotificationRequest object which is used to update notification content
+     - Returns: MutableNotificationContent object which has updated content
+     */
+    @objc
+    public static func updateContentFromRequest(_ request: UNNotificationRequest) -> UNMutableNotificationContent? {
+        var userInfo = request.content.userInfo
+        userInfo["notificationID"] = request.identifier
+        return updateNotificationContent((request.content.mutableCopy() as! UNMutableNotificationContent), with: userInfo)
+    }
+
+    /**
+     This method Updates Notification content and returns data back to extension.
+
+     - Parameters:
+       - mutableNotificationContent: MutableNotificationContent object which is used to update notification content
+       - userInfo: userInfo dictionary which is passed from notification
+     - Returns: MutableNotificationContent object which has updated content
+     */
+    private static func updateNotificationContent(_ mutableNotificationContent: UNMutableNotificationContent, with userInfo: [AnyHashable: Any]) -> UNMutableNotificationContent? {
+        NSLog("*** posted")
         let content = mutableNotificationContent
         let rawTriggerData = userInfo["triggerData"]
 
@@ -91,7 +126,8 @@ public class CooeeNotificationService: NSObject {
 
     // MARK: Internal
 
-    /**
+
+/**
      Download the image from the given URL and return the UNNotificationAttachment.
 
      - Parameter imageURL: The URL of the image to be downloaded.
