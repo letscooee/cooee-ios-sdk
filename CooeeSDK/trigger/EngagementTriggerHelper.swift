@@ -16,10 +16,10 @@ public class EngagementTriggerHelper {
     // MARK: Public
 
     /**
-      Start rendering the in-app trigger from the the raw response received from the backend API.
+     Start rendering the in-app trigger from the the raw response received from the backend API.
 
-      - Parameter data: Data received from the backend
-      */
+     - Parameter data: Data received from the backend
+     */
     public func renderInAppTriggerFromResponse(response data: [String: Any]?) {
         if data == nil {
             return
@@ -89,7 +89,7 @@ public class EngagementTriggerHelper {
     func renderInAppFromPushNotification(for triggerData: TriggerData) {
         _ = CooeeFactory.shared.runtimeData
 
-        if (triggerData.id?.isEmpty ?? true) {
+        if triggerData.id?.isEmpty ?? true {
             return
         }
 
@@ -104,30 +104,28 @@ public class EngagementTriggerHelper {
      - Parameter triggerData: Data to render in-app.
      */
     func loadLazyData(for triggerData: TriggerData) {
-        if (triggerData.id?.isEmpty ?? true) {
+        if triggerData.id?.isEmpty ?? true {
             return
         }
 
         InAppTriggerHelper.loadLazyData(for: triggerData) { data in
-            if data == nil {
+            if data.isEmpty {
                 return
             }
 
             var triggerData = triggerData
-            triggerData.setInAppTrigger(inAppTrigger: data!)
+            triggerData.setInAppTrigger(inAppTrigger: TriggerData.fromHSON(from: data).getInAppTrigger())
 
             self.renderInAppTrigger(triggerData)
         }
     }
 
-    // MARK: Private
-
     /**
      Start rendering the in-app trigger.
-
+˝
      - Parameter data: received and parsed trigger data.
      */
-   func renderInAppTrigger(_ data: TriggerData?) {
+    func renderInAppTrigger(_ data: TriggerData?) {
         if data == nil {
             return
         }
@@ -146,6 +144,8 @@ public class EngagementTriggerHelper {
             CooeeFactory.shared.sentryHelper.capture(message: "Couldn't show Engagement Trigger", error: error as NSError)
         }
     }
+
+    // MARK: Private
 
     /**
      Set active trigger for the session
