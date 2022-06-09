@@ -53,8 +53,8 @@ class AppLifeCycle: NSObject {
         _ = sessionManager.checkSessionValidity()
         DispatchQueue.main.async {
             NewSessionExecutor().execute()
+            EngagementTriggerHelper().performOrganicLaunch()
         }
-
     }
 
     @objc func appMovedToForeground() {
@@ -75,7 +75,6 @@ class AppLifeCycle: NSObject {
             let session = Event(eventName: "CE App Foreground", properties: eventProps)
 
             CooeeFactory.shared.safeHttpService.sendEvent(event: session)
-
         }
     }
 
