@@ -14,14 +14,16 @@ import Foundation
  - Since: 1.3.16
  */
 class CacheTriggerContent {
-    private let pendingTriggerDAO: PendingTriggerDAO
+    // MARK: Lifecycle
 
     init() {
         pendingTriggerDAO = PendingTriggerDAO()
     }
 
+    // MARK: Internal
+
     /**
-    Inserts the given trigger into the Database and load triggers content to store it.
+     Inserts the given trigger into the Database and load triggers content to store it.
 
      - Parameters:
        - triggerData: The trigger data to be inserted.
@@ -44,7 +46,7 @@ class CacheTriggerContent {
                 return
             }
 
-            storedTriggerData.merge(responseMap) { (_, new) in
+            storedTriggerData.merge(responseMap) { _, new in
                 new
             }
             pendingTrigger.triggerData = storedTriggerData.toJSONString()
@@ -53,4 +55,51 @@ class CacheTriggerContent {
             NSLog("Updated PendingTrigger(id=\(pendingTrigger.id))")
         }
     }
+
+    /**
+     Provides latest pending trigger from stack
+
+     - Returns: Latest pending trigger from stack
+     */
+    func getLatestTrigger() -> PendingTrigger? {
+        let pendingTriggerList = pendingTriggerDAO.fetchTriggers()
+
+        if pendingTriggerList.isEmpty {
+            return nil
+        }
+
+        return pendingTriggerList.first
+    }
+
+    /**
+     Removes the given trigger from the Database.
+
+     - Parameter triggerId: The trigger ID to be removed.
+     */
+    func removeTrigger(_ triggerId: String) {
+        pendingTriggerDAO.deleteTriggerByTriggerId(triggerId)
+    }
+
+    /**
+     Fetch pending trigger with given trigger ID.
+
+     - Parameter triggerId: The trigger ID to be searched.
+     - Returns: The pending trigger with given trigger ID.
+     */
+    func getTriggerBy(_ triggerId: String) -> PendingTrigger? {
+        pendingTriggerDAO.fetchTriggerWithTriggerId(triggerId)
+    }
+
+    /**
+     Delete the provided pending trigger from database.
+
+     - Parameter trigger: The pending trigger to be deleted.
+     */
+    func removeTrigger(_ trigger: PendingTrigger) {
+        pendingTriggerDAO.delete(trigger)
+    }
+
+    // MARK: Private
+
+    private let pendingTriggerDAO: PendingTriggerDAO
 }
