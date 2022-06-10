@@ -134,8 +134,8 @@ class EngagementTriggerHelperTest: BaseTestCase {
 
         let activeTriggers = EngagementTriggerHelper.getActiveTriggers()
         XCTAssertEqual(activeTriggers.count, 1)
-        let embededTrigger = activeTriggers[0]
-        XCTAssertEqual(embededTrigger.getExpireAt(), triggerData.expireAt)
+        let embeddedTrigger = activeTriggers[0]
+        XCTAssertEqual(embeddedTrigger.getExpireAt(), triggerData.expireAt)
     }
 
     func test_store_expired_trigger() {
@@ -146,6 +146,42 @@ class EngagementTriggerHelperTest: BaseTestCase {
 
         let activeTriggers = EngagementTriggerHelper.getActiveTriggers()
         XCTAssertEqual(activeTriggers.count, 0)
+    }
+
+    func test_organic_launch_with_empty_database() {
+        mockEngagementTriggerHelper.performOrganicLaunch()
+        XCTAssertFalse(mockEngagementTriggerHelper.hasCalledRenderInAppTrigger)
+        XCTAssertFalse(mockEngagementTriggerHelper.hasCalledLoadLazyData)
+        PendingTriggerDAO().deleteAll()
+    }
+
+    // TODO: need to update the test case to check the pending trigger
+    func organic_launch_database() {
+        let cacheContnet = CacheTriggerContent()
+        cacheContnet.loadAndSaveTriggerData(triggerData, forNotification: "test")
+
+        var proceed = false
+        while !proceed {
+            let latestTrigger = cacheContnet.getLatestTrigger()
+            if latestTrigger?.loadedLazyData ?? false {
+                proceed = true
+            }
+        }
+
+        mockEngagementTriggerHelper.performOrganicLaunch()
+        XCTAssertTrue(mockEngagementTriggerHelper.hasCalledRenderInAppTrigger)
+        XCTAssertFalse(mockEngagementTriggerHelper.hasCalledLoadLazyData)
+        PendingTriggerDAO().deleteAll()
+    }
+
+    func test_organic_launch_database_with_non_loaded_trigger() {
+        PendingTriggerDAO().deleteAll()
+        samplePayloadMap.updateValue("T1", forKey: "id")
+        let triggerData = TriggerData.deserialize(from: samplePayloadMap)
+        CacheTriggerContent().loadAndSaveTriggerData(triggerData!, forNotification: "test")
+        mockEngagementTriggerHelper.performOrganicLaunch()
+        XCTAssertTrue(mockEngagementTriggerHelper.hasCalledLoadLazyData)
+        PendingTriggerDAO().deleteAll()
     }
 }
 
