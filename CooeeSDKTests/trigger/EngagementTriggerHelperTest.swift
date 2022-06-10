@@ -84,13 +84,17 @@ class EngagementTriggerHelperTest: BaseTestCase {
         assertLoadInAppFromJSONString(false)
     }
 
-    func assertRenderInAppFromPushNotification(_ data: TriggerData, _ assertType: Bool) {
-        mockEngagementTriggerHelper.renderInAppFromPushNotification(for: data)
+    func assertRenderInAppFromPushNotification(_ data: TriggerData, _ assertType: Bool, _ checkPendingTrigger: Bool = false) {
+        mockEngagementTriggerHelper.renderInAppFromPushNotification(for: data, checkPendingTrigger: checkPendingTrigger)
 
         if assertType {
             XCTAssertTrue(mockEngagementTriggerHelper.hasCalledLoadLazyData)
         } else {
             XCTAssertFalse(mockEngagementTriggerHelper.hasCalledLoadLazyData)
+        }
+
+        if checkPendingTrigger {
+            XCTAssertTrue(mockEngagementTriggerHelper.hasCalledRenderInAppTrigger)
         }
     }
 
@@ -98,6 +102,12 @@ class EngagementTriggerHelperTest: BaseTestCase {
         XCTAssertNotNil(triggerData)
 
         assertRenderInAppFromPushNotification(triggerData, true)
+    }
+
+    func test_render_in_app_from_valid_push_notification_with_pending_trigger() {
+        XCTAssertNotNil(triggerData)
+        CacheTriggerContent().loadAndSaveTriggerData(triggerData, forNotification: "")
+        assertRenderInAppFromPushNotification(triggerData, false, true)
     }
 
     func test_render_in_app_from_invalid_push_notification() {
@@ -156,9 +166,9 @@ class MockEngagementTriggerHelper: EngagementTriggerHelper {
         super.renderInAppTriggerFromJSONString(rawTriggerData)
     }
 
-    override func renderInAppFromPushNotification(for triggerData: TriggerData) {
+    override func renderInAppFromPushNotification(for triggerData: TriggerData, checkPendingTrigger: Bool = false) {
         hasCalledRenderInAppFromPushNotification = true
-        super.renderInAppFromPushNotification(for: triggerData)
+        super.renderInAppFromPushNotification(for: triggerData, checkPendingTrigger: checkPendingTrigger)
     }
 
     override func loadLazyData(for triggerData: TriggerData) {
