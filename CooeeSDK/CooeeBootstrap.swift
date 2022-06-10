@@ -71,10 +71,14 @@ extension CooeeBootstrap {
     @objc
     public func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         guard let rawTriggerData = userInfo["triggerData"] else {
+            NSLog("No Trigger Data found in notification")
+            completionHandler(.noData)
             return
         }
 
-        guard let notificationID = userInfo["notificationID"] else {
+        guard let notificationID = LocalStorageHelper.getString(key: Constants.STORAGE_NOTIFICATION_ID) else {
+            NSLog("No NotificationID found in storage")
+            completionHandler(.noData)
             return
         }
 
@@ -82,7 +86,7 @@ extension CooeeBootstrap {
             NSLog("Fail to deserialize triggerData")
             return
         }
-        CacheTriggerContent().loadAndSaveTriggerData(triggerData, forNotification: notificationID as! String)
-        completionHandler(.newData)
+        CacheTriggerContent().loadAndSaveTriggerData(triggerData, forNotification: notificationID)
+        completionHandler(.noData)
     }
 }

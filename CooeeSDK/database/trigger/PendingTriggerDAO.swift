@@ -116,7 +116,6 @@ class PendingTriggerDAO {
      - Parameter pendingTrigger: The pending trigger to be updated.
      */
     func delete(_ pendingTrigger: PendingTrigger) {
-        NSLog("Deleting Trigger \(pendingTrigger.id)")
         let context = database.viewContext
         context.delete(pendingTrigger)
     }
