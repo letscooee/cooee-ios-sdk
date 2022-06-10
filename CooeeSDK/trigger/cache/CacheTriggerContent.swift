@@ -22,6 +22,8 @@ class CacheTriggerContent {
 
     // MARK: Internal
 
+    var pendingTriggerDAO: PendingTriggerDAO
+
     /**
      Inserts the given trigger into the Database and load triggers content to store it.
 
@@ -98,8 +100,4 @@ class CacheTriggerContent {
     func removeTrigger(_ trigger: PendingTrigger) {
         pendingTriggerDAO.delete(trigger)
     }
-
-    // MARK: Private
-
-    private let pendingTriggerDAO: PendingTriggerDAO
 }
