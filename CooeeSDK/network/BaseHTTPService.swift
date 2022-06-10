@@ -18,6 +18,16 @@ import UIKit
   - Since: 1.3.0
   */
 class BaseHTTPService {
+    // MARK: Lifecycle
+
+    init() {
+        if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
+            isTesting = true
+        }
+    }
+
+    // MARK: Internal
+
     class CommonHeaders {
         // MARK: Lifecycle
 
@@ -66,8 +76,13 @@ class BaseHTTPService {
     let externalApiClient = ExternalApiClient.shared
     let publicApiClient = PublicApiClient.shared
     let commonHeaders = CommonHeaders()
+    var isTesting: Bool = false
 
     func sendFirebaseToken(token: String?) throws {
+        if isTesting {
+            return
+        }
+
         if token == nil {
             return
         }
@@ -79,6 +94,10 @@ class BaseHTTPService {
     }
 
     func registerDevice(body: DeviceAuthenticationBody, completion: @escaping (DeviceAuthResponse?, Error?) -> ()) {
+        if isTesting {
+            completion(DeviceAuthResponse(), nil)
+        }
+
         do {
             let result = try webService.getResponse(fromURL: Constants.registerUser, method: .POST,
                     params: body.toDictionary(), header: commonHeaders.getDictionary())
@@ -90,11 +109,19 @@ class BaseHTTPService {
     }
 
     func sendSessionConcludedEvent(body: [String: Any]) throws {
+        if isTesting {
+            return
+        }
+
         _ = try webService.getResponse(fromURL: Constants.concludeSession, method: .POST, params: body,
                 header: commonHeaders.getDictionary())
     }
 
     func keepAliveSession(body: [String: Any]) {
+        if isTesting {
+            return
+        }
+
         do {
             _ = try webService.getResponse(fromURL: Constants.keepAlive, method: .POST, params: body,
                     header: commonHeaders.getDictionary())
@@ -103,16 +130,28 @@ class BaseHTTPService {
     }
 
     func updateUserProfile(requestData: [String: Any]) throws {
+        if isTesting {
+            return
+        }
+
         _ = try webService.getResponse(fromURL: Constants.updateProfile, method: .PUT, params: requestData,
                 header: commonHeaders.getDictionary())
     }
 
     func updateDeviceProp(requestData: [String: Any]) throws {
+        if isTesting {
+            return
+        }
+
         _ = try webService.getResponse(fromURL: Constants.deviceUpdate, method: .PUT, params: requestData,
                 header: commonHeaders.getDictionary())
     }
 
     func sendEvent(event: Event) throws {
+        if isTesting {
+            return
+        }
+
         let responseData = try webService.getResponse(fromURL: Constants.trackEvent, method: .POST, params: event.toJSON()!,
                 header: commonHeaders.getDictionary())
 
@@ -126,14 +165,26 @@ class BaseHTTPService {
     }
 
     func downloadFont(_ url: URL, atPath filePath: URL) throws {
+        if isTesting {
+            return
+        }
+
         try externalApiClient.downloadFile(webURL: url, filePath: filePath)
     }
 
     func getAppConfig(appID: String) throws -> [String: Any]? {
+        if isTesting {
+            return nil
+        }
+
         return try publicApiClient.getAppConfig(appID: appID)
     }
 
     func uploadScreenshot(imageToUpload: UIImage, screenName: String) throws -> [String: Any]? {
+        if isTesting {
+            return nil
+        }
+
         let response = try publicApiClient.uploadImage(imageToUpload: imageToUpload, screenName: screenName, header: commonHeaders.getDictionary())
         return response
     }
