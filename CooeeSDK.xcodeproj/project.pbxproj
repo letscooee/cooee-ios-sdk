@@ -77,6 +77,7 @@
 		75B9BD6E2850B76200F414B1 /* PendingTriggerDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B9BD6D2850B76200F414B1 /* PendingTriggerDAO.swift */; };
 		75B9BD722850B89C00F414B1 /* CacheTriggerContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B9BD712850B89C00F414B1 /* CacheTriggerContent.swift */; };
 		75B9BD742850BF6200F414B1 /* PendingTriggerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B9BD732850BF6200F414B1 /* PendingTriggerModel.swift */; };
+		75B9BDA928532A6600F414B1 /* CacheTriggerContentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B9BDA828532A6600F414B1 /* CacheTriggerContentTest.swift */; };
 		75C58B4427B3C7E600F840A9 /* DeviceTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C58B4327B3C7E600F840A9 /* DeviceTaskProcessor.swift */; };
 		75C58B4627B3C88700F840A9 /* InAppNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C58B4527B3C88700F840A9 /* InAppNotification.swift */; };
 		75C58B4727B3CDBB00F840A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 751BC79426F31162002D8358 /* Main.storyboard */; };
@@ -283,6 +284,7 @@
 		75B9BD6D2850B76200F414B1 /* PendingTriggerDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTriggerDAO.swift; sourceTree = "<group>"; };
 		75B9BD712850B89C00F414B1 /* CacheTriggerContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheTriggerContent.swift; sourceTree = "<group>"; };
 		75B9BD732850BF6200F414B1 /* PendingTriggerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTriggerModel.swift; sourceTree = "<group>"; };
+		75B9BDA828532A6600F414B1 /* CacheTriggerContentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheTriggerContentTest.swift; sourceTree = "<group>"; };
 		75C58B4327B3C7E600F840A9 /* DeviceTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceTaskProcessor.swift; sourceTree = "<group>"; };
 		75C58B4527B3C88700F840A9 /* InAppNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppNotification.swift; sourceTree = "<group>"; };
 		75D0238527C67023009A320B /* ObjectID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectID.swift; sourceTree = "<group>"; };
@@ -622,6 +624,7 @@
 		7555227D27FB3A55002DBFFF /* trigger */ = {
 			isa = PBXGroup;
 			children = (
+				75B9BDA728532A4800F414B1 /* cache */,
 				752A211D27FC4916003C6E8F /* inapp */,
 				7555227E27FB3A73002DBFFF /* EngagementTriggerHelperTest.swift */,
 			);
@@ -755,6 +758,14 @@
 			isa = PBXGroup;
 			children = (
 				75B9BD712850B89C00F414B1 /* CacheTriggerContent.swift */,
+			);
+			path = cache;
+			sourceTree = "<group>";
+		};
+		75B9BDA728532A4800F414B1 /* cache */ = {
+			isa = PBXGroup;
+			children = (
+				75B9BDA828532A6600F414B1 /* CacheTriggerContentTest.swift */,
 			);
 			path = cache;
 			sourceTree = "<group>";
@@ -1453,6 +1464,7 @@
 			files = (
 				752A211F27FC4943003C6E8F /* InAppTriggerSceneTest.swift in Sources */,
 				751BC7D126F35881002D8358 /* CooeeSDKTests.swift in Sources */,
+				75B9BDA928532A6600F414B1 /* CacheTriggerContentTest.swift in Sources */,
 				7555227A27FB1914002DBFFF /* AppInfoTest.swift in Sources */,
 				752D1BD227F5B9FB001995E7 /* CooeeTest.swift in Sources */,
 				7555227727FB07AA002DBFFF /* BaseTestCase.swift in Sources */,

@@ -141,6 +141,18 @@ class PendingTriggerDAO {
         } catch {
         }
     }
+    
+    func deleteAll(){
+        let context = database.viewContext
+
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "PendingTrigger")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try context.execute(deleteRequest)
+        } catch _ as NSError {
+        }
+    }
 
     // MARK: Private
 
