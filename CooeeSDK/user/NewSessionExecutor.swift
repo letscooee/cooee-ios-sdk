@@ -13,12 +13,13 @@ import Foundation
  - Author: Ashish Gaikwad
  - Since: 0.1.0
    */
-class NewSessionExecutor {
+@objc
+public class NewSessionExecutor: NSObject {
     // MARK: Lifecycle
 
     // private let SafeHTTPService safeHTTPService
 
-    init() {
+    override init() {
         devicePropertyCollector = DevicePropertyCollector()
         appInfo = CooeeFactory.shared.appInfo
         sessionManager = CooeeFactory.shared.sessionManager
@@ -26,7 +27,26 @@ class NewSessionExecutor {
 
     // MARK: Public
 
-    public func execute() {
+    /**
+     Use to set wrapper name. Can use only in Flutter/Cordova/React-Native to keep track of wrappers.
+
+     - Parameters:
+       - wrapperType: Type of wrapper
+       - versionNumber:  Version number of wrapper
+       - versionCode:  Version code of wrapper
+     */
+    @objc
+    public static func updateWrapperInformation(wrapperType: WrapperType, versionNumber: String, versionCode: Int) {
+        if versionCode == 0 {
+            return
+        }
+
+        wrapper = WrapperDetails(wrapperName: wrapperType.name(), versionNumber: versionNumber, versionCode: versionCode)
+    }
+
+    // MARK: Internal
+
+    func execute() {
         if isAppFirstTimeLaunch() {
             sendFirstLaunchEvent()
         } else {
@@ -39,6 +59,7 @@ class NewSessionExecutor {
     private let devicePropertyCollector: DevicePropertyCollector
     private let appInfo: AppInfo
     private let sessionManager: SessionManager
+    private static var wrapper: WrapperDetails?
 
     /**
       Check if app is launched for first time
@@ -63,7 +84,7 @@ class NewSessionExecutor {
         let event = Event(eventName: "CE App Launched", deviceProps: mutableDeviceProperty)
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)
 
-        sendDefaultDeviceProperties(userProperties: mutableDeviceProperty)
+        sendDefaultDeviceProperties(deviceMutableProperties: mutableDeviceProperty)
     }
 
     /**
@@ -76,17 +97,24 @@ class NewSessionExecutor {
         var firstLaunchProps = [String: Any]()
         firstLaunchProps["firstLaunch"] = DateUtils.formatDateToUTCString(date: Date())
         firstLaunchProps["installedTime"] = devicePropertyCollector.getAppInstallDate()
-        sendDefaultDeviceProperties(userProperties: firstLaunchProps)
+        sendDefaultDeviceProperties(deviceMutableProperties: firstLaunchProps)
     }
 
-    private func sendDefaultDeviceProperties(userProperties: [String: Any]?) {
-        var dictionary = devicePropertyCollector.getImmutableDeviceProps()
-        if userProperties != nil {
-            dictionary.merge(userProperties!) { _, new in
+    private func sendDefaultDeviceProperties(deviceMutableProperties: [String: Any]?) {
+        var deviceProperties = devicePropertyCollector.getImmutableDeviceProps()
+        if deviceMutableProperties != nil {
+            deviceProperties.merge(deviceMutableProperties!) { _, new in
                 new
             }
         }
 
-        CooeeFactory.shared.safeHttpService.updateDeviceProperty(deviceProp: ["props": dictionary])
+        let props = DeviceDetails()
+        props.props = deviceProperties
+
+        if let wrapper = NewSessionExecutor.wrapper {
+            props.wrp = wrapper
+        }
+
+        CooeeFactory.shared.safeHttpService.updateDeviceProperty(deviceProp: props)
     }
 }

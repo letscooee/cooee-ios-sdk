@@ -157,7 +157,9 @@ public final class CooeeSDK: NSObject {
         var requestBody = [String: Any]()
         requestBody["pushToken"] = tokenString
 
-        CooeeFactory.shared.safeHttpService.updatePushToken(requestData: requestBody)
+        DispatchQueue.global().async {
+            self.safeHttpService.updatePushToken(requestData: requestBody)
+        }
     }
 
     /**
@@ -201,18 +203,6 @@ public final class CooeeSDK: NSObject {
         }
 
         return [.alert, .sound, .badge]
-    }
-
-    /**
-     Use to set wrapper name. Can use only in Flutter/Cordova/React-Native to keep track of wrappers
-
-     - parameters:
-     - wrapperName: Name of the wrapper
-    - warning:  Can use only in Flutter/Cordova/React-Native to keep track of wrappers
-     */
-    @objc
-    public func setWrapper(_ wrapperName: String) {
-        CooeeFactory.shared.baseHttpService.commonHeaders.wrapper = wrapperName
     }
 
     // MARK: Private
