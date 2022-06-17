@@ -170,7 +170,7 @@ public class EngagementTriggerHelper {
      - Parameter data: received and parsed trigger data.
      */
     func renderInAppTrigger(_ data: TriggerData?) {
-        if data == nil {
+        if data == nil || data?.getInAppTrigger() == nil || data?.getInAppTrigger()?.cont == nil {
             return
         }
         let runtimeData = RuntimeData.shared

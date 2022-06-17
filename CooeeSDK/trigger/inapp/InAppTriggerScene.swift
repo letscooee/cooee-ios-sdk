@@ -203,7 +203,7 @@ class InAppTriggerScene: UIView {
         }
 
         // exit animation
-        let exitAnimation = inAppData!.anim?.ex ?? .SLIDE_OUT_RIGHT
+        let exitAnimation = inAppData?.anim?.ex ?? .SLIDE_OUT_RIGHT
         UIView.animate(withDuration: 0.5, animations: {
             switch exitAnimation {
                 case .SLIDE_OUT_LEFT:
