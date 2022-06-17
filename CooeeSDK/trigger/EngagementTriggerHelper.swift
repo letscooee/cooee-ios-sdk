@@ -65,6 +65,7 @@ public class EngagementTriggerHelper {
         let embeddedTrigger = EmbeddedTrigger(trigger: triggerData)
         activeTriggers.append(embeddedTrigger)
         LocalStorageHelper.putTypedArray(key: Constants.STORAGE_ACTIVATED_TRIGGERS, array: activeTriggers)
+        EngagementTriggerHelper.setActiveTrigger(triggerData)
     }
 
     /**
