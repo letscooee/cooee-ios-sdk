@@ -67,24 +67,12 @@ public class CooeeNotificationService: NSObject {
             content.body = body
         }
 
-        let smallImage = pushNotification.getSmallImage()
-        let largeImage = pushNotification.getLargeImage()
-
-        let hasSmallImage = !(smallImage?.isEmpty ?? true)
-        let hasLargeImage = !(largeImage?.isEmpty ?? true)
-
+        let image = pushNotification.getSmallImage() ?? pushNotification.getLargeImage()
         var attachments = [UNNotificationAttachment]()
 
-        if hasSmallImage {
-            if let smallImageAttachment = getAttachment(from: smallImage) {
-                attachments.append(smallImageAttachment)
-                content.attachments = attachments
-            }
-        } else if hasLargeImage {
-            if let largeImageAttachment = getAttachment(from: largeImage) {
-                attachments.append(largeImageAttachment)
-                content.attachments = attachments
-            }
+        if let smallImageAttachment = getAttachment(from: image) {
+            attachments.append(smallImageAttachment)
+            content.attachments = attachments
         }
 
         sendEvent("CE Notification Viewed", withTriggerData: triggerData!)
