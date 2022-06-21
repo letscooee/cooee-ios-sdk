@@ -82,11 +82,13 @@ class DevicePropertyCollector {
         return [
             "display": display,
             "device": device,
-            "ar": deviceInfo.cachedInfo.arSupport
+            "ar": deviceInfo.cachedInfo.arSupport,
+            "flTime": DateUtils.formatDateToUTCString(date: Date()),
+            "iTime": getAppInstallDate()
         ]
     }
 
-    func getAppInstallDate() -> String? {
+    func getAppInstallDate() -> String {
         DateUtils.formatDateToUTCString(date: appInfo.cachedInfo.installDate ?? Date())
     }
 

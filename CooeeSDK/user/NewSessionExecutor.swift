@@ -72,11 +72,6 @@ class NewSessionExecutor {
     private func sendFirstLaunchEvent() {
         let event = Event(eventName: "CE App Installed", deviceProps: devicePropertyCollector.getMutableDeviceProps())
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)
-
-        var firstLaunchProps = [String: Any]()
-        firstLaunchProps["firstLaunch"] = DateUtils.formatDateToUTCString(date: Date())
-        firstLaunchProps["installedTime"] = devicePropertyCollector.getAppInstallDate()
-        sendDefaultDeviceProperties(userProperties: firstLaunchProps)
     }
 
     private func sendDefaultDeviceProperties(userProperties: [String: Any]?) {
