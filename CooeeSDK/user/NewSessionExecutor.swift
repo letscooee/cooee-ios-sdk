@@ -62,8 +62,6 @@ class NewSessionExecutor {
         let mutableDeviceProperty = devicePropertyCollector.getMutableDeviceProps()
         let event = Event(eventName: "CE App Launched", deviceProps: mutableDeviceProperty)
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)
-
-        sendDefaultDeviceProperties(userProperties: mutableDeviceProperty)
     }
 
     /**
@@ -72,16 +70,5 @@ class NewSessionExecutor {
     private func sendFirstLaunchEvent() {
         let event = Event(eventName: "CE App Installed", deviceProps: devicePropertyCollector.getMutableDeviceProps())
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)
-    }
-
-    private func sendDefaultDeviceProperties(userProperties: [String: Any]?) {
-        var dictionary = devicePropertyCollector.getImmutableDeviceProps()
-        if userProperties != nil {
-            dictionary.merge(userProperties!) { _, new in
-                new
-            }
-        }
-
-        CooeeFactory.shared.safeHttpService.updateDeviceProperty(deviceProp: ["props": dictionary])
     }
 }
