@@ -13,12 +13,13 @@ import Foundation
  - Author: Ashish Gaikwad
  - Since: 0.1.0
    */
-class NewSessionExecutor {
+@objc
+public class NewSessionExecutor: NSObject {
     // MARK: Lifecycle
 
     // private let SafeHTTPService safeHTTPService
 
-    init() {
+    override init() {
         devicePropertyCollector = DevicePropertyCollector()
         appInfo = CooeeFactory.shared.appInfo
         sessionManager = CooeeFactory.shared.sessionManager
@@ -26,19 +27,43 @@ class NewSessionExecutor {
 
     // MARK: Public
 
-    public func execute() {
+    @objc
+    public static func updateWrapper(wrapperType: WrapperType, versionCode: Int, version: String) {
+        wrapper = WrapperDetails(versionCode, version, wrapperType)
+    }
+
+    // MARK: Internal
+
+    func execute() {
         if isAppFirstTimeLaunch() {
             sendFirstLaunchEvent()
         } else {
             sendSuccessiveLaunchEvent()
         }
+
+        updateWrapperInformation()
     }
 
     // MARK: Private
 
+    private static var wrapper: WrapperDetails?
+
     private let devicePropertyCollector: DevicePropertyCollector
     private let appInfo: AppInfo
     private let sessionManager: SessionManager
+
+    /**
+     Update device props with default values
+     */
+    private func updateWrapperInformation() {
+        if NewSessionExecutor.wrapper == nil {
+            return
+        }
+
+        DispatchQueue.global().async {
+            CooeeFactory.shared.safeHttpService.updateDeviceProperty(deviceProp: ["wrp": NewSessionExecutor.wrapper!.toDictionary()])
+        }
+    }
 
     /**
       Check if app is launched for first time
@@ -59,8 +84,7 @@ class NewSessionExecutor {
      */
 
     private func sendSuccessiveLaunchEvent() {
-        let mutableDeviceProperty = devicePropertyCollector.getMutableDeviceProps()
-        let event = Event(eventName: "CE App Launched", deviceProps: mutableDeviceProperty)
+        let event = Event(eventName: "CE App Launched", deviceProps: devicePropertyCollector.getMutableDeviceProps())
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)
     }
 
