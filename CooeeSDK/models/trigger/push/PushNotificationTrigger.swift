@@ -27,13 +27,22 @@ struct PushNotificationTrigger: HandyJSON {
         si
     }
 
+    public func getLargeImage() -> String? {
+        li
+    }
+
     public func getClickAction() -> ClickAction? {
         clc
+    }
+
+    public func getSubTitle() -> TextElement? {
+        st
     }
 
     // MARK: Private
 
     private var t: TextElement?
+    private var st: TextElement?
     private var b: TextElement?
     private var si: String?
     private var li: String?
