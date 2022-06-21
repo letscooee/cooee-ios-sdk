@@ -40,8 +40,6 @@ public class NewSessionExecutor: NSObject {
         } else {
             sendSuccessiveLaunchEvent()
         }
-
-        updateWrapperInformation()
     }
 
     // MARK: Private
@@ -51,19 +49,6 @@ public class NewSessionExecutor: NSObject {
     private let devicePropertyCollector: DevicePropertyCollector
     private let appInfo: AppInfo
     private let sessionManager: SessionManager
-
-    /**
-     Update device props with default values
-     */
-    private func updateWrapperInformation() {
-        if NewSessionExecutor.wrapper == nil {
-            return
-        }
-
-        DispatchQueue.global().async {
-            CooeeFactory.shared.safeHttpService.updateDeviceProperty(deviceProp: ["wrp": NewSessionExecutor.wrapper!.toDictionary()])
-        }
-    }
 
     /**
       Check if app is launched for first time
@@ -84,7 +69,13 @@ public class NewSessionExecutor: NSObject {
      */
 
     private func sendSuccessiveLaunchEvent() {
-        let event = Event(eventName: "CE App Launched", deviceProps: devicePropertyCollector.getMutableDeviceProps())
+        var deviceProperties = devicePropertyCollector.getMutableDeviceProps()
+
+        if let wrapper = NewSessionExecutor.wrapper {
+            deviceProperties.updateValue(wrapper.toDictionary(), forKey: "wrp")
+        }
+
+        let event = Event(eventName: "CE App Launched", deviceProps: deviceProperties)
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)
     }
 
@@ -92,7 +83,13 @@ public class NewSessionExecutor: NSObject {
      * Runs when app is opened for the first time after sdkToken is received from server asynchronously
      */
     private func sendFirstLaunchEvent() {
-        let event = Event(eventName: "CE App Installed", deviceProps: devicePropertyCollector.getMutableDeviceProps())
+        var deviceProperties = devicePropertyCollector.getMutableDeviceProps()
+
+        if let wrapper = NewSessionExecutor.wrapper {
+            deviceProperties.updateValue(wrapper.toDictionary(), forKey: "wrp")
+        }
+
+        let event = Event(eventName: "CE App Installed", deviceProps: deviceProperties)
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)
     }
 }
