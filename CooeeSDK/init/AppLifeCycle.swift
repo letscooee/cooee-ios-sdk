@@ -58,8 +58,12 @@ class AppLifeCycle: NSObject {
     }
 
     @objc func appMovedToForeground() {
-        _ = sessionManager.checkSessionValidity()
+        let willSessionConclude = sessionManager.checkSessionValidity()
         DispatchQueue.main.async {
+            if willSessionConclude {
+                EngagementTriggerHelper().performOrganicLaunch()
+            }
+
             self.sessionManager.keepSessionAlive()
 
             if self.runtimeData.isFirstForeground() {
