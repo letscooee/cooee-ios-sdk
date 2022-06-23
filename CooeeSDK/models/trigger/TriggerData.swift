@@ -39,6 +39,10 @@ struct TriggerData: HandyJSON {
         features
     }
 
+    public func getConfig() -> [String: Any]? {
+        config
+    }
+
     // MARK: Internal
 
     var id: String?
@@ -53,4 +57,5 @@ struct TriggerData: HandyJSON {
     private var pn: PushNotificationTrigger?
     private var ar: [String: Any]?
     private var features: [Int]?
+    private var config: [String:Any]?
 }

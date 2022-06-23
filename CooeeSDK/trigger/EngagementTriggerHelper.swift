@@ -194,6 +194,10 @@ public class EngagementTriggerHelper {
             return
         }
 
+        if let triggerConfig = data?.getConfig(), shouldRemoveNotification(triggerConfig) {
+
+        }
+
         UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [notificationId])
         cacheTriggerContent.removeTrigger(pendingTrigger)
         NSLog("Removed PendingTrigger(id=\(pendingTrigger.id))")
@@ -202,6 +206,28 @@ public class EngagementTriggerHelper {
     // MARK: Private
 
     private let cacheTriggerContent: CacheTriggerContent
+
+    /**
+    Check for the ``rmPN`` key in given map to manage notification in the notification tray.
+
+    ``rmPN`` basically stands for <b>Remove Push Notification</b> from tray. It will be ``true``
+    to remove PN from tray other wise ``false``.
+    <b>By default if value is absent it will be ``true``</b>.
+
+    - Parameter config: Configuration to remove push notification from tray
+    - Returns: Returns ``true`` to remove PN from tray other wise ``false``
+
+     <ul>
+    <li>If given <code>map</code> is <code>null</code> it will return <code>true</code>
+    (As default value to close PN is true).</li>
+    <li>If given <code>map.get("rmPN")</code> is <code>null</code> it will return
+    <code>true</code> (As default value to close PN is true).</li>
+    <li>If map.get("rmPN") is present it it will provide its value.</li>
+    </ul>
+    */
+    private func shouldRemoveNotification(_ config: [String: Any]) -> Bool {
+        config["rmPN"] as? Bool ?? true
+    }
 
     /**
      Set active trigger for the session
