@@ -23,6 +23,7 @@ class CooeeBootstrap: NSObject {
             _ = CooeeFactory.shared
             self.startPendingTaskJob()
             FontProcessor.checkAndUpdateBrandFonts()
+            self.registerCategory()
         }
         // ARHelper.initAndShowUnity()
     }
@@ -102,7 +103,7 @@ class CooeeBootstrap: NSObject {
     
     private func registerCategory() -> Void{
 
-        let category : UNNotificationCategory = UNNotificationCategory.init(identifier: "COOEENOTIFICATION", actions: [], intentIdentifiers: [], options: [])
+        let category : UNNotificationCategory = UNNotificationCategory.init(identifier: "CooeeNotification", actions: [], intentIdentifiers: [], options: .customDismissAction)
 
         let center = UNUserNotificationCenter.current()
         center.setNotificationCategories([category])
