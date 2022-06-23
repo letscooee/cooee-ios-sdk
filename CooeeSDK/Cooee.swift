@@ -179,6 +179,7 @@ public final class CooeeSDK: NSObject {
         switch response.actionIdentifier {
             case UNNotificationDismissActionIdentifier:
                 CooeeNotificationService.sendEvent("CE Notification Cancelled", withTriggerData: triggerData)
+                removePendingTrigger(triggerData)
             case UNNotificationDefaultActionIdentifier:
                 notificationClicked(triggerData, containsSDKCode: containsSDKCode)
             default:
@@ -256,6 +257,7 @@ public final class CooeeSDK: NSObject {
      Performs the notification click action
 
      - Parameter triggerData: ``TriggerData`` received via click action of push notification
+     - Parameter containsSDKCode: true if notification contains sdkCode
      */
     private func notificationClicked(_ triggerData: TriggerData, containsSDKCode: Bool) {
         if triggerData.getPushNotification() != nil {
@@ -309,5 +311,20 @@ public final class CooeeSDK: NSObject {
             }
         }
         return false
+    }
+
+    /**
+     Removes pending trigger from ``pendingTrigger`` table
+
+     - Parameter data: ``TriggerData`` to remove
+     */
+    private func removePendingTrigger(_ data: TriggerData) {
+        DispatchQueue.global().async {
+            guard let triggerID = data.id else {
+                return
+            }
+
+            CacheTriggerContent().removeTrigger(triggerID)
+        }
     }
 }
