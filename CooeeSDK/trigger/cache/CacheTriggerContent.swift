@@ -32,6 +32,11 @@ class CacheTriggerContent {
        - notificationID: The notification ID of the trigger.
      */
     func loadAndSaveTriggerData(_ triggerData: TriggerData, forNotification notificationID: String) {
+
+        if !shouldFetchInApp(triggerData) {
+            return
+        }
+
         let pendingTriggerModel = PendingTriggerModel(triggerData: triggerData, notificationId: notificationID)
         let pendingTrigger = pendingTriggerDAO.insert(pendingTriggerModel)
         NSLog("Created PendingTrigger(id=\(pendingTrigger.id))")
@@ -56,6 +61,34 @@ class CacheTriggerContent {
             self.pendingTriggerDAO.update(pendingTrigger)
             NSLog("Updated PendingTrigger(id=\(pendingTrigger.id))")
         }
+    }
+
+    /**
+    Checks if feature is present or not.
+
+    - Parameter data: {@link TriggerData} object to be checked.
+    - Returns: true if InApp/AR is present, false otherwise.
+    <ul>
+    <li>If its null, will allow to load InApp from server</li>
+    <li>If its empty, will allow to load InApp from server</li>
+    <li>If its present, Will loop and check if there is any feature except PN is present or not.</li>
+    <ol>
+    <li>If present, Will allow loading data from server</li>
+    </ol>
+    </ul>
+     */
+    private func shouldFetchInApp(_ data: TriggerData) -> Bool {
+        if (data.getFeatures()?.isEmpty ?? true) {
+            return true;
+        }
+
+        for feature in data.getFeatures() ?? [Int]() {
+            if (feature == 2 || feature == 3) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
