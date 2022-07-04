@@ -249,11 +249,16 @@ public class CooeeNotificationService: NSObject {
             return nil
         }
 
-        guard let imageData = NSData(contentsOf: url) else {
+        guard let fileData = try? Data(contentsOf: url) else {
             return nil
         }
 
-        guard let attachment = UNNotificationAttachment.create(imageFileIdentifier: "image.jpg", data: imageData, options: nil) else {
+        guard let fileExtension = fileData.mimeType else {
+            NSLog("Could not determine file extension for image at URL: \(url)")
+            return nil
+        }
+
+        guard let attachment = UNNotificationAttachment.create(imageFileIdentifier: "image\(fileExtension)", data: NSData(data: fileData), options: nil) else {
             NSLog("Error in UNNotificationAttachment.create()")
             return nil
         }

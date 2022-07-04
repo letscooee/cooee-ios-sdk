@@ -158,3 +158,22 @@ extension NSMutableData {
         append(data!)
     }
 }
+
+/**
+ Extensions for ``Data`` class which allows detect file type from data
+ Currently its blocked for jpeg, png & gif
+ Ref: https://stackoverflow.com/a/45305316/9256497
+ */
+extension Data {
+    private static let mimeTypeSignatures: [UInt8: String] = [
+        0xFF: ".jpeg",
+        0x89: ".png",
+        0x47: ".gif"
+    ]
+
+    var mimeType: String? {
+        var c: UInt8 = 0
+        copyBytes(to: &c, count: 1)
+        return Data.mimeTypeSignatures[c] ?? nil
+    }
+}
