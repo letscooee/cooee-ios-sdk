@@ -41,7 +41,7 @@ public class NewSessionExecutor: NSObject {
             return
         }
 
-        wrapper = WrapperDetails(wrapperName: wrapperType.name(), versionNumber: versionNumber, versionCode: versionCode)
+        wrapper = WrapperDetails(versionCode,versionNumber,wrapperType)
     }
 
     // MARK: Internal
