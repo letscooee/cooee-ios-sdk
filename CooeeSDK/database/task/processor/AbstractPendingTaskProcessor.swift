@@ -22,7 +22,8 @@ class AbstractPendingTaskProcessor<T: HandyJSON>: PendingTaskProcessor {
      - Returns: Deserialized Java object of given type {@link T}.
      */
     func deserialize(_ task: PendingTasks) -> T {
-        if let decodedTask = T.deserialize(from: task.data), task.type != PendingTaskType.API_UPDATE_PROFILE.rawValue {
+        if let decodedTask = T.deserialize(from: task.data), task.type != PendingTaskType.API_UPDATE_PROFILE.rawValue,
+           task.type != PendingTaskType.API_DEVICE_PROFILE.rawValue{
             return decodedTask
         }
         
