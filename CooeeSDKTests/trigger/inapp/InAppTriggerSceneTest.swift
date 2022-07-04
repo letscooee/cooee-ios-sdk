@@ -36,6 +36,10 @@ class InAppTriggerSceneTest: BaseTestCase {
         do {
             try inAppTriggerScene.updateViewWith(data: triggerData, on: viewController)
 
+            let delayExpectation = XCTestExpectation()
+            delayExpectation.isInverted = true
+            wait(for: [delayExpectation], timeout: 5)
+            
             XCTAssertTrue(inAppTriggerScene.isCalledAddViewToParentView)
         } catch {
             XCTAssertNil(error)

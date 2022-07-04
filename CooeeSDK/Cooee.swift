@@ -86,10 +86,10 @@ public final class CooeeSDK: NSObject {
     @objc
     public func updateUserProfile(userData: [String: Any], userProperties: [String: Any]) throws {
         var requestData = [String: Any]()
-        requestData.merge(userProperties) { (current, _) in
+        requestData.merge(userProperties) { current, _ in
             current
         }
-        requestData.merge(userData) { (current, _) in
+        requestData.merge(userData) { current, _ in
             current
         }
 
@@ -174,11 +174,14 @@ public final class CooeeSDK: NSObject {
             return
         }
 
+        let containsSDKCode = (response.notification.request.content.userInfo["sdkCode"] as? Int) != nil
+
         switch response.actionIdentifier {
             case UNNotificationDismissActionIdentifier:
                 CooeeNotificationService.sendEvent("CE Notification Cancelled", withTriggerData: triggerData)
+                removePendingTrigger(triggerData)
             case UNNotificationDefaultActionIdentifier:
-                notificationClicked(triggerData)
+                notificationClicked(triggerData, containsSDKCode: containsSDKCode)
             default:
                 // Handle other actions
                 break
@@ -240,24 +243,25 @@ public final class CooeeSDK: NSObject {
      Performs the notification click action
 
      - Parameter triggerData: ``TriggerData`` received via click action of push notification
+     - Parameter containsSDKCode: true if notification contains sdkCode
      */
-    private func notificationClicked(_ triggerData: TriggerData) {
+    private func notificationClicked(_ triggerData: TriggerData, containsSDKCode: Bool) {
         if triggerData.getPushNotification() != nil {
             CooeeNotificationService.sendEvent("CE Notification Clicked", withTriggerData: triggerData)
         }
 
         guard let notificationClickAction = triggerData.getPushNotification()?.getClickAction() else {
-            launchInApp(with: triggerData)
+            launchInApp(with: triggerData, checkPendingTrigger: containsSDKCode)
             return
         }
 
         guard let launchType = notificationClickAction.open else {
-            launchInApp(with: triggerData)
+            launchInApp(with: triggerData, checkPendingTrigger: containsSDKCode)
             return
         }
 
         if launchType == 1 {
-            launchInApp(with: triggerData)
+            launchInApp(with: triggerData, checkPendingTrigger: containsSDKCode)
         } else {
             let triggerContext = TriggerContext()
             triggerContext.setTriggerData(triggerData: triggerData)
@@ -273,9 +277,10 @@ public final class CooeeSDK: NSObject {
      Provide data to the ``EngagementTriggerHelper.renderInAppFromPushNotification`` to launch in-App
 
      - Parameter triggerData: ``TriggerData``
+     - Parameter checkPendingTrigger: ``Bool`` to check for pending trigger
      */
-    private func launchInApp(with triggerData: TriggerData) {
-        EngagementTriggerHelper().renderInAppFromPushNotification(for: triggerData)
+    private func launchInApp(with triggerData: TriggerData, checkPendingTrigger: Bool = false) {
+        EngagementTriggerHelper().renderInAppFromPushNotification(for: triggerData, checkPendingTrigger: checkPendingTrigger)
     }
 
     /**
@@ -292,5 +297,20 @@ public final class CooeeSDK: NSObject {
             }
         }
         return false
+    }
+
+    /**
+     Removes pending trigger from ``pendingTrigger`` table
+
+     - Parameter data: ``TriggerData`` to remove
+     */
+    private func removePendingTrigger(_ data: TriggerData) {
+        DispatchQueue.global().async {
+            guard let triggerID = data.id else {
+                return
+            }
+
+            CacheTriggerContent().removeTrigger(triggerID)
+        }
     }
 }
