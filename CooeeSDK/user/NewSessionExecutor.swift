@@ -56,10 +56,11 @@ public class NewSessionExecutor: NSObject {
 
     // MARK: Private
 
+    private static var wrapper: WrapperDetails?
+
     private let devicePropertyCollector: DevicePropertyCollector
     private let appInfo: AppInfo
     private let sessionManager: SessionManager
-    private static var wrapper: WrapperDetails?
 
     /**
       Check if app is launched for first time
@@ -80,41 +81,27 @@ public class NewSessionExecutor: NSObject {
      */
 
     private func sendSuccessiveLaunchEvent() {
-        let mutableDeviceProperty = devicePropertyCollector.getMutableDeviceProps()
-        let event = Event(eventName: "CE App Launched", deviceProps: mutableDeviceProperty)
-        CooeeFactory.shared.safeHttpService.sendEvent(event: event)
+        var deviceProperties = devicePropertyCollector.getMutableDeviceProps()
 
-        sendDefaultDeviceProperties(deviceMutableProperties: mutableDeviceProperty)
+        if let wrapper = NewSessionExecutor.wrapper {
+            deviceProperties.updateValue(wrapper.toDictionary(), forKey: "wrp")
+        }
+
+        let event = Event(eventName: "CE App Launched", deviceProps: deviceProperties)
+        CooeeFactory.shared.safeHttpService.sendEvent(event: event)
     }
 
     /**
      * Runs when app is opened for the first time after sdkToken is received from server asynchronously
      */
     private func sendFirstLaunchEvent() {
-        let event = Event(eventName: "CE App Installed", deviceProps: devicePropertyCollector.getMutableDeviceProps())
-        CooeeFactory.shared.safeHttpService.sendEvent(event: event)
-
-        var firstLaunchProps = [String: Any]()
-        firstLaunchProps["firstLaunch"] = DateUtils.formatDateToUTCString(date: Date())
-        firstLaunchProps["installedTime"] = devicePropertyCollector.getAppInstallDate()
-        sendDefaultDeviceProperties(deviceMutableProperties: firstLaunchProps)
-    }
-
-    private func sendDefaultDeviceProperties(deviceMutableProperties: [String: Any]?) {
-        var deviceProperties = devicePropertyCollector.getImmutableDeviceProps()
-        if deviceMutableProperties != nil {
-            deviceProperties.merge(deviceMutableProperties!) { _, new in
-                new
-            }
-        }
-
-        let props = DeviceDetails()
-        props.props = deviceProperties
+        var deviceProperties = devicePropertyCollector.getMutableDeviceProps()
 
         if let wrapper = NewSessionExecutor.wrapper {
-            props.wrp = wrapper
+            deviceProperties.updateValue(wrapper.toDictionary(), forKey: "wrp")
         }
 
-        CooeeFactory.shared.safeHttpService.updateDeviceProperty(deviceProp: props)
+        let event = Event(eventName: "CE App Installed", deviceProps: deviceProperties)
+        CooeeFactory.shared.safeHttpService.sendEvent(event: event)
     }
 }

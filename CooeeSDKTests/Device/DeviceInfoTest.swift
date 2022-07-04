@@ -76,7 +76,7 @@ class DeviceInfoTest: XCTestCase {
 
     func test_device_orientation() {
         let orientation = deviceInfo.cachedInfo.deviceOrientation
-        XCTAssert(orientation == "Portrait")
+        XCTAssert(orientation == 1)
     }
 
     func test_device_is_wifi_on() {

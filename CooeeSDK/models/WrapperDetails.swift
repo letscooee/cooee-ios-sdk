@@ -1,44 +1,35 @@
 //
-// Created by Ashish Gaikwad on 31/05/22.
+// Created by Ashish Gaikwad on 21/06/22.
 //
 
 import Foundation
-import HandyJSON
 
 /**
- WrapperDetails holds the details of the wrapper.
+ WrapperDetails can hold wrapper information
 
  - Author: Ashish Gaikwad
- - Since: 1.3.15
+ - Since: 1.3.16
  */
-class WrapperDetails: HandyJSON {
-    required init() {
-    }
+struct WrapperDetails {
+    // MARK: Lifecycle
 
-    private var name: String?
-    private var ver: String?
-    private var code: Int?
-
-    init(wrapperName: String, versionNumber: String, versionCode: Int) {
-        name = wrapperName
-        ver = versionNumber
+    init(_ versionCode: Int, _ version: String, _ wrapperName: WrapperType) {
         code = versionCode
+        ver = version
+        name = wrapperName.rawValue
     }
+
+    // MARK: Internal
+
+    var code: Int?
+    var ver: String?
+    var name: String?
 
     func toDictionary() -> [String: Any] {
-        var dict = [String: Any]()
-        if let name = name {
-            dict["name"] = name
-        }
-
-        if let ver = ver {
-            dict["ver"] = ver
-        }
-
-        if let code = code {
-            dict["code"] = code
-        }
-
-        return dict
+        [
+            "code": code as Any,
+            "ver": ver as Any,
+            "name": name as Any
+        ] as [String: Any]
     }
 }
