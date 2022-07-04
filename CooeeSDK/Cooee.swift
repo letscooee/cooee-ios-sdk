@@ -119,6 +119,9 @@ public final class CooeeSDK: NSObject {
     @objc
     public func setCurrentScreen(screenName: String) {
         runtimeData.setCurrentScreenName(name: screenName)
+
+        let event = Event(eventName: Constants.EVENT_SCREEN_VIEW, properties: ["screenName": screenName])
+        safeHttpService.sendEvent(event: event);
     }
 
     /**

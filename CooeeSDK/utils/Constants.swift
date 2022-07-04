@@ -67,9 +67,23 @@ struct Constants {
     public static let UNIT_VIEWPORT_HEIGHT = "vh";
     public static let UNIT_VIEWPORT_WIDTH = "vw";
     // endregion
-    
+
     // region SDK Info
     static let VERSION_STRING = "1.3.14"
     static let VERSION_CODE = 10314
+    // endregion
+
+    // region Event Names
+    static let EVENT_SCREEN_VIEW = "CE Screen View"
+    static let EVENT_APP_INSTALLED = "CE App Installed"
+    static let EVENT_APP_LAUNCHED = "CE App Launched"
+    static let EVENT_APP_BACKGROUND = "CE App Background"
+    static let EVENT_APP_FOREGROUND = "CE App Foreground"
+    static let EVENT_TRIGGER_DISPLAY = "CE Trigger Displayed"
+    static let EVENT_TRIGGER_CLOSED = "CE Trigger Closed"
+    static let EVENT_NOTIFICATION_RECEIVED = "CE Notification Received"
+    static let EVENT_NOTIFICATION_VIEWED = "CE Notification Viewed"
+    static let EVENT_NOTIFICATION_CLICKED = "CE Notification Clicked"
+    static let EVENT_NOTIFICATION_CANCELLED = "CE Notification Cancelled"
     // endregion
 }
