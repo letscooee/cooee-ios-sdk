@@ -101,7 +101,7 @@ public class NewSessionExecutor: NSObject {
             deviceProperties.updateValue(wrapper.toDictionary(), forKey: "wrp")
         }
 
-        let event = Event(eventName: Constants.EVENT_APP_INSTALLED , deviceProps: deviceProperties)
+        let event = Event(eventName: Constants.EVENT_APP_INSTALLED, deviceProps: deviceProperties)
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)
     }
 }
