@@ -135,14 +135,14 @@ public class InAppNotification: UIViewController {
         }
         stackView.autoresizesSubviews = true
         // stackView.distribution = .fill
-        CooeeNotificationService.sendEvent("CE Notification Viewed", withTriggerData: triggerData)
+        CooeeNotificationService.sendEvent(Constants.EVENT_NOTIFICATION_VIEWED, withTriggerData: triggerData)
          Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(triggerJob), userInfo: nil, repeats: true)
     }
 
     @objc public func handleTap(_ sender: UITapGestureRecognizer) {
         dismissAnimation()
         let engagementTriggerHelper = EngagementTriggerHelper()
-        CooeeNotificationService.sendEvent("CE Notification Clicked", withTriggerData: triggerData)
+        CooeeNotificationService.sendEvent(Constants.EVENT_NOTIFICATION_CLICKED, withTriggerData: triggerData)
 
         guard let notificationClickAction = triggerData.getPushNotification()?.getClickAction() else {
             engagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)

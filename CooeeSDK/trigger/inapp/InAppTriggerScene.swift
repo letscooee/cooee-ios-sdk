@@ -187,7 +187,7 @@ class InAppTriggerScene: UIView {
     }
 
     private func sendTriggerDisplayedEvent() {
-        let event = Event(eventName: "CE Trigger Displayed", triggerData: triggerData!)
+        let event = Event(eventName: Constants.EVENT_TRIGGER_DISPLAY, triggerData: triggerData!)
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)
     }
 
@@ -197,7 +197,7 @@ class InAppTriggerScene: UIView {
             let duration = DateUtils.getDateDifferenceInSeconds(startDate: self.startTime!, endDate: Date())
             closedEventProps.updateValue(duration, forKey: "duration")
 
-            var event = Event(eventName: "CE Trigger Closed", properties: closedEventProps)
+            var event = Event(eventName: Constants.EVENT_TRIGGER_CLOSED, properties: closedEventProps)
             event.withTrigger(triggerData: self.triggerData!)
             CooeeFactory.shared.safeHttpService.sendEvent(event: event)
         }

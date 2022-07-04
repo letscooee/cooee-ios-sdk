@@ -42,7 +42,7 @@ class AppLifeCycle: NSObject {
         var sessionProperties = [String: Any]()
         sessionProperties["aDur"] = duration
 
-        let session = Event(eventName: "CE App Background", properties: sessionProperties)
+        let session = Event(eventName: Constants.EVENT_APP_BACKGROUND, properties: sessionProperties)
         CooeeFactory.shared.safeHttpService.sendEvent(event: session)
 
         CooeeNotificationService.processPendingNotification()
@@ -76,7 +76,7 @@ class AppLifeCycle: NSObject {
 
             var eventProps = [String: Any]()
             eventProps["iaDur"] = backgroundDuration
-            let session = Event(eventName: "CE App Foreground", properties: eventProps)
+            let session = Event(eventName: Constants.EVENT_APP_FOREGROUND, properties: eventProps)
 
             CooeeFactory.shared.safeHttpService.sendEvent(event: session)
         }

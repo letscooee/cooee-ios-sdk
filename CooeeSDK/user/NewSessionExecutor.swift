@@ -41,7 +41,7 @@ public class NewSessionExecutor: NSObject {
             return
         }
 
-        wrapper = WrapperDetails(versionCode,versionNumber,wrapperType)
+        wrapper = WrapperDetails(versionCode, versionNumber, wrapperType)
     }
 
     // MARK: Internal
@@ -87,7 +87,7 @@ public class NewSessionExecutor: NSObject {
             deviceProperties.updateValue(wrapper.toDictionary(), forKey: "wrp")
         }
 
-        let event = Event(eventName: "CE App Launched", deviceProps: deviceProperties)
+        let event = Event(eventName: Constants.EVENT_APP_LAUNCHED, deviceProps: deviceProperties)
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)
     }
 
@@ -101,7 +101,7 @@ public class NewSessionExecutor: NSObject {
             deviceProperties.updateValue(wrapper.toDictionary(), forKey: "wrp")
         }
 
-        let event = Event(eventName: "CE App Installed", deviceProps: deviceProperties)
+        let event = Event(eventName: Constants.EVENT_APP_INSTALLED , deviceProps: deviceProperties)
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)
     }
 }
