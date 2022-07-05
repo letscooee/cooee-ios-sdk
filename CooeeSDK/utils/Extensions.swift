@@ -167,6 +167,7 @@ extension NSMutableData {
 extension Data {
     private static let mimeTypeSignatures: [UInt8: String] = [
         0xFF: ".jpeg",
+        0x52: ".jpg",
         0x89: ".png",
         0x47: ".gif"
     ]
