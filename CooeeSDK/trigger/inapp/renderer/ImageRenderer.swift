@@ -70,7 +70,7 @@ class ImageLoaderService: ObservableObject {
         let task = URLSession.shared.dataTask(with: url) { data, _, _ in
             guard let data = data else { return }
             DispatchQueue.main.async {
-                self.image = UIImage.gif(data: data)!
+                self.image = UIImage.gif(data: data, url: url.absoluteString) ?? UIImage()
             }
         }
         task.resume()

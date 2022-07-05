@@ -123,12 +123,12 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
     private func requestPushNotificationPermission() {
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(
-            options: authOptions,
-            completionHandler: { _, _ in
-                DispatchQueue.main.async {
-                    self.updateDeviceProps()
+                options: authOptions,
+                completionHandler: { _, _ in
+                    DispatchQueue.main.async {
+                        self.updateDeviceProps()
+                    }
                 }
-            }
         )
     }
 
@@ -172,13 +172,14 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
      Check for InApp Browser data and launch InApp Browser using SafariService
      */
     private func launchInAppBrowser() {
-        if clickAction.iab == nil || clickAction.iab!.u == nil {
+        guard let iab = clickAction.iab, let stringURL = iab.u else {
             return
         }
 
-        let url = URL(string: clickAction.iab!.u!)!
-        let safariVC = SFSafariViewController(url: url)
-        triggerContext.getPresentViewController()?.present(safariVC, animated: true, completion: nil)
+        if let url = URL(string: stringURL) {
+            let safariVC = SFSafariViewController(url: url)
+            triggerContext.getPresentViewController()?.present(safariVC, animated: true, completion: nil)
+        }
     }
 
     /**
@@ -201,14 +202,14 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
     }
 
     private func share() {
-        let share = clickAction.share
-
-        if share == nil {
+        guard let share = clickAction.share, !share.isEmpty else {
             return
         }
 
         // text to share
-        let text = share!["text"] ?? ""
+        guard let text = share["text"] else {
+            return
+        }
 
         // set up activity view controller
         let textToShare = [text]
@@ -223,13 +224,11 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
     }
 
     private func updateApp() {
-        let update = clickAction.updt
-
-        if update == nil || (update!.u?.isEmpty ?? true) {
+        guard let update = clickAction.updt, let url = update.u else {
             return
         }
 
-        if let url = URL(string: update!.u!) {
+        if let url = URL(string: url) {
             UIApplication.shared.open(url)
         }
     }
@@ -238,13 +237,11 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
      Process external block from ClickAction and opens URL in external browser
      */
     private func executeExternal() {
-        let external = clickAction.ext
-
-        if external == nil || (external!.u?.isEmpty ?? true) {
+        guard let external = clickAction.ext, let url = external.u else {
             return
         }
 
-        if let url = URL(string: external!.u!) {
+        if let url = URL(string: url) {
             UIApplication.shared.open(url)
         }
     }
@@ -253,28 +250,24 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
      Process UserProperties block in ClickAction and send it to server
      */
     private func updateUserProperties() {
-        let userProperties = clickAction.up
-
-        if userProperties == nil {
+        guard let userProperties = clickAction.up else {
             return
         }
 
-        CooeeFactory.shared.safeHttpService.updateUserProfile(userData: userProperties!)
+        CooeeFactory.shared.safeHttpService.updateUserProfile(userData: userProperties)
     }
 
     /**
      Process KeyValue block in ClickAction and sends it back to App via CooeeCTADelegate
      */
     private func passKeyValueToApp() {
-        let keyValues = clickAction.kv
-
-        if keyValues == nil {
+        guard let keyValues = clickAction.kv else {
             return
         }
 
         guard let onCTAListener = CooeeSDK.getInstance().getOnCTAListener() else {
             return
         }
-        onCTAListener.onCTAResponse(payload: keyValues!)
+        onCTAListener.onCTAResponse(payload: keyValues)
     }
 }
