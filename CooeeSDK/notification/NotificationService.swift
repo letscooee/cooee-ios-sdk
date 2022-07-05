@@ -241,29 +241,41 @@ public class CooeeNotificationService: NSObject {
      - Returns: The UNNotificationAttachment. Nil if the image could not be downloaded.
      */
     private class func getAttachment(from imageURL: String?) -> UNNotificationAttachment? {
-        if imageURL == nil {
+        guard let imageURL = imageURL, !imageURL.isEmpty else {
+            log("Trying to download empty image URL for Push Notification")
             return nil
         }
 
-        guard let url = URL(string: imageURL!) else {
+        guard let url = URL(string: imageURL) else {
+            log("Fail to create Swift.URL from:\(imageURL)")
             return nil
         }
 
         guard let fileData = try? Data(contentsOf: url) else {
+            log("Fail to load Data for image:\(imageURL)")
             return nil
         }
 
         guard let fileExtension = fileData.mimeType else {
-            NSLog("Could not determine file extension for image at URL: \(url)")
+            log("Could not determine file extension for image at URL: \(url)")
             return nil
         }
 
         guard let attachment = UNNotificationAttachment.create(imageFileIdentifier: "image\(fileExtension)", data: NSData(data: fileData), options: nil) else {
-            NSLog("Error in UNNotificationAttachment.create()")
+            log("Fail UNNotificationAttachment.create()")
             return nil
         }
 
         return attachment
+    }
+
+    /**
+     Logs ``logMessage`` to Sentry
+
+     - Parameter logMessage: The message to log
+     */
+    private static func log(_ logMessage: String) {
+        CooeeFactory.shared.sentryHelper.capture(message: logMessage)
     }
 
     /**
