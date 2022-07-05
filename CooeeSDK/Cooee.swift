@@ -118,10 +118,16 @@ public final class CooeeSDK: NSObject {
      */
     @objc
     public func setCurrentScreen(screenName: String) {
-        runtimeData.setCurrentScreenName(name: screenName)
+        if screenName.isEmpty {
+            NSLog("Trying to set empty screen name")
+            return
+        }
 
-        let event = Event(eventName: Constants.EVENT_SCREEN_VIEW, properties: ["screenName": screenName])
+        var event = Event(eventName: Constants.EVENT_SCREEN_VIEW)
+        event.screenName = screenName
         safeHttpService.sendEvent(event: event);
+
+        runtimeData.setCurrentScreenName(name: screenName)
     }
 
     /**
