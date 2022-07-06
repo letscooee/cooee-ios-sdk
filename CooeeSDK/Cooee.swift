@@ -123,11 +123,15 @@ public final class CooeeSDK: NSObject {
             return
         }
 
-        var event = Event(eventName: Constants.EVENT_SCREEN_VIEW)
-        event.screenName = screenName
-        safeHttpService.sendEvent(event: event);
+        DispatchQueue.global().async {
+            let event = Event(eventName: Constants.EVENT_SCREEN_VIEW,
+                    properties: ["ps": self.runtimeData.getCurrentScreenName()])
 
-        runtimeData.setCurrentScreenName(name: screenName)
+            self.runtimeData.setCurrentScreenName(name: screenName)
+
+            self.safeHttpService.sendEvent(event: event);
+        }
+
     }
 
     /**

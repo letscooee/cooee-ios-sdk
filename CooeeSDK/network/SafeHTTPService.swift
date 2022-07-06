@@ -82,7 +82,7 @@ class SafeHTTPService {
 
         event.activeTriggers = EngagementTriggerHelper.getActiveTriggers()
         event.trigger = trigger
-        event.properties!["screenName"] = runtimeData.getCurrentScreenName()
+        event.screenName = runtimeData.getCurrentScreenName()
 
         let pendingTask = pendingTaskService.newTask(event)
 

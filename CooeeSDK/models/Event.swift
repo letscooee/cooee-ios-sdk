@@ -15,7 +15,8 @@ import HandyJSON
 struct Event: HandyJSON {
     // MARK: Lifecycle
 
-    init() {}
+    init() {
+    }
 
     init(eventName: String) {
         self.init(eventName: eventName, properties: [String: Any?]())
@@ -27,17 +28,18 @@ struct Event: HandyJSON {
     }
 
     init(eventName: String, properties: [String: Any?]) {
-        name = eventName
+        self.name = eventName
         self.properties = properties
-        occurred = DateUtils.formatDateToUTCString(date: Date())
-    }
-    
-    init(eventName: String, deviceProps: [String: Any?]) {
-        self.init(eventName: eventName)
-        self.deviceProps = deviceProps as [String : Any]
+        self.occurred = DateUtils.formatDateToUTCString(date: Date())
     }
 
-    init(from decoder: Decoder) throws {}
+    init(eventName: String, deviceProps: [String: Any?]) {
+        self.init(eventName: eventName)
+        self.deviceProps = deviceProps as [String: Any]
+    }
+
+    init(from decoder: Decoder) throws {
+    }
 
     // MARK: Internal
 
@@ -67,5 +69,6 @@ struct Event: HandyJSON {
          "deviceProps": deviceProps] as [String: Any?]
     }
 
-    func encode(to encoder: Encoder) throws {}
+    func encode(to encoder: Encoder) throws {
+    }
 }
