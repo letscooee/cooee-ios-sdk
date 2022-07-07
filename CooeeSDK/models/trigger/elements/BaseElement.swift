@@ -104,6 +104,10 @@ class BaseElement: HandyJSON {
         bg = background
     }
 
+    public func hasValidData() -> Bool {
+        bg?.i == nil || !(bg?.i?.src?.isEmpty ?? true)
+    }
+
     // MARK: Internal
 
     var br: Border? // Border

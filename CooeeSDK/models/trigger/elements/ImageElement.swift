@@ -17,4 +17,8 @@ class ImageElement: BaseElement {
     // MARK: Internal
 
     var src: String?
+
+    override func hasValidData() -> Bool {
+        super.hasValidData() && !(src?.isEmpty ?? true)
+    }
 }

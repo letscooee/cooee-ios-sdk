@@ -42,6 +42,42 @@ class InAppTrigger: BaseElement {
         }
     }
 
+    func isContainValidData() -> Bool {
+        cont != nil && !(elems?.isEmpty ?? true) && containsValidChildren()
+    }
+
+    private func containsValidChildren() -> Bool {
+        for element in elems! {
+            let baseElement = BaseElement.deserialize(from: element)
+            if ElementType.TEXT == baseElement!.getElementType() {
+                if let textElement = TextElement.deserialize(from: element) {
+                    if !textElement.hasValidData() {
+                        return false
+                    }
+                }
+            } else if ElementType.BUTTON == baseElement!.getElementType() {
+                if let textElement = TextElement.deserialize(from: element) {
+                    if !textElement.hasValidData() {
+                        return false
+                    }
+                }
+            } else if ElementType.IMAGE == baseElement!.getElementType() {
+                if let textElement = ImageElement.deserialize(from: element) {
+                    if !textElement.hasValidData() {
+                        return false
+                    }
+                }
+            } else if ElementType.SHAPE == baseElement!.getElementType() {
+                if let textElement = ShapeElement.deserialize(from: element) {
+                    if !textElement.hasValidData() {
+                        return false
+                    }
+                }
+            }
+        }
+        return true
+    }
+
     override public func getBackground() -> Background? {
         // Todo: Remove Implementation once the background is implemented in CP
         if super.getBackground() == nil {

@@ -48,6 +48,10 @@ class TextElement: BaseTextElement, Identifiable {
         return text
     }
 
+    override func hasValidData() -> Bool {
+        super.hasValidData() && !(prs?.isEmpty ?? true)
+    }
+
     // MARK: Internal
 
     var prs: [PartElement]?

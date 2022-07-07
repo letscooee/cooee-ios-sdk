@@ -43,6 +43,10 @@ struct TriggerData: HandyJSON {
         config
     }
 
+    public func isContainValidData() -> Bool {
+        return !(id?.isEmpty ?? true) && ian != nil && ian!.isContainValidData()
+    }
+
     // MARK: Internal
 
     var id: String?
@@ -57,5 +61,9 @@ struct TriggerData: HandyJSON {
     private var pn: PushNotificationTrigger?
     private var ar: [String: Any]?
     private var features: [Int]?
-    private var config: [String:Any]?
+    private var config: [String: Any]?
+
+    func toString() -> String {
+        "Trigger{id='\(String(describing: id))'}"
+    }
 }
