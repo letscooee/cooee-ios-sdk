@@ -176,9 +176,13 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
             return
         }
 
-        guard let stringURL = iab.u, !stringURL.isEmpty else {
+        guard var stringURL = iab.u, !stringURL.isEmpty else {
             log("Received empty url in InAppBrowser CTA in trigger: \(String(describing: triggerContext.getTriggerData()?.toString()))")
             return
+        }
+
+        if let queryParameters = getQueryParameters(iab), !queryParameters.isEmpty {
+            stringURL += "?\(queryParameters)"
         }
 
         if let url = URL(string: stringURL) {
@@ -251,14 +255,35 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
             return
         }
 
-        guard let url = external.u, !url.isEmpty else {
+        guard var url = external.u, !url.isEmpty else {
             log("Received empty url in external CTA in trigger: \(String(describing: triggerContext.getTriggerData()?.toString()))")
             return
+        }
+
+        if let queryParameters = getQueryParameters(external), !queryParameters.isEmpty {
+            url += "?\(queryParameters)"
         }
 
         if let url = URL(string: url) {
             UIApplication.shared.open(url)
         }
+    }
+
+    /**
+     Crete query parameter from map
+     - Parameter browserContent: content to be passed to browser
+     */
+    private func getQueryParameters(_ browserContent: BrowserContent) -> String? {
+        guard let queryParameters = browserContent.qp else {
+            return nil
+        }
+        var queryString = ""
+        for (key, value) in queryParameters {
+            queryString += "\(key)=\(value)&".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        }
+        queryString.removeLast()
+
+        return queryString
     }
 
     /**

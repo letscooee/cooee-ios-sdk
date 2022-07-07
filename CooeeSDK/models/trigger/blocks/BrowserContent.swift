@@ -14,6 +14,7 @@ import HandyJSON
  */
 struct BrowserContent: HandyJSON {
 
-    var u: String?
+    var u: String? // http URL
     var showAB: Bool? = false
+    var qp: [String: Any]? // query parameters
 }
