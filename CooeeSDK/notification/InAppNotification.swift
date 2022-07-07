@@ -139,23 +139,23 @@ public class InAppNotification: UIViewController {
         Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(triggerJob), userInfo: nil, repeats: true)
     }
 
-    @objc public func handleTap(_ sender: UITapGestureRecognizer) {
+    @objc public func handleTap(_ sender: UITapGestureRecognizer) throws {
         dismissAnimation()
         let engagementTriggerHelper = EngagementTriggerHelper()
         CooeeNotificationService.sendEvent(Constants.EVENT_NOTIFICATION_CLICKED, withTriggerData: triggerData)
 
         guard let notificationClickAction = triggerData.getPushNotification()?.getClickAction() else {
-            engagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
+            try engagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
             return
         }
 
         guard  let launchType = notificationClickAction.open else {
-            engagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
+            try engagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
             return
         }
 
         if launchType == 1 {
-            engagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
+            try engagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
         } else if launchType == 2 {
             // Launch Self AR
             //EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)

@@ -53,7 +53,11 @@ class AppLifeCycle: NSObject {
         _ = sessionManager.checkSessionValidity()
         DispatchQueue.main.async {
             NewSessionExecutor().execute()
-            EngagementTriggerHelper().performOrganicLaunch()
+            do {
+                try EngagementTriggerHelper().performOrganicLaunch()
+            } catch {
+                NSLog(error.localizedDescription)
+            }
         }
     }
 
@@ -61,7 +65,11 @@ class AppLifeCycle: NSObject {
         let willSessionConclude = sessionManager.checkSessionValidity()
         DispatchQueue.main.async {
             if willSessionConclude {
-                EngagementTriggerHelper().performOrganicLaunch()
+                do {
+                    try EngagementTriggerHelper().performOrganicLaunch()
+                } catch {
+                    NSLog(error.localizedDescription)
+                }
             }
 
             self.sessionManager.keepSessionAlive()

@@ -155,7 +155,11 @@ class BaseHTTPService {
         let responseData = try webService.getResponse(fromURL: Constants.trackEvent, method: .POST, params: event.toJSON()!,
                 header: commonHeaders.getDictionary())
 
-        EngagementTriggerHelper().renderInAppTriggerFromResponse(response: responseData)
+        do {
+            try EngagementTriggerHelper().renderInAppTriggerFromResponse(response: responseData)
+        } catch {
+            NSLog(error.localizedDescription)
+        }
     }
 
     func loadTriggerDetails(id triggerId: String) throws -> [String: Any] {

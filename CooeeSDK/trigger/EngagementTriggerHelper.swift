@@ -26,7 +26,7 @@ public class EngagementTriggerHelper {
 
      - Parameter data: Data received from the backend
      */
-    public func renderInAppTriggerFromResponse(response data: [String: Any]?) {
+    public func renderInAppTriggerFromResponse(response data: [String: Any]?) throws {
         if data == nil {
             return
         }
@@ -39,17 +39,17 @@ public class EngagementTriggerHelper {
             return
         }
 
-        renderInAppTrigger(triggerData)
+        try renderInAppTrigger(triggerData)
     }
 
-    public func renderInAppTriggerFromJSONString(_ rawTriggerData: String) {
+    public func renderInAppTriggerFromJSONString(_ rawTriggerData: String) throws {
         guard let triggerData = TriggerData.deserialize(from: rawTriggerData) else {
             return
         }
 
         EngagementTriggerHelper.storeActiveTriggerDetails(triggerData: triggerData)
 
-        renderInAppTrigger(triggerData)
+        try renderInAppTrigger(triggerData)
     }
 
     // MARK: Internal
@@ -91,7 +91,7 @@ public class EngagementTriggerHelper {
     /**
      Gets latest trigger from database and renders it.
      */
-    func performOrganicLaunch() {
+    func performOrganicLaunch() throws {
         guard let latestTrigger = cacheTriggerContent.getLatestTrigger() else {
             return
         }
@@ -106,7 +106,7 @@ public class EngagementTriggerHelper {
         }
 
         EngagementTriggerHelper.storeActiveTriggerDetails(triggerData: triggerData)
-        renderInAppTrigger(triggerData)
+        try renderInAppTrigger(triggerData)
     }
 
     /**
@@ -115,7 +115,7 @@ public class EngagementTriggerHelper {
      - Parameter triggerData: Data to render in-app.
      - Parameter checkPendingTrigger: Whether to check for pending trigger.
      */
-    func renderInAppFromPushNotification(for triggerData: TriggerData, checkPendingTrigger: Bool = false) {
+    func renderInAppFromPushNotification(for triggerData: TriggerData, checkPendingTrigger: Bool = false) throws {
         _ = CooeeFactory.shared.runtimeData
 
         if triggerData.id?.isEmpty ?? true {
@@ -139,7 +139,7 @@ public class EngagementTriggerHelper {
             return
         }
 
-        renderInAppTrigger(pendingTriggerData)
+        try renderInAppTrigger(pendingTriggerData)
     }
 
     /**
@@ -160,7 +160,11 @@ public class EngagementTriggerHelper {
             var triggerData = triggerData
             triggerData.setInAppTrigger(inAppTrigger: TriggerData.fromHSON(from: data).getInAppTrigger())
 
-            self.renderInAppTrigger(triggerData)
+            do {
+                try self.renderInAppTrigger(triggerData)
+            } catch {
+                NSLog(error.localizedDescription)
+            }
         }
     }
 
@@ -169,10 +173,13 @@ public class EngagementTriggerHelper {
 
      - Parameter data: received and parsed trigger data.
      */
-    func renderInAppTrigger(_ data: TriggerData?) {
-        if data == nil || data?.getInAppTrigger() == nil || data?.getInAppTrigger()?.cont == nil {
-            return
+    func renderInAppTrigger(_ data: TriggerData?) throws {
+        guard let data = data, data.isContainValidData() else {
+            let exception = InvalidTriggerDataException(message: "Invalid trigger data received: \(String(describing: data?.toString()))")
+            CooeeFactory.shared.sentryHelper.capture(error: exception)
+            throw exception
         }
+
         let runtimeData = RuntimeData.shared
 
         if runtimeData.isInBackground() {
@@ -181,20 +188,20 @@ public class EngagementTriggerHelper {
 
         do {
             if let visibleController = UIApplication.shared.topMostViewController() {
-                EngagementTriggerHelper.setActiveTrigger(data!)
-                try InAppTriggerScene.instance.updateViewWith(data: data!, on: visibleController)
+                EngagementTriggerHelper.setActiveTrigger(data)
+                try InAppTriggerScene.instance.updateViewWith(data: data, on: visibleController)
             }
         } catch {
             CooeeFactory.shared.sentryHelper.capture(message: "Couldn't show Engagement Trigger", error: error as NSError)
         }
 
-        guard let pendingTrigger = cacheTriggerContent.getTriggerBy(data!.id!),
+        guard let pendingTrigger = cacheTriggerContent.getTriggerBy(data.id!),
               let notificationId = pendingTrigger.notificationId
         else {
             return
         }
 
-        if let triggerConfig = data?.getConfig(), shouldRemoveNotification(triggerConfig) {
+        if let triggerConfig = data.getConfig(), shouldRemoveNotification(triggerConfig) {
 
         }
 

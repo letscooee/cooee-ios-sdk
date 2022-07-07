@@ -172,7 +172,12 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
      Check for InApp Browser data and launch InApp Browser using SafariService
      */
     private func launchInAppBrowser() {
-        guard let iab = clickAction.iab, let stringURL = iab.u else {
+        guard let iab = clickAction.iab else {
+            return
+        }
+
+        guard let stringURL = iab.u, !stringURL.isEmpty else {
+            log("Received empty url in InAppBrowser CTA in trigger: \(String(describing: triggerContext.getTriggerData()?.toString()))")
             return
         }
 
@@ -202,12 +207,12 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
     }
 
     private func share() {
-        guard let share = clickAction.share, !share.isEmpty else {
+        guard let share = clickAction.share else {
             return
         }
 
         // text to share
-        guard let text = share["text"] else {
+        guard let text = share.text, !text.isEmpty else {
             return
         }
 
@@ -224,7 +229,12 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
     }
 
     private func updateApp() {
-        guard let update = clickAction.updt, let url = update.u else {
+        guard let update = clickAction.updt else {
+            return
+        }
+
+        guard let url = update.u, !url.isEmpty else {
+            log("Received empty url in update CTA in trigger: \(String(describing: triggerContext.getTriggerData()?.toString()))")
             return
         }
 
@@ -237,7 +247,12 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
      Process external block from ClickAction and opens URL in external browser
      */
     private func executeExternal() {
-        guard let external = clickAction.ext, let url = external.u else {
+        guard let external = clickAction.ext else {
+            return
+        }
+
+        guard let url = external.u, !url.isEmpty else {
+            log("Received empty url in external CTA in trigger: \(String(describing: triggerContext.getTriggerData()?.toString()))")
             return
         }
 
@@ -269,5 +284,14 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
             return
         }
         onCTAListener.onCTAResponse(payload: keyValues)
+    }
+
+    /**
+     Logs ``logMessage`` to Sentry
+
+     - Parameter logMessage: The message to log
+     */
+    private func log(_ logMessage: String) {
+        CooeeFactory.shared.sentryHelper.capture(message: logMessage)
     }
 }
