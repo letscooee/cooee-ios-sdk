@@ -48,8 +48,8 @@ class TextElement: BaseTextElement, Identifiable {
         return text
     }
 
-    override func hasValidData() -> Bool {
-        super.hasValidData() && !(prs?.isEmpty ?? true)
+    override func hasValidImageResource() -> Bool {
+        !(prs?.isEmpty ?? true)
     }
 
     // MARK: Internal

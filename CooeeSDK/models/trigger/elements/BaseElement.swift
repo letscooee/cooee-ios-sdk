@@ -104,7 +104,7 @@ class BaseElement: HandyJSON {
         bg = background
     }
 
-    public func hasValidData() -> Bool {
+    public func hasValidImageResource() -> Bool {
         bg?.i == nil || !(bg?.i?.src?.isEmpty ?? true)
     }
 

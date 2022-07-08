@@ -51,25 +51,25 @@ class InAppTrigger: BaseElement {
             let baseElement = BaseElement.deserialize(from: element)
             if ElementType.TEXT == baseElement!.getElementType() {
                 if let textElement = TextElement.deserialize(from: element) {
-                    if !textElement.hasValidData() {
+                    if !textElement.hasValidImageResource() {
                         return false
                     }
                 }
             } else if ElementType.BUTTON == baseElement!.getElementType() {
                 if let textElement = TextElement.deserialize(from: element) {
-                    if !textElement.hasValidData() {
+                    if !textElement.hasValidImageResource() {
                         return false
                     }
                 }
             } else if ElementType.IMAGE == baseElement!.getElementType() {
                 if let textElement = ImageElement.deserialize(from: element) {
-                    if !textElement.hasValidData() {
+                    if !textElement.hasValidImageResource() {
                         return false
                     }
                 }
             } else if ElementType.SHAPE == baseElement!.getElementType() {
                 if let textElement = ShapeElement.deserialize(from: element) {
-                    if !textElement.hasValidData() {
+                    if !textElement.hasValidImageResource() {
                         return false
                     }
                 }
