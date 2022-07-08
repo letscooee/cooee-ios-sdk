@@ -43,8 +43,12 @@ struct TriggerData: HandyJSON {
         config
     }
 
-    public func containValidData() -> Bool {
-        !(id?.isEmpty ?? true) && ian != nil && ian!.containValidData()
+    public func containValidData() throws -> Bool {
+        do {
+            return try (!(id?.isEmpty ?? true) && ian != nil && ian!.containValidData())
+        } catch {
+            throw InvalidTriggerDataException(message: "\(error.localizedDescription) in trigger: \(toString())")
+        }
     }
 
     // MARK: Internal

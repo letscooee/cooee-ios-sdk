@@ -230,12 +230,21 @@ extension UIImage {
             return UIImage.animatedImageWithSource(source)
         } else if count == 1 {
             return UIImage(data: data)
-        }else{
+        } else {
             CooeeFactory.shared.sentryHelper.capture(message: "Fail to load image with url:\(url)")
             return nil
         }
     }
 
+    /**
+     Loads Image from assets present in app
+     This method is not used anywhere
+
+     - Parameters:
+       - asset: asset name
+       - url: image url
+     - Returns: optional UIImage
+     */
     @available(iOS 9.0, *)
     public class func gif(asset: String, url: String) -> UIImage? {
         // Create source from assets catalog

@@ -174,25 +174,30 @@ public class EngagementTriggerHelper {
      - Parameter data: received and parsed trigger data.
      */
     func renderInAppTrigger(_ data: TriggerData?) throws {
-        guard let data = data, data.containValidData() else {
-            let exception = InvalidTriggerDataException(message: "Invalid trigger data received: \(String(describing: data?.toString()))")
-            CooeeFactory.shared.sentryHelper.capture(error: exception)
-            throw exception
-        }
-
         let runtimeData = RuntimeData.shared
 
         if runtimeData.isInBackground() {
             return
         }
 
+        guard let data = data else {
+            return
+        }
+
         do {
+            if try !data.containValidData() {
+                return
+            }
+
             if let visibleController = UIApplication.shared.topMostViewController() {
                 EngagementTriggerHelper.setActiveTrigger(data)
                 try InAppTriggerScene.instance.updateViewWith(data: data, on: visibleController)
             }
         } catch {
-            CooeeFactory.shared.sentryHelper.capture(message: "Couldn't show Engagement Trigger", error: error as NSError)
+            CooeeFactory.shared.sentryHelper.capture(message: "Failed to show In-App", error: error as NSError)
+
+            // Sends exception back to callers
+            throw error
         }
 
         guard let pendingTrigger = cacheTriggerContent.getTriggerBy(data.id!),

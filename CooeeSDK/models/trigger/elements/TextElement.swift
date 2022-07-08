@@ -48,8 +48,18 @@ class TextElement: BaseTextElement, Identifiable {
         return text
     }
 
-    override func hasValidImageResource() -> Bool {
-        !(prs?.isEmpty ?? true)
+    /**
+     Checks if TextElement has valid text or not
+
+     - Returns: true if has valid text.
+     - Throws: ``InvalidTextElement`` if text is empty/nil
+     */
+    override func hasValidImageResource() throws -> Bool {
+        if prs?.isEmpty ?? true {
+            throw InvalidTriggerDataException(message: "TextElement has no/empty parts")
+        }
+
+        return true
     }
 
     // MARK: Internal

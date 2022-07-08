@@ -42,34 +42,34 @@ class InAppTrigger: BaseElement {
         }
     }
 
-    func containValidData() -> Bool {
-        hasValidImageResource() && (cont?.hasValidImageResource() ?? false) && !(elems?.isEmpty ?? true) && containsValidChildren()
+    func containValidData() throws -> Bool {
+        try hasValidImageResource() && (cont?.hasValidImageResource() ?? false) && !(elems?.isEmpty ?? true) && containsValidChildren()
     }
 
-    private func containsValidChildren() -> Bool {
+    private func containsValidChildren() throws -> Bool {
         for element in elems! {
             let baseElement = BaseElement.deserialize(from: element)
             if ElementType.TEXT == baseElement!.getElementType() {
                 if let textElement = TextElement.deserialize(from: element) {
-                    if !textElement.hasValidImageResource() {
+                    if try !textElement.hasValidImageResource() {
                         return false
                     }
                 }
             } else if ElementType.BUTTON == baseElement!.getElementType() {
                 if let textElement = TextElement.deserialize(from: element) {
-                    if !textElement.hasValidImageResource() {
+                    if try !textElement.hasValidImageResource() {
                         return false
                     }
                 }
             } else if ElementType.IMAGE == baseElement!.getElementType() {
                 if let textElement = ImageElement.deserialize(from: element) {
-                    if !textElement.hasValidImageResource() {
+                    if try !textElement.hasValidImageResource() {
                         return false
                     }
                 }
             } else if ElementType.SHAPE == baseElement!.getElementType() {
                 if let textElement = ShapeElement.deserialize(from: element) {
-                    if !textElement.hasValidImageResource() {
+                    if try !textElement.hasValidImageResource() {
                         return false
                     }
                 }
