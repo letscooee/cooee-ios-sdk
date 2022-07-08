@@ -9,6 +9,14 @@
 import XCTest
 
 class EngagementTriggerHelperTest: BaseTestCase {
+
+    enum InvalidType: String {
+        case EMPTY_BACKGROUND_IMAGE = "invalidBg"
+        case NULL_PARTS = "nullParts"
+        case EMPTY_PARTS = "emptyParts"
+        case EMPTY_IMAGE_ELEMENT_URL = "emptyImage"
+    }
+
     var mockEngagementTriggerHelper: MockEngagementTriggerHelper!
 
     override func setUpWithError() throws {
@@ -23,8 +31,8 @@ class EngagementTriggerHelperTest: BaseTestCase {
         mockEngagementTriggerHelper = nil
     }
 
-    func assertLoadInAppFromResponse(_ data: [String: Any]?, _ assertType: Bool) {
-        mockEngagementTriggerHelper.renderInAppTriggerFromResponse(response: data)
+    func assertLoadInAppFromResponse(_ data: [String: Any]?, _ assertType: Bool) throws {
+        try mockEngagementTriggerHelper.renderInAppTriggerFromResponse(response: data)
 
         if assertType {
             XCTAssertTrue(mockEngagementTriggerHelper.hasCalledRenderInAppTrigger)
@@ -33,36 +41,36 @@ class EngagementTriggerHelperTest: BaseTestCase {
         }
     }
 
-    func test_load_in_app_from_empty_response() {
+    func test_load_in_app_from_empty_response() throws {
         XCTAssertNotNil(samplePayloadMap)
 
-        assertLoadInAppFromResponse([String: Any](), false)
+        try assertLoadInAppFromResponse([String: Any](), false)
     }
 
-    func test_load_in_app_from_nil_response() {
+    func test_load_in_app_from_nil_response() throws {
         XCTAssertNotNil(samplePayloadMap)
 
-        assertLoadInAppFromResponse(nil, false)
+        try assertLoadInAppFromResponse(nil, false)
     }
 
-    func test_load_in_app_from_valid_response() {
+    func test_load_in_app_from_valid_response() throws {
         XCTAssertNotNil(samplePayloadMap)
 
         let response: [String: Any] = ["triggerData": samplePayloadMap as Any]
-        assertLoadInAppFromResponse(response, true)
+        try assertLoadInAppFromResponse(response, true)
     }
 
-    func test_load_in_app_from_invalid_response() {
+    func test_load_in_app_from_invalid_response() throws {
         XCTAssertNotNil(samplePayloadMap)
 
         let response: [String: Any] = ["triggerData": samplePayload as Any]
-        assertLoadInAppFromResponse(response, false)
+        try assertLoadInAppFromResponse(response, false)
     }
 
-    func assertLoadInAppFromJSONString(_ assertType: Bool) {
+    func assertLoadInAppFromJSONString(_ assertType: Bool) throws {
         XCTAssertNotNil(samplePayload)
 
-        mockEngagementTriggerHelper.renderInAppTriggerFromJSONString(samplePayload)
+        try mockEngagementTriggerHelper.renderInAppTriggerFromJSONString(samplePayload)
         if assertType {
             XCTAssertTrue(mockEngagementTriggerHelper.hasCalledRenderInAppTrigger)
         } else {
@@ -70,22 +78,22 @@ class EngagementTriggerHelperTest: BaseTestCase {
         }
     }
 
-    func test_load_in_app_from_valid_json_string() {
-        assertLoadInAppFromJSONString(true)
+    func test_load_in_app_from_valid_json_string() throws {
+        try assertLoadInAppFromJSONString(true)
     }
 
-    func test_load_in_app_from_invalid_json_string() {
+    func test_load_in_app_from_invalid_json_string() throws {
         samplePayload = "Hi, this is invalid JSON string"
-        assertLoadInAppFromJSONString(false)
+        try assertLoadInAppFromJSONString(false)
     }
 
-    func test_load_in_app_from_empty_json_string() {
+    func test_load_in_app_from_empty_json_string() throws {
         samplePayload = ""
-        assertLoadInAppFromJSONString(false)
+        try assertLoadInAppFromJSONString(false)
     }
 
-    func assertRenderInAppFromPushNotification(_ data: TriggerData, _ assertType: Bool, _ checkPendingTrigger: Bool = false) {
-        mockEngagementTriggerHelper.renderInAppFromPushNotification(for: data, checkPendingTrigger: checkPendingTrigger)
+    func assertRenderInAppFromPushNotification(_ data: TriggerData, _ assertType: Bool, _ checkPendingTrigger: Bool = false) throws {
+        try mockEngagementTriggerHelper.renderInAppFromPushNotification(for: data, checkPendingTrigger: checkPendingTrigger)
 
         if assertType {
             XCTAssertTrue(mockEngagementTriggerHelper.hasCalledLoadLazyData)
@@ -98,20 +106,20 @@ class EngagementTriggerHelperTest: BaseTestCase {
         }
     }
 
-    func test_render_in_app_from_valid_push_notification() {
+    func test_render_in_app_from_valid_push_notification() throws {
         XCTAssertNotNil(triggerData)
 
-        assertRenderInAppFromPushNotification(triggerData, true)
+        try assertRenderInAppFromPushNotification(triggerData, true)
     }
 
-    func test_render_in_app_from_valid_push_notification_with_pending_trigger() {
+    func test_render_in_app_from_valid_push_notification_with_pending_trigger() throws {
         XCTAssertNotNil(triggerData)
         CacheTriggerContent().loadAndSaveTriggerData(triggerData, forNotification: "")
-        assertRenderInAppFromPushNotification(triggerData, false, true)
+        try assertRenderInAppFromPushNotification(triggerData, false, true)
     }
 
-    func test_render_in_app_from_invalid_push_notification() {
-        assertRenderInAppFromPushNotification(TriggerData(), false)
+    func test_render_in_app_from_invalid_push_notification() throws {
+        try assertRenderInAppFromPushNotification(TriggerData(), false)
     }
 
     func test_load_lazy_data_from_valid_trigger() {
@@ -148,15 +156,14 @@ class EngagementTriggerHelperTest: BaseTestCase {
         XCTAssertEqual(activeTriggers.count, 0)
     }
 
-    func test_organic_launch_with_empty_database() {
-        mockEngagementTriggerHelper.performOrganicLaunch()
+    func test_organic_launch_with_empty_database() throws {
+        try mockEngagementTriggerHelper.performOrganicLaunch()
         XCTAssertFalse(mockEngagementTriggerHelper.hasCalledRenderInAppTrigger)
-        XCTAssertFalse(mockEngagementTriggerHelper.hasCalledLoadLazyData)
         PendingTriggerDAO().deleteAll()
     }
 
     // TODO: need to update the test case to check the pending trigger
-    func organic_launch_database() {
+    func organic_launch_database() throws {
         let cacheContnet = CacheTriggerContent()
         cacheContnet.loadAndSaveTriggerData(triggerData, forNotification: "test")
 
@@ -168,20 +175,83 @@ class EngagementTriggerHelperTest: BaseTestCase {
             }
         }
 
-        mockEngagementTriggerHelper.performOrganicLaunch()
+        try mockEngagementTriggerHelper.performOrganicLaunch()
         XCTAssertTrue(mockEngagementTriggerHelper.hasCalledRenderInAppTrigger)
         XCTAssertFalse(mockEngagementTriggerHelper.hasCalledLoadLazyData)
         PendingTriggerDAO().deleteAll()
     }
 
-    func test_organic_launch_database_with_non_loaded_trigger() {
+    func test_organic_launch_database_with_non_loaded_trigger() throws {
         PendingTriggerDAO().deleteAll()
         samplePayloadMap.updateValue("T1", forKey: "id")
         let triggerData = TriggerData.deserialize(from: samplePayloadMap)
         CacheTriggerContent().loadAndSaveTriggerData(triggerData!, forNotification: "test")
-        mockEngagementTriggerHelper.performOrganicLaunch()
+        try mockEngagementTriggerHelper.performOrganicLaunch()
         XCTAssertTrue(mockEngagementTriggerHelper.hasCalledLoadLazyData)
         PendingTriggerDAO().deleteAll()
+    }
+
+    func test_render_inapp() {
+        do {
+            try mockEngagementTriggerHelper.renderInAppTrigger(triggerData)
+            XCTAssertTrue(true)
+        } catch {
+            XCTAssertTrue(false)
+        }
+    }
+
+    func test_render_inapp_with_invalid_background_image() {
+        do {
+            let trigger = getInvalidTrigger(.EMPTY_BACKGROUND_IMAGE)
+
+            try mockEngagementTriggerHelper.renderInAppTrigger(trigger)
+            XCTAssertTrue(false)
+        } catch {
+            XCTAssert(error is InvalidTriggerDataException)
+        }
+    }
+
+    func test_render_inapp_with_null_parts() {
+        do {
+            let trigger = getInvalidTrigger(.NULL_PARTS)
+
+            try mockEngagementTriggerHelper.renderInAppTrigger(trigger)
+            XCTAssertTrue(false)
+        } catch {
+            XCTAssert(error is InvalidTriggerDataException)
+        }
+    }
+
+    func test_render_inapp_with_empty_parts() {
+        do {
+            let trigger = getInvalidTrigger(.EMPTY_PARTS)
+
+            try mockEngagementTriggerHelper.renderInAppTrigger(trigger)
+            XCTAssertTrue(false)
+        } catch {
+            XCTAssert(error is InvalidTriggerDataException)
+        }
+    }
+
+    func test_render_inapp_with_empty_image_element_src() {
+        do {
+            let trigger = getInvalidTrigger(.EMPTY_IMAGE_ELEMENT_URL)
+
+            try mockEngagementTriggerHelper.renderInAppTrigger(trigger)
+            XCTAssertTrue(false)
+        } catch {
+            XCTAssert(error is InvalidTriggerDataException)
+        }
+    }
+
+    func getInvalidTrigger(_ type: InvalidType) -> TriggerData? {
+        var ian = samplePayloadMap["ian"] as! [String: Any?]
+        let elemets = invalidDataMap[type.rawValue]
+
+        ian.updateValue(elemets, forKey: "elems")
+        samplePayloadMap.updateValue(ian, forKey: "ian")
+
+        return TriggerData.deserialize(from: samplePayloadMap)
     }
 }
 
@@ -192,19 +262,19 @@ class MockEngagementTriggerHelper: EngagementTriggerHelper {
     var hasCalledLoadLazyData = false
     var hasCalledRenderInAppTrigger = false
 
-    override func renderInAppTriggerFromResponse(response data: [String: Any]?) {
+    override func renderInAppTriggerFromResponse(response data: [String: Any]?) throws {
         hasCalledRenderInAppTriggerFromResponse = true
-        super.renderInAppTriggerFromResponse(response: data)
+        try super.renderInAppTriggerFromResponse(response: data)
     }
 
-    override func renderInAppTriggerFromJSONString(_ rawTriggerData: String) {
+    override func renderInAppTriggerFromJSONString(_ rawTriggerData: String) throws {
         hasCalledRenderInAppTriggerFromJSONString = true
-        super.renderInAppTriggerFromJSONString(rawTriggerData)
+        try super.renderInAppTriggerFromJSONString(rawTriggerData)
     }
 
-    override func renderInAppFromPushNotification(for triggerData: TriggerData, checkPendingTrigger: Bool = false) {
+    override func renderInAppFromPushNotification(for triggerData: TriggerData, checkPendingTrigger: Bool = false) throws {
         hasCalledRenderInAppFromPushNotification = true
-        super.renderInAppFromPushNotification(for: triggerData, checkPendingTrigger: checkPendingTrigger)
+        try super.renderInAppFromPushNotification(for: triggerData, checkPendingTrigger: checkPendingTrigger)
     }
 
     override func loadLazyData(for triggerData: TriggerData) {
@@ -212,8 +282,8 @@ class MockEngagementTriggerHelper: EngagementTriggerHelper {
         hasCalledLoadLazyData = true
     }
 
-    override func renderInAppTrigger(_ data: TriggerData?) {
+    override func renderInAppTrigger(_ data: TriggerData?) throws {
         hasCalledRenderInAppTrigger = true
-        super.renderInAppTrigger(data)
+        try super.renderInAppTrigger(data)
     }
 }

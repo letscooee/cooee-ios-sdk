@@ -75,6 +75,7 @@
 		7599DCCE2772FE94002CEB1A /* ScreenShotUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7599DCCD2772FE93002CEB1A /* ScreenShotUtility.swift */; };
 		75A0981027070FD800C2057B /* AppLifeCycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A0980F27070FD800C2057B /* AppLifeCycle.swift */; };
 		75A098122707132100C2057B /* CooeeBootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A098112707132100C2057B /* CooeeBootstrap.swift */; };
+		75A49FB22878339F008FF177 /* invalid_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 75A49FB12878339F008FF177 /* invalid_data.json */; };
 		75B9BD6E2850B76200F414B1 /* PendingTriggerDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B9BD6D2850B76200F414B1 /* PendingTriggerDAO.swift */; };
 		75B9BD722850B89C00F414B1 /* CacheTriggerContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B9BD712850B89C00F414B1 /* CacheTriggerContent.swift */; };
 		75B9BD742850BF6200F414B1 /* PendingTriggerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B9BD732850BF6200F414B1 /* PendingTriggerModel.swift */; };
@@ -285,6 +286,7 @@
 		759E15F2271061520040F09C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75A0980F27070FD800C2057B /* AppLifeCycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLifeCycle.swift; sourceTree = "<group>"; };
 		75A098112707132100C2057B /* CooeeBootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeBootstrap.swift; sourceTree = "<group>"; };
+		75A49FB12878339F008FF177 /* invalid_data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = invalid_data.json; sourceTree = "<group>"; };
 		75B9BD6D2850B76200F414B1 /* PendingTriggerDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTriggerDAO.swift; sourceTree = "<group>"; };
 		75B9BD712850B89C00F414B1 /* CacheTriggerContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheTriggerContent.swift; sourceTree = "<group>"; };
 		75B9BD732850BF6200F414B1 /* PendingTriggerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTriggerModel.swift; sourceTree = "<group>"; };
@@ -346,7 +348,6 @@
 		AC0B8829F5B44FE4A5E23E66 /* ShapeElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeElement.swift; sourceTree = "<group>"; };
 		AC0B885A897ACFB8EBF772D0 /* DictionaryPrototype.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryPrototype.swift; sourceTree = "<group>"; };
 		AC0B88F3881FA99265E09B56 /* Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
-		AC0B89675A209D1D7E7D2168 /* WrapperType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrapperType.swift; sourceTree = "<group>"; };
 		AC0B898DBA7B1DE088837B41 /* TextRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextRenderer.swift; sourceTree = "<group>"; };
 		AC0B899D43B11EA47FD52E45 /* InAppTrigger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppTrigger.swift; sourceTree = "<group>"; };
 		AC0B8A5E35C8A00964D04170 /* PermissionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionType.swift; sourceTree = "<group>"; };
@@ -574,6 +575,7 @@
 				752D1BD127F5B9FB001995E7 /* CooeeTest.swift */,
 				7555227427FB06D3002DBFFF /* payload.json */,
 				7555227627FB07AA002DBFFF /* BaseTestCase.swift */,
+				75A49FB12878339F008FF177 /* invalid_data.json */,
 			);
 			path = CooeeSDKTests;
 			sourceTree = "<group>";
@@ -1215,6 +1217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7555227527FB06D3002DBFFF /* payload.json in Resources */,
+				75A49FB22878339F008FF177 /* invalid_data.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
