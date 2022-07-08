@@ -42,8 +42,8 @@ class InAppTrigger: BaseElement {
         }
     }
 
-    func isContainValidData() -> Bool {
-        cont != nil && !(elems?.isEmpty ?? true) && containsValidChildren()
+    func containValidData() -> Bool {
+        hasValidImageResource() && (cont?.hasValidImageResource() ?? false) && !(elems?.isEmpty ?? true) && containsValidChildren()
     }
 
     private func containsValidChildren() -> Bool {

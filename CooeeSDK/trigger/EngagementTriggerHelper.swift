@@ -174,7 +174,7 @@ public class EngagementTriggerHelper {
      - Parameter data: received and parsed trigger data.
      */
     func renderInAppTrigger(_ data: TriggerData?) throws {
-        guard let data = data, data.isContainValidData() else {
+        guard let data = data, data.containValidData() else {
             let exception = InvalidTriggerDataException(message: "Invalid trigger data received: \(String(describing: data?.toString()))")
             CooeeFactory.shared.sentryHelper.capture(error: exception)
             throw exception

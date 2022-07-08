@@ -43,8 +43,8 @@ struct TriggerData: HandyJSON {
         config
     }
 
-    public func isContainValidData() -> Bool {
-        return !(id?.isEmpty ?? true) && ian != nil && ian!.isContainValidData()
+    public func containValidData() -> Bool {
+        !(id?.isEmpty ?? true) && ian != nil && ian!.containValidData()
     }
 
     // MARK: Internal
