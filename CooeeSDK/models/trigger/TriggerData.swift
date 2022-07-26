@@ -43,6 +43,14 @@ struct TriggerData: HandyJSON {
         config
     }
 
+    public func containValidData() throws -> Bool {
+        do {
+            return try (!(id?.isEmpty ?? true) && ian != nil && ian!.containValidData())
+        } catch {
+            throw InvalidTriggerDataException(message: "\(error.localizedDescription) in trigger: \(toString())")
+        }
+    }
+
     // MARK: Internal
 
     var id: String?
@@ -57,5 +65,9 @@ struct TriggerData: HandyJSON {
     private var pn: PushNotificationTrigger?
     private var ar: [String: Any]?
     private var features: [Int]?
-    private var config: [String:Any]?
+    private var config: [String: Any]?
+
+    func toString() -> String {
+        "Trigger{id='\(String(describing: id))'}"
+    }
 }

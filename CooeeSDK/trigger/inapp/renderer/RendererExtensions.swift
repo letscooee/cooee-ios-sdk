@@ -215,9 +215,10 @@ extension UIImage {
      considered as GIF otherwise normal image.
 
      - Parameter data: image in Data
+     - Parameter url: image url
      - Returns: optional UIImage
      */
-    public class func gif(data: Data) -> UIImage? {
+    public class func gif(data: Data, url: String) -> UIImage? {
         // Create source from data
         guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
             NSLog("Load GIF/Image: Source for the image does not exist")
@@ -227,20 +228,32 @@ extension UIImage {
         let count = CGImageSourceGetCount(source)
         if count > 1 {
             return UIImage.animatedImageWithSource(source)
-        } else {
+        } else if count == 1 {
             return UIImage(data: data)
+        } else {
+            CooeeFactory.shared.sentryHelper.capture(message: "Fail to load image with url:\(url)")
+            return nil
         }
     }
 
+    /**
+     Loads Image from assets present in app
+     This method is not used anywhere
+
+     - Parameters:
+       - asset: asset name
+       - url: image url
+     - Returns: optional UIImage
+     */
     @available(iOS 9.0, *)
-    public class func gif(asset: String) -> UIImage? {
+    public class func gif(asset: String, url: String) -> UIImage? {
         // Create source from assets catalog
         guard let dataAsset = NSDataAsset(name: asset) else {
             NSLog("Load GIF/Image: Cannot turn image named \"\(asset)\" into NSDataAsset")
             return nil
         }
 
-        return gif(data: dataAsset.data)
+        return gif(data: dataAsset.data, url: url)
     }
 
     /**

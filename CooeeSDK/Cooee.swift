@@ -300,7 +300,11 @@ public final class CooeeSDK: NSObject {
      - Parameter checkPendingTrigger: ``Bool`` to check for pending trigger
      */
     private func launchInApp(with triggerData: TriggerData, checkPendingTrigger: Bool = false) {
-        EngagementTriggerHelper().renderInAppFromPushNotification(for: triggerData, checkPendingTrigger: checkPendingTrigger)
+        do {
+            try EngagementTriggerHelper().renderInAppFromPushNotification(for: triggerData, checkPendingTrigger: checkPendingTrigger)
+        } catch {
+            NSLog(error.localizedDescription)
+        }
     }
 
     /**
