@@ -20,8 +20,114 @@ public class CooeeNotificationService: NSObject {
 
     // MARK: Public
 
+    /**
+     This method Updates Notification content and returns data back to extension.
+
+     - Parameter request: UNNotificationRequest object which is used to update notification content
+     - Returns: MutableNotificationContent object which has updated content
+     */
     @objc
-    public static func updateContent(_ mutableNotificationContent: UNMutableNotificationContent, with userInfo: [AnyHashable: Any]) -> UNMutableNotificationContent? {
+    public static func updateContentFromRequest(_ request: UNNotificationRequest) -> UNMutableNotificationContent? {
+        var userInfo = request.content.userInfo
+        userInfo["notificationID"] = request.identifier
+        userInfo["sdkCode"] = Constants.VERSION_CODE
+        LocalStorageHelper.putString(key: Constants.STORAGE_NOTIFICATION_ID, value: request.identifier)
+        return updateNotificationContent(request.content.mutableCopy() as! UNMutableNotificationContent, with: userInfo)
+    }
+
+    // MARK: Internal
+
+    /**
+     Create and send the event to the server
+     - Parameters:
+       - eventName: Name of event
+       - triggerData: trigger information of event
+     */
+    static func sendEvent(_ eventName: String, withTriggerData triggerData: TriggerData) {
+        DispatchQueue.main.async {
+            let event = Event(eventName: eventName, triggerData: triggerData)
+            CooeeFactory.shared.safeHttpService.sendEventWithoutNewSession(event: event)
+        }
+    }
+
+    /**
+     Process all parts and create one string to show in PN
+
+     - Parameter textElement: The text element to be processed.
+     - Returns: String
+     */
+    static func getTextFromPart(from textElement: TextElement?) -> String? {
+        if textElement == nil {
+            return nil
+        }
+
+        var string = ""
+        guard let parts = textElement!.prs else {
+            return nil
+        }
+
+        let count = parts.count - 1
+
+        for index in 0 ... count {
+            string = "\(string) \(parts[index].getPartText().trimmingCharacters(in: .newlines))"
+        }
+
+        return string
+    }
+
+    static func addPendingNotification(_ notificationContent: UNMutableNotificationContent, _ triggerData: TriggerData) {
+        CooeeNotificationService.triggerData = triggerData
+        pendingNotificationContent = notificationContent
+    }
+
+    static func processPendingNotification() {
+        if pendingNotificationContent == nil {
+            return
+        }
+
+        renderPN(pendingNotificationContent!, silent: true)
+
+        pendingNotificationContent = nil
+    }
+
+    /**
+     Requests <code>ImageDownloader</code> to download Image from URL
+
+     - Parameters:
+         - urlString: Web URL of Image
+         - completion: provide UIImage
+     */
+    func getMediaAttachment(for urlString: String, completion: @escaping (UIImage?) -> Void) {
+        guard let url = URL(string: urlString) else {
+            completion(nil)
+            return
+        }
+
+        ImageDownloader.shared.downloadImage(forURL: url) { result in
+            guard let image = try? result.get() else {
+                completion(nil)
+                return
+            }
+            completion(image)
+        }
+    }
+
+    // MARK: Private
+
+    private static var pendingNotificationContent: UNMutableNotificationContent?
+    private static var triggerData: TriggerData?
+
+    private var userInfo: [AnyHashable: Any]
+
+    /**
+     This method Updates Notification content and returns data back to extension.
+
+     - Parameters:
+       - mutableNotificationContent: MutableNotificationContent object which is used to update notification content
+       - userInfo: userInfo dictionary which is passed from notification
+     - Returns: MutableNotificationContent object which has updated content
+     */
+    private static func updateNotificationContent(_ mutableNotificationContent: UNMutableNotificationContent, with userInfo: [AnyHashable: Any]) -> UNMutableNotificationContent? {
         let content = mutableNotificationContent
         let rawTriggerData = userInfo["triggerData"]
 
@@ -79,117 +185,6 @@ public class CooeeNotificationService: NSObject {
         return content
     }
 
-    // MARK: Internal
-
-    /**
-     Download the image from the given URL and return the UNNotificationAttachment.
-
-     - Parameter imageURL: The URL of the image to be downloaded.
-     - Returns: The UNNotificationAttachment. Nil if the image could not be downloaded.
-     */
-    private class func getAttachment(from imageURL: String?) -> UNNotificationAttachment? {
-        if imageURL == nil {
-            return nil
-        }
-
-        guard let url = URL(string: imageURL!) else {
-            return nil
-        }
-
-        guard let imageData = NSData(contentsOf: url) else {
-            return nil
-        }
-
-        guard let attachment = UNNotificationAttachment.create(imageFileIdentifier: "image.jpg", data: imageData, options: nil) else {
-            NSLog("Error in UNNotificationAttachment.create()")
-            return nil
-        }
-
-        return attachment
-    }
-
-    /**
-     Create and send the event to the server
-     - Parameters:
-       - eventName: Name of event
-       - triggerData: trigger information of event
-     */
-    static func sendEvent(_ eventName: String, withTriggerData triggerData: TriggerData) {
-        DispatchQueue.main.async {
-            let event = Event(eventName: eventName, triggerData: triggerData)
-            CooeeFactory.shared.safeHttpService.sendEventWithoutNewSession(event: event)
-        }
-    }
-
-    /**
-     Process all parts and create one string to show in PN
-
-     - Parameter textElement: The text element to be processed.
-     - Returns: String
-     */
-    static func getTextFromPart(from textElement: TextElement?) -> String? {
-        if textElement == nil {
-            return nil
-        }
-
-        var string = ""
-        guard let parts = textElement!.prs else {
-            return nil
-        }
-
-        let count = parts.count - 1
-
-        for index in 0...count {
-            string = "\(string) \(parts[index].getPartText().trimmingCharacters(in: .newlines))"
-        }
-
-        return string
-    }
-
-    static func addPendingNotification(_ notificationContent: UNMutableNotificationContent, _ triggerData: TriggerData) {
-        CooeeNotificationService.triggerData = triggerData
-        pendingNotificationContent = notificationContent
-    }
-
-    static func processPendingNotification() {
-        if pendingNotificationContent == nil {
-            return
-        }
-
-        renderPN(pendingNotificationContent!, silent: true)
-
-        pendingNotificationContent = nil
-    }
-
-    /**
-     Requests <code>ImageDownloader</code> to download Image from URL
-
-     - Parameters:
-         - urlString: Web URL of Image
-         - completion: provide UIImage
-     */
-    func getMediaAttachment(for urlString: String, completion: @escaping (UIImage?) -> Void) {
-        guard let url = URL(string: urlString) else {
-            completion(nil)
-            return
-        }
-
-        ImageDownloader.shared.downloadImage(forURL: url) { result in
-            guard let image = try? result.get() else {
-                completion(nil)
-                return
-            }
-            completion(image)
-        }
-    }
-
-    // MARK: Private
-
-    private static var pendingNotificationContent: UNMutableNotificationContent?
-    private static var triggerData: TriggerData?
-
-    private var userInfo: [AnyHashable: Any]
-
     private static func showInAppNotification(_ content: UNMutableNotificationContent, _ image: UIImage?) {
         DispatchQueue.main.async {
             let vc = InAppNotification()
@@ -237,6 +232,33 @@ public class CooeeNotificationService: NSObject {
                 }
             }
         }
+    }
+
+    /**
+     Download the image from the given URL and return the UNNotificationAttachment.
+
+     - Parameter imageURL: The URL of the image to be downloaded.
+     - Returns: The UNNotificationAttachment. Nil if the image could not be downloaded.
+     */
+    private class func getAttachment(from imageURL: String?) -> UNNotificationAttachment? {
+        if imageURL == nil {
+            return nil
+        }
+
+        guard let url = URL(string: imageURL!) else {
+            return nil
+        }
+
+        guard let imageData = NSData(contentsOf: url) else {
+            return nil
+        }
+
+        guard let attachment = UNNotificationAttachment.create(imageFileIdentifier: "image.jpg", data: imageData, options: nil) else {
+            NSLog("Error in UNNotificationAttachment.create()")
+            return nil
+        }
+
+        return attachment
     }
 
     /**
@@ -311,14 +333,14 @@ public class CooeeNotificationService: NSObject {
     private func saveImageAttachment(image: UIImage, forIdentifier identifier: String) -> URL? {
         let tempDirectory = URL(fileURLWithPath: NSTemporaryDirectory())
         let directoryPath = tempDirectory.appendingPathComponent(
-                ProcessInfo.processInfo.globallyUniqueString,
-                isDirectory: true)
+            ProcessInfo.processInfo.globallyUniqueString,
+            isDirectory: true)
 
         do {
             try FileManager.default.createDirectory(
-                    at: directoryPath,
-                    withIntermediateDirectories: true,
-                    attributes: nil)
+                at: directoryPath,
+                withIntermediateDirectories: true,
+                attributes: nil)
 
             let fileURL = directoryPath.appendingPathComponent(identifier)
 

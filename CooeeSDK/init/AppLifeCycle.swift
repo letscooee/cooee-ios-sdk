@@ -50,16 +50,21 @@ class AppLifeCycle: NSObject {
 
     @objc func appMovedToLaunch() {
         runtimeData.setInForeground()
+        runtimeData.setLaunchType(launchType: .ORGANIC)
         _ = sessionManager.checkSessionValidity()
         DispatchQueue.main.async {
             NewSessionExecutor().execute()
         }
-
     }
 
     @objc func appMovedToForeground() {
-        _ = sessionManager.checkSessionValidity()
+        let willCreateNewSession = sessionManager.checkSessionValidity()
+        let isNewSession = willCreateNewSession || runtimeData.isFirstForeground();
         DispatchQueue.main.async {
+            if isNewSession && self.runtimeData.getLaunchType() == .ORGANIC {
+                EngagementTriggerHelper().performOrganicLaunch()
+            }
+
             self.sessionManager.keepSessionAlive()
 
             if self.runtimeData.isFirstForeground() {
@@ -75,7 +80,6 @@ class AppLifeCycle: NSObject {
             let session = Event(eventName: "CE App Foreground", properties: eventProps)
 
             CooeeFactory.shared.safeHttpService.sendEvent(event: session)
-
         }
     }
 

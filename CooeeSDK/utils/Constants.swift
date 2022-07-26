@@ -31,6 +31,7 @@ struct Constants {
     static let STORAGE_SCREENSHOT_SYNC_TIME = "screenshot_sync_time"
     static let STORAGE_ACTIVE_SESSION = "active_session"
     static let STORAGE_LAST_SESSION_USE_TIME = "last_session_use_time"
+    static let STORAGE_NOTIFICATION_ID = "cooee_notification_id"
     // endregion
 
     // KEEP_ALIVE_TIME_IN_MS will be in SECONDS
@@ -69,5 +70,6 @@ struct Constants {
     
     // region SDK Info
     static let VERSION_STRING = "1.3.14"
+    static let VERSION_CODE = 10314
     // endregion
 }
