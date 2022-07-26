@@ -54,6 +54,11 @@ class AppLifeCycle: NSObject {
         _ = sessionManager.checkSessionValidity()
         DispatchQueue.main.async {
             NewSessionExecutor().execute()
+            do {
+                try EngagementTriggerHelper().performOrganicLaunch()
+            } catch {
+                NSLog(error.localizedDescription)
+            }
         }
     }
 
@@ -62,7 +67,11 @@ class AppLifeCycle: NSObject {
         let isNewSession = willCreateNewSession || runtimeData.isFirstForeground();
         DispatchQueue.main.async {
             if isNewSession && self.runtimeData.getLaunchType() == .ORGANIC {
-                EngagementTriggerHelper().performOrganicLaunch()
+                do {
+                    try EngagementTriggerHelper().performOrganicLaunch()
+                } catch {
+                    NSLog(error.localizedDescription)
+                }
             }
 
             self.sessionManager.keepSessionAlive()

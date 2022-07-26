@@ -67,7 +67,7 @@ class SentryHelper {
      - Parameter message: Any custom message to send.
      */
     public func capture(message: String) {
-        NSLog("\(message)")
+        NSLog("**********\n\n\(message)\n\n**********")
         SentrySDK.capture(message: message)
     }
 
@@ -80,10 +80,7 @@ class SentryHelper {
     }
 
     public func capture(message: String, error: NSError) {
-        NSLog("""
-              \(Constants.TAG) \(message)
-              \n\(error)
-              """)
+        NSLog("**********\n\n\(error)\n\n**********")
 
         if (!enabled) {
             return;

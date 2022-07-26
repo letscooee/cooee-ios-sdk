@@ -37,8 +37,8 @@ class InAppTriggerScene: UIView {
 
     @objc func renderNewInApp() {
         let sentryTransaction = SentrySDK.startTransaction(
-            name: SentryTransaction.COOEE_INAPP_SCENE.rawValue,
-            operation: "load"
+                name: SentryTransaction.COOEE_INAPP_SCENE.rawValue,
+                operation: "load"
         )
 
         do {
@@ -224,7 +224,8 @@ class InAppTriggerScene: UIView {
                     self.parentView.frame = CGRect(x: 0 + UIScreen.main.bounds.width, y: 0 - UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             }
         }, completion: { (_: Bool) in
-            self.parentView.removeFromSuperview()
+            self.parentView?.removeFromSuperview()
+            self.parentView = nil;
             NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
         })
 

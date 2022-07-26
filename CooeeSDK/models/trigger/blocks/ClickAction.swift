@@ -35,7 +35,7 @@ struct ClickAction: HandyJSON {
     var pmpt: Int?
     var up: [String: Any]?
     var kv: [String: Any]?
-    var share: [String: Any]?
+    var share: ShareContent?
     var close: Bool? = false
     var ntvAR: AppAR?
     var open: Int?

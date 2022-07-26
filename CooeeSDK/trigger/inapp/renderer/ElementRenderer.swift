@@ -71,12 +71,12 @@ struct ElementRenderer: View {
                 let buttonElement = ButtonElement.deserialize(from: child)
 
                 if buttonElement!.getCalculatedWidth() ?? 0 <= deviceWidth {
-                    ButtonRenderer(buttonElement!, triggerContext)
+                    TextRenderer(buttonElement!, triggerContext)
                             .modifier(AbstractInAppRenderer(elementData: buttonElement!, triggerContext: triggerContext, isText: true))
                 } else {
                     ZStack {
                     }.background(
-                            ButtonRenderer(buttonElement!, triggerContext)
+                            TextRenderer(buttonElement!, triggerContext)
                                     .modifier(AbstractInAppRenderer(elementData: buttonElement!, triggerContext: triggerContext, isText: true))
 
                                     // Reference to add GeometryReader & onPreferenceChange which will help to keep watch on height of element

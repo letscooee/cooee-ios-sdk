@@ -4,6 +4,7 @@
 
 import Foundation
 import SwiftUI
+
 /**
  Renders a ImageElement
 
@@ -14,10 +15,10 @@ struct ImageRenderer<Placeholder: View, ConfiguredImage: View>: View {
     // MARK: Lifecycle
 
     init(
-        url: URL,
-        @ViewBuilder placeholder: @escaping () -> Placeholder,
-        @ViewBuilder image: @escaping (GIFImageView) -> ConfiguredImage,
-        data: BaseElement
+            url: URL,
+            @ViewBuilder placeholder: @escaping () -> Placeholder,
+            @ViewBuilder image: @escaping (GIFImageView) -> ConfiguredImage,
+            data: BaseElement
     ) {
         self.url = url
         self.placeholder = placeholder
@@ -34,9 +35,9 @@ struct ImageRenderer<Placeholder: View, ConfiguredImage: View>: View {
 
     var body: some View {
         imageContent
-            .onReceive(imageLoader.$image) { imageData in
-                self.imageData = imageData
-            }
+                .onReceive(imageLoader.$image) { imageData in
+                    self.imageData = imageData
+                }
     }
 
     // MARK: Private
@@ -68,9 +69,11 @@ class ImageLoaderService: ObservableObject {
 
     func loadImage(for url: URL) {
         let task = URLSession.shared.dataTask(with: url) { data, _, _ in
-            guard let data = data else { return }
+            guard let data = data else {
+                return
+            }
             DispatchQueue.main.async {
-                self.image = UIImage.gif(data: data)!
+                self.image = UIImage.gif(data: data, url: url.absoluteString) ?? UIImage()
             }
         }
         task.resume()
