@@ -68,7 +68,7 @@ public class CooeeNotificationService: NSObject {
 
         let count = parts.count - 1
 
-        for index in 0 ... count {
+        for index in 0...count {
             string = "\(string) \(parts[index].getPartText().trimmingCharacters(in: .newlines))"
         }
 
@@ -151,7 +151,7 @@ public class CooeeNotificationService: NSObject {
             return content
         }
 
-        CooeeNotificationService.sendEvent("CE Notification Received", withTriggerData: triggerData!)
+        CooeeNotificationService.sendEvent(Constants.EVENT_NOTIFICATION_RECEIVED, withTriggerData: triggerData!)
 
         let title: String? = getTextFromPart(from: pushNotification.getTitle())
         let subTitle: String? = getTextFromPart(from: pushNotification.getSubTitle())
@@ -181,7 +181,7 @@ public class CooeeNotificationService: NSObject {
             content.attachments = attachments
         }
 
-        sendEvent("CE Notification Viewed", withTriggerData: triggerData!)
+        sendEvent(Constants.EVENT_NOTIFICATION_VIEWED, withTriggerData: triggerData!)
         return content
     }
 
@@ -226,7 +226,7 @@ public class CooeeNotificationService: NSObject {
         UNUserNotificationCenter.current().add(request) { data in
             if !silent {
                 if data == nil {
-                    CooeeNotificationService.sendEvent("CE Notification Viewed", withTriggerData: triggerData!)
+                    CooeeNotificationService.sendEvent(Constants.EVENT_NOTIFICATION_VIEWED, withTriggerData: triggerData!)
                 } else {
                     CooeeFactory.shared.sentryHelper.capture(error: data! as NSError)
                 }
@@ -287,7 +287,7 @@ public class CooeeNotificationService: NSObject {
             return
         }
 
-        CooeeNotificationService.sendEvent("CE Notification Received", withTriggerData: CooeeNotificationService.triggerData!)
+        CooeeNotificationService.sendEvent(Constants.EVENT_NOTIFICATION_RECEIVED, withTriggerData: CooeeNotificationService.triggerData!)
 
         UNUserNotificationCenter.current().getNotificationSettings { settings in
 
@@ -333,14 +333,14 @@ public class CooeeNotificationService: NSObject {
     private func saveImageAttachment(image: UIImage, forIdentifier identifier: String) -> URL? {
         let tempDirectory = URL(fileURLWithPath: NSTemporaryDirectory())
         let directoryPath = tempDirectory.appendingPathComponent(
-            ProcessInfo.processInfo.globallyUniqueString,
-            isDirectory: true)
+                ProcessInfo.processInfo.globallyUniqueString,
+                isDirectory: true)
 
         do {
             try FileManager.default.createDirectory(
-                at: directoryPath,
-                withIntermediateDirectories: true,
-                attributes: nil)
+                    at: directoryPath,
+                    withIntermediateDirectories: true,
+                    attributes: nil)
 
             let fileURL = directoryPath.appendingPathComponent(identifier)
 

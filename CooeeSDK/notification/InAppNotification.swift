@@ -21,16 +21,16 @@ public class InAppNotification: UIViewController {
         view = UIView()
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture(_:)))
-        let mainHeight = CGFloat((10 * UIScreen.main.bounds.height)/100)
+        let mainHeight = CGFloat((10 * UIScreen.main.bounds.height) / 100)
         swipe.direction = .up
         view.backgroundColor = UIColor.white.withAlphaComponent(0.0)
         view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
 
         stackView = UIStackView()
         stackView.addBlurredBackground(style: .systemChromeMaterialLight, alpha: 0)
-        let mainWidth = CGFloat((90 * UIScreen.main.bounds.width)/100)
+        let mainWidth = CGFloat((90 * UIScreen.main.bounds.width) / 100)
 
-        stackView.frame = CGRect(x: CGFloat((5 * UIScreen.main.bounds.width)/100), y: 40, width: mainWidth, height: mainHeight)
+        stackView.frame = CGRect(x: CGFloat((5 * UIScreen.main.bounds.width) / 100), y: 40, width: mainWidth, height: mainHeight)
         stackView.axis = .horizontal
         stackView.layer.cornerRadius = 15
         stackView.distribution = .fillProportionally
@@ -54,7 +54,7 @@ public class InAppNotification: UIViewController {
 
         let splitContent = image != nil
 
-        let width = splitContent ? (stackView.frame.width * 75)/100 : stackView.frame.width
+        let width = splitContent ? (stackView.frame.width * 75) / 100 : stackView.frame.width
 
         let verticalStack = UIStackView()
         verticalStack.axis = .vertical
@@ -75,7 +75,7 @@ public class InAppNotification: UIViewController {
         title.font = UIFont.boldSystemFont(ofSize: 16)
         title.textColor = UIColor.black
         title.numberOfLines = 1
-        title.frame.size = CGSize(width: width - 20, height: (mainHeight/3) - 10)
+        title.frame.size = CGSize(width: width - 20, height: (mainHeight / 3) - 10)
         title.widthAnchor.constraint(equalToConstant: width - 20).isActive = true
 
         let body = UILabel()
@@ -135,14 +135,14 @@ public class InAppNotification: UIViewController {
         }
         stackView.autoresizesSubviews = true
         // stackView.distribution = .fill
-        CooeeNotificationService.sendEvent("CE Notification Viewed", withTriggerData: triggerData)
-         Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(triggerJob), userInfo: nil, repeats: true)
+        CooeeNotificationService.sendEvent(Constants.EVENT_NOTIFICATION_VIEWED, withTriggerData: triggerData)
+        Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(triggerJob), userInfo: nil, repeats: true)
     }
 
     @objc public func handleTap(_ sender: UITapGestureRecognizer) {
         dismissAnimation()
         let engagementTriggerHelper = EngagementTriggerHelper()
-        CooeeNotificationService.sendEvent("CE Notification Clicked", withTriggerData: triggerData)
+        CooeeNotificationService.sendEvent(Constants.EVENT_NOTIFICATION_CLICKED, withTriggerData: triggerData)
 
         guard let notificationClickAction = triggerData.getPushNotification()?.getClickAction() else {
             engagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
@@ -184,7 +184,7 @@ public class InAppNotification: UIViewController {
 
     func dismissAnimation() {
         UIView.animate(withDuration: 0.5, animations: { [self] in
-            self.stackView.frame = CGRect(x: CGFloat((5 * UIScreen.main.bounds.width)/100), y: 0 - self.stackView.bounds.height, width: self.stackView.bounds.width, height: self.stackView.bounds.height)
+            self.stackView.frame = CGRect(x: CGFloat((5 * UIScreen.main.bounds.width) / 100), y: 0 - self.stackView.bounds.height, width: self.stackView.bounds.width, height: self.stackView.bounds.height)
         }, completion: { (_: Bool) in
             self.stackView.removeFromSuperview()
             self.dismiss(animated: false, completion: nil)
@@ -219,7 +219,9 @@ extension UILabel {
     }
 
     override open var intrinsicContentSize: CGSize {
-        guard let text = self.text else { return super.intrinsicContentSize }
+        guard let text = self.text else {
+            return super.intrinsicContentSize
+        }
 
         var contentSize = super.intrinsicContentSize
         var textWidth: CGFloat = frame.size.width
@@ -233,8 +235,8 @@ extension UILabel {
         }
 
         let newSize = text.boundingRect(with: CGSize(width: textWidth, height: CGFloat.greatestFiniteMagnitude),
-                                        options: NSStringDrawingOptions.usesLineFragmentOrigin,
-                                        attributes: [NSAttributedString.Key.font: font!], context: nil)
+                options: NSStringDrawingOptions.usesLineFragmentOrigin,
+                attributes: [NSAttributedString.Key.font: font!], context: nil)
 
         contentSize.height = ceil(newSize.size.height) + insetsHeight
         contentSize.width = ceil(newSize.size.width) + insetsWidth

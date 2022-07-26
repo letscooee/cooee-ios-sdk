@@ -118,7 +118,26 @@ public final class CooeeSDK: NSObject {
      */
     @objc
     public func setCurrentScreen(screenName: String) {
-        runtimeData.setCurrentScreenName(name: screenName)
+        if screenName.isEmpty {
+            NSLog("Trying to set empty screen name")
+            return
+        }
+
+        /*
+         * Set current screen name to runtime as soon as possible because threads can be on hold if processing is
+         * slow/CPU is not available.
+         */
+        let previousScreen = self.runtimeData.getCurrentScreenName()
+        self.runtimeData.setCurrentScreenName(name: screenName)
+
+        DispatchQueue.global().async {
+            let event = Event(eventName: Constants.EVENT_SCREEN_VIEW,
+                    properties: ["ps": previousScreen])
+
+
+            self.safeHttpService.sendEvent(event: event);
+        }
+
     }
 
     /**
@@ -178,7 +197,7 @@ public final class CooeeSDK: NSObject {
 
         switch response.actionIdentifier {
             case UNNotificationDismissActionIdentifier:
-                CooeeNotificationService.sendEvent("CE Notification Cancelled", withTriggerData: triggerData)
+                CooeeNotificationService.sendEvent(Constants.EVENT_NOTIFICATION_CANCELLED, withTriggerData: triggerData)
                 removePendingTrigger(triggerData)
             case UNNotificationDefaultActionIdentifier:
                 notificationClicked(triggerData, containsSDKCode: containsSDKCode)
@@ -248,7 +267,7 @@ public final class CooeeSDK: NSObject {
     private func notificationClicked(_ triggerData: TriggerData, containsSDKCode: Bool) {
         runtimeData.setLaunchType(launchType: .PUSH_CLICK)
         if triggerData.getPushNotification() != nil {
-            CooeeNotificationService.sendEvent("CE Notification Clicked", withTriggerData: triggerData)
+            CooeeNotificationService.sendEvent(Constants.EVENT_NOTIFICATION_CLICKED, withTriggerData: triggerData)
         }
 
         guard let notificationClickAction = triggerData.getPushNotification()?.getClickAction() else {
