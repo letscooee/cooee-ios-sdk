@@ -50,17 +50,18 @@ class AppLifeCycle: NSObject {
 
     @objc func appMovedToLaunch() {
         runtimeData.setInForeground()
+        runtimeData.setLaunchType(launchType: .ORGANIC)
         _ = sessionManager.checkSessionValidity()
         DispatchQueue.main.async {
             NewSessionExecutor().execute()
-            EngagementTriggerHelper().performOrganicLaunch()
         }
     }
 
     @objc func appMovedToForeground() {
-        let willSessionConclude = sessionManager.checkSessionValidity()
+        let willCreateNewSession = sessionManager.checkSessionValidity()
+        let isNewSession = willCreateNewSession || runtimeData.isFirstForeground();
         DispatchQueue.main.async {
-            if willSessionConclude {
+            if isNewSession && self.runtimeData.getLaunchType() == .ORGANIC {
                 EngagementTriggerHelper().performOrganicLaunch()
             }
 

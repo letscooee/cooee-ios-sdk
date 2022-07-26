@@ -246,6 +246,7 @@ public final class CooeeSDK: NSObject {
      - Parameter containsSDKCode: true if notification contains sdkCode
      */
     private func notificationClicked(_ triggerData: TriggerData, containsSDKCode: Bool) {
+        runtimeData.setLaunchType(launchType: .PUSH_CLICK)
         if triggerData.getPushNotification() != nil {
             CooeeNotificationService.sendEvent("CE Notification Clicked", withTriggerData: triggerData)
         }

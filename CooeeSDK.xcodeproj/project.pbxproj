@@ -145,6 +145,7 @@
 		AC0B8E543C14FC65E6EE0093 /* AbstractInAppRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8CAD418C022E74D59D3F /* AbstractInAppRenderer.swift */; };
 		AC0B8E5C2D7FCA755C9F8910 /* TextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B86FED7478E8BCDAAC99D /* TextElement.swift */; };
 		AC0B8E841AD56FEB009D2A89 /* SessionConcludeTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */; };
+		AC0B8EC39677FCEF6537D774 /* LaunchType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8ED04FA32D4AD2745069 /* LaunchType.swift */; };
 		AC0B8F9ACEAD15992DF79CC2 /* EngagementTriggerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B804DEA9B9A9EB7E1FD5F /* EngagementTriggerHelper.swift */; };
 		BEB73FBAC60DCFBA7C64AEFD /* Pods_NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 940E9EC9E9208D74AAF0FF42 /* Pods_NotificationService.framework */; };
 		E2FACEB3E0C1C0E425AADDC6 /* Pods_Cooee_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44E0CBC1B3361F69A091296 /* Pods_Cooee_iOS.framework */; };
@@ -358,6 +359,7 @@
 		AC0B8D73DB6AA189BD02953E /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		AC0B8D9905508EE356785965 /* ElementType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementType.swift; sourceTree = "<group>"; };
 		AC0B8EA2BBEED727BA8558D9 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		AC0B8ED04FA32D4AD2745069 /* LaunchType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchType.swift; sourceTree = "<group>"; };
 		AC0B8ED273C05CC69495D48B /* PendingTaskService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingTaskService.swift; sourceTree = "<group>"; };
 		AC0B8F1A3240B22206AC68B6 /* PendingTaskType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingTaskType.swift; sourceTree = "<group>"; };
 		AC0B8FA4CD8ACA8151E9B65D /* DeviceDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceDetails.swift; sourceTree = "<group>"; };
@@ -861,6 +863,7 @@
 			children = (
 				75DD87C6271ECCF000A272BB /* trigger */,
 				AC0B8D3AE6909072583CC338 /* WrapperType.swift */,
+				AC0B8ED04FA32D4AD2745069 /* LaunchType.swift */,
 			);
 			path = enums;
 			sourceTree = "<group>";
@@ -1440,6 +1443,7 @@
 				AC0B8CE48A6861AA5B35C879 /* CooeeCTADelegate.swift in Sources */,
 				AC0B801AE5F5B4DC3DD73942 /* DeviceDetails.swift in Sources */,
 				75B9BD722850B89C00F414B1 /* CacheTriggerContent.swift in Sources */,
+				AC0B8EC39677FCEF6537D774 /* LaunchType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
