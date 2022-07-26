@@ -123,11 +123,17 @@ public final class CooeeSDK: NSObject {
             return
         }
 
+        /*
+         * Set current screen name to runtime as soon as possible because threads can be on hold if processing is
+         * slow/CPU is not available.
+         */
+        let previousScreen = self.runtimeData.getCurrentScreenName()
+        self.runtimeData.setCurrentScreenName(name: screenName)
+
         DispatchQueue.global().async {
             let event = Event(eventName: Constants.EVENT_SCREEN_VIEW,
-                    properties: ["ps": self.runtimeData.getCurrentScreenName()])
+                    properties: ["ps": previousScreen])
 
-            self.runtimeData.setCurrentScreenName(name: screenName)
 
             self.safeHttpService.sendEvent(event: event);
         }
