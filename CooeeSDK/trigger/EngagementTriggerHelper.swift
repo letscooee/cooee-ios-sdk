@@ -16,7 +16,7 @@ public class EngagementTriggerHelper {
     // MARK: Lifecycle
 
     init() {
-        cacheTriggerContent = CacheTriggerContent()
+        cacheTriggerContent = PendingTriggerService()
     }
 
     // MARK: Public
@@ -92,7 +92,7 @@ public class EngagementTriggerHelper {
      Gets latest trigger from database and renders it.
      */
     func performOrganicLaunch() throws {
-        guard let latestTrigger = cacheTriggerContent.getLatestTrigger() else {
+        guard let latestTrigger = cacheTriggerContent.peep() else {
             return
         }
 
@@ -152,7 +152,7 @@ public class EngagementTriggerHelper {
             return
         }
 
-        InAppTriggerHelper.loadLazyData(for: triggerData) { data in
+        LazyTriggerLoader.load(for: triggerData) { data in
             if data.isEmpty {
                 return
             }
@@ -185,7 +185,7 @@ public class EngagementTriggerHelper {
         }
 
         do {
-            if try !data.containValidData() {
+            if try ! data.containValidData() {
                 return
             }
 
@@ -207,17 +207,16 @@ public class EngagementTriggerHelper {
         }
 
         if let triggerConfig = data.getConfig(), shouldRemoveNotification(triggerConfig) {
-
+            UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [notificationId])
         }
 
-        UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [notificationId])
         cacheTriggerContent.removeTrigger(pendingTrigger)
         NSLog("Removed PendingTrigger(id=\(pendingTrigger.id))")
     }
 
     // MARK: Private
 
-    private let cacheTriggerContent: CacheTriggerContent
+    private let cacheTriggerContent: PendingTriggerService
 
     /**
     Check for the ``rmPN`` key in given map to manage notification in the notification tray.

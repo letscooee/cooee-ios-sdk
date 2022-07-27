@@ -93,7 +93,8 @@ extension CooeeBootstrap {
             NSLog("Fail to deserialize triggerData")
             return
         }
-        CacheTriggerContent().loadAndSaveTriggerData(triggerData, forNotification: notificationID)
+
+        PendingTriggerService().lazyLoadAndSave(triggerData, forNotification: notificationID)
         completionHandler(.noData)
     }
 }

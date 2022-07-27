@@ -334,7 +334,7 @@ public final class CooeeSDK: NSObject {
                 return
             }
 
-            CacheTriggerContent().removeTrigger(triggerID)
+            PendingTriggerService().removeTrigger(triggerID)
         }
     }
 }

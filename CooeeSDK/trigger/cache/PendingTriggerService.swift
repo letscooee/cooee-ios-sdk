@@ -13,7 +13,7 @@ import Foundation
  - Author: Ashish Gaikwad
  - Since: 1.3.16
  */
-class CacheTriggerContent {
+class PendingTriggerService {
     // MARK: Lifecycle
 
     init() {
@@ -31,7 +31,7 @@ class CacheTriggerContent {
        - triggerData: The trigger data to be inserted.
        - notificationID: The notification ID of the trigger.
      */
-    func loadAndSaveTriggerData(_ triggerData: TriggerData, forNotification notificationID: String) {
+    func lazyLoadAndSave(_ triggerData: TriggerData, forNotification notificationID: String) {
 
         if !shouldFetchInApp(triggerData) {
             return
@@ -41,7 +41,7 @@ class CacheTriggerContent {
         let pendingTrigger = pendingTriggerDAO.insert(pendingTriggerModel)
         NSLog("Created PendingTrigger(id=\(pendingTrigger.id))")
 
-        InAppTriggerHelper.loadLazyData(for: triggerData) { rawTriggerData in
+        LazyTriggerLoader.load(for: triggerData) { rawTriggerData in
             if rawTriggerData.isEmpty {
                 return
             }
@@ -97,14 +97,12 @@ class CacheTriggerContent {
 
      - Returns: Latest pending trigger from stack
      */
-    func getLatestTrigger() -> PendingTrigger? {
-        let pendingTriggerList = pendingTriggerDAO.fetchTriggers()
-
-        if pendingTriggerList.isEmpty {
+    func peep() -> PendingTrigger? {
+        guard let pendingTrigger = pendingTriggerDAO.getFirst() else {
             return nil
         }
 
-        return pendingTriggerList.first
+        return pendingTrigger
     }
 
     /**

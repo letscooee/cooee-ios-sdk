@@ -66,6 +66,23 @@ class PendingTriggerDAO {
         return [PendingTrigger]()
     }
 
+    func getFirst() -> PendingTrigger? {
+        let context = database.viewContext
+
+        let fetchRequest = NSFetchRequest<PendingTrigger>(entityName: "PendingTrigger")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "triggerTime", ascending: false)]
+        fetchRequest.fetchLimit = 1
+
+        do {
+            let pendingTriggers = try context.fetch(fetchRequest)
+            if pendingTriggers.count > 0 {
+                return pendingTriggers[0]
+            }
+        } catch {
+        }
+        return nil
+    }
+
     /**
      Access Pending trigger from database with given trigger ID.
 
@@ -141,8 +158,8 @@ class PendingTriggerDAO {
         } catch {
         }
     }
-    
-    func deleteAll(){
+
+    func deleteAll() {
         let context = database.viewContext
 
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "PendingTrigger")

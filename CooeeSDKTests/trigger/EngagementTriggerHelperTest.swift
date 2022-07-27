@@ -114,7 +114,7 @@ class EngagementTriggerHelperTest: BaseTestCase {
 
     func test_render_in_app_from_valid_push_notification_with_pending_trigger() throws {
         XCTAssertNotNil(triggerData)
-        CacheTriggerContent().loadAndSaveTriggerData(triggerData, forNotification: "")
+        PendingTriggerService().lazyLoadAndSave(triggerData, forNotification: "")
         try assertRenderInAppFromPushNotification(triggerData, false, true)
     }
 
@@ -164,12 +164,12 @@ class EngagementTriggerHelperTest: BaseTestCase {
 
     // TODO: need to update the test case to check the pending trigger
     func organic_launch_database() throws {
-        let cacheContnet = CacheTriggerContent()
-        cacheContnet.loadAndSaveTriggerData(triggerData, forNotification: "test")
+        let cacheContnet = PendingTriggerService()
+        cacheContnet.lazyLoadAndSave(triggerData, forNotification: "test")
 
         var proceed = false
         while !proceed {
-            let latestTrigger = cacheContnet.getLatestTrigger()
+            let latestTrigger = cacheContnet.peep()
             if latestTrigger?.loadedLazyData ?? false {
                 proceed = true
             }
@@ -185,7 +185,7 @@ class EngagementTriggerHelperTest: BaseTestCase {
         PendingTriggerDAO().deleteAll()
         samplePayloadMap.updateValue("T1", forKey: "id")
         let triggerData = TriggerData.deserialize(from: samplePayloadMap)
-        CacheTriggerContent().loadAndSaveTriggerData(triggerData!, forNotification: "test")
+        PendingTriggerService().lazyLoadAndSave(triggerData!, forNotification: "test")
         try mockEngagementTriggerHelper.performOrganicLaunch()
         XCTAssertTrue(mockEngagementTriggerHelper.hasCalledLoadLazyData)
         PendingTriggerDAO().deleteAll()

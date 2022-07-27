@@ -11,14 +11,14 @@ import XCTest
 
 class CacheTriggerContentTest: BaseTestCase {
     var mockPendingTriggerDAO: MockPendingTriggerDAO!
-    var cacheTriggerContent: CacheTriggerContent!
+    var cacheTriggerContent: PendingTriggerService!
     let delayExpectation = XCTestExpectation()
 
     override func setUpWithError() throws {
         try super.setUpWithError()
 
         mockPendingTriggerDAO = MockPendingTriggerDAO()
-        cacheTriggerContent = CacheTriggerContent(mockPendingTriggerDAO)
+        cacheTriggerContent = PendingTriggerService(mockPendingTriggerDAO)
         delayExpectation.isInverted = true
     }
 
@@ -33,7 +33,7 @@ class CacheTriggerContentTest: BaseTestCase {
     }
 
     func insertTestCase(_ data: TriggerData) {
-        cacheTriggerContent.loadAndSaveTriggerData(data, forNotification: "test")
+        cacheTriggerContent.lazyLoadAndSave(data, forNotification: "test")
         XCTAssertTrue(mockPendingTriggerDAO.hasCalledInsert)
     }
 
@@ -81,7 +81,7 @@ class CacheTriggerContentTest: BaseTestCase {
             insertTestCase(trigger)
         }
 
-        let pendingTrigger = cacheTriggerContent.getLatestTrigger()
+        let pendingTrigger = cacheTriggerContent.peep()
         let pendingTriggers = mockPendingTriggerDAO.fetchTriggers()
 
         XCTAssertEqual(pendingTriggers.count, 5)
@@ -91,7 +91,7 @@ class CacheTriggerContentTest: BaseTestCase {
 
     func test_get_latest_trigger_on_empty_table() {
         flushDatabase()
-        let pendingTrigger = cacheTriggerContent.getLatestTrigger()
+        let pendingTrigger = cacheTriggerContent.peep()
         let pendingTriggers = mockPendingTriggerDAO.fetchTriggers()
 
         XCTAssertEqual(pendingTriggers.count, 0)
@@ -204,7 +204,7 @@ class MockPendingTriggerDAO: PendingTriggerDAO {
     }
 }
 
-extension CacheTriggerContent {
+extension PendingTriggerService {
     convenience init(_ dao: PendingTriggerDAO) {
         self.init()
         pendingTriggerDAO = dao

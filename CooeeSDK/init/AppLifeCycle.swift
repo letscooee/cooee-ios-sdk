@@ -51,24 +51,18 @@ class AppLifeCycle: NSObject {
         runtimeData.setLaunchType(launchType: .ORGANIC)
         DispatchQueue.main.async {
             NewSessionExecutor().execute()
-            do {
-                try EngagementTriggerHelper().performOrganicLaunch()
-            } catch {
-                NSLog(error.localizedDescription)
-            }
         }
     }
 
     @objc func appMovedToForeground() {
         let willCreateNewSession = sessionManager.checkSessionValidity()
         let isNewSession = willCreateNewSession || runtimeData.isFirstForeground();
-
         DispatchQueue.main.async {
             if isNewSession && self.runtimeData.getLaunchType() == .ORGANIC {
                 do {
                     try EngagementTriggerHelper().performOrganicLaunch()
                 } catch {
-                    NSLog(error.localizedDescription)
+                    NSLog("Error: \(error.localizedDescription)")
                 }
             }
 
