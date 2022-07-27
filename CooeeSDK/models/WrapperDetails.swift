@@ -13,10 +13,10 @@ import Foundation
 struct WrapperDetails {
     // MARK: Lifecycle
 
-    init(_ versionCode: Int, _ version: String, _ wrapperName: WrapperType) {
+    init(_ versionCode: Int, _ version: String, _ wrapperType: WrapperType) {
         code = versionCode
         ver = version
-        name = wrapperName.rawValue
+        name = wrapperType.rawValue
     }
 
     // MARK: Internal

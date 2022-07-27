@@ -9,8 +9,9 @@ import Foundation
 import HandyJSON
 
 class AbstractPendingTaskProcessor<T: HandyJSON>: PendingTaskProcessor {
-    
-    func process(_ task: PendingTasks) {}
+
+    func process(_ task: PendingTasks) {
+    }
 
     func canProcess(_ task: PendingTasks) -> Bool {
         return false
@@ -23,14 +24,14 @@ class AbstractPendingTaskProcessor<T: HandyJSON>: PendingTaskProcessor {
      */
     func deserialize(_ task: PendingTasks) -> T {
         if let decodedTask = T.deserialize(from: task.data), task.type != PendingTaskType.API_UPDATE_PROFILE.rawValue,
-           task.type != PendingTaskType.API_DEVICE_PROFILE.rawValue{
+           task.type != PendingTaskType.API_DEVICE_PROFILE.rawValue {
             return decodedTask
         }
-        
-        if let decodedTask = task.data?.convertToDictionary(){
+
+        if let decodedTask = task.data?.convertToDictionary() {
             return decodedTask as! T
         }
-        
+
         return [String: Any]() as! T
     }
 
