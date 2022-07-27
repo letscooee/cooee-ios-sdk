@@ -35,5 +35,5 @@ struct PendingTaskModel {
     var data: String
     var lastAttempted: Date?
     var type: PendingTaskType
-    var sdkVersion: Int = SDKInfo.shared.cachedInfo.sdkVersionCode
+    let sdkVersion: Int = SDKInfo.shared.cachedInfo.sdkVersionCode
 }

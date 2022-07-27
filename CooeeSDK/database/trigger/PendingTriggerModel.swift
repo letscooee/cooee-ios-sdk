@@ -27,11 +27,11 @@ class PendingTriggerModel {
     }
 
     init(triggerData: TriggerData, notificationId: String? = nil) {
-        triggerId = triggerData.id ?? ""
-        self.notificationId = notificationId ?? ""
+        triggerId = triggerData.id!
+        self.notificationId = notificationId!
         triggerTime = Date()
         scheduleAt = Date()
-        self.triggerData = triggerData.toJSONString() ?? ""
+        self.triggerData = triggerData.toJSONString()!
         sdkCode = SDKInfo.shared.cachedInfo.sdkVersionCode
         loadedLazyData = false
     }

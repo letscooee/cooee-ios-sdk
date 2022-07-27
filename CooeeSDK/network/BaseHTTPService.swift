@@ -78,7 +78,7 @@ class BaseHTTPService {
     let commonHeaders = CommonHeaders()
     var isTesting: Bool = false
 
-    func sendFirebaseToken(token: String?) throws {
+    func sendPushToken(token: String?) throws {
         if isTesting {
             return
         }

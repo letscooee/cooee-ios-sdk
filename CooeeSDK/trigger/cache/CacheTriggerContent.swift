@@ -40,6 +40,7 @@ class CacheTriggerContent {
         let pendingTriggerModel = PendingTriggerModel(triggerData: triggerData, notificationId: notificationID)
         let pendingTrigger = pendingTriggerDAO.insert(pendingTriggerModel)
         NSLog("Created PendingTrigger(id=\(pendingTrigger.id))")
+
         InAppTriggerHelper.loadLazyData(for: triggerData) { rawTriggerData in
             if rawTriggerData.isEmpty {
                 return
@@ -121,7 +122,7 @@ class CacheTriggerContent {
      - Parameter triggerId: The trigger ID to be searched.
      - Returns: The pending trigger with given trigger ID.
      */
-    func getTriggerBy(_ triggerId: String) -> PendingTrigger? {
+    func getTriggerByTriggerId(_ triggerId: String) -> PendingTrigger? {
         pendingTriggerDAO.fetchTriggerWithTriggerId(triggerId)
     }
 

@@ -102,7 +102,7 @@ class CacheTriggerContentTest: BaseTestCase {
         XCTAssertNotNil(samplePayloadMap)
         insertManyTriggers()
 
-        let pendingTrigger = cacheTriggerContent.getTriggerBy("T3")
+        let pendingTrigger = cacheTriggerContent.getTriggerByTriggerId("T3")
         let pendingTriggers = mockPendingTriggerDAO.fetchTriggers()
 
         XCTAssertEqual(pendingTriggers.count, 4)
@@ -114,7 +114,7 @@ class CacheTriggerContentTest: BaseTestCase {
         XCTAssertNotNil(samplePayloadMap)
         insertManyTriggers()
 
-        let pendingTrigger = cacheTriggerContent.getTriggerBy("T10")
+        let pendingTrigger = cacheTriggerContent.getTriggerByTriggerId("T10")
         let pendingTriggers = mockPendingTriggerDAO.fetchTriggers()
 
         XCTAssertEqual(pendingTriggers.count, 4)
@@ -127,7 +127,7 @@ class CacheTriggerContentTest: BaseTestCase {
         insertManyTriggers()
 
         cacheTriggerContent.removeTrigger("T3")
-        let pendingTrigger = cacheTriggerContent.getTriggerBy("T3")
+        let pendingTrigger = cacheTriggerContent.getTriggerByTriggerId("T3")
         let pendingTriggers = mockPendingTriggerDAO.fetchTriggers()
 
         XCTAssertNil(pendingTrigger)
@@ -150,9 +150,9 @@ class CacheTriggerContentTest: BaseTestCase {
         XCTAssertNotNil(samplePayloadMap)
         insertManyTriggers()
 
-        let pendingTrigger = cacheTriggerContent.getTriggerBy("T3")
+        let pendingTrigger = cacheTriggerContent.getTriggerByTriggerId("T3")
         cacheTriggerContent.removeTrigger(pendingTrigger!)
-        let output = cacheTriggerContent.getTriggerBy("T3")
+        let output = cacheTriggerContent.getTriggerByTriggerId("T3")
         let pendingTriggers = mockPendingTriggerDAO.fetchTriggers()
 
         XCTAssertNil(output)

@@ -128,7 +128,7 @@ public class EngagementTriggerHelper {
             loadLazyData(for: triggerData)
         }
 
-        guard let pendingTrigger = cacheTriggerContent.getTriggerBy(triggerData.id!) else {
+        guard let pendingTrigger = cacheTriggerContent.getTriggerByTriggerId(triggerData.id!) else {
             return
         }
 
@@ -158,7 +158,7 @@ public class EngagementTriggerHelper {
             }
 
             var triggerData = triggerData
-            triggerData.setInAppTrigger(inAppTrigger: TriggerData.fromHSON(from: data).getInAppTrigger())
+            triggerData.setInAppTrigger(inAppTrigger: TriggerData.fromJSON(from: data).getInAppTrigger())
 
             do {
                 try self.renderInAppTrigger(triggerData)
@@ -200,7 +200,7 @@ public class EngagementTriggerHelper {
             throw error
         }
 
-        guard let pendingTrigger = cacheTriggerContent.getTriggerBy(data.id!),
+        guard let pendingTrigger = cacheTriggerContent.getTriggerByTriggerId(data.id!),
               let notificationId = pendingTrigger.notificationId
         else {
             return

@@ -63,6 +63,7 @@ class AppLifeCycle: NSObject {
     @objc func appMovedToForeground() {
         let willCreateNewSession = sessionManager.checkSessionValidity()
         let isNewSession = willCreateNewSession || runtimeData.isFirstForeground();
+
         DispatchQueue.main.async {
             if isNewSession && self.runtimeData.getLaunchType() == .ORGANIC {
                 do {

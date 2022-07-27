@@ -15,7 +15,7 @@ import HandyJSON
 struct TriggerData: HandyJSON {
     // MARK: Public
 
-    public static func fromHSON(from jsonString: String) -> TriggerData {
+    public static func fromJSON(from jsonString: String) -> TriggerData {
         TriggerData.deserialize(from: jsonString) ?? TriggerData()
     }
 
