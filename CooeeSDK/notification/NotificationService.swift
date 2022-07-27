@@ -15,7 +15,6 @@ public class CooeeNotificationService: NSObject {
     init(userInfo: [AnyHashable: Any]) {
         self.userInfo = userInfo
         super.init()
-        processPN()
     }
 
     // MARK: Public
@@ -75,42 +74,6 @@ public class CooeeNotificationService: NSObject {
         return string
     }
 
-    static func addPendingNotification(_ notificationContent: UNMutableNotificationContent, _ triggerData: TriggerData) {
-        CooeeNotificationService.triggerData = triggerData
-        pendingNotificationContent = notificationContent
-    }
-
-    static func processPendingNotification() {
-        if pendingNotificationContent == nil {
-            return
-        }
-
-        renderPN(pendingNotificationContent!, silent: true)
-
-        pendingNotificationContent = nil
-    }
-
-    /**
-     Requests <code>ImageDownloader</code> to download Image from URL
-
-     - Parameters:
-         - urlString: Web URL of Image
-         - completion: provide UIImage
-     */
-    func getMediaAttachment(for urlString: String, completion: @escaping (UIImage?) -> Void) {
-        guard let url = URL(string: urlString) else {
-            completion(nil)
-            return
-        }
-
-        ImageDownloader.shared.downloadImage(forURL: url) { result in
-            guard let image = try? result.get() else {
-                completion(nil)
-                return
-            }
-            completion(image)
-        }
-    }
 
     // MARK: Private
 
@@ -185,55 +148,6 @@ public class CooeeNotificationService: NSObject {
         return content
     }
 
-    private static func showInAppNotification(_ content: UNMutableNotificationContent, _ image: UIImage?) {
-        DispatchQueue.main.async {
-            let vc = InAppNotification()
-            vc.notificationContent = content
-            vc.triggerData = CooeeNotificationService.triggerData
-            vc.image = image
-            vc.modalPresentationStyle = .overCurrentContext
-
-            if let visibleController = UIApplication.shared.topMostViewController() {
-                visibleController.present(vc, animated: false, completion: nil)
-            }
-        }
-    }
-
-    /**
-     Create  <code>UNNotificationRequest</code> with help of <code>UNMutableNotificationContent</code> and adds that
-      request to  <code>UNUserNotificationCenter</code> and sent "CE Notification Viewed" event
-
-     - Parameter content: Instance of <code>UNMutableNotificationContent</code>
-     - Parameter image: Image to be shown in Notification
-     - Parameter silent: If true, the notification will not be shown in the notification center.
-     */
-    private static func renderPN(_ content: UNMutableNotificationContent, _ image: UIImage? = nil, silent: Bool = false) {
-        let isForeground = CooeeFactory.shared.runtimeData.isInForeground()
-
-        if isForeground {
-            showInAppNotification(content, image)
-            return
-        }
-
-        if silent {
-            content.sound = nil
-        }
-
-        let trigger = silent ? UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false) : UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-        let uuidString = UUID().uuidString
-        let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger)
-
-        UNUserNotificationCenter.current().add(request) { data in
-            if !silent {
-                if data == nil {
-                    CooeeNotificationService.sendEvent(Constants.EVENT_NOTIFICATION_VIEWED, withTriggerData: triggerData!)
-                } else {
-                    CooeeFactory.shared.sentryHelper.capture(error: data! as NSError)
-                }
-            }
-        }
-    }
-
     /**
      Download the image from the given URL and return the UNNotificationAttachment.
 
@@ -276,100 +190,6 @@ public class CooeeNotificationService: NSObject {
      */
     private static func logSentryError(_ logMessage: String) {
         CooeeFactory.shared.sentryHelper.capture(message: logMessage)
-    }
-
-    /**
-     Process <code>userInfo</code> and get <code>triggerData</code> to process PN
-     */
-    private func processPN() {
-        let rawTriggerData = userInfo["triggerData"]
-
-        if rawTriggerData == nil {
-            return
-        }
-
-        CooeeNotificationService.triggerData = TriggerData.deserialize(from: "\(rawTriggerData!)")
-
-        if CooeeNotificationService.triggerData!.v == nil, CooeeNotificationService.triggerData!.v! >= 4.0, CooeeNotificationService.triggerData!.v! < 5.0 {
-            NSLog("Unsupported payload version: v\(CooeeNotificationService.triggerData!.v!)")
-            return
-        }
-
-        if CooeeNotificationService.triggerData!.getPushNotification() == nil {
-            EngagementTriggerHelper().loadLazyData(for: CooeeNotificationService.triggerData!)
-            return
-        }
-
-        guard let pushNotification = CooeeNotificationService.triggerData?.getPushNotification() else {
-            return
-        }
-
-        CooeeNotificationService.sendEvent(Constants.EVENT_NOTIFICATION_RECEIVED, withTriggerData: CooeeNotificationService.triggerData!)
-
-        UNUserNotificationCenter.current().getNotificationSettings { settings in
-
-            guard settings.authorizationStatus == .authorized else {
-                return
-            }
-
-            let content = UNMutableNotificationContent()
-            let title: String = CooeeNotificationService.getTextFromPart(from: pushNotification.getTitle()) ?? ""
-            let body: String = CooeeNotificationService.getTextFromPart(from: pushNotification.getBody()) ?? ""
-
-            content.categoryIdentifier = "COOEENOTIFICATION"
-            content.title = title
-            content.body = body
-            content.sound = UNNotificationSound.default
-            content.userInfo = self.userInfo
-
-            if pushNotification.getSmallImage() == nil {
-                CooeeNotificationService.renderPN(content)
-            } else {
-                self.getMediaAttachment(for: pushNotification.getSmallImage() ?? "") { image in
-                    guard let image = image, let fileURL = self.saveImageAttachment(image: image, forIdentifier: "attachment.png") else {
-                        return
-                    }
-
-                    let attachment = try? UNNotificationAttachment(identifier: "image", url: fileURL, options: nil)
-
-                    content.attachments = [attachment!]
-                    CooeeNotificationService.renderPN(content, image)
-                }
-            }
-        }
-    }
-
-    /**
-     Saves given UIImage to the temporary folder on device
-
-     - Parameters:
-       - image: instance of UIIMage
-       - identifier: Name of the file to be used as identifier of file
-     - Returns: Path URL of image at storage
-     */
-    private func saveImageAttachment(image: UIImage, forIdentifier identifier: String) -> URL? {
-        let tempDirectory = URL(fileURLWithPath: NSTemporaryDirectory())
-        let directoryPath = tempDirectory.appendingPathComponent(
-                ProcessInfo.processInfo.globallyUniqueString,
-                isDirectory: true)
-
-        do {
-            try FileManager.default.createDirectory(
-                    at: directoryPath,
-                    withIntermediateDirectories: true,
-                    attributes: nil)
-
-            let fileURL = directoryPath.appendingPathComponent(identifier)
-
-            guard let imageData = image.pngData() else {
-                return nil
-            }
-
-            try imageData.write(to: fileURL)
-            return fileURL
-        } catch {
-            return nil
-        }
     }
 }
 

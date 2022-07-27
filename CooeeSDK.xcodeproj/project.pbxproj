@@ -81,7 +81,6 @@
 		75B9BD742850BF6200F414B1 /* PendingTriggerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B9BD732850BF6200F414B1 /* PendingTriggerModel.swift */; };
 		75B9BDA928532A6600F414B1 /* CacheTriggerContentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B9BDA828532A6600F414B1 /* CacheTriggerContentTest.swift */; };
 		75C58B4427B3C7E600F840A9 /* DeviceTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C58B4327B3C7E600F840A9 /* DeviceTaskProcessor.swift */; };
-		75C58B4627B3C88700F840A9 /* InAppNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C58B4527B3C88700F840A9 /* InAppNotification.swift */; };
 		75C58B4727B3CDBB00F840A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 751BC79426F31162002D8358 /* Main.storyboard */; };
 		75D0238627C67023009A320B /* ObjectID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D0238527C67023009A320B /* ObjectID.swift */; };
 		75D5A79F27BD25360028F742 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D5A79E27BD25360028F742 /* NotificationService.swift */; };
@@ -146,8 +145,8 @@
 		AC0B8E543C14FC65E6EE0093 /* AbstractInAppRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8CAD418C022E74D59D3F /* AbstractInAppRenderer.swift */; };
 		AC0B8E5C2D7FCA755C9F8910 /* TextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B86FED7478E8BCDAAC99D /* TextElement.swift */; };
 		AC0B8E841AD56FEB009D2A89 /* SessionConcludeTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */; };
-		AC0B8EC39677FCEF6537D774 /* LaunchType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8ED04FA32D4AD2745069 /* LaunchType.swift */; };
 		AC0B8E9E664B47C20265F25C /* InvalidTriggerDataException.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B82D4AE18F74D48582520 /* InvalidTriggerDataException.swift */; };
+		AC0B8EC39677FCEF6537D774 /* LaunchType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8ED04FA32D4AD2745069 /* LaunchType.swift */; };
 		AC0B8F9ACEAD15992DF79CC2 /* EngagementTriggerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B804DEA9B9A9EB7E1FD5F /* EngagementTriggerHelper.swift */; };
 		BEB73FBAC60DCFBA7C64AEFD /* Pods_NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 940E9EC9E9208D74AAF0FF42 /* Pods_NotificationService.framework */; };
 		E2FACEB3E0C1C0E425AADDC6 /* Pods_Cooee_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44E0CBC1B3361F69A091296 /* Pods_Cooee_iOS.framework */; };
@@ -293,7 +292,6 @@
 		75B9BD732850BF6200F414B1 /* PendingTriggerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTriggerModel.swift; sourceTree = "<group>"; };
 		75B9BDA828532A6600F414B1 /* CacheTriggerContentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheTriggerContentTest.swift; sourceTree = "<group>"; };
 		75C58B4327B3C7E600F840A9 /* DeviceTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceTaskProcessor.swift; sourceTree = "<group>"; };
-		75C58B4527B3C88700F840A9 /* InAppNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppNotification.swift; sourceTree = "<group>"; };
 		75D0238527C67023009A320B /* ObjectID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectID.swift; sourceTree = "<group>"; };
 		75D5A79C27BD25360028F742 /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		75D5A79E27BD25360028F742 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
@@ -656,7 +654,6 @@
 		756BAA1C27577C1600C7A84F /* notification */ = {
 			isa = PBXGroup;
 			children = (
-				75C58B4527B3C88700F840A9 /* InAppNotification.swift */,
 				756BAA1D27577C3E00C7A84F /* NotificationService.swift */,
 			);
 			path = notification;
@@ -1420,7 +1417,6 @@
 				AC0B83940A8AA5D45A0E64D9 /* EventTaskProcessor.swift in Sources */,
 				75C58B4427B3C7E600F840A9 /* DeviceTaskProcessor.swift in Sources */,
 				75B9BD6E2850B76200F414B1 /* PendingTriggerDAO.swift in Sources */,
-				75C58B4627B3C88700F840A9 /* InAppNotification.swift in Sources */,
 				AC0B850DFCDC2005C3A115B0 /* PushTokenTaskProcessor.swift in Sources */,
 				AC0B8E841AD56FEB009D2A89 /* SessionConcludeTaskProcessor.swift in Sources */,
 				75DD879A2716FD3600A272BB /* SentryHelper.swift in Sources */,
