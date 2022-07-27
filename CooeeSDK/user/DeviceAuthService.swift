@@ -137,4 +137,38 @@ class DeviceAuthService {
         LocalStorageHelper.putString(key: Constants.STORAGE_USER_ID, value: self.userID!)
         LocalStorageHelper.putString(key: Constants.STORAGE_DEVICE_UUID, value: self.uuID!)
     }
+
+    /**
+     Update auth details if its available.
+     This is mainly used while profile merging.
+
+     - Parameter response: response from server
+     */
+    func checkAndUpdate(_ response: [String: Any]?) {
+        guard let mergeDetails = response?["mergeDetails"] as? [String: Any] else {
+            return
+        }
+
+        guard var deviceAuthResponse = DeviceAuthResponse.deserialize(from: mergeDetails) else {
+            return
+        }
+
+        // If sdkToken is not present then add it from local
+        if deviceAuthResponse.sdkToken?.isEmpty ?? true {
+            deviceAuthResponse.sdkToken = self.sdkToken
+        }
+
+        // If userID is not present then add it from local
+        if deviceAuthResponse.id?.isEmpty ?? true {
+            deviceAuthResponse.id = self.userID
+        }
+
+        // If deviceID is not present then add it from local
+        if deviceAuthResponse.deviceID?.isEmpty ?? true {
+            deviceAuthResponse.deviceID = self.deviceID
+        }
+
+        // Send to update the local storage & api client
+        saveUserDataInStorage(data: deviceAuthResponse)
+    }
 }
