@@ -19,6 +19,13 @@ class CooeeBootstrap: NSObject {
 
     override public init() {
         super.init()
+        /**
+         Move session check in Bootstrap as Application Lifecycle works with observers.
+         Due to observers there is delay in getting Lifecycle events. And till time event from user getting fired
+         which is updating the session las used time.
+         Hence moved session check to Bootstrap. so that it will be first opetation from cooee sdk.
+         */
+        _ = SessionManager.shared.checkSessionValidity()
         swizzleDidReceiveRemoteNotification()
         _ = AppLifeCycle.shared
         DispatchQueue.main.async {

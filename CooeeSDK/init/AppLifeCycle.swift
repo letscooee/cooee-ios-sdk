@@ -49,7 +49,6 @@ class AppLifeCycle: NSObject {
     @objc func appMovedToLaunch() {
         runtimeData.setInForeground()
         runtimeData.setLaunchType(launchType: .ORGANIC)
-        _ = sessionManager.checkSessionValidity()
         DispatchQueue.main.async {
             NewSessionExecutor().execute()
             do {
