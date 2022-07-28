@@ -84,6 +84,14 @@ class RuntimeData {
         return self.lastEnterBackground == nil
     }
 
+    public func getLaunchType() -> LaunchType? {
+        launchType
+    }
+
+    public func setLaunchType(launchType: LaunchType) {
+        self.launchType = launchType
+    }
+
     // MARK: Internal
 
     static let shared = RuntimeData()
@@ -94,5 +102,6 @@ class RuntimeData {
     private var lastEnterForeground: Date?
     private var lastEnterBackground: Date?
     private var currentScreenName: String?
+    private var launchType: LaunchType?
 
 }

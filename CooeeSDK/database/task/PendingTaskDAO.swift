@@ -31,6 +31,7 @@ class PendingTaskDAO {
         task.data = pendingTask.data
         task.dateCreated = pendingTask.dateCreated
         task.type = pendingTask.type.rawValue
+        task.sdkCode = Int32(pendingTask.sdkVersion)
 
         do {
             try context.save()

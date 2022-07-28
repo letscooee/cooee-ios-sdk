@@ -13,7 +13,7 @@ import Foundation
  - Author: Ashish Gaikwad
  - Since: 1.0.0
  */
-class InAppTriggerHelper {
+class LazyTriggerLoader {
     // MARK: Internal
 
     /**
@@ -23,14 +23,14 @@ class InAppTriggerHelper {
        - triggerData: engagement trigger {@link TriggerData}
        - callback: callback on complete
      */
-    static func loadLazyData(for triggerData: TriggerData, callback: @escaping (_ result: InAppTrigger?) -> ()) {
+    static func load(for triggerData: TriggerData, callback: @escaping (_ result: String) -> ()) {
         let thread = DispatchQueue.global()
 
         thread.async {
-            let trigger = getIANFromRawIAN(from: doHTTPForIAN(id: triggerData.id!))
+            let rawTriggerData = String(decoding: doHTTPForIAN(id: triggerData.id!)?.percentEncoded() ?? Data(), as: UTF8.self)
 
             DispatchQueue.main.async {
-                callback(trigger)
+                callback(rawTriggerData)
             }
         }
     }

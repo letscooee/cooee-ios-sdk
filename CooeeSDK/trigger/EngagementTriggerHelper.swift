@@ -13,14 +13,20 @@ import UIKit
  - Since: 1.3.0
  */
 public class EngagementTriggerHelper {
+    // MARK: Lifecycle
+
+    init() {
+        cacheTriggerContent = PendingTriggerService()
+    }
+
     // MARK: Public
 
     /**
-      Start rendering the in-app trigger from the the raw response received from the backend API.
+     Start rendering the in-app trigger from the the raw response received from the backend API.
 
-      - Parameter data: Data received from the backend
-      */
-    public func renderInAppTriggerFromResponse(response data: [String: Any]?) {
+     - Parameter data: Data received from the backend
+     */
+    public func renderInAppTriggerFromResponse(response data: [String: Any]?) throws {
         if data == nil {
             return
         }
@@ -33,17 +39,17 @@ public class EngagementTriggerHelper {
             return
         }
 
-        renderInAppTrigger(triggerData)
+        try renderInAppTrigger(triggerData)
     }
 
-    public func renderInAppTriggerFromJSONString(_ rawTriggerData: String) {
+    public func renderInAppTriggerFromJSONString(_ rawTriggerData: String) throws {
         guard let triggerData = TriggerData.deserialize(from: rawTriggerData) else {
             return
         }
 
         EngagementTriggerHelper.storeActiveTriggerDetails(triggerData: triggerData)
 
-        renderInAppTrigger(triggerData)
+        try renderInAppTrigger(triggerData)
     }
 
     // MARK: Internal
@@ -59,6 +65,7 @@ public class EngagementTriggerHelper {
         let embeddedTrigger = EmbeddedTrigger(trigger: triggerData)
         activeTriggers.append(embeddedTrigger)
         LocalStorageHelper.putTypedArray(key: Constants.STORAGE_ACTIVATED_TRIGGERS, array: activeTriggers)
+        EngagementTriggerHelper.setActiveTrigger(triggerData)
     }
 
     /**
@@ -82,20 +89,57 @@ public class EngagementTriggerHelper {
     }
 
     /**
+     Gets latest trigger from database and renders it.
+     */
+    func performOrganicLaunch() throws {
+        guard let latestTrigger = cacheTriggerContent.peep() else {
+            return
+        }
+
+        guard let triggerData = TriggerData.deserialize(from: latestTrigger.triggerData) else {
+            return
+        }
+
+        if !latestTrigger.loadedLazyData {
+            loadLazyData(for: triggerData)
+            return
+        }
+
+        EngagementTriggerHelper.storeActiveTriggerDetails(triggerData: triggerData)
+        try renderInAppTrigger(triggerData)
+    }
+
+    /**
      Render the In-App trigger when a push notification was clicked.
 
      - Parameter triggerData: Data to render in-app.
+     - Parameter checkPendingTrigger: Whether to check for pending trigger.
      */
-    func renderInAppFromPushNotification(for triggerData: TriggerData) {
+    func renderInAppFromPushNotification(for triggerData: TriggerData, checkPendingTrigger: Bool = false) throws {
         _ = CooeeFactory.shared.runtimeData
 
-        if (triggerData.id?.isEmpty ?? true) {
+        if triggerData.id?.isEmpty ?? true {
             return
         }
 
         EngagementTriggerHelper.storeActiveTriggerDetails(triggerData: triggerData)
 
-        loadLazyData(for: triggerData)
+        if !checkPendingTrigger {
+            loadLazyData(for: triggerData)
+        }
+
+        guard let pendingTrigger = cacheTriggerContent.getTriggerByTriggerId(triggerData.id!) else {
+            return
+        }
+
+        guard let pendingTriggerData = TriggerData.deserialize(from: pendingTrigger.triggerData),
+              !pendingTrigger.loadedLazyData
+        else {
+            loadLazyData(for: triggerData)
+            return
+        }
+
+        try renderInAppTrigger(pendingTriggerData)
     }
 
     /**
@@ -104,47 +148,96 @@ public class EngagementTriggerHelper {
      - Parameter triggerData: Data to render in-app.
      */
     func loadLazyData(for triggerData: TriggerData) {
-        if (triggerData.id?.isEmpty ?? true) {
+        if triggerData.id?.isEmpty ?? true {
             return
         }
 
-        InAppTriggerHelper.loadLazyData(for: triggerData) { data in
-            if data == nil {
+        LazyTriggerLoader.load(for: triggerData) { data in
+            if data.isEmpty {
                 return
             }
 
             var triggerData = triggerData
-            triggerData.setInAppTrigger(inAppTrigger: data!)
+            triggerData.setInAppTrigger(inAppTrigger: TriggerData.fromJSON(from: data).getInAppTrigger())
 
-            self.renderInAppTrigger(triggerData)
+            do {
+                try self.renderInAppTrigger(triggerData)
+            } catch {
+                NSLog(error.localizedDescription)
+            }
         }
     }
-
-    // MARK: Private
 
     /**
      Start rendering the in-app trigger.
 
      - Parameter data: received and parsed trigger data.
      */
-   func renderInAppTrigger(_ data: TriggerData?) {
-        if data == nil {
-            return
-        }
+    func renderInAppTrigger(_ data: TriggerData?) throws {
         let runtimeData = RuntimeData.shared
 
         if runtimeData.isInBackground() {
             return
         }
 
+        guard let data = data else {
+            return
+        }
+
         do {
+            if try ! data.containValidData() {
+                return
+            }
+
             if let visibleController = UIApplication.shared.topMostViewController() {
-                EngagementTriggerHelper.setActiveTrigger(data!)
-                try InAppTriggerScene.instance.updateViewWith(data: data!, on: visibleController)
+                EngagementTriggerHelper.setActiveTrigger(data)
+                try InAppTriggerScene.instance.updateViewWith(data: data, on: visibleController)
             }
         } catch {
-            CooeeFactory.shared.sentryHelper.capture(message: "Couldn't show Engagement Trigger", error: error as NSError)
+            CooeeFactory.shared.sentryHelper.capture(message: "Failed to show In-App", error: error as NSError)
+
+            // Sends exception back to callers
+            throw error
         }
+
+        guard let pendingTrigger = cacheTriggerContent.getTriggerByTriggerId(data.id!),
+              let notificationId = pendingTrigger.notificationId
+        else {
+            return
+        }
+
+        if let triggerConfig = data.getConfig(), shouldRemoveNotification(triggerConfig) {
+            UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [notificationId])
+        }
+
+        cacheTriggerContent.removeTrigger(pendingTrigger)
+        NSLog("Removed PendingTrigger(id=\(pendingTrigger.id))")
+    }
+
+    // MARK: Private
+
+    private let cacheTriggerContent: PendingTriggerService
+
+    /**
+    Check for the ``rmPN`` key in given map to manage notification in the notification tray.
+
+    ``rmPN`` basically stands for <b>Remove Push Notification</b> from tray. It will be ``true``
+    to remove PN from tray other wise ``false``.
+    <b>By default if value is absent it will be ``true``</b>.
+
+    - Parameter config: Configuration to remove push notification from tray
+    - Returns: Returns ``true`` to remove PN from tray other wise ``false``
+
+     <ul>
+    <li>If given <code>map</code> is <code>null</code> it will return <code>true</code>
+    (As default value to close PN is true).</li>
+    <li>If given <code>map.get("rmPN")</code> is <code>null</code> it will return
+    <code>true</code> (As default value to close PN is true).</li>
+    <li>If map.get("rmPN") is present it it will provide its value.</li>
+    </ul>
+    */
+    private func shouldRemoveNotification(_ config: [String: Any]) -> Bool {
+        config["rmPN"] as? Bool ?? true
     }
 
     /**

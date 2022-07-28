@@ -40,7 +40,7 @@ class SafeHTTPService {
         sendEvent(event: event, createSession: false)
     }
 
-    
+
     public func updateUserProfile(userData: [String: Any]) {
         var requestData = userData
         requestData["sessionID"] = sessionManager.getCurrentSessionID()
@@ -58,8 +58,8 @@ class SafeHTTPService {
         attemptTaskImmediately(pendingTask);
     }
 
-    func updateDeviceProperty(deviceProp: [String: Any]) {
-        let pendingTask = pendingTaskService.newTask(data: deviceProp, pendingTaskType: PendingTaskType.API_DEVICE_PROFILE)
+    func updateDeviceProperty(deviceProp: DeviceDetails) {
+        let pendingTask = pendingTaskService.newTask(data: deviceProp.toDictionary(), pendingTaskType: PendingTaskType.API_DEVICE_PROFILE)
         attemptTaskImmediately(pendingTask)
     }
 
@@ -81,7 +81,7 @@ class SafeHTTPService {
         let trigger = LocalStorageHelper.getTypedClass(key: Constants.STORAGE_ACTIVE_TRIGGER, clazz: EmbeddedTrigger.self)
 
         event.activeTriggers = EngagementTriggerHelper.getActiveTriggers()
-        event.activeTrigger = trigger
+        event.trigger = trigger
         event.screenName = runtimeData.getCurrentScreenName()
 
         let pendingTask = pendingTaskService.newTask(event)

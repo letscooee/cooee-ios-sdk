@@ -4,6 +4,7 @@
 //
 //  Created by Ashish Gaikwad on 01/10/21.
 //
+
 import Foundation
 import UIKit
 
@@ -18,48 +19,27 @@ class CooeeBootstrap: NSObject {
 
     override public init() {
         super.init()
+        /**
+         Move session check in Bootstrap as Application Lifecycle works with observers.
+         Due to observers there is delay in getting Lifecycle events. And till time event from user getting fired
+         which is updating the session las used time.
+         Hence moved session check to Bootstrap. so that it will be first opetation from cooee sdk.
+         */
+        _ = SessionManager.shared.checkSessionValidity()
+        swizzleDidReceiveRemoteNotification()
         _ = AppLifeCycle.shared
         DispatchQueue.main.async {
             _ = CooeeFactory.shared
             self.startPendingTaskJob()
             FontProcessor.checkAndUpdateBrandFonts()
+            self.registerCategory()
         }
         // ARHelper.initAndShowUnity()
     }
 
-    // MARK: Internal
-
-    func notificationClicked(_ triggerData: TriggerData) {
-        CooeeNotificationService.sendEvent("CE Notification Clicked", withTriggerData: triggerData)
-
-        guard let notificationClickAction = triggerData.getPushNotification()?.getClickAction() else {
-            self.launchInApp(with: triggerData)
-            return
-        }
-
-        guard  let launchType = notificationClickAction.open else {
-            self.launchInApp(with: triggerData)
-            return
-        }
-
-        if launchType == 1 {
-            self.launchInApp(with: triggerData)
-        } else if launchType == 2 {
-            // Launch Self AR
-            //EngagementTriggerHelper.renderInAppFromPushNotification(for: triggerData)
-        } else if launchType == 3 {
-            // Launch Native AR
-        }
-
-    }
-
     // MARK: Private
 
-    private func launchInApp(with triggerData: TriggerData) {
-        EngagementTriggerHelper().renderInAppFromPushNotification(for: triggerData)
-    }
-
-/**
+    /**
      Registers custom didReceiveRemoteNotification on current appDelegate
      */
     private func swizzleDidReceiveRemoteNotification() {
@@ -86,70 +66,35 @@ class CooeeBootstrap: NSObject {
         CooeeJobUtils.schedulePendingTaskJob()
     }
 
-    private func registerForPushNotification() {
-        UNUserNotificationCenter.current().delegate = self
-        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(
-                options: authOptions,
-                completionHandler: { _, _ in
-                    self.registerCategory()
-                }
-                
-        )
-
-        UIApplication.shared.registerForRemoteNotifications()
-    }
-    
-    private func registerCategory() -> Void{
-
-        let category : UNNotificationCategory = UNNotificationCategory.init(identifier: "COOEENOTIFICATION", actions: [], intentIdentifiers: [], options: [])
+    private func registerCategory() {
+        let category = UNNotificationCategory(identifier: "CooeeNotification", actions: [], intentIdentifiers: [], options: .customDismissAction)
 
         let center = UNUserNotificationCenter.current()
         center.setNotificationCategories([category])
-
     }
 }
 
 extension CooeeBootstrap {
     @objc
     public func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        _ = CooeeNotificationService(userInfo: userInfo)
-        completionHandler(.newData)
-    }
-}
-
-extension CooeeBootstrap: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([[.badge, .sound, .alert]])
-    }
-
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        let userInfo = response.notification.request.content.userInfo
-        let rawTriggerData = userInfo["triggerData"]
-
-        if rawTriggerData == nil {
+        guard let rawTriggerData = userInfo["triggerData"] else {
+            NSLog("No Trigger Data found in notification")
+            completionHandler(.noData)
             return
         }
 
-        let triggerData = TriggerData.deserialize(from: "\(rawTriggerData!)")
-
-        if triggerData == nil {
+        guard let notificationID = LocalStorageHelper.getString(key: Constants.STORAGE_NOTIFICATION_ID) else {
+            NSLog("No NotificationID found in storage")
+            completionHandler(.noData)
             return
         }
 
-        switch response.actionIdentifier {
-            case UNNotificationDismissActionIdentifier:
-                CooeeNotificationService.sendEvent("CE Notification Cancelled", withTriggerData: triggerData!)
-                break
-            case UNNotificationDefaultActionIdentifier:
-                self.notificationClicked(triggerData!)
-                break
-            default:
-                // Handle other actions
-                break
+        guard let triggerData = TriggerData.deserialize(from: "\(rawTriggerData)") else {
+            NSLog("Fail to deserialize triggerData")
+            return
         }
 
-
-        completionHandler()
+        PendingTriggerService().lazyLoadAndSave(triggerData, forNotification: notificationID)
+        completionHandler(.noData)
     }
 }

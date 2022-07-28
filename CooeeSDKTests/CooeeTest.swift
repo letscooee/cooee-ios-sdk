@@ -105,14 +105,14 @@ class CooeeTest: XCTestCase {
     }
     
     func test_send_event_with_valid_properties() {
-        measure {
+        //measure {
             do {
                 try cooeeSDK.sendEvent(eventName: eventName, eventProperties: validEventProperties)
                 XCTAssertTrue(true)
             } catch {
                 XCTAssertTrue(false, error.localizedDescription)
             }
-        }
+        //}
     }
     
     func test_send_event_with_invalid_valid_properties() {
@@ -126,14 +126,14 @@ class CooeeTest: XCTestCase {
     }
     
     func test_update_user_profile_valid() {
-        measure {
+        //measure {
             do {
                 try cooeeSDK.updateUserProfile(validUserProfile)
                 XCTAssertTrue(true)
             } catch {
                 XCTAssert(false)
             }
-        }
+        //}
     }
     
     func test_update_user_profile_empty_property() {

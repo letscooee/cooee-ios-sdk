@@ -31,13 +31,18 @@ if (newVersion === 'patch') {
 }
 
 console.log(`updating [${oldVersion}] --> [${newVersion}]`);
+const newVersionCode = parseInt(newVersion.split('.').map(v => v.padStart(2, '0')).join(''));
 
 podspecData = podspecData.replace(/spec.version      = "[^"]+"/, `spec.version      = "${newVersion}"`);
 fs.writeFileSync(podspecFilePath, podspecData);
 
 let cooeeMetaData = fs.readFileSync(versionFilePath, "utf8");
 cooeeMetaData = cooeeMetaData.replace(/VERSION_STRING = "[^"]+"/, `VERSION_STRING = "${newVersion}"`);
+cooeeMetaData = cooeeMetaData.replace(/VERSION_CODE = [^\n]+/, `VERSION_CODE = ${newVersionCode}`);
 fs.writeFileSync(versionFilePath, cooeeMetaData);
+
+// Stop script here only as further setup is incomplete
+return;
 
 pushCodeAndPublishPod();
 

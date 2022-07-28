@@ -56,7 +56,7 @@ class DeviceInfoTest: XCTestCase {
 
     func test_device_os_version() {
         let osVersion = deviceInfo.cachedInfo.osVersion
-        XCTAssert(osVersion == "15.4.0")
+        XCTAssert(osVersion == "15.5.0")
     }
 
     func test_device_name() {
@@ -71,7 +71,7 @@ class DeviceInfoTest: XCTestCase {
 
     func test_device_orientation() {
         let orientation = deviceInfo.cachedInfo.deviceOrientation
-        XCTAssert(orientation == "Portrait")
+        XCTAssert(orientation == 1)
     }
 
     func test_device_is_wifi_on() {
@@ -95,7 +95,8 @@ class DeviceInfoTest: XCTestCase {
     }
 
     func test_device_device_battery_charging() {
+        UIDevice.current.isBatteryMonitoringEnabled = true
         let isBatteryCharging = deviceInfo.cachedInfo.isBatteryCharging
-        XCTAssertTrue(isBatteryCharging)
+        XCTAssertEqual(isBatteryCharging, UIDevice.current.batteryState == .charging)
     }
 }

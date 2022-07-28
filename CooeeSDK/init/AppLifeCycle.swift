@@ -42,24 +42,30 @@ class AppLifeCycle: NSObject {
         var sessionProperties = [String: Any]()
         sessionProperties["aDur"] = duration
 
-        let session = Event(eventName: "CE App Background", properties: sessionProperties)
+        let session = Event(eventName: Constants.EVENT_APP_BACKGROUND, properties: sessionProperties)
         CooeeFactory.shared.safeHttpService.sendEvent(event: session)
-
-        CooeeNotificationService.processPendingNotification()
     }
 
     @objc func appMovedToLaunch() {
         runtimeData.setInForeground()
-        _ = sessionManager.checkSessionValidity()
+        runtimeData.setLaunchType(launchType: .ORGANIC)
         DispatchQueue.main.async {
             NewSessionExecutor().execute()
         }
-
     }
 
     @objc func appMovedToForeground() {
-        _ = sessionManager.checkSessionValidity()
+        let willCreateNewSession = sessionManager.checkSessionValidity()
+        let isNewSession = willCreateNewSession || runtimeData.isFirstForeground();
         DispatchQueue.main.async {
+            if isNewSession && self.runtimeData.getLaunchType() == .ORGANIC {
+                do {
+                    try EngagementTriggerHelper().performOrganicLaunch()
+                } catch {
+                    NSLog("Error: \(error.localizedDescription)")
+                }
+            }
+
             self.sessionManager.keepSessionAlive()
 
             if self.runtimeData.isFirstForeground() {
@@ -72,10 +78,9 @@ class AppLifeCycle: NSObject {
 
             var eventProps = [String: Any]()
             eventProps["iaDur"] = backgroundDuration
-            let session = Event(eventName: "CE App Foreground", properties: eventProps)
+            let session = Event(eventName: Constants.EVENT_APP_FOREGROUND, properties: eventProps)
 
             CooeeFactory.shared.safeHttpService.sendEvent(event: session)
-
         }
     }
 
