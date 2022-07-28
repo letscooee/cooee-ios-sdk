@@ -14,7 +14,7 @@ import HandyJSON
 class HttpTaskProcessor<T: HandyJSON>: AbstractPendingTaskProcessor<T> {
 
     let baseHttpService = CooeeFactory.shared.baseHttpService
-    let userAuthService = CooeeFactory.shared.userAuthService
+    let deviceAuthService = CooeeFactory.shared.deviceAuthService
 
     /**
      Make the <strong>synchronous</strong> HTTP call to the service via {@link BaseHTTPService}.
@@ -35,7 +35,7 @@ class HttpTaskProcessor<T: HandyJSON>: AbstractPendingTaskProcessor<T> {
         NSLog("Processing Task: \(task.id)")
         let data = deserialize(task)
 
-        if !(userAuthService.hasToken()) {
+        if !(deviceAuthService.hasToken()) {
             NSLog("Don't have SDK token. Abort processing \(task.id)")
             return
         }
