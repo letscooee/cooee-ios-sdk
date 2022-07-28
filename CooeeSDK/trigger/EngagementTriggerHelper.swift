@@ -185,7 +185,7 @@ public class EngagementTriggerHelper {
         }
 
         do {
-            if try ! data.containValidData() {
+            if !(try data.containValidData()) {
                 return
             }
 
@@ -219,23 +219,23 @@ public class EngagementTriggerHelper {
     private let cacheTriggerContent: PendingTriggerService
 
     /**
-    Check for the ``rmPN`` key in given map to manage notification in the notification tray.
+     Check for the ``rmPN`` key in given map to manage notification in the notification tray.
 
-    ``rmPN`` basically stands for <b>Remove Push Notification</b> from tray. It will be ``true``
-    to remove PN from tray other wise ``false``.
-    <b>By default if value is absent it will be ``true``</b>.
+     ``rmPN`` basically stands for <b>Remove Push Notification</b> from tray. It will be ``true``
+     to remove PN from tray other wise ``false``.
+     <b>By default if value is absent it will be ``true``</b>.
 
-    - Parameter config: Configuration to remove push notification from tray
-    - Returns: Returns ``true`` to remove PN from tray other wise ``false``
+     - Parameter config: Configuration to remove push notification from tray
+     - Returns: Returns ``true`` to remove PN from tray other wise ``false``
 
-     <ul>
-    <li>If given <code>map</code> is <code>null</code> it will return <code>true</code>
-    (As default value to close PN is true).</li>
-    <li>If given <code>map.get("rmPN")</code> is <code>null</code> it will return
-    <code>true</code> (As default value to close PN is true).</li>
-    <li>If map.get("rmPN") is present it it will provide its value.</li>
-    </ul>
-    */
+      <ul>
+     <li>If given <code>map</code> is <code>null</code> it will return <code>true</code>
+     (As default value to close PN is true).</li>
+     <li>If given <code>map.get("rmPN")</code> is <code>null</code> it will return
+     <code>true</code> (As default value to close PN is true).</li>
+     <li>If map.get("rmPN") is present it it will provide its value.</li>
+     </ul>
+     */
     private func shouldRemoveNotification(_ config: [String: Any]) -> Bool {
         config["rmPN"] as? Bool ?? true
     }

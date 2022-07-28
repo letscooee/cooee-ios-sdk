@@ -97,7 +97,7 @@ class InAppTriggerScene: UIView {
             throw NSError(domain: "Invalid InApp Elements", code: 0, userInfo: nil)
         }
 
-        // updateDeviceOrientation(inAppData!.getOrientation()) // Skipping orientation lock in 1.3.0 release
+        updateDeviceOrientation(inAppData!.getDeviceOrientation())
         triggerContext.setTriggerData(triggerData: triggerData!)
         triggerContext.setTriggerParentLayout(triggerParentLayout: parentView)
         triggerContext.setPresentViewController(presentViewController: viewController)
@@ -227,9 +227,8 @@ class InAppTriggerScene: UIView {
             self.parentView?.removeFromSuperview()
             self.parentView = nil;
             NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
+            // revert device to previous device orientation
+            self.updateDeviceOrientation(self.deviceDefaultOrientation)
         })
-
-        // revert device to previous device orientation
-        // updateDeviceOrientation(deviceDefaultOrientation) // Skipping orientation lock in 1.3.0 release
     }
 }

@@ -54,6 +54,16 @@ class WebService: NSObject {
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
             responseData = data
             responseError = error
+            
+            if self.debugging {
+                NSLog("""
+                      \n-------WS Response--------\n
+                      Response Body:\(data ?? Data())\n
+                      Response Error: \(error ?? NSError(domain: "No Error", code: 100))\n
+                      -------End WS Response--------\n
+                      """)
+            }
+            
             group.leave()
         }
         task.resume()

@@ -94,6 +94,11 @@ extension CooeeBootstrap {
             return
         }
 
+        if triggerData.getPushNotification() == nil {
+            completionHandler(.noData)
+            return
+        }
+        
         PendingTriggerService().lazyLoadAndSave(triggerData, forNotification: notificationID)
         completionHandler(.noData)
     }
