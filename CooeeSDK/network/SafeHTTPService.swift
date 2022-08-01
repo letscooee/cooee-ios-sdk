@@ -73,15 +73,28 @@ class SafeHTTPService {
         var event = event
         let sessionID = sessionManager.getCurrentSessionID(createNew: createSession)
 
+        let trigger = LocalStorageHelper.getTypedClass(key: Constants.STORAGE_ACTIVE_TRIGGER, clazz: EmbeddedTrigger.self)
+
+        /*
+         * Update trigger.expired every time before sending the event.
+         * As event.trigger will be tracked till the session is not expired.
+         * There is possibility that the trigger can get get expire in same session.
+         */
+        trigger?.updateStatus()
+
+        /*
+         * Will set session and trigger in event if event is other than Notification event.
+         */
         if !(sessionID.isEmpty) && createSession {
             event.sessionID = sessionID
             event.sessionNumber = Int(sessionManager.getCurrentSessionNumber())
+            /*
+             * Moved to if condition to prevent overwriting the trigger from notification event.
+             */
+            event.trigger = trigger
         }
 
-        let trigger = LocalStorageHelper.getTypedClass(key: Constants.STORAGE_ACTIVE_TRIGGER, clazz: EmbeddedTrigger.self)
-
         event.activeTriggers = EngagementTriggerHelper.getActiveTriggers()
-        event.trigger = trigger
         event.screenName = runtimeData.getCurrentScreenName()
 
         let pendingTask = pendingTaskService.newTask(event)
