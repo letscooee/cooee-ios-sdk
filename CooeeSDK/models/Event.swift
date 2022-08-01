@@ -28,8 +28,8 @@ struct Event: HandyJSON {
     }
 
     init(eventName: String, properties: [String: Any?]) {
-        self._id = ObjectID().hexString
-        name = eventName
+        self.id = ObjectID().hexString
+        self.name = eventName
         self.name = eventName
         self.properties = properties
         self.occurred = DateUtils.formatDateToUTCString(date: Date())
@@ -45,7 +45,7 @@ struct Event: HandyJSON {
 
     // MARK: Internal
 
-    var _id: String?
+    var id: String?
     var name: String?
     var properties: [String: Any?]?
     var sessionID: String?
