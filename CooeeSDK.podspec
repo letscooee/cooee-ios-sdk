@@ -144,5 +144,5 @@ spec.frameworks = 'CoreData'
 # ――― Dependency ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 #
 spec.dependency 'HandyJSON', '~> 5.0.2'
-spec.dependency 'Sentry', '~> 7.8.0'
+spec.dependency 'Sentry', '~> 7.23.0'
 end
