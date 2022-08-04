@@ -15,7 +15,8 @@ import HandyJSON
 struct ClickAction: HandyJSON {
     // MARK: Lifecycle
 
-    init() {}
+    init() {
+    }
 
     init(shouldClose: Bool) {
         self.close = shouldClose
@@ -24,7 +25,7 @@ struct ClickAction: HandyJSON {
     // MARK: Public
 
     public func isOnlyCloseCTA() -> Bool {
-        return iab == nil && ext == nil && updt == nil && pmpt == nil && up == nil && kv == nil && share == nil && open == nil
+        return iab == nil && ext == nil && updt == nil && pmpt == nil && up == nil && kv == nil && custKV == nil && share == nil && open == nil
     }
 
     // MARK: Internal
@@ -35,6 +36,7 @@ struct ClickAction: HandyJSON {
     var pmpt: Int?
     var up: [String: Any]?
     var kv: [String: Any]?
+    var custKV: [String: Any]?
     var share: [String: Any]?
     var close: Bool? = false
     var ntvAR: AppAR?

@@ -266,15 +266,24 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
      Process KeyValue block in ClickAction and sends it back to App via CooeeCTADelegate
      */
     private func passKeyValueToApp() {
-        let keyValues = clickAction.kv
-
-        if keyValues == nil {
-            return
-        }
-
         guard let onCTAListener = CooeeSDK.getInstance().getOnCTAListener() else {
             return
         }
-        onCTAListener.onCTAResponse(payload: keyValues!)
+
+        var mergedKV = clickAction.custKV
+
+        if mergedKV == nil {
+            mergedKV = [String: Any]()
+        }
+
+        /*
+         * Merging order is most important and should not change in future.
+         * Merging main kv to customKV will override duplicate key from customKV with kv.
+         */
+        if let keyValue = clickAction.kv {
+            mergedKV?.merge(keyValue) { (_, new) in new }
+        }
+
+        onCTAListener.onCTAResponse(payload: mergedKV!)
     }
 }
