@@ -39,6 +39,8 @@ let cooeeMetaData = fs.readFileSync(versionFilePath, "utf8");
 cooeeMetaData = cooeeMetaData.replace(/VERSION_STRING = "[^"]+"/, `VERSION_STRING = "${newVersion}"`);
 fs.writeFileSync(versionFilePath, cooeeMetaData);
 
+// Stop here to prevent further process which requires permission for push operation
+return;
 pushCodeAndPublishPod();
 
 /****************** private functions ******************/
