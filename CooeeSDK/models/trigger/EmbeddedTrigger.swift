@@ -26,7 +26,7 @@ class EmbeddedTrigger: Codable, HandyJSON {
         self.triggerID = triggerID
         self.engagementID = engagementID
         self.expireAt = expireAt
-        self.expired = isExpired()
+        self.updateExpired()
     }
 
     convenience init(trigger: TriggerData) {
@@ -46,8 +46,10 @@ class EmbeddedTrigger: Codable, HandyJSON {
     /**
      Update ``expired`` value at runtime
      */
-    public func updateStatus() {
-        expired = isExpired()
+    public func updateExpired() {
+        if isExpired() {
+            expired = true
+        }
     }
 
     // MARK: Private

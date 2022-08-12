@@ -80,7 +80,7 @@ class SafeHTTPService {
          * As event.trigger will be tracked till the session is not expired.
          * There is possibility that the trigger can get get expire in same session.
          */
-        trigger?.updateStatus()
+        trigger?.updateExpired()
 
         /*
          * Will set session and trigger in event if event is other than Notification event.
