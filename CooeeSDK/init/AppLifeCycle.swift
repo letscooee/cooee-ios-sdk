@@ -20,6 +20,7 @@ class AppLifeCycle: NSObject {
     override init() {
         runtimeData = RuntimeData.shared
         sessionManager = SessionManager.shared
+        devicePropertyCollector = DevicePropertyCollector()
         super.init()
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(appMovedToLaunch), name: UIApplication.didFinishLaunchingNotification, object: nil)
@@ -42,8 +43,10 @@ class AppLifeCycle: NSObject {
         var sessionProperties = [String: Any]()
         sessionProperties["aDur"] = duration
 
-        let session = Event(eventName: Constants.EVENT_APP_BACKGROUND, properties: sessionProperties)
-        CooeeFactory.shared.safeHttpService.sendEvent(event: session)
+        var event = Event(eventName: Constants.EVENT_APP_BACKGROUND, properties: sessionProperties)
+        event.deviceProps = self.devicePropertyCollector.getMutableDeviceProps()
+        
+        CooeeFactory.shared.safeHttpService.sendEvent(event: event)
     }
 
     @objc func appMovedToLaunch() {
@@ -78,9 +81,10 @@ class AppLifeCycle: NSObject {
 
             var eventProps = [String: Any]()
             eventProps["iaDur"] = backgroundDuration
-            let session = Event(eventName: Constants.EVENT_APP_FOREGROUND, properties: eventProps)
+            var event = Event(eventName: Constants.EVENT_APP_FOREGROUND, properties: eventProps)
+            event.deviceProps = self.devicePropertyCollector.getMutableDeviceProps()
 
-            CooeeFactory.shared.safeHttpService.sendEvent(event: session)
+            CooeeFactory.shared.safeHttpService.sendEvent(event: event)
         }
     }
 
@@ -100,4 +104,5 @@ class AppLifeCycle: NSObject {
     private var runtimeData: RuntimeData
     private let notificationCenter = NotificationCenter.default
     private let sessionManager: SessionManager
+    private let devicePropertyCollector: DevicePropertyCollector
 }
