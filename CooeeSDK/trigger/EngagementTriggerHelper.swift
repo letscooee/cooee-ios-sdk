@@ -185,7 +185,7 @@ public class EngagementTriggerHelper {
         }
 
         do {
-            if try ! data.containValidData() {
+            if try (!data.containValidData()) {
                 return
             }
 

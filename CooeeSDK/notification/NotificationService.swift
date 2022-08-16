@@ -156,7 +156,6 @@ public class CooeeNotificationService: NSObject {
      */
     private class func getAttachment(from imageURL: String?) -> UNNotificationAttachment? {
         guard let imageURL = imageURL, !imageURL.isEmpty else {
-            logSentryError("Trying to download empty image URL for Push Notification")
             return nil
         }
 
