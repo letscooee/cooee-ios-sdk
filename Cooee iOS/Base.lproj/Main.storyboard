@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -33,12 +33,23 @@
                                     <action selector="loadPayload:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nqc-Qy-4oR"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AdD-DV-UnF">
+                                <rect key="frame" x="40" y="186" width="334" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Copy UserID"/>
+                                <connections>
+                                    <action selector="copyUserID:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gE2-MI-Hxp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="T8C-9v-yMn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="Cec-at-fwj"/>
+                            <constraint firstItem="AdD-DV-UnF" firstAttribute="top" secondItem="HYs-72-10V" secondAttribute="bottom" constant="20" id="OL0-Yk-ipp"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="AdD-DV-UnF" secondAttribute="trailing" constant="40" id="X7L-xc-1do"/>
                             <constraint firstItem="HYs-72-10V" firstAttribute="top" secondItem="T8C-9v-yMn" secondAttribute="bottom" constant="20" id="X96-Lq-AQz"/>
+                            <constraint firstItem="AdD-DV-UnF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="efx-0o-CXf"/>
                             <constraint firstItem="HYs-72-10V" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="kLP-WC-OQU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="HYs-72-10V" secondAttribute="trailing" constant="40" id="kMW-eU-2sV"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="T8C-9v-yMn" secondAttribute="trailing" constant="40" id="uac-2D-T2B"/>
@@ -51,7 +62,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="133" y="72"/>
+            <point key="canvasLocation" x="131.8840579710145" y="71.651785714285708"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="R0s-bK-HaJ">
@@ -62,22 +73,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EQg-TP-M8w">
-                                <rect key="frame" x="40" y="40" width="334" height="34"/>
+                                <rect key="frame" x="40" y="84" width="334" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dID-aK-HyN">
-                                <rect key="frame" x="40" y="94" width="334" height="34"/>
+                                <rect key="frame" x="40" y="138" width="334" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Mobile No." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cdV-L2-q2v">
-                                <rect key="frame" x="40" y="148" width="334" height="34"/>
+                                <rect key="frame" x="40" y="192" width="334" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Mn-Ud-n5A">
-                                <rect key="frame" x="40" y="232" width="334" height="31"/>
+                                <rect key="frame" x="40" y="276" width="334" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Save"/>
                                 <connections>
