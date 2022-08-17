@@ -146,7 +146,7 @@ public final class CooeeSDK: NSObject {
      */
     @objc
     public func getUserID() -> String? {
-        CooeeFactory.shared.userAuthService.getUserID()
+        CooeeFactory.shared.deviceAuthService.getUserID()
     }
 
     @objc

@@ -134,8 +134,11 @@ class BaseHTTPService {
             return
         }
 
-        _ = try webService.getResponse(fromURL: Constants.updateProfile, method: .PUT, params: requestData,
+        let response = try webService.getResponse(fromURL: Constants.updateProfile, method: .PUT, params: requestData,
                 header: commonHeaders.getDictionary())
+
+        // send to update the local storage & api client
+        CooeeFactory.shared.deviceAuthService.checkAndUpdate(response)
     }
 
     func updateDeviceProp(requestData: [String: Any]) throws {
