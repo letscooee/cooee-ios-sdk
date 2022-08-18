@@ -39,6 +39,7 @@ public class EngagementTriggerHelper {
             return
         }
 
+        EngagementTriggerHelper.storeActiveTriggerDetails(triggerData: triggerData)
         try renderInAppTrigger(triggerData)
     }
 
