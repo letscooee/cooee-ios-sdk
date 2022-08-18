@@ -329,12 +329,10 @@ public final class CooeeSDK: NSObject {
      - Parameter data: ``TriggerData`` to remove
      */
     private func removePendingTrigger(_ data: TriggerData) {
-        DispatchQueue.global().async {
-            guard let triggerID = data.id else {
-                return
-            }
-
-            PendingTriggerService().removeTrigger(triggerID)
+        guard let triggerID = data.id else {
+            return
         }
+
+        PendingTriggerService().removeTrigger(triggerID)
     }
 }
