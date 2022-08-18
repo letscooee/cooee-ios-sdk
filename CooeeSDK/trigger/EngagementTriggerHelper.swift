@@ -163,7 +163,7 @@ public class EngagementTriggerHelper {
             do {
                 try self.renderInAppTrigger(triggerData)
             } catch {
-                NSLog(error.localizedDescription)
+                NSLog("\(Constants.TAG) \(error.localizedDescription)")
             }
         }
     }
@@ -211,7 +211,7 @@ public class EngagementTriggerHelper {
         }
 
         cacheTriggerContent.removeTrigger(pendingTrigger)
-        NSLog("Removed PendingTrigger(id=\(pendingTrigger.id))")
+        NSLog("\(Constants.TAG) Removed PendingTrigger(id=\(pendingTrigger.id))")
     }
 
     // MARK: Private

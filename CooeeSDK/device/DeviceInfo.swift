@@ -52,7 +52,7 @@ class DeviceInfo {
             withUnsafeMutablePointer(to: &vm_stat) { vmStatPointer -> Void in
                 vmStatPointer.withMemoryRebound(to: integer_t.self, capacity: Int(host_size)) {
                     if host_statistics(host_port, HOST_VM_INFO, $0, &host_size) != KERN_SUCCESS {
-                        NSLog("Error: Failed to fetch vm statistics")
+                        NSLog("\(Constants.TAG) Failed to fetch vm statistics")
                     }
                 }
             }

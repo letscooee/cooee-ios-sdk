@@ -39,7 +39,7 @@ class PendingTriggerService {
 
         let pendingTriggerModel = PendingTriggerModel(triggerData: triggerData, notificationId: notificationID)
         let pendingTrigger = pendingTriggerDAO.insert(pendingTriggerModel)
-        NSLog("Created PendingTrigger(id=\(pendingTrigger.id))")
+        NSLog("\(Constants.TAG) Created PendingTrigger(id=\(pendingTrigger.id))")
 
         LazyTriggerLoader.load(for: triggerData) { rawTriggerData in
             if rawTriggerData.isEmpty {
@@ -60,7 +60,7 @@ class PendingTriggerService {
             pendingTrigger.triggerData = storedTriggerData.toJSONString()
             pendingTrigger.loadedLazyData = true
             self.pendingTriggerDAO.update(pendingTrigger)
-            NSLog("Updated PendingTrigger(id=\(pendingTrigger.id))")
+            NSLog("\(Constants.TAG) Updated PendingTrigger(id=\(pendingTrigger.id))")
         }
     }
 

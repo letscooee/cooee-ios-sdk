@@ -101,7 +101,7 @@ public class CooeeNotificationService: NSObject {
         let triggerData = TriggerData.deserialize(from: "\(rawTriggerData!)")
 
         if triggerData!.v == nil, triggerData!.v! >= 4.0, triggerData!.v! < 5.0 {
-            NSLog("Unsupported payload version \(triggerData!.v!)")
+            NSLog("\(Constants.TAG) Unsupported payload version \(triggerData!.v!)")
             return content
         }
 
@@ -208,7 +208,7 @@ extension UNNotificationAttachment {
             let imageAttachment = try UNNotificationAttachment(identifier: imageFileIdentifier, url: fileURL, options: options)
             return imageAttachment
         } catch {
-            NSLog("Fail to download Attachment: \(error)")
+            NSLog("\(Constants.TAG) Fail to download Attachment: \(error)")
         }
 
         return nil

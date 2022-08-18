@@ -34,7 +34,7 @@ class InfoPlistReader {
                     appID = propList["COOEE_APP_ID"] as? String ?? ""
                 }
             } catch {
-                NSLog("Fail to read Info.plist: \(error)")
+                NSLog("\(Constants.TAG) Fail to read Info.plist: \(error)")
             }
         }
     }

@@ -65,7 +65,7 @@ class AppLifeCycle: NSObject {
                 do {
                     try EngagementTriggerHelper().performOrganicLaunch()
                 } catch {
-                    NSLog("Error: \(error.localizedDescription)")
+                    NSLog("\(Constants.TAG) \(error.localizedDescription)")
                 }
             }
 

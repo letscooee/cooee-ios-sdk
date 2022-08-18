@@ -119,7 +119,7 @@ public final class CooeeSDK: NSObject {
     @objc
     public func setCurrentScreen(screenName: String) {
         if screenName.isEmpty {
-            NSLog("Trying to set empty screen name")
+            NSLog("\(Constants.TAG) Trying to set empty screen name")
             return
         }
 
@@ -166,7 +166,7 @@ public final class CooeeSDK: NSObject {
     @objc
     public func setDeviceToken(token data: Data?) {
         guard let rawToken = data else {
-            NSLog("Received empty device token")
+            NSLog("\(Constants.TAG) Received empty device token")
             return
         }
 
@@ -303,7 +303,7 @@ public final class CooeeSDK: NSObject {
         do {
             try EngagementTriggerHelper().renderInAppFromPushNotification(for: triggerData, checkPendingTrigger: checkPendingTrigger)
         } catch {
-            NSLog(error.localizedDescription)
+            NSLog("\(Constants.TAG) \(error.localizedDescription)")
         }
     }
 

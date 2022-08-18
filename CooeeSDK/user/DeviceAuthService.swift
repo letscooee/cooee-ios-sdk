@@ -32,12 +32,12 @@ class DeviceAuthService {
     func acquireSDKToken() {
         self.lock.lock()
         if self.hasToken() {
-            NSLog("Already has SDK token")
+            NSLog("\(Constants.TAG) Already has SDK token")
             self.populateUserDataFromStorage()
             return
         }
 
-        NSLog("Attempt to acquire SDK token")
+        NSLog("\(Constants.TAG) Attempt to acquire SDK token")
 
         self.getSDKTokenFromServer()
         self.lock.unlock()
@@ -149,11 +149,11 @@ class DeviceAuthService {
         self.deviceID = LocalStorageHelper.getString(key: Constants.STORAGE_DEVICE_ID)
 
         if self.sdkToken?.isEmpty ?? true {
-            NSLog("No SDK token found in preference")
+            NSLog("\(Constants.TAG) No SDK token found in preference")
         }
 
         if self.userID?.isEmpty ?? true {
-            NSLog("No user ID found in preference")
+            NSLog("\(Constants.TAG) No user ID found in preference")
         }
 
         self.updateAPI()
@@ -169,7 +169,7 @@ class DeviceAuthService {
         let props = DevicePropertyCollector().getImmutableDeviceProps()
 
         if appInfo.appID.isEmpty {
-            NSLog("Missing App credentials in Info.plist. Check Integration https://docs.letscooee.com/developers/ios/quickstart")
+            NSLog("\(Constants.TAG) Missing App credentials in Info.plist. Check Integration https://docs.letscooee.com/developers/ios/quickstart")
             return
         }
 

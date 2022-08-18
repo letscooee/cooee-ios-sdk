@@ -161,7 +161,7 @@ class BaseHTTPService {
         do {
             try EngagementTriggerHelper().renderInAppTriggerFromResponse(response: responseData)
         } catch {
-            NSLog(error.localizedDescription)
+            NSLog("\(Constants.TAG) \(error.localizedDescription)")
         }
     }
 

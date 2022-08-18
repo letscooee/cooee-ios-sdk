@@ -67,7 +67,7 @@ class SentryHelper {
      - Parameter message: Any custom message to send.
      */
     public func capture(message: String) {
-        NSLog("**********\n\n\(message)\n\n**********")
+        NSLog("\(Constants.TAG) **********\n\n\(message)\n\n**********")
         SentrySDK.capture(message: message)
     }
 
@@ -80,14 +80,14 @@ class SentryHelper {
     }
 
     public func capture(message: String, error: NSError) {
-        NSLog("**********\n\n\(error)\n\n**********")
+        NSLog("\(Constants.TAG) **********\n\n\(error)\n\n**********")
 
         if (!enabled) {
             return;
         }
 
         let sentryId = SentrySDK.capture(error: error)
-        NSLog("Sentry id of the exception: \(sentryId.sentryIdString)")
+        NSLog("\(Constants.TAG) Sentry id of the exception: \(sentryId.sentryIdString)")
     }
 
     // MARK: Internal
@@ -148,7 +148,7 @@ class SentryHelper {
     private func setupFilterToExcludeNonCooeeEvents(_ options: Options) {
         options.beforeSend = { event in
             if !self.containsWordCooee(event) {
-                NSLog("Skipping Sentry event with message: \(String(describing: event.message))")
+                NSLog("\(Constants.TAG) Skipping Sentry event with message: \(String(describing: event.message))")
                 return nil
             }
 

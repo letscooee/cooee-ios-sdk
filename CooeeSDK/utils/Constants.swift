@@ -38,7 +38,7 @@ struct Constants {
     static let KEEP_ALIVE_TIME_IN_MS = 5 * 60
     static let IDLE_TIME_IN_SECONDS = 30 * 60
     static let SYSTEM_DATA_PREFIX = "CE"
-    static let TAG = "\(Date()) CooeeSDK - "
+    static let TAG = "CooeeSDK:"
     static let TIME_TO_WAIT_SECONDS = 6.0;
     static let FONT_REFRESH_INTERVAL_DAYS = 7
     static let SCREENSHOT_SEND_INTERVAL_HOURS = 6

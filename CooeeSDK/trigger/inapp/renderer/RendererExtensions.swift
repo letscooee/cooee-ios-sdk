@@ -176,16 +176,16 @@ extension UIFont {
 
     static func register(from url: URL) {
         guard let fontDataProvider = CGDataProvider(url: url as CFURL) else {
-            NSLog("Could not get reference to font data provider")
+            NSLog("\(Constants.TAG) Could not get reference to font data provider")
             return
         }
         guard let font = CGFont(fontDataProvider) else {
-            NSLog("Could not get font from coregraphics")
+            NSLog("\(Constants.TAG) Could not get font from coregraphics")
             return
         }
         var error: Unmanaged<CFError>?
         guard CTFontManagerRegisterGraphicsFont(font, &error) else {
-            NSLog("Error registering font: \(error.debugDescription)")
+            NSLog("\(Constants.TAG) Error registering font: \(error.debugDescription)")
             return
         }
     }
@@ -221,7 +221,7 @@ extension UIImage {
     public class func gif(data: Data, url: String) -> UIImage? {
         // Create source from data
         guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
-            NSLog("Load GIF/Image: Source for the image does not exist")
+            NSLog("\(Constants.TAG) Load GIF/Image: Source for the image does not exist")
             return nil
         }
 
@@ -249,7 +249,7 @@ extension UIImage {
     public class func gif(asset: String, url: String) -> UIImage? {
         // Create source from assets catalog
         guard let dataAsset = NSDataAsset(name: asset) else {
-            NSLog("Load GIF/Image: Cannot turn image named \"\(asset)\" into NSDataAsset")
+            NSLog("\(Constants.TAG) Load GIF/Image: Cannot turn image named \"\(asset)\" into NSDataAsset")
             return nil
         }
 
