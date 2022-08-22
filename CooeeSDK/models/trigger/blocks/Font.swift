@@ -39,6 +39,20 @@ struct Font: HandyJSON {
 
         return font
     }
+    
+    public func getUIFont(for partElement: PartElement) -> UIFont {
+        var font = UIFont.systemFont(ofSize: getSize())
+
+        if ff != nil {
+            font = UIFont(name: ff!, size: getSize()) ?? font
+        }
+
+        if tf != nil, let newFont = processUITypeFace(for: partElement) {
+            font = newFont
+        }
+
+        return font
+    }
 
     // MARK: Internal
 
@@ -73,6 +87,24 @@ struct Font: HandyJSON {
 
         return SwiftUI.Font.custom(tf!, size: getSize())
     }
+    
+    private func processUITypeFace(for partElement: PartElement) -> UIFont? {
+        let font = checkForUISystemFont()
+
+        if font != nil {
+            return font
+        }
+
+        let fontFile = getFontPath(of: tf!)
+
+        if !FileManager.default.fileExists(atPath: fontFile.path) {
+            return uiFontWithCustomStyle(partElement)
+        }
+
+        UIFont.register(from: fontFile)
+
+        return UIFont(name:tf!, size: getSize())
+    }
 
     /**
      Access and check ``tf`` in ``UIFont.familyNames`` list
@@ -83,6 +115,16 @@ struct Font: HandyJSON {
         for family in UIFont.familyNames {
             if family.caseInsensitiveCompare(tf!) == .orderedSame {
                 return SwiftUI.Font.custom(family, size: getSize())
+            }
+        }
+
+        return nil
+    }
+    
+    private func checkForUISystemFont() -> UIFont? {
+        for family in UIFont.familyNames {
+            if family.caseInsensitiveCompare(tf!) == .orderedSame {
+                return UIFont(name:family, size: getSize())
             }
         }
 
@@ -120,6 +162,28 @@ struct Font: HandyJSON {
         UIFont.register(from: fontFile)
 
         return SwiftUI.Font.custom(typeFace, size: getSize())
+    }
+    
+    private func uiFontWithCustomStyle(_ partElement: PartElement) -> UIFont? {
+        var typeFace = "\(tf!.lowercased().trimmingCharacters(in: .whitespacesAndNewlines))-"
+
+        if partElement.isBold() {
+            typeFace = "\(typeFace)bold"
+        }
+
+        if partElement.isItalic() {
+            typeFace = "\(typeFace)italic"
+        }
+
+        let fontFile = getFontPath(of: typeFace)
+
+        if !FileManager.default.fileExists(atPath: fontFile.path) {
+            return nil
+        }
+
+        UIFont.register(from: fontFile)
+
+        return UIFont(name: typeFace, size: getSize())
     }
 
     /**

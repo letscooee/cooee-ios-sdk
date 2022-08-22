@@ -36,6 +36,10 @@ class PartElement: BaseElement, Identifiable {
     public func getPartColour() -> Color? {
         return c == nil ? nil : Color(hex: c!)
     }
+    
+    public func getUIPartColour() -> UIColor? {
+        return c == nil ? nil : UIColor(hexString: c!)
+    }
 
     public func getPartText() -> String {
         return txt ?? ""

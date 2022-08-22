@@ -16,9 +16,6 @@ import SwiftUI
  - Since: 1.3.0
  */
 class BaseTextElement: BaseElement {
-    // MARK: Lifecycle
-
-
     // MARK: Public
 
     /**
@@ -61,12 +58,33 @@ class BaseTextElement: BaseElement {
         }
     }
 
+    public func getNSTextAlignment() -> NSTextAlignment {
+        switch alg {
+            case 0:
+                return .left
+            case 1:
+                return .center
+            case 2:
+                return .right
+            case 3:
+                return .justified
+            case .none:
+                return .left
+            case .some:
+                return .left
+        }
+    }
+
     /**
      Process ``c`` and generates ``SwiftUI.Color``
      - Returns: Optional instance of ``SwiftUI.Color``
      */
     public func getColour() -> Color? {
         return c == nil ? nil : Color(hex: c!.getColour(), alpha: c!.getAlpha())
+    }
+    
+    public func getUIColour() -> UIColor? {
+        return c == nil ? nil : UIColor(hexString: c!.getColour(), c!.getAlpha())
     }
 
     /**
@@ -82,8 +100,16 @@ class BaseTextElement: BaseElement {
             return f!.getFont(for: part)
         }
     }
+    
+    public func getUIFont(for part: PartElement) -> UIFont {
+        if f == nil {
+            return UIFont.systemFont(ofSize: 14)
+        } else {
+            return f!.getUIFont(for: part)
+        }
+    }
 
-    // MARK: Internal
+    // MARK: Private
 
     private var txt: String?
     private var alg: Int?
