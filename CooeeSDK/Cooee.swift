@@ -137,7 +137,6 @@ public final class CooeeSDK: NSObject {
 
             self.safeHttpService.sendEvent(event: event);
         }
-
     }
 
     /**
@@ -225,6 +224,17 @@ public final class CooeeSDK: NSObject {
         }
 
         return [.alert, .sound, .badge]
+    }
+
+    /**
+     Launch ``DebugInfoViewController`` activity which holds debug information.
+     This information is useful to debug problem with the SDK.
+     */
+    @objc
+    public func showDebugInfo() {
+        if let visibleController = UIApplication.shared.topMostViewController() {
+            _ = DebugInfoViewController(on: visibleController)
+        }
     }
 
     // MARK: Private
