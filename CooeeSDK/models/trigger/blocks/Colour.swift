@@ -25,7 +25,7 @@ struct Colour: HandyJSON {
     var g: Gradient?
 
     func getColour() -> UIColor {
-        UIColor(hexString: h!)
+        UIColor(hexString: h!, Double(a ?? 100) / 100)
     }
 
     func getColour() -> String {

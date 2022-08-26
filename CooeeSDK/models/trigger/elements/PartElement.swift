@@ -41,6 +41,15 @@ class PartElement: BaseElement, Identifiable {
         return txt ?? ""
     }
 
+    /**
+     Return UIColor
+
+     - Returns: UIColor
+     */
+    public func getUIPartColour() -> UIColor? {
+        return c == nil ? nil : UIColor(hexString: c!)
+    }
+
     // MARK: Private
 
     private var txt: String?
