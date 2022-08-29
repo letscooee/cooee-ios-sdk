@@ -44,6 +44,9 @@
 		751F856D28464D29001B9656 /* WrapperDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B837BF5A14AEAEEEA0C95 /* WrapperDetails.swift */; };
 		752A211F27FC4943003C6E8F /* InAppTriggerSceneTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752A211E27FC4943003C6E8F /* InAppTriggerSceneTest.swift */; };
 		752D1BD227F5B9FB001995E7 /* CooeeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752D1BD127F5B9FB001995E7 /* CooeeTest.swift */; };
+		75425AA428B35A8B0097E454 /* DebugInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75425AA328B35A8B0097E454 /* DebugInfoViewController.swift */; };
+		75425AA828B365150097E454 /* DebugInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75425AA728B365150097E454 /* DebugInformation.swift */; };
+		75425AAA28B368760097E454 /* DebugInfoCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75425AA928B368760097E454 /* DebugInfoCollector.swift */; };
 		7555227027FADC53002DBFFF /* LocalStorageHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555226F27FADC53002DBFFF /* LocalStorageHelperTest.swift */; };
 		7555227527FB06D3002DBFFF /* payload.json in Resources */ = {isa = PBXBuildFile; fileRef = 7555227427FB06D3002DBFFF /* payload.json */; };
 		7555227727FB07AA002DBFFF /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555227627FB07AA002DBFFF /* BaseTestCase.swift */; };
@@ -252,6 +255,9 @@
 		751E134F270F2F4C002CF442 /* letscooee.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = letscooee.xcdatamodel; sourceTree = "<group>"; };
 		752A211E27FC4943003C6E8F /* InAppTriggerSceneTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppTriggerSceneTest.swift; sourceTree = "<group>"; };
 		752D1BD127F5B9FB001995E7 /* CooeeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooeeTest.swift; sourceTree = "<group>"; };
+		75425AA328B35A8B0097E454 /* DebugInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugInfoViewController.swift; sourceTree = "<group>"; };
+		75425AA728B365150097E454 /* DebugInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugInformation.swift; sourceTree = "<group>"; };
+		75425AA928B368760097E454 /* DebugInfoCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugInfoCollector.swift; sourceTree = "<group>"; };
 		7555226F27FADC53002DBFFF /* LocalStorageHelperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageHelperTest.swift; sourceTree = "<group>"; };
 		7555227427FB06D3002DBFFF /* payload.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = payload.json; sourceTree = "<group>"; };
 		7555227627FB07AA002DBFFF /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
@@ -547,6 +553,7 @@
 				751BC7C626F31A4B002D8358 /* DeviceInfo.swift */,
 				75729E8426F9BA27006EB506 /* DevicePropertyCollector.swift */,
 				758660D526FAFA89006B40DC /* SDKInfo.swift */,
+				75425AA328B35A8B0097E454 /* DebugInfoViewController.swift */,
 			);
 			path = device;
 			sourceTree = "<group>";
@@ -672,6 +679,7 @@
 				AC0B8FE80388BD5A3A3517E9 /* CooeeCTADelegate.swift */,
 				75D0238527C67023009A320B /* ObjectID.swift */,
 				750D470827DA10BF0029E18E /* SentryTransaction.swift */,
+				75425AA928B368760097E454 /* DebugInfoCollector.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -688,6 +696,7 @@
 				7599DCC42771ECEF002CEB1A /* AppFont.swift */,
 				AC0B837BF5A14AEAEEEA0C95 /* WrapperDetails.swift */,
 				AC0B8FA4CD8ACA8151E9B65D /* DeviceDetails.swift */,
+				75425AA728B365150097E454 /* DebugInformation.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -1331,6 +1340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75A098122707132100C2057B /* CooeeBootstrap.swift in Sources */,
+				75425AAA28B368760097E454 /* DebugInfoCollector.swift in Sources */,
 				75DD87CA271EE39700A272BB /* BaseTextElement.swift in Sources */,
 				756BAA1E27577C3F00C7A84F /* NotificationService.swift in Sources */,
 				751E1325270C350C002CF442 /* SessionManager.swift in Sources */,
@@ -1414,6 +1424,7 @@
 				751F856C28464D18001B9656 /* WrapperType.swift in Sources */,
 				AC0B83AC5BBFE158F4379789 /* ImageElement.swift in Sources */,
 				AC0B8E5C2D7FCA755C9F8910 /* TextElement.swift in Sources */,
+				75425AA428B35A8B0097E454 /* DebugInfoViewController.swift in Sources */,
 				AC0B8E13066BD7C37F8B65E8 /* VideoElement.swift in Sources */,
 				AC0B8B29AC11EB84B287A922 /* Container.swift in Sources */,
 				750D470927DA10C00029E18E /* SentryTransaction.swift in Sources */,
@@ -1427,6 +1438,7 @@
 				AC0B81656327520249E6A428 /* UnitUtil.swift in Sources */,
 				7518746C274DF8C100BF267F /* PartElement.swift in Sources */,
 				AC0B85C98A085703F48B2067 /* RendererExtensions.swift in Sources */,
+				75425AA828B365150097E454 /* DebugInformation.swift in Sources */,
 				AC0B887F64D2646212E0E763 /* ElementType.swift in Sources */,
 				751BB5CA27AD07F800097210 /* PermissionManager.swift in Sources */,
 				AC0B8F9ACEAD15992DF79CC2 /* EngagementTriggerHelper.swift in Sources */,
