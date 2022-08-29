@@ -57,7 +57,7 @@ struct Event: HandyJSON {
     var deviceProps: [String: Any]?
 
     mutating func withTrigger(triggerData: TriggerData) {
-        properties?.updateValue(triggerData.id ?? "", forKey: "triggerID")
+        trigger = EmbeddedTrigger(trigger: triggerData)
     }
 
     func toDictionary() -> [String: Any?] {
