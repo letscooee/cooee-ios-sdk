@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="PendingTasks" representedClassName="PendingTasks" syncable="YES" codeGenerationType="class">
         <attribute name="attempts" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="data" optional="YES" attributeType="String"/>
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="lastAttempted" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="sdkCode" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="type" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="PendingTrigger" representedClassName="PendingTrigger" syncable="YES" codeGenerationType="class">
+        <attribute name="loadedLazyData" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="notificationId" optional="YES" attributeType="String"/>
+        <attribute name="scheduleAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="sdkCode" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="triggerData" optional="YES" attributeType="String"/>
+        <attribute name="triggerId" optional="YES" attributeType="String"/>
+        <attribute name="triggerTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
     <elements>
-        <element name="PendingTasks" positionX="-11457" positionY="-3852" width="128" height="104"/>
+        <element name="PendingTasks" positionX="-11457" positionY="-3852" width="128" height="119"/>
+        <element name="PendingTrigger" positionX="-11457" positionY="-3807" width="128" height="134"/>
     </elements>
 </model>

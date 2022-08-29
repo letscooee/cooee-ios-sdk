@@ -70,6 +70,15 @@ class ViewController: UIViewController, CooeeCTADelegate {
             print(error)
         }
     }
+
+    @IBAction func copyUserID(_ sender: Any) {
+        UIPasteboard.general.string = cooeeSDK.getUserID()
+        print("User ID: \(cooeeSDK.getUserID() ?? "")")
+    }
+
+    @IBAction func showDebugInfo(_ sender: Any) {
+        cooeeSDK.showDebugInfo()
+    }
 }
 
 public extension Dictionary {

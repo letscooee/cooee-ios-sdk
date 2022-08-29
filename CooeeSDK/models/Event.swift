@@ -15,7 +15,8 @@ import HandyJSON
 struct Event: HandyJSON {
     // MARK: Lifecycle
 
-    init() {}
+    init() {
+    }
 
     init(eventName: String) {
         self.init(eventName: eventName, properties: [String: Any?]())
@@ -27,33 +28,36 @@ struct Event: HandyJSON {
     }
 
     init(eventName: String, properties: [String: Any?]) {
-        name = eventName
+        self.id = ObjectID().hexString
+        self.name = eventName
+        self.name = eventName
         self.properties = properties
-        occurred = DateUtils.formatDateToUTCString(date: Date())
-    }
-    
-    init(eventName: String, deviceProps: [String: Any?]) {
-        name = eventName
-        self.deviceProps = deviceProps as [String : Any]
-        occurred = DateUtils.formatDateToUTCString(date: Date())
+        self.occurred = DateUtils.formatDateToUTCString(date: Date())
     }
 
-    init(from decoder: Decoder) throws {}
+    init(eventName: String, deviceProps: [String: Any?]) {
+        self.init(eventName: eventName)
+        self.deviceProps = deviceProps as [String: Any]
+    }
+
+    init(from decoder: Decoder) throws {
+    }
 
     // MARK: Internal
 
+    var id: String?
     var name: String?
     var properties: [String: Any?]?
     var sessionID: String?
     var sessionNumber: Int?
     var screenName: String?
     var activeTriggers: [EmbeddedTrigger]?
-    var activeTrigger: EmbeddedTrigger?
+    var trigger: EmbeddedTrigger?
     var occurred: String?
     var deviceProps: [String: Any]?
 
     mutating func withTrigger(triggerData: TriggerData) {
-        properties?.updateValue(triggerData.id ?? "", forKey: "triggerID")
+        trigger = EmbeddedTrigger(trigger: triggerData)
     }
 
     func toDictionary() -> [String: Any?] {
@@ -63,10 +67,11 @@ struct Event: HandyJSON {
          "sessionNumber": sessionNumber,
          "screenName": screenName,
          "activeTriggers": activeTriggers,
-         "trigger": activeTrigger,
+         "trigger": trigger,
          "occurred": occurred,
          "deviceProps": deviceProps] as [String: Any?]
     }
 
-    func encode(to encoder: Encoder) throws {}
+    func encode(to encoder: Encoder) throws {
+    }
 }

@@ -40,7 +40,7 @@ class SafeHTTPService {
         sendEvent(event: event, createSession: false)
     }
 
-    
+
     public func updateUserProfile(userData: [String: Any]) {
         var requestData = userData
         requestData["sessionID"] = sessionManager.getCurrentSessionID()
@@ -58,8 +58,8 @@ class SafeHTTPService {
         attemptTaskImmediately(pendingTask);
     }
 
-    func updateDeviceProperty(deviceProp: [String: Any]) {
-        let pendingTask = pendingTaskService.newTask(data: deviceProp, pendingTaskType: PendingTaskType.API_DEVICE_PROFILE)
+    func updateDeviceProperty(deviceProp: DeviceDetails) {
+        let pendingTask = pendingTaskService.newTask(data: deviceProp.toDictionary(), pendingTaskType: PendingTaskType.API_DEVICE_PROFILE)
         attemptTaskImmediately(pendingTask)
     }
 
@@ -73,15 +73,23 @@ class SafeHTTPService {
         var event = event
         let sessionID = sessionManager.getCurrentSessionID(createNew: createSession)
 
+        if event.trigger == nil {
+            /*
+             *There is a possibility that the trigger can get expire in the same session or while the app is running. So, update
+             * "trigger.expired" before sending any event as the last active trigger will be tracked till the session is not expired.
+             */
+            if let trigger = LocalStorageHelper.getTypedClass(key: Constants.STORAGE_ACTIVE_TRIGGER, clazz: EmbeddedTrigger.self) {
+                trigger.updateExpired()
+                event.trigger = trigger
+            }
+        }
+
         if !(sessionID.isEmpty) && createSession {
             event.sessionID = sessionID
             event.sessionNumber = Int(sessionManager.getCurrentSessionNumber())
         }
 
-        let trigger = LocalStorageHelper.getTypedClass(key: Constants.STORAGE_ACTIVE_TRIGGER, clazz: EmbeddedTrigger.self)
-
         event.activeTriggers = EngagementTriggerHelper.getActiveTriggers()
-        event.activeTrigger = trigger
         event.screenName = runtimeData.getCurrentScreenName()
 
         let pendingTask = pendingTaskService.newTask(event)

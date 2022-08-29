@@ -104,6 +104,20 @@ class BaseElement: HandyJSON {
         bg = background
     }
 
+    /**
+     Checks element has valid image resource.
+
+     - Returns: ``true`` if element has valid image resource.
+     - Throws: ``InvalidElementException`` if element has invalid image resource.
+     */
+    public func hasValidImageResource() throws -> Bool {
+        if bg?.i == nil || !(bg?.i?.src?.isEmpty ?? true) {
+            return true
+        }
+
+        throw InvalidTriggerDataException(message: "Found Empty background image url")
+    }
+
     // MARK: Internal
 
     var br: Border? // Border

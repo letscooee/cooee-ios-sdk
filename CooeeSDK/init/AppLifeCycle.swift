@@ -20,6 +20,7 @@ class AppLifeCycle: NSObject {
     override init() {
         runtimeData = RuntimeData.shared
         sessionManager = SessionManager.shared
+        devicePropertyCollector = DevicePropertyCollector()
         super.init()
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(appMovedToLaunch), name: UIApplication.didFinishLaunchingNotification, object: nil)
@@ -42,24 +43,32 @@ class AppLifeCycle: NSObject {
         var sessionProperties = [String: Any]()
         sessionProperties["aDur"] = duration
 
-        let session = Event(eventName: "CE App Background", properties: sessionProperties)
-        CooeeFactory.shared.safeHttpService.sendEvent(event: session)
-
-        CooeeNotificationService.processPendingNotification()
+        var event = Event(eventName: Constants.EVENT_APP_BACKGROUND, properties: sessionProperties)
+        event.deviceProps = self.devicePropertyCollector.getMutableDeviceProps()
+        
+        CooeeFactory.shared.safeHttpService.sendEvent(event: event)
     }
 
     @objc func appMovedToLaunch() {
         runtimeData.setInForeground()
-        _ = sessionManager.checkSessionValidity()
+        runtimeData.setLaunchType(launchType: .ORGANIC)
         DispatchQueue.main.async {
             NewSessionExecutor().execute()
         }
-
     }
 
     @objc func appMovedToForeground() {
-        _ = sessionManager.checkSessionValidity()
+        let willCreateNewSession = sessionManager.checkSessionValidity()
+        let isNewSession = willCreateNewSession || runtimeData.isFirstForeground();
         DispatchQueue.main.async {
+            if isNewSession && self.runtimeData.getLaunchType() == .ORGANIC {
+                do {
+                    try EngagementTriggerHelper().performOrganicLaunch()
+                } catch {
+                    NSLog("\(Constants.TAG) \(error.localizedDescription)")
+                }
+            }
+
             self.sessionManager.keepSessionAlive()
 
             if self.runtimeData.isFirstForeground() {
@@ -72,10 +81,10 @@ class AppLifeCycle: NSObject {
 
             var eventProps = [String: Any]()
             eventProps["iaDur"] = backgroundDuration
-            let session = Event(eventName: "CE App Foreground", properties: eventProps)
+            var event = Event(eventName: Constants.EVENT_APP_FOREGROUND, properties: eventProps)
+            event.deviceProps = self.devicePropertyCollector.getMutableDeviceProps()
 
-            CooeeFactory.shared.safeHttpService.sendEvent(event: session)
-
+            CooeeFactory.shared.safeHttpService.sendEvent(event: event)
         }
     }
 
@@ -95,4 +104,5 @@ class AppLifeCycle: NSObject {
     private var runtimeData: RuntimeData
     private let notificationCenter = NotificationCenter.default
     private let sessionManager: SessionManager
+    private let devicePropertyCollector: DevicePropertyCollector
 }

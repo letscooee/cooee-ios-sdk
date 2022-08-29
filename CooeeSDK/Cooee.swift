@@ -51,8 +51,9 @@ public final class CooeeSDK: NSObject {
         } else {
             event = Event(eventName: eventName, properties: eventProperties!)
         }
-
-        safeHttpService.sendEvent(event: event)
+        DispatchQueue.global().async {
+            self.safeHttpService.sendEvent(event: event)
+        }
     }
 
     /**
@@ -85,10 +86,10 @@ public final class CooeeSDK: NSObject {
     @objc
     public func updateUserProfile(userData: [String: Any], userProperties: [String: Any]) throws {
         var requestData = [String: Any]()
-        requestData.merge(userProperties) { (current, _) in
+        requestData.merge(userProperties) { current, _ in
             current
         }
-        requestData.merge(userData) { (current, _) in
+        requestData.merge(userData) { current, _ in
             current
         }
 
@@ -105,9 +106,10 @@ public final class CooeeSDK: NSObject {
         if isContainSystemDataPrefix(userData) {
             throw CustomError.PropertyError
         }
-
-        sentryHelper.setUserInfo(userData: userData)
-        safeHttpService.updateUserProfile(userData: userData)
+        DispatchQueue.global().async {
+            self.sentryHelper.setUserInfo(userData: userData)
+            self.safeHttpService.updateUserProfile(userData: userData)
+        }
     }
 
     /**
@@ -116,7 +118,25 @@ public final class CooeeSDK: NSObject {
      */
     @objc
     public func setCurrentScreen(screenName: String) {
-        runtimeData.setCurrentScreenName(name: screenName)
+        if screenName.isEmpty {
+            NSLog("\(Constants.TAG) Trying to set empty screen name")
+            return
+        }
+
+        /*
+         * Set current screen name to runtime as soon as possible because threads can be on hold if processing is
+         * slow/CPU is not available.
+         */
+        let previousScreen = self.runtimeData.getCurrentScreenName()
+        self.runtimeData.setCurrentScreenName(name: screenName)
+
+        DispatchQueue.global().async {
+            let event = Event(eventName: Constants.EVENT_SCREEN_VIEW,
+                    properties: ["ps": previousScreen])
+
+
+            self.safeHttpService.sendEvent(event: event);
+        }
     }
 
     /**
@@ -125,7 +145,7 @@ public final class CooeeSDK: NSObject {
      */
     @objc
     public func getUserID() -> String? {
-        CooeeFactory.shared.userAuthService.getUserID()
+        CooeeFactory.shared.deviceAuthService.getUserID()
     }
 
     @objc
@@ -145,7 +165,7 @@ public final class CooeeSDK: NSObject {
     @objc
     public func setDeviceToken(token data: Data?) {
         guard let rawToken = data else {
-            NSLog("Received empty device token")
+            NSLog("\(Constants.TAG) Received empty device token")
             return
         }
 
@@ -155,7 +175,9 @@ public final class CooeeSDK: NSObject {
         var requestBody = [String: Any]()
         requestBody["pushToken"] = tokenString
 
-        CooeeFactory.shared.safeHttpService.updatePushToken(requestData: requestBody)
+        DispatchQueue.global().async {
+            self.safeHttpService.updatePushToken(requestData: requestBody)
+        }
     }
 
     /**
@@ -170,11 +192,14 @@ public final class CooeeSDK: NSObject {
             return
         }
 
+        let containsSDKCode = (response.notification.request.content.userInfo["sdkCode"] as? Int) != nil
+
         switch response.actionIdentifier {
             case UNNotificationDismissActionIdentifier:
-                CooeeNotificationService.sendEvent("CE Notification Cancelled", withTriggerData: triggerData)
+                CooeeNotificationService.sendEvent(Constants.EVENT_NOTIFICATION_CANCELLED, withTriggerData: triggerData)
+                removePendingTrigger(triggerData)
             case UNNotificationDefaultActionIdentifier:
-                notificationClicked(triggerData)
+                notificationClicked(triggerData, containsSDKCode: containsSDKCode)
             default:
                 // Handle other actions
                 break
@@ -202,15 +227,14 @@ public final class CooeeSDK: NSObject {
     }
 
     /**
-     Use to set wrapper name. Can use only in Flutter/Cordova/React-Native to keep track of wrappers
-
-     - parameters:
-     - wrapperName: Name of the wrapper
-    - warning:  Can use only in Flutter/Cordova/React-Native to keep track of wrappers
+     Launch ``DebugInfoViewController`` activity which holds debug information.
+     This information is useful to debug problem with the SDK.
      */
     @objc
-    public func setWrapper(_ wrapperName: String) {
-        CooeeFactory.shared.baseHttpService.commonHeaders.wrapper = wrapperName
+    public func showDebugInfo() {
+        if let visibleController = UIApplication.shared.topMostViewController() {
+            _ = DebugInfoViewController(on: visibleController)
+        }
     }
 
     // MARK: Private
@@ -248,24 +272,26 @@ public final class CooeeSDK: NSObject {
      Performs the notification click action
 
      - Parameter triggerData: ``TriggerData`` received via click action of push notification
+     - Parameter containsSDKCode: true if notification contains sdkCode
      */
-    private func notificationClicked(_ triggerData: TriggerData) {
+    private func notificationClicked(_ triggerData: TriggerData, containsSDKCode: Bool) {
+        runtimeData.setLaunchType(launchType: .PUSH_CLICK)
         if triggerData.getPushNotification() != nil {
-            CooeeNotificationService.sendEvent("CE Notification Clicked", withTriggerData: triggerData)
+            CooeeNotificationService.sendEvent(Constants.EVENT_NOTIFICATION_CLICKED, withTriggerData: triggerData)
         }
 
         guard let notificationClickAction = triggerData.getPushNotification()?.getClickAction() else {
-            launchInApp(with: triggerData)
+            launchInApp(with: triggerData, checkPendingTrigger: containsSDKCode)
             return
         }
 
         guard let launchType = notificationClickAction.open else {
-            launchInApp(with: triggerData)
+            launchInApp(with: triggerData, checkPendingTrigger: containsSDKCode)
             return
         }
 
         if launchType == 1 {
-            launchInApp(with: triggerData)
+            launchInApp(with: triggerData, checkPendingTrigger: containsSDKCode)
         } else {
             let triggerContext = TriggerContext()
             triggerContext.setTriggerData(triggerData: triggerData)
@@ -281,9 +307,14 @@ public final class CooeeSDK: NSObject {
      Provide data to the ``EngagementTriggerHelper.renderInAppFromPushNotification`` to launch in-App
 
      - Parameter triggerData: ``TriggerData``
+     - Parameter checkPendingTrigger: ``Bool`` to check for pending trigger
      */
-    private func launchInApp(with triggerData: TriggerData) {
-        EngagementTriggerHelper().renderInAppFromPushNotification(for: triggerData)
+    private func launchInApp(with triggerData: TriggerData, checkPendingTrigger: Bool = false) {
+        do {
+            try EngagementTriggerHelper().renderInAppFromPushNotification(for: triggerData, checkPendingTrigger: checkPendingTrigger)
+        } catch {
+            NSLog("\(Constants.TAG) \(error.localizedDescription)")
+        }
     }
 
     /**
@@ -300,5 +331,18 @@ public final class CooeeSDK: NSObject {
             }
         }
         return false
+    }
+
+    /**
+     Removes pending trigger from ``pendingTrigger`` table
+
+     - Parameter data: ``TriggerData`` to remove
+     */
+    private func removePendingTrigger(_ data: TriggerData) {
+        guard let triggerID = data.id else {
+            return
+        }
+
+        PendingTriggerService().removeTrigger(triggerID)
     }
 }

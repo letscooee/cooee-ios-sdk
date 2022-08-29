@@ -22,28 +22,34 @@ class EmbeddedTrigger: Codable, HandyJSON {
     required init() {
     }
 
-    init(triggerID: String, engagementID: String, expireAt: Int64) {
+    init(triggerID: String?, engagementID: String?, expireAt: Int64?) {
         self.triggerID = triggerID
         self.engagementID = engagementID
         self.expireAt = expireAt
-        self.expired = isExpired()
+        self.updateExpired()
     }
 
-    init(trigger: TriggerData) {
-        self.triggerID = trigger.id
-        self.engagementID = trigger.engagementID
-        self.expireAt = trigger.expireAt
-        self.expired = isExpired()
+    convenience init(trigger: TriggerData) {
+        self.init(triggerID: trigger.id, engagementID: trigger.engagementID, expireAt: trigger.expireAt)
     }
 
     // MARK: Public
 
     public func getExpireAt() -> Int64 {
-        return expireAt ?? Int64(Date().timeIntervalSince1970 * 1000)
+        return expireAt ?? 0
     }
 
     public func isExpired() -> Bool {
         return getExpireAt() < Int64(Date().timeIntervalSince1970 * 1000)
+    }
+
+    /**
+     Update ``expired`` value at runtime
+     */
+    public func updateExpired() {
+        if isExpired() {
+            expired = true
+        }
     }
 
     // MARK: Private

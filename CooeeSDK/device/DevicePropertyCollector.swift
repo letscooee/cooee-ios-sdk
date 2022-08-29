@@ -57,7 +57,7 @@ class DevicePropertyCollector {
             "locale": Bundle.main.preferredLocalizations[0],
             "bt": deviceInfo.cachedInfo.isBTOn,
             "wifi": deviceInfo.cachedInfo.isWIFIConnected,
-            "orientation": deviceInfo.cachedInfo.deviceOrientation
+            "ori": deviceInfo.cachedInfo.deviceOrientation
         ] as [String: Any]
         
         deviceProperties.merge(permissionManager.getPermissionInformation() ?? [String: Any]()){(current,_) in current}
@@ -82,10 +82,12 @@ class DevicePropertyCollector {
         return [
             "display": display,
             "device": device,
+            "flTime": DateUtils.formatDateToUTCString(date: Date()),
+            "iTime": getAppInstallDate()
         ]
     }
 
-    func getAppInstallDate() -> String? {
+    func getAppInstallDate() -> String {
         DateUtils.formatDateToUTCString(date: appInfo.cachedInfo.installDate ?? Date())
     }
 

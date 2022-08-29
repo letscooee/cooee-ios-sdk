@@ -31,6 +31,7 @@ class PendingTaskDAO {
         task.data = pendingTask.data
         task.dateCreated = pendingTask.dateCreated
         task.type = pendingTask.type.rawValue
+        task.sdkCode = Int32(pendingTask.sdkVersion)
 
         do {
             try context.save()
@@ -53,7 +54,7 @@ class PendingTaskDAO {
     }
 
     func delete(_ pendingTask: PendingTasks) {
-        NSLog("Deleting Task \(pendingTask.id)")
+        NSLog("\(Constants.TAG) Deleting Task \(pendingTask.id)")
         let context = database.viewContext
         context.delete(pendingTask)
 

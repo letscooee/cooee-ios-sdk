@@ -40,7 +40,7 @@ struct AbstractInAppRenderer: ViewModifier {
                 .padding(.leading, elementData.spc!.getPaddingLeft())
                 .padding(.trailing, elementData.spc!.getPaddingRight())
         }
-        .if(elementData.getBackground()?.s?.g != nil) {
+        .if(elementData.getBackground()?.s?.g?.c1 != nil) {
             $0.background(
                 LinearGradient(gradient: SwiftUI.Gradient(colors: [Color(hex: elementData.getBackground()!.s!.g!.c1!), Color(hex: elementData.getBackground()!.s!.g!.c2!)]), startPoint: .top, endPoint: .bottom)
             ).cornerRadius(elementData.br?.getRadius() ?? 0)
@@ -51,7 +51,7 @@ struct AbstractInAppRenderer: ViewModifier {
         .if(elementData.getBackground()?.g != nil) {
             $0.background(BlurBackground(effect: UIBlurEffect(style: .light)))
         }
-        .if(elementData.getBackground()?.i != nil) {
+        .if(elementData.getBackground()?.i?.src != nil) {
             $0.background(
                 ImageRenderer(
                     url: URL(string: elementData.getBackground()!.i!.src!)!,

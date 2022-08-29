@@ -13,7 +13,7 @@ import Foundation
 class PushTokenTaskProcessor: HttpTaskProcessor<DictionaryPrototype> {
 
     override func doHttp(data: DictionaryPrototype) throws {
-        try baseHttpService.sendFirebaseToken(token: data.pushToken)
+        try baseHttpService.sendPushToken(token: data.pushToken)
     }
 
     override func canProcess(_ task: PendingTasks) -> Bool {

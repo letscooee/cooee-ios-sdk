@@ -21,7 +21,7 @@ class CooeeJobUtils {
     }
 
     public static func triggerPendingTaskJobImmediately() {
-        NSLog("Run PendingTaskJob immediately")
+        NSLog("\(Constants.TAG) Run PendingTaskJob immediately")
         scheduleJob(latencyMillis: 0)
     }
 
