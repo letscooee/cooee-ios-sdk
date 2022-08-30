@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
 #
 
 spec.name         = "CooeeSDK"
-spec.version      = "1.3.16"
+spec.version      = "1.4.0"
 spec.summary      = "Hyper-personalised Mobile App Re-Engagement via Machine Learning"
 
 # This description is used to generate tags and improve search results.

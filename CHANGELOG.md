@@ -1,5 +1,41 @@
 # Change Log
 
+## 1.4.0 (2022-08-30)
+
+### Breaking
+
+1. Removed `CooeeNotificationService.updateContent` method and exposed `CooeeNotificationService.updateContentFromRequest`.
+```diff
+// Old code
+- bestAttemptContent = CooeeNotificationService.updateContent(((request.content.mutableCopy() as! UNMutableNotificationContent)), with: request.content.userInfo)
+
+// New code
++ bestAttemptContent = CooeeNotificationService.updateContentFromRequest(request)
+```
+
+### Feature
+
+1. Handle pending engagement on organic app launch.
+2. Ability to manage InApp orientation.
+
+### Improvements
+
+1. Expose `showDebugInfo` method for SDK debugging.
+2. Add GIF support in Notification and InApp.
+3. Ability to support profile merging.
+4. Add Null-Safety check before processing any payload.
+5. Track `Screen View` event when user set current screen.
+6. Improve Notification rendering by making all fields optional except title.
+7. Expose method to accept wrapper information.
+8. Improve `event.trigger` tracking for Notification events.
+9. Ability to launch InApp in full screen.
+
+### Fixes
+
+1. Fix tracking event twice to backend (Send eventID with event).
+2. Fix `Notification Cancelled` event not getting tracked.
+3. Fix failure while loading InApp data from server.
+
 ## 1.3.16 (2022-08-04)
 
 ### Improvements

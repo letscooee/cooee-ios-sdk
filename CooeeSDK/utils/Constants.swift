@@ -69,8 +69,8 @@ struct Constants {
     // endregion
 
     // region SDK Info
-    static let VERSION_STRING = "1.3.16"
-    static let VERSION_CODE = 10314
+    static let VERSION_STRING = "1.4.0"
+    static let VERSION_CODE = 10400
     // endregion
 
     // region Event Names
