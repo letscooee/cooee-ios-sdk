@@ -16,7 +16,7 @@ import HandyJSON
  */
 struct DeviceAuthResponse: Decodable, HandyJSON {
 
-    var id: String?
+    var userID: String?
     var deviceID: String?
     var sdkToken: String?
 }

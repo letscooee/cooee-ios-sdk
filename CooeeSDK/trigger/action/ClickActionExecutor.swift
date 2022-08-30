@@ -172,13 +172,23 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
      Check for InApp Browser data and launch InApp Browser using SafariService
      */
     private func launchInAppBrowser() {
-        if clickAction.iab == nil || clickAction.iab!.u == nil {
+        guard let iab = clickAction.iab else {
             return
         }
 
-        let url = URL(string: clickAction.iab!.u!)!
-        let safariVC = SFSafariViewController(url: url)
-        triggerContext.getPresentViewController()?.present(safariVC, animated: true, completion: nil)
+        guard var stringURL = iab.u, !stringURL.isEmpty else {
+            log("Received empty url in InAppBrowser CTA in trigger: \(String(describing: triggerContext.getTriggerData()?.toString()))")
+            return
+        }
+
+        if let queryParameters = getQueryParameters(iab), !queryParameters.isEmpty {
+            stringURL += "?\(queryParameters)"
+        }
+
+        if let url = URL(string: stringURL) {
+            let safariVC = SFSafariViewController(url: url)
+            triggerContext.getPresentViewController()?.present(safariVC, animated: true, completion: nil)
+        }
     }
 
     /**
@@ -201,14 +211,14 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
     }
 
     private func share() {
-        let share = clickAction.share
-
-        if share == nil {
+        guard let share = clickAction.share else {
             return
         }
 
         // text to share
-        let text = share!["text"] ?? ""
+        guard let text = share.text, !text.isEmpty else {
+            return
+        }
 
         // set up activity view controller
         let textToShare = [text]
@@ -223,13 +233,16 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
     }
 
     private func updateApp() {
-        let update = clickAction.updt
-
-        if update == nil || (update!.u?.isEmpty ?? true) {
+        guard let update = clickAction.updt else {
             return
         }
 
-        if let url = URL(string: update!.u!) {
+        guard let url = update.u, !url.isEmpty else {
+            log("Received empty url in update CTA in trigger: \(String(describing: triggerContext.getTriggerData()?.toString()))")
+            return
+        }
+
+        if let url = URL(string: url) {
             UIApplication.shared.open(url)
         }
     }
@@ -238,28 +251,50 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
      Process external block from ClickAction and opens URL in external browser
      */
     private func executeExternal() {
-        let external = clickAction.ext
-
-        if external == nil || (external!.u?.isEmpty ?? true) {
+        guard let external = clickAction.ext else {
             return
         }
 
-        if let url = URL(string: external!.u!) {
+        guard var url = external.u, !url.isEmpty else {
+            log("Received empty url in external CTA in trigger: \(String(describing: triggerContext.getTriggerData()?.toString()))")
+            return
+        }
+
+        if let queryParameters = getQueryParameters(external), !queryParameters.isEmpty {
+            url += "?\(queryParameters)"
+        }
+
+        if let url = URL(string: url) {
             UIApplication.shared.open(url)
         }
+    }
+
+    /**
+     Crete query parameter from map
+     - Parameter browserContent: content to be passed to browser
+     */
+    private func getQueryParameters(_ browserContent: BrowserContent) -> String? {
+        guard let queryParameters = browserContent.qp else {
+            return nil
+        }
+        var queryString = ""
+        for (key, value) in queryParameters {
+            queryString += "\(key)=\(value)&".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        }
+        queryString.removeLast()
+
+        return queryString
     }
 
     /**
      Process UserProperties block in ClickAction and send it to server
      */
     private func updateUserProperties() {
-        let userProperties = clickAction.up
-
-        if userProperties == nil {
+        guard let userProperties = clickAction.up else {
             return
         }
 
-        CooeeFactory.shared.safeHttpService.updateUserProfile(userData: userProperties!)
+        CooeeFactory.shared.safeHttpService.updateUserProfile(userData: userProperties)
     }
 
     /**
@@ -285,5 +320,14 @@ class ClickActionExecutor: NSObject, CLLocationManagerDelegate {
         }
 
         onCTAListener.onCTAResponse(payload: mergedKV!)
+    }
+
+    /**
+     Logs ``logMessage`` to Sentry
+
+     - Parameter logMessage: The message to log
+     */
+    private func log(_ logMessage: String) {
+        CooeeFactory.shared.sentryHelper.capture(message: logMessage)
     }
 }

@@ -15,8 +15,7 @@ import HandyJSON
 struct ClickAction: HandyJSON {
     // MARK: Lifecycle
 
-    init() {
-    }
+    init() {}
 
     init(shouldClose: Bool) {
         self.close = shouldClose
@@ -37,7 +36,7 @@ struct ClickAction: HandyJSON {
     var up: [String: Any]?
     var kv: [String: Any]?
     var custKV: [String: Any]?
-    var share: [String: Any]?
+    var share: ShareContent?
     var close: Bool? = false
     var ntvAR: AppAR?
     var open: Int?

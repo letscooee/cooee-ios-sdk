@@ -13,12 +13,13 @@ import Foundation
  - Author: Ashish Gaikwad
  - Since: 0.1.0
    */
-class NewSessionExecutor {
+@objc
+public class NewSessionExecutor: NSObject {
     // MARK: Lifecycle
 
     // private let SafeHTTPService safeHTTPService
 
-    init() {
+    override init() {
         devicePropertyCollector = DevicePropertyCollector()
         appInfo = CooeeFactory.shared.appInfo
         sessionManager = CooeeFactory.shared.sessionManager
@@ -26,7 +27,26 @@ class NewSessionExecutor {
 
     // MARK: Public
 
-    public func execute() {
+    /**
+     Use to set wrapper name. Can use only in Flutter/Cordova/React-Native to keep track of wrappers.
+
+     - Parameters:
+       - wrapperType: Type of wrapper
+       - versionNumber:  Version number of wrapper
+       - versionCode:  Version code of wrapper
+     */
+    @objc
+    public static func updateWrapperInformation(wrapperType: WrapperType, versionNumber: String, versionCode: Int) {
+        if versionCode == 0 {
+            return
+        }
+
+        wrapper = WrapperDetails(versionCode, versionNumber, wrapperType)
+    }
+
+    // MARK: Internal
+
+    func execute() {
         if isAppFirstTimeLaunch() {
             sendFirstLaunchEvent()
         } else {
@@ -35,6 +55,8 @@ class NewSessionExecutor {
     }
 
     // MARK: Private
+
+    private static var wrapper: WrapperDetails?
 
     private let devicePropertyCollector: DevicePropertyCollector
     private let appInfo: AppInfo
@@ -59,34 +81,27 @@ class NewSessionExecutor {
      */
 
     private func sendSuccessiveLaunchEvent() {
-        let mutableDeviceProperty = devicePropertyCollector.getMutableDeviceProps()
-        let event = Event(eventName: "CE App Launched", deviceProps: mutableDeviceProperty)
-        CooeeFactory.shared.safeHttpService.sendEvent(event: event)
+        var deviceProperties = devicePropertyCollector.getMutableDeviceProps()
 
-        sendDefaultDeviceProperties(userProperties: mutableDeviceProperty)
+        if let wrapper = NewSessionExecutor.wrapper {
+            deviceProperties.updateValue(wrapper.toDictionary(), forKey: "wrp")
+        }
+
+        let event = Event(eventName: Constants.EVENT_APP_LAUNCHED, deviceProps: deviceProperties)
+        CooeeFactory.shared.safeHttpService.sendEvent(event: event)
     }
 
     /**
      * Runs when app is opened for the first time after sdkToken is received from server asynchronously
      */
     private func sendFirstLaunchEvent() {
-        let event = Event(eventName: "CE App Installed", deviceProps: devicePropertyCollector.getMutableDeviceProps())
-        CooeeFactory.shared.safeHttpService.sendEvent(event: event)
+        var deviceProperties = devicePropertyCollector.getMutableDeviceProps()
 
-        var firstLaunchProps = [String: Any]()
-        firstLaunchProps["firstLaunch"] = DateUtils.formatDateToUTCString(date: Date())
-        firstLaunchProps["installedTime"] = devicePropertyCollector.getAppInstallDate()
-        sendDefaultDeviceProperties(userProperties: firstLaunchProps)
-    }
-
-    private func sendDefaultDeviceProperties(userProperties: [String: Any]?) {
-        var dictionary = devicePropertyCollector.getImmutableDeviceProps()
-        if userProperties != nil {
-            dictionary.merge(userProperties!) { _, new in
-                new
-            }
+        if let wrapper = NewSessionExecutor.wrapper {
+            deviceProperties.updateValue(wrapper.toDictionary(), forKey: "wrp")
         }
 
-        CooeeFactory.shared.safeHttpService.updateDeviceProperty(deviceProp: ["props": dictionary])
+        let event = Event(eventName: Constants.EVENT_APP_INSTALLED, deviceProps: deviceProperties)
+        CooeeFactory.shared.safeHttpService.sendEvent(event: event)
     }
 }

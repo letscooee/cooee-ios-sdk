@@ -12,6 +12,7 @@ import XCTest
 class BaseTestCase: XCTestCase {
     var samplePayload: String!
     var samplePayloadMap: [String: Any]!
+    var invalidDataMap: [String: Any]!
     var triggerData: TriggerData!
     var expiredTriggerData: TriggerData!
 
@@ -32,6 +33,16 @@ class BaseTestCase: XCTestCase {
 
             } else {
                 print("file not found")
+            }
+            
+            if let bundlePath = Bundle(for: type(of: self)).url(forResource: "invalid_data", withExtension: "json") {
+                print("path obtained")
+                let jsonData = try Data(contentsOf: bundlePath)
+
+                invalidDataMap = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as? [String: Any]
+
+            } else {
+                print("invalid data file not found")
             }
         } catch {
             NSLog(error.localizedDescription)

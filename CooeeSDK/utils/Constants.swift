@@ -31,13 +31,14 @@ struct Constants {
     static let STORAGE_SCREENSHOT_SYNC_TIME = "screenshot_sync_time"
     static let STORAGE_ACTIVE_SESSION = "active_session"
     static let STORAGE_LAST_SESSION_USE_TIME = "last_session_use_time"
+    static let STORAGE_NOTIFICATION_ID = "cooee_notification_id"
     // endregion
 
     // KEEP_ALIVE_TIME_IN_MS will be in SECONDS
     static let KEEP_ALIVE_TIME_IN_MS = 5 * 60
     static let IDLE_TIME_IN_SECONDS = 30 * 60
     static let SYSTEM_DATA_PREFIX = "CE"
-    static let TAG = "\(Date()) CooeeSDK - "
+    static let TAG = "CooeeSDK:"
     static let TIME_TO_WAIT_SECONDS = 6.0;
     static let FONT_REFRESH_INTERVAL_DAYS = 7
     static let SCREENSHOT_SEND_INTERVAL_HOURS = 6
@@ -66,8 +67,23 @@ struct Constants {
     public static let UNIT_VIEWPORT_HEIGHT = "vh";
     public static let UNIT_VIEWPORT_WIDTH = "vw";
     // endregion
-    
+
     // region SDK Info
     static let VERSION_STRING = "1.3.16"
+    static let VERSION_CODE = 10314
+    // endregion
+
+    // region Event Names
+    static let EVENT_SCREEN_VIEW = "CE Screen View"
+    static let EVENT_APP_INSTALLED = "CE App Installed"
+    static let EVENT_APP_LAUNCHED = "CE App Launched"
+    static let EVENT_APP_BACKGROUND = "CE App Background"
+    static let EVENT_APP_FOREGROUND = "CE App Foreground"
+    static let EVENT_TRIGGER_DISPLAY = "CE Trigger Displayed"
+    static let EVENT_TRIGGER_CLOSED = "CE Trigger Closed"
+    static let EVENT_NOTIFICATION_RECEIVED = "CE Notification Received"
+    static let EVENT_NOTIFICATION_VIEWED = "CE Notification Viewed"
+    static let EVENT_NOTIFICATION_CLICKED = "CE Notification Clicked"
+    static let EVENT_NOTIFICATION_CANCELLED = "CE Notification Cancelled"
     // endregion
 }

@@ -37,8 +37,8 @@ class InAppTriggerScene: UIView {
 
     @objc func renderNewInApp() {
         let sentryTransaction = SentrySDK.startTransaction(
-            name: SentryTransaction.COOEE_INAPP_SCENE.rawValue,
-            operation: "load"
+                name: SentryTransaction.COOEE_INAPP_SCENE.rawValue,
+                operation: "load"
         )
 
         do {
@@ -97,7 +97,7 @@ class InAppTriggerScene: UIView {
             throw NSError(domain: "Invalid InApp Elements", code: 0, userInfo: nil)
         }
 
-        // updateDeviceOrientation(inAppData!.getOrientation()) // Skipping orientation lock in 1.3.0 release
+        updateDeviceOrientation(inAppData!.getDeviceOrientation())
         triggerContext.setTriggerData(triggerData: triggerData!)
         triggerContext.setTriggerParentLayout(triggerParentLayout: parentView)
         triggerContext.setPresentViewController(presentViewController: viewController)
@@ -106,7 +106,7 @@ class InAppTriggerScene: UIView {
             self.finish()
         }
 
-        let host = UIHostingController(rootView: ContainerRenderer(inAppTrigger: inAppData!, triggerContext).edgesIgnoringSafeArea(.all))
+        let host = UIHostingController(rootView: ContainerRenderer(inAppTrigger: inAppData!, triggerContext))
         guard let hostView = host.view else {
             CooeeFactory.shared.sentryHelper.capture(message: "Loading SwiftUI failed")
             return
@@ -187,7 +187,7 @@ class InAppTriggerScene: UIView {
     }
 
     private func sendTriggerDisplayedEvent() {
-        let event = Event(eventName: "CE Trigger Displayed", triggerData: triggerData!)
+        let event = Event(eventName: Constants.EVENT_TRIGGER_DISPLAY, triggerData: triggerData!)
         CooeeFactory.shared.safeHttpService.sendEvent(event: event)
     }
 
@@ -197,13 +197,13 @@ class InAppTriggerScene: UIView {
             let duration = DateUtils.getDateDifferenceInSeconds(startDate: self.startTime!, endDate: Date())
             closedEventProps.updateValue(duration, forKey: "duration")
 
-            var event = Event(eventName: "CE Trigger Closed", properties: closedEventProps)
+            var event = Event(eventName: Constants.EVENT_TRIGGER_CLOSED, properties: closedEventProps)
             event.withTrigger(triggerData: self.triggerData!)
             CooeeFactory.shared.safeHttpService.sendEvent(event: event)
         }
 
         // exit animation
-        let exitAnimation = inAppData!.anim?.ex ?? .SLIDE_OUT_RIGHT
+        let exitAnimation = inAppData?.anim?.ex ?? .SLIDE_OUT_RIGHT
         UIView.animate(withDuration: 0.5, animations: {
             switch exitAnimation {
                 case .SLIDE_OUT_LEFT:
@@ -224,11 +224,11 @@ class InAppTriggerScene: UIView {
                     self.parentView.frame = CGRect(x: 0 + UIScreen.main.bounds.width, y: 0 - UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             }
         }, completion: { (_: Bool) in
-            self.parentView.removeFromSuperview()
+            self.parentView?.removeFromSuperview()
+            self.parentView = nil;
             NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
+            // revert device to previous device orientation
+            self.updateDeviceOrientation(self.deviceDefaultOrientation)
         })
-
-        // revert device to previous device orientation
-        // updateDeviceOrientation(deviceDefaultOrientation) // Skipping orientation lock in 1.3.0 release
     }
 }

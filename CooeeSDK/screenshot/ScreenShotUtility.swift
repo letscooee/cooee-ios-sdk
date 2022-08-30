@@ -24,7 +24,7 @@ class ScreenShotUtility {
         let isAppInDebugMode = CooeeFactory.shared.appInfo.isAppDebugging()
 
         if !isAppInDebugMode {
-            NSLog("Skipping screenshot send as App is not in debug mode")
+            NSLog("\(Constants.TAG) Skipping screenshot send as App is not in debug mode")
             return
         }
 
@@ -39,7 +39,7 @@ class ScreenShotUtility {
         }
 
         if !isTimeToSendScreenshot(for: screenName) {
-            NSLog("Skipping screenshot send as its before \(Constants.SCREENSHOT_SEND_INTERVAL_HOURS) hours")
+            NSLog("\(Constants.TAG) Skipping screenshot send as its before \(Constants.SCREENSHOT_SEND_INTERVAL_HOURS) hours")
             return
         }
 

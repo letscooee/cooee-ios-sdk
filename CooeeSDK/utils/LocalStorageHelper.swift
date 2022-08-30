@@ -125,7 +125,7 @@ class LocalStorageHelper {
      */
     static func putDate(key: String, value: Date) {
         let userDefault = UserDefaults(suiteName: "group.\(bundleId)")
-        userDefault?.set(value, forKey: key)
+        userDefault?.set(value.timeIntervalSince1970, forKey: key)
     }
 
     /**
@@ -139,6 +139,11 @@ class LocalStorageHelper {
      */
     static func getDate(key: String, defaultValue: Date?) -> Date? {
         let userDefault = UserDefaults(suiteName: "group.\(bundleId)")
-        return userDefault?.value(forKey: key) as? Date ?? defaultValue
+        
+        if let sharedTime = userDefault?.value(forKey: key) as? Double {
+            return Date(timeIntervalSince1970: sharedTime)
+        }
+        
+        return defaultValue
     }
 }

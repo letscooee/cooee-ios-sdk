@@ -18,7 +18,6 @@ class SessionManager {
 
     init() {
         runtimeData = RuntimeData.shared
-        _ = getCurrentSessionID()
     }
 
     // MARK: Public

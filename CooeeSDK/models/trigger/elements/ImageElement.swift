@@ -17,4 +17,11 @@ class ImageElement: BaseElement {
     // MARK: Internal
 
     var src: String?
+
+    override func hasValidImageResource() throws -> Bool {
+        if src?.isEmpty ?? true {
+            throw InvalidTriggerDataException(message: "ImageElement has no/empty src")
+        }
+        return true
+    }
 }

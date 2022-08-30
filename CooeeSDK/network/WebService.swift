@@ -41,7 +41,7 @@ class WebService: NSObject {
         request.allHTTPHeaderFields = header
 
         let eventName = params["name"] as? String ?? ""
-        NSLog("Request: Method=\(method.rawValue), URL=\(url.path), Event=\(eventName)")
+        NSLog("\(Constants.TAG) Request: Method=\(method.rawValue), URL=\(url.path), Event=\(eventName)")
         if debugging {
             NSLog("""
                   \n-------WS Params--------\n
@@ -54,6 +54,16 @@ class WebService: NSObject {
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
             responseData = data
             responseError = error
+            
+            if self.debugging {
+                NSLog("""
+                      \n-------WS Response--------\n
+                      Response Body:\(data ?? Data())\n
+                      Response Error: \(error ?? NSError(domain: "No Error", code: 100))\n
+                      -------End WS Response--------\n
+                      """)
+            }
+            
             group.leave()
         }
         task.resume()

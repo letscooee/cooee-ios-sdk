@@ -44,7 +44,7 @@ class FontProcessor {
         do {
             return try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
         } catch {
-            NSLog("Fail to get write access \(error)")
+            NSLog("\(Constants.TAG) Fail to get write access \(error)")
             return URL(string: "")!
         }
     }
@@ -54,14 +54,14 @@ class FontProcessor {
      */
     private static func cacheBrandFonts() {
         if !isItTimeToRefreshFontsFromServer() {
-            NSLog("Skipping font check as its before \(Constants.FONT_REFRESH_INTERVAL_DAYS) days")
+            NSLog("\(Constants.TAG) Skipping font check as its before \(Constants.FONT_REFRESH_INTERVAL_DAYS) days")
             return
         }
 
         let appID = CooeeFactory.shared.infoPlistReader.getAppID()
 
         if appID.isEmpty {
-            NSLog("Skipping getAppConfig as appID is not available")
+            NSLog("\(Constants.TAG) Skipping getAppConfig as appID is not available")
         }
 
         do {
@@ -124,7 +124,7 @@ class FontProcessor {
         let outputList = [AppFont].deserialize(from: rawFontList)
 
         if outputList == nil {
-            NSLog("Received empty font list")
+            NSLog("\(Constants.TAG) Received empty font list")
             return
         }
 
