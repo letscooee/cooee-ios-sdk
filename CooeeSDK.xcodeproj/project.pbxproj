@@ -70,6 +70,7 @@
 		757E405A26F9FF54008352F3 /* DeviceAuthenticationBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757E405926F9FF54008352F3 /* DeviceAuthenticationBody.swift */; };
 		757E405C26FA08D5008352F3 /* DeviceAuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757E405B26FA08D5008352F3 /* DeviceAuthResponse.swift */; };
 		758660D626FAFA89006B40DC /* SDKInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758660D526FAFA89006B40DC /* SDKInfo.swift */; };
+		758B12C828B89E1600EBF6E4 /* TextAbstractRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758B12C728B89E1600EBF6E4 /* TextAbstractRenderer.swift */; };
 		7599DCC32771EB0E002CEB1A /* FontProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7599DCC22771EB0E002CEB1A /* FontProcessor.swift */; };
 		7599DCC52771ECEF002CEB1A /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7599DCC42771ECEF002CEB1A /* AppFont.swift */; };
 		7599DCC82771FFDE002CEB1A /* ExternalApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7599DCC72771FFDE002CEB1A /* ExternalApiClient.swift */; };
@@ -282,6 +283,7 @@
 		757E405926F9FF54008352F3 /* DeviceAuthenticationBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAuthenticationBody.swift; sourceTree = "<group>"; };
 		757E405B26FA08D5008352F3 /* DeviceAuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAuthResponse.swift; sourceTree = "<group>"; };
 		758660D526FAFA89006B40DC /* SDKInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKInfo.swift; sourceTree = "<group>"; };
+		758B12C728B89E1600EBF6E4 /* TextAbstractRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAbstractRenderer.swift; sourceTree = "<group>"; };
 		7599DCC22771EB0E002CEB1A /* FontProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontProcessor.swift; sourceTree = "<group>"; };
 		7599DCC42771ECEF002CEB1A /* AppFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
 		7599DCC72771FFDE002CEB1A /* ExternalApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalApiClient.swift; sourceTree = "<group>"; };
@@ -938,6 +940,7 @@
 				AC0B814783FAE5CBC0031163 /* ButtonRenderer.swift */,
 				75187467274CD6F000BF267F /* ElementRenderer.swift */,
 				75187469274CE35E00BF267F /* ShapeRenderer.swift */,
+				758B12C728B89E1600EBF6E4 /* TextAbstractRenderer.swift */,
 			);
 			path = renderer;
 			sourceTree = "<group>";
@@ -1342,6 +1345,7 @@
 				75A098122707132100C2057B /* CooeeBootstrap.swift in Sources */,
 				75425AAA28B368760097E454 /* DebugInfoCollector.swift in Sources */,
 				75DD87CA271EE39700A272BB /* BaseTextElement.swift in Sources */,
+				758B12C828B89E1600EBF6E4 /* TextAbstractRenderer.swift in Sources */,
 				756BAA1E27577C3F00C7A84F /* NotificationService.swift in Sources */,
 				751E1325270C350C002CF442 /* SessionManager.swift in Sources */,
 				75DD87C0271D822600A272BB /* BrowserContent.swift in Sources */,

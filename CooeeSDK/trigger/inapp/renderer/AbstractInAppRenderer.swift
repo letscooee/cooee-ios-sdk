@@ -27,11 +27,6 @@ struct AbstractInAppRenderer: ViewModifier {
         let calculatedX = elementData.getX(for: calculatedWidth ?? 0)
         let calculatedY = elementData.getY(for: calculatedHeight ?? 0)
 
-        /*let _ = print("\(elementData)")
-        let _ = print("x: \(elementData.getX()), y: \(elementData.getY())")
-        let _ = print("newX: \(calculatedX)), newY: \(calculatedY)")
-        let _ = print("h: \(String(describing: calculatedHeight)), w: \(String(describing: calculatedWidth)), dh: \(deviceHeight), dw: \(deviceWidth)")*/
-
         /// MARK: Spacing
 
         content.if(elementData.spc != nil) {

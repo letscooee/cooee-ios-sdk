@@ -21,6 +21,37 @@ struct Gradient: HandyJSON {
         case SWEEP
     }
 
+    /**
+     Generates list of CGColor with provided colors
+
+     - Returns: list of CGColor
+     */
+    public func getColors() -> [CGColor] {
+        var list = [CGColor]()
+
+        if let colour = c1 {
+            list.append(UIColor(hexString: colour).cgColor)
+        }
+
+        if let colour = c2 {
+            list.append(UIColor(hexString: colour).cgColor)
+        }
+
+        if let colour = c3 {
+            list.append(UIColor(hexString: colour).cgColor)
+        }
+
+        if let colour = c4 {
+            list.append(UIColor(hexString: colour).cgColor)
+        }
+
+        if let colour = c5 {
+            list.append(UIColor(hexString: colour).cgColor)
+        }
+
+        return list
+    }
+
     // MARK: Internal
 
     var type: Type?

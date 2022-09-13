@@ -40,16 +40,35 @@ struct Font: HandyJSON {
         return font
     }
 
-    // MARK: Internal
+    // UIKit Returns functions
+
+    /**
+     Generates UIKit UIFont instance
+     - Parameter partElement: ``PartElement`` which holds BOLD/ITALIC
+     - Returns: UIFont
+     */
+    public func getUIFont(for partElement: PartElement) -> UIFont {
+        var font = UIFont.systemFont(ofSize: getSize())
+
+        if ff != nil {
+            font = UIFont(name: ff!, size: getSize()) ?? font
+        }
+
+        if tf != nil, let newFont = processUITypeFace(for: partElement) {
+            font = newFont
+        }
+
+        return font
+    }
+
+    // MARK: Private
+
+    private static let DEFAULT_SIZE: CGFloat = UIFont.systemFontSize
 
     private var s: Float?
     private var ff: String?
     private var tf: String?
     private var lh: Float?
-
-    // MARK: Private
-
-    private static let DEFAULT_SIZE: CGFloat = UIFont.systemFontSize
 
     /**
      Process ``ft`` and get font from storage
@@ -131,5 +150,65 @@ struct Font: HandyJSON {
     private func getFontPath(of name: String) -> URL {
         let fontDir = FontProcessor.getFontsStorageDirectory()
         return fontDir.appendingPathComponent("\(tf!).ttf")
+    }
+
+    /**
+     Process TypeFace sent via payload and returns result in UIFont
+     - Parameter partElement: ``PartElement`` which holds BOLD/ITALIC
+     - Returns: UIFont
+     */
+    private func processUITypeFace(for partElement: PartElement) -> UIFont? {
+        let font = checkForUISystemFont()
+
+        if font != nil {
+            return font
+        }
+
+        let fontFile = getFontPath(of: tf!)
+
+        if !FileManager.default.fileExists(atPath: fontFile.path) {
+            return uiFontWithCustomStyle(partElement)
+        }
+
+        UIFont.register(from: fontFile)
+
+        return UIFont(name: tf!, size: getSize())
+    }
+
+    private func checkForUISystemFont() -> UIFont? {
+        for family in UIFont.familyNames {
+            if family.caseInsensitiveCompare(tf!) == .orderedSame {
+                return UIFont(name: family, size: getSize())
+            }
+        }
+
+        return nil
+    }
+
+    /**
+     Check for font file wrt part style and return result in UIFont
+     - Parameter partElement: ``PartElement`` which holds BOLD/ITALIC
+     - Returns: UIFont
+     */
+    private func uiFontWithCustomStyle(_ partElement: PartElement) -> UIFont? {
+        var typeFace = "\(tf!.lowercased().trimmingCharacters(in: .whitespacesAndNewlines))-"
+
+        if partElement.isBold() {
+            typeFace = "\(typeFace)bold"
+        }
+
+        if partElement.isItalic() {
+            typeFace = "\(typeFace)italic"
+        }
+
+        let fontFile = getFontPath(of: typeFace)
+
+        if !FileManager.default.fileExists(atPath: fontFile.path) {
+            return nil
+        }
+
+        UIFont.register(from: fontFile)
+
+        return UIFont(name: typeFace, size: getSize())
     }
 }
