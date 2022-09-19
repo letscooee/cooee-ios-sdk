@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.4.1 (2022-09-19)
+
+### Fixes
+
+1. Fix InApp rendering with Custom Events.
+
 ## 1.4.0 (2022-08-30)
 
 ### Breaking
