@@ -158,10 +158,12 @@ class BaseHTTPService {
         let responseData = try webService.getResponse(fromURL: Constants.trackEvent, method: .POST, params: event.toJSON()!,
                 header: commonHeaders.getDictionary())
 
-        do {
-            try EngagementTriggerHelper().renderInAppTriggerFromResponse(response: responseData)
-        } catch {
-            NSLog("\(Constants.TAG) \(error.localizedDescription)")
+        DispatchQueue.main.async {
+            do {
+                try EngagementTriggerHelper().renderInAppTriggerFromResponse(response: responseData)
+            } catch {
+                NSLog("\(Constants.TAG) \(error.localizedDescription)")
+            }
         }
     }
 
