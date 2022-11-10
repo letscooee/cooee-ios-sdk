@@ -190,6 +190,8 @@ public class EngagementTriggerHelper {
                 return
             }
 
+            FontProcessor.preCacheFonts(urls: data.getInAppTrigger()?.getFontURLs())
+
             if let visibleController = UIApplication.shared.topMostViewController() {
                 EngagementTriggerHelper.setActiveTrigger(data)
                 try InAppTriggerScene.instance.updateViewWith(data: data, on: visibleController)
