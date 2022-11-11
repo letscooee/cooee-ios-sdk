@@ -124,6 +124,7 @@
 		AC0B843D6FCF6D51FBCA7FD7 /* ProfileTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B805A34D46C1243CFFC5A /* ProfileTaskProcessor.swift */; };
 		AC0B8442A908253F00AF3061 /* PendingTaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8ED273C05CC69495D48B /* PendingTaskService.swift */; };
 		AC0B8473C5E1A18B2B68A819 /* FontFamily.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8390F17D75797DD64040 /* FontFamily.swift */; };
+		AC0B8481EA3FA271545E0C33 /* LogoutTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8217D63274C890D1EF3E /* LogoutTaskProcessor.swift */; };
 		AC0B850DFCDC2005C3A115B0 /* PushTokenTaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B861F4E3D4E157C46147D /* PushTokenTaskProcessor.swift */; };
 		AC0B8518BD3390F14BA56E86 /* PendingTaskType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B8F1A3240B22206AC68B6 /* PendingTaskType.swift */; };
 		AC0B85211B7F2B8520801AFF /* PendingTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B861B34A834EC10D3493B /* PendingTask.swift */; };
@@ -335,6 +336,7 @@
 		AC0B804DEA9B9A9EB7E1FD5F /* EngagementTriggerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngagementTriggerHelper.swift; sourceTree = "<group>"; };
 		AC0B805A34D46C1243CFFC5A /* ProfileTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTaskProcessor.swift; sourceTree = "<group>"; };
 		AC0B814783FAE5CBC0031163 /* ButtonRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonRenderer.swift; sourceTree = "<group>"; };
+		AC0B8217D63274C890D1EF3E /* LogoutTaskProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutTaskProcessor.swift; sourceTree = "<group>"; };
 		AC0B822657FEE473DCFC71D3 /* SDKFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDKFont.swift; sourceTree = "<group>"; };
 		AC0B8231AEEB5525B46328E1 /* ShareContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareContent.swift; sourceTree = "<group>"; };
 		AC0B82787896FE8BB64A3542 /* ClickActionExecutor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickActionExecutor.swift; sourceTree = "<group>"; };
@@ -614,6 +616,7 @@
 				AC0B8D173E6FFB9D0659EA78 /* EventTaskProcessor.swift */,
 				AC0B861F4E3D4E157C46147D /* PushTokenTaskProcessor.swift */,
 				AC0B802DF91484D1BA6CF26C /* SessionConcludeTaskProcessor.swift */,
+				AC0B8217D63274C890D1EF3E /* LogoutTaskProcessor.swift */,
 			);
 			path = processor;
 			sourceTree = "<group>";
@@ -1468,6 +1471,7 @@
 				AC0B8CC61DA0809200A52BC9 /* SDKFont.swift in Sources */,
 				AC0B817A94C28137011230DC /* FontStyle.swift in Sources */,
 				AC0B8473C5E1A18B2B68A819 /* FontFamily.swift in Sources */,
+				AC0B8481EA3FA271545E0C33 /* LogoutTaskProcessor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
