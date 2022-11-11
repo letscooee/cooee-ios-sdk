@@ -13,10 +13,18 @@ import Foundation
  - Author: Ashish Gaikwad
  - Since: 0.1.0
  */
-class DeviceTaskProcessor: HttpTaskProcessor<DeviceDetails> {
+class DeviceTaskProcessor: HttpTaskProcessor<Dictionary<String, Any>> {
 
-    override func doHttp(data: DeviceDetails) throws {
-        try baseHttpService.updateDeviceProp(requestData: data.toDictionary())
+    override func deserialize(_ task: PendingTasks) -> Dictionary<String, Any> {
+        guard let decodedData = task.data?.convertToDictionary() else {
+            return [:]
+        }
+
+        return decodedData
+    }
+
+    override func doHttp(data: Dictionary<String, Any>) throws {
+        try baseHttpService.updateDeviceProp(requestData: data)
     }
 
     override func canProcess(_ task: PendingTasks) -> Bool {

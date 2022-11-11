@@ -12,6 +12,13 @@ import HandyJSON
  - Since: 0.1.0
  */
 class ProfileTaskProcessor: HttpTaskProcessor<Dictionary<String, Any>> {
+    override func deserialize(_ task: PendingTasks) -> Dictionary<String, Any> {
+        guard let decodedData = task.data?.convertToDictionary() else {
+            return [:]
+        }
+        
+        return decodedData
+    }
 
     override func doHttp(data: [String: Any]) throws {
         try baseHttpService.updateUserProfile(requestData: data)
@@ -22,4 +29,5 @@ class ProfileTaskProcessor: HttpTaskProcessor<Dictionary<String, Any>> {
     }
 }
 
-extension Dictionary: HandyJSON{}
+extension Dictionary: HandyJSON {
+}
