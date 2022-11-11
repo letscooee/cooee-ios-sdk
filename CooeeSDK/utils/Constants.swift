@@ -58,6 +58,7 @@ struct Constants {
     static let triggerDetails = "/v1/trigger/details/"
     static let appConfig = "/v1/app/config/"
     static let uploadScreenshot = "/v1/app/uploadScreenshot"
+    static let logout = "/v1/user/logout"
 
     // endregion
 

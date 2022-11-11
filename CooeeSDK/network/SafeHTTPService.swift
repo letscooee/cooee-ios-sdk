@@ -63,6 +63,11 @@ class SafeHTTPService {
         attemptTaskImmediately(pendingTask)
     }
 
+    func logOutUser() {
+        let pendingTask = pendingTaskService.newTask(data: "", pendingTaskType: .API_LOGOUT)
+        attemptTaskImmediately(pendingTask)
+    }
+
     // MARK: Private
 
     private let pendingTaskService: PendingTaskService
