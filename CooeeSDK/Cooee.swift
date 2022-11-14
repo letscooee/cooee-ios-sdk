@@ -259,7 +259,7 @@ public final class CooeeSDK: NSObject {
     @objc
     public func logout() {
         DispatchQueue.global().async {
-            self.safeHttpService.logOutUser()
+            self.safeHttpService.logoutUser()
         }
     }
 

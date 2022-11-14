@@ -10,7 +10,7 @@ import HandyJSON
 
 class LogoutTaskProcessor: HttpTaskProcessor<String> {
     override func doHttp(data: String) throws {
-        try super.baseHttpService.logOutUser()
+        try super.baseHttpService.logoutUser()
     }
 
     override func canProcess(_ task: PendingTasks) -> Bool {

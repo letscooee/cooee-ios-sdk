@@ -206,7 +206,7 @@ class BaseHTTPService {
         return response
     }
 
-    func logOutUser() throws {
+    func logoutUser() throws {
         if isTesting {
             return
         }
