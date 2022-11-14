@@ -36,7 +36,7 @@ struct Font: HandyJSON {
     }
 
     /**
-     Collect all string URLs from front family
+     Collect all string URLs from font-family
      - Returns: Optional list optional string URL
      */
     public func getFontURLs() -> [String?]? {
