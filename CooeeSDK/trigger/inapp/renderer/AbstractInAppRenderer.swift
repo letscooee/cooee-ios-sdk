@@ -143,6 +143,7 @@ struct AbstractInAppRenderer: ViewModifier {
         .if(elementData.getX() != 0.0 || elementData.getY() != 0.0) {
             $0.offset(x: calculatedX, y: calculatedY)
         }
+        .opacity(elementData.getOpacity())
         .gesture(
             TapGesture()
                 .onEnded { _ in

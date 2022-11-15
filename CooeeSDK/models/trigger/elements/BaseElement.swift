@@ -118,6 +118,23 @@ class BaseElement: HandyJSON {
         throw InvalidTriggerDataException(message: "Found Empty background image url")
     }
 
+    func mapping(mapper: HelpingMapper) {
+        mapper.specify(property: &opacity, name: "a")
+    }
+
+    public func getOpacity() -> Double {
+        guard let opacity = opacity else {
+            return 1.0
+        }
+
+        if opacity < 0 || opacity > 100 {
+            NSLog("\(Constants.TAG) Received wrong alpha value: \(opacity)")
+            return 1.0
+        }
+
+        return (Double(opacity) / 100);
+    }
+
     // MARK: Internal
 
     var br: Border? // Border
@@ -125,6 +142,7 @@ class BaseElement: HandyJSON {
     var spc: Spacing? // Spacing
     var trf: Transform? // Transform
     var clc: ClickAction? // ClickAction
+    var opacity: Int? // Opacity
 
     // MARK: Private
 
