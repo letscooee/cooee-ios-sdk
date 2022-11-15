@@ -8,6 +8,7 @@
 import Foundation
 import HandyJSON
 import UIKit
+import SwiftUI
 
 /**
  Colour os class which holds colour variants for element
@@ -26,6 +27,10 @@ struct Colour: HandyJSON {
 
     func getColour() -> UIColor {
         UIColor(hexString: h ?? "#ffffff")
+    }
+
+    func getSwiftUIColour() -> SwiftUI.Color {
+        Color(hex: getColour(), alpha: getAlpha())
     }
 
     func getColour() -> String {

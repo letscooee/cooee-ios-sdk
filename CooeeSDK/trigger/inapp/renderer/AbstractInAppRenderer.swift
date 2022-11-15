@@ -126,7 +126,12 @@ struct AbstractInAppRenderer: ViewModifier {
             $0.cornerRadius(elementData.br!.getRadius())
         }
         .if(elementData.shd != nil) {
-            $0.shadow(radius: CGFloat(elementData.shd!.getElevation()), x: 20, y: 20)
+            $0.shadow(
+                    color:elementData.shd!.getColour(),
+                    radius: CGFloat(elementData.shd!.getElevation()),
+                    x: elementData.shd!.getXOffset(),
+                    y: elementData.shd!.getYOffset()
+            )
         }
         .if(elementData.trf != nil) {
             $0.rotationEffect(elementData.trf!.getRotation())
