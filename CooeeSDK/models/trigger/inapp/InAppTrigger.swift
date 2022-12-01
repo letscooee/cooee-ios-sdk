@@ -151,6 +151,12 @@ class InAppTrigger: BaseElement {
     var cont: Container? // Container
     var elems: [[String: Any]]? // Elements
     var anim: Animation? // Animation
+    var autoClose: AutoClose?
+
+    override func mapping(mapper: HelpingMapper) {
+        super.mapping(mapper: mapper)
+        mapper.specify(property: &autoClose, name: "atcl")
+    }
 
     // MARK: Private
 

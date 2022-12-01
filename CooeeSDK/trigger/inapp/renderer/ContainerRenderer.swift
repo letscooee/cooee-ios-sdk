@@ -23,6 +23,7 @@ struct ContainerRenderer: View {
         orientation = UIDevice.current.orientation
         displayWidth = triggerContext.getDeviceInfo().getDeviceWidth()
         displayHeight = triggerContext.getDeviceInfo().getDeviceHeight()
+        autoClose = inAppTrigger.autoClose ?? AutoClose()
 
         if orientation == .landscapeLeft || orientation == .landscapeRight {
             displayWidth = displayWidth - (UIApplication.shared.windows.first?.safeAreaInsets.left ?? 40)
@@ -58,6 +59,12 @@ struct ContainerRenderer: View {
                 .modifier(AbstractInAppRenderer(elementData: container, triggerContext: triggerContext, isContainer: false))
                 .clipped()
                 .frame(UnitUtil.getScaledPixel(container.getWidth()), UnitUtil.getScaledPixel(container.getHeight()))
+
+                if autoClose.showTimer() {
+                    AutoCloseView(autoClose, UnitUtil.getScaledPixel(container.getWidth()),
+                                  UnitUtil.getScaledPixel(container.getHeight()),
+                                  triggerContext)
+                }
             }
             .frame(width: displayWidth, height: displayHeight)
         }
@@ -74,6 +81,7 @@ struct ContainerRenderer: View {
     private var triggerContext: TriggerContext
     private var inAppTrigger: InAppTrigger
     private var orientation: UIDeviceOrientation
+    private var autoClose: AutoClose
 
     private func updateScalingFactor() {
         let containerWidth = container.getWidth()
