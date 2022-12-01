@@ -26,7 +26,6 @@ struct Shadow: HandyJSON {
     }
 
     public func getElevation() -> Int {
-        print("Shadow Info: \(elevation) and scaled: \(UnitUtil.getScaledPixel(Float(elevation ?? 0)))")
         return Int(UnitUtil.getScaledPixel(Float(elevation ?? 0)))
     }
 

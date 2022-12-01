@@ -50,7 +50,7 @@ extension UIColor {
         }
 
         let tempAlpha:CGFloat = a != nil ? CGFloat(a!/255) : CGFloat(alpha)
-        self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: alpha)
+        self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: tempAlpha)
     }
 }
 
