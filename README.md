@@ -8,7 +8,7 @@
 
 Lets Cooee powers hyper-personalized and real time engagements for mobile apps based on machine learning. The SaaS platform, hosted on cloud infrastructure processes millions of user transactions and data attributes to create unique and contextual user engagement triggers for end users with simple SDK integration that requires no coding at mobile app level.
 
-For More information visit our [website](https://www.letscooee.com/) and [documentation](https://docs.letscooee.com/developers/ios/quickstart).
+For More information visit our [website](https://www.letscooee.com/) and [documentation](https://docs.letscooee.com/developers/ios).
 ## Features
 
 Plug and Play - SDK is plug and play for mobile applications. That means it needs to be initialized with the Application Context and it will work automatically in the background.
@@ -18,4 +18,4 @@ Average SDK size – 5-6 MB(including dependency SDK’s).
 
 ## Installation & Uses
 
-For detailed installation & uses, Refer [iOS](https://docs.letscooee.com/developers/ios/quickstart) documentation.
+For detailed installation & uses, Refer [iOS](https://docs.letscooee.com/developers/ios/get-started) documentation.
