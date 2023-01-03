@@ -76,17 +76,17 @@ class BaseTextElement: BaseElement {
      - Returns:
      */
     public func getFont(for part: PartElement) -> SwiftUI.Font {
-        if f == nil {
-            return SwiftUI.Font.system(size: 14)
-        } else {
-            return f!.getFont(for: part)
+        guard let font = f else {
+            return SwiftUI.Font.custom("Arial", size: 14)
         }
+
+        return font.getFont()
     }
 
     // MARK: Internal
 
     private var txt: String?
     private var alg: Int?
-    private var f: Font?
+    var f: Font?
     private var c: Colour?
 }

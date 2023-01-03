@@ -31,7 +31,6 @@ class CooeeBootstrap: NSObject {
         DispatchQueue.main.async {
             _ = CooeeFactory.shared
             self.startPendingTaskJob()
-            FontProcessor.checkAndUpdateBrandFonts()
             self.registerCategory()
         }
         // ARHelper.initAndShowUnity()
@@ -98,7 +97,7 @@ extension CooeeBootstrap {
             completionHandler(.noData)
             return
         }
-        
+
         PendingTriggerService().lazyLoadAndSave(triggerData, forNotification: notificationID)
         completionHandler(.noData)
     }

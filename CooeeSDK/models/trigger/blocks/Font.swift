@@ -26,24 +26,40 @@ struct Font: HandyJSON {
         return lh == nil ? nil : UnitUtil.getScaledPixel(s!)
     }
 
-    public func getFont(for partElement: PartElement) -> SwiftUI.Font {
-        var font = SwiftUI.Font.system(size: getSize(), design: .default)
+    public func getFont() -> SwiftUI.Font {
 
-        if ff != nil {
-            font = SwiftUI.Font.custom(ff!, size: getSize())
+        guard let fontFamily = fmly else {
+            return SwiftUI.Font.custom("Arial", size: getSize())
         }
 
-        if tf != nil, let newFont = processTypeFace(for: partElement) {
-            font = newFont
+        return SwiftUI.Font.custom(fontFamily.name ?? "Arial", size: getSize())
+    }
+
+    /**
+     Collect all string URLs from font-family
+     - Returns: Optional list optional string URL
+     */
+    public func getFontURLs() -> [String?]? {
+        guard let fontFamily = fmly else {
+            return nil
         }
 
-        return font
+        guard let sdkFonts = fontFamily.fonts, !sdkFonts.isEmpty else {
+            return nil
+        }
+
+        var urls: [String?] = []
+        for sdkFont in sdkFonts {
+            urls.append(sdkFont.url)
+        }
+
+        return urls
     }
 
     // MARK: Internal
 
     private var s: Float?
-    private var ff: String?
+    private var fmly: FontFamily?
     private var tf: String?
     private var lh: Float?
 

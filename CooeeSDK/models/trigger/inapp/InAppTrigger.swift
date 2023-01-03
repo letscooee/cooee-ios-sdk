@@ -78,6 +78,40 @@ class InAppTrigger: BaseElement {
         return true
     }
 
+    /**
+     Collects all the Font URLs from all Text and Button Elements.
+     - Returns: List of the all font URLs from all Button and Text Elements.
+     */
+    public func getFontURLs() -> [String] {
+        var urlList: [String?] = []
+        guard let elements = elems else {
+            return []
+        }
+
+        return elements.map { (element) -> [String?] in
+                    // Will provide element as [String:Any] and expect [String?] and whole output is [[String?]]
+                    let baseElement = BaseElement.deserialize(from: element)
+                    if ElementType.TEXT == baseElement!.getElementType() {
+                        if let textElement = TextElement.deserialize(from: element) {
+                            return textElement.f?.getFontURLs() ?? []
+                        }
+                    } else if ElementType.BUTTON == baseElement!.getElementType() {
+                        if let textElement = TextElement.deserialize(from: element) {
+                            return textElement.f?.getFontURLs() ?? []
+                        }
+                    } else {
+                        return []
+                    }
+                    return []
+                }
+                .flatMap {  // Flats [[string?]] - > [string?]
+                    $0
+                }
+                .flatMap { // Removes null from array [string?] -> [string]
+                    $0
+                }
+    }
+
     override public func getBackground() -> Background? {
         // Todo: Remove Implementation once the background is implemented in CP
         if super.getBackground() == nil {
