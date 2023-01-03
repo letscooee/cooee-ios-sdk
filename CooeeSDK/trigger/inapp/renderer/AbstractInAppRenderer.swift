@@ -21,6 +21,7 @@ struct AbstractInAppRenderer: ViewModifier {
     let deviceHeight = UIScreen.main.bounds.height
 
     @ViewBuilder func body(content: Content) -> some View {
+        // TODO: 15/11/22 Simplify whole AbstractRenderer. Currently its hard to understand working
         // process height and width
         let calculatedHeight = elementData.getCalculatedHeight()
         let calculatedWidth = elementData.getCalculatedWidth()
@@ -40,9 +41,13 @@ struct AbstractInAppRenderer: ViewModifier {
                 .padding(.leading, elementData.spc!.getPaddingLeft())
                 .padding(.trailing, elementData.spc!.getPaddingRight())
         }
-        .if(elementData.getBackground()?.s?.g?.c1 != nil) {
+        .if(elementData.getBackground()?.s?.g != nil) {
             $0.background(
-                LinearGradient(gradient: SwiftUI.Gradient(colors: [Color(hex: elementData.getBackground()!.s!.g!.c1!), Color(hex: elementData.getBackground()!.s!.g!.c2!)]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: SwiftUI.Gradient(
+                        colors: elementData.getBackground()!.s!.g!.getColourArray()),
+                        startPoint: elementData.getBackground()!.s!.g!.getStartEnd().start,
+                        endPoint: elementData.getBackground()!.s!.g!.getStartEnd().end
+                )
             ).cornerRadius(elementData.br?.getRadius() ?? 0)
         }
         .if(elementData.getBackground()?.s != nil && elementData.getBackground()?.s?.g == nil) {
@@ -126,7 +131,12 @@ struct AbstractInAppRenderer: ViewModifier {
             $0.cornerRadius(elementData.br!.getRadius())
         }
         .if(elementData.shd != nil) {
-            $0.shadow(radius: CGFloat(elementData.shd!.getElevation()), x: 20, y: 20)
+            $0.shadow(
+                    color:elementData.shd!.getColour(),
+                    radius: CGFloat(elementData.shd!.getElevation()),
+                    x: elementData.shd!.getXOffset(),
+                    y: elementData.shd!.getYOffset()
+            )
         }
         .if(elementData.trf != nil) {
             $0.rotationEffect(elementData.trf!.getRotation())
@@ -143,6 +153,7 @@ struct AbstractInAppRenderer: ViewModifier {
         .if(elementData.getX() != 0.0 || elementData.getY() != 0.0) {
             $0.offset(x: calculatedX, y: calculatedY)
         }
+        .opacity(elementData.getOpacity())
         .gesture(
             TapGesture()
                 .onEnded { _ in
