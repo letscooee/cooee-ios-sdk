@@ -86,5 +86,6 @@ struct Constants {
     static let EVENT_NOTIFICATION_VIEWED = "CE Notification Viewed"
     static let EVENT_NOTIFICATION_CLICKED = "CE Notification Clicked"
     static let EVENT_NOTIFICATION_CANCELLED = "CE Notification Cancelled"
+    static let EVENT_SESSION_STARTED = "CE Session Started"
     // endregion
 }

@@ -64,7 +64,7 @@ class SessionManager {
      - returns:The current session id.
      */
     public func getCurrentSessionID() -> String {
-        return getCurrentSessionID(createNew: true)
+        getCurrentSessionID(createNew: true)
     }
 
     /**
@@ -92,7 +92,7 @@ class SessionManager {
     }
 
     public func getCurrentSessionNumber() -> Int64 {
-        return currentSessionNumber!
+        currentSessionNumber!
     }
 
     /**
@@ -152,6 +152,11 @@ class SessionManager {
         currentSessionNumber! += 1
 
         LocalStorageHelper.putLong(key: Constants.STORAGE_SESSION_NUMBER, value: currentSessionNumber)
+        self.sendSessionStartedEvent()
+    }
+
+    private func sendSessionStartedEvent() {
+        CooeeFactory.shared.safeHttpService.sendEvent(event: Event(eventName: Constants.EVENT_SESSION_STARTED))
     }
 
     /**
