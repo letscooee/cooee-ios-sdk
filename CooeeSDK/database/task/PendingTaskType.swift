@@ -10,6 +10,7 @@ enum PendingTaskType: String, CaseIterable {
     case API_DEVICE_PROFILE = "API_DEVICE_PROFILE"
     case API_SESSION_CONCLUDE = "API_SESSION_CONCLUDE"
     case API_UPDATE_PUSH_TOKEN = "API_UPDATE_PUSH_TOKEN"
+    case API_LOGOUT = "API_LOGOUT"
 
     static func withLabel(_ label: String) -> PendingTaskType {
         return self.allCases.first {

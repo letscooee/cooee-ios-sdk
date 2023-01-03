@@ -11,6 +11,15 @@ import Foundation
  - Since: 0.1.0
  */
 class EventTaskProcessor: HttpTaskProcessor<Event> {
+
+    override func deserialize(_ task: PendingTasks) -> Event {
+        guard let decodedTask = Event.deserialize(from: task.data) else {
+            return Event()
+        }
+
+        return decodedTask
+    }
+
     override func doHttp(data: Event) throws {
         try baseHttpService.sendEvent(event: data)
     }

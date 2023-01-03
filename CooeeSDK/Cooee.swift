@@ -40,6 +40,7 @@ public final class CooeeSDK: NSObject {
        - eventName: Name the event like onDeviceReady
        - eventProperties: Properties associated with the event
      - Throws: Throws ``CustomError/PropertyError`` if user try to send any property start with "CE "
+     - See: [Tracking Event](https://docs.letscooee.com/developers/ios/tracking-events) for more details
      */
     @objc
     public func sendEvent(eventName: String, eventProperties: [String: Any]? = nil) throws {
@@ -100,6 +101,7 @@ public final class CooeeSDK: NSObject {
      Send the given user data and user properties to the server.
      - Parameter userData: The common user data like name, email, etc.
      - Throws: Throws ``CustomError/PropertyError`` if user try to send any property start with "CE "
+     - See: [Tacking Properties](https://docs.letscooee.com/developers/ios/tracking-properties) for more details.
      */
     @objc
     public func updateUserProfile(_ userData: [String: Any]) throws {
@@ -115,6 +117,7 @@ public final class CooeeSDK: NSObject {
     /**
      Set current screen name where user navigated.
      - Parameter screenName: Name of the screen. Like Login, Cart, Wishlist etc.
+     - See: [Tracking Screen](https://docs.letscooee.com/developers/ios/tracking-screens) for more details.
      */
     @objc
     public func setCurrentScreen(screenName: String) {
@@ -148,6 +151,15 @@ public final class CooeeSDK: NSObject {
         CooeeFactory.shared.deviceAuthService.getUserID()
     }
 
+    /**
+     Set call back listener to the Cooee SDK.
+
+     This call back listener will be fired when the user performs any action on the
+
+     InApp/Notification sent via Cooee.
+     - Parameter onCTAHandler: instance of the ``CooeeCTADelegate``
+     - See: [CTA Callback](https://docs.letscooee.com/developers/ios/cta-callback) for more details.
+     */
     @objc
     public func setOnCTADelegate(_ onCTAHandler: CooeeCTADelegate) {
         self.onCTAHandler = onCTAHandler
@@ -232,8 +244,22 @@ public final class CooeeSDK: NSObject {
      */
     @objc
     public func showDebugInfo() {
-        if let visibleController = UIApplication.shared.topMostViewController() {
-            _ = DebugInfoViewController(on: visibleController)
+        DispatchQueue.main.async {
+            if let visibleController = UIApplication.shared.topMostViewController() {
+                _ = DebugInfoViewController(on: visibleController)
+            }
+        }
+    }
+
+    /**
+     Logout user from the Cooee SDK.
+     This method must be called with apps logout functionality.
+     - Since: 1.4.2
+     */
+    @objc
+    public func logout() {
+        DispatchQueue.global().async {
+            self.safeHttpService.logoutUser()
         }
     }
 

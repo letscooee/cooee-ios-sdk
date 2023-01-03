@@ -134,8 +134,11 @@ class BaseHTTPService {
             return
         }
 
-        let response = try webService.getResponse(fromURL: Constants.updateProfile, method: .PUT, params: requestData,
+        guard let response = try webService.getResponse(fromURL: Constants.updateProfile, method: .PUT, params: requestData,
                 header: commonHeaders.getDictionary())
+        else {
+            return
+        }
 
         // send to update the local storage & api client
         CooeeFactory.shared.deviceAuthService.checkAndUpdate(response)
@@ -155,8 +158,13 @@ class BaseHTTPService {
             return
         }
 
-        let responseData = try webService.getResponse(fromURL: Constants.trackEvent, method: .POST, params: event.toJSON()!,
+        guard let responseData = try webService.getResponse(fromURL: Constants.trackEvent, method: .POST, params: event.toJSON()!,
                 header: commonHeaders.getDictionary())
+        else {
+            return
+        }
+
+        CooeeFactory.shared.deviceAuthService.checkAndUpdate(responseData)
 
         DispatchQueue.main.async {
             do {
@@ -196,5 +204,17 @@ class BaseHTTPService {
 
         let response = try publicApiClient.uploadImage(imageToUpload: imageToUpload, screenName: screenName, header: commonHeaders.getDictionary())
         return response
+    }
+
+    func logoutUser() throws {
+        if isTesting {
+            return
+        }
+
+        guard let response = try webService.getResponse(fromURL: Constants.logout, method: .GET, params: [:], header: commonHeaders.getDictionary()) else {
+            return
+        }
+
+        CooeeFactory.shared.deviceAuthService.checkAndUpdate(response)
     }
 }
