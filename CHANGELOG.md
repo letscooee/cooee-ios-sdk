@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.4.2 (2023-01-19)
+
+1. Fix InApp Animation.
+
+### Fixes
+
 ## 1.4.1 (2022-09-19)
 
 ### Fixes
