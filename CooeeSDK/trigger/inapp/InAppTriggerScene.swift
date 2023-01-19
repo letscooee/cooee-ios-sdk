@@ -165,6 +165,9 @@ class InAppTriggerScene: UIView {
                 parentView.frame = CGRect(x: 0 - UIScreen.main.bounds.width, y: 0 + UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             case .SLIDE_IN_BOTTOM_RIGHT:
                 parentView.frame = CGRect(x: 0 + UIScreen.main.bounds.width, y: 0 + UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            default:
+                parentView.frame = CGRect(x: 0 + UIScreen.main.bounds.width, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            
         }
     }
 
@@ -222,6 +225,8 @@ class InAppTriggerScene: UIView {
                     self.parentView.frame = CGRect(x: 0 - UIScreen.main.bounds.width, y: 0 - UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                 case .SLIDE_OUT_TOP_RIGHT:
                     self.parentView.frame = CGRect(x: 0 + UIScreen.main.bounds.width, y: 0 - UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                default:
+                    self.parentView.frame = CGRect(x: 0 + UIScreen.main.bounds.width, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             }
         }, completion: { (_: Bool) in
             self.parentView?.removeFromSuperview()
