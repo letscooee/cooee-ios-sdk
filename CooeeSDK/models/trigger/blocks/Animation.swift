@@ -11,14 +11,28 @@ import HandyJSON
  */
 struct Animation: HandyJSON {
 
-    public enum EntranceAnimation: String, HandyJSONEnum {
-        case SLIDE_IN_TOP, SLIDE_IN_DOWN, SLIDE_IN_LEFT, SLIDE_IN_RIGHT,
-             SLIDE_IN_TOP_LEFT, SLIDE_IN_TOP_RIGHT, SLIDE_IN_BOTTOM_LEFT, SLIDE_IN_BOTTOM_RIGHT
+    public enum EntranceAnimation: Int, HandyJSONEnum {
+        case NONE = 1
+        case SLIDE_IN_TOP = 2
+        case SLIDE_IN_DOWN = 3
+        case SLIDE_IN_LEFT = 4
+        case SLIDE_IN_RIGHT = 5
+        case SLIDE_IN_TOP_LEFT = 6
+        case SLIDE_IN_TOP_RIGHT = 7
+        case SLIDE_IN_BOTTOM_LEFT = 8
+        case SLIDE_IN_BOTTOM_RIGHT = 9
     }
 
-    public enum ExitAnimation: String, HandyJSONEnum {
-        case SLIDE_OUT_TOP, SLIDE_OUT_DOWN, SLIDE_OUT_LEFT, SLIDE_OUT_RIGHT,
-             SLIDE_OUT_TOP_LEFT, SLIDE_OUT_TOP_RIGHT, SLIDE_OUT_BOTTOM_LEFT, SLIDE_OUT_BOTTOM_RIGHT
+    public enum ExitAnimation: Int, HandyJSONEnum {
+        case  NONE = 1
+        case  SLIDE_OUT_TOP = 2
+        case  SLIDE_OUT_DOWN = 3
+        case  SLIDE_OUT_LEFT = 4
+        case  SLIDE_OUT_RIGHT = 5
+        case  SLIDE_OUT_TOP_LEFT = 6
+        case  SLIDE_OUT_TOP_RIGHT = 7
+        case  SLIDE_OUT_BOTTOM_LEFT = 8
+        case  SLIDE_OUT_BOTTOM_RIGHT = 9
     }
 
     var en: EntranceAnimation?
